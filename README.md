@@ -1,0 +1,2 @@
+collective.contact.content
+==========================
