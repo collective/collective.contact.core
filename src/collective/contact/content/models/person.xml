@@ -1,4 +1,4 @@
 <model xmlns="http://namespaces.plone.org/supermodel/schema">
-  <schema based-on="collective.contact.content.person.IPerson collective.contact.content.organization.IOrganization">
+  <schema based-on="collective.contact.content.person.IPerson">
   </schema>
 </model>
