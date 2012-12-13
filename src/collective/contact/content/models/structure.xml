@@ -1,0 +1,9 @@
+<model xmlns="http://namespaces.plone.org/supermodel/schema">
+  <schema>
+    <field name="structure_type" type="zope.schema.Choice">
+      <description />
+      <title>Type</title>
+      <vocabulary>StructureTypes</vocabulary>
+    </field>
+  </schema>
+</model>

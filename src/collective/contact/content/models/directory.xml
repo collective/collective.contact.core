@@ -1,0 +1,16 @@
+<model xmlns="http://namespaces.plone.org/supermodel/schema">
+  <schema>
+    <field name="position_types" type="zope.schema.Text">
+      <description />
+      <title>Position types</title>
+    </field>
+    <field name="structure_types" type="zope.schema.Text">
+      <description />
+      <title>Structure types</title>
+    </field>
+    <field name="structure_levels" type="zope.schema.Text">
+      <description />
+      <title>Structure levels</title>
+    </field>
+  </schema>
+</model>
