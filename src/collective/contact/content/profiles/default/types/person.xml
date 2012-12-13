@@ -20,53 +20,11 @@
  </property>
  <property name="default_view_fallback">False</property>
  <property name="add_permission">cmf.AddPortalContent</property>
- <property name="klass">plone.dexterity.content.Container</property>
+ <property name="klass">collective.contact.content.person.Person</property>
  <property name="behaviors"/>
- <property name="schema"></property>
- <property
-    name="model_source">&lt;model xmlns="http://namespaces.plone.org/supermodel/schema"&gt;
-    &lt;schema&gt;
-      &lt;field name="gender" type="zope.schema.Choice"&gt;
-        &lt;description /&gt;
-        &lt;required&gt;False&lt;/required&gt;
-        &lt;title&gt;Gender&lt;/title&gt;
-        &lt;values&gt;
-          &lt;element&gt;M&lt;/element&gt;
-          &lt;element&gt;F&lt;/element&gt;
-        &lt;/values&gt;
-      &lt;/field&gt;
-      &lt;field name="person_title" type="zope.schema.TextLine"&gt;
-        &lt;description /&gt;
-        &lt;required&gt;False&lt;/required&gt;
-        &lt;title&gt;Person title&lt;/title&gt;
-      &lt;/field&gt;
-      &lt;field name="firstname" type="zope.schema.TextLine"&gt;
-        &lt;description /&gt;
-        &lt;required&gt;False&lt;/required&gt;
-        &lt;title&gt;Firstname&lt;/title&gt;
-      &lt;/field&gt;
-      &lt;field name="lastname" type="zope.schema.TextLine"&gt;
-        &lt;description /&gt;
-        &lt;title&gt;Lastname&lt;/title&gt;
-      &lt;/field&gt;
-      &lt;field name="birthday" type="zope.schema.Date"&gt;
-        &lt;description /&gt;
-        &lt;required&gt;False&lt;/required&gt;
-        &lt;title&gt;Birthday&lt;/title&gt;
-      &lt;/field&gt;
-      &lt;field name="email" type="zope.schema.TextLine"&gt;
-        &lt;description /&gt;
-        &lt;required&gt;False&lt;/required&gt;
-        &lt;title&gt;Email&lt;/title&gt;
-      &lt;/field&gt;
-      &lt;field name="photo" type="plone.namedfile.field.NamedImage"&gt;
-        &lt;description /&gt;
-        &lt;required&gt;False&lt;/required&gt;
-        &lt;title&gt;Photo&lt;/title&gt;
-      &lt;/field&gt;
-    &lt;/schema&gt;
-  &lt;/model&gt;</property>
- <property name="model_file"></property>
+ <property name="schema" />
+ <property name="model_source" />
+ <property name="model_file">collective.contact.content.models:person.xml</property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="@@edit"/>
  <alias from="sharing" to="@@sharing"/>

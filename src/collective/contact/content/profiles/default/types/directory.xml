@@ -13,7 +13,7 @@
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
   <element value="person"/>
-  <element value="structure"/>
+  <element value="organization"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">view</property>
@@ -27,25 +27,9 @@
   <element value="plone.app.content.interfaces.INameFromTitle"/>
   <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
  </property>
- <property name="schema"></property>
- <property
-    name="model_source">&lt;model xmlns="http://namespaces.plone.org/supermodel/schema"&gt;
-    &lt;schema&gt;
-      &lt;field name="position_types" type="zope.schema.Text"&gt;
-        &lt;description /&gt;
-        &lt;title&gt;Position types&lt;/title&gt;
-      &lt;/field&gt;
-      &lt;field name="structure_types" type="zope.schema.Text"&gt;
-        &lt;description /&gt;
-        &lt;title&gt;Structure types&lt;/title&gt;
-      &lt;/field&gt;
-      &lt;field name="structure_levels" type="zope.schema.Text"&gt;
-        &lt;description /&gt;
-        &lt;title&gt;Structure levels&lt;/title&gt;
-      &lt;/field&gt;
-    &lt;/schema&gt;
-  &lt;/model&gt;</property>
- <property name="model_file"></property>
+ <property name="schema" />
+ <property name="model_source" />
+ <property name="model_file">collective.contact.content.models:directory.xml</property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="@@edit"/>
  <alias from="sharing" to="@@sharing"/>

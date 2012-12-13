@@ -9,8 +9,8 @@
 
   <include package="plone.app.dexterity" />
   <include package="plone.app.relationfield" />
-  <utility name="StructureTypes"
-      factory=".vocabulary.StructureTypes" />
+  <utility name="OrganizationTypes"
+      factory=".vocabulary.OrganizationTypes" />
 
   <genericsetup:registerProfile
       name="default"
@@ -20,5 +20,10 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
   <!-- -*- extra stuff goes here -*- -->
-  
+
+  <utility
+      component=".fields.RelationChoiceHandler"
+      name="z3c.relationfield.schema.RelationChoice"
+      />
+
 </configure>

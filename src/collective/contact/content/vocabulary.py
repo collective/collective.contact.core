@@ -4,7 +4,7 @@ from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.interfaces import IVocabularyFactory
 
 
-class StructureTypes(object):
+class OrganizationTypes(object):
     implements(IVocabularyFactory)
 
     def __call__(self, context):
@@ -13,7 +13,7 @@ class StructureTypes(object):
             parent = aq_parent(parent)
 
         terms = []
-        for line in parent.structure_types.split('\n'):
+        for line in parent.organization_types.split('\n'):
             value, title = line.split('|')
             terms.append(SimpleVocabulary.createTerm(
                 value, value, title))

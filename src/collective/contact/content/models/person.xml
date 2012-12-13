@@ -1,42 +1,4 @@
 <model xmlns="http://namespaces.plone.org/supermodel/schema">
-  <schema>
-    <field name="gender" type="zope.schema.Choice">
-      <description />
-      <required>False</required>
-      <title>Gender</title>
-      <values>
-        <element>M</element>
-        <element>F</element>
-      </values>
-    </field>
-    <field name="person_title" type="zope.schema.TextLine">
-      <description />
-      <required>False</required>
-      <title>Person title</title>
-    </field>
-    <field name="firstname" type="zope.schema.TextLine">
-      <description />
-      <required>False</required>
-      <title>Firstname</title>
-    </field>
-    <field name="lastname" type="zope.schema.TextLine">
-      <description />
-      <title>Lastname</title>
-    </field>
-    <field name="birthday" type="zope.schema.Date">
-      <description />
-      <required>False</required>
-      <title>Birthday</title>
-    </field>
-    <field name="email" type="zope.schema.TextLine">
-      <description />
-      <required>False</required>
-      <title>Email</title>
-    </field>
-    <field name="photo" type="plone.namedfile.field.NamedImage">
-      <description />
-      <required>False</required>
-      <title>Photo</title>
-    </field>
+  <schema based-on="collective.contact.content.person.IPerson collective.contact.content.organization.IOrganization">
   </schema>
 </model>

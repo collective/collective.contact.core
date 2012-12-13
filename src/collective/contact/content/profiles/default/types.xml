@@ -5,5 +5,5 @@
  <object name="directory" meta_type="Dexterity FTI"/>
  <object name="held_position" meta_type="Dexterity FTI"/>
  <object name="position" meta_type="Dexterity FTI"/>
- <object name="structure" meta_type="Dexterity FTI"/>
+ <object name="organization" meta_type="Dexterity FTI"/>
 </object>
