@@ -5,6 +5,8 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="collective.contact.content">
 
+  <include package="five.grok" />
+
   <grok:grok package="." />
 
   <include package="plone.app.dexterity" />
