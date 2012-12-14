@@ -46,12 +46,9 @@ setup(name='collective.contact.content',
           'plone.directives.form',
           'Products.CMFPlone',
       ],
-      extras_require={'test': [
-          'plone.app.testing',
-          'robotsuite',
-          'robotframework-selenium2library',
-          'plone.act',
-          ]},
+      extras_require={
+          'test': ['plone.app.testing'],
+          },
       entry_points="""
       # -*- Entry points: -*-
       [z3c.autoinclude.plugin]

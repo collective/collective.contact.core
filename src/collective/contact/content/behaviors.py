@@ -62,8 +62,8 @@ class IContactDetails(form.Schema):
                     'city',
                     'street',
                     'number',
-                    'additional_address_details',
-                    ),
+                    'additional_address_details'
+                    )
         )
 
     email = schema.TextLine(
