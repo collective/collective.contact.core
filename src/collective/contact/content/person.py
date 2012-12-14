@@ -48,7 +48,6 @@ class Person(Container):
     """ """
     implements(IPerson)
 
-<<<<<<< HEAD
 
 class PersonSchemaPolicy(object):
     """ """
@@ -66,5 +65,3 @@ class PersonSchemaPolicy(object):
         # thus update it
         return '__tmp__' + schemaName
 
-=======
->>>>>>> 8e5bb1289a7f4a96d16043d74100164ea3cc537c
