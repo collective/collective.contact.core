@@ -11,10 +11,10 @@ COLLECTIVE_CONTACT_CONTENT = PloneWithPackageLayer(
     gs_profile_id='collective.contact.content:testing',
     name="COLLECTIVE_CONTACT_CONTENT")
 
-COLLECTIVE_CONTACT_CONTENT_INTEGRATION = IntegrationTesting(
+INTEGRATION = IntegrationTesting(
     bases=(COLLECTIVE_CONTACT_CONTENT, ),
-    name="COLLECTIVE_CONTACT_CONTENT_INTEGRATION")
+    name="INTEGRATION")
 
-COLLECTIVE_CONTACT_CONTENT_FUNCTIONAL = FunctionalTesting(
+FUNCTIONAL = FunctionalTesting(
     bases=(COLLECTIVE_CONTACT_CONTENT, ),
-    name="COLLECTIVE_CONTACT_CONTENT_FUNCTIONAL")
+    name="FUNCTIONAL")

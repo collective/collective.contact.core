@@ -2,21 +2,20 @@ import unittest2 as unittest
 
 from Products.CMFCore.utils import getToolByName
 
-from collective.contact.content.testing import\
-    COLLECTIVE_CONTACT_CONTENT_INTEGRATION
+from collective.contact.content.testing import INTEGRATION
 
 
 class TestExample(unittest.TestCase):
 
-    layer = COLLECTIVE_CONTACT_CONTENT_INTEGRATION
-    
+    layer = INTEGRATION
+
     def setUp(self):
         self.app = self.layer['app']
         self.portal = self.layer['portal']
         self.qi_tool = getToolByName(self.portal, 'portal_quickinstaller')
-    
+
     def test_product_is_installed(self):
-        """ Validate that our products GS profile has been run and the product 
+        """ Validate that our products GS profile has been run and the product
             installed
         """
         pid = 'collective.contact.content'
