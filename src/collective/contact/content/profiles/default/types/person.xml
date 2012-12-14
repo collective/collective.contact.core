@@ -21,7 +21,9 @@
  <property name="default_view_fallback">False</property>
  <property name="add_permission">cmf.AddPortalContent</property>
  <property name="klass">collective.contact.content.person.Person</property>
- <property name="behaviors"/>
+ <property name="behaviors">
+ 	<element value="collective.contact.content.behaviors.IContactDetails" />
+</property>
  <property name="schema" />
  <property name="model_source" />
  <property name="model_file">collective.contact.content.models:person.xml</property>

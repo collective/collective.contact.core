@@ -1,8 +1,8 @@
-from zope.interface import implements
 from zope import schema
-from plone.namedfile.field import NamedImage
+from zope.interface import implements
 
 from plone.dexterity.content import Container
+from plone.namedfile.field import NamedImage
 from plone.supermodel import model
 from plone.supermodel.parser import ISchemaPolicy
 
@@ -47,3 +47,4 @@ class IPerson(model.Schema):
 class Person(Container):
     """ """
     implements(IPerson)
+

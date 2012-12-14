@@ -22,6 +22,7 @@
  <property name="klass">plone.dexterity.content.Item</property>
  <property name="behaviors">
   <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
+  <element value="collective.contact.content.behaviors.IContactDetails" />
  </property>
  <property name="schema" />
  <property name="model_source" />
