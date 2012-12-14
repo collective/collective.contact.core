@@ -22,5 +22,5 @@ def postInstall(context):
     site = context.getSite()
     # we CAN NOT reinstall the product using portal_quickinstaller because
     # it removes manualy added fields for dexterity types
-    import ipdb; ipdb.set_trace()
+    #import ipdb; ipdb.set_trace()
     # we need to be sure 
