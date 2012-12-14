@@ -31,12 +31,12 @@
 
   <utility
       factory=".person.PersonSchemaPolicy"
-      name="person"
+      name="schema_policy_person"
       />
 
   <utility
       factory=".organization.OrganizationSchemaPolicy"
-      name="organization"
+      name="schema_policy_organization"
       />
 
 </configure>
