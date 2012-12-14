@@ -9,6 +9,9 @@
 
   <include package="plone.app.dexterity" />
   <include package="plone.app.relationfield" />
+
+  <include file="behaviors.zcml" />
+
   <utility name="OrganizationTypes"
       factory=".vocabulary.OrganizationTypes" />
 
@@ -19,7 +22,6 @@
       description="Installs the collective.contact.content package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-  <!-- -*- extra stuff goes here -*- -->
 
   <utility
       component=".fields.RelationChoiceHandler"

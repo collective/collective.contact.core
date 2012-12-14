@@ -1,8 +1,8 @@
-from zope.interface import implements
 from zope import schema
-from plone.namedfile.field import NamedImage
+from zope.interface import implements
 
 from plone.dexterity.content import Container
+from plone.namedfile.field import NamedImage
 from plone.supermodel import model
 from plone.supermodel.parser import ISchemaPolicy
 
@@ -48,6 +48,7 @@ class Person(Container):
     """ """
     implements(IPerson)
 
+<<<<<<< HEAD
 
 class PersonSchemaPolicy(object):
     """ """
@@ -65,3 +66,5 @@ class PersonSchemaPolicy(object):
         # thus update it
         return '__tmp__' + schemaName
 
+=======
+>>>>>>> 8e5bb1289a7f4a96d16043d74100164ea3cc537c

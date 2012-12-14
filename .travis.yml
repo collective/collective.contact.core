@@ -9,4 +9,4 @@ script:
   - bin/test
 notifications:
   email:
-    - travis-reports@ecreall.com
+    - prive-ged@listes.entrouvert.com

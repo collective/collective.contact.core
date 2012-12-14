@@ -9,8 +9,11 @@ class OrganizationTypes(object):
 
     def __call__(self, context):
         parent = context
+
         while parent.portal_type != "directory":
             parent = aq_parent(parent)
+            if getattr(parent, 'portal_type', None) is None:
+                return SimpleVocabulary([])
 
         terms = []
         for line in parent.organization_types.split('\n'):

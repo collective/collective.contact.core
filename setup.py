@@ -1,3 +1,5 @@
+# -*- coding: utf8 -*-
+
 from setuptools import setup, find_packages
 
 version = '1.0'
@@ -40,15 +42,13 @@ setup(name='collective.contact.content',
       install_requires=[
           'setuptools',
           'plone.app.dexterity',
-          'Products.CMFPlone',
           'plone.app.relationfield',
+          'plone.directives.form',
+          'Products.CMFPlone',
       ],
-      extras_require={'test': [
-          'plone.app.testing',
-          'robotsuite',
-          'robotframework-selenium2library',
-          'plone.act',
-          ]},
+      extras_require={
+          'test': ['plone.app.testing'],
+          },
       entry_points="""
       # -*- Entry points: -*-
       [z3c.autoinclude.plugin]
