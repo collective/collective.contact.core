@@ -24,7 +24,7 @@
  <property name="behaviors"/>
  <property name="schema" />
  <property name="model_source" />
- <property name="model_file">collective.contact.content.models:person.xml</property>
+ <property name="model_file" />
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="@@edit"/>
  <alias from="sharing" to="@@sharing"/>

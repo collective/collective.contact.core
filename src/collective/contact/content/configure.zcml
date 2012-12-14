@@ -26,4 +26,14 @@
       name="z3c.relationfield.schema.RelationChoice"
       />
 
+  <utility
+      factory=".person.PersonSchemaPolicy"
+      name="person"
+      />
+
+  <utility
+      factory=".organization.OrganizationSchemaPolicy"
+      name="organization"
+      />
+
 </configure>
