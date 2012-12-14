@@ -45,6 +45,7 @@ setup(name='collective.contact.content',
           'plone.app.relationfield',
           'plone.directives.form',
           'Products.CMFPlone',
+          'collective.z3cform.datagridfield',
       ],
       extras_require={
           'test': ['plone.app.testing'],
