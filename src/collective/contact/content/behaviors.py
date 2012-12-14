@@ -1,7 +1,9 @@
 from zope.interface import alsoProvides
 from zope import schema
 
-from plone.directives import form
+from plone.supermodel import model
+from plone.supermodel.directives import fieldset
+from plone.autoform.interfaces import IFormFieldProvider
 
 from Products.CMFDefault.utils import checkEmailAddress
 from Products.CMFDefault.exceptions import EmailAddressInvalid
@@ -21,9 +23,9 @@ def validateEmail(value):
     return True
 
 
-class IGlobalPositioning(form.Schema):
+class IGlobalPositioning(model.Schema):
 
-    form.fieldset(
+    fieldset(
         'global_positioning',
         label=_(u'Global positioning'),
         fields=('latitude', 'longitude')
@@ -45,12 +47,12 @@ class IGlobalPositioning(form.Schema):
             required=False,
             )
 
-alsoProvides(IGlobalPositioning, form.IFormFieldProvider)
+alsoProvides(IGlobalPositioning, IFormFieldProvider)
 
 
-class IContactDetails(form.Schema):
+class IContactDetails(model.Schema):
 
-    form.fieldset(
+    fieldset(
             'contact_details',
             label=_(u'Contact details'),
             fields=('email',
@@ -127,4 +129,4 @@ class IContactDetails(form.Schema):
             required=False,
             )
 
-alsoProvides(IContactDetails, form.IFormFieldProvider)
+alsoProvides(IContactDetails, IFormFieldProvider)

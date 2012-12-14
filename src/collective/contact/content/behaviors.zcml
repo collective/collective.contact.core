@@ -7,9 +7,6 @@
 
     <include package="plone.behavior" file="meta.zcml" />
 
-    <include package="plone.directives.form" file="meta.zcml" />
-    <include package="plone.directives.form" />
-
     <grok:grok package=".behaviors" />
 
     <plone:behavior
