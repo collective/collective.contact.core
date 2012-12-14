@@ -29,7 +29,8 @@
   <element value="collective.contact.content.behaviors.IContactDetails" />
  </property>
  <property name="schema"/>
- <property name="model_source"/>
+ <!-- DO NOT use a model_source or it removes manually added fields while reapplying the profile -->
+ <!--property name="model_source" /-->
  <property name="model_file">collective.contact.content.models:organization.xml</property>
  <property name="schema_policy">schema_policy_organization</property>
  <alias from="(Default)" to="(dynamic view)"/>
