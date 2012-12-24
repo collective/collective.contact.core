@@ -16,8 +16,8 @@
 
   <include file="behaviors.zcml" />
 
-  <utility name="OrganizationTypes"
-      factory=".vocabulary.OrganizationTypes" />
+  <utility name="OrganizationTypesOrLevels"
+      factory=".vocabulary.OrganizationTypesOrLevels" />
 
   <genericsetup:registerProfile
       name="default"
@@ -41,5 +41,10 @@
       factory=".organization.OrganizationSchemaPolicy"
       name="schema_policy_organization"
       />
+
+  <adapter for=".person.IPerson"
+    provides=".person.INameFromPersonNames"
+    factory=".person.NameFromPersonNames"
+  />
 
 </configure>
