@@ -6,8 +6,6 @@ from DateTime import DateTime
 
 from ecreall.helpers.testing.base import BaseTest
 
-######### from Products.CMFCore.utils import getToolByName
-
 from collective.contact.content.testing import INTEGRATION
 
 
