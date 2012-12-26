@@ -19,11 +19,11 @@ class IHeldPosition(model.Schema):
       title=_("End date")
     )
     organization = RelationChoice(
-        title=_("Structure"),
-        source=ObjPathSourceBinder(portal_type=("structure", "position"))
+        title=_("Organization"),
+        source=ObjPathSourceBinder(portal_type=("organization", "position"))
     )
 
 
 class HeldPosition(Container):
-    """ """
+    """Position held by a person in an organization"""
     implements(IHeldPosition)

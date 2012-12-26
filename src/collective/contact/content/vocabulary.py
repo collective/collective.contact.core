@@ -38,23 +38,26 @@ class PositionTypes(object):
             return SimpleVocabulary([])
 
 
-class OrganizationTypes(object):
+class OrganizationTypesOrLevels(object):
     implements(IVocabularyFactory)
+
+    def is_root(self, context):
+        if hasattr(context, 'is_root_organization'):
+            return context.is_root_organization
+        else:
+            container_type_name = context.getPortalTypeName()
+            if container_type_name == 'directory':
+                return True
+            elif container_type_name == 'organization':
+                return False
 
     def __call__(self, context):
         try:
             directory = get_directory(context)
-            return get_vocabulary(directory.organization_types)
-        except NoDirectoryFound:
-            return SimpleVocabulary([])
-
-
-class OrganizationLevels(object):
-    implements(IVocabularyFactory)
-
-    def __call__(self, context):
-        try:
-            directory = get_directory(context)
-            return get_vocabulary(directory.organization_levels)
+            # TODO: is there a better way to do this ?
+            if self.is_root(context):
+                return get_vocabulary(directory.organization_types)
+            else:
+                return get_vocabulary(directory.organization_levels)
         except NoDirectoryFound:
             return SimpleVocabulary([])
