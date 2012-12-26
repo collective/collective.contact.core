@@ -17,6 +17,9 @@
 
   <include file="behaviors.zcml" />
 
+  <utility name="PositionTypes"
+      factory=".vocabulary.PositionTypes" />
+
   <utility name="OrganizationTypesOrLevels"
       factory=".vocabulary.OrganizationTypesOrLevels" />
 
@@ -41,6 +44,16 @@
   <utility
       factory=".organization.OrganizationSchemaPolicy"
       name="schema_policy_organization"
+      />
+
+  <utility
+      factory=".position.PositionSchemaPolicy"
+      name="schema_policy_position"
+      />
+
+  <utility
+      factory=".held_position.HeldPositionSchemaPolicy"
+      name="schema_policy_held_position"
       />
 
   <adapter for=".person.IPerson"

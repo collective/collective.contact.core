@@ -42,6 +42,7 @@ class OrganizationTypesOrLevels(object):
     implements(IVocabularyFactory)
 
     def is_root(self, context):
+        # TODO : problem : context is parent during creation and item after
         if hasattr(context, 'is_root_organization'):
             return context.is_root_organization
         else:

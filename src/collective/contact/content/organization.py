@@ -9,8 +9,6 @@ from plone.dexterity.schema import DexteritySchemaPolicy
 from . import _
 
 
-
-
 class IOrganization(model.Schema):
     """ """
 
@@ -24,7 +22,7 @@ class IOrganization(model.Schema):
         vocabulary="OrganizationTypesOrLevels",
         )
 
-@default_value(field=IOrganization['is_root_organisation'])
+@default_value(field=IOrganization['is_root_organization'])
 def isRootOrganization(data):
     if data.context.getPortalTypeName() == 'directory':
         return True
@@ -43,4 +41,3 @@ class OrganizationSchemaPolicy(DexteritySchemaPolicy):
 
     def bases(self, schemaName, tree):
         return (IOrganization,)
-

@@ -19,15 +19,15 @@
  </property>
  <property name="default_view_fallback">False</property>
  <property name="add_permission">cmf.AddPortalContent</property>
- <property name="klass">plone.dexterity.content.Item</property>
+ <property name="klass">collective.contact.content.position.Position</property>
  <property name="behaviors">
-  <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
   <element value="collective.contact.content.behaviors.IContactDetails" />
  </property>
  <property name="schema" />
  <!-- DO NOT use a model_source or it removes manually added fields while reapplying the profile -->
  <!--property name="model_source" /-->
  <property name="model_file">collective.contact.content.models:position.xml</property>
+ <property name="schema_policy">schema_policy_position</property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="@@edit"/>
  <alias from="sharing" to="@@sharing"/>
