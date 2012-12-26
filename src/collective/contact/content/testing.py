@@ -2,10 +2,25 @@ from plone.app.testing import PloneWithPackageLayer
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
 
+from ecreall.helpers.testing import member as memberhelpers
+
 import collective.contact.content
 
 
-COLLECTIVE_CONTACT_CONTENT = PloneWithPackageLayer(
+USERDEFS = [
+        {'user': 'manager', 'roles': ('Manager', 'Member'), 'groups': ()},
+        {'user': 'member', 'roles': ('Member', ), 'groups': ()},
+        ]
+
+
+class ContactContentLayer(PloneWithPackageLayer):
+
+    def setUpPloneSite(self, portal):
+        self.applyProfile(portal, 'collective.contact.content:testing')
+        memberhelpers.createMembers(portal, USERDEFS)
+
+
+COLLECTIVE_CONTACT_CONTENT = ContactContentLayer(
     zcml_package=collective.contact.content,
     zcml_filename='testing.zcml',
     gs_profile_id='collective.contact.content:testing',
