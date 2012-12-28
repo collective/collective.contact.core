@@ -14,6 +14,7 @@
   <include package="plone.directives.form" />
   <include package="plone.supermodel" />
   <include package="collective.z3cform.datagridfield" />
+  <include package="collective.contact.vcard" />
 
   <include file="behaviors.zcml" />
 
@@ -56,9 +57,16 @@
       name="schema_policy_held_position"
       />
 
-  <adapter for=".person.IPerson"
-    provides=".person.INameFromPersonNames"
+  <adapter
+    for=".person.IPerson"
+	provides=".person.INameFromPersonNames"
     factory=".person.NameFromPersonNames"
   />
+
+  <adapter
+    for=".held_position.HeldPosition"
+    provides="collective.contact.vcard.interfaces.IVCard"
+    factory=".adapters.HeldPositionVCard"
+    />
 
 </configure>

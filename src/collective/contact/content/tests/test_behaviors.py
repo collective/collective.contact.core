@@ -4,6 +4,8 @@ import unittest2 as unittest
 
 from Products.CMFDefault.Document import Document
 
+from plone.app.testing.interfaces import TEST_USER_NAME, TEST_USER_ID
+
 from ecreall.helpers.testing.base import BaseTest
 
 from collective.contact.content.testing import INTEGRATION
@@ -22,6 +24,7 @@ from plone.behavior.interfaces import IBehavior
 from plone.autoform.interfaces import IFormFieldProvider
 from zope.component._api import queryUtility
 from collective.contact.content.position import Position
+from plone.app.testing.helpers import setRoles
 
 
 configuration = """\
@@ -56,14 +59,16 @@ provideAdapter(TestingAssignable)
 
 
 class TestBehaviors(unittest.TestCase, BaseTest):
-    """Tests new content types"""
+    """Tests behaviors"""
 
     layer = INTEGRATION
 
     def setUp(self):
         super(TestBehaviors, self).setUp()
         self.portal = self.layer['portal']
-        self.login('manager')
+
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.login(TEST_USER_NAME)
         self.portal.invokeFactory('testtype', 'testitem')
         self.testitem = self.portal['testitem']
 

@@ -1,4 +1,5 @@
 from zope import schema
+from zope.component import adapts
 from zope.interface import implements
 
 from plone.app.content.interfaces import INameFromTitle
@@ -56,7 +57,7 @@ class IPerson(model.Schema):
 
 
 class NameFromPersonNames(object):
-
+    adapts(IPerson)
     implements(INameFromPersonNames)
 
     def __init__(self, context):

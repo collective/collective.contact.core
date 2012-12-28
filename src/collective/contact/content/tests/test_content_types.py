@@ -2,7 +2,7 @@
 
 import unittest2 as unittest
 
-from DateTime import DateTime
+from DateTime.DateTime import DateTime
 
 from ecreall.helpers.testing.base import BaseTest
 
@@ -17,76 +17,10 @@ class TestContentTypes(unittest.TestCase, BaseTest):
     def setUp(self):
         super(TestContentTypes, self).setUp()
         self.portal = self.layer['portal']
-        self.login('manager')
-
-        position_types = [{'Name': 'General', 'Token': 'general'},
-                          {'Name': 'Sergeant', 'Token': 'sergeant'},
-                          {'Name': 'Colonel', 'Token': 'colonel'},
-                          {'Name': 'Lieutenant', 'Token': 'lieutenant'},
-                          {'Name': 'Captain', 'Token': 'captain'},
-                          {'Name': 'Admiral', 'Token': 'admiral'},
-                          ]
-
-        organization_types = [{'Name': 'Navy', 'Token': 'navy'},
-                              {'Name': 'Army', 'Token': 'army'},
-                              {'Name': 'Air force', 'Token': 'air_force'},
-                              ]
-
-        organization_levels = [{'Name': 'Corps', 'Token': 'corps'},
-                               {'Name': 'Division', 'Token': 'division'},
-                               {'Name': 'Brigade', 'Token': 'brigade'},
-                               {'Name': 'Regiment', 'Token': 'regiment'},
-                               {'Name': 'Squad', 'Token': 'squad'},
-                               ]
-
-        params = {'title': "Military directory",
-                  'position_types': position_types,
-                  'organization_types': organization_types,
-                  'organization_levels': organization_levels,
-                  }
-        self.portal.invokeFactory('directory', 'mydirectory', **params)
-        mydirectory = self.portal['mydirectory']
-
-        params = {'lastname': 'De Gaulle',
-                  'firstname': 'Charles',
-                  'gender': 'M',
-                  'person_title': u'Général',
-                  'birthday': DateTime('1890-11-22'),
-                  'email': 'charles.de.gaulle@armees.fr',
-                  }
-        mydirectory.invokeFactory('person', 'degaulle', **params)
-
-        params = {'title': "Armée de terre",
-                  'organization_type': 'army',
-                  }
-        mydirectory.invokeFactory('organization', 'armeedeterre', **params)
-        armeedeterre = mydirectory['armeedeterre']
-
-        params = {'title': "Corps A",
-                  'organization_type': 'corps',
-                  }
-        armeedeterre.invokeFactory('organization', 'corpsa', **params)
-        corpsa = armeedeterre['corpsa']
-
-        params = {'title': "Corps B",
-                  'organization_type': 'corps',
-                  }
-        armeedeterre.invokeFactory('organization', 'corpsb', **params)
-
-        params = {'title': "Division Alpha",
-                  'organization_type': 'division',
-                  }
-        corpsa.invokeFactory('organization', 'divisionalpha', **params)
-
-        params = {'title': u"General of armée de terre",
-                  'position_type': 'general',
-                  }
-        armeedeterre.invokeFactory('position', 'general_adt', **params)
-
-        self.mydirectory = mydirectory
-        self.degaulle = mydirectory['degaulle']
-        self.armeedeterre = armeedeterre
-        self.general_adt = armeedeterre['general_adt']
+        self.mydirectory = self.portal['mydirectory']
+        self.degaulle = self.mydirectory['degaulle']
+        self.armeedeterre = self.mydirectory['armeedeterre']
+        self.general_adt = self.armeedeterre['general_adt']
 
     def test_directory(self):
         self.assertIn('mydirectory', self.portal)
@@ -125,18 +59,5 @@ class TestContentTypes(unittest.TestCase, BaseTest):
 
     def test_held_position(self):
         degaulle = self.degaulle
-        armeedeterre = self.armeedeterre
-        params = {'start_date': DateTime('1940-05-25'),
-                  'end_date': DateTime('1970-11-09'),
-                  'position': armeedeterre,
-                  }
-        degaulle.invokeFactory('held_position', 'adt', **params)
         self.assertIn('adt', degaulle)
-
-        general_adt = self.general_adt
-        params = {'start_date': DateTime('1940-05-25'),
-                  'end_date': DateTime('1970-11-09'),
-                  'position': general_adt,
-                  }
-        degaulle.invokeFactory('held_position', 'gadt', **params)
         self.assertIn('gadt', degaulle)
