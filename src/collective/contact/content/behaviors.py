@@ -123,6 +123,12 @@ class IContactDetails(model.Schema):
             required=False,
             )
 
+    region = schema.TextLine(
+            title=_('Region'),
+            description=_(u'Region'),
+            required=False,
+            )
+
     additional_address_details = schema.TextLine(
             title=_('Additional address details'),
             description=_(u'Additional address details'),

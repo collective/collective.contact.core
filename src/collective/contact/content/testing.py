@@ -57,7 +57,7 @@ class ContactContentLayer(PloneWithPackageLayer):
         mydirectory.invokeFactory('person', 'degaulle', **params)
         degaulle = mydirectory['degaulle']
 
-        params = {'title': "Armée de terre",
+        params = {'title': u"Armée de terre",
                   'organization_type': 'army',
                   }
         mydirectory.invokeFactory('organization', 'armeedeterre', **params)
