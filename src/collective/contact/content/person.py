@@ -65,9 +65,10 @@ class NameFromPersonNames(object):
 
     @property
     def title(self):
+        firstname = self.context.firstname
         lastname = self.context.lastname
-        if self.context.firstname is not None and self.context.firstname:
-            return self.context.firstname + ' ' + lastname
+        if firstname is not None and firstname:
+            return firstname + ' ' + lastname
         else:
             return lastname
 
@@ -82,4 +83,3 @@ class PersonSchemaPolicy(DexteritySchemaPolicy):
 
     def bases(self, schemaName, tree):
         return (IPerson, )
-

@@ -5,7 +5,7 @@ from Products.CMFCore.utils import getToolByName
 from collective.contact.content.testing import INTEGRATION
 
 
-class TestExample(unittest.TestCase):
+class TestSetup(unittest.TestCase):
 
     layer = INTEGRATION
 

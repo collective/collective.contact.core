@@ -64,6 +64,7 @@ class IContactDetails(model.Schema):
                     'city',
                     'street',
                     'number',
+                    'region',
                     'additional_address_details'
                     )
         )
