@@ -16,6 +16,8 @@
   <include package="collective.z3cform.datagridfield" />
   <include package="collective.contact.vcard" />
 
+  <include package="five.globalrequest" />
+
   <include file="behaviors.zcml" />
 
   <utility name="PositionTypes"

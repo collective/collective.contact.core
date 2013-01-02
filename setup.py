@@ -42,6 +42,7 @@ setup(name='collective.contact.content',
       install_requires=[
           'setuptools',
           'five.grok',
+          'five.globalrequest',
           'plone.app.dexterity',
           'plone.app.relationfield',
           'plone.supermodel',

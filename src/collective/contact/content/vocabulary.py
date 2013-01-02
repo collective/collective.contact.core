@@ -2,6 +2,7 @@ from Acquisition import aq_parent
 from zope.interface import implements
 from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.interfaces import IVocabularyFactory
+from zope.globalrequest import getRequest
 
 
 class NoDirectoryFound(Exception):
@@ -41,23 +42,21 @@ class PositionTypes(object):
 class OrganizationTypesOrLevels(object):
     implements(IVocabularyFactory)
 
-    def is_root(self, context):
-        if hasattr(context, 'is_root_organization'):
-            return context.is_root_organization
+    def get_container_type(self, context):
+        if "++add++organization" in getRequest().getURL():
+            # creation mode
+            return context.portal_type
         else:
-            container_type_name = context.getPortalTypeName()
-            if container_type_name == 'directory':
-                return True
-            elif container_type_name == 'organization':
-                return False
+            # edit or view mode
+            return context.getParentNode().portal_type
 
     def __call__(self, context):
         try:
             directory = get_directory(context)
-            #FIXME: context is parent during creation and item after
-            if self.is_root(context):
+            container_type = self.get_container_type(context)
+            if container_type == 'directory':
                 return get_vocabulary(directory.organization_types)
-            else:
+            elif container_type == 'organization':
                 return get_vocabulary(directory.organization_levels)
         except NoDirectoryFound:
             return SimpleVocabulary([])
