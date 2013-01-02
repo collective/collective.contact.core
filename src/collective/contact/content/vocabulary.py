@@ -42,7 +42,6 @@ class OrganizationTypesOrLevels(object):
     implements(IVocabularyFactory)
 
     def is_root(self, context):
-        # TODO : problem : context is parent during creation and item after
         if hasattr(context, 'is_root_organization'):
             return context.is_root_organization
         else:
@@ -55,7 +54,7 @@ class OrganizationTypesOrLevels(object):
     def __call__(self, context):
         try:
             directory = get_directory(context)
-            # TODO: is there a better way to do this ?
+            #FIXME: context is parent during creation and item after
             if self.is_root(context):
                 return get_vocabulary(directory.organization_types)
             else:
