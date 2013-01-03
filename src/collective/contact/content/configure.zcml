@@ -35,6 +35,11 @@
       />
 
   <utility
+      factory=".directory.DirectorySchemaPolicy"
+      name="schema_policy_directory"
+      />
+
+  <utility
       component=".fields.RelationChoiceHandler"
       name="z3c.relationfield.schema.RelationChoice"
       />

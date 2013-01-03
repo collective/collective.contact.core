@@ -3,6 +3,7 @@ from zope import schema
 
 from plone.autoform.directives import widget
 from plone.dexterity.content import Container
+from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.supermodel import model
 
 from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
@@ -42,3 +43,10 @@ class IDirectory(model.Schema):
 class Directory(Container):
     """ """
     implements(IDirectory)
+
+
+class DirectorySchemaPolicy(DexteritySchemaPolicy):
+    """ """
+
+    def bases(self, schemaName, tree):
+        return (IDirectory, )

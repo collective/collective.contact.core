@@ -1,6 +1,8 @@
 from zope.interface import implements
 from zope.component import adapts
 
+from Acquisition import aq_inner, aq_chain
+
 from Products.CMFPlone.utils import base_hasattr
 
 import vobject
@@ -10,7 +12,7 @@ from collective.contact.content.held_position import IHeldPosition
 
 
 def find_root_organization(position_or_organization):
-    for item in reversed(position_or_organization.aq_inner.aq_chain):
+    for item in reversed(aq_chain(aq_inner(position_or_organization))):
         if base_hasattr(item, 'portal_type') and \
            item.portal_type == 'organization':
             return item

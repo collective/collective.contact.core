@@ -18,6 +18,7 @@ def get_directory(context):
             raise NoDirectoryFound
     return parent
 
+
 def get_vocabulary(schema_list):
     terms = []
     for item in schema_list:
