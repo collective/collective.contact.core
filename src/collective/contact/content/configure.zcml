@@ -20,6 +20,20 @@
 
   <include file="behaviors.zcml" />
 
+  <genericsetup:importStep
+      name="collective.contact.content-postInstall"
+      title="collective.contact.content postInstall import step"
+      description="Post install import step from collective.contact.content"
+      handler=".setuphandlers.postInstall">
+  </genericsetup:importStep>
+
+  <genericsetup:importStep
+      name="collective.contact.content-createTestData"
+      title="collective.contact.content createTestData import step"
+      description="Create test data import step from collective.contact.content"
+      handler=".setuphandlers.createTestData">
+  </genericsetup:importStep>
+
   <utility name="PositionTypes"
       factory=".vocabulary.PositionTypes" />
 
@@ -31,6 +45,14 @@
       title="collective.contact.content"
       directory="profiles/default"
       description="Installs the collective.contact.content package"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:registerProfile
+      name="test_data"
+      title="Test data for collective.contact.content"
+      directory="profiles/test_data"
+      description="Installs test data for the collective.contact.content package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
