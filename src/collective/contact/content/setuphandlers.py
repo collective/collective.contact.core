@@ -8,7 +8,7 @@
 
 __docformat__ = 'plaintext'
 
-from DateTime import DateTime
+import datetime
 
 import logging
 logger = logging.getLogger('collective.contact.content: setuphandlers')
@@ -41,24 +41,24 @@ def createTestData(context):
     if isNotTestDataProfile(context): return
     portal = context.getSite()
 
-    position_types = [{'Name': 'General', 'Token': 'general'},
-                      {'Name': 'Sergeant', 'Token': 'sergeant'},
-                      {'Name': 'Colonel', 'Token': 'colonel'},
-                      {'Name': 'Lieutenant', 'Token': 'lieutenant'},
-                      {'Name': 'Captain', 'Token': 'captain'},
-                      {'Name': 'Admiral', 'Token': 'admiral'},
+    position_types = [{'name': 'General', 'token': 'general'},
+                      {'name': 'Sergeant', 'token': 'sergeant'},
+                      {'name': 'Colonel', 'token': 'colonel'},
+                      {'name': 'Lieutenant', 'token': 'lieutenant'},
+                      {'name': 'Captain', 'token': 'captain'},
+                      {'name': 'Admiral', 'token': 'admiral'},
                       ]
 
-    organization_types = [{'Name': 'Navy', 'Token': 'navy'},
-                          {'Name': 'Army', 'Token': 'army'},
-                          {'Name': 'Air force', 'Token': 'air_force'},
+    organization_types = [{'name': 'Navy', 'token': 'navy'},
+                          {'name': 'Army', 'token': 'army'},
+                          {'name': 'Air force', 'token': 'air_force'},
                           ]
 
-    organization_levels = [{'Name': 'Corps', 'Token': 'corps'},
-                           {'Name': 'Division', 'Token': 'division'},
-                           {'Name': 'Brigade', 'Token': 'brigade'},
-                           {'Name': 'Regiment', 'Token': 'regiment'},
-                           {'Name': 'Squad', 'Token': 'squad'},
+    organization_levels = [{'name': 'Corps', 'token': 'corps'},
+                           {'name': 'Division', 'token': 'division'},
+                           {'name': 'Brigade', 'token': 'brigade'},
+                           {'name': 'Regiment', 'token': 'regiment'},
+                           {'name': 'Squad', 'token': 'squad'},
                            ]
 
     params = {'title': "Military directory",
@@ -73,7 +73,7 @@ def createTestData(context):
               'firstname': 'Charles',
               'gender': 'M',
               'person_title': u'Général',
-              'birthday': DateTime('1890-11-22'),
+              'birthday': datetime.date(1890, 11, 22),
               'email': 'charles.de.gaulle@armees.fr',
               }
     mydirectory.invokeFactory('person', 'degaulle', **params)
@@ -106,15 +106,15 @@ def createTestData(context):
               }
     armeedeterre.invokeFactory('position', 'general_adt', **params)
 
-    params = {'start_date': DateTime('1940-05-25'),
-              'end_date': DateTime('1970-11-09'),
+    params = {'start_date': datetime.date(1940, 5, 25),
+              'end_date': datetime.date(1970, 11, 9),
               'position': armeedeterre,
               }
     degaulle.invokeFactory('held_position', 'adt', **params)
 
     general_adt = armeedeterre['general_adt']
-    params = {'start_date': DateTime('1940-05-25'),
-              'end_date': DateTime('1970-11-09'),
+    params = {'start_date': datetime.date(1940, 5, 25),
+              'end_date': datetime.date(1970, 11, 9),
               'position': general_adt,
               }
     degaulle.invokeFactory('held_position', 'gadt', **params)

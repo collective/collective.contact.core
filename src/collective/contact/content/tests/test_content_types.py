@@ -2,7 +2,7 @@
 
 import unittest2 as unittest
 
-from DateTime.DateTime import DateTime
+import datetime
 
 from ecreall.helpers.testing.base import BaseTest
 
@@ -26,11 +26,11 @@ class TestContentTypes(unittest.TestCase, BaseTest):
         self.assertIn('mydirectory', self.portal)
         mydirectory = self.portal['mydirectory']
         self.assertEqual('Military directory', mydirectory.Title())
-        self.assertIn({'Name': 'Colonel', 'Token': 'colonel'},
+        self.assertIn({'name': 'Colonel', 'token': 'colonel'},
                       mydirectory.position_types)
-        self.assertIn({'Name': 'Air force', 'Token': 'air_force'},
+        self.assertIn({'name': 'Air force', 'token': 'air_force'},
                       mydirectory.organization_types)
-        self.assertIn({'Name': 'Regiment', 'Token': 'regiment'},
+        self.assertIn({'name': 'Regiment', 'token': 'regiment'},
                       mydirectory.organization_levels)
 
     def test_person(self):
@@ -39,7 +39,7 @@ class TestContentTypes(unittest.TestCase, BaseTest):
         #self.assertEqual('Charles De Gaulle', degaulle.Title())
         self.assertEqual('De Gaulle', degaulle.lastname)
         self.assertEqual('Charles', degaulle.firstname)
-        self.assertEqual(DateTime('1890-11-22'), degaulle.birthday)
+        self.assertEqual(datetime.date(1890, 11, 22), degaulle.birthday)
         with self.assertRaises(ValueError):
             self.portal.invokeFactory('person', 'error',
                                       {'lastname': "Toto"})

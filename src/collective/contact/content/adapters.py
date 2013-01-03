@@ -41,7 +41,7 @@ class HeldPositionVCard(object):
 
         if person.birthday is not None:
             vcard.add('bday')
-            vcard.bday.value = person.birthday.Date()
+            vcard.bday.value = person.birthday.isoformat()
 
         # held_position is linked to position or organization ?
         position_or_organization = self.context.position

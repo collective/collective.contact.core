@@ -31,4 +31,4 @@ class TestAdapters(unittest.TestCase, BaseTest):
         self.assertEqual(vcard.email.type_param, 'INTERNET')
         self.assertFalse(hasattr(vcard, 'adr'))
         self.assertFalse(hasattr(vcard, 'tel_list'))
-        self.assertEqual(vcard.bday.value, '1890/11/22')
+        self.assertEqual(vcard.bday.value, '1890-11-22')
