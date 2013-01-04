@@ -10,6 +10,11 @@ __docformat__ = 'plaintext'
 
 import datetime
 
+from zope import component
+from zope.intid.interfaces import IIntIds
+
+from z3c.relationfield.relation import RelationValue
+
 import logging
 logger = logging.getLogger('collective.contact.content: setuphandlers')
 
@@ -106,15 +111,17 @@ def createTestData(context):
               }
     armeedeterre.invokeFactory('position', 'general_adt', **params)
 
+    intids = component.getUtility(IIntIds)
+
     params = {'start_date': datetime.date(1940, 5, 25),
               'end_date': datetime.date(1970, 11, 9),
-              'position': armeedeterre,
+              'position': RelationValue(intids.getId(armeedeterre)),
               }
     degaulle.invokeFactory('held_position', 'adt', **params)
 
     general_adt = armeedeterre['general_adt']
     params = {'start_date': datetime.date(1940, 5, 25),
               'end_date': datetime.date(1970, 11, 9),
-              'position': general_adt,
+              'position': RelationValue(intids.getId(general_adt)),
               }
     degaulle.invokeFactory('held_position', 'gadt', **params)
