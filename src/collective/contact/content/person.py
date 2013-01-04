@@ -46,10 +46,6 @@ class IPerson(model.Schema):
         title=_("Birthday"),
         required=False,
         )
-    email = schema.TextLine(
-        title=_("Email"),
-        required=False,
-        )
     photo = NamedImage(
         title=_("Photo"),
         required=False,
