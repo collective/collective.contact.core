@@ -1,0 +1,172 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-01-04 13:52+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.contact.content\n"
+
+#: ../behaviors.py:134
+msgid "Additional address details"
+msgstr "Complément d'adresse"
+
+#: ../person.py:46
+msgid "Birthday"
+msgstr "Date de naissance"
+
+#: ../behaviors.py:86
+msgid "Cell phone"
+msgstr "Téléphone portable"
+
+#: ../behaviors.py:87
+msgid "Cell phone number"
+msgstr "Numéro de téléphone portable"
+
+#: ../behaviors.py:110
+msgid "City"
+msgstr "Ville"
+
+#: ../behaviors.py:57
+msgid "Contact details"
+msgstr "Coordonnées"
+
+#: ../behaviors.py:98
+msgid "Country"
+msgstr "Pays"
+
+#: ../behaviors.py:73
+msgid "Email"
+msgstr "Mél"
+
+#: ../behaviors.py:74
+msgid "Email address"
+msgstr "Adresse électronique"
+
+#: ../held_position.py:22
+msgid "End date"
+msgstr "Date de fin"
+
+#: ../person.py:39
+msgid "Firstname"
+msgstr "Prénom"
+
+#: ../person.py:30
+msgid "Gender"
+msgstr "Genre"
+
+#: ../behaviors.py:30
+msgid "Global positioning"
+msgstr "Localisation"
+
+#: ../behaviors.py:92
+msgid "Instant messenger handle"
+msgstr "Identifiant de messagerie instantanée"
+
+#: ../behaviors.py:15
+msgid "Invalid email address"
+msgstr "Adresse électronique invalide"
+
+#: ../person.py:26
+msgid "Lastname"
+msgstr "Nom de famille"
+
+#: ../behaviors.py:35
+msgid "Latitude"
+msgstr "Latitude"
+
+#: ../behaviors.py:43
+msgid "Longitude"
+msgstr "Longitude"
+
+#: ../directory.py:15
+msgid "Name"
+msgstr "Nom"
+
+#: ../behaviors.py:122
+msgid "Number"
+msgstr "Numéro"
+
+#: ../directory.py:30
+msgid "Organization"
+msgstr "Organisation"
+
+#: ../directory.py:37
+msgid "Organization level"
+msgstr "Niveau d'organisation"
+
+#: ../directory.py:36
+msgid "Organization levels"
+msgstr "Niveaux d'organisation"
+
+#: ../directory.py:29
+msgid "Organization types"
+msgstr "Types d'organisations"
+
+#: ../person.py:35
+msgid "Person title"
+msgstr "Civilité"
+
+#: ../behaviors.py:80
+msgid "Phone"
+msgstr "Téléphone"
+
+#: ../behaviors.py:81
+msgid "Phone number"
+msgstr "Numéro de téléphone"
+
+#: ../person.py:50
+msgid "Photo"
+msgstr "Photo"
+
+#: ../directory.py:23
+msgid "Position"
+msgstr "Fonction"
+
+#: ../held_position.py:25
+msgid "Position or organization"
+msgstr "Fonction ou organisation"
+
+#: ../directory.py:22
+msgid "Position types"
+msgstr "Types de fonctions"
+
+#: ../behaviors.py:128
+msgid "Region"
+msgstr "Région"
+
+#: ../held_position.py:19
+msgid "Start date"
+msgstr "Date de début"
+
+#: ../behaviors.py:116
+msgid "Street"
+msgstr "Rue"
+
+#: ../directory.py:16
+#, fuzzy
+msgid "Token"
+msgstr "Identifiant"
+
+#: ../position.py:15
+msgid "Type"
+msgstr "Type"
+
+#: ../organization.py:15
+msgid "Type or level"
+msgstr "Type ou niveau"
+
+#: ../behaviors.py:104
+msgid "Zip Code"
+msgstr "Code postal"
+

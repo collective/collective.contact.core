@@ -1,0 +1,171 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-01-04 13:52+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.contact.content\n"
+
+#: ../behaviors.py:134
+msgid "Additional address details"
+msgstr ""
+
+#: ../person.py:46
+msgid "Birthday"
+msgstr ""
+
+#: ../behaviors.py:86
+msgid "Cell phone"
+msgstr ""
+
+#: ../behaviors.py:87
+msgid "Cell phone number"
+msgstr ""
+
+#: ../behaviors.py:110
+msgid "City"
+msgstr ""
+
+#: ../behaviors.py:57
+msgid "Contact details"
+msgstr ""
+
+#: ../behaviors.py:98
+msgid "Country"
+msgstr ""
+
+#: ../behaviors.py:73
+msgid "Email"
+msgstr ""
+
+#: ../behaviors.py:74
+msgid "Email address"
+msgstr ""
+
+#: ../held_position.py:22
+msgid "End date"
+msgstr ""
+
+#: ../person.py:39
+msgid "Firstname"
+msgstr ""
+
+#: ../person.py:30
+msgid "Gender"
+msgstr ""
+
+#: ../behaviors.py:30
+msgid "Global positioning"
+msgstr ""
+
+#: ../behaviors.py:92
+msgid "Instant messenger handle"
+msgstr ""
+
+#: ../behaviors.py:15
+msgid "Invalid email address"
+msgstr ""
+
+#: ../person.py:26
+msgid "Lastname"
+msgstr ""
+
+#: ../behaviors.py:35
+msgid "Latitude"
+msgstr ""
+
+#: ../behaviors.py:43
+msgid "Longitude"
+msgstr ""
+
+#: ../directory.py:15
+msgid "Name"
+msgstr ""
+
+#: ../behaviors.py:122
+msgid "Number"
+msgstr ""
+
+#: ../directory.py:30
+msgid "Organization"
+msgstr ""
+
+#: ../directory.py:37
+msgid "Organization level"
+msgstr ""
+
+#: ../directory.py:36
+msgid "Organization levels"
+msgstr ""
+
+#: ../directory.py:29
+msgid "Organization types"
+msgstr ""
+
+#: ../person.py:35
+msgid "Person title"
+msgstr ""
+
+#: ../behaviors.py:80
+msgid "Phone"
+msgstr ""
+
+#: ../behaviors.py:81
+msgid "Phone number"
+msgstr ""
+
+#: ../person.py:50
+msgid "Photo"
+msgstr ""
+
+#: ../directory.py:23
+msgid "Position"
+msgstr ""
+
+#: ../held_position.py:25
+msgid "Position or organization"
+msgstr ""
+
+#: ../directory.py:22
+msgid "Position types"
+msgstr ""
+
+#: ../behaviors.py:128
+msgid "Region"
+msgstr ""
+
+#: ../held_position.py:19
+msgid "Start date"
+msgstr ""
+
+#: ../behaviors.py:116
+msgid "Street"
+msgstr ""
+
+#: ../directory.py:16
+msgid "Token"
+msgstr ""
+
+#: ../position.py:15
+msgid "Type"
+msgstr ""
+
+#: ../organization.py:15
+msgid "Type or level"
+msgstr ""
+
+#: ../behaviors.py:104
+msgid "Zip Code"
+msgstr ""
+
