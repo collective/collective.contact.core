@@ -44,7 +44,7 @@ class HeldPositionVCard(object):
             vcard.bday.value = person.birthday.isoformat()
 
         # held_position is linked to position or organization ?
-        position_or_organization = self.context.position
+        position_or_organization = self.context.position.to_object
         if position_or_organization.portal_type == 'position':
             position_name = position_or_organization.Title()
             vcard.add('role')
