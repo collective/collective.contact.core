@@ -13,7 +13,7 @@ from . import _
 
 class IHeldPosition(model.Schema):
 
-    # TODO : title = position ???
+    # TODO: computed title ?
 
     start_date = schema.Date(
       title=_("Start date"),

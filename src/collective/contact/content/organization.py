@@ -3,7 +3,6 @@ from zope import schema
 
 from plone.dexterity.content import Container
 from plone.supermodel import model
-from plone.directives.form import default_value
 from plone.dexterity.schema import DexteritySchemaPolicy
 
 from . import _
