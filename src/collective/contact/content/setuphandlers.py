@@ -77,14 +77,14 @@ def createTestData(context):
     params = {'lastname': 'De Gaulle',
               'firstname': 'Charles',
               'gender': 'M',
-              'person_title': u'Général',
+              'person_title': 'Général',
               'birthday': datetime.date(1890, 11, 22),
               'email': 'charles.de.gaulle@armees.fr',
               }
     mydirectory.invokeFactory('person', 'degaulle', **params)
     degaulle = mydirectory['degaulle']
 
-    params = {'title': u"Armée de terre",
+    params = {'title': "Armée de terre",
               'organization_type': 'army',
               }
     mydirectory.invokeFactory('organization', 'armeedeterre', **params)
@@ -106,7 +106,7 @@ def createTestData(context):
               }
     corpsa.invokeFactory('organization', 'divisionalpha', **params)
 
-    params = {'title': u"General of armée de terre",
+    params = {'title': "General of armée de terre",
               'position_type': 'general',
               }
     armeedeterre.invokeFactory('position', 'general_adt', **params)
