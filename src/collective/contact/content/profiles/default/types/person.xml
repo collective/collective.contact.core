@@ -24,7 +24,6 @@
  <property name="behaviors">
   <element value="plone.app.content.interfaces.INameFromTitle"/>
   <element value="collective.contact.content.behaviors.IContactDetails" />
-  <element value="collective.dexteritytextindexer.behavior.IDexterityTextIndexer" />
 </property>
  <property name="schema" />
  <!-- DO NOT use a model_source or it removes manually added fields while reapplying the profile -->
