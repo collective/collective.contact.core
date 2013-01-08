@@ -89,12 +89,6 @@
       />
 
   <adapter
-    for=".person.IPerson"
-	provides=".person.INameFromPersonNames"
-    factory=".person.NameFromPersonNames"
-  />
-
-  <adapter
     for=".held_position.HeldPosition"
     provides="collective.contact.vcard.interfaces.IVCard"
     factory=".adapters.HeldPositionVCard"

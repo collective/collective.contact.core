@@ -1,8 +1,5 @@
 from zope import schema
-from zope.component import adapts
 from zope.interface import implements
-
-from plone.app.content.interfaces import INameFromTitle
 
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
@@ -11,12 +8,6 @@ from plone.namedfile.field import NamedImage
 from plone.supermodel import model
 
 from . import _
-
-
-class INameFromPersonNames(INameFromTitle):
-
-    def title(self):
-        """Return a processed title"""
 
 
 class IPerson(model.Schema):
@@ -52,26 +43,17 @@ class IPerson(model.Schema):
         )
 
 
-class NameFromPersonNames(object):
-    adapts(IPerson)
-    implements(INameFromPersonNames)
+class Person(Container):
+    """ """
+    implements(IPerson)
 
-    def __init__(self, context):
-        self.context = context
-
-    @property
-    def title(self):
-        firstname = self.context.firstname
-        lastname = self.context.lastname
+    def Title(self):
+        firstname = self.firstname
+        lastname = self.lastname
         if firstname is not None and firstname:
             return firstname + ' ' + lastname
         else:
             return lastname
-
-
-class Person(Container):
-    """ """
-    implements(IPerson)
 
 
 class PersonSchemaPolicy(DexteritySchemaPolicy):
