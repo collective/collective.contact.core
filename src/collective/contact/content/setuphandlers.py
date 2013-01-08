@@ -84,14 +84,18 @@ def createTestData(context):
     degaulle = mydirectory['degaulle']
 
     params = {'lastname': 'Pepper',
-              'firstname': 'Bob',
               'gender': 'M',
               'person_title': 'Sergent',
               'birthday': datetime.date(1967, 6, 1),
-              'email': 'bob.pepper@armees.fr',
+              'email': 'sgt.pepper@armees.fr',
               }
     mydirectory.invokeFactory('person', 'pepper', **params)
     pepper = mydirectory['pepper']
+
+    params = {'lastname': 'Rambo',
+              'firstname': 'John',
+              }
+    mydirectory.invokeFactory('person', 'rambo', **params)
 
     params = {'title': "Armée de terre",
               'organization_type': 'army',

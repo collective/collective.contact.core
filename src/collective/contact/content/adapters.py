@@ -29,7 +29,7 @@ class HeldPositionVCard(object):
                                            family=lastname,
                                            given=firstname)
         vcard.add('fn')
-        vcard.fn.value = '%s %s' % (firstname, lastname)
+        vcard.fn.value = ' '.join([e for e in (firstname, lastname) if e])
 
         if person.birthday is not None:
             vcard.add('bday')

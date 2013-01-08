@@ -37,6 +37,6 @@ class TestAdapters(unittest.TestCase, BaseTest):
         sergent_pepper = self.pepper['sergent_pepper']
         vcard_provider = IVCard(sergent_pepper)
         vcard = vcard_provider.get_vcard()
-        self.assertEqual(vcard.fn.value, 'Bob Pepper')
+        self.assertEqual(vcard.fn.value, 'Pepper')
         self.assertEqual(vcard.org.value, 'Armée de terre;Corps A;Division Alpha;Régiment H;Brigade LH')
         self.assertEqual(vcard.role.value, "Sergent de la brigade LH")

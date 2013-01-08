@@ -30,9 +30,6 @@ class IPerson(model.Schema):
         title=_("Firstname"),
         required=False,
         )
-    lastname = schema.TextLine(
-        title=_("Lastname")
-        )
     birthday = schema.Date(
         title=_("Birthday"),
         required=False,

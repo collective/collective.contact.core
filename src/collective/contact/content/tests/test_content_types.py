@@ -35,15 +35,21 @@ class TestContentTypes(unittest.TestCase, BaseTest):
                       mydirectory.organization_levels)
 
     def test_person(self):
-        self.assertIn('degaulle', self.mydirectory)
+        mydirectory = self.mydirectory
+        self.assertIn('degaulle', mydirectory)
         degaulle = self.degaulle
         self.assertEqual('Général Charles De Gaulle', degaulle.Title())
         self.assertEqual('De Gaulle', degaulle.lastname)
         self.assertEqual('Charles', degaulle.firstname)
         self.assertEqual(datetime.date(1890, 11, 22), degaulle.birthday)
+        pepper = mydirectory['pepper']
+        self.assertEqual('Sergent Pepper', pepper.Title())
+        rambo = mydirectory['rambo']
+        self.assertEqual('John Rambo', rambo.Title())
+        # we can't create persons in portal
         with self.assertRaises(ValueError):
             self.portal.invokeFactory('person', 'error',
-                                      {'lastname': "Toto"})
+                                      {'lastname': "Casper"})
 
     def test_organization(self):
         self.assertIn('armeedeterre', self.mydirectory)
