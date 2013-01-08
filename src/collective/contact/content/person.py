@@ -51,7 +51,7 @@ class Person(Container):
         person_title = self.person_title or ''
         firstname = self.firstname or ''
         lastname = self.lastname or ''
-        return ' '.join((person_title, firstname, lastname))
+        return ' '.join([e for e in (person_title, firstname, lastname) if e])
 
 
 class PersonSchemaPolicy(DexteritySchemaPolicy):
