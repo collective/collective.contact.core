@@ -1,0 +1,17 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:z3c="http://namespaces.zope.org/z3c">
+
+  <adapter
+      factory=".widgets.AutocompleteMultiFieldWidget"
+      for=".interfaces.IContactList
+           z3c.form.interfaces.IFormLayer"
+      />
+
+  <adapter
+      factory=".widgets.AutocompleteFieldWidget"
+      for=".interfaces.IContactChoice
+           z3c.form.interfaces.IFormLayer"
+      />
+
+</configure>

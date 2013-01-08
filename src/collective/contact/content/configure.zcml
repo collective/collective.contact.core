@@ -21,6 +21,7 @@
   <include package="five.globalrequest" />
 
   <include file="behaviors.zcml" />
+  <include file="widgets.zcml" />
 
   <genericsetup:importStep
       name="collective.contact.content-postInstall"
