@@ -36,13 +36,13 @@ class TestSearch(unittest.TestCase, BaseTest):
     def test_indexers(self):
         divisionalpha = self.divisionalpha
         self.assertEqual(organization_searchable_text(divisionalpha)(),\
-                         "Division Alpha Corps A Armée de terre")
+                         "Armée de terre Corps A Division Alpha")
         gadt = self.gadt
         self.assertEqual(held_position_searchable_text(gadt)(),\
                          "Général de l'armée de terre Armée de terre")
         sergent_pepper = self.sergent_pepper
         self.assertEqual(held_position_searchable_text(sergent_pepper)(),\
-                         "Sergent de la brigade LH Brigade LH Régiment H Division Alpha Corps A Armée de terre")
+                         "Sergent de la brigade LH Armée de terre Corps A Division Alpha Régiment H Brigade LH")
 
     def test_searchable_fields(self):
         catalog = getToolByName(self.portal, 'portal_catalog')

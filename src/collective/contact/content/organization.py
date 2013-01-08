@@ -32,7 +32,7 @@ class Organization(Container):
                     break
                 elif item.portal_type == 'organization':
                     full_title.append(item.Title())
-        return full_title
+        return reversed(full_title)
 
 
 class OrganizationSchemaPolicy(DexteritySchemaPolicy):
