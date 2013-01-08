@@ -19,7 +19,7 @@ class ContactChoice(RelationChoice):
     implements(IContactChoice)
 
     def __init__(self, *args, **kwargs):
-        if not ('source' in kwargs or 'vocabulary' in kwargs or 'source' in kwargs):
+        if not ('values' in kwargs or 'vocabulary' in kwargs or 'source' in kwargs):
             kwargs['source'] = ObjPathSourceBinder(
                             portal_type=('organization', 'person', 'held_position'))
         super(RelationChoice, self).__init__(*args, **kwargs)
