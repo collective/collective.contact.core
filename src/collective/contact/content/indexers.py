@@ -1,6 +1,12 @@
 from plone.indexer import indexer
 
 from collective.contact.content.held_position import IHeldPosition
+from collective.contact.content.organization import IOrganization
+
+
+@indexer(IOrganization)
+def organization_searchable_text(obj):
+    return ' '.join(obj.get_full_title())
 
 
 @indexer(IHeldPosition)

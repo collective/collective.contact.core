@@ -100,4 +100,9 @@
     factory=".indexers.held_position_searchable_text"
     />
 
+  <adapter
+    name="SearchableText"
+    factory=".indexers.organization_searchable_text"
+    />
+
 </configure>
