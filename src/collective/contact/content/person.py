@@ -48,12 +48,10 @@ class Person(Container):
     implements(IPerson)
 
     def Title(self):
-        firstname = self.firstname
-        lastname = self.lastname
-        if firstname is not None and firstname:
-            return firstname + ' ' + lastname
-        else:
-            return lastname
+        person_title = self.person_title or ''
+        firstname = self.firstname or ''
+        lastname = self.lastname or ''
+        return ' '.join((person_title, firstname, lastname))
 
 
 class PersonSchemaPolicy(DexteritySchemaPolicy):

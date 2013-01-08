@@ -37,7 +37,7 @@ class TestContentTypes(unittest.TestCase, BaseTest):
     def test_person(self):
         self.assertIn('degaulle', self.mydirectory)
         degaulle = self.degaulle
-        self.assertEqual('Charles De Gaulle', degaulle.Title())
+        self.assertEqual('Général Charles De Gaulle', degaulle.Title())
         self.assertEqual('De Gaulle', degaulle.lastname)
         self.assertEqual('Charles', degaulle.firstname)
         self.assertEqual(datetime.date(1890, 11, 22), degaulle.birthday)

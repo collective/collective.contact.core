@@ -49,7 +49,7 @@ class TestSearch(unittest.TestCase, BaseTest):
         results = catalog.searchResults(SearchableText='Gaulle')
         self.assertEqual(len(results), 1)
         results = catalog.searchResults(SearchableText='Général')
-        self.assertEqual(len(results), 2)
+        self.assertEqual(len(results), 3)
         results = catalog.searchResults(SearchableText='Corps')
         self.assertEqual(len(results), 7)
         results_objects = [res.getObject() for res in results]
