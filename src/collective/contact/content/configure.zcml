@@ -52,7 +52,7 @@
 
   <genericsetup:registerProfile
       name="test_data"
-      title="Test data for collective.contact.content"
+      title="collective.contact.content test data"
       directory="profiles/test_data"
       description="Installs test data for the collective.contact.content package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
