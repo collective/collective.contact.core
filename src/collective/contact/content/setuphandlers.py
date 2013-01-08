@@ -61,7 +61,6 @@ def createTestData(context):
 
     organization_levels = [{'name': 'Corps', 'token': 'corps'},
                            {'name': 'Division', 'token': 'division'},
-                           {'name': 'Brigade', 'token': 'brigade'},
                            {'name': 'Regiment', 'token': 'regiment'},
                            {'name': 'Squad', 'token': 'squad'},
                            ]
@@ -83,6 +82,16 @@ def createTestData(context):
               }
     mydirectory.invokeFactory('person', 'degaulle', **params)
     degaulle = mydirectory['degaulle']
+
+    params = {'lastname': 'Pepper',
+              'firstname': 'Bob',
+              'gender': 'M',
+              'person_title': 'Sergent',
+              'birthday': datetime.date(1967, 6, 1),
+              'email': 'bob.pepper@armees.fr',
+              }
+    mydirectory.invokeFactory('person', 'pepper', **params)
+    pepper = mydirectory['pepper']
 
     params = {'title': "Armée de terre",
               'organization_type': 'army',
@@ -106,10 +115,35 @@ def createTestData(context):
               }
     corpsa.invokeFactory('organization', 'divisionalpha', **params)
 
-    params = {'title': "General of armée de terre",
+    params = {'title': "Division Beta",
+              'organization_type': 'division',
+              }
+    corpsa.invokeFactory('organization', 'divisionbeta', **params)
+
+    divisionalpha = corpsa['divisionalpha']
+
+    params = {'title': "Régiment H",
+              'organization_type': 'regiment',
+              }
+    divisionalpha.invokeFactory('organization', 'regimenth', **params)
+
+    regimenth = divisionalpha['regimenth']
+    params = {'title': "Brigade LH",
+              'organization_type': 'squad',
+              }
+    regimenth.invokeFactory('organization', 'brigadelh', **params)
+    brigadelh = regimenth['brigadelh']
+
+    params = {'title': "Général de l'armée de terre",
               'position_type': 'general',
               }
     armeedeterre.invokeFactory('position', 'general_adt', **params)
+
+    params = {'title': "Sergent de la brigade LH",
+              'position_type': 'sergent',
+              }
+    brigadelh.invokeFactory('position', 'sergent_lh', **params)
+    sergent_lh = brigadelh['sergent_lh']
 
     intids = component.getUtility(IIntIds)
 
@@ -125,3 +159,9 @@ def createTestData(context):
               'position': RelationValue(intids.getId(general_adt)),
               }
     degaulle.invokeFactory('held_position', 'gadt', **params)
+
+    params = {'start_date': datetime.date(1980, 6, 5),
+              'end_date': datetime.date(1988, 1, 19),
+              'position': RelationValue(intids.getId(sergent_lh)),
+              }
+    pepper.invokeFactory('held_position', 'sergent_pepper', **params)

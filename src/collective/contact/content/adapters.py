@@ -1,22 +1,14 @@
 from zope.interface import implements
 from zope.component import adapts
 
-from Acquisition import aq_inner, aq_chain
-
-from Products.CMFPlone.utils import base_hasattr
-
 import vobject
 
 from collective.contact.vcard.interfaces import IVCard
 from collective.contact.content.held_position import IHeldPosition
 
 
-def find_root_organization(position_or_organization):
-    for item in reversed(aq_chain(aq_inner(position_or_organization))):
-        if base_hasattr(item, 'portal_type') and \
-           item.portal_type == 'organization':
-            return item
-    return ''
+def get_organization_vcard(organization):
+    return ';'.join(reversed(organization.get_full_title()))
 
 
 class HeldPositionVCard(object):
@@ -51,11 +43,11 @@ class HeldPositionVCard(object):
             vcard.role.value = position_name
             vcard.add('title')
             vcard.title.value = position_name
-            organization = find_root_organization(position_or_organization)
+            organization = position_or_organization.getParentNode()
         elif position_or_organization.portal_type == 'organization':
-            organization = find_root_organization(position_or_organization)
+            organization = position_or_organization
         vcard.add('org')
-        vcard.org.value = organization.Title()
+        vcard.org.value = get_organization_vcard(organization)
 
         if person.email is not None:
             vcard.add('email')
