@@ -22,4 +22,4 @@ class ContactChoice(RelationChoice):
         if not ('values' in kwargs or 'vocabulary' in kwargs or 'source' in kwargs):
             kwargs['source'] = ObjPathSourceBinder(
                             portal_type=('organization', 'person', 'held_position'))
-        super(RelationChoice, self).__init__(*args, **kwargs)
+        super(ContactChoice, self).__init__(*args, **kwargs)
