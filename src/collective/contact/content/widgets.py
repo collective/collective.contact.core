@@ -10,12 +10,12 @@ from plone.formwidget.autocomplete.widget import (
 @implementer(IFieldWidget)
 def AutocompleteFieldWidget(field, request):
     widget = AutocompleteSelectionWidget(request)
-    widget.mustMatch = False
+    widget.autoFill = False
     return FieldWidget(field, widget)
 
 
 @implementer(IFieldWidget)
 def AutocompleteMultiFieldWidget(field, request):
     widget = AutocompleteMultiSelectionWidget(request)
-    widget.mustMatch = False
+    widget.autoFill = False
     return FieldWidget(field, widget)
