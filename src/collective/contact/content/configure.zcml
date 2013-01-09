@@ -59,12 +59,6 @@
       />
 
   <adapter
-    for=".held_position.HeldPosition"
-    provides="collective.contact.vcard.interfaces.IVCard"
-    factory=".adapters.HeldPositionVCard"
-    />
-
-  <adapter
     name="SearchableText"
     factory=".indexers.held_position_searchable_text"
     />

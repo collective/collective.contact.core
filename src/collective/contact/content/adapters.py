@@ -1,19 +1,19 @@
-from zope.interface import implements
-from zope.component import adapts
-
+from five import grok
 import vobject
 
 from collective.contact.vcard.interfaces import IVCard
-from collective.contact.content.held_position import IHeldPosition
+from collective.contact.content.held_position import IHeldPosition,\
+                                                     HeldPosition
 
 
 def get_organization_vcard(organization):
     return ';'.join(organization.get_full_title())
 
 
-class HeldPositionVCard(object):
-    implements(IHeldPosition)
-    adapts(IVCard)
+class HeldPositionVCard(grok.Adapter):
+    grok.implements(IHeldPosition)
+    grok.context(HeldPosition)
+    grok.provides(IVCard)
 
     def __init__(self, context):
         self.context = context
