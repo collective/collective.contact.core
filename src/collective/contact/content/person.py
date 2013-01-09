@@ -14,7 +14,7 @@ class IPerson(model.Schema):
     """ """
 
     lastname = schema.TextLine(
-        title=_(u"Lastname"),
+        title=_("Lastname"),
         required=True
         )
     firstname = schema.TextLine(
@@ -23,7 +23,7 @@ class IPerson(model.Schema):
         )
     gender = schema.Choice(
         title=_("Gender"),
-        values=("M", "F",),
+        vocabulary="Genders",
         required=False,
         )
     person_title = schema.TextLine(

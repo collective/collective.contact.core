@@ -37,12 +37,6 @@
       handler=".setuphandlers.createTestData">
   </genericsetup:importStep>
 
-  <utility name="PositionTypes"
-      factory=".vocabulary.PositionTypes" />
-
-  <utility name="OrganizationTypesOrLevels"
-      factory=".vocabulary.OrganizationTypesOrLevels" />
-
   <genericsetup:registerProfile
       name="default"
       title="collective.contact.content"

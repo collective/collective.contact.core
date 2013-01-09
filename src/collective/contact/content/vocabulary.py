@@ -4,6 +4,9 @@ from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.interfaces import IVocabularyFactory
 from zope.globalrequest import getRequest
 
+from . import _
+from five import grok
+
 
 class NoDirectoryFound(Exception):
     """No directory found"""
@@ -29,8 +32,9 @@ def get_vocabulary(schema_list):
     return SimpleVocabulary(terms)
 
 
-class PositionTypes(object):
-    implements(IVocabularyFactory)
+class PositionTypes(grok.GlobalUtility):
+    grok.name("PositionTypes")
+    grok.implements(IVocabularyFactory)
 
     def __call__(self, context):
         try:
@@ -40,8 +44,9 @@ class PositionTypes(object):
             return SimpleVocabulary([])
 
 
-class OrganizationTypesOrLevels(object):
-    implements(IVocabularyFactory)
+class OrganizationTypesOrLevels(grok.GlobalUtility):
+    grok.name("OrganizationTypesOrLevels")
+    grok.implements(IVocabularyFactory)
 
     def get_container_type(self, context):
         if "++add++organization" in getRequest().getURL():
@@ -61,3 +66,16 @@ class OrganizationTypesOrLevels(object):
                 return get_vocabulary(directory.organization_levels)
         except NoDirectoryFound:
             return SimpleVocabulary([])
+
+
+class Genders(grok.GlobalUtility):
+    grok.name("Genders")
+    grok.implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        terms = []
+        genders = {'M': _("Masculine"), 'F': _("Feminine")}
+        for (token, value) in genders.iteritems():
+            term = SimpleVocabulary.createTerm(token, token, value)
+            terms.append(term)
+        return SimpleVocabulary(terms)
