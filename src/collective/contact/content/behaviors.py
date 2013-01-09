@@ -4,6 +4,7 @@ from zope import schema
 from plone.supermodel import model
 from plone.supermodel.directives import fieldset
 from plone.autoform.interfaces import IFormFieldProvider
+from plone.formwidget.masterselect import MasterSelectBoolField
 
 from Products.CMFDefault.utils import checkEmailAddress
 from Products.CMFDefault.exceptions import EmailAddressInvalid
@@ -53,76 +54,97 @@ alsoProvides(IGlobalPositioning, IFormFieldProvider)
 class IContactDetails(model.Schema):
 
     fieldset(
-            'contact_details',
-            label=_(u'Contact details'),
-            fields=('email',
-                    'phone',
-                    'cell_phone',
-                    'im_handle',
-                    'country',
-                    'zip_code',
-                    'city',
-                    'street',
-                    'number',
-                    'region',
-                    'additional_address_details'
-                    )
+        'contact_details',
+        label=_(u'Contact details'),
+        fields=('email',
+                'phone',
+                'cell_phone',
+                'im_handle',
+                'use_address_below',
+                'country',
+                'zip_code',
+                'city',
+                'street',
+                'number',
+                'region',
+                'additional_address_details'
+                )
         )
 
     email = schema.TextLine(
-            title=_(u"Email"),
-            description=_(u"Email address"),
-            constraint=validateEmail,
-            required=False,
+        title=_(u"Email"),
+        description=_(u"Email address"),
+        constraint=validateEmail,
+        required=False,
         )
 
     phone = schema.TextLine(
-            title=_(u"Phone"),
-            description=_(u"Phone number"),
-            required=False,
+        title=_(u"Phone"),
+        description=_(u"Phone number"),
+        required=False,
         )
 
     cell_phone = schema.TextLine(
-            title=_(u"Cell phone"),
-            description=_(u"Cell phone number"),
-            required=False,
+        title=_(u"Cell phone"),
+        description=_(u"Cell phone number"),
+        required=False,
         )
 
     im_handle = schema.TextLine(
-            title=_('Instant messenger handle'),
-            description=_('Instant messenger handle'),
-            required=False,
+        title=_('Instant messenger handle'),
+        description=_('Instant messenger handle'),
+        required=False,
         )
 
+    use_address_below = MasterSelectBoolField(
+        title=_("Use the address below"),
+        description=_("Use the address below"),
+        slave_fields=(
+            {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
+             'name': 'country',
+             'action': 'show',
+             'hide_values': 0,
+             'siblings': True,
+            },
+            {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
+             'name': 'region',
+             'action': 'show',
+             'hide_values': 0,
+             'siblings': True,
+            },
+        ),
+        required=False,
+    )
+
     country = schema.TextLine(
-            title=_('Country'),
-            description=_(u'Country'),
-            required=False,
-            )
+        title=_('Country'),
+        description=_(u'Country'),
+        required=False,
+        )
 
     zip_code = schema.TextLine(
-            title=_('Zip Code'),
-            description=_(u'Zip Code'),
-            required=False,
-            )
+        title=_('Zip Code'),
+        description=_(u'Zip Code'),
+        required=False,
+        )
 
     city = schema.TextLine(
-            title=_('City'),
-            description=_(u'City'),
-            required=False,
-            )
+        title=_('City'),
+        description=_(u'City'),
+        required=False,
+        )
 
     street = schema.TextLine(
-            title=_('Street'),
-            description=_(u'Street'),
-            required=False,
-            )
+        title=_('Street'),
+        description=_(u'Street'),
+        required=False,
+        )
 
     number = schema.TextLine(
-            title=_('Number'),
-            description=_(u'Number'),
-            required=False,
-            )
+        title=_('Number'),
+        description=_(u'Number'),
+        required=False,
+        )
 
     region = schema.TextLine(
             title=_('Region'),

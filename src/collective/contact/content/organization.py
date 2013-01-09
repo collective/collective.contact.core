@@ -27,10 +27,16 @@ class IOrganization(model.Schema):
         [OrganizationFoo, DivisionBar, HRService]
         """
 
-    def get_full_title():
+    def get_organizations_titles():
         """Gets list of titles of the chain of organizations
         e.g. for HR service in Division Bar in Organization Foo :
         ["Organization Foo", "Division Bar", "HR service"]
+        """
+
+    def get_full_title():
+        """Gets formated title using list of titles of the organizations
+        e.g. for HR service in Division Bar in Organization Foo :
+        "Organization Foo / Division Bar / HR service"
         """
 
 
@@ -52,8 +58,11 @@ class Organization(Container):
     def get_root_organization(self):
         return self.get_organizations_chain()[0]
 
-    def get_full_title(self):
+    def get_organizations_titles(self):
         return [item.Title() for item in self.get_organizations_chain()]
+
+    def get_full_title(self):
+        return ' / '.join(self.get_organizations_titles())
 
 
 class OrganizationSchemaPolicy(grok.GlobalUtility,

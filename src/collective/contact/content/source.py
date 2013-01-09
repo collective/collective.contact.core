@@ -11,7 +11,7 @@ class ContactSource(ObjPathSource):
             value = brain.getPath()[len(self.portal_path):]
         # TODO avoid to wake up object, create a get_full_title brain metadada
         if hasattr(brain.getObject(), "get_full_title"):
-            full_title = "->".join(brain.getObject().get_full_title())
+            full_title = brain.getObject().get_full_title()
             return SimpleTerm(value, token=brain.getPath(), title=full_title)
         else:
             return SimpleTerm(value, token=brain.getPath(), title=brain.Title or

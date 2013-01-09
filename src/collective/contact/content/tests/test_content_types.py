@@ -55,7 +55,7 @@ class TestContentTypes(unittest.TestCase, BaseTest):
         self.assertIn('armeedeterre', self.mydirectory)
         armeedeterre = self.mydirectory['armeedeterre']
         self.assertEqual(armeedeterre.Title(), "Armée de terre")
-        self.assertIn('Armée de terre', armeedeterre.get_full_title())
+        self.assertIn('Armée de terre', armeedeterre.get_organizations_titles())
         self.assertIn('corpsa', armeedeterre)
         corpsa = armeedeterre['corpsa']
         self.assertIn('corpsb', armeedeterre)
@@ -67,23 +67,25 @@ class TestContentTypes(unittest.TestCase, BaseTest):
         self.assertIn('brigadelh', regimenth)
         brigadelh = regimenth['brigadelh']
 
-        corpsa_full_title = corpsa.get_full_title()
-        self.assertIn('Armée de terre', corpsa_full_title)
-        self.assertIn('Corps A', corpsa_full_title)
+        corpsa_titles = corpsa.get_organizations_titles()
+        self.assertIn('Armée de terre', corpsa_titles)
+        self.assertIn('Corps A', corpsa_titles)
 
-        division_alpha_full_title = divisionalpha.get_full_title()
+        division_alpha_titles = divisionalpha.get_organizations_titles()
         self.assertIn('armeedeterre', divisionalpha.getPhysicalPath())
-        self.assertIn('Armée de terre', division_alpha_full_title)
-        self.assertIn('Corps A', division_alpha_full_title)
-        self.assertIn('Division Alpha', division_alpha_full_title)
+        self.assertIn('Armée de terre', division_alpha_titles)
+        self.assertIn('Corps A', division_alpha_titles)
+        self.assertIn('Division Alpha', division_alpha_titles)
 
-        brigadelh_full_title = brigadelh.get_full_title()
+        brigadelh_titles = brigadelh.get_organizations_titles()
         self.assertIn('armeedeterre', brigadelh.getPhysicalPath())
-        self.assertIn('Armée de terre', brigadelh_full_title)
-        self.assertIn('Corps A', brigadelh_full_title)
-        self.assertIn('Division Alpha', brigadelh_full_title)
-        self.assertIn('Régiment H', brigadelh_full_title)
-        self.assertIn('Brigade LH', brigadelh_full_title)
+        self.assertIn('Armée de terre', brigadelh_titles)
+        self.assertIn('Corps A', brigadelh_titles)
+        self.assertIn('Division Alpha', brigadelh_titles)
+        self.assertIn('Régiment H', brigadelh_titles)
+        self.assertIn('Brigade LH', brigadelh_titles)
+        self.assertEqual(brigadelh.get_full_title(),
+                         "Armée de terre / Corps A / Division Alpha / Régiment H / Brigade LH")
 
     def test_position(self):
         self.assertIn('general_adt', self.armeedeterre)
