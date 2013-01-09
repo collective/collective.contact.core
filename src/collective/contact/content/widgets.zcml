@@ -1,5 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:z3c="http://namespaces.zope.org/z3c">
 
   <adapter
@@ -12,6 +13,13 @@
       factory=".widgets.ContactAutocompleteFieldWidget"
       for=".interfaces.IContactChoice
            z3c.form.interfaces.IFormLayer"
+      />
+
+  <browser:page
+      name="add-contact"
+      for="*"
+      class=".addcontact.AddContact"
+      permission="cmf.ModifyPortalContent"
       />
 
 </configure>
