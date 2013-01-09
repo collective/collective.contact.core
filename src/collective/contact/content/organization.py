@@ -1,14 +1,16 @@
 from zope.interface import implements
 from zope import schema
-
 from Acquisition import aq_inner, aq_chain
+
+from five import grok
+
+from Products.CMFPlone.utils import base_hasattr
 
 from plone.dexterity.content import Container
 from plone.supermodel import model
 from plone.dexterity.schema import DexteritySchemaPolicy
 
 from . import _
-from Products.CMFPlone.utils import base_hasattr
 
 
 class IOrganization(model.Schema):
@@ -51,8 +53,10 @@ class Organization(Container):
         return [item.Title() for item in self.get_organizations_chain()]
 
 
-class OrganizationSchemaPolicy(DexteritySchemaPolicy):
+class OrganizationSchemaPolicy(grok.GlobalUtility,
+                               DexteritySchemaPolicy):
     """ """
+    grok.name("schema_policy_organization")
 
     def bases(self, schemaName, tree):
         return (IOrganization,)

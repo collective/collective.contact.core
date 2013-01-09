@@ -1,7 +1,8 @@
 from zope.interface import implements
 from zope import schema
-
 from z3c.relationfield.schema import RelationChoice
+
+from five import grok
 
 from plone.formwidget.contenttree import ObjPathSourceBinder
 from plone.dexterity.schema import DexteritySchemaPolicy
@@ -39,8 +40,10 @@ class HeldPosition(Container):
         return self.getParentNode()
 
 
-class HeldPositionSchemaPolicy(DexteritySchemaPolicy):
+class HeldPositionSchemaPolicy(grok.GlobalUtility,
+                               DexteritySchemaPolicy):
     """ """
+    grok.name("schema_policy_held_position")
 
     def bases(self, schemaName, tree):
         return (IHeldPosition,)

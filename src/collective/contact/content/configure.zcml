@@ -54,33 +54,8 @@
       />
 
   <utility
-      factory=".directory.DirectorySchemaPolicy"
-      name="schema_policy_directory"
-      />
-
-  <utility
       component=".fields.RelationChoiceHandler"
       name="z3c.relationfield.schema.RelationChoice"
-      />
-
-  <utility
-      factory=".person.PersonSchemaPolicy"
-      name="schema_policy_person"
-      />
-
-  <utility
-      factory=".organization.OrganizationSchemaPolicy"
-      name="schema_policy_organization"
-      />
-
-  <utility
-      factory=".position.PositionSchemaPolicy"
-      name="schema_policy_position"
-      />
-
-  <utility
-      factory=".held_position.HeldPositionSchemaPolicy"
-      name="schema_policy_held_position"
       />
 
   <adapter

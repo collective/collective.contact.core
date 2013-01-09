@@ -1,9 +1,10 @@
 from zope import schema
 from zope.interface import implements
 
+from five import grok
+
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
-
 from plone.namedfile.field import NamedImage
 from plone.supermodel import model
 
@@ -51,8 +52,10 @@ class Person(Container):
         return ' '.join([e for e in (person_title, firstname, lastname) if e])
 
 
-class PersonSchemaPolicy(DexteritySchemaPolicy):
+class PersonSchemaPolicy(grok.GlobalUtility,
+                         DexteritySchemaPolicy):
     """ """
+    grok.name("schema_policy_person")
 
     def bases(self, schemaName, tree):
         return (IPerson, )

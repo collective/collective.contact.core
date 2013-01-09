@@ -1,11 +1,12 @@
 from Acquisition import aq_parent
-from zope.interface import implements
+
 from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.interfaces import IVocabularyFactory
 from zope.globalrequest import getRequest
 
-from . import _
 from five import grok
+
+from . import _
 
 
 class NoDirectoryFound(Exception):

@@ -1,6 +1,8 @@
 from zope.interface import Interface, implements
 from zope import schema
 
+from five import grok
+
 from plone.autoform.directives import widget
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
@@ -32,7 +34,7 @@ class IDirectory(model.Schema):
         )
     widget(organization_types=DataGridFieldFactory)
 
-    organization_levels=schema.List(
+    organization_levels = schema.List(
         title=_("Organization levels"),
         value_type=DictRow(title=_(u'Organization level'),
                            schema=INameTokenTableRowSchema)
@@ -45,8 +47,10 @@ class Directory(Container):
     implements(IDirectory)
 
 
-class DirectorySchemaPolicy(DexteritySchemaPolicy):
+class DirectorySchemaPolicy(grok.GlobalUtility,
+                            DexteritySchemaPolicy):
     """ """
+    grok.name("schema_policy_directory")
 
     def bases(self, schemaName, tree):
         return (IDirectory, )

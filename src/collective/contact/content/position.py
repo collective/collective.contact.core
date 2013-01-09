@@ -1,6 +1,8 @@
 from zope.interface import implements
 from zope import schema
 
+from five import grok
+
 from plone.dexterity.content import Container
 from plone.supermodel import model
 from plone.dexterity.schema import DexteritySchemaPolicy
@@ -22,8 +24,10 @@ class Position(Container):
     implements(IPosition)
 
 
-class PositionSchemaPolicy(DexteritySchemaPolicy):
+class PositionSchemaPolicy(grok.GlobalUtility,
+                           DexteritySchemaPolicy):
     """ """
+    grok.name("schema_policy_position")
 
     def bases(self, schemaName, tree):
         return (IPosition,)
