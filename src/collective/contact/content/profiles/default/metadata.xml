@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>0001</version>
+  <version>1</version>
   <dependencies>
     <dependency>profile-plone.app.dexterity:default</dependency>
+    <dependency>profile-plone.formwidget.masterselect:default</dependency>
     <dependency>profile-plone.app.relationfield:default</dependency>
     <dependency>profile-collective.z3cform.datagridfield:default</dependency>
   </dependencies>
