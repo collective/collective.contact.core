@@ -47,10 +47,14 @@ class Organization(Container):
                 elif item.portal_type == 'organization':
                     organizations_chain.append(item)
         organizations_chain.reverse()
+        self.organizations_chain = organizations_chain
         return organizations_chain
 
+    def get_root_organization(self):
+        return self.organizations_chain[0]
+
     def get_full_title(self):
-        return [item.Title() for item in self.get_organizations_chain()]
+        return [item.Title() for item in self.organizations_chain]
 
 
 class OrganizationSchemaPolicy(grok.GlobalUtility,

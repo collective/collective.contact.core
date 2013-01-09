@@ -14,8 +14,6 @@ from . import _
 
 class IHeldPosition(model.Schema):
 
-    # TODO: title of Position + start_date + end_date
-
     start_date = schema.Date(
       title=_("Start date"),
     )
@@ -38,6 +36,33 @@ class HeldPosition(Container):
 
     def get_person(self):
         return self.getParentNode()
+
+    def get_position(self):
+        pos_or_org = self.position.to_object
+        if pos_or_org.portal_type == 'position':
+            return pos_or_org
+        else:
+            return None
+
+    def get_organization(self):
+        pos_or_org = self.position.to_object
+        if pos_or_org.portal_type == 'position':
+            return pos_or_org.getParentNode()
+        elif pos_or_org.portal_type == 'organization':
+            return pos_or_org
+
+    def Title(self):
+        person_name = self.get_person().Title()
+        root_organization = self.get_organization().get_root_organization().Title()
+        position = self.get_position()
+        if position is None:
+            return "%s (%s)" % (person_name,
+                                     root_organization)
+        else:
+            position_name = position.Title()
+            return "%s (%s - %s)" % (person_name,
+                                     root_organization,
+                                     position_name)
 
 
 class HeldPositionSchemaPolicy(grok.GlobalUtility,
