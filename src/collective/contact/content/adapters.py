@@ -35,17 +35,15 @@ class HeldPositionVCard(grok.Adapter):
             vcard.add('bday')
             vcard.bday.value = person.birthday.isoformat()
 
-        # held_position is linked to position or organization ?
-        position_or_organization = self.context.position.to_object
-        if position_or_organization.portal_type == 'position':
-            position_name = position_or_organization.Title()
+        position = self.context.get_position()
+        if position is not None:
+            position_name = position.Title()
             vcard.add('role')
             vcard.role.value = position_name
             vcard.add('title')
             vcard.title.value = position_name
-            organization = position_or_organization.getParentNode()
-        elif position_or_organization.portal_type == 'organization':
-            organization = position_or_organization
+
+        organization = self.context.get_organization()
         vcard.add('org')
         vcard.org.value = get_organization_vcard(organization)
 
