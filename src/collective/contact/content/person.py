@@ -17,6 +17,10 @@ class IPerson(model.Schema):
         title=_(u"Lastname"),
         required=True
         )
+    firstname = schema.TextLine(
+        title=_("Firstname"),
+        required=False,
+        )
     gender = schema.Choice(
         title=_("Gender"),
         values=("M", "F",),
@@ -24,10 +28,6 @@ class IPerson(model.Schema):
         )
     person_title = schema.TextLine(
         title=_("Person title"),
-        required=False,
-        )
-    firstname = schema.TextLine(
-        title=_("Firstname"),
         required=False,
         )
     birthday = schema.Date(
