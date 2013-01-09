@@ -26,10 +26,17 @@ class IHeldPosition(model.Schema):
         source=ObjPathSourceBinder(portal_type=("organization", "position"))
     )
 
+    def get_person():
+        """Get the person who helds the position
+        """
+
 
 class HeldPosition(Container):
     """Position held by a person in an organization"""
     implements(IHeldPosition)
+
+    def get_person(self):
+        return self.getParentNode()
 
 
 class HeldPositionSchemaPolicy(DexteritySchemaPolicy):

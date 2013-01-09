@@ -12,6 +12,7 @@ def organization_searchable_text(obj):
 @indexer(IHeldPosition)
 def held_position_searchable_text(obj):
     indexed_fields = []
+    indexed_fields.append(obj.get_person().Title())
     position_or_organization = obj.position.to_object
     if position_or_organization.portal_type == 'position':
         position = position_or_organization

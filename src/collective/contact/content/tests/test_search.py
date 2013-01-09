@@ -39,17 +39,17 @@ class TestSearch(unittest.TestCase, BaseTest):
                          "Armée de terre Corps A Division Alpha")
         gadt = self.gadt
         self.assertEqual(held_position_searchable_text(gadt)(),\
-                         "Général de l'armée de terre Armée de terre")
+                         "Général Charles De Gaulle Général de l'armée de terre Armée de terre")
         sergent_pepper = self.sergent_pepper
         self.assertEqual(held_position_searchable_text(sergent_pepper)(),\
-                         "Sergent de la brigade LH Armée de terre Corps A Division Alpha Régiment H Brigade LH")
+                         "Sergent Pepper Sergent de la brigade LH Armée de terre Corps A Division Alpha Régiment H Brigade LH")
 
     def test_searchable_fields(self):
         catalog = getToolByName(self.portal, 'portal_catalog')
         results = catalog.searchResults(SearchableText='Gaulle')
-        self.assertEqual(len(results), 1)
-        results = catalog.searchResults(SearchableText='Général')
         self.assertEqual(len(results), 3)
+        results = catalog.searchResults(SearchableText='Général')
+        self.assertEqual(len(results), 4)
         results = catalog.searchResults(SearchableText='Corps')
         self.assertEqual(len(results), 7)
         results_objects = [res.getObject() for res in results]
