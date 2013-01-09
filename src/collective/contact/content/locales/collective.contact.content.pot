@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-01-04 13:52+0000\n"
+"POT-Creation-Date: 2013-01-09 13:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Additional address details"
 msgstr ""
 
-#: ../person.py:46
+#: ../person.py:35
 msgid "Birthday"
 msgstr ""
 
@@ -45,6 +45,10 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
+#: ../profiles/default/types/directory.xml
+msgid "Directory"
+msgstr ""
+
 #: ../behaviors.py:73
 msgid "Email"
 msgstr ""
@@ -53,20 +57,28 @@ msgstr ""
 msgid "Email address"
 msgstr ""
 
-#: ../held_position.py:22
+#: ../held_position.py:21
 msgid "End date"
 msgstr ""
 
-#: ../person.py:39
+#: ../vocabulary.py:78
+msgid "Feminine"
+msgstr ""
+
+#: ../person.py:22
 msgid "Firstname"
 msgstr ""
 
-#: ../person.py:30
+#: ../person.py:26
 msgid "Gender"
 msgstr ""
 
 #: ../behaviors.py:30
 msgid "Global positioning"
+msgstr ""
+
+#: ../profiles/default/types/held_position.xml
+msgid "Held position"
 msgstr ""
 
 #: ../behaviors.py:92
@@ -77,7 +89,7 @@ msgstr ""
 msgid "Invalid email address"
 msgstr ""
 
-#: ../person.py:26
+#: ../person.py:18
 msgid "Lastname"
 msgstr ""
 
@@ -89,7 +101,11 @@ msgstr ""
 msgid "Longitude"
 msgstr ""
 
-#: ../directory.py:15
+#: ../vocabulary.py:78
+msgid "Masculine"
+msgstr ""
+
+#: ../directory.py:17
 msgid "Name"
 msgstr ""
 
@@ -97,23 +113,28 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
-#: ../directory.py:30
+#: ../directory.py:32
+#: ../profiles/default/types/organization.xml
 msgid "Organization"
 msgstr ""
 
-#: ../directory.py:37
+#: ../directory.py:39
 msgid "Organization level"
 msgstr ""
 
-#: ../directory.py:36
+#: ../directory.py:38
 msgid "Organization levels"
 msgstr ""
 
-#: ../directory.py:29
+#: ../directory.py:31
 msgid "Organization types"
 msgstr ""
 
-#: ../person.py:35
+#: ../profiles/default/types/person.xml
+msgid "Person"
+msgstr ""
+
+#: ../person.py:31
 msgid "Person title"
 msgstr ""
 
@@ -125,19 +146,20 @@ msgstr ""
 msgid "Phone number"
 msgstr ""
 
-#: ../person.py:50
+#: ../person.py:39
 msgid "Photo"
 msgstr ""
 
-#: ../directory.py:23
+#: ../directory.py:25
+#: ../profiles/default/types/position.xml
 msgid "Position"
 msgstr ""
 
-#: ../held_position.py:25
+#: ../held_position.py:24
 msgid "Position or organization"
 msgstr ""
 
-#: ../directory.py:22
+#: ../directory.py:24
 msgid "Position types"
 msgstr ""
 
@@ -145,7 +167,7 @@ msgstr ""
 msgid "Region"
 msgstr ""
 
-#: ../held_position.py:19
+#: ../held_position.py:18
 msgid "Start date"
 msgstr ""
 
@@ -153,15 +175,15 @@ msgstr ""
 msgid "Street"
 msgstr ""
 
-#: ../directory.py:16
+#: ../directory.py:18
 msgid "Token"
 msgstr ""
 
-#: ../position.py:15
+#: ../position.py:17
 msgid "Type"
 msgstr ""
 
-#: ../organization.py:15
+#: ../organization.py:20
 msgid "Type or level"
 msgstr ""
 
