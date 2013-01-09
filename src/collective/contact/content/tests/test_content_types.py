@@ -96,6 +96,21 @@ class TestContentTypes(unittest.TestCase, BaseTest):
     def test_held_position(self):
         degaulle = self.degaulle
         self.assertIn('adt', degaulle)
+        adt = degaulle['adt']
+        self.assertEqual(adt.Title(),
+                         "Armée de terre")
+        self.assertEqual(adt.get_full_title(),
+                         "Général Charles De Gaulle (Armée de terre)")
         self.assertIn('gadt', degaulle)
+        gadt = degaulle['gadt']
+        self.assertEqual(gadt.Title(),
+                         "Général de l'armée de terre")
+        self.assertEqual(gadt.get_full_title(),
+                         "Général Charles De Gaulle (Armée de terre - Général de l'armée de terre)")
         pepper = self.pepper
         self.assertIn('sergent_pepper', pepper)
+        sergent_pepper = pepper['sergent_pepper']
+        self.assertEqual(sergent_pepper.Title(),
+                         "Sergent de la brigade LH")
+        self.assertEqual(sergent_pepper.get_full_title(),
+                         "Sergent Pepper (Armée de terre - Sergent de la brigade LH)")

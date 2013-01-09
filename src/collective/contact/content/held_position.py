@@ -52,6 +52,9 @@ class HeldPosition(Container):
             return pos_or_org
 
     def Title(self):
+        return self.position.to_object.Title()
+
+    def get_full_title(self):
         person_name = self.get_person().Title()
         root_organization = self.get_organization().get_root_organization().Title()
         position = self.get_position()
