@@ -19,21 +19,36 @@ class IOrganization(model.Schema):
         vocabulary="OrganizationTypesOrLevels",
         )
 
+    def get_organizations_chain():
+        """Gets chain of organizations
+        e.g. for HR service in Division Bar in Organization Foo :
+        [OrganizationFoo, DivisionBar, HRService]
+        """
+
+    def get_full_title():
+        """Gets list of titles of the chain of organizations
+        e.g. for HR service in Division Bar in Organization Foo :
+        ["Organization Foo", "Division Bar", "HR service"]
+        """
+
 
 class Organization(Container):
     """ """
     implements(IOrganization)
 
-    def get_full_title(self):
-        full_title = []
+    def get_organizations_chain(self):
+        organizations_chain = []
         for item in aq_chain(aq_inner(self)):
             if base_hasattr(item, 'portal_type'):
                 if item.portal_type == 'directory':
                     break
                 elif item.portal_type == 'organization':
-                    full_title.append(item.Title())
-        full_title.reverse()
-        return full_title
+                    organizations_chain.append(item)
+        organizations_chain.reverse()
+        return organizations_chain
+
+    def get_full_title(self):
+        return [item.Title() for item in self.get_organizations_chain()]
 
 
 class OrganizationSchemaPolicy(DexteritySchemaPolicy):
