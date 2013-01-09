@@ -7,15 +7,21 @@ from plone.formwidget.autocomplete.widget import (
     AutocompleteSelectionWidget)
 
 
+class ContactAutocompleteSelectionWidget(AutocompleteSelectionWidget):
+    autoFill = False
+
+
+class ContactAutocompleteMultiSelectionWidget(AutocompleteMultiSelectionWidget):
+    autoFill = False
+
+
 @implementer(IFieldWidget)
-def AutocompleteFieldWidget(field, request):
-    widget = AutocompleteSelectionWidget(request)
-    widget.autoFill = False
+def ContactAutocompleteFieldWidget(field, request):
+    widget = ContactAutocompleteSelectionWidget(request)
     return FieldWidget(field, widget)
 
 
 @implementer(IFieldWidget)
-def AutocompleteMultiFieldWidget(field, request):
-    widget = AutocompleteMultiSelectionWidget(request)
-    widget.autoFill = False
+def ContactAutocompleteMultiFieldWidget(field, request):
+    widget = ContactAutocompleteMultiSelectionWidget(request)
     return FieldWidget(field, widget)

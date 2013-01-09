@@ -1,9 +1,8 @@
 from zope.interface import implements
 from z3c.relationfield.schema import RelationChoice, RelationList
 
-from plone.formwidget.contenttree import ObjPathSourceBinder
-
 from .interfaces import IContactChoice, IContactList
+from .source import ContactSourceBinder
 
 
 class ContactList(RelationList):
@@ -20,6 +19,6 @@ class ContactChoice(RelationChoice):
 
     def __init__(self, *args, **kwargs):
         if not ('values' in kwargs or 'vocabulary' in kwargs or 'source' in kwargs):
-            kwargs['source'] = ObjPathSourceBinder(
+            kwargs['source'] = ContactSourceBinder(
                             portal_type=('organization', 'person', 'held_position'))
         super(ContactChoice, self).__init__(*args, **kwargs)

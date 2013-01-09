@@ -3,13 +3,13 @@
     xmlns:z3c="http://namespaces.zope.org/z3c">
 
   <adapter
-      factory=".widgets.AutocompleteMultiFieldWidget"
+      factory=".widgets.ContactAutocompleteMultiFieldWidget"
       for=".interfaces.IContactList
            z3c.form.interfaces.IFormLayer"
       />
 
   <adapter
-      factory=".widgets.AutocompleteFieldWidget"
+      factory=".widgets.ContactAutocompleteFieldWidget"
       for=".interfaces.IContactChoice
            z3c.form.interfaces.IFormLayer"
       />
