@@ -23,4 +23,9 @@
       name="position"
       />
 
+  <browser:defaultView
+      for=".person.IPerson"
+      name="person"
+      />
+
 </configure>

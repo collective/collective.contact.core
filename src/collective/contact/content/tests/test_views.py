@@ -88,8 +88,9 @@ class TestContactView(TestView):
 
         self.assertEqual(contact_view.fullname,
                          "Général Charles De Gaulle")
-        self.assertEqual([self.armeedeterre],
-                         contact_view.organizations)
+        self.assertEqual([self.armeedeterre], contact_view.organizations)
+        self.assertEqual(contact_view.birthday, 'Nov 22, 1901')
+
         # address is acquired from degaulle
         address = contact_view.address
         self.assertEqual(address['number'], '6bis')
@@ -196,3 +197,33 @@ class TestOrganizationView(TestView):
         self.assertEqual(set(['Corps A', 'Corps B',
                               "Général de l'armée de terre"]),
                          set(items_names))
+
+
+class TestPersonView(TestView):
+
+    def test_person_view(self):
+        person_view = self.degaulle.restrictedTraverse("@@person")
+        person_view.update()
+
+        self.assertEqual(person_view.name, "Général Charles De Gaulle")
+
+        self.assertEqual(person_view.gender, 'M')
+        self.assertEqual(person_view.birthday, 'Nov 22, 1901')
+
+        self.assertEqual(person_view.email, 'charles.de.gaulle@armees.fr')
+        self.assertEqual(person_view.phone, '')
+        self.assertEqual(person_view.cell_phone, '')
+        self.assertEqual(person_view.im_handle, '')
+
+        address = person_view.address
+        self.assertEqual(address['number'], '6bis')
+        self.assertEqual(address['street'], "rue Jean Moulin")
+        self.assertEqual(address['city'], 'Colombey les deux églises')
+        self.assertEqual(address['zip_code'], '52330')
+        self.assertEqual(address['region'], '')
+        self.assertEqual(address['country'], 'France')
+        self.assertEqual(address['additional_address_details'], 'bâtiment D')
+
+        held_positions = [b.getObject() for b in person_view.held_positions]
+        self.assertIn(self.adt, held_positions)
+        self.assertIn(self.gadt, held_positions)

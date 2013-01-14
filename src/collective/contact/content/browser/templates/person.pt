@@ -1,0 +1,58 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="collective.contact.content">
+<body>
+
+<div metal:fill-slot="main">
+	<h1 tal:content="view/name"></h1>
+
+    <div class="field" tal:condition="view/birthday">
+        <label i18n:translate="">Birthday : </label>
+        <span tal:content="view/birthday"
+              i18n:translate="" />
+    </div>
+
+    <div class="field" tal:condition="view/email">
+        <label i18n:translate="">Email : </label>
+        <span tal:content="view/email"
+              i18n:translate="" />
+    </div>
+
+    <div class="field" tal:condition="view/phone">
+        <label i18n:translate="">Phone number : </label>
+        <span tal:content="view/phone"
+              i18n:translate="" />
+    </div>
+
+    <div class="field" tal:condition="view/cell_phone">
+        <label i18n:translate="">Cell phone number : </label>
+        <span tal:content="view/cell_phone"
+              i18n:translate="" />
+    </div>
+
+    <div class="field" tal:condition="view/im_handle">
+        <label i18n:translate="">IM handle : </label>
+        <span tal:content="view/im_handle"
+              i18n:translate="" />
+    </div>
+
+    <div id="address"
+         tal:replace="structure view/render_address" />
+
+    <div id="held_positions" class="field" tal:condition="view/held_positions">
+        <label i18n:translate="">List of positions held by this person : </label>
+        <ul>
+        <tal:block tal:repeat="held_position view/held_positions">
+            <li><a tal:attributes="href held_position/getURL">
+                <span tal:replace="held_position/Title"
+                      i18n:translate="" />
+            </a></li>
+        </tal:block>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>
