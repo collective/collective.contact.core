@@ -25,8 +25,32 @@
         </ul>
     </div>
 
-	<div id="address"
-	     tal:replace="structure view/render_address" />
+    <div class="field" tal:condition="view/email">
+        <label i18n:translate="">Email : </label>
+        <span tal:content="view/email"
+              i18n:translate="" />
+    </div>
+
+    <div class="field" tal:condition="view/phone">
+        <label i18n:translate="">Phone number : </label>
+        <span tal:content="view/phone"
+              i18n:translate="" />
+    </div>
+
+    <div class="field" tal:condition="view/cell_phone">
+        <label i18n:translate="">Cell phone number : </label>
+        <span tal:content="view/cell_phone"
+              i18n:translate="" />
+    </div>
+
+    <div class="field" tal:condition="view/im_handle">
+        <label i18n:translate="">IM handle : </label>
+        <span tal:content="view/im_handle"
+              i18n:translate="" />
+    </div>
+
+    <div id="address"
+         tal:replace="structure view/render_address" />
 
 </div>
 
