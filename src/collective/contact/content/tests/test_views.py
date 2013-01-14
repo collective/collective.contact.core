@@ -24,7 +24,11 @@ class TestView(unittest.TestCase):
         self.pepper = mydirectory['pepper']
         self.sergent_pepper = self.pepper['sergent_pepper']
         self.rambo = mydirectory['rambo']
-        self.regimenth = mydirectory['armeedeterre']['corpsa']['divisionalpha']['regimenth']
+        self.armeedeterre = mydirectory['armeedeterre']
+        self.corpsa = self.armeedeterre['corpsa']
+        self.divisionalpha = self.corpsa['divisionalpha']
+        self.regimenth = self.divisionalpha['regimenth']
+        self.brigadelh = self.regimenth['brigadelh']
         self.mydirectory = mydirectory
 
 
@@ -82,9 +86,8 @@ class TestContactView(TestView):
 
         self.assertEqual(contact_view.fullname,
                          "Général Charles De Gaulle")
-        organizations_names = contact_view.organizations_names
-        self.assertEqual(['Armée de terre'],
-                         organizations_names)
+        self.assertEqual([self.armeedeterre],
+                         contact_view.organizations)
         # address is acquired from degaulle
         address = contact_view.address
         self.assertEqual(address['number'], '6bis')
@@ -98,10 +101,12 @@ class TestContactView(TestView):
         contact_view = self.sergent_pepper.restrictedTraverse("@@contact")
         contact_view.update()
         self.assertEqual(contact_view.fullname, "Sergent Pepper")
-        organizations_names = contact_view.organizations_names
-        self.assertEqual(['Armée de terre', 'Corps A',
-                          'Division Alpha', 'Régiment H',
-                          'Brigade LH'], organizations_names)
+        organizations = contact_view.organizations
+        self.assertEqual([self.armeedeterre,
+                          self.corpsa,
+                          self.divisionalpha,
+                          self.regimenth,
+                          self.brigadelh], organizations)
 
         # Person email comes before Position email
         self.assertEqual(contact_view.email,

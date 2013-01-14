@@ -1,6 +1,8 @@
-<div id="address"
+<div class="field" id="address"
      i18n:domain="collective.contact.content"
      tal:repeat="address args">
+    <div tal:condition="address">
+    <label i18n:translate="">Address :</label>
     <div class="address_line">
         <span i18n:translate="" tal:content="address/number"></span>
         <span i18n:translate="" tal:content="address/additional_address_details"></span>
@@ -12,5 +14,6 @@
     </div>
     <div class="address_line">
         <span i18n:translate="" tal:content="address/country"></span>
+    </div>
     </div>
 </div>

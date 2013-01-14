@@ -54,7 +54,6 @@ class Contact(grok.View, Contactable):
 
         organization = held_position.get_organization()
         self.organizations = organization.get_organizations_chain()
-        self.organizations_names = organization.get_organizations_titles()
 
         self.contactables = self.get_contactables()
         self.update_contact_details()

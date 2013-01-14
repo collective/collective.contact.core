@@ -7,35 +7,41 @@
 <div metal:fill-slot="main">
 	<h1 tal:content="view/fullname"></h1>
 
-	<div tal:condition="view/position_name">
-		<span i18n:translate="">Position : </span>
+	<div class="field" tal:condition="view/position_name">
+		<label i18n:translate="">Position : </label>
 		<span tal:content="view/position_name"
 		 	  i18n:translate="" />
 	</div>
 
-	<div>
-		<span i18n:translate="">List of organizations : </span>
-		<tal:block tal:repeat="organization view/organizations_names">
-			<span tal:content="organization"
-			 	  i18n:translate="" />
-		</tal:block>
-	</div>
+    <div id="organizations" class="field">
+        <label i18n:translate="">List of organizations : </label>
+        <ul>
+        <tal:block tal:repeat="organization view/organizations">
+            <li><a tal:attributes="href organization/absolute_url">
+                <span tal:replace="organization/Title"
+                      i18n:translate="" />
+            </a></li>
+        </tal:block>
+        </ul>
+    </div>
 
-	<div>
-		<span i18n:translate="">Birthday : </span>
-		<span tal:content="view/birthday"
-		 	  i18n:translate="" />
-	</div>
-	<div>
-		<span i18n:translate="">Start date : </span>
+	<div class="field">
+		<label i18n:translate="">Start date : </label>
 		<span tal:content="view/start_date"
 		 	  i18n:translate="" />
 	</div>
-	<div>
-		<span i18n:translate="">End date : </span>
+
+	<div class="field">
+		<label i18n:translate="">End date : </label>
 		<span tal:content="view/end_date"
 		 	  i18n:translate="" />
 	</div>
+
+    <div class="field">
+        <label i18n:translate="">Birthday : </label>
+        <span tal:content="view/birthday"
+              i18n:translate="" />
+    </div>
 
 	<div id="address"
 	     tal:replace="structure view/render_address" />
