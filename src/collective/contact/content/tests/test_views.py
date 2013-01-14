@@ -159,3 +159,40 @@ class TestPositionView(TestView):
         self.assertEqual(address['zip_code'], '59650')
         self.assertEqual(address['region'], '')
         self.assertEqual(address['additional_address_details'], '')
+
+
+class TestOrganizationView(TestView):
+
+    def test_organization_view(self):
+        org_view = self.corpsa.restrictedTraverse("@@organization")
+        org_view.update()
+
+        self.assertEqual(org_view.name, "Corps A")
+        self.assertEqual(org_view.type, "corps")
+        organizations = org_view.organizations
+        self.assertEqual([self.armeedeterre, self.corpsa],
+                         organizations)
+
+        self.assertEqual(org_view.email, '')
+
+        address = org_view.address
+        self.assertEqual(address['number'], '')
+        self.assertEqual(address['street'], "rue Philibert Lucot")
+        self.assertEqual(address['city'], 'Orléans')
+        self.assertEqual(address['zip_code'], '')
+        self.assertEqual(address['region'], '')
+        self.assertEqual(address['country'], 'France')
+        self.assertEqual(address['additional_address_details'], '')
+
+        items_names = [e.Title for e in org_view.items]
+        self.assertIn("Division Alpha", items_names)
+        self.assertIn("Division Beta", items_names)
+
+    def test_items(self):
+        """Items should contains organizations and positions"""
+        org_view = self.armeedeterre.restrictedTraverse("@@organization")
+        org_view.update()
+        items_names = [e.Title for e in org_view.items]
+        self.assertEqual(set(['Corps A', 'Corps B',
+                              "Général de l'armée de terre"]),
+                         set(items_names))

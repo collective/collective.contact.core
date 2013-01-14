@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="collective.contact.content">
+<body>
+
+<div metal:fill-slot="main">
+	<h1 tal:content="view/name"></h1>
+
+    <div id="type" class="field">
+         <label i18n:translate="">Organization type : </label>
+         <span tal:content="view/type"
+               i18n:translate="" />
+    </div>
+
+    <div id="organizations" class="field">
+        <label i18n:translate="">List of parent organizations : </label>
+        <ul>
+        <tal:block tal:repeat="organization view/organizations">
+            <li><a tal:attributes="href organization/absolute_url">
+                <span tal:replace="organization/Title"
+                      i18n:translate="" />
+            </a></li>
+        </tal:block>
+        </ul>
+    </div>
+
+	<div id="address"
+	     tal:replace="structure view/render_address" />
+
+    <div id="items" class="field">
+        <label i18n:translate="">List of organizations and positions in this organization : </label>
+        <ul>
+        <tal:block tal:repeat="item view/items">
+            <li><a tal:attributes="href item/getURL">
+                <span tal:replace="item/Title"
+                      i18n:translate="" />
+            </a></li>
+        </tal:block>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>
