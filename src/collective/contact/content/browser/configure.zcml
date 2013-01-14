@@ -13,4 +13,9 @@
       name="contact"
       />
 
+  <browser:defaultView
+      for=".position.IPosition"
+      name="position"
+      />
+
 </configure>
