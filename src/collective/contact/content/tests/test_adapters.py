@@ -20,7 +20,7 @@ class TestAdapters(unittest.TestCase, BaseTest):
         self.degaulle = self.directory['degaulle']
         self.pepper = self.directory['pepper']
 
-    def test_held_position_vcard(self):
+    def test_gadt_vcard(self):
         gadt = self.degaulle['gadt']
         vcard_provider = IVCard(gadt)
         vcard = vcard_provider.get_vcard()
@@ -30,13 +30,17 @@ class TestAdapters(unittest.TestCase, BaseTest):
         self.assertEqual(vcard.title.value, "Général de l'armée de terre")
         self.assertEqual(vcard.email.value, 'charles.de.gaulle@armees.fr')
         self.assertEqual(vcard.email.type_param, 'INTERNET')
-        self.assertFalse(hasattr(vcard, 'adr'))
+        self.assertTrue(hasattr(vcard, 'adr'))
         self.assertFalse(hasattr(vcard, 'tel_list'))
-        self.assertEqual(vcard.bday.value, '1890-11-22')
+        self.assertEqual(vcard.bday.value, '1901-11-22')
 
+    def test_sgt_pepper_vcard(self):
         sergent_pepper = self.pepper['sergent_pepper']
         vcard_provider = IVCard(sergent_pepper)
         vcard = vcard_provider.get_vcard()
         self.assertEqual(vcard.fn.value, 'Pepper')
         self.assertEqual(vcard.org.value, 'Armée de terre;Corps A;Division Alpha;Régiment H;Brigade LH')
         self.assertEqual(vcard.role.value, "Sergent de la brigade LH")
+
+        # TODO: test a held_position without address ?? Rambo ? (associate new Organization and Position to Rambo)
+        # self.assertFalse(hasattr(vcard, 'adr'))

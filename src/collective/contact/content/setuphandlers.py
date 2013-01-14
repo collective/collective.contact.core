@@ -77,8 +77,14 @@ def createTestData(context):
               'firstname': 'Charles',
               'gender': 'M',
               'person_title': 'Général',
-              'birthday': datetime.date(1890, 11, 22),
+              'birthday': datetime.date(1901, 11, 22),
               'email': 'charles.de.gaulle@armees.fr',
+              'country': 'France',
+              'city': "Colombey les deux églises",
+              'number': '6bis',
+              'street': 'rue Jean Moulin',
+              'zip_code': '52330',
+              'additional_address_details': 'bâtiment D',
               }
     mydirectory.invokeFactory('person', 'degaulle', **params)
     degaulle = mydirectory['degaulle']
@@ -88,12 +94,16 @@ def createTestData(context):
               'person_title': 'Sergent',
               'birthday': datetime.date(1967, 6, 1),
               'email': 'sgt.pepper@armees.fr',
+              'phone': '0288552211',
+              'city': 'Liverpool',
+              'country': 'England',
               }
     mydirectory.invokeFactory('person', 'pepper', **params)
     pepper = mydirectory['pepper']
 
     params = {'lastname': 'Rambo',
               'firstname': 'John',
+              'phone': '0788556644',
               }
     mydirectory.invokeFactory('person', 'rambo', **params)
 
@@ -105,6 +115,9 @@ def createTestData(context):
 
     params = {'title': "Corps A",
               'organization_type': 'corps',
+              'street': "rue Philibert Lucot",
+              'city': 'Orléans',
+              'country': 'France',
               }
     armeedeterre.invokeFactory('organization', 'corpsa', **params)
     corpsa = armeedeterre['corpsa']
@@ -128,6 +141,11 @@ def createTestData(context):
 
     params = {'title': "Régiment H",
               'organization_type': 'regiment',
+              'number': "11",
+              'street': "rue de l'harmonie",
+              'city': "Villeneuve d'Ascq",
+              'zip_code': '59650',
+              'country': 'France',
               }
     divisionalpha.invokeFactory('organization', 'regimenth', **params)
 
@@ -145,6 +163,9 @@ def createTestData(context):
 
     params = {'title': "Sergent de la brigade LH",
               'position_type': 'sergent',
+              'cell_phone': '0654875233',
+              'email': 'brigade_lh@armees.fr',
+              'im_handle': 'brigade_lh@jabber.org',
               }
     brigadelh.invokeFactory('position', 'sergent_lh', **params)
     sergent_lh = brigadelh['sergent_lh']
