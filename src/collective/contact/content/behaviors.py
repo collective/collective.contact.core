@@ -4,7 +4,9 @@ from zope import schema
 from plone.supermodel import model
 from plone.supermodel.directives import fieldset
 from plone.autoform.interfaces import IFormFieldProvider
+from plone.autoform import directives as form
 from plone.formwidget.masterselect import MasterSelectBoolField
+from plone.app.textfield import RichText
 
 from Products.CMFDefault.utils import checkEmailAddress
 from Products.CMFDefault.exceptions import EmailAddressInvalid
@@ -67,7 +69,9 @@ class IContactDetails(model.Schema):
                 'street',
                 'number',
                 'region',
-                'additional_address_details'
+                'additional_address_details',
+                # not a real field !
+                'address_below',
                 )
         )
 
@@ -99,6 +103,7 @@ class IContactDetails(model.Schema):
     use_address_below = MasterSelectBoolField(
         title=_("Use the address below"),
         description=_("Use the address below"),
+        default=True,
         slave_fields=(
             {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
              'name': 'country',
@@ -112,9 +117,60 @@ class IContactDetails(model.Schema):
              'hide_values': 0,
              'siblings': True,
             },
+            {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
+             'name': 'zip_code',
+             'action': 'show',
+             'hide_values': 0,
+             'siblings': True,
+            },
+            {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
+             'name': 'city',
+             'action': 'show',
+             'hide_values': 0,
+             'siblings': True,
+            },
+            {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
+             'name': 'number',
+             'action': 'show',
+             'hide_values': 0,
+             'siblings': True,
+            },
+            {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
+             'name': 'street',
+             'action': 'show',
+             'hide_values': 0,
+             'siblings': True,
+            },
+            {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
+             'name': 'additional_address_details',
+             'action': 'show',
+             'hide_values': 0,
+             'siblings': True,
+            },
+
+            {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
+             'name': 'address_below',
+             'action': 'hide',
+             'hide_values': 0,
+             'siblings': True,
+            },
         ),
         required=False,
     )
+
+    address_below = RichText(
+        default_mime_type='text/html',
+        output_mime_type='text/html',
+        default=u"""
+<div id="address">
+3, rue Philibert Lucot<br/>
+75013 Paris
+</div>
+""",  # TODO: use address of the object self.context/@@address ???
+# TODO: Hide this field and "use address below" field in view mode ?
+        required=False,
+        )
+    form.mode(address_below='display')
 
     country = schema.TextLine(
         title=_('Country'),
