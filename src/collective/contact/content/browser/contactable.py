@@ -21,9 +21,12 @@ class Contactable(object):
         we use the one of the first object in this list which have this information
         """
         contactables = []
-        contactables.append(self.person)
-        contactables.append(self.position)
-        contactables.extend(reversed(self.organizations))
+        if self.person is not None:
+            contactables.append(self.person)
+        if self.position is not None:
+            contactables.append(self.position)
+        if self.organizations:
+            contactables.extend(reversed(self.organizations))
         return contactables
 
     def update_contact_details(self):
