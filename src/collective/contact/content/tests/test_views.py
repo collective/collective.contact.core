@@ -29,6 +29,8 @@ class TestView(unittest.TestCase):
         self.divisionalpha = self.corpsa['divisionalpha']
         self.regimenth = self.divisionalpha['regimenth']
         self.brigadelh = self.regimenth['brigadelh']
+        self.general_adt = self.armeedeterre['general_adt']
+        self.sergent_lh = self.brigadelh['sergent_lh']
         self.mydirectory = mydirectory
 
 
@@ -101,6 +103,8 @@ class TestContactView(TestView):
         contact_view = self.sergent_pepper.restrictedTraverse("@@contact")
         contact_view.update()
         self.assertEqual(contact_view.fullname, "Sergent Pepper")
+        self.assertEqual(self.sergent_lh,
+                         contact_view.position)
         organizations = contact_view.organizations
         self.assertEqual([self.armeedeterre,
                           self.corpsa,
@@ -122,6 +126,33 @@ class TestContactView(TestView):
 
         # Everything in Sgt Pepper's address is acquired from Régiment H
         address = contact_view.address
+        self.assertEqual(address['number'], '11')
+        self.assertEqual(address['street'], "rue de l'harmonie")
+        self.assertEqual(address['city'], "Villeneuve d'Ascq")
+        self.assertEqual(address['zip_code'], '59650')
+        self.assertEqual(address['region'], '')
+        self.assertEqual(address['additional_address_details'], '')
+
+
+class TestPositionView(TestView):
+
+    def test_position_view(self):
+        position_view = self.sergent_lh.restrictedTraverse("@@position")
+        position_view.update()
+
+        self.assertEqual(position_view.name, "Sergent de la brigade LH")
+        self.assertEqual(position_view.type, "sergent")
+        organizations = position_view.organizations
+        self.assertEqual([self.armeedeterre,
+                          self.corpsa,
+                          self.divisionalpha,
+                          self.regimenth,
+                          self.brigadelh], organizations)
+
+        self.assertEqual(position_view.email,
+                         "brigade_lh@armees.fr")
+
+        address = position_view.address
         self.assertEqual(address['number'], '11')
         self.assertEqual(address['street'], "rue de l'harmonie")
         self.assertEqual(address['city'], "Villeneuve d'Ascq")

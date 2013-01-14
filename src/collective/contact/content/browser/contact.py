@@ -45,12 +45,7 @@ class Contact(grok.View, Contactable):
         self.gender = person.gender or ''
         #self.photo = person.photo or ''  # FIXME:
 
-        position = held_position.get_position()
-        self.position = position
-        if position is not None:
-            self.position_name = position.Title()
-        else:
-            self.position_name = ''
+        self.position = held_position.get_position()
 
         organization = held_position.get_organization()
         self.organizations = organization.get_organizations_chain()

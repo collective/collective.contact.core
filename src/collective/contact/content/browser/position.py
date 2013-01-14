@@ -17,8 +17,8 @@ class Position(grok.View, Contactable):
     def update(self):
         self.position = self.context
         position = self.position
-        self.position_name = position.Title()
-        self.position_type = position.position_type
+        self.name = position.Title()
+        self.type = position.position_type  # TODO: get value, not token
 
         organization = position.get_organization()
         self.organizations = organization.get_organizations_chain()

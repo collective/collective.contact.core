@@ -5,7 +5,13 @@
 <body>
 
 <div metal:fill-slot="main">
-	<h1 tal:content="view/position_name"></h1>
+	<h1 tal:content="view/name"></h1>
+
+	<div id="type" class="field">
+	     <label i18n:translate="">Position type : </label>
+	     <span tal:content="view/type"
+               i18n:translate="" />
+	</div>
 
 	<div id="organizations" class="field">
         <label i18n:translate="">List of organizations : </label>
