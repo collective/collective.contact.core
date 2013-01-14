@@ -29,6 +29,15 @@ class IHeldPosition(model.Schema):
         """Get the person who helds the position
         """
 
+    def get_position():
+        """Get the position (if position field is a position)
+        """
+
+    def get_organization():
+        """Get the first organization related to HeldPosition
+        i.e. position field or parent of the position
+        """
+
 
 class HeldPosition(Container):
     """Position held by a person in an organization"""

@@ -1,0 +1,16 @@
+<div id="address"
+     i18n:domain="collective.contact.content"
+     tal:repeat="address args">
+    <div class="address_line">
+        <span i18n:translate="" tal:content="address/number"></span>
+        <span i18n:translate="" tal:content="address/additional_address_details"></span>
+        <span i18n:translate="" tal:content="address/street"></span>
+    </div>
+    <div class="address_line">
+        <span i18n:translate="" tal:content="address/zip_code"></span>
+        <span i18n:translate="" tal:content="address/city"></span>
+    </div>
+    <div class="address_line">
+        <span i18n:translate="" tal:content="address/country"></span>
+    </div>
+</div>
