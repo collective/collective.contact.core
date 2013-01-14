@@ -14,7 +14,7 @@
 	</div>
 
 	<div id="organizations" class="field">
-        <label i18n:translate="">List of organizations : </label>
+        <label i18n:translate="">List of parent organizations : </label>
         <ul>
         <tal:block tal:repeat="organization view/organizations">
             <li><a tal:attributes="href organization/absolute_url">
