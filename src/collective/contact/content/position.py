@@ -18,10 +18,16 @@ class IPosition(model.Schema):
         vocabulary="PositionTypes",
         )
 
+    def get_organization():
+        """Returns organization"""
+
 
 class Position(Container):
     """ """
     implements(IPosition)
+
+    def get_organization(self):
+        return self.getParentNode()
 
 
 class PositionSchemaPolicy(grok.GlobalUtility,

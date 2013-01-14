@@ -56,7 +56,7 @@ class HeldPosition(Container):
     def get_organization(self):
         pos_or_org = self.position.to_object
         if pos_or_org.portal_type == 'position':
-            return pos_or_org.getParentNode()
+            return pos_or_org.get_organization()
         elif pos_or_org.portal_type == 'organization':
             return pos_or_org
 
