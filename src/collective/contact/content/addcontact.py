@@ -10,7 +10,7 @@ from collective.contact.content.schema import ContactChoice
 from collective.contact.content.source import ContactSourceBinder
 from collective.contact.content.widgets import ContactAutocompleteFieldWidget
 
-_ = MessageFactory("collection.contact.content")
+_ = MessageFactory("collective.contact.content")
 
 
 class IAddContact(model.Schema):
