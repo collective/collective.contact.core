@@ -26,6 +26,8 @@ class Person(grok.View, Contactable):
         if birthday is not None:
             birthday = date_to_DateTime(birthday)
             self.birthday = self.context.toLocalizedTime(birthday)
+        else:
+            self.birthday = None
         self.person_title = person.person_title
         self.gender = person.gender or ''
         #self.photo = person.photo  # TODO:
