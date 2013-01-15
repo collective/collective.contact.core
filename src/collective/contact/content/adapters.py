@@ -1,9 +1,9 @@
 from five import grok
 import vobject
 
-from collective.contact.vcard.interfaces import IVCard
-from collective.contact.content.held_position import IHeldPosition,\
-                                                     HeldPosition
+from collective.contact.content.interfaces import IVCard
+from collective.contact.content.content.held_position import IHeldPosition,\
+                                                             HeldPosition
 
 
 def get_organization_vcard(organization):
@@ -22,10 +22,10 @@ class HeldPositionVCard(grok.Adapter):
         vcard = vobject.vCard()
         person = self.context.getParentNode()
         vcard.add('n')
-        firstname = person.firstname or ''
-        lastname = person.lastname or ''
-        person_title = person.person_title
-        vcard.n.value = vobject.vcard.Name(prefix=person_title or '',
+        firstname = unicode(person.firstname or '')
+        lastname = unicode(person.lastname or '')
+        person_title = unicode(person.person_title or '')
+        vcard.n.value = vobject.vcard.Name(prefix=person_title,
                                            family=lastname,
                                            given=firstname)
         vcard.add('fn')
@@ -37,7 +37,7 @@ class HeldPositionVCard(grok.Adapter):
 
         position = self.context.get_position()
         if position is not None:
-            position_name = position.Title()
+            position_name = unicode(position.Title())
             vcard.add('role')
             vcard.role.value = position_name
             vcard.add('title')
@@ -45,7 +45,8 @@ class HeldPositionVCard(grok.Adapter):
 
         organization = self.context.get_organization()
         vcard.add('org')
-        vcard.org.value = get_organization_vcard(organization)
+        orgs = organization.get_organizations_titles()
+        vcard.org.value = [unicode(org) for org in orgs]
 
         if person.email is not None:
             vcard.add('email')
@@ -57,22 +58,28 @@ class HeldPositionVCard(grok.Adapter):
            person.country is not None or \
            person.region is not None:
             vcard.add('adr')
-            vcard.adr.value = vobject.vcard.Address(street=person.street or '',
-                                                    city=person.city or '',
-                                                    region=person.region or '',
+            country = unicode(person.country or '')
+            region = unicode(person.region or '')
+            street = unicode(person.street or '')
+            city = unicode(person.city or '')
+            additional = unicode(person.additional_address_details or '')
+            vcard.adr.value = vobject.vcard.Address(street=street,
+                                                    city=city,
+                                                    region=region,
                                                     code=person.zip_code or '',
-                                                    country=person.country or '',
+                                                    country=country,
                                                     box=person.number or '',
-                                                    extended=person.additional_address_details or '')
+                                                    extended=additional)
         if person.phone is not None:
             vcard.add('tel')
             vcard.tel.type_param = 'WORK'
             vcard.tel.value = person.phone
         if person.cell_phone is not None:
             vcard.add('tel')
-            last_item = len(vcard.tel_list)-1
+            last_item = len(vcard.tel_list) - 1
             vcard.tel_list[last_item].type_param = 'CELL'
             vcard.tel_list[last_item].value = person.cell_phone
+
         #vcard.add('photo')
         #vcard.photo.value = person.photo
 

@@ -10,7 +10,7 @@ from plone.dexterity.content import Container
 from plone.supermodel import model
 from plone.dexterity.schema import DexteritySchemaPolicy
 
-from . import _
+from collective.contact.content import _
 
 
 class IOrganization(model.Schema):

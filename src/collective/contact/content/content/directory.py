@@ -10,7 +10,7 @@ from plone.supermodel import model
 
 from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
 
-from . import _
+from collective.contact.content import _
 
 
 class INameTokenTableRowSchema(Interface):

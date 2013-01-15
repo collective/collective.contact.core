@@ -22,7 +22,7 @@
  </property>
  <property name="default_view_fallback">False</property>
  <property name="add_permission">cmf.AddPortalContent</property>
- <property name="klass">collective.contact.content.organization.Organization</property>
+ <property name="klass">collective.contact.content.content.organization.Organization</property>
  <property name="behaviors">
   <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
   <element value="plone.app.content.interfaces.INameFromTitle"/>

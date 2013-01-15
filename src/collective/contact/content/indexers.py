@@ -1,7 +1,7 @@
 from plone.indexer import indexer
 
-from collective.contact.content.held_position import IHeldPosition
-from collective.contact.content.organization import IOrganization
+from collective.contact.content.content.held_position import IHeldPosition
+from collective.contact.content.content.organization import IOrganization
 
 
 @indexer(IOrganization)

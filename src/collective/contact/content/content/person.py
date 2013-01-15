@@ -8,7 +8,7 @@ from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.namedfile.field import NamedImage
 from plone.supermodel import model
 
-from . import _
+from collective.contact.content import _
 
 
 class IPerson(model.Schema):

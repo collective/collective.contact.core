@@ -2,7 +2,7 @@ from five import grok
 
 from collective.contact.content.browser import TEMPLATES_DIR
 from collective.contact.content.browser.contactable import Contactable
-from collective.contact.content.position import IPosition
+from collective.contact.content.content.position import IPosition
 
 
 grok.templatedir(TEMPLATES_DIR)

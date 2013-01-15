@@ -16,7 +16,6 @@
   <include package="plone.supermodel" />
   <include package="plone.formwidget.masterselect" />
 
-  <include package="collective.contact.vcard" />
   <include package="collective.z3cform.datagridfield" />
 
   <include package="five.globalrequest" />

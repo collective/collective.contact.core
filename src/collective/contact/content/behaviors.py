@@ -55,6 +55,8 @@ alsoProvides(IGlobalPositioning, IFormFieldProvider)
 
 class IContactDetails(model.Schema):
 
+    # TODO: remove descriptions from fields
+
     fieldset(
         'contact_details',
         label=_(u'Contact details'),

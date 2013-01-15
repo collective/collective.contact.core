@@ -5,7 +5,7 @@ import unittest2 as unittest
 from ecreall.helpers.testing.base import BaseTest
 
 from collective.contact.content.testing import INTEGRATION
-from collective.contact.vcard.interfaces import IVCard
+from collective.contact.content.interfaces import IVCard
 
 
 class TestAdapters(unittest.TestCase, BaseTest):
@@ -24,10 +24,10 @@ class TestAdapters(unittest.TestCase, BaseTest):
         gadt = self.degaulle['gadt']
         vcard_provider = IVCard(gadt)
         vcard = vcard_provider.get_vcard()
-        self.assertEqual(vcard.fn.value, 'Charles De Gaulle')
-        self.assertEqual(vcard.org.value, 'Armée de terre')
-        self.assertEqual(vcard.role.value, "Général de l'armée de terre")
-        self.assertEqual(vcard.title.value, "Général de l'armée de terre")
+        self.assertEqual(vcard.fn.value, u'Charles De Gaulle')
+        self.assertEqual(vcard.org.value, [u'Armée de terre'])
+        self.assertEqual(vcard.role.value, u"Général de l'armée de terre")
+        self.assertEqual(vcard.title.value, u"Général de l'armée de terre")
         self.assertEqual(vcard.email.value, 'charles.de.gaulle@armees.fr')
         self.assertEqual(vcard.email.type_param, 'INTERNET')
         self.assertTrue(hasattr(vcard, 'adr'))
@@ -39,7 +39,9 @@ class TestAdapters(unittest.TestCase, BaseTest):
         vcard_provider = IVCard(sergent_pepper)
         vcard = vcard_provider.get_vcard()
         self.assertEqual(vcard.fn.value, 'Pepper')
-        self.assertEqual(vcard.org.value, 'Armée de terre;Corps A;Division Alpha;Régiment H;Brigade LH')
+        self.assertEqual(vcard.org.value,
+                         [u'Armée de terre', u'Corps A', u'Division Alpha',
+                          u'Régiment H', u'Brigade LH'])
         self.assertEqual(vcard.role.value, "Sergent de la brigade LH")
 
         # TODO: test a held_position without address ?? Rambo ? (associate new Organization and Position to Rambo)

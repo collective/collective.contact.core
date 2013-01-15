@@ -9,7 +9,7 @@ from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.dexterity.content import Container
 from plone.supermodel import model
 
-from . import _
+from collective.contact.content import _
 
 
 class IHeldPosition(model.Schema):

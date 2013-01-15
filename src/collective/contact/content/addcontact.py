@@ -5,7 +5,7 @@ from plone.autoform import directives as form
 import z3c.form
 from plone.supermodel import model
 
-from collective.contact.content.held_position import IHeldPosition
+from collective.contact.content.content.held_position import IHeldPosition
 from collective.contact.content.schema import ContactChoice
 from collective.contact.content.source import ContactSourceBinder
 from collective.contact.content.widgets import ContactAutocompleteFieldWidget

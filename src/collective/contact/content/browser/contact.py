@@ -4,7 +4,7 @@ from DateTime import DateTime
 
 from collective.contact.content.browser import TEMPLATES_DIR
 from collective.contact.content.browser.contactable import Contactable
-from collective.contact.content.held_position import IHeldPosition
+from collective.contact.content.content.held_position import IHeldPosition
 
 
 grok.templatedir(TEMPLATES_DIR)

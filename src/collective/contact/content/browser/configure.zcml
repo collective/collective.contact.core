@@ -9,22 +9,22 @@
   <include package="plone.formwidget.autocomplete" />
 
   <browser:defaultView
-      for=".held_position.IHeldPosition"
+      for=".content.held_position.IHeldPosition"
       name="contact"
       />
 
   <browser:defaultView
-      for=".organization.IOrganization"
+      for=".content.organization.IOrganization"
       name="organization"
       />
 
   <browser:defaultView
-      for=".position.IPosition"
+      for=".content.position.IPosition"
       name="position"
       />
 
   <browser:defaultView
-      for=".person.IPerson"
+      for=".content.person.IPerson"
       name="person"
       />
 

@@ -20,7 +20,7 @@
  </property>
  <property name="default_view_fallback">False</property>
  <property name="add_permission">cmf.AddPortalContent</property>
- <property name="klass">collective.contact.content.person.Person</property>
+ <property name="klass">collective.contact.content.content.person.Person</property>
  <property name="behaviors">
   <element value="plone.app.content.interfaces.INameFromTitle"/>
   <element value="collective.contact.content.behaviors.IContactDetails" />

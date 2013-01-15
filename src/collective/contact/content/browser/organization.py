@@ -4,7 +4,7 @@ from Products.CMFCore.utils import getToolByName
 
 from collective.contact.content.browser import TEMPLATES_DIR
 from collective.contact.content.browser.contactable import Contactable
-from collective.contact.content.organization import IOrganization
+from collective.contact.content.content.organization import IOrganization
 
 
 grok.templatedir(TEMPLATES_DIR)

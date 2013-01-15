@@ -73,7 +73,7 @@
 	     tal:replace="structure view/render_address" />
 
 	<div id="download_vcard">
-		<a i18n:translate="" href="">Download VCard</a>
+		<a i18n:translate="" href="@@contact.vcf">Download VCard</a>
 	</div>
 
 </div>
