@@ -7,11 +7,10 @@
 <div metal:fill-slot="main">
 	<h1 tal:content="view/fullname"></h1>
 
-	<div class="field" tal:condition="view/position"
-	       tal:define="position view/position">
+	<div class="field" tal:condition="view/position">
 		<label i18n:translate="">Position : </label>
-		<a tal:attributes="href position/absolute_url">
-		  <span tal:content="position/Title"
+		<a tal:attributes="href view/position/absolute_url">
+		  <span tal:content="view/position/Title"
 		 	  i18n:translate="" />
 		</a>
 	</div>
