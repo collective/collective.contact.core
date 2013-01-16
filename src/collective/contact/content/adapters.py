@@ -1,6 +1,8 @@
 from five import grok
 import vobject
 
+from Products.CMFPlone.utils import safe_unicode
+
 from collective.contact.content.interfaces import IVCard
 from collective.contact.content.content.held_position import IHeldPosition,\
                                                              HeldPosition
@@ -18,9 +20,9 @@ class HeldPositionVCard(grok.Adapter):
         vcard = vobject.vCard()
         person = self.context.getParentNode()
         vcard.add('n')
-        firstname = unicode(person.firstname or '')
-        lastname = unicode(person.lastname or '')
-        person_title = unicode(person.person_title or '')
+        firstname = safe_unicode(person.firstname or '', encoding='utf8')
+        lastname = safe_unicode(person.lastname or '', encoding='utf8')
+        person_title = safe_unicode(person.person_title or '', encoding='utf8')
         vcard.n.value = vobject.vcard.Name(prefix=person_title,
                                            family=lastname,
                                            given=firstname)
@@ -33,7 +35,7 @@ class HeldPositionVCard(grok.Adapter):
 
         position = self.context.get_position()
         if position is not None:
-            position_name = unicode(position.Title())
+            position_name = safe_unicode(position.Title())
             vcard.add('role')
             vcard.role.value = position_name
             vcard.add('title')
@@ -42,7 +44,7 @@ class HeldPositionVCard(grok.Adapter):
         organization = self.context.get_organization()
         vcard.add('org')
         orgs = organization.get_organizations_titles()
-        vcard.org.value = [unicode(org) for org in orgs]
+        vcard.org.value = [safe_unicode(org, encoding='utf8') for org in orgs]
 
         if person.email is not None:
             vcard.add('email')
@@ -54,11 +56,12 @@ class HeldPositionVCard(grok.Adapter):
            person.country is not None or \
            person.region is not None:
             vcard.add('adr')
-            country = unicode(person.country or '')
-            region = unicode(person.region or '')
-            street = unicode(person.street or '')
-            city = unicode(person.city or '')
-            additional = unicode(person.additional_address_details or '')
+            country = safe_unicode(person.country or '', encoding='utf8')
+            region = safe_unicode(person.region or '', encoding='utf8')
+            street = safe_unicode(person.street or '', encoding='utf8')
+            city = safe_unicode(person.city or '', encoding='utf8')
+            additional = safe_unicode(person.additional_address_details or '',
+                                      encoding='utf8')
             vcard.adr.value = vobject.vcard.Address(street=street,
                                                     city=city,
                                                     region=region,
