@@ -6,10 +6,6 @@ from collective.contact.content.content.held_position import IHeldPosition,\
                                                              HeldPosition
 
 
-def get_organization_vcard(organization):
-    return ';'.join(organization.get_organizations_titles())
-
-
 class HeldPositionVCard(grok.Adapter):
     grok.implements(IHeldPosition)
     grok.context(HeldPosition)
