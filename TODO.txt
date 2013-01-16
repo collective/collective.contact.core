@@ -1,0 +1,1 @@
+- Adapter to download full directory in vcard format
