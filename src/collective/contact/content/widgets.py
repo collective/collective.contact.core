@@ -48,7 +48,7 @@ $(document).ready(function() {
     var el = $(el);
     var o = el.closest('.overlay-ajax');
     var pbo = o.data('pbo');
-    var overlay_counter = parseInt(pbo.nt.substring(3));
+    var overlay_counter = parseInt(pbo.nt.substring(3, pbo.nt.length));
     o.css({zIndex: 9998+overlay_counter});
 //    el.html(responseText);
     if (!pbo.selector) {
