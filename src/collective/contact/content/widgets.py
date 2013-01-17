@@ -16,9 +16,6 @@ from plone.dexterity.i18n import MessageFactory as DMF
 
 from . import _
 
-# TODO: we have to patch form reload as well. This is done below but
-# we have jQuery undefined error, but this seems to work
-# and form error is sometime below the form...
 class PatchLoadInsideOverlay(grok.Viewlet):
     grok.context(Interface)
     grok.viewletmanager(IHtmlHeadLinks)
@@ -32,6 +29,7 @@ $(document).ready(function() {
     if (!pbo.selector) {
       var content = ajax_parent.find(common_content_filter).detach();
       ajax_parent.empty().append(content);
+      ajax_parent.prepend(ajax_parent.find('.portalMessage').detach());
       ajax_parent.wrapInner('<div />');
     }
   });
@@ -41,6 +39,7 @@ $(document).ready(function() {
     if (!pbo.selector) {
       var content = ajax_parent.find(common_content_filter).detach();
       ajax_parent.empty().append(content);
+      ajax_parent.prepend(ajax_parent.find('.portalMessage').detach());
       ajax_parent.wrapInner('<div />');
     }
   });
