@@ -4,6 +4,7 @@ from zope.component import getUtility
 from zope.interface import implementer, Interface
 from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
 from five import grok
+from Products.CMFCore.utils import getToolByName
 
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.app.layout.viewlets.interfaces import IHtmlHeadLinks
@@ -65,29 +66,41 @@ $(document).ready(function() {
 </style>
 """
 
+
+def find_directory(context):
+    catalog = getToolByName(context, 'portal_catalog')
+    results = catalog.searchResults(portal_type='directory')
+    return results[0].getObject()
+
+
 class ContactBaseWidget(object):
     display_template = ViewPageTemplateFile('templates/contact_display.pt')
     input_template = ViewPageTemplateFile('templates/contact_input.pt')
 
-    def update(self):
-        super(ContactBaseWidget, self).update()
+    def render(self):
         source = self.bound_source
         criteria = source.selectable_filter.criteria
         self.addlink_enabled = criteria.get('addlink', [True])[0]
         portal_types = criteria.get('portal_type', [])
+        # During traversal, we are Anonymous User,
+        # so we can't do catalog search in update method.
+        directory = find_directory(self.context)
+        directory_url = directory.absolute_url()
         if len(portal_types) == 1:
-            # TODO: get directory url
-            self.addnew_url = '++add++%s' % portal_types[0]
+            # TODO: for position, the base url have to be the selected orga
+            self.addnew_url = '%s/++add++%s' % (directory_url, portal_types[0])
             self.closeOnClick = 'true'
             fti = getUtility(IDexterityFTI, name=portal_types[0])
             self.type_name = fti.Title()
         else:
-            self.addnew_url = "@@add-contact"
+            self.addnew_url = "%s/@@add-contact" % directory_url
             self.closeOnClick = 'false'
             self.type_name = _(u"Contact")
 
         self.addlink_label = DMF(u"Add ${name}",
                 mapping={'name': self.type_name})
+
+        return super(ContactBaseWidget, self).render()
 
     def js_extra(self):
         return """
