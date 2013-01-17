@@ -55,8 +55,6 @@ alsoProvides(IGlobalPositioning, IFormFieldProvider)
 
 class IContactDetails(model.Schema):
 
-    # TODO: remove descriptions from fields
-
     fieldset(
         'contact_details',
         label=_(u'Contact details'),
@@ -79,32 +77,27 @@ class IContactDetails(model.Schema):
 
     email = schema.TextLine(
         title=_(u"Email"),
-        description=_(u"Email address"),
         constraint=validateEmail,
         required=False,
         )
 
     phone = schema.TextLine(
         title=_(u"Phone"),
-        description=_(u"Phone number"),
         required=False,
         )
 
     cell_phone = schema.TextLine(
         title=_(u"Cell phone"),
-        description=_(u"Cell phone number"),
         required=False,
         )
 
     im_handle = schema.TextLine(
         title=_('Instant messenger handle'),
-        description=_('Instant messenger handle'),
         required=False,
         )
 
     use_address_below = MasterSelectBoolField(
         title=_("Use the address below"),
-        description=_("Use the address below"),
         default=True,
         slave_fields=(
             {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
@@ -176,43 +169,36 @@ class IContactDetails(model.Schema):
 
     country = schema.TextLine(
         title=_('Country'),
-        description=_(u'Country'),
         required=False,
         )
 
     zip_code = schema.TextLine(
         title=_('Zip Code'),
-        description=_(u'Zip Code'),
         required=False,
         )
 
     city = schema.TextLine(
         title=_('City'),
-        description=_(u'City'),
         required=False,
         )
 
     street = schema.TextLine(
         title=_('Street'),
-        description=_(u'Street'),
         required=False,
         )
 
     number = schema.TextLine(
         title=_('Number'),
-        description=_(u'Number'),
         required=False,
         )
 
     region = schema.TextLine(
             title=_('Region'),
-            description=_(u'Region'),
             required=False,
             )
 
     additional_address_details = schema.TextLine(
             title=_('Additional address details'),
-            description=_(u'Additional address details'),
             required=False,
             )
 
