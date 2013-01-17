@@ -1,15 +1,15 @@
 from zope.interface import implements
 from zope import schema
-from z3c.relationfield.schema import RelationChoice
 
 from five import grok
 
-from plone.formwidget.contenttree import ObjPathSourceBinder
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.dexterity.content import Container
 from plone.supermodel import model
 
 from collective.contact.content import _
+from collective.contact.content.schema import ContactChoice
+from collective.contact.content.source import ContactSourceBinder
 
 
 class IHeldPosition(model.Schema):
@@ -20,9 +20,10 @@ class IHeldPosition(model.Schema):
     end_date = schema.Date(
       title=_("End date")
     )
-    position = RelationChoice(
+    position = ContactChoice(
         title=_("Position or organization"),
-        source=ObjPathSourceBinder(portal_type=("organization", "position"))
+        source=ContactSourceBinder(portal_type=("organization", "position"),
+            addlink=False)
     )
 
     def get_person():
