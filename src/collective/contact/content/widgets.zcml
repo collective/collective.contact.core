@@ -22,4 +22,19 @@
       permission="cmf.ModifyPortalContent"
       />
 
+  <adapter
+    name="organization-ms"
+    for="zope.interface.Interface z3c.form.interfaces.IFormLayer zope.interface.Interface"
+    provides="zope.contentprovider.interfaces.IContentProvider"
+    factory=".addcontact.MasterSelectAddContactProvider"
+    />
+
+  <browser:page
+      name="ploneform-render-widget"
+      for="zope.contentprovider.interfaces.IContentProvider"
+      layer="plone.app.z3cform.interfaces.IPloneFormLayer"
+      class=".addcontact.RenderContentProvider"
+      permission="zope.Public"
+      />
+
 </configure>

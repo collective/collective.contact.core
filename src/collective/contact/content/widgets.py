@@ -86,7 +86,6 @@ class ContactBaseWidget(object):
         directory = find_directory(self.context)
         directory_url = directory.absolute_url()
         if len(portal_types) == 1:
-            # TODO: for position, the base url have to be the selected orga
             self.addnew_url = '%s/++add++%s' % (directory_url, portal_types[0])
             self.closeOnClick = 'true'
             fti = getUtility(IDexterityFTI, name=portal_types[0])
@@ -103,7 +102,7 @@ class ContactBaseWidget(object):
 
     def js_extra(self):
         return """
-$('#%(id)s-autocomplete').find('.addcontact'
+$('#%(id)s-autocomplete').find('.addnew'
     ).prepOverlay({
   subtype: 'ajax',
 //filter: common_content_filter,
@@ -115,7 +114,6 @@ $('#%(id)s-autocomplete').find('.addcontact'
       closeOnEsc: %(closeOnClick)s
   }
 });
-
 """ % dict(id=self.id, closeOnClick=self.closeOnClick)
 
 class ContactAutocompleteSelectionWidget(ContactBaseWidget, AutocompleteSelectionWidget):

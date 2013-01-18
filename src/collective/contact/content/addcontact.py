@@ -1,18 +1,60 @@
+from zope.interface import implements
 from zope.component import getUtility
+from zope.publisher.browser import BrowserView
+from zope.contentprovider.interfaces import IContentProvider
 
 from plone.autoform import directives as form
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.dexterity.browser.add import DefaultAddForm
 import z3c.form
+from z3c.form.interfaces import IFieldsAndContentProvidersForm
+from z3c.form.contentprovider import ContentProviders
 from plone.supermodel import model
+from plone.dexterity.i18n import MessageFactory as DMF
 
 from collective.contact.content.schema import ContactChoice
 from collective.contact.content.source import ContactSourceBinder
 from collective.contact.content.widgets import ContactAutocompleteFieldWidget
 
-from plone.dexterity.i18n import MessageFactory as DMF
-
 from . import _
+
+
+class MasterSelectAddContactProvider(BrowserView):
+    implements(IContentProvider)
+    def __init__(self, context, request, view):
+        super(MasterSelectAddContactProvider, self).__init__(context, request)
+        self.__parent__ = view
+
+    def update(self):
+        pass
+
+    def render(self):
+# FIXME need to prepOverlay again on position to update href in overlay
+        return """<script type="text/javascript">
+$(document).ready(function() {
+  $('#formfield-form-widgets-position,div[id*=held_position]').hide();
+  $('#form-widgets-organization-widgets-query').blur(function(e){
+    var radio = $('input[name="form.widgets.organization:list"]');
+    if (radio.length > 1) {
+      $('#formfield-form-widgets-position,div[id*=held_position]').show('slow');
+    }
+    var form = $(this).closest('form'),
+    viewArr = form.serializeArray(),
+    view = {};
+    for (var i in viewArr) {
+      view[viewArr[i].name] = viewArr[i].value;
+    }
+    $('#form-widgets-position-autocomplete .addnew')
+      .attr('href', portal_url + '/' + view['form.widgets.organization:list'].split('/').slice(2).join('/') + '/++add++position');
+  });
+});
+</script>
+"""
+
+
+class RenderContentProvider(BrowserView):
+    def __call__(self):
+        return self.context.render()
 
 
 class IAddContact(model.Schema):
@@ -36,6 +78,10 @@ class IAddContact(model.Schema):
 
 
 class AddContact(DefaultAddForm, z3c.form.form.AddForm):
+    implements(IFieldsAndContentProvidersForm)
+    contentProviders = ContentProviders(['organization-ms'])
+#    contentProviders['organization-ms'] = MasterSelectAddContactProvider
+    contentProviders['organization-ms'].position = 0
     label = DMF(u"Add ${name}", mapping={'name': _(u"Contact")})
     description = u""
     schema = IAddContact

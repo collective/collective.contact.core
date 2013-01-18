@@ -5,7 +5,7 @@
            <div style="float:left">
              <tal:block replace="structure view/subform/render" />
            </div>
-           <a class="addcontact"
+           <a class="addnew"
               tal:condition="view/addlink_enabled"
               href="@@add-contact" i18n:translate=""
               tal:attributes="href view/addnew_url"
