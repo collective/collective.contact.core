@@ -46,26 +46,26 @@ def createTestData(context):
     if isNotTestDataProfile(context): return
     portal = context.getSite()
 
-    position_types = [{'name': 'General', 'token': 'general'},
-                      {'name': 'Sergeant', 'token': 'sergeant'},
-                      {'name': 'Colonel', 'token': 'colonel'},
-                      {'name': 'Lieutenant', 'token': 'lieutenant'},
-                      {'name': 'Captain', 'token': 'captain'},
-                      {'name': 'Admiral', 'token': 'admiral'},
+    position_types = [{'name': u'General', 'token': u'general'},
+                      {'name': u'Sergeant', 'token': u'sergeant'},
+                      {'name': u'Colonel', 'token': u'colonel'},
+                      {'name': u'Lieutenant', 'token': u'lieutenant'},
+                      {'name': u'Captain', 'token': u'captain'},
+                      {'name': u'Admiral', 'token': u'admiral'},
                       ]
 
-    organization_types = [{'name': 'Navy', 'token': 'navy'},
-                          {'name': 'Army', 'token': 'army'},
-                          {'name': 'Air force', 'token': 'air_force'},
+    organization_types = [{'name': u'Navy', 'token': u'navy'},
+                          {'name': u'Army', 'token': u'army'},
+                          {'name': u'Air force', 'token': u'air_force'},
                           ]
 
-    organization_levels = [{'name': 'Corps', 'token': 'corps'},
-                           {'name': 'Division', 'token': 'division'},
-                           {'name': 'Regiment', 'token': 'regiment'},
-                           {'name': 'Squad', 'token': 'squad'},
+    organization_levels = [{'name': u'Corps', 'token': u'corps'},
+                           {'name': u'Division', 'token': u'division'},
+                           {'name': u'Regiment', 'token': u'regiment'},
+                           {'name': u'Squad', 'token': u'squad'},
                            ]
 
-    params = {'title': "Military directory",
+    params = {'title': u"Military directory",
               'position_types': position_types,
               'organization_types': organization_types,
               'organization_levels': organization_levels,
@@ -73,99 +73,99 @@ def createTestData(context):
     portal.invokeFactory('directory', 'mydirectory', **params)
     mydirectory = portal['mydirectory']
 
-    params = {'lastname': 'De Gaulle',
-              'firstname': 'Charles',
-              'gender': 'M',
-              'person_title': 'Général',
+    params = {'lastname': u'De Gaulle',
+              'firstname': u'Charles',
+              'gender': u'M',
+              'person_title': u'Général',
               'birthday': datetime.date(1901, 11, 22),
-              'email': 'charles.de.gaulle@armees.fr',
-              'country': 'France',
-              'city': "Colombey les deux églises",
-              'number': '6bis',
-              'street': 'rue Jean Moulin',
-              'zip_code': '52330',
-              'additional_address_details': 'bâtiment D',
+              'email': u'charles.de.gaulle@armees.fr',
+              'country': u'France',
+              'city': u"Colombey les deux églises",
+              'number': u'6bis',
+              'street': u'rue Jean Moulin',
+              'zip_code': u'52330',
+              'additional_address_details': u'bâtiment D',
               }
     mydirectory.invokeFactory('person', 'degaulle', **params)
     degaulle = mydirectory['degaulle']
 
-    params = {'lastname': 'Pepper',
-              'gender': 'M',
-              'person_title': 'Sergent',
+    params = {'lastname': u'Pepper',
+              'gender': u'M',
+              'person_title': u'Sergent',
               'birthday': datetime.date(1967, 6, 1),
-              'email': 'sgt.pepper@armees.fr',
-              'phone': '0288552211',
-              'city': 'Liverpool',
-              'country': 'England',
+              'email': u'sgt.pepper@armees.fr',
+              'phone': u'0288552211',
+              'city': u'Liverpool',
+              'country': u'England',
               }
     mydirectory.invokeFactory('person', 'pepper', **params)
     pepper = mydirectory['pepper']
 
-    params = {'lastname': 'Rambo',
-              'firstname': 'John',
-              'phone': '0788556644',
+    params = {'lastname': u'Rambo',
+              'firstname': u'John',
+              'phone': u'0788556644',
               }
     mydirectory.invokeFactory('person', 'rambo', **params)
 
-    params = {'title': "Armée de terre",
-              'organization_type': 'army',
+    params = {'title': u"Armée de terre",
+              'organization_type': u'army',
               }
     mydirectory.invokeFactory('organization', 'armeedeterre', **params)
     armeedeterre = mydirectory['armeedeterre']
 
-    params = {'title': "Corps A",
-              'organization_type': 'corps',
-              'street': "rue Philibert Lucot",
-              'city': 'Orléans',
-              'country': 'France',
+    params = {'title': u"Corps A",
+              'organization_type': u'corps',
+              'street': u"rue Philibert Lucot",
+              'city': u'Orléans',
+              'country': u'France',
               }
     armeedeterre.invokeFactory('organization', 'corpsa', **params)
     corpsa = armeedeterre['corpsa']
 
-    params = {'title': "Corps B",
-              'organization_type': 'corps',
+    params = {'title': u"Corps B",
+              'organization_type': u'corps',
               }
     armeedeterre.invokeFactory('organization', 'corpsb', **params)
 
-    params = {'title': "Division Alpha",
-              'organization_type': 'division',
+    params = {'title': u"Division Alpha",
+              'organization_type': u'division',
               }
     corpsa.invokeFactory('organization', 'divisionalpha', **params)
 
-    params = {'title': "Division Beta",
-              'organization_type': 'division',
+    params = {'title': u"Division Beta",
+              'organization_type': u'division',
               }
     corpsa.invokeFactory('organization', 'divisionbeta', **params)
 
     divisionalpha = corpsa['divisionalpha']
 
-    params = {'title': "Régiment H",
-              'organization_type': 'regiment',
-              'number': "11",
-              'street': "rue de l'harmonie",
-              'city': "Villeneuve d'Ascq",
-              'zip_code': '59650',
-              'country': 'France',
+    params = {'title': u"Régiment H",
+              'organization_type': u'regiment',
+              'number': u"11",
+              'street': u"rue de l'harmonie",
+              'city': u"Villeneuve d'Ascq",
+              'zip_code': u'59650',
+              'country': u'France',
               }
     divisionalpha.invokeFactory('organization', 'regimenth', **params)
 
     regimenth = divisionalpha['regimenth']
-    params = {'title': "Brigade LH",
-              'organization_type': 'squad',
+    params = {'title': u"Brigade LH",
+              'organization_type': u'squad',
               }
     regimenth.invokeFactory('organization', 'brigadelh', **params)
     brigadelh = regimenth['brigadelh']
 
-    params = {'title': "Général de l'armée de terre",
-              'position_type': 'general',
+    params = {'title': u"Général de l'armée de terre",
+              'position_type': u'general',
               }
     armeedeterre.invokeFactory('position', 'general_adt', **params)
 
-    params = {'title': "Sergent de la brigade LH",
-              'position_type': 'sergent',
-              'cell_phone': '0654875233',
-              'email': 'brigade_lh@armees.fr',
-              'im_handle': 'brigade_lh@jabber.org',
+    params = {'title': u"Sergent de la brigade LH",
+              'position_type': u'sergent',
+              'cell_phone': u'0654875233',
+              'email': u'brigade_lh@armees.fr',
+              'im_handle': u'brigade_lh@jabber.org',
               }
     brigadelh.invokeFactory('position', 'sergent_lh', **params)
     sergent_lh = brigadelh['sergent_lh']

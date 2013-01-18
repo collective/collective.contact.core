@@ -46,11 +46,12 @@ class Person(Container):
     implements(IPerson)
 
     def Title(self):
+        # must return utf8 and not unicode (Title() from basic behavior return utf8)
+        # attributes are stored as unicode
         person_title = self.person_title or ''
         firstname = self.firstname or ''
         lastname = self.lastname or ''
-        return ' '.join([e for e in (person_title, firstname, lastname) if e])
-
+        return ' '.join([e.encode('utf8') for e in (person_title, firstname, lastname) if e])
 
 class PersonSchemaPolicy(grok.GlobalUtility,
                          DexteritySchemaPolicy):
