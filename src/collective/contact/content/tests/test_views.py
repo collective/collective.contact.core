@@ -41,21 +41,21 @@ class TestAddressView(TestView):
         data = address_view.namespace()
         for field in ADDRESS_FIELDS:
             self.assertIn(field, data)
-        self.assertEqual(data['country'], 'France')
-        self.assertEqual(data['number'], '6bis')
-        self.assertEqual(data['street'], 'rue Jean Moulin')
-        self.assertEqual(data['city'], "Colombey les deux églises")
-        self.assertEqual(data['zip_code'], '52330')
-        self.assertEqual(data['region'], '')
-        self.assertEqual(data['additional_address_details'], 'bâtiment D')
+        self.assertEqual(data['country'], u'France')
+        self.assertEqual(data['number'], u'6bis')
+        self.assertEqual(data['street'], u'rue Jean Moulin')
+        self.assertEqual(data['city'], u"Colombey les deux églises")
+        self.assertEqual(data['zip_code'], u'52330')
+        self.assertEqual(data['region'], u'')
+        self.assertEqual(data['additional_address_details'], u'bâtiment D')
 
     def test_pepper_address_view(self):
         address_view = self.pepper.restrictedTraverse("@@address")
         data = address_view.namespace()
         for field in ADDRESS_FIELDS:
             self.assertIn(field, data)
-        self.assertEqual(data['country'], 'England')
-        self.assertEqual(data['city'], "Liverpool")
+        self.assertEqual(data['country'], u'England')
+        self.assertEqual(data['city'], u"Liverpool")
 
     def test_rambo_address_view(self):
         # no address information
@@ -63,7 +63,7 @@ class TestAddressView(TestView):
         data = address_view.namespace()
         for field in ADDRESS_FIELDS:
             self.assertIn(field, data)
-            self.assertEqual(data[field], '')
+            self.assertEqual(data[field], u'')
 
     def test_regimenth_address_view(self):
         # an organization have an address view
@@ -71,12 +71,12 @@ class TestAddressView(TestView):
         data = address_view.namespace()
         for field in ADDRESS_FIELDS:
             self.assertIn(field, data)
-        self.assertEqual(data['number'], '11')
-        self.assertEqual(data['street'], "rue de l'harmonie")
-        self.assertEqual(data['city'], "Villeneuve d'Ascq")
-        self.assertEqual(data['zip_code'], '59650')
-        self.assertEqual(data['region'], '')
-        self.assertEqual(data['additional_address_details'], '')
+        self.assertEqual(data['number'], u'11')
+        self.assertEqual(data['street'], u"rue de l'harmonie")
+        self.assertEqual(data['city'], u"Villeneuve d'Ascq")
+        self.assertEqual(data['zip_code'], u'59650')
+        self.assertEqual(data['region'], u'')
+        self.assertEqual(data['additional_address_details'], u'')
     # TODO: test that a position can have an address
 
 
@@ -93,12 +93,12 @@ class TestContactView(TestView):
 
         # address is acquired from degaulle
         address = contact_view.address
-        self.assertEqual(address['number'], '6bis')
-        self.assertEqual(address['street'], "rue Jean Moulin")
-        self.assertEqual(address['city'], "Colombey les deux églises")
-        self.assertEqual(address['zip_code'], '52330')
-        self.assertEqual(address['region'], '')
-        self.assertEqual(address['additional_address_details'], 'bâtiment D')
+        self.assertEqual(address['number'], u'6bis')
+        self.assertEqual(address['street'], u"rue Jean Moulin")
+        self.assertEqual(address['city'], u"Colombey les deux églises")
+        self.assertEqual(address['zip_code'], u'52330')
+        self.assertEqual(address['region'], u'')
+        self.assertEqual(address['additional_address_details'], u'bâtiment D')
 
     def test_contact_details_acquisition(self):
         contact_view = self.sergent_pepper.restrictedTraverse("@@contact")
@@ -127,12 +127,12 @@ class TestContactView(TestView):
 
         # Everything in Sgt Pepper's address is acquired from Régiment H
         address = contact_view.address
-        self.assertEqual(address['number'], '11')
-        self.assertEqual(address['street'], "rue de l'harmonie")
-        self.assertEqual(address['city'], "Villeneuve d'Ascq")
-        self.assertEqual(address['zip_code'], '59650')
-        self.assertEqual(address['region'], '')
-        self.assertEqual(address['additional_address_details'], '')
+        self.assertEqual(address['number'], u'11')
+        self.assertEqual(address['street'], u"rue de l'harmonie")
+        self.assertEqual(address['city'], u"Villeneuve d'Ascq")
+        self.assertEqual(address['zip_code'], u'59650')
+        self.assertEqual(address['region'], u'')
+        self.assertEqual(address['additional_address_details'], u'')
 
 
 class TestPositionView(TestView):
@@ -154,12 +154,12 @@ class TestPositionView(TestView):
                          "brigade_lh@armees.fr")
 
         address = position_view.address
-        self.assertEqual(address['number'], '11')
-        self.assertEqual(address['street'], "rue de l'harmonie")
-        self.assertEqual(address['city'], "Villeneuve d'Ascq")
-        self.assertEqual(address['zip_code'], '59650')
-        self.assertEqual(address['region'], '')
-        self.assertEqual(address['additional_address_details'], '')
+        self.assertEqual(address['number'], u'11')
+        self.assertEqual(address['street'], u"rue de l'harmonie")
+        self.assertEqual(address['city'], u"Villeneuve d'Ascq")
+        self.assertEqual(address['zip_code'], u'59650')
+        self.assertEqual(address['region'], u'')
+        self.assertEqual(address['additional_address_details'], u'')
 
 
 class TestOrganizationView(TestView):
@@ -177,13 +177,13 @@ class TestOrganizationView(TestView):
         self.assertEqual(org_view.email, '')
 
         address = org_view.address
-        self.assertEqual(address['number'], '')
-        self.assertEqual(address['street'], "rue Philibert Lucot")
-        self.assertEqual(address['city'], 'Orléans')
-        self.assertEqual(address['zip_code'], '')
-        self.assertEqual(address['region'], '')
-        self.assertEqual(address['country'], 'France')
-        self.assertEqual(address['additional_address_details'], '')
+        self.assertEqual(address['number'], u'')
+        self.assertEqual(address['street'], u"rue Philibert Lucot")
+        self.assertEqual(address['city'], u'Orléans')
+        self.assertEqual(address['zip_code'], u'')
+        self.assertEqual(address['region'], u'')
+        self.assertEqual(address['country'], u'France')
+        self.assertEqual(address['additional_address_details'], u'')
 
         items_names = [e.Title for e in org_view.items]
         self.assertIn("Division Alpha", items_names)
@@ -216,13 +216,13 @@ class TestPersonView(TestView):
         self.assertEqual(person_view.im_handle, '')
 
         address = person_view.address
-        self.assertEqual(address['number'], '6bis')
-        self.assertEqual(address['street'], "rue Jean Moulin")
-        self.assertEqual(address['city'], 'Colombey les deux églises')
-        self.assertEqual(address['zip_code'], '52330')
-        self.assertEqual(address['region'], '')
-        self.assertEqual(address['country'], 'France')
-        self.assertEqual(address['additional_address_details'], 'bâtiment D')
+        self.assertEqual(address['number'], u'6bis')
+        self.assertEqual(address['street'], u"rue Jean Moulin")
+        self.assertEqual(address['city'], u'Colombey les deux églises')
+        self.assertEqual(address['zip_code'], u'52330')
+        self.assertEqual(address['region'], u'')
+        self.assertEqual(address['country'], u'France')
+        self.assertEqual(address['additional_address_details'], u'bâtiment D')
 
         held_positions = [b.getObject() for b in person_view.held_positions]
         self.assertIn(self.adt, held_positions)
