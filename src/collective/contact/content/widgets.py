@@ -5,7 +5,9 @@ from zope.interface import implementer, Interface
 from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
 from five import grok
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import base_hasattr
 
+from plone.app.layout.viewlets.interfaces import IBelowContent
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.app.layout.viewlets.interfaces import IHtmlHeadLinks
 from plone.formwidget.autocomplete.widget import (
@@ -29,9 +31,9 @@ $(document).ready(function() {
     if (!pbo.selector) {
       var content = ajax_parent.find(common_content_filter).detach();
       ajax_parent.empty().append(content);
-      ajax_parent.prepend(ajax_parent.find('.portalMessage').detach());
       ajax_parent.wrapInner('<div />');
     }
+    ajax_parent.find('div').slice(0, 1).prepend(ajax_parent.find('.portalMessage').detach());
   });
   $(document).bind('formOverlayLoadFailure', function(e, req, myform, api, pb, ajax_parent) {
     var o = ajax_parent.closest('.overlay-ajax');
@@ -39,9 +41,9 @@ $(document).ready(function() {
     if (!pbo.selector) {
       var content = ajax_parent.find(common_content_filter).detach();
       ajax_parent.empty().append(content);
-      ajax_parent.prepend(ajax_parent.find('.portalMessage').detach());
       ajax_parent.wrapInner('<div />');
     }
+    ajax_parent.find('div').slice(0, 1).prepend(ajax_parent.find('.portalMessage').detach());
   });
   $(document).bind('loadInsideOverlay', function(e, el, responseText, errorText, api) {
     var el = $(el);
@@ -49,13 +51,21 @@ $(document).ready(function() {
     var pbo = o.data('pbo');
     var overlay_counter = parseInt(pbo.nt.substring(3, pbo.nt.length));
     o.css({zIndex: 9998+overlay_counter});
-//    el.html(responseText);
     if (!pbo.selector) {
       var content = el.find(common_content_filter).detach();
       el.empty().append(content);
       el.wrapInner('<div />');
     }
   });
+  $.plonepopups.fill_autocomplete = function (el, pbo, noform) {
+    var objpath = el.find('input[name=objpath]');
+    if (objpath.length) {
+        data = objpath.val().split('|');
+        var input_box = pbo.source.siblings('div').find('.querySelectSearch input');
+        formwidget_autocomplete_new_value(input_box, data[0], data[1]);
+    }
+    return noform;
+};
 });
 </script>
 <style type="text/css">
@@ -66,9 +76,25 @@ $(document).ready(function() {
 """
 
 
+class ObjPathViewlet(grok.Viewlet):
+    grok.context(Interface)
+    # TODO: restrict context
+    grok.viewletmanager(IBelowContent)
+
+    def render(self):
+
+        token = '/'.join(self.context.getPhysicalPath())
+        if base_hasattr(self.context, 'get_full_title'):
+            title = self.context.get_full_title()
+        else:
+            title = self.context.Title()
+        return """<input type="hidden" name="objpath" value="%s" />""" % (
+                    '|'.join([token, title]))
+
+
 def find_directory(context):
     catalog = getToolByName(context, 'portal_catalog')
-    results = catalog.searchResults(portal_type='directory')
+    results = catalog.unrestrictedSearchResults(portal_type='directory')
     return results[0].getObject()
 
 
@@ -105,10 +131,10 @@ class ContactBaseWidget(object):
 $('#%(id)s-autocomplete').find('.addnew'
     ).prepOverlay({
   subtype: 'ajax',
-//filter: common_content_filter,
+  filter: common_content_filter+',#viewlet-below-content>*',
   formselector: '#form',
   closeselector: '[name="form.buttons.cancel"]',
-  noform: 'close',
+  noform: function(el, pbo) {return $.plonepopups.fill_autocomplete(el, pbo, 'close');},
   config: {
       closeOnClick: %(closeOnClick)s,
       closeOnEsc: %(closeOnClick)s

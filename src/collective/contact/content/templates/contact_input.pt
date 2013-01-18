@@ -6,6 +6,7 @@
              <tal:block replace="structure view/subform/render" />
            </div>
            <a class="addnew"
+              target="_blank"
               tal:condition="view/addlink_enabled"
               href="@@add-contact" i18n:translate=""
               tal:attributes="href view/addnew_url"
