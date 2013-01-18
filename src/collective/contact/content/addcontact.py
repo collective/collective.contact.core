@@ -147,11 +147,11 @@ class AddContact(DefaultAddForm, form.AddForm):
         if obj is not None:
             # mark only as finished if we get the new object
             self._finishedAdd = True
-            IStatusMessage(self.request).addStatusMessage(_(u"Item created"), "info")
+            IStatusMessage(self.request).addStatusMessage(DMF(u"Item created"), "info")
 
     @button.buttonAndHandler(DMF(u'Cancel'), name='cancel')
     def handleCancel(self, action):
-        IStatusMessage(self.request).addStatusMessage(_(u"Add New Item operation cancelled"), "info")
+        IStatusMessage(self.request).addStatusMessage(DMF(u"Add New Item operation cancelled"), "info")
         self.request.response.redirect(self.nextURL())
         notify(AddCancelledEvent(self.context))
 
