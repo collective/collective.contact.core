@@ -29,23 +29,33 @@ class MasterSelectAddContactProvider(BrowserView):
         pass
 
     def render(self):
-# FIXME need to prepOverlay again on position to update href in overlay
+# On change event, we don't have the new radio box created yet.
+# If we fill organization and person, show position and held position fields
         return """<script type="text/javascript">
 $(document).ready(function() {
-  $('#formfield-form-widgets-position,div[id*=held_position]').hide();
-  $('#form-widgets-organization-widgets-query').blur(function(e){
+  var position_fields = '#formfield-form-widgets-position,div[id*=held_position]';
+  $(position_fields).hide();
+  $('#form-widgets-organization-widgets-query').change(function(e){
+    var radio = $('input[name="form.widgets.person:list"]');
+    if (radio.length > 1) {
+      $(position_fields).show('slow');
+    }
+  });
+  $('#form-widgets-person-widgets-query').change(function(e){
     var radio = $('input[name="form.widgets.organization:list"]');
     if (radio.length > 1) {
-      $('#formfield-form-widgets-position,div[id*=held_position]').show('slow');
+      $(position_fields).show('slow');
     }
+  });
+  $('#form-widgets-position-autocomplete .addnew').hover(function(e){
     var form = $(this).closest('form'),
     viewArr = form.serializeArray(),
     view = {};
     for (var i in viewArr) {
       view[viewArr[i].name] = viewArr[i].value;
     }
-    $('#form-widgets-position-autocomplete .addnew')
-      .attr('href', portal_url + '/' + view['form.widgets.organization:list'].split('/').slice(2).join('/') + '/++add++position');
+    var add_position_url = portal_url + '/' + view['form.widgets.organization:list'].split('/').slice(2).join('/') + '/++add++position';
+    $('#form-widgets-position-autocomplete .addnew').data('pbo').src = add_position_url;
   });
 });
 </script>
