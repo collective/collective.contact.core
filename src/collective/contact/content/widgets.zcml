@@ -37,4 +37,11 @@
       permission="zope.Public"
       />
 
+  <browser:page
+      name="autocomplete-search"
+      for=".interfaces.IContactAutocompleteWidget"
+      permission="zope.Public"
+      class=".widgets.AutocompleteSearch"
+      />
+
 </configure>

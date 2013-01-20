@@ -31,7 +31,6 @@ class MasterSelectAddContactProvider(BrowserView):
         pass
 
     def render(self):
-# On change event, we don't have the new radio box created yet.
 # If we fill organization and person, show position and held position fields
         return """<script type="text/javascript">
 $(document).ready(function() {
@@ -41,35 +40,49 @@ $(document).ready(function() {
         $('input[name="form.widgets.organization:list"]').length > 1)) {
       $(position_fields).hide();
   }
-  $('#form-widgets-organization-widgets-query').change(function(e){
-    var radio = $('input[name="form.widgets.person:list"]');
-    if (radio.length > 1) {
-      $(position_fields).show('slow');
-      $('#formfield-form-widgets-Plone_0_held_position-position').hide();
-    }
-  });
-  $('#form-widgets-person-widgets-query').change(function(e){
-    var radio = $('input[name="form.widgets.organization:list"]');
-    if (radio.length > 1) {
-      $(position_fields).show('slow');
-      $('#formfield-form-widgets-Plone_0_held_position-position').hide();
-    }
-  });
-  $('#form-widgets-position-autocomplete .addnew').hover(function(e){
-    var form = $(this).closest('form'),
+ function serialize_form(form) {
     viewArr = form.serializeArray(),
     view = {};
     for (var i in viewArr) {
       view[viewArr[i].name] = viewArr[i].value;
     }
-    var add_position_url = portal_url + '/' + view['form.widgets.organization:list'].split('/').slice(2).join('/') + '/++add++position';
+    return view;
+  }
+  function update_position_field(form) {
+    var view = serialize_form(form);
+    var organization_token = view['form.widgets.organization:list'];
+    var organization_title = form.find('#form-widgets-organization-input-fields input[value='+organization_token+']').siblings('.label').text();
+    $('#formfield-form-widgets-position > .fieldErrorBox').text('Recherchez ou ajoutez une fonction dans "' + organization_title + '".');
+    $("#form-widgets-position-widgets-query")
+        .setOptions({extraParams: {path: organization_token}}).flushCache();
+
+    var organization_path = '/' + organization_token.split('/').slice(2).join('/');
+    var add_position_url = portal_url + organization_path + '/++add++position';
     $('#form-widgets-position-autocomplete .addnew').data('pbo').src = add_position_url;
+  }
+  $('#form-widgets-organization-input-fields').delegate('input', 'change', function(e){
+    var form = $(this).closest('form');
+    update_position_field(form);
+    if ($('input[name="form.widgets.person:list"]').length > 1 &&
+        $('input[name="form.widgets.organization:list"]').length > 1) {
+      $(position_fields).show('slow');
+      $('#formfield-form-widgets-Plone_0_held_position-position').hide();
+    }
+  });
+  $('#form-widgets-person-input-fields').delegate('input', 'change', function(e){
+    if ($('input[name="form.widgets.person:list"]').length > 1 &&
+        $('input[name="form.widgets.organization:list"]').length > 1) {
+      $(position_fields).show('slow');
+      $('#formfield-form-widgets-Plone_0_held_position-position').hide();
+    }
+  });
+  $('#form-widgets-position-widgets-query').setOptions({minChars: 0});
+  $('#form-widgets-position-widgets-query').focus(function(e){
+    $(this).trigger('click');
   });
 });
 </script>
 """
-# TODO change the url for the position autocomplete widget too
-# and use setOptions to load existing positions from selected orga?
 
 
 class RenderContentProvider(BrowserView):
@@ -98,7 +111,7 @@ class AddContact(DefaultAddForm, form.AddForm):
     implements(IFieldsAndContentProvidersForm)
     contentProviders = ContentProviders(['organization-ms'])
 #    contentProviders['organization-ms'] = MasterSelectAddContactProvider
-    contentProviders['organization-ms'].position = 0
+    contentProviders['organization-ms'].position = -1
     label = DMF(u"Add ${name}", mapping={'name': _(u"Contact")})
     description = u""
     schema = IAddContact
