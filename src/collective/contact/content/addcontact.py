@@ -54,7 +54,7 @@ $(document).ready(function() {
   function get_selected_organization(form) {
     var view = serialize_form(form);
     var token = view['form.widgets.organization:list'];
-    var title = form.find('#form-widgets-organization-input-fields input[value='+token+']').siblings('.label').text();
+    var title = form.find('#form-widgets-organization-input-fields input[value='+token+']').siblings('.label').find('a').first().text();
     var path = '/' + token.split('/').slice(2).join('/');
     return {token: token, title: title, path: path};
   }
