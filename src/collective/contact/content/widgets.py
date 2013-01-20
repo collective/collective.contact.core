@@ -50,17 +50,43 @@ $(document).ready(function() {
     }
     return noform;
   };
+
+  var pendingCall = null;
   $.plonepopups.add_contact_preview = function (input) {
     var path = '/' + input.val().split('/').slice(2).join('/');
     var url = portal_url+path;
     input.siblings('.label')
         .wrapInner('<a href="'+url+'">').find('a')
-        .prepOverlay({subtype: 'ajax', filter: common_content_filter});
+        .bind("mouseover", function() {
+            var trigger = $(this);
+            if (!trigger.data('tooltip')) {
+              if (pendingCall) {
+                clearTimeout(pendingCall);
+              }
+              var tooltipCall = function() {
+                  var tip = $('<div class="tooltip pb-ajax" style="display:none">please wait</div>')
+                        .insertAfter(trigger);
+                  trigger.tooltip({relative: true, position: "center right"});
+                  var tooltip = trigger.tooltip();
+                  tooltip.show();
+                  var url = trigger.attr('href');
+                  $.get(url, function(data) {
+                    tooltip.hide();
+                    tooltip.getTip().html($('<div />').append(
+                            data.replace(/<script(.|\s)*?\/script>/gi, ""))
+                        .find(common_content_filter));
+                    tooltip.show();
+                    pendingCall = null;
+                  });
+              }
+              pendingCall = setTimeout(tooltipCall, 1000);
+            }
+        });
   };
 });
 </script>
 <style type="text/css">
-#calroot {
+.tooltip, #calroot {
   z-index: 99999;
 }
 </style>
