@@ -51,7 +51,7 @@ $(document).ready(function() {
     return noform;
   };
 
-  var pendingCall = null;
+  var pendingCall = {timeStamp: null, procID: null};
   $.plonepopups.add_contact_preview = function (input) {
     var path = '/' + input.val().split('/').slice(2).join('/');
     var url = portal_url+path;
@@ -60,9 +60,10 @@ $(document).ready(function() {
         .bind("mouseover", function() {
             var trigger = $(this);
             if (!trigger.data('tooltip')) {
-              if (pendingCall) {
-                clearTimeout(pendingCall);
+              if (pendingCall.procID) {
+                clearTimeout(pendingCall.procID);
               }
+              var timeStamp = new Date();
               var tooltipCall = function() {
                   var tip = $('<div class="tooltip pb-ajax" style="display:none">please wait</div>')
                         .insertAfter(trigger);
@@ -75,11 +76,14 @@ $(document).ready(function() {
                     tooltip.getTip().html($('<div />').append(
                             data.replace(/<script(.|\s)*?\/script>/gi, ""))
                         .find(common_content_filter));
-                    tooltip.show();
-                    pendingCall = null;
+                    if (pendingCall.timeStamp == timeStamp) {
+                        tooltip.show();
+                    }
+                    pendingCall.procID = null;
                   });
               }
-              pendingCall = setTimeout(tooltipCall, 1000);
+              pendingCall = {timeStamp: timeStamp,
+                             procID: setTimeout(tooltipCall, 1000)};
             }
         });
   };
