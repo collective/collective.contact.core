@@ -34,12 +34,14 @@ class MasterSelectAddContactProvider(BrowserView):
 # If we fill organization and person, show position and held position fields
         return """<script type="text/javascript">
 $(document).ready(function() {
+
   $('#formfield-form-widgets-Plone_0_held_position-position').hide();
   var position_fields = '#formfield-form-widgets-position,div[id*=held_position]';
   if (!($('input[name="form.widgets.person:list"]').length > 1 &&
         $('input[name="form.widgets.organization:list"]').length > 1)) {
       $(position_fields).hide();
-  }
+ }
+
  function serialize_form(form) {
     viewArr = form.serializeArray(),
     view = {};
@@ -48,27 +50,55 @@ $(document).ready(function() {
     }
     return view;
   }
-  function update_position_field(form) {
-    var view = serialize_form(form);
-    var organization_token = view['form.widgets.organization:list'];
-    var organization_title = form.find('#form-widgets-organization-input-fields input[value='+organization_token+']').siblings('.label').text();
-    $('#formfield-form-widgets-position > .fieldErrorBox').text('Recherchez ou ajoutez une fonction dans "' + organization_title + '".');
-    $("#form-widgets-position-widgets-query")
-        .setOptions({extraParams: {path: organization_token}}).flushCache();
 
-    var organization_path = '/' + organization_token.split('/').slice(2).join('/');
-    var add_position_url = portal_url + organization_path + '/++add++position';
-    $('#form-widgets-position-autocomplete .addnew').data('pbo').src = add_position_url;
+  function get_selected_organization(form) {
+    var view = serialize_form(form);
+    var token = view['form.widgets.organization:list'];
+    var title = form.find('#form-widgets-organization-input-fields input[value='+token+']').siblings('.label').text();
+    var path = '/' + token.split('/').slice(2).join('/');
+    return {token: token, title: title, path: path};
   }
+
   $('#form-widgets-organization-input-fields').delegate('input', 'change', function(e){
     var form = $(this).closest('form');
-    update_position_field(form);
+    var orga = get_selected_organization(form);
+    var add_organization_url, addneworga, add_text;
+
+    addneworga = $('#form-widgets-organization-autocomplete .addnew');
+    if (!addneworga.data('pbo').original_src) {
+        addneworga.data('pbo').original_src = addneworga.data('pbo').src;
+        addneworga.data('pbo').original_text = addneworga.text();
+    }
+    if (orga.token == '--NOVALUE--') {
+      $(position_fields).hide();
+      add_organization_url = addneworga.data('pbo').original_src;
+      add_text = addneworga.data('pbo').original_text;
+    } else {
+      // update add new orga link to add sub orga
+      add_organization_url = portal_url + orga.path + '/++add++organization';
+      add_text = addneworga.data('pbo').original_text + ' dans ' + orga.title;
+    }
+    addneworga.data('pbo').src = add_organization_url;
+    addneworga.text(add_text);
+
+    // update position autocomplete field
+    $('#formfield-form-widgets-position > .fieldErrorBox').text('Recherchez ou ajoutez une fonction dans "' + orga.title + '".');
+    $("#form-widgets-position-widgets-query")
+        .setOptions({extraParams: {path: orga.token}}).flushCache();
+
+    // update add new position url
+    var add_position_url = portal_url + orga.path + '/++add++position';
+    $('#form-widgets-position-autocomplete .addnew').data('pbo').src = add_position_url;
+
+    // show position and held position fields if orga and person are selected
     if ($('input[name="form.widgets.person:list"]').length > 1 &&
-        $('input[name="form.widgets.organization:list"]').length > 1) {
+        $('input[name="form.widgets.organization:list"]').length > 1 &&
+        orga.token != '--NOVALUE--') {
       $(position_fields).show('slow');
       $('#formfield-form-widgets-Plone_0_held_position-position').hide();
     }
   });
+
   $('#form-widgets-person-input-fields').delegate('input', 'change', function(e){
     if ($('input[name="form.widgets.person:list"]').length > 1 &&
         $('input[name="form.widgets.organization:list"]').length > 1) {
@@ -76,10 +106,12 @@ $(document).ready(function() {
       $('#formfield-form-widgets-Plone_0_held_position-position').hide();
     }
   });
+
   $('#form-widgets-position-widgets-query').setOptions({minChars: 0});
   $('#form-widgets-position-widgets-query').focus(function(e){
     $(this).trigger('click');
   });
+
 });
 </script>
 """
