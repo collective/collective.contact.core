@@ -16,9 +16,11 @@ class IHeldPosition(model.Schema):
 
     start_date = schema.Date(
       title=_("Start date"),
+      required=False,
     )
     end_date = schema.Date(
-      title=_("End date")
+      title=_("End date"),
+      required=False,
     )
     position = ContactChoice(
         title=_("Position or organization"),
