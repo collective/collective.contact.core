@@ -17,7 +17,6 @@ def get_address(obj):
                       'additional_address_details']
     if obj is None:
         return dict([(x, '') for x in address_fields])
-        # OR dict(zip(address_fields, ['']*len(address_fields)))
     obj = aq_base(obj)
     for field in address_fields:
         value = getattr(obj, field, '') or ''
