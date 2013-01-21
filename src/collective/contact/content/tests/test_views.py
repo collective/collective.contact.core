@@ -171,8 +171,9 @@ class TestOrganizationView(TestView):
         self.assertEqual(org_view.name, "Corps A")
         self.assertEqual(org_view.type, "corps")
         organizations = org_view.organizations
-        self.assertEqual([self.armeedeterre, self.corpsa],
-                         organizations)
+        parent_organizations = org_view.parent_organizations
+        self.assertEqual([self.armeedeterre], parent_organizations)
+        self.assertEqual([self.armeedeterre, self.corpsa], organizations)
 
         self.assertEqual(org_view.email, '')
 
