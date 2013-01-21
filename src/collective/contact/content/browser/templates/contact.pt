@@ -15,7 +15,7 @@
 		</a>
 	</div>
 
-    <div id="organizations" class="field">
+    <div id="organizations" class="field" tal:condition="view/organizations">
         <label i18n:translate="">List of organizations : </label>
         <ul>
         <tal:block tal:repeat="organization view/organizations">

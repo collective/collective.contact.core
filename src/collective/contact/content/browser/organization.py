@@ -23,7 +23,11 @@ class Organization(grok.View, Contactable):
         self.name = organization.Title()
         self.type = organization.organization_type
 
-        self.organizations = organization.get_organizations_chain()
+        organizations = organization.get_organizations_chain()
+        self.parent_organizations = [org for org in organizations]
+        #self.parent_organizations = deepcopy(organizations)  # FIXME: doesn't work ?
+        self.parent_organizations.remove(organization)
+        self.organizations = organizations
 
         catalog = getToolByName(self.context, 'portal_catalog')
         context_path = '/'.join(organization.getPhysicalPath())

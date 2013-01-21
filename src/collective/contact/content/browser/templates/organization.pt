@@ -13,10 +13,10 @@
                i18n:translate="" />
     </div>
 
-    <div id="organizations" class="field">
+    <div id="organizations" class="field" tal:condition="view/parent_organizations">
         <label i18n:translate="">List of parent organizations : </label>
         <ul>
-        <tal:block tal:repeat="organization view/organizations">
+        <tal:block tal:repeat="organization view/parent_organizations">
             <li><a tal:attributes="href organization/absolute_url">
                 <span tal:replace="organization/Title"
                       i18n:translate="" />
