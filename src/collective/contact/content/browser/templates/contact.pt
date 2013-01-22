@@ -7,6 +7,12 @@
 <div metal:fill-slot="main">
 	<h1 tal:content="view/fullname"></h1>
 
+    <!--
+	<div class="field" tal:condition="view/photo">
+	   <img tal:replace="structure python: view.widgets['photo'].render()" />
+	</div>
+	-->
+
 	<div class="field" tal:condition="view/position">
 		<label i18n:translate="">Position : </label>
 		<a tal:attributes="href view/position/absolute_url">

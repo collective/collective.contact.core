@@ -7,6 +7,10 @@
 <div metal:fill-slot="main">
 	<h1 tal:content="view/name"></h1>
 
+    <div class="field" tal:condition="view/photo">
+       <img tal:replace="structure python: view.widgets['photo'].render()" />
+    </div>
+
     <div class="field" tal:condition="view/birthday">
         <label i18n:translate="">Birthday : </label>
         <span tal:content="view/birthday"
