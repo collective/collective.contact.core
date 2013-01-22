@@ -72,7 +72,7 @@ class HeldPosition(Container):
         position = self.get_position()
         if position is None:
             return "%s (%s)" % (person_name,
-                                     root_organization)
+                                root_organization)
         else:
             position_name = position.Title()
             return "%s (%s - %s)" % (person_name,
