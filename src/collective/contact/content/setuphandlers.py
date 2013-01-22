@@ -107,6 +107,13 @@ def createTestData(context):
               }
     mydirectory.invokeFactory('person', 'rambo', **params)
 
+    params = {'lastname': u'Draper',
+              'firstname': u'John',
+              'person_title': u'Mister',
+              }
+    mydirectory.invokeFactory('person', 'draper', **params)
+    draper = mydirectory['draper']
+
     params = {'title': u"Armée de terre",
               'organization_type': u'army',
               }
@@ -161,6 +168,12 @@ def createTestData(context):
               }
     armeedeterre.invokeFactory('position', 'general_adt', **params)
 
+    params = {'title': u"Capitaine de la division Alpha",
+              'position_type': u'captain',
+              }
+    divisionalpha.invokeFactory('position', 'capitaine_alpha', **params)
+    capitaine_alpha = divisionalpha['capitaine_alpha']
+
     params = {'title': u"Sergent de la brigade LH",
               'position_type': u'sergeant',
               'cell_phone': u'0654875233',
@@ -186,7 +199,10 @@ def createTestData(context):
     degaulle.invokeFactory('held_position', 'gadt', **params)
 
     params = {'start_date': datetime.date(1980, 6, 5),
-              'end_date': datetime.date(1988, 1, 19),
               'position': RelationValue(intids.getId(sergent_lh)),
               }
     pepper.invokeFactory('held_position', 'sergent_pepper', **params)
+
+    params = {'position': RelationValue(intids.getId(capitaine_alpha)),
+              }
+    draper.invokeFactory('held_position', 'captain_crunch', **params)
