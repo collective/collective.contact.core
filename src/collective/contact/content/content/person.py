@@ -53,6 +53,7 @@ class Person(Container):
         lastname = self.lastname or ''
         return ' '.join([e.encode('utf8') for e in (person_title, firstname, lastname) if e])
 
+
 class PersonSchemaPolicy(grok.GlobalUtility,
                          DexteritySchemaPolicy):
     """ """
