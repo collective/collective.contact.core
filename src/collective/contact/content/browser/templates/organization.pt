@@ -14,7 +14,7 @@
     </div>
 
     <div id="organizations" class="field" tal:condition="view/parent_organizations">
-        <label i18n:translate="">List of parent organizations : </label>
+        <label i18n:translate="">Parent organizations : </label>
         <ul>
         <tal:block tal:repeat="organization view/parent_organizations">
             <li><a tal:attributes="href organization/absolute_url">
@@ -64,7 +64,7 @@
         </ul>
     </div>
 
-    <div id="sub_organizations" class="field" tal:condition="view/positions">
+    <div id="positions" class="field" tal:condition="view/positions">
         <label i18n:translate="">Positions in this organization : </label>
         <ul>
         <tal:block tal:repeat="position view/positions">
