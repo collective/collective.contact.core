@@ -3,6 +3,7 @@ from zope.schema.vocabulary import SimpleTerm
 from Products.ZCTextIndex.ParseTree import ParseError
 
 from plone.formwidget.contenttree.source import PathSourceBinder, ObjPathSource
+from Products.CMFPlone.utils import base_hasattr
 
 
 def parse_query(query, path_prefix=""):
@@ -37,7 +38,7 @@ class ContactSource(ObjPathSource):
         else:
             value = brain.getPath()[len(self.portal_path):]
         # TODO avoid to wake up object, create a get_full_title brain metadada
-        if hasattr(brain.getObject(), "get_full_title"):
+        if base_hasattr(brain.getObject(), "get_full_title"):
             full_title = brain.getObject().get_full_title()
             return SimpleTerm(value, token=brain.getPath(), title=full_title)
         else:
