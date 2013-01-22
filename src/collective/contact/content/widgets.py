@@ -56,37 +56,38 @@ $(document).ready(function() {
     var path = '/' + input.val().split('/').slice(2).join('/');
     var url = portal_url+path;
     input.siblings('.label')
-        .wrapInner('<a href="'+url+'">').find('a')
-        .bind("mouseover", function() {
-            var trigger = $(this);
-            if (!trigger.data('tooltip')) {
-              if (pendingCall.procID) {
-                clearTimeout(pendingCall.procID);
-              }
-              var timeStamp = new Date();
-              var tooltipCall = function() {
-                  var tip = $('<div class="tooltip pb-ajax" style="display:none">please wait</div>')
-                        .insertAfter(trigger);
-                  trigger.tooltip({relative: true, position: "center right"});
-                  var tooltip = trigger.tooltip();
-                  tooltip.show();
-                  var url = trigger.attr('href');
-                  $.get(url, function(data) {
-                    tooltip.hide();
-                    tooltip.getTip().html($('<div />').append(
-                            data.replace(/<script(.|\s)*?\/script>/gi, ""))
-                        .find(common_content_filter));
-                    if (pendingCall.timeStamp == timeStamp) {
-                        tooltip.show();
-                    }
-                    pendingCall.procID = null;
-                  });
-              }
-              pendingCall = {timeStamp: timeStamp,
-                             procID: setTimeout(tooltipCall, 1000)};
-            }
-        });
+        .wrapInner('<a href="'+url+'" class="link-tooltip">');
   };
+
+  $(document).delegate('.link-tooltip', 'mouseenter', function() {
+    var trigger = $(this);
+    if (!trigger.data('tooltip')) {
+      if (pendingCall.procID) {
+        clearTimeout(pendingCall.procID);
+      }
+      var timeStamp = new Date();
+      var tooltipCall = function() {
+          var tip = $('<div class="tooltip pb-ajax" style="display:none">please wait</div>')
+                .insertAfter(trigger);
+          trigger.tooltip({relative: true, position: "center right"});
+          var tooltip = trigger.tooltip();
+          tooltip.show();
+          var url = trigger.attr('href');
+          $.get(url, function(data) {
+            tooltip.hide();
+            tooltip.getTip().html($('<div />').append(
+                    data.replace(/<script(.|\s)*?\/script>/gi, ""))
+                .find(common_content_filter));
+            if (pendingCall.timeStamp == timeStamp) {
+                tooltip.show();
+            }
+            pendingCall.procID = null;
+          });
+      }
+      pendingCall = {timeStamp: timeStamp,
+                     procID: setTimeout(tooltipCall, 500)};
+    }
+  });
 });
 </script>
 <style type="text/css">
