@@ -1,21 +1,14 @@
-from five import grok
-
 from Products.CMFCore.utils import getToolByName
 
-from collective.contact.content.browser import TEMPLATES_DIR
+from plone.dexterity.browser.view import DefaultView
+
 from collective.contact.content.browser.contactable import Contactable
-from collective.contact.content.content.person import IPerson
-from collective.contact.content.browser.utils import date_to_DateTime
+
+from collective.contact.content.browser.utils import date_to_DateTime,\
+    get_ttw_fields
 
 
-grok.templatedir(TEMPLATES_DIR)
-
-
-class Person(grok.View, Contactable):
-    grok.name('person')
-    grok.context(IPerson)
-    grok.require("zope2.View")
-    grok.template('person')
+class Person(DefaultView, Contactable):
 
     name = ''
     birthday = ''
@@ -25,6 +18,7 @@ class Person(grok.View, Contactable):
     photo = ''
 
     def update(self):
+        super(Person, self).update()
         self.person = self.context
         person = self.person
 
@@ -47,3 +41,6 @@ class Person(grok.View, Contactable):
         self.contactables = self.get_contactables()
         self.update_contact_details()
         self.address = self.get_address()
+
+        # also show fields that were added TTW
+        self.ttw_fields = get_ttw_fields(person)

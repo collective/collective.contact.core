@@ -11,7 +11,7 @@ def date_to_DateTime(date):
     return DateTime(date.year, date.month, date.day).Date()
 
 
-def get_new_fields(obj):
+def get_ttw_fields(obj):
     """Returns names of the fields that were added to obj through the web"""
     fti = getUtility(IDexterityFTI, name=obj.portal_type)
     full_schema = fti.lookupSchema()

@@ -1,23 +1,11 @@
-from five import grok
+from plone.dexterity.browser.view import DefaultView
 
-
-from collective.contact.content.browser import TEMPLATES_DIR
 from collective.contact.content.browser.contactable import Contactable
-from collective.contact.content.content.held_position import IHeldPosition
-from collective.contact.content.browser.utils import get_new_fields,\
+from collective.contact.content.browser.utils import get_ttw_fields,\
     date_to_DateTime
 
 
-grok.templatedir(TEMPLATES_DIR)
-
-
-
-
-class Contact(grok.View, Contactable):
-    grok.name('contact')
-    grok.context(IHeldPosition)
-    grok.require("zope2.View")
-    grok.template('contact')
+class Contact(DefaultView, Contactable):
 
     start_date = ''
     end_date = ''
@@ -28,6 +16,7 @@ class Contact(grok.View, Contactable):
     organizations = []
 
     def update(self):
+        super(Contact, self).update()
         held_position = self.context
 
         start_date = held_position.start_date
@@ -50,7 +39,7 @@ class Contact(grok.View, Contactable):
             self.birthday = self.context.toLocalizedTime(birthday)
 
         self.gender = person.gender or ''
-        #self.photo = person.photo or ''  # FIXME:
+        #self.photo = person.photo or ''  # FIXME
 
         self.position = held_position.get_position()
 
@@ -60,3 +49,6 @@ class Contact(grok.View, Contactable):
         self.contactables = self.get_contactables()
         self.update_contact_details()
         self.address = self.get_address()
+
+        # also show fields that were added TTW
+        self.ttw_fields = get_ttw_fields(held_position)
