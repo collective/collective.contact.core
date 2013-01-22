@@ -53,7 +53,7 @@
          tal:replace="structure view/render_address" />
 
     <div id="sub_organizations" class="field" tal:condition="view/sub_organizations">
-        <label i18n:translate="">List of organizations in this organization : </label>
+        <label i18n:translate="">Organizations in this organization : </label>
         <ul>
         <tal:block tal:repeat="sub_org view/sub_organizations">
             <li><a tal:attributes="href sub_org/getURL">
@@ -65,7 +65,7 @@
     </div>
 
     <div id="sub_organizations" class="field" tal:condition="view/positions">
-        <label i18n:translate="">List of positions in this organization : </label>
+        <label i18n:translate="">Positions in this organization : </label>
         <ul>
         <tal:block tal:repeat="position view/positions">
             <li><a tal:attributes="href position/getURL">

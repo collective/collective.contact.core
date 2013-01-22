@@ -41,7 +41,7 @@
          tal:replace="structure view/render_address" />
 
     <div id="held_positions" class="field" tal:condition="view/held_positions">
-        <label i18n:translate="">List of positions held by this person : </label>
+        <label i18n:translate="">Positions held by this person : </label>
         <ul>
         <tal:block tal:repeat="held_position view/held_positions">
             <li><a tal:attributes="href held_position/getURL">
