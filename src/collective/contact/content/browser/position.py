@@ -1,4 +1,6 @@
 from five import grok
+from zope.component import getUtility
+from zope.schema.interfaces import IVocabularyFactory
 
 from collective.contact.content.browser import TEMPLATES_DIR
 from collective.contact.content.browser.contactable import Contactable
@@ -18,7 +20,9 @@ class Position(grok.View, Contactable):
         self.position = self.context
         position = self.position
         self.name = position.Title()
-        self.type = position.position_type  # TODO: get value, not token
+        factory = getUtility(IVocabularyFactory, "PositionTypes")
+        vocabulary = factory(self.context)
+        self.type = vocabulary.getTerm(position.position_type).title
 
         organization = position.get_organization()
         self.organizations = organization.get_organizations_chain()

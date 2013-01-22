@@ -162,7 +162,7 @@ def createTestData(context):
     armeedeterre.invokeFactory('position', 'general_adt', **params)
 
     params = {'title': u"Sergent de la brigade LH",
-              'position_type': u'sergent',
+              'position_type': u'sergeant',
               'cell_phone': u'0654875233',
               'email': u'brigade_lh@armees.fr',
               'im_handle': u'brigade_lh@jabber.org',

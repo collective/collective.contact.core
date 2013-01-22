@@ -142,7 +142,7 @@ class TestPositionView(TestView):
         position_view.update()
 
         self.assertEqual(position_view.name, "Sergent de la brigade LH")
-        self.assertEqual(position_view.type, "sergent")
+        self.assertEqual(position_view.type, "Sergeant")
         organizations = position_view.organizations
         self.assertEqual([self.armeedeterre,
                           self.corpsa,
