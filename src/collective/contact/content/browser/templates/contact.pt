@@ -27,19 +27,19 @@
         </ul>
     </div>
 
-	<div class="field">
+	<div class="field" tal:condition="view/start_date">
 		<label i18n:translate="">Start date : </label>
 		<span tal:content="view/start_date"
 		 	  i18n:translate="" />
 	</div>
 
-	<div class="field">
+	<div class="field" tal:condition="view/end_date">
 		<label i18n:translate="">End date : </label>
 		<span tal:content="view/end_date"
 		 	  i18n:translate="" />
 	</div>
 
-    <div class="field">
+    <div class="field" tal:condition="view/birthday">
         <label i18n:translate="">Birthday : </label>
         <span tal:content="view/birthday"
               i18n:translate="" />

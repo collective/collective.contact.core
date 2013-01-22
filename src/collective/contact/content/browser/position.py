@@ -16,6 +16,10 @@ class Position(grok.View, Contactable):
     grok.require("zope2.View")
     grok.template('position')
 
+    name = ''
+    type = ''
+    organizations = []
+
     def update(self):
         self.position = self.context
         position = self.position

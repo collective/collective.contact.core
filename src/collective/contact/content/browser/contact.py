@@ -21,6 +21,14 @@ class Contact(grok.View, Contactable):
     grok.require("zope2.View")
     grok.template('contact')
 
+    start_date = ''
+    end_date = ''
+    birthday = ''
+    gender = ''
+    photo = ''
+    position = None
+    organizations = []
+
     def update(self):
         held_position = self.context
 
@@ -37,6 +45,7 @@ class Contact(grok.View, Contactable):
         person = held_position.get_person()
         self.person = person
         self.fullname = person.Title()
+
         birthday = person.birthday
         if birthday is not None:
             birthday = date_to_DateTime(birthday)

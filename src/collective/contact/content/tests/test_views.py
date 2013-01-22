@@ -31,6 +31,8 @@ class TestView(unittest.TestCase):
         self.brigadelh = self.regimenth['brigadelh']
         self.general_adt = self.armeedeterre['general_adt']
         self.sergent_lh = self.brigadelh['sergent_lh']
+        self.draper = mydirectory['draper']
+        self.captain_crunch = self.draper['captain_crunch']
         self.mydirectory = mydirectory
 
 
@@ -98,6 +100,15 @@ class TestContactView(TestView):
         self.assertEqual(address['zip_code'], u'52330')
         self.assertEqual(address['region'], u'')
         self.assertEqual(address['additional_address_details'], u'bâtiment D')
+
+    def test_empty_fields(self):
+        contact_view = self.captain_crunch.restrictedTraverse("@@contact")
+        contact_view.update()
+        self.assertEqual(contact_view.start_date, u'')
+        self.assertEqual(contact_view.end_date, u'')
+        self.assertEqual(contact_view.birthday, u'')
+        self.assertEqual(contact_view.gender, u'')
+        self.assertEqual(contact_view.photo, u'')
 
     def test_contact_details_acquisition(self):
         contact_view = self.sergent_pepper.restrictedTraverse("@@contact")

@@ -18,6 +18,12 @@ class Organization(grok.View, Contactable):
     grok.require("zope2.View")
     grok.template('organization')
 
+    name = ''
+    type = ''
+    parent_organizations = []
+    sub_organizations = []
+    positions = []
+
     def update(self):
         self.organization = self.context
         organization = self.organization
