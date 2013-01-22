@@ -23,6 +23,7 @@ from . import _
 
 class MasterSelectAddContactProvider(BrowserView):
     implements(IContentProvider)
+
     def __init__(self, context, request, view):
         super(MasterSelectAddContactProvider, self).__init__(context, request)
         self.__parent__ = view
@@ -31,7 +32,7 @@ class MasterSelectAddContactProvider(BrowserView):
         pass
 
     def render(self):
-# If we fill organization and person, show position and held position fields
+        # If we fill organization and person, show position and held position fields
         return """<script type="text/javascript">
 $(document).ready(function() {
 
@@ -163,7 +164,7 @@ class AddContact(DefaultAddForm, form.AddForm):
         # hide the one from IHeldPosition
         # TODO: there is no hidden template for autocomplete widget,
         # we hide it in javascript for now.
-        self.fields[self._schema_name+'.position'].mode = HIDDEN_MODE
+        self.fields[self._schema_name + '.position'].mode = HIDDEN_MODE
 
     def updateWidgets(self):
         super(AddContact, self).updateWidgets()
@@ -192,11 +193,13 @@ class AddContact(DefaultAddForm, form.AddForm):
         if obj is not None:
             # mark only as finished if we get the new object
             self._finishedAdd = True
-            IStatusMessage(self.request).addStatusMessage(DMF(u"Item created"), "info")
+            IStatusMessage(self.request).addStatusMessage(DMF(u"Item created"),
+                                                          "info")
 
     @button.buttonAndHandler(DMF(u'Cancel'), name='cancel')
     def handleCancel(self, action):
-        IStatusMessage(self.request).addStatusMessage(DMF(u"Add New Item operation cancelled"), "info")
+        IStatusMessage(self.request).addStatusMessage(DMF(u"Add New Item operation cancelled"),
+                                                      "info")
         self.request.response.redirect(self.nextURL())
         notify(AddCancelledEvent(self.context))
 
@@ -221,15 +224,18 @@ class AddContact(DefaultAddForm, form.AddForm):
         if position is None:
             position = orga
 
-        data[self._schema_name+'.position'] = position
+        data[self._schema_name + '.position'] = position
         return super(AddContact, self).create(data)
 
-    def add(self, object):
+    def add(self, obj):
         container = self._container
         fti = getUtility(IDexterityFTI, name=self.portal_type)
-        new_object = addContentToContainer(container, object)
+        new_object = addContentToContainer(container, obj)
 
         if fti.immediate_view:
-            self.immediate_view = "%s/%s/%s" % (container.absolute_url(), new_object.id, fti.immediate_view,)
+            self.immediate_view = "%s/%s/%s" % (container.absolute_url(),
+                                                new_object.id,
+                                                fti.immediate_view,)
         else:
-            self.immediate_view = "%s/%s" % (container.absolute_url(), new_object.id)
+            self.immediate_view = "%s/%s" % (container.absolute_url(),
+                                             new_object.id)
