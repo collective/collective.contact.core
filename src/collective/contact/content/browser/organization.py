@@ -1,4 +1,6 @@
 from five import grok
+from zope.component import getUtility
+from zope.schema.interfaces import IVocabularyFactory
 
 from Products.CMFCore.utils import getToolByName
 
@@ -21,11 +23,12 @@ class Organization(grok.View, Contactable):
         organization = self.organization
 
         self.name = organization.Title()
-        self.type = organization.organization_type
+        factory = getUtility(IVocabularyFactory, "OrganizationTypesOrLevels")
+        vocabulary = factory(self.context)
+        self.type = vocabulary.getTerm(organization.organization_type).title
 
         organizations = organization.get_organizations_chain()
         self.parent_organizations = [org for org in organizations]
-        #self.parent_organizations = deepcopy(organizations)  # FIXME: doesn't work ?
         self.parent_organizations.remove(organization)
         self.organizations = organizations
 
