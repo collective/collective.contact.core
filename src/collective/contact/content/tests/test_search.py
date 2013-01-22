@@ -51,7 +51,7 @@ class TestSearch(unittest.TestCase, BaseTest):
         results = catalog.searchResults(SearchableText='Général')
         self.assertEqual(len(results), 4)
         results = catalog.searchResults(SearchableText='Corps')
-        self.assertEqual(len(results), 7)
+        self.assertEqual(len(results), 8)
         results_objects = [res.getObject() for res in results]
         self.assertIn(self.corpsa, results_objects)
         self.assertIn(self.corpsb, results_objects)
@@ -61,7 +61,7 @@ class TestSearch(unittest.TestCase, BaseTest):
         self.assertIn(self.brigadelh, results_objects)
         self.assertIn(self.sergent_pepper, results_objects)
         results = catalog.searchResults(SearchableText='armée')
-        self.assertEqual(len(results), 11)
+        self.assertEqual(len(results), 12)
         results = catalog.searchResults(SearchableText='beta')
         self.assertEqual(len(results), 1)
         results = catalog.searchResults(SearchableText='régiment')

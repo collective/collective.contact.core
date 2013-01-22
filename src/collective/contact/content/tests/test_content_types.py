@@ -160,6 +160,7 @@ class TestHeldPosition(TestContentTypes):
         self.assertIn('sergent_pepper', pepper)
         self.assertEqual(sergent_pepper.Title(),
                          "Sergent de la brigade LH")
+        self.assertIsNone(sergent_pepper.end_date)
 
     def test_get_full_title(self):
         self.assertEqual(self.adt.get_full_title(),

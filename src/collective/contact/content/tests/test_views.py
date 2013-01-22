@@ -77,7 +77,6 @@ class TestAddressView(TestView):
         self.assertEqual(data['zip_code'], u'59650')
         self.assertEqual(data['region'], u'')
         self.assertEqual(data['additional_address_details'], u'')
-    # TODO: test that a position can have an address
 
 
 class TestContactView(TestView):
