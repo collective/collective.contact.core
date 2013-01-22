@@ -31,9 +31,12 @@ class Organization(grok.View, Contactable):
 
         catalog = getToolByName(self.context, 'portal_catalog')
         context_path = '/'.join(organization.getPhysicalPath())
-        results = catalog.searchResults(path={'query': context_path,
-                                              'depth': 1})
-        self.items = results
+        self.sub_organizations = catalog.searchResults(portal_type="organization",
+                                                       path={'query': context_path,
+                                                             'depth': 1})
+        self.positions = catalog.searchResults(portal_type="position",
+                                               path={'query': context_path,
+                                                     'depth': 1})
 
         self.contactables = self.get_contactables()
         self.update_contact_details()

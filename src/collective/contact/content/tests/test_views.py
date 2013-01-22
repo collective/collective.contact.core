@@ -186,18 +186,27 @@ class TestOrganizationView(TestView):
         self.assertEqual(address['country'], u'France')
         self.assertEqual(address['additional_address_details'], u'')
 
-        items_names = [e.Title for e in org_view.items]
-        self.assertIn("Division Alpha", items_names)
-        self.assertIn("Division Beta", items_names)
-
-    def test_items(self):
-        """Items should contains organizations and positions"""
+    def test_sub_organizations(self):
         org_view = self.armeedeterre.restrictedTraverse("@@organization")
         org_view.update()
-        items_names = [e.Title for e in org_view.items]
-        self.assertEqual(set(['Corps A', 'Corps B',
-                              "Général de l'armée de terre"]),
-                         set(items_names))
+        sub_organizations_names = [e.Title for e in org_view.sub_organizations]
+        self.assertEqual(set(['Corps A', 'Corps B']),
+                         set(sub_organizations_names))
+        # no sub-organizations
+        org_view = self.brigadelh.restrictedTraverse("@@organization")
+        org_view.update()
+        self.assertEqual(0, len(org_view.sub_organizations))
+
+    def test_positions(self):
+        org_view = self.armeedeterre.restrictedTraverse("@@organization")
+        org_view.update()
+        positions_names = [e.Title for e in org_view.positions]
+        self.assertEqual(set(["Général de l'armée de terre"]),
+                         set(positions_names))
+        # no_positions
+        org_view = self.corpsa.restrictedTraverse("@@organization")
+        org_view.update()
+        self.assertEqual(0, len(org_view.positions))
 
 
 class TestPersonView(TestView):

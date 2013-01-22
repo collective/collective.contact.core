@@ -52,12 +52,24 @@
     <div id="address"
          tal:replace="structure view/render_address" />
 
-    <div id="items" class="field">
-        <label i18n:translate="">List of organizations and positions in this organization : </label>
+    <div id="sub_organizations" class="field" tal:condition="view/sub_organizations">
+        <label i18n:translate="">List of organizations in this organization : </label>
         <ul>
-        <tal:block tal:repeat="item view/items">
-            <li><a tal:attributes="href item/getURL">
-                <span tal:replace="item/Title"
+        <tal:block tal:repeat="sub_org view/sub_organizations">
+            <li><a tal:attributes="href sub_org/getURL">
+                <span tal:replace="sub_org/Title"
+                      i18n:translate="" />
+            </a></li>
+        </tal:block>
+        </ul>
+    </div>
+
+    <div id="sub_organizations" class="field" tal:condition="view/positions">
+        <label i18n:translate="">List of positions in this organization : </label>
+        <ul>
+        <tal:block tal:repeat="position view/positions">
+            <li><a tal:attributes="href position/getURL">
+                <span tal:replace="position/Title"
                       i18n:translate="" />
             </a></li>
         </tal:block>
