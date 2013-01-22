@@ -29,6 +29,10 @@ class Position(Container):
     def get_organization(self):
         return self.getParentNode()
 
+    def get_full_title(self):
+        organization = self.get_organization().Title()
+        return "%s (%s)" % (self.Title(), organization)
+
 
 class PositionSchemaPolicy(grok.GlobalUtility,
                            DexteritySchemaPolicy):

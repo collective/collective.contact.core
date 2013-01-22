@@ -138,6 +138,10 @@ class TestPosition(TestContentTypes):
         self.assertEqual(general_adt.position_type,
                          'general')
 
+    def test_get_full_title(self):
+        self.assertEqual(self.general_adt.get_full_title(),
+                         "Général de l'armée de terre (Armée de terre)")
+
 
 class TestHeldPosition(TestContentTypes):
 
