@@ -5,7 +5,7 @@ from Products.CMFCore.utils import getToolByName
 from collective.contact.content.browser import TEMPLATES_DIR
 from collective.contact.content.browser.contactable import Contactable
 from collective.contact.content.content.person import IPerson
-from collective.contact.content.browser.contact import date_to_DateTime
+from collective.contact.content.browser.utils import date_to_DateTime
 
 
 grok.templatedir(TEMPLATES_DIR)

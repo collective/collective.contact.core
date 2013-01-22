@@ -1,18 +1,16 @@
 from five import grok
 
-from DateTime import DateTime
 
 from collective.contact.content.browser import TEMPLATES_DIR
 from collective.contact.content.browser.contactable import Contactable
 from collective.contact.content.content.held_position import IHeldPosition
+from collective.contact.content.browser.utils import get_new_fields,\
+    date_to_DateTime
 
 
 grok.templatedir(TEMPLATES_DIR)
 
 
-def date_to_DateTime(date):
-    """Convert datetime.date to DateTime.DateTime format"""
-    return DateTime(date.year, date.month, date.day).Date()
 
 
 class Contact(grok.View, Contactable):
