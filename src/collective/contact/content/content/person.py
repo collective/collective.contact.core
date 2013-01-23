@@ -1,9 +1,11 @@
 from zope import schema
 from zope.interface import implements
 from z3c.form.interfaces import NO_VALUE
+from z3c.form.browser.radio import RadioFieldWidget
 
 from five import grok
 
+from plone.autoform import directives as form
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.namedfile.field import NamedImage
@@ -30,6 +32,7 @@ class IPerson(model.Schema, IContactContent):
         vocabulary="Genders",
         required=False,
         )
+    form.widget(gender=RadioFieldWidget)
     person_title = schema.TextLine(
         title=_("Person title"),
         required=False,
