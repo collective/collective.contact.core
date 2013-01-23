@@ -220,7 +220,7 @@ msgstr "Fonction ou organisation"
 
 #: ../browser/templates/position.pt:11
 msgid "Position type&nbsp;:"
-msgstr "Type de position&nbsp;:"
+msgstr "Type de fonction&nbsp;:"
 
 #: ../content/directory.py:24
 msgid "Position types"
