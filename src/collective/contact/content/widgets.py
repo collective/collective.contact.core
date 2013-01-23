@@ -96,6 +96,9 @@ $(document).ready(function() {
 });
 </script>
 <style type="text/css">
+.tooltip {
+  padding: 1em;
+}
 .tooltip, #calroot {
   z-index: 99999;
 }
