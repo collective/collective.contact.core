@@ -3,6 +3,10 @@ from z3c.relationfield.interfaces import IRelationChoice, IRelationList
 from plone.formwidget.autocomplete.interfaces import IAutocompleteWidget
 
 
+class IContactContent(Interface):
+    """Base class for collective.contact.content content types"""
+
+
 class IContactAutocompleteWidget(IAutocompleteWidget):
     """Marker interface for the contact autocomplete widget
     """

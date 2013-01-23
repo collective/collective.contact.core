@@ -8,9 +8,11 @@ from plone.supermodel import model
 from plone.dexterity.schema import DexteritySchemaPolicy
 
 from collective.contact.content import _
+from collective.contact.content.interfaces import IContactContent
+from collective.contact.content.browser.contactable import Contactable
 
 
-class IPosition(model.Schema):
+class IPosition(model.Schema, IContactContent):
     """ """
 
     position_type = schema.Choice(

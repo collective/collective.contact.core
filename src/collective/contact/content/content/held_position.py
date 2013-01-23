@@ -10,9 +10,11 @@ from plone.supermodel import model
 from collective.contact.content import _
 from collective.contact.content.schema import ContactChoice
 from collective.contact.content.source import ContactSourceBinder
+from collective.contact.content.interfaces import IContactContent
+from collective.contact.content.browser.contactable import Contactable
 
 
-class IHeldPosition(model.Schema):
+class IHeldPosition(model.Schema, IContactContent):
 
     start_date = schema.Date(
       title=_("Start date"),

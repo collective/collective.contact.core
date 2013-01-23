@@ -9,9 +9,11 @@ from plone.namedfile.field import NamedImage
 from plone.supermodel import model
 
 from collective.contact.content import _
+from collective.contact.content.interfaces import IContactContent
+from collective.contact.content.browser.contactable import Contactable
 
 
-class IPerson(model.Schema):
+class IPerson(model.Schema, IContactContent):
     """ """
 
     lastname = schema.TextLine(
