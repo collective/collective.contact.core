@@ -8,13 +8,13 @@
 	<h1 tal:content="view/name"></h1>
 
 	<div id="type" class="field">
-	     <label i18n:translate="">Position type : </label>
+	     <label i18n:translate="">Position type&nbsp;: </label>
 	     <span tal:content="view/type"
                i18n:translate="" />
 	</div>
 
 	<div id="organizations" class="field" tal:condition="view/organizations">
-        <label i18n:translate="">Parent organizations : </label>
+        <label i18n:translate="">Parent organizations&nbsp;: </label>
         <ul>
         <tal:block tal:repeat="organization view/organizations">
             <li><a tal:attributes="href organization/absolute_url">
@@ -26,25 +26,25 @@
     </div>
 
     <div class="field" tal:condition="view/email">
-        <label i18n:translate="">Email : </label>
+        <label i18n:translate="">Email&nbsp;: </label>
         <span tal:content="view/email"
               i18n:translate="" />
     </div>
 
     <div class="field" tal:condition="view/phone">
-        <label i18n:translate="">Phone number : </label>
+        <label i18n:translate="">Phone number&nbsp;: </label>
         <span tal:content="view/phone"
               i18n:translate="" />
     </div>
 
     <div class="field" tal:condition="view/cell_phone">
-        <label i18n:translate="">Cell phone number : </label>
+        <label i18n:translate="">Cell phone number&nbsp;: </label>
         <span tal:content="view/cell_phone"
               i18n:translate="" />
     </div>
 
     <div class="field" tal:condition="view/im_handle">
-        <label i18n:translate="">IM handle : </label>
+        <label i18n:translate="">IM handle&nbsp;: </label>
         <span tal:content="view/im_handle"
               i18n:translate="" />
     </div>
