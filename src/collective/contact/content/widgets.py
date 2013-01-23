@@ -113,7 +113,8 @@ class ObjPathViewlet(grok.Viewlet):
             title = self.context.get_full_title()
         else:
             title = self.context.Title()
-        return """<input type="hidden" name="objpath" value="%s" />""" % (
+        title = title.decode('utf-8')
+        return u"""<input type="hidden" name="objpath" value="%s" />""" % (
                     '|'.join([token, title]))
 
 
