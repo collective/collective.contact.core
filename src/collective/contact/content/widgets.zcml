@@ -44,4 +44,22 @@
       class=".widgets.AutocompleteSearch"
       />
 
+  <!-- overrides the template registered for
+       z3c.form.interfaces.ICheckBoxWidget -->
+  <z3c:widgetTemplate
+      mode="input"
+      widget=".interfaces.IContactAutocompleteMultiSelectionWidget"
+      layer="z3c.form.interfaces.IFormLayer"
+      template="templates/checkbox_input.pt"
+      />
+
+  <!-- overrides the template registered for
+       z3c.form.interfaces.IRadioWidget -->
+  <z3c:widgetTemplate
+      mode="input"
+      widget=".interfaces.IContactAutocompleteSelectionWidget"
+      layer="z3c.form.interfaces.IFormLayer"
+      template="templates/radio_input.pt"
+      />
+
 </configure>

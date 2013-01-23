@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-01-18 21:12+0000\n"
+"POT-Creation-Date: 2013-01-22 21:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,11 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.contact.content\n"
 
-#: ../addcontact.py:140
+#: ../widgets.py:125
+msgid "(nothing)"
+msgstr ""
+
+#: ../addcontact.py:185
 msgid "Add"
 msgstr ""
 
@@ -56,8 +60,8 @@ msgstr ""
 msgid "City"
 msgstr ""
 
-#: ../addcontact.py:102
-#: ../widgets.py:122
+#: ../addcontact.py:147
+#: ../widgets.py:158
 msgid "Contact"
 msgstr ""
 
@@ -174,7 +178,7 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
-#: ../addcontact.py:82
+#: ../addcontact.py:127
 #: ../content/directory.py:32
 #: ../profiles/default/types/organization.xml
 msgid "Organization"
@@ -196,7 +200,7 @@ msgstr ""
 msgid "Organization types"
 msgstr ""
 
-#: ../addcontact.py:87
+#: ../addcontact.py:132
 #: ../profiles/default/types/person.xml
 msgid "Person"
 msgstr ""
@@ -223,7 +227,7 @@ msgstr ""
 msgid "Photo"
 msgstr ""
 
-#: ../addcontact.py:92
+#: ../addcontact.py:137
 #: ../content/directory.py:25
 #: ../profiles/default/types/position.xml
 msgid "Position"

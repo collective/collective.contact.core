@@ -18,7 +18,10 @@ from plone.formwidget.autocomplete.widget import AutocompleteSearch as BaseAutoc
 from plone.dexterity.i18n import MessageFactory as DMF
 
 from . import _
-from .interfaces import IContactAutocompleteWidget
+from .interfaces import (
+    IContactAutocompleteWidget,
+    IContactAutocompleteSelectionWidget,
+    IContactAutocompleteMultiSelectionWidget)
 
 class PatchLoadInsideOverlay(grok.Viewlet):
     grok.context(Interface)
@@ -122,6 +125,8 @@ def find_directory(context):
 
 class ContactBaseWidget(object):
     implements(IContactAutocompleteWidget)
+    noValueLabel = _(u'(nothing)')
+    autoFill = False
     display_template = ViewPageTemplateFile('templates/contact_display.pt')
     input_template = ViewPageTemplateFile('templates/contact_input.pt')
     js_callback_template = """
@@ -136,6 +141,10 @@ function (event, data, formatted) {
     }(jQuery));
 }
 """
+
+    def tokenToUrl(self, token):
+        portal_url = getToolByName(self.context, 'portal_url')()
+        return "%s/%s" % (portal_url, self.bound_source.tokenToPath(token))
 
     def render(self):
         source = self.bound_source
@@ -178,11 +187,11 @@ $('#%(id)s-autocomplete').find('.addnew'
 """ % dict(id=self.id, closeOnClick=self.closeOnClick)
 
 class ContactAutocompleteSelectionWidget(ContactBaseWidget, AutocompleteSelectionWidget):
-    autoFill = False
+    implements(IContactAutocompleteSelectionWidget)
 
 
 class ContactAutocompleteMultiSelectionWidget(ContactBaseWidget, AutocompleteMultiSelectionWidget):
-    autoFill = False
+    implements(IContactAutocompleteMultiSelectionWidget)
 
 
 @implementer(IFieldWidget)

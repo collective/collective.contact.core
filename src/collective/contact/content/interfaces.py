@@ -8,6 +8,16 @@ class IContactAutocompleteWidget(IAutocompleteWidget):
     """
 
 
+class IContactAutocompleteSelectionWidget(IContactAutocompleteWidget):
+    """Marker interface for the multi selection contact autocomplete widget
+    """
+
+
+class IContactAutocompleteMultiSelectionWidget(IContactAutocompleteWidget):
+    """Marker interface for the selection contact autocomplete widget
+    """
+
+
 class IContactChoice(IRelationChoice):
     """A one to one relation where a choice of target objects is available.
     """

@@ -21,6 +21,7 @@
         >
     <div tal:repeat="term view/terms">
         <a tal:content="term/title"
+           class="link-tooltip"
            tal:attributes="href python: term.token.replace(portal_path, portal_url, 1)"
            tal:condition="python:not(term.token.startswith('#error-'))"
            />

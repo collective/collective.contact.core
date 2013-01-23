@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.contact.content\n"
-"POT-Creation-Date: 2013-01-18 21:12+0000\n"
-"PO-Revision-Date: 2013-01-18 22:12+0100\n"
+"POT-Creation-Date: 2013-01-22 21:23+0000\n"
+"PO-Revision-Date: 2013-01-22 22:24+0100\n"
 "Last-Translator: Vincent Fretin <vincent.fretin@gmail.com>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -14,7 +14,11 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.contact.content\n"
 
-#: ../addcontact.py:140
+#: ../widgets.py:125
+msgid "(nothing)"
+msgstr "(aucune)"
+
+#: ../addcontact.py:185
 msgid "Add"
 msgstr "Ajouter"
 
@@ -53,8 +57,8 @@ msgstr "Numéro de téléphone mobile :"
 msgid "City"
 msgstr "Ville"
 
-#: ../addcontact.py:102
-#: ../widgets.py:122
+#: ../addcontact.py:147
+#: ../widgets.py:158
 msgid "Contact"
 msgstr "Contact"
 
@@ -171,7 +175,7 @@ msgstr "Nom"
 msgid "Number"
 msgstr "Numéro"
 
-#: ../addcontact.py:82
+#: ../addcontact.py:127
 #: ../content/directory.py:32
 #: ../profiles/default/types/organization.xml
 msgid "Organization"
@@ -193,7 +197,7 @@ msgstr "Type d'organisation :"
 msgid "Organization types"
 msgstr "Types d'organisations"
 
-#: ../addcontact.py:87
+#: ../addcontact.py:132
 #: ../profiles/default/types/person.xml
 msgid "Person"
 msgstr "Personne"
@@ -220,7 +224,7 @@ msgstr "Numéro de téléphone :"
 msgid "Photo"
 msgstr "Photo"
 
-#: ../addcontact.py:92
+#: ../addcontact.py:137
 #: ../content/directory.py:25
 #: ../profiles/default/types/position.xml
 msgid "Position"
