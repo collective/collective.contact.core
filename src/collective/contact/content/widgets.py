@@ -21,7 +21,8 @@ from . import _
 from .interfaces import (
     IContactAutocompleteWidget,
     IContactAutocompleteSelectionWidget,
-    IContactAutocompleteMultiSelectionWidget)
+    IContactAutocompleteMultiSelectionWidget,
+    IContactContent)
 
 class PatchLoadInsideOverlay(grok.Viewlet):
     grok.context(Interface)
@@ -102,8 +103,7 @@ $(document).ready(function() {
 
 
 class ObjPathViewlet(grok.Viewlet):
-    grok.context(Interface)
-    # TODO: restrict context
+    grok.context(IContactContent)
     grok.viewletmanager(IBelowContent)
 
     def render(self):
@@ -228,7 +228,6 @@ class AutocompleteSearch(BaseAutocompleteSearch):
         # during traversal before.
         self.context.update()
         source = self.context.bound_source
-        # TODO: use limit?
 
         if path is not None:
             query = "path:%s %s" % (source.tokenToPath(path), query)
