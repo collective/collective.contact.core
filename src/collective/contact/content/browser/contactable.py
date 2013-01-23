@@ -76,7 +76,8 @@ class Contactable(grok.Adapter):
     def get_parent_address(self):
         address = self._get_address()
         if not address:
-            return ''
+            # Very important to return unicode here, RichTextWidget needs it.
+            return u''
         template_path = os.path.join(TEMPLATES_DIR, 'address.pt')
         template = ViewPageTemplateFile(template_path)
         self.request = getRequest()

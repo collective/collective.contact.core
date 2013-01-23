@@ -31,6 +31,8 @@ def validateEmail(value):
 
 def get_parent_address(adapter):
     """Gets the address of the first parent in hierarchy"""
+    if adapter.context.portal_type == "directory":
+        return u''
     return IContactable(adapter.context).get_parent_address()
 
 
