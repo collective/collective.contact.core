@@ -1,5 +1,6 @@
 from zope.interface import implements
 from zope import schema
+from z3c.form.interfaces import NO_VALUE
 
 from five import grok
 
@@ -40,6 +41,8 @@ class PositionContactableAdapter(Contactable):
 class Position(Container):
     """ """
     implements(IPosition)
+    use_address_below = NO_VALUE
+    address_below = NO_VALUE
 
     def get_organization(self):
         return self.getParentNode()

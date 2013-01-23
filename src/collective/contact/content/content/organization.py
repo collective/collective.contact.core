@@ -1,6 +1,7 @@
+from Acquisition import aq_inner, aq_chain
 from zope.interface import implements
 from zope import schema
-from Acquisition import aq_inner, aq_chain
+from z3c.form.interfaces import NO_VALUE
 
 from five import grok
 
@@ -13,7 +14,6 @@ from plone.dexterity.schema import DexteritySchemaPolicy
 from collective.contact.content import _
 from collective.contact.content.interfaces import IContactContent
 from collective.contact.content.browser.contactable import Contactable
-from collective.contact.content.behaviors import IContactDetails
 
 
 class IOrganization(model.Schema, IContactContent):
@@ -54,6 +54,8 @@ class OrganizationContactableAdapter(Contactable):
 class Organization(Container):
     """ """
     implements(IOrganization)
+    use_address_below = NO_VALUE
+    address_below = NO_VALUE
 
     def get_organizations_chain(self):
         organizations_chain = []

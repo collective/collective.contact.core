@@ -1,5 +1,6 @@
 from zope import schema
 from zope.interface import implements
+from z3c.form.interfaces import NO_VALUE
 
 from five import grok
 
@@ -62,6 +63,12 @@ class Person(Container):
         firstname = self.firstname or ''
         lastname = self.lastname or ''
         return ' '.join([e.encode('utf8') for e in (person_title, firstname, lastname) if e])
+
+    # plone.dexterity.content.Content.__getattr__ retrieve the field.default
+    # so step 1.2.1 in z3c.form.widget.py returns something instead of NO_VALUE
+    # then IValue adapter is not looked up...
+    use_address_below = NO_VALUE
+    address_below = NO_VALUE
 
 
 class PersonSchemaPolicy(grok.GlobalUtility,

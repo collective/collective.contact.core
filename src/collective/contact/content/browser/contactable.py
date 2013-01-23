@@ -1,4 +1,6 @@
 import os.path
+
+from zope.globalrequest import getRequest
 from five import grok
 from Acquisition import aq_base
 
@@ -77,6 +79,7 @@ class Contactable(grok.Adapter):
             return ''
         template_path = os.path.join(TEMPLATES_DIR, 'address.pt')
         template = ViewPageTemplateFile(template_path)
+        self.request = getRequest()
         return template(self, address)
 
 
