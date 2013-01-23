@@ -1,4 +1,5 @@
 from zope.interface import alsoProvides
+from zope.interface import Interface
 from zope import schema
 
 from plone.supermodel import model
@@ -7,11 +8,13 @@ from plone.autoform.interfaces import IFormFieldProvider
 from plone.autoform import directives as form
 from plone.formwidget.masterselect import MasterSelectBoolField
 from plone.app.textfield import RichText
+from z3c.form.widget import ComputedWidgetAttribute
 
 from Products.CMFDefault.utils import checkEmailAddress
 from Products.CMFDefault.exceptions import EmailAddressInvalid
 
 from collective.contact.content import _
+from collective.contact.content.interfaces import IContactable
 
 
 class InvalidEmailAddress(schema.ValidationError):
@@ -24,6 +27,11 @@ def validateEmail(value):
     except EmailAddressInvalid:
         raise InvalidEmailAddress(value)
     return True
+
+
+def get_parent_address(adapter):
+    """Gets the address of the first parent in hierarchy"""
+    return IContactable(adapter.context).get_parent_address()
 
 
 class IGlobalPositioning(model.Schema):
@@ -98,7 +106,6 @@ class IContactDetails(model.Schema):
 
     use_address_below = MasterSelectBoolField(
         title=_("Use the address below"),
-        default=True,
         slave_fields=(
             {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
              'name': 'country',
@@ -150,19 +157,13 @@ class IContactDetails(model.Schema):
              'siblings': True,
             },
         ),
+        default=True,
         required=False,
     )
 
     address_below = RichText(
         default_mime_type='text/html',
         output_mime_type='text/html',
-        default=u"""
-<div id="address">
-3, rue Philibert Lucot<br/>
-75013 Paris
-</div>
-""",  # TODO: use address of the object self.context/@@address ???
-# TODO: Hide this field and "use address below" field in view mode ?
         required=False,
         )
     form.mode(address_below='display')
@@ -203,3 +204,13 @@ class IContactDetails(model.Schema):
             )
 
 alsoProvides(IContactDetails, IFormFieldProvider)
+
+
+DefaultUseAddressBelow = ComputedWidgetAttribute(
+    get_parent_address,
+    field=IContactDetails['use_address_below'], view=Interface)
+
+
+DefaultAddressBelow = ComputedWidgetAttribute(
+    get_parent_address,
+    field=IContactDetails['address_below'], view=Interface)

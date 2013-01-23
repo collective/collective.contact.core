@@ -69,4 +69,12 @@
     factory=".indexers.organization_searchable_text"
     />
 
+  <adapter
+      factory=".behaviors.DefaultUseAddressBelow"
+      name="default" />
+
+  <adapter
+      factory=".behaviors.DefaultAddressBelow"
+      name="default" />
+
 </configure>

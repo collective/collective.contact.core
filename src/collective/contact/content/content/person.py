@@ -43,6 +43,14 @@ class IPerson(model.Schema, IContactContent):
         )
 
 
+class PersonContactableAdapter(Contactable):
+    grok.context(IPerson)
+
+    @property
+    def person(self):
+        return self.context
+
+
 class Person(Container):
     """ """
     implements(IPerson)

@@ -53,6 +53,7 @@ setup(name='collective.contact.content',
           'plone.supermodel',
           'Products.CMFPlone',
           'vobject',
+          'zope.schema >= 4.2.1',
       ],
       extras_require={
           'test': ['plone.app.testing',

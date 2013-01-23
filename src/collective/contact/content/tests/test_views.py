@@ -1,6 +1,10 @@
 # -*- coding: utf8 -*-
 import unittest2 as unittest
 
+from plone.app.testing.interfaces import TEST_USER_NAME
+
+from ecreall.helpers.testing.base import BaseTest
+
 from collective.contact.content.testing import INTEGRATION
 
 
@@ -9,12 +13,13 @@ ADDRESS_FIELDS = ['country', 'region', 'zip_code',
                   'additional_address_details']
 
 
-class TestView(unittest.TestCase):
+class TestView(unittest.TestCase, BaseTest):
 
     layer = INTEGRATION
 
     def setUp(self):
         super(TestView, self).setUp()
+        self.login(TEST_USER_NAME)
         self.app = self.layer['app']
         self.portal = self.layer['portal']
         mydirectory = self.portal['mydirectory']

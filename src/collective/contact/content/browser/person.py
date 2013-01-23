@@ -1,13 +1,12 @@
 from Products.CMFCore.utils import getToolByName
 
-from plone.dexterity.browser.view import DefaultView
-
-from collective.contact.content.browser.contactable import Contactable
+from collective.contact.content.browser.contactable import BaseView
 from collective.contact.content.browser.utils import date_to_DateTime,\
-    get_ttw_fields
+                                                     get_ttw_fields
+from collective.contact.content.interfaces import IContactable
 
 
-class Person(Contactable, DefaultView):
+class Person(BaseView):
 
     name = ''
     birthday = ''
@@ -37,9 +36,13 @@ class Person(Contactable, DefaultView):
                                               'depth': 1})
         self.held_positions = results
 
-        self.contactables = self.get_contactables()
-        self.update_contact_details()
-        self.address = self.get_address()
+        contactable = IContactable(person)
+        contact_details = contactable.get_contact_details()
+        self.email = contact_details['email']
+        self.phone = contact_details['phone']
+        self.cell_phone = contact_details['cell_phone']
+        self.im_handle = contact_details['im_handle']
+        self.address = contact_details['address']
 
         # also show fields that were added TTW
         self.ttw_fields = get_ttw_fields(person)

@@ -44,6 +44,23 @@ class IHeldPosition(model.Schema, IContactContent):
         """
 
 
+class HeldPositionContactableAdapter(Contactable):
+    grok.context(IHeldPosition)
+
+    @property
+    def person(self):
+        return self.context.get_person()
+
+    @property
+    def position(self):
+        return self.context.get_position()
+
+    @property
+    def organizations(self):
+        organization = self.context.get_organization()
+        return organization.get_organizations_chain()
+
+
 class HeldPosition(Container):
     """Position held by a person in an organization"""
     implements(IHeldPosition)

@@ -13,6 +13,7 @@ from plone.dexterity.schema import DexteritySchemaPolicy
 from collective.contact.content import _
 from collective.contact.content.interfaces import IContactContent
 from collective.contact.content.browser.contactable import Contactable
+from collective.contact.content.behaviors import IContactDetails
 
 
 class IOrganization(model.Schema, IContactContent):
@@ -40,6 +41,14 @@ class IOrganization(model.Schema, IContactContent):
         e.g. for HR service in Division Bar in Organization Foo :
         "Organization Foo / Division Bar / HR service"
         """
+
+
+class OrganizationContactableAdapter(Contactable):
+    grok.context(IOrganization)
+
+    @property
+    def organizations(self):
+        return self.context.get_organizations_chain()
 
 
 class Organization(Container):

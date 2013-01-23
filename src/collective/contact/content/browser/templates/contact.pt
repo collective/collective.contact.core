@@ -76,7 +76,7 @@
     </div>
 
 	<div id="address"
-	     tal:replace="structure view/render_address" />
+         tal:replace="structure view/render_address" />
 
     <tal:block tal:repeat="field view/ttw_fields">
         <div class="field" tal:define="widget python: view.widgets[field]" tal:condition="widget/value">

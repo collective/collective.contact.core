@@ -24,6 +24,19 @@ class IPosition(model.Schema, IContactContent):
         """Returns organization"""
 
 
+class PositionContactableAdapter(Contactable):
+    grok.context(IPosition)
+
+    @property
+    def position(self):
+        return self.context
+
+    @property
+    def organizations(self):
+        organization = self.context.get_organization()
+        return organization.get_organizations_chain()
+
+
 class Position(Container):
     """ """
     implements(IPosition)
