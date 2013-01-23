@@ -47,6 +47,7 @@ $(document).ready(function() {
         data = objpath.val().split('|');
         var input_box = pbo.source.siblings('div').find('.querySelectSearch input');
         formwidget_autocomplete_new_value(input_box, data[0], data[1]);
+        input_box.flushCache();
         // trigger change event on newly added input element
         var input = input_box.parents('.querySelectSearch').parent('div').siblings('.autocompleteInputWidget').find('input').last();
         $.plonepopups.add_contact_preview(input);
