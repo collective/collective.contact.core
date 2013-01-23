@@ -3,12 +3,11 @@ from Products.CMFCore.utils import getToolByName
 from plone.dexterity.browser.view import DefaultView
 
 from collective.contact.content.browser.contactable import Contactable
-
 from collective.contact.content.browser.utils import date_to_DateTime,\
     get_ttw_fields
 
 
-class Person(DefaultView, Contactable):
+class Person(Contactable, DefaultView):
 
     name = ''
     birthday = ''

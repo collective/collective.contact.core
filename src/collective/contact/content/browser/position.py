@@ -7,7 +7,7 @@ from collective.contact.content.browser.contactable import Contactable
 from collective.contact.content.browser.utils import get_ttw_fields
 
 
-class Position(DefaultView, Contactable):
+class Position(Contactable, DefaultView):
 
     name = ''
     type = ''

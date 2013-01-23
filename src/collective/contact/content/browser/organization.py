@@ -9,7 +9,7 @@ from collective.contact.content.browser.contactable import Contactable
 from collective.contact.content.browser.utils import get_ttw_fields
 
 
-class Organization(DefaultView, Contactable):
+class Organization(Contactable, DefaultView):
 
     name = ''
     type = ''

@@ -4,8 +4,21 @@ from Acquisition import aq_base
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+from plone.dexterity.utils import getAdditionalSchemata
+
 from collective.contact.content.browser import TEMPLATES_DIR
 from collective.contact.content.browser.address import get_address
+from collective.contact.content.behaviors import IContactDetails
+
+#
+#class IContactable(grok.Adapter):
+#
+#    grok.implements(IHeldPosition)
+#    grok.context(HeldPosition)
+#    grok.provides(IVCard)
+#
+#    def __init__(self, context):
+#        self.context = context
 
 
 class Contactable(object):
@@ -56,3 +69,11 @@ class Contactable(object):
         template_path = os.path.join(TEMPLATES_DIR, 'address.pt')
         template = ViewPageTemplateFile(template_path)
         return template(self, self.address)
+
+    @property
+    def additionalSchemata(self):
+        # we don't want IContactDetails in behaviors
+        additional_schemata = list(getAdditionalSchemata(context=self.context))
+        if IContactDetails in additional_schemata:
+            additional_schemata.remove(IContactDetails)
+        return additional_schemata
