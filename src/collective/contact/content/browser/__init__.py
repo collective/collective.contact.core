@@ -1,0 +1,1 @@
+TEMPLATES_DIR = 'templates'
