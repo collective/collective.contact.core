@@ -15,8 +15,6 @@ def get_address(obj):
     address_fields = ['country', 'region', 'zip_code',
                       'city', 'street', 'number',
                       'additional_address_details']
-    if obj is None:
-        return dict([(x, '') for x in address_fields])
     obj = aq_base(obj)
     for field in address_fields:
         value = getattr(obj, field, '') or ''
