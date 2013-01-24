@@ -1,3 +1,4 @@
+from AccessControl import getSecurityManager
 from z3c.form.interfaces import IFieldWidget
 from z3c.form.widget import FieldWidget
 from zope.component import getUtility
@@ -159,6 +160,9 @@ function (event, data, formatted) {
         # During traversal, we are Anonymous User,
         # so we can't do catalog search in update method.
         directory = find_directory(self.context)
+        sm = getSecurityManager()
+        if not sm.checkPermission("Add portal content", directory):
+            self.addlink_enabled = False
         directory_url = directory.absolute_url()
         if len(portal_types) == 1:
             self.addnew_url = '%s/++add++%s' % (directory_url, portal_types[0])

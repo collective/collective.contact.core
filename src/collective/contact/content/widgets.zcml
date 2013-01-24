@@ -19,7 +19,7 @@
       name="add-contact"
       for="*"
       class=".addcontact.AddContact"
-      permission="cmf.ModifyPortalContent"
+      permission="cmf.AddPortalContent"
       />
 
   <adapter
