@@ -3,7 +3,7 @@ import vobject
 
 from Products.CMFPlone.utils import safe_unicode
 
-from collective.contact.content.interfaces import IVCard
+from collective.contact.content.interfaces import IVCard, IContactable
 from collective.contact.content.content.held_position import IHeldPosition,\
                                                              HeldPosition
 
@@ -18,7 +18,13 @@ class HeldPositionVCard(grok.Adapter):
 
     def get_vcard(self):
         vcard = vobject.vCard()
-        person = self.context.getParentNode()
+        held_position = self.context
+        contactable = IContactable(held_position)
+        person = contactable.person
+        position = contactable.position
+        organizations = contactable.organizations
+        contact_details = contactable.get_contact_details()
+
         vcard.add('n')
         firstname = safe_unicode(person.firstname or '', encoding='utf8')
         lastname = safe_unicode(person.lastname or '', encoding='utf8')
@@ -33,52 +39,63 @@ class HeldPositionVCard(grok.Adapter):
             vcard.add('bday')
             vcard.bday.value = person.birthday.isoformat()
 
-        position = self.context.get_position()
         if position is not None:
-            position_name = safe_unicode(position.Title())
+            position_name = safe_unicode(position.Title(), encoding='utf8')
             vcard.add('role')
             vcard.role.value = position_name
             vcard.add('title')
             vcard.title.value = position_name
 
-        organization = self.context.get_organization()
         vcard.add('org')
-        orgs = organization.get_organizations_titles()
-        vcard.org.value = [safe_unicode(org, encoding='utf8') for org in orgs]
+        vcard.org.value = [safe_unicode(org.Title(),
+                                        encoding='utf8') for org in organizations]
 
-        if person.email is not None:
+        email = contact_details['email']
+        if email:
             vcard.add('email')
             vcard.email.type_param = 'INTERNET'
-            vcard.email.value = person.email
+            vcard.email.value = email
+
+        phone = contact_details['phone']
+        if phone:
+            vcard.add('tel')
+            vcard.tel.type_param = 'WORK'
+            vcard.tel.value = phone
+
+        cell_phone = contact_details['cell_phone']
+        if cell_phone:
+            vcard.add('tel')
+            last_item = len(vcard.tel_list) - 1
+            vcard.tel_list[last_item].type_param = 'CELL'
+            vcard.tel_list[last_item].value = cell_phone
+
+        im_handle = contact_details['im_handle']
+        if im_handle:
+            vcard.add('impp')
+            vcard.impp.value = im_handle
+
+        address = contact_details['address']
 
         # if we don't have relevant address information, we don't need address
-        if person.city is not None or \
-           person.country is not None or \
-           person.region is not None:
+        if address:
             vcard.add('adr')
-            country = safe_unicode(person.country or '', encoding='utf8')
-            region = safe_unicode(person.region or '', encoding='utf8')
-            street = safe_unicode(person.street or '', encoding='utf8')
-            city = safe_unicode(person.city or '', encoding='utf8')
-            additional = safe_unicode(person.additional_address_details or '',
+            country = safe_unicode(address['country'], encoding='utf8')
+            region = safe_unicode(address['region'], encoding='utf8')
+            zip_code = safe_unicode(address['zip_code'], encoding='utf8')
+            city = safe_unicode(address['city'], encoding='utf8')
+            street = safe_unicode(address['street'], encoding='utf8')
+            number = safe_unicode(address['number'], encoding='utf8')
+            additional = safe_unicode(address['additional_address_details'],
                                       encoding='utf8')
             vcard.adr.value = vobject.vcard.Address(street=street,
                                                     city=city,
                                                     region=region,
-                                                    code=person.zip_code or '',
+                                                    code=zip_code,
                                                     country=country,
-                                                    box=person.number or '',
+                                                    box=number,
                                                     extended=additional)
-        if person.phone is not None:
-            vcard.add('tel')
-            vcard.tel.type_param = 'WORK'
-            vcard.tel.value = person.phone
-        if person.cell_phone is not None:
-            vcard.add('tel')
-            last_item = len(vcard.tel_list) - 1
-            vcard.tel_list[last_item].type_param = 'CELL'
-            vcard.tel_list[last_item].value = person.cell_phone
 
+        # TODO ?
         #vcard.add('photo')
         #vcard.photo.value = person.photo
 
