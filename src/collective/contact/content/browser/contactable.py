@@ -47,13 +47,12 @@ class Contactable(grok.Adapter):
             contactables.extend(reversed(self.organizations))
         return contactables
 
-    def _get_address(self):
-        # search the object that carries the address
-        for obj in self._get_contactables():
+    def _get_address(self, contactables):
+        for obj in contactables:
             obj = aq_base(obj)
-            city = getattr(obj, 'city', '') or ''
-            street = getattr(obj, 'street', '') or ''
-            if city and street:
+            if obj.use_parent_address is True:
+                continue
+            else:
                 return get_address(obj)
         return {}
 
@@ -70,11 +69,15 @@ class Contactable(grok.Adapter):
                     break
             else:
                 contact_details[field] = ''
-        contact_details['address'] = self._get_address()
+        contactables = self._get_contactables()
+        contact_details['address'] = self._get_address(contactables)
         return contact_details
 
     def get_parent_address(self):
-        address = self._get_address()
+        contactables = self._get_contactables()
+        # we don't want self.context address here
+        contactables.remove(self.context)
+        address = self._get_address(contactables)
         if not address:
             # Very important to return unicode here, RichTextWidget needs it.
             return u''

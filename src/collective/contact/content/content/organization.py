@@ -54,8 +54,8 @@ class OrganizationContactableAdapter(Contactable):
 class Organization(Container):
     """ """
     implements(IOrganization)
-    use_address_below = NO_VALUE
-    address_below = NO_VALUE
+    use_parent_address = NO_VALUE
+    parent_address = NO_VALUE
 
     def get_organizations_chain(self):
         organizations_chain = []

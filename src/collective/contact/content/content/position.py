@@ -41,8 +41,8 @@ class PositionContactableAdapter(Contactable):
 class Position(Container):
     """ """
     implements(IPosition)
-    use_address_below = NO_VALUE
-    address_below = NO_VALUE
+    use_parent_address = NO_VALUE
+    parent_address = NO_VALUE
 
     def get_organization(self):
         return self.getParentNode()

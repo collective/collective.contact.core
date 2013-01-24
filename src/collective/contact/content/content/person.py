@@ -58,6 +58,11 @@ class PersonContactableAdapter(Contactable):
 class Person(Container):
     """ """
     implements(IPerson)
+    # plone.dexterity.content.Content.__getattr__ retrieve the field.default
+    # so step 1.2.1 in z3c.form.widget.py returns something instead of NO_VALUE
+    # then IValue adapter is not looked up...
+    use_parent_address = NO_VALUE
+    parent_address = NO_VALUE
 
     def Title(self):
         # must return utf8 and not unicode (Title() from basic behavior return utf8)
@@ -66,12 +71,6 @@ class Person(Container):
         firstname = self.firstname or ''
         lastname = self.lastname or ''
         return ' '.join([e.encode('utf8') for e in (person_title, firstname, lastname) if e])
-
-    # plone.dexterity.content.Content.__getattr__ retrieve the field.default
-    # so step 1.2.1 in z3c.form.widget.py returns something instead of NO_VALUE
-    # then IValue adapter is not looked up...
-    use_address_below = NO_VALUE
-    address_below = NO_VALUE
 
 
 class PersonSchemaPolicy(grok.GlobalUtility,

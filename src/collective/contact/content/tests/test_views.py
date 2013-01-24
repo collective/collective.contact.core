@@ -68,9 +68,7 @@ class TestAddressView(TestView):
         # no address information
         address_view = self.rambo.restrictedTraverse("@@address")
         data = address_view.namespace()
-        for field in ADDRESS_FIELDS:
-            self.assertIn(field, data)
-            self.assertEqual(data[field], u'')
+        self.assertEqual(data, {})
 
     def test_regimenth_address_view(self):
         # an organization have an address view

@@ -70,11 +70,11 @@
     />
 
   <adapter
-      factory=".behaviors.DefaultUseAddressBelow"
+      factory=".behaviors.DefaultUseParentAddress"
       name="default" />
 
   <adapter
-      factory=".behaviors.DefaultAddressBelow"
+      factory=".behaviors.DefaultParentAddress"
       name="default" />
 
 </configure>

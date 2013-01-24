@@ -72,7 +72,8 @@ class IContactDetails(model.Schema):
                 'phone',
                 'cell_phone',
                 'im_handle',
-                'use_address_below',
+                'use_parent_address',
+                'parent_address',
                 'country',
                 'zip_code',
                 'city',
@@ -80,8 +81,6 @@ class IContactDetails(model.Schema):
                 'number',
                 'region',
                 'additional_address_details',
-                # not a real field !
-                'address_below',
                 )
         )
 
@@ -106,54 +105,54 @@ class IContactDetails(model.Schema):
         required=False,
         )
 
-    use_address_below = MasterSelectBoolField(
-        title=_("Use the address below"),
+    use_parent_address = MasterSelectBoolField(
+        title=_("Use the parent address"),
         slave_fields=(
-            {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
+            {'masterID': 'form-widgets-IContactDetails-use_parent_address-0',
              'name': 'country',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
             },
-            {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
+            {'masterID': 'form-widgets-IContactDetails-use_parent_address-0',
              'name': 'region',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
             },
-            {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
+            {'masterID': 'form-widgets-IContactDetails-use_parent_address-0',
              'name': 'zip_code',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
             },
-            {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
+            {'masterID': 'form-widgets-IContactDetails-use_parent_address-0',
              'name': 'city',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
             },
-            {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
+            {'masterID': 'form-widgets-IContactDetails-use_parent_address-0',
              'name': 'number',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
             },
-            {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
+            {'masterID': 'form-widgets-IContactDetails-use_parent_address-0',
              'name': 'street',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
             },
-            {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
+            {'masterID': 'form-widgets-IContactDetails-use_parent_address-0',
              'name': 'additional_address_details',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
             },
 
-            {'masterID': 'form-widgets-IContactDetails-use_address_below-0',
-             'name': 'address_below',
+            {'masterID': 'form-widgets-IContactDetails-use_parent_address-0',
+             'name': 'parent_address',
              'action': 'hide',
              'hide_values': 0,
              'siblings': True,
@@ -163,12 +162,12 @@ class IContactDetails(model.Schema):
         required=False,
     )
 
-    address_below = RichText(
+    parent_address = RichText(
         default_mime_type='text/html',
         output_mime_type='text/html',
         required=False,
         )
-    form.mode(address_below='display')
+    form.mode(parent_address='display')
 
     country = schema.TextLine(
         title=_('Country'),
@@ -208,11 +207,11 @@ class IContactDetails(model.Schema):
 alsoProvides(IContactDetails, IFormFieldProvider)
 
 
-DefaultUseAddressBelow = ComputedWidgetAttribute(
+DefaultUseParentAddress = ComputedWidgetAttribute(
     get_parent_address,
-    field=IContactDetails['use_address_below'], view=Interface)
+    field=IContactDetails['use_parent_address'], view=Interface)
 
 
-DefaultAddressBelow = ComputedWidgetAttribute(
+DefaultParentAddress = ComputedWidgetAttribute(
     get_parent_address,
-    field=IContactDetails['address_below'], view=Interface)
+    field=IContactDetails['parent_address'], view=Interface)

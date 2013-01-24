@@ -85,6 +85,7 @@ def createTestData(context):
               'street': u'rue Jean Moulin',
               'zip_code': u'52330',
               'additional_address_details': u'bâtiment D',
+              'use_parent_address': False,
               }
     mydirectory.invokeFactory('person', 'degaulle', **params)
     degaulle = mydirectory['degaulle']
@@ -97,6 +98,7 @@ def createTestData(context):
               'phone': u'0288552211',
               'city': u'Liverpool',
               'country': u'England',
+              'use_parent_address': False,
               }
     mydirectory.invokeFactory('person', 'pepper', **params)
     pepper = mydirectory['pepper']
@@ -104,18 +106,21 @@ def createTestData(context):
     params = {'lastname': u'Rambo',
               'firstname': u'John',
               'phone': u'0788556644',
+              'use_parent_address': True,
               }
     mydirectory.invokeFactory('person', 'rambo', **params)
 
     params = {'lastname': u'Draper',
               'firstname': u'John',
               'person_title': u'Mister',
+              'use_parent_address': True,
               }
     mydirectory.invokeFactory('person', 'draper', **params)
     draper = mydirectory['draper']
 
     params = {'title': u"Armée de terre",
               'organization_type': u'army',
+              'use_parent_address': True,
               }
     mydirectory.invokeFactory('organization', 'armeedeterre', **params)
     armeedeterre = mydirectory['armeedeterre']
@@ -125,22 +130,26 @@ def createTestData(context):
               'street': u"rue Philibert Lucot",
               'city': u'Orléans',
               'country': u'France',
+              'use_parent_address': False,
               }
     armeedeterre.invokeFactory('organization', 'corpsa', **params)
     corpsa = armeedeterre['corpsa']
 
     params = {'title': u"Corps B",
               'organization_type': u'corps',
+              'use_parent_address': True,
               }
     armeedeterre.invokeFactory('organization', 'corpsb', **params)
 
     params = {'title': u"Division Alpha",
               'organization_type': u'division',
+              'use_parent_address': True,
               }
     corpsa.invokeFactory('organization', 'divisionalpha', **params)
 
     params = {'title': u"Division Beta",
               'organization_type': u'division',
+              'use_parent_address': True,
               }
     corpsa.invokeFactory('organization', 'divisionbeta', **params)
 
@@ -153,23 +162,27 @@ def createTestData(context):
               'city': u"Villeneuve d'Ascq",
               'zip_code': u'59650',
               'country': u'France',
+              'use_parent_address': False,
               }
     divisionalpha.invokeFactory('organization', 'regimenth', **params)
 
     regimenth = divisionalpha['regimenth']
     params = {'title': u"Brigade LH",
               'organization_type': u'squad',
+              'use_parent_address': True,
               }
     regimenth.invokeFactory('organization', 'brigadelh', **params)
     brigadelh = regimenth['brigadelh']
 
     params = {'title': u"Général de l'armée de terre",
               'position_type': u'general',
+              'use_parent_address': True,
               }
     armeedeterre.invokeFactory('position', 'general_adt', **params)
 
     params = {'title': u"Capitaine de la division Alpha",
               'position_type': u'captain',
+              'use_parent_address': True,
               }
     divisionalpha.invokeFactory('position', 'capitaine_alpha', **params)
     capitaine_alpha = divisionalpha['capitaine_alpha']
@@ -179,6 +192,7 @@ def createTestData(context):
               'cell_phone': u'0654875233',
               'email': u'brigade_lh@armees.fr',
               'im_handle': u'brigade_lh@jabber.org',
+              'use_parent_address': True,
               }
     brigadelh.invokeFactory('position', 'sergent_lh', **params)
     sergent_lh = brigadelh['sergent_lh']
