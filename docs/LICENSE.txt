@@ -1,4 +1,4 @@
-collective.contact.content Copyright 2012, <YOUR NAME HERE>
+collective.contact.core Copyright 2012, <YOUR NAME HERE>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
