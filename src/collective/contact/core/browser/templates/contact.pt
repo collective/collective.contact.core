@@ -1,0 +1,106 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="collective.contact.core">
+<body>
+
+<div metal:fill-slot="main">
+	<h1 tal:content="view/fullname"></h1>
+
+    <!--
+	<div class="field" tal:condition="view/photo">
+	   <img tal:replace="structure python: view.widgets['photo'].render()" />
+	</div>
+	-->
+
+	<div class="field" tal:condition="view/position">
+		<label i18n:translate="">Position&nbsp;: </label>
+		<a tal:attributes="href view/position/absolute_url">
+		  <span tal:content="view/position/Title"
+		 	  i18n:translate="" />
+		</a>
+	</div>
+
+    <div id="organizations" class="field" tal:condition="view/organizations">
+        <label i18n:translate="">Organizations&nbsp;: </label>
+        <ul>
+        <tal:block tal:repeat="organization view/organizations">
+            <li><a tal:attributes="href organization/absolute_url">
+                <span tal:replace="organization/Title"
+                      i18n:translate="" />
+            </a></li>
+        </tal:block>
+        </ul>
+    </div>
+
+	<div class="field" tal:condition="view/start_date">
+		<label i18n:translate="">Start date&nbsp;: </label>
+		<span tal:content="view/start_date"
+		 	  i18n:translate="" />
+	</div>
+
+	<div class="field" tal:condition="view/end_date">
+		<label i18n:translate="">End date&nbsp;: </label>
+		<span tal:content="view/end_date"
+		 	  i18n:translate="" />
+	</div>
+
+    <div class="field" tal:condition="view/birthday">
+        <label i18n:translate="">Birthday&nbsp;: </label>
+        <span tal:content="view/birthday"
+              i18n:translate="" />
+    </div>
+
+    <div class="field" tal:condition="view/email">
+        <label i18n:translate="">Email&nbsp;: </label>
+        <span tal:content="view/email"
+              i18n:translate="" />
+    </div>
+
+    <div class="field" tal:condition="view/phone">
+        <label i18n:translate="">Phone number&nbsp;: </label>
+        <span tal:content="view/phone"
+              i18n:translate="" />
+    </div>
+
+    <div class="field" tal:condition="view/cell_phone">
+        <label i18n:translate="">Cell phone number&nbsp;: </label>
+        <span tal:content="view/cell_phone"
+              i18n:translate="" />
+    </div>
+
+    <div class="field" tal:condition="view/im_handle">
+        <label i18n:translate="">IM handle&nbsp;: </label>
+        <span tal:content="view/im_handle"
+              i18n:translate="" />
+    </div>
+
+	<div id="address"
+         tal:replace="structure view/render_address" />
+
+    <tal:block tal:repeat="field view/ttw_fields">
+        <div class="field" tal:define="widget python: view.widgets[field]" tal:condition="widget/value">
+            <label tal:content="python: widget.label" i18n:translate="" />
+            <span tal:content="structure widget/render" />
+        </div>
+    </tal:block>
+
+    <fieldset tal:repeat="group view/groups"
+              tal:attributes="id python:''.join((group.prefix, 'groups.', group.__name__)).replace('.', '-')">
+        <legend tal:content="group/label" />
+        <div class="field" tal:repeat="widget group/widgets/values">
+            <label tal:content="widget/label" />
+            <br />
+            <div tal:content="structure widget/render" />
+        </div>
+    </fieldset>
+
+	<div id="download_vcard">
+		<a i18n:translate="" href="@@contact.vcf"
+		   tal:attributes="href string: ${context/absolute_url}/@@contact.vcf">Download VCard</a>
+	</div>
+
+</div>
+
+</body>
+</html>

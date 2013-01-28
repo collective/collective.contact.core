@@ -15,9 +15,9 @@ long_description = (
     open('CHANGES.rst').read()
     + '\n')
 
-setup(name='collective.contact.content',
+setup(name='collective.contact.core',
       version=version,
-      description="Dexterity contact content type",
+      description="Core package for collective.contact add-ons",
       long_description=long_description,
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
