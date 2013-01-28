@@ -15,16 +15,16 @@ class ContactContentLayer(PloneWithPackageLayer):
         self.applyProfile(portal, 'collective.contact.core:test_data')
 
 
-COLLECTIVE_CONTACT_CONTENT = ContactContentLayer(
+COLLECTIVE_CONTACT_CORE = ContactContentLayer(
     zcml_package=collective.contact.core,
     zcml_filename='testing.zcml',
     gs_profile_id='collective.contact.core:testing',
-    name="COLLECTIVE_CONTACT_CONTENT")
+    name="COLLECTIVE_CONTACT_CORE")
 
 INTEGRATION = IntegrationTesting(
-    bases=(COLLECTIVE_CONTACT_CONTENT, ),
+    bases=(COLLECTIVE_CONTACT_CORE, ),
     name="INTEGRATION")
 
 FUNCTIONAL = FunctionalTesting(
-    bases=(COLLECTIVE_CONTACT_CONTENT, ),
+    bases=(COLLECTIVE_CONTACT_CORE, ),
     name="FUNCTIONAL")

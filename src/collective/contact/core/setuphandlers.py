@@ -20,11 +20,11 @@ logger = logging.getLogger('collective.contact.core: setuphandlers')
 
 
 def isNotCollectiveContactContentProfile(context):
-    return context.readDataFile("collective_contact_content_marker.txt") is None
+    return context.readDataFile("collective_contact_core_marker.txt") is None
 
 
 def isNotTestDataProfile(context):
-    return context.readDataFile("collective_contact_content_test_data_marker.txt") is None
+    return context.readDataFile("collective_contact_core_test_data_marker.txt") is None
 
 
 def postInstall(context):
