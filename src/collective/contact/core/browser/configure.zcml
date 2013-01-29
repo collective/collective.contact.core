@@ -60,4 +60,8 @@
       name="person"
       />
 
+  <browser:resourceDirectory
+      name="collective.contact.core"
+      directory="images"
+      />
 </configure>
