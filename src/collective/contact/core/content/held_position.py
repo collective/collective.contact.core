@@ -9,7 +9,7 @@ from plone.supermodel import model
 
 from collective.contact.core import _
 from collective.contact.core.schema import ContactChoice
-from collective.contact.core.source import ContactSourceBinder
+from collective.contact.widget.source import ContactSourceBinder
 from collective.contact.core.interfaces import IContactContent
 from collective.contact.core.browser.contactable import Contactable
 
@@ -26,8 +26,8 @@ class IHeldPosition(model.Schema, IContactContent):
     )
     position = ContactChoice(
         title=_("Position or organization"),
-        source=ContactSourceBinder(portal_type=("organization", "position"),
-            addlink=False)
+        addlink=False,
+        source=ContactSourceBinder(portal_type=("organization", "position"))
     )
 
     def get_person():

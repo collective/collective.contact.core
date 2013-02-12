@@ -10,53 +10,53 @@
 
   <browser:page
       name="contact"
-      for=".content.held_position.IHeldPosition"
-      class=".browser.contact.Contact"
+      for="..content.held_position.IHeldPosition"
+      class=".contact.Contact"
       template="templates/contact.pt"
       permission="zope2.View"
       />
 
   <browser:defaultView
-      for=".content.held_position.IHeldPosition"
+      for="..content.held_position.IHeldPosition"
       name="contact"
       />
 
   <browser:page
       name="organization"
-      for=".content.organization.IOrganization"
-      class=".browser.organization.Organization"
+      for="..content.organization.IOrganization"
+      class=".organization.Organization"
       template="templates/organization.pt"
       permission="zope2.View"
       />
 
   <browser:defaultView
-      for=".content.organization.IOrganization"
+      for="..content.organization.IOrganization"
       name="organization"
       />
 
   <browser:page
       name="position"
-      for=".content.position.IPosition"
-      class=".browser.position.Position"
+      for="..content.position.IPosition"
+      class=".position.Position"
       template="templates/position.pt"
       permission="zope2.View"
       />
 
   <browser:defaultView
-      for=".content.position.IPosition"
+      for="..content.position.IPosition"
       name="position"
       />
 
   <browser:page
       name="person"
-      for=".content.person.IPerson"
-      class=".browser.person.Person"
+      for="..content.person.IPerson"
+      class=".person.Person"
       template="templates/person.pt"
       permission="zope2.View"
       />
 
   <browser:defaultView
-      for=".content.person.IPerson"
+      for="..content.person.IPerson"
       name="person"
       />
 
@@ -64,4 +64,19 @@
       name="collective.contact.core"
       directory="images"
       />
+
+  <browser:page
+      name="add-contact"
+      for="*"
+      class=".addcontact.AddContact"
+      permission="cmf.AddPortalContent"
+      />
+
+  <adapter
+    name="organization-ms"
+    for="zope.interface.Interface z3c.form.interfaces.IFormLayer zope.interface.Interface"
+    provides="zope.contentprovider.interfaces.IContentProvider"
+    factory=".addcontact.MasterSelectAddContactProvider"
+    />
+
 </configure>

@@ -43,6 +43,7 @@ setup(name='collective.contact.core',
       zip_safe=False,
       install_requires=[
           'collective.z3cform.datagridfield',
+          'collective.contact.widget',
           'setuptools',
           'five.grok',
           'five.globalrequest',

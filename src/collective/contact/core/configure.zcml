@@ -15,14 +15,14 @@
   <include package="plone.app.relationfield" />
   <include package="plone.supermodel" />
   <include package="plone.formwidget.masterselect" />
+  <include package="collective.contact.widget" />
 
   <include package="collective.z3cform.datagridfield" />
 
   <include package="five.globalrequest" />
 
   <include file="behaviors.zcml" />
-  <include file="browser/configure.zcml" />
-  <include file="widgets.zcml" />
+  <include package=".browser" />
 
   <genericsetup:importStep
       name="collective.contact.core-postInstall"

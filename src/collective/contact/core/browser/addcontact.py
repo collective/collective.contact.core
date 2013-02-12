@@ -1,25 +1,64 @@
+from AccessControl import getSecurityManager
+from Products.CMFCore.utils import getToolByName
+from Products.statusmessages.interfaces import IStatusMessage
+from five import grok
+from plone.dexterity.browser.add import DefaultAddForm
+from plone.dexterity.events import AddCancelledEvent
+from plone.dexterity.i18n import MessageFactory as DMF
+from plone.dexterity.interfaces import IDexterityFTI
+from plone.dexterity.utils import addContentToContainer
+from plone.supermodel import model
+from z3c.form import form, button
+from z3c.form.contentprovider import ContentProviders
+from z3c.form.interfaces import IFieldsAndContentProvidersForm, HIDDEN_MODE
 from zope.component import getUtility
 from zope.contentprovider.interfaces import IContentProvider
 from zope.event import notify
 from zope.interface import implements
 from zope.publisher.browser import BrowserView
 
-from plone.dexterity.interfaces import IDexterityFTI
-from plone.dexterity.browser.add import DefaultAddForm
-from plone.dexterity.events import AddCancelledEvent
-from plone.dexterity.utils import addContentToContainer
-from z3c.form.interfaces import IFieldsAndContentProvidersForm, HIDDEN_MODE
-from z3c.form.contentprovider import ContentProviders
-from z3c.form import form, button
-from plone.supermodel import model
-from plone.dexterity.i18n import MessageFactory as DMF
-from Products.statusmessages.interfaces import IStatusMessage
+from collective.contact.widget.schema import ContactChoice
+from collective.contact.widget.source import ContactSourceBinder
+from collective.contact.widget.interfaces import IContactWidgetSettings
 
-from collective.contact.core.schema import ContactChoice
-from collective.contact.core.source import ContactSourceBinder
+from collective.contact.core import _
 
-from . import _
 
+class ContactWidgetSettings(grok.GlobalUtility):
+    grok.implements(IContactWidgetSettings)
+
+    def add_contact_infos(self, widget):
+        source = widget.bound_source
+        criteria = source.selectable_filter.criteria
+        addlink_enabled = widget.field.addlink
+        portal_types = criteria.get('portal_type', [])
+
+        catalog = getToolByName(widget.context, 'portal_catalog')
+        results = catalog.unrestrictedSearchResults(portal_type='directory')
+        directory = results[0].getObject()
+
+        sm = getSecurityManager()
+        if not sm.checkPermission("Add portal content", directory):
+            addlink_enabled = False
+        directory_url = directory.absolute_url()
+        if len(portal_types) == 1:
+            addnew_url = '%s/++add++%s' % (directory_url, portal_types[0])
+            close_on_click = True
+            fti = getUtility(IDexterityFTI, name=portal_types[0])
+            type_name = fti.Title()
+        else:
+            addnew_url = "%s/@@add-contact" % directory_url
+            close_on_click = False
+            type_name = _(u"Contact")
+
+        addlink_label = DMF(u"Add ${name}",
+                mapping={'name': type_name})
+
+        return {'addlink_enabled': addlink_enabled,
+                'addnew_url': addnew_url,
+                'addlink_label': addlink_label,
+                'close_on_click': close_on_click,
+                }
 
 class MasterSelectAddContactProvider(BrowserView):
     implements(IContentProvider)
@@ -116,11 +155,6 @@ $(document).ready(function() {
 });
 </script>
 """
-
-
-class RenderContentProvider(BrowserView):
-    def __call__(self):
-        return self.context.render()
 
 
 class IAddContact(model.Schema):
