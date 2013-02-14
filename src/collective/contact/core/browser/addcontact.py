@@ -38,25 +38,29 @@ class ContactWidgetSettings(grok.GlobalUtility):
         directory = results[0].getObject()
 
         sm = getSecurityManager()
+        actions = []
         if not sm.checkPermission("Add portal content", directory):
             addlink_enabled = False
-        directory_url = directory.absolute_url()
-        if len(portal_types) == 1:
-            addnew_url = '%s/++add++%s' % (directory_url, portal_types[0])
-            close_on_click = True
-            fti = getUtility(IDexterityFTI, name=portal_types[0])
-            type_name = fti.Title()
-        else:
-            addnew_url = "%s/@@add-contact" % directory_url
-            close_on_click = False
-            type_name = _(u"Contact")
 
-        addlink_label = DMF(u"Add ${name}",
-                mapping={'name': type_name})
+        close_on_click = True
+        if addlink_enabled:
+            directory_url = directory.absolute_url()
+            if len(portal_types) == 1:
+                addnew_url = '%s/++add++%s' % (directory_url, portal_types[0])
+                fti = getUtility(IDexterityFTI, name=portal_types[0])
+                type_name = fti.Title()
+            else:
+                addnew_url = "%s/@@add-contact" % directory_url
+                type_name = _(u"Contact")
+                close_on_click = False
 
-        return {'addlink_enabled': addlink_enabled,
-                'addnew_url': addnew_url,
-                'addlink_label': addlink_label,
+            addlink_label = DMF(u"Add ${name}",
+                    mapping={'name': type_name})
+
+            action = {'url': addnew_url,
+                      'label': addlink_label}
+            actions.append(action)
+        return {'actions': actions,
                 'close_on_click': close_on_click,
                 }
 
