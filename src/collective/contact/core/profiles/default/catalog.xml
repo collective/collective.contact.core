@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<object name="portal_catalog" meta_type="Plone Catalog Tool">
+
+        <!-- Add a new metadata column which will read from context.get_full_title() function -->
+        <column value="get_full_title" />
+
+</object>

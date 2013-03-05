@@ -8,6 +8,7 @@
   <i18n:registerTranslations directory="locales" />
 
   <include package="five.grok" />
+  <include package="plone.api" />
 
   <grok:grok package="." />
 
@@ -22,6 +23,7 @@
   <include package="five.globalrequest" />
 
   <include file="behaviors.zcml" />
+  <include package=".upgrades" />
   <include package=".browser" />
 
   <genericsetup:importStep
