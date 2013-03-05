@@ -8,6 +8,11 @@
 
   <include package="plone.formwidget.autocomplete" />
 
+  <browser:resourceDirectory
+      name="static"
+      directory="static"
+      />
+
   <browser:page
       name="contact"
       for="..content.held_position.IHeldPosition"
