@@ -1,10 +1,8 @@
 from zope.interface import Interface
 
-# bbb
-from collective.contact.widget.interfaces import IContactContent
-
 
 class IContactable(Interface):
+    """Interface for Contactable adapter"""
 
     def get_contact_details():
         """Returns a dict containing the contact details inherited from the hierarchy"""
@@ -14,6 +12,7 @@ class IContactable(Interface):
 
 
 class IVCard(Interface):
+    """Interface for VCard"""
 
     def get_vcard(self):
         """Get a vobject.VCard object containing vCard information

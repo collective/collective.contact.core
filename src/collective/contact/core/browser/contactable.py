@@ -12,7 +12,8 @@ from plone.dexterity.utils import getAdditionalSchemata
 from collective.contact.core.browser import TEMPLATES_DIR
 from collective.contact.core.browser.address import get_address
 from collective.contact.core.behaviors import IContactDetails
-from collective.contact.core.interfaces import IContactContent, IContactable
+from collective.contact.core.interfaces import IContactable
+from collective.contact.widget.interfaces import IContactContent
 
 
 class Contactable(grok.Adapter):
