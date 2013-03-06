@@ -6,3 +6,4 @@ Changelog
 
 - Initial release
   [cedricmessiant]
+
