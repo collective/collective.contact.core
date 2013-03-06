@@ -28,7 +28,6 @@ class Person(BaseView):
 
         self.person_title = person.person_title
         self.gender = person.gender or ''
-        self.photo = person.photo or ''
 
         catalog = getToolByName(self.context, 'portal_catalog')
         context_path = '/'.join(person.getPhysicalPath())
