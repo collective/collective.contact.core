@@ -156,10 +156,10 @@ class TestHeldPosition(TestContentTypes):
                          "Armée de terre")
         self.assertIn('gadt', degaulle)
         self.assertEqual(gadt.Title(),
-                         "Général de l'armée de terre")
+                         "Général de l'armée de terre (Armée de terre)")
         self.assertIn('sergent_pepper', pepper)
         self.assertEqual(sergent_pepper.Title(),
-                         "Sergent de la brigade LH")
+                         "Sergent de la brigade LH (Armée de terre)")
         self.assertIsNone(sergent_pepper.end_date)
 
     def test_get_full_title(self):

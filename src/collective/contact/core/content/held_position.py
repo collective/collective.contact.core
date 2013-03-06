@@ -110,8 +110,15 @@ class HeldPosition(Container):
             return pos_or_org
 
     def Title(self):
-        """The held position's title is the position's title"""
-        return self.position.to_object.Title()
+        """The held position's title is constituted by the position's
+        title and the root organization's title"""
+        position = self.position.to_object
+        organization = self.get_organization().get_root_organization()
+        if position == organization:
+            return position.Title()
+        else:
+            return "%s (%s)" % (position.Title(),
+                                organization.Title())
 
     def get_full_title(self):
         """Returns the 'full title' of the held position.
