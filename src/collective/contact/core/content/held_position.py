@@ -1,5 +1,6 @@
 from ComputedAttribute import ComputedAttribute
 
+from z3c.form.interfaces import NO_VALUE
 from zope.interface import implements
 from zope import schema
 
@@ -84,6 +85,8 @@ class HeldPosition(Container):
     """
 
     implements(IHeldPosition)
+    use_parent_address = NO_VALUE
+    parent_address = NO_VALUE
 
     def get_person(self):
         """Returns the person who holds the position
