@@ -9,12 +9,13 @@ from plone.supermodel import model
 
 from collective.contact.core import _
 from collective.contact.core.schema import ContactChoice
-from collective.contact.widget.source import ContactSourceBinder
-from collective.contact.core.interfaces import IContactContent
 from collective.contact.core.browser.contactable import Contactable
+from collective.contact.widget.source import ContactSourceBinder
+from collective.contact.widget.interfaces import IContactContent
 
 
 class IHeldPosition(model.Schema, IContactContent):
+    """Interface for HeldPosition content type"""
 
     start_date = schema.Date(
       title=_("Start date"),
@@ -31,20 +32,22 @@ class IHeldPosition(model.Schema, IContactContent):
     )
 
     def get_person():
-        """Get the person who helds the position
+        """Returns the person who helds the position
         """
 
     def get_position():
-        """Get the position (if position field is a position)
+        """Returns the position (if position field is a position)
         """
 
     def get_organization():
-        """Get the first organization related to HeldPosition
+        """Returns the first organization related to HeldPosition
         i.e. position field or parent of the position
         """
 
 
 class HeldPositionContactableAdapter(Contactable):
+    """Contactable adapter for HeldPosition content type"""
+
     grok.context(IHeldPosition)
 
     @property
@@ -61,14 +64,22 @@ class HeldPositionContactableAdapter(Contactable):
         return organization.get_organizations_chain()
 
 
+
 class HeldPosition(Container):
-    """Position held by a person in an organization"""
+    """HeldPosition content type
+    Links a Position or an Organization to a person in an organization
+    """
+
     implements(IHeldPosition)
 
     def get_person(self):
+        """Returns the person who helds the position
+        """
         return self.getParentNode()
 
     def get_position(self):
+        """Returns the position (if position field is a position)
+        """
         pos_or_org = self.position.to_object
         if pos_or_org.portal_type == 'position':
             return pos_or_org
@@ -76,6 +87,9 @@ class HeldPosition(Container):
             return None
 
     def get_organization(self):
+        """Returns the first organization related to HeldPosition
+        i.e. position field or parent of the position
+        """
         pos_or_org = self.position.to_object
         if pos_or_org.portal_type == 'position':
             return pos_or_org.get_organization()
@@ -83,9 +97,14 @@ class HeldPosition(Container):
             return pos_or_org
 
     def Title(self):
+        """The held position's title is the position's title"""
         return self.position.to_object.Title()
 
     def get_full_title(self):
+        """Returns the 'full title' of the held position.
+        It is constituted by the person's who held the position name,
+        the root organization and the position name (if any)
+        """
         person_name = self.get_person().Title()
         root_organization = self.get_organization().get_root_organization().Title()
         position = self.get_position()
@@ -101,7 +120,8 @@ class HeldPosition(Container):
 
 class HeldPositionSchemaPolicy(grok.GlobalUtility,
                                DexteritySchemaPolicy):
-    """ """
+    """Schema policy for HeldPosition content type"""
+
     grok.name("schema_policy_held_position")
 
     def bases(self, schemaName, tree):

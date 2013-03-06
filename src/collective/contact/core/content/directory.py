@@ -14,11 +14,16 @@ from collective.contact.core import _
 
 
 class INameTokenTableRowSchema(Interface):
+    """Schema for dict rows used in DataGridFields
+    name is the 'real' name
+    token is the token used in the vocabularies
+    """
     name = schema.TextLine(title=_(u"Name"))
     token = schema.TextLine(title=_(u"Token"))
 
 
 class IDirectory(model.Schema):
+    """Interface for Directory content type"""
 
     position_types = schema.List(
         title=_("Position types"),
@@ -43,13 +48,13 @@ class IDirectory(model.Schema):
 
 
 class Directory(Container):
-    """ """
+    """Directory content type"""
     implements(IDirectory)
 
 
 class DirectorySchemaPolicy(grok.GlobalUtility,
                             DexteritySchemaPolicy):
-    """ """
+    """Schema policy for Directory content type"""
     grok.name("schema_policy_directory")
 
     def bases(self, schemaName, tree):

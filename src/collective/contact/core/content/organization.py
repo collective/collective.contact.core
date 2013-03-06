@@ -12,12 +12,12 @@ from plone.supermodel import model
 from plone.dexterity.schema import DexteritySchemaPolicy
 
 from collective.contact.core import _
-from collective.contact.core.interfaces import IContactContent
 from collective.contact.core.browser.contactable import Contactable
+from collective.contact.widget.interfaces import IContactContent
 
 
 class IOrganization(model.Schema, IContactContent):
-    """ """
+    """Interface for Organization content type"""
 
     organization_type = schema.Choice(
         title=_("Type or level"),
@@ -25,25 +25,30 @@ class IOrganization(model.Schema, IContactContent):
         )
 
     def get_organizations_chain():
-        """Gets chain of organizations
+        """Returns the list of organizations and sub-organizations in this organization
         e.g. for HR service in Division Bar in Organization Foo :
         [OrganizationFoo, DivisionBar, HRService]
         """
 
     def get_organizations_titles():
-        """Gets list of titles of the chain of organizations
+        """Returns the list of titles of the organizations and
+        sub-organizations in this organization
         e.g. for HR service in Division Bar in Organization Foo :
         ["Organization Foo", "Division Bar", "HR service"]
         """
 
     def get_full_title():
-        """Gets formated title using list of titles of the organizations
+        """Returns the full title of the organization
+        It is constituted by the list of the names of the organizations and
+        sub-organizations in this organization separated by slashes
         e.g. for HR service in Division Bar in Organization Foo :
         "Organization Foo / Division Bar / HR service"
         """
 
 
 class OrganizationContactableAdapter(Contactable):
+    """Contactable adapter for Organization content type"""
+
     grok.context(IOrganization)
 
     @property
@@ -52,12 +57,16 @@ class OrganizationContactableAdapter(Contactable):
 
 
 class Organization(Container):
-    """ """
+    """Organization content type"""
     implements(IOrganization)
     use_parent_address = NO_VALUE
     parent_address = NO_VALUE
 
     def get_organizations_chain(self):
+        """Returns the list of organizations and sub-organizations in this organization
+        e.g. for HR service in Division Bar in Organization Foo :
+        [OrganizationFoo, DivisionBar, HRService]
+        """
         organizations_chain = []
         for item in aq_chain(aq_inner(self)):
             if base_hasattr(item, 'portal_type'):
@@ -69,18 +78,33 @@ class Organization(Container):
         return organizations_chain
 
     def get_root_organization(self):
+        """Returns the first organization in the chain
+        e.g. the company or the institution
+        """
         return self.get_organizations_chain()[0]
 
     def get_organizations_titles(self):
+        """Returns the list of titles of the organizations and
+        sub-organizations in this organization
+        e.g. for HR service in Division Bar in Organization Foo :
+        ["Organization Foo", "Division Bar", "HR service"]
+        """
         return [item.Title() for item in self.get_organizations_chain()]
 
     def get_full_title(self):
+        """Returns the full title of the organization
+        It is constituted by the list of the names of the organizations and
+        sub-organizations in this organization separated by slashes
+        e.g. for HR service in Division Bar in Organization Foo :
+        "Organization Foo / Division Bar / HR service"
+        """
         return ' / '.join(self.get_organizations_titles())
 
 
 class OrganizationSchemaPolicy(grok.GlobalUtility,
                                DexteritySchemaPolicy):
-    """ """
+    """Schema policy for Organization content type"""
+
     grok.name("schema_policy_organization")
 
     def bases(self, schemaName, tree):

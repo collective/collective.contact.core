@@ -12,12 +12,12 @@ from plone.namedfile.field import NamedImage
 from plone.supermodel import model
 
 from collective.contact.core import _
-from collective.contact.core.interfaces import IContactContent
 from collective.contact.core.browser.contactable import Contactable
+from collective.contact.widget.interfaces import IContactContent
 
 
 class IPerson(model.Schema, IContactContent):
-    """ """
+    """Interface for Person content type"""
 
     lastname = schema.TextLine(
         title=_("Lastname"),
@@ -48,6 +48,8 @@ class IPerson(model.Schema, IContactContent):
 
 
 class PersonContactableAdapter(Contactable):
+    """Contactable adapter for Person content type"""
+
     grok.context(IPerson)
 
     @property
@@ -56,7 +58,8 @@ class PersonContactableAdapter(Contactable):
 
 
 class Person(Container):
-    """ """
+    """Person content type"""
+
     implements(IPerson)
     # plone.dexterity.content.Content.__getattr__ retrieve the field.default
     # so step 1.2.1 in z3c.form.widget.py returns something instead of NO_VALUE
@@ -75,7 +78,8 @@ class Person(Container):
 
 class PersonSchemaPolicy(grok.GlobalUtility,
                          DexteritySchemaPolicy):
-    """ """
+    """Schema policy for Person content type"""
+
     grok.name("schema_policy_person")
 
     def bases(self, schemaName, tree):
