@@ -106,7 +106,7 @@ class IContactDetails(model.Schema):
         )
 
     use_parent_address = MasterSelectBoolField(
-        title=_("Use the parent address"),
+        title=_("Use the belonging entity address"),
         slave_fields=(
             {'masterID': 'form-widgets-IContactDetails-use_parent_address-0',
              'name': 'country',
