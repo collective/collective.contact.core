@@ -18,10 +18,12 @@ from collective.contact.core.interfaces import IContactable
 
 
 class InvalidEmailAddress(schema.ValidationError):
+    """Exception for invalid address"""
     __doc__ = _(u"Invalid email address")
 
 
 def validateEmail(value):
+    """Simple email validator"""
     try:
         checkEmailAddress(value)
     except EmailAddressInvalid:
@@ -37,6 +39,7 @@ def get_parent_address(adapter):
 
 
 class IGlobalPositioning(model.Schema):
+    """GlobalPositioning behavior"""
 
     fieldset(
         'global_positioning',
@@ -64,6 +67,7 @@ alsoProvides(IGlobalPositioning, IFormFieldProvider)
 
 
 class IContactDetails(model.Schema):
+    """Contact details behavior"""
 
     fieldset(
         'contact_details',

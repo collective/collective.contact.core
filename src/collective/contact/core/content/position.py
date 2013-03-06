@@ -48,6 +48,7 @@ class PositionContactableAdapter(Contactable):
 
 class Position(Container):
     """Position content type"""
+
     implements(IPosition)
     use_parent_address = NO_VALUE
     parent_address = NO_VALUE
