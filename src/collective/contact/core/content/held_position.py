@@ -1,3 +1,5 @@
+from ComputedAttribute import ComputedAttribute
+
 from zope.interface import implements
 from zope import schema
 
@@ -5,6 +7,7 @@ from five import grok
 
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.dexterity.content import Container
+from plone.namedfile.field import NamedImage
 from plone.supermodel import model
 
 from collective.contact.core import _
@@ -12,6 +15,11 @@ from collective.contact.core.schema import ContactChoice
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.widget.source import ContactSourceBinder
 from collective.contact.widget.interfaces import IContactContent
+
+
+def acqproperty(func):
+    """Property that manages acquisition"""
+    return ComputedAttribute(func, 1)
 
 
 class IHeldPosition(model.Schema, IContactContent):
@@ -30,6 +38,11 @@ class IHeldPosition(model.Schema, IContactContent):
         addlink=False,
         source=ContactSourceBinder(portal_type=("organization", "position"))
     )
+    photo = NamedImage(
+        title=_("Photo"),
+        required=False,
+        readonly=True,
+        )
 
     def get_person():
         """Returns the person who holds the position
@@ -116,6 +129,12 @@ class HeldPosition(Container):
             return "%s (%s - %s)" % (person_name,
                                      root_organization,
                                      position_name)
+
+    @acqproperty
+    def photo(self):
+        """Get photo from Person"""
+        person = self.get_person()
+        return person.photo
 
 
 class HeldPositionSchemaPolicy(grok.GlobalUtility,

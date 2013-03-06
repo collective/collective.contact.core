@@ -42,6 +42,7 @@ setup(name='collective.contact.core',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
+          'ExtensionClass',
           'collective.z3cform.datagridfield',
           'collective.contact.widget',
           'setuptools',

@@ -10,7 +10,6 @@ class Contact(BaseView):
     end_date = ''
     birthday = ''
     gender = ''
-    photo = ''
     position = None
     organizations = []
 
@@ -38,7 +37,6 @@ class Contact(BaseView):
             self.birthday = self.context.toLocalizedTime(birthday)
 
         self.gender = person.gender or ''
-        #self.photo = person.photo or ''  # FIXME
 
         self.position = held_position.get_position()
 
