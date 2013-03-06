@@ -32,7 +32,7 @@ class IHeldPosition(model.Schema, IContactContent):
     )
 
     def get_person():
-        """Returns the person who helds the position
+        """Returns the person who holds the position
         """
 
     def get_position():
@@ -73,7 +73,7 @@ class HeldPosition(Container):
     implements(IHeldPosition)
 
     def get_person(self):
-        """Returns the person who helds the position
+        """Returns the person who holds the position
         """
         return self.getParentNode()
 
