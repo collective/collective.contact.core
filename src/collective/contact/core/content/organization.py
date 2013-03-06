@@ -30,6 +30,11 @@ class IOrganization(model.Schema, IContactContent):
         [OrganizationFoo, DivisionBar, HRService]
         """
 
+    def get_root_organization(self):
+        """Returns the first organization in the chain
+        e.g. the company or the institution
+        """
+
     def get_organizations_titles():
         """Returns the list of titles of the organizations and
         sub-organizations in this organization
