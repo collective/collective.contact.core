@@ -94,8 +94,10 @@
     </fieldset>
 
 	<div id="download_vcard">
-		<a i18n:translate="" href="@@contact.vcf"
-		   tal:attributes="href string: ${context/absolute_url}/@@contact.vcf">Download VCard <img tal:attributes="src string:${portal_url}/vcard_icon.png" /></a>
+        <a href="@@contact.vcf" tal:attributes="href string: ${context/absolute_url}/@@contact.vcf">
+            <img tal:attributes="src string:${portal_url}/vcard_icon.png" />
+            <tal:vcard i18n:translate=""> Download VCard</tal:vcard>
+        </a>
 	</div>
 
 </div>
