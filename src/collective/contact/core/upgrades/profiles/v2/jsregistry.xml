@@ -3,7 +3,7 @@
 
  <javascript cacheable="True" compression="none" cookable="True"
     enabled="1" expression=""
-    id="++resource++static/js/forms.js"
+    id="++resource++collective.contact.core/forms.js"
     />
 
 </object>

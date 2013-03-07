@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<object name="portal_skins" meta_type="Plone Skins Tool" allow_any="False"
+   cookie_persistence="False"
+   request_varname="plone_skin"
+   based-on="Plone Default">
+
+  <object name="collective_contact_core"
+          meta_type="Filesystem Directory View"
+          directory="collective.contact.core:skins/collective_contact_core" />
+
+  <skin-path name="*">
+    <layer name="collective_contact_core" insert-after="custom" />
+  </skin-path>
+
+</object>
