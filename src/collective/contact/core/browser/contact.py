@@ -1,3 +1,5 @@
+from plone import api
+
 from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.browser.utils import get_ttw_fields,\
     date_to_DateTime
@@ -16,6 +18,8 @@ class Contact(BaseView):
     def update(self):
         super(Contact, self).update()
         held_position = self.context
+
+        self.portal_url = api.portal.get().absolute_url()
 
         start_date = held_position.start_date
         if start_date is not None:

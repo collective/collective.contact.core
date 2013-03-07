@@ -95,7 +95,7 @@
 
 	<div id="download_vcard">
 		<a i18n:translate="" href="@@contact.vcf"
-		   tal:attributes="href string: ${context/absolute_url}/@@contact.vcf">Download VCard</a>
+		   tal:attributes="href string: ${context/absolute_url}/@@contact.vcf">Download VCard <img tal:attributes="src string:${portal_url}/vcard_icon.png" /></a>
 	</div>
 
 </div>
