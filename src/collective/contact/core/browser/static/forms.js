@@ -55,6 +55,6 @@ manage_directory = function(){
 }
 
 $(document).ready(function(){
-    $('#formfield-form-widgets-gender input').change(update_person_title);
+    $(document).delegate('#formfield-form-widgets-gender input', 'change', update_person_title);
     manage_directory();
 });
