@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.contact.core\n"
-"POT-Creation-Date: 2013-03-06 14:24+0000\n"
-"PO-Revision-Date: 2013-03-06 15:25+0100\n"
+"POT-Creation-Date: 2013-03-11 15:26+0000\n"
+"PO-Revision-Date: 2013-03-11 16:24+0100\n"
 "Last-Translator: Cédric Messiant <cedricmessiant@ecreall.com>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -14,11 +14,19 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.contact.core\n"
 
+#: ../upgrades/profiles/v2/workflows/collective_contact_core_workflow/definition.xml
+msgid "Activate the object"
+msgstr "Activer l'objet"
+
+#: ../upgrades/profiles/v2/workflows/collective_contact_core_workflow/definition.xml
+msgid "Active"
+msgstr "Actif"
+
 #: ../browser/addcontact.py:224
 msgid "Add"
 msgstr "Ajouter"
 
-#: ../behaviors.py:203
+#: ../behaviors.py:207
 msgid "Additional address details"
 msgstr "Complément d'adresse"
 
@@ -35,7 +43,7 @@ msgstr "Date de naissance"
 msgid "Birthday&nbsp;:"
 msgstr "Date de naissance&nbsp;:"
 
-#: ../behaviors.py:99
+#: ../behaviors.py:103
 msgid "Cell phone"
 msgstr "Téléphone portable"
 
@@ -45,7 +53,7 @@ msgstr "Téléphone portable"
 msgid "Cell phone number&nbsp;:"
 msgstr "Numéro de téléphone portable&nbsp;:"
 
-#: ../behaviors.py:183
+#: ../behaviors.py:187
 msgid "City"
 msgstr "Ville"
 
@@ -53,23 +61,32 @@ msgstr "Ville"
 msgid "Contact"
 msgstr "Contact"
 
-#: ../behaviors.py:70
+#: ../behaviors.py:74
 msgid "Contact details"
 msgstr "Coordonnées"
 
-#: ../behaviors.py:173
+#: ../behaviors.py:177
 msgid "Country"
 msgstr "Pays"
 
+#: ../upgrades/profiles/v2/workflows/collective_contact_core_workflow/definition.xml
+msgid "Deactivate the object"
+msgstr "Désactiver l'objet"
+
+#: ../upgrades/profiles/v2/workflows/collective_contact_core_workflow/definition.xml
+msgid "Deactivated"
+msgstr "Désactivé"
+
 #: ../profiles/default/types/directory.xml
+#: ../upgrades/profiles/v2/types/directory.xml
 msgid "Directory"
 msgstr "Annuaire"
 
-#: ../browser/templates/contact.pt:97
+#: ../browser/templates/contact.pt:99
 msgid "Download VCard"
 msgstr "Télécharger la VCard"
 
-#: ../behaviors.py:88
+#: ../behaviors.py:92
 msgid "Email"
 msgstr "Mél"
 
@@ -79,7 +96,7 @@ msgstr "Mél"
 msgid "Email&nbsp;:"
 msgstr "Mél&nbsp;:"
 
-#: ../content/held_position.py:33
+#: ../content/held_position.py:34
 msgid "End date"
 msgstr "Date de fin"
 
@@ -99,11 +116,12 @@ msgstr "Prénom"
 msgid "Gender"
 msgstr "Genre"
 
-#: ../behaviors.py:43
+#: ../behaviors.py:46
 msgid "Global positioning"
 msgstr "Localisation"
 
 #: ../profiles/default/types/held_position.xml
+#: ../upgrades/profiles/v2/types/held_position.xml
 msgid "Held position"
 msgstr "Fonction occupée"
 
@@ -113,11 +131,11 @@ msgstr "Fonction occupée"
 msgid "IM handle&nbsp;:"
 msgstr "Identifiant de messagerie instantanée&nbsp;:"
 
-#: ../behaviors.py:104
+#: ../behaviors.py:108
 msgid "Instant messenger handle"
 msgstr "Identifiant de messagerie instantanée"
 
-#: ../behaviors.py:21
+#: ../behaviors.py:22
 msgid "Invalid email address"
 msgstr "Adresse électronique invalide"
 
@@ -125,11 +143,11 @@ msgstr "Adresse électronique invalide"
 msgid "Lastname"
 msgstr "Nom de famille"
 
-#: ../behaviors.py:48
+#: ../behaviors.py:51
 msgid "Latitude"
 msgstr "Latitude"
 
-#: ../behaviors.py:56
+#: ../behaviors.py:59
 msgid "Longitude"
 msgstr "Longitude"
 
@@ -141,7 +159,7 @@ msgstr "Masculin"
 msgid "Name"
 msgstr "Nom"
 
-#: ../behaviors.py:193
+#: ../behaviors.py:197
 msgid "Number"
 msgstr "Numéro"
 
@@ -182,6 +200,7 @@ msgstr "Organisations parentes&nbsp;:"
 
 #: ../browser/addcontact.py:171
 #: ../profiles/default/types/person.xml
+#: ../upgrades/profiles/v2/types/person.xml
 msgid "Person"
 msgstr "Personne"
 
@@ -189,7 +208,7 @@ msgstr "Personne"
 msgid "Person title"
 msgstr "Civilité"
 
-#: ../behaviors.py:94
+#: ../behaviors.py:98
 msgid "Phone"
 msgstr "Téléphone"
 
@@ -199,7 +218,7 @@ msgstr "Téléphone"
 msgid "Phone number&nbsp;:"
 msgstr "Numéro de téléphone&nbsp;:"
 
-#: ../content/held_position.py:42
+#: ../content/held_position.py:43
 #: ../content/person.py:45
 msgid "Photo"
 msgstr "Photo"
@@ -210,7 +229,7 @@ msgstr "Photo"
 msgid "Position"
 msgstr "Fonction"
 
-#: ../content/held_position.py:37
+#: ../content/held_position.py:38
 msgid "Position or organization"
 msgstr "Fonction ou organisation"
 
@@ -234,11 +253,11 @@ msgstr "Fonctions occupées par cette personne&nbsp;:"
 msgid "Positions in this organization&nbsp;:"
 msgstr "Fonctions dans cette organisation&nbsp;:"
 
-#: ../behaviors.py:198
+#: ../behaviors.py:202
 msgid "Region"
 msgstr "Région"
 
-#: ../content/held_position.py:29
+#: ../content/held_position.py:30
 msgid "Start date"
 msgstr "Date de début"
 
@@ -246,7 +265,7 @@ msgstr "Date de début"
 msgid "Start date&nbsp;:"
 msgstr "Date de début&nbsp;:"
 
-#: ../behaviors.py:188
+#: ../behaviors.py:192
 msgid "Street"
 msgstr "Rue"
 
@@ -262,11 +281,11 @@ msgstr "Type"
 msgid "Type or level"
 msgstr "Type ou niveau"
 
-#: ../behaviors.py:109
+#: ../behaviors.py:113
 msgid "Use the belonging entity address"
 msgstr "Utiliser l'adresse de l'entité d'appartenance"
 
-#: ../behaviors.py:178
+#: ../behaviors.py:182
 msgid "Zip Code"
 msgstr "Code postal"
 

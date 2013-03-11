@@ -6,7 +6,7 @@
              initial_state="active"
              manager_bypass="False"
              xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-             i18n:domain="collective.contact.core">
+             i18n:domain="plone">
  <permission>Access contents information</permission>
  <permission>Modify portal content</permission>
  <permission>View</permission>
