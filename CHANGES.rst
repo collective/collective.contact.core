@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.11 (unreleased)
+0.11 (2013-03-11)
 -----------------
 
 - Fixed bug with default views.
