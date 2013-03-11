@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.contact.core\n"
-"POT-Creation-Date: 2013-03-11 15:26+0000\n"
+"POT-Creation-Date: 2013-03-11 15:37+0000\n"
 "PO-Revision-Date: 2013-03-11 16:24+0100\n"
 "Last-Translator: Cédric Messiant <cedricmessiant@ecreall.com>\n"
 "Language-Team: French\n"

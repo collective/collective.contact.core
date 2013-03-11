@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.contact.core\n"
-"POT-Creation-Date: 2013-03-11 15:26+0000\n"
-"PO-Revision-Date: 2013-03-11 16:27+0100\n"
+"POT-Creation-Date: 2013-03-11 15:37+0000\n"
+"PO-Revision-Date: 2013-03-11 16:38+0100\n"
 "Last-Translator: Cédric Messiant <cedricmessiant@ecreall.com>\n"
 "Language-Team: Ecréall\n"
 "MIME-Version: 1.0\n"
@@ -26,38 +26,6 @@ msgstr "Activer l'objet"
 msgid "Active"
 msgstr "Actif"
 
-#: ../browser/addcontact.py:224
-msgid "Add"
-msgstr ""
-
-#: ../behaviors.py:207
-msgid "Additional address details"
-msgstr ""
-
-#: ../content/person.py:41
-msgid "Birthday"
-msgstr ""
-
-#: ../behaviors.py:103
-msgid "Cell phone"
-msgstr ""
-
-#: ../behaviors.py:187
-msgid "City"
-msgstr ""
-
-#: ../browser/addcontact.py:54
-msgid "Contact"
-msgstr ""
-
-#: ../behaviors.py:74
-msgid "Contact details"
-msgstr ""
-
-#: ../behaviors.py:177
-msgid "Country"
-msgstr ""
-
 #: ../profiles/default/workflows/collective_contact_core_workflow/definition.xml
 msgid "Deactivate"
 msgstr "Désactiver"
@@ -70,146 +38,11 @@ msgstr "Désactiver l'objet"
 msgid "Deactivated"
 msgstr "Désactivé"
 
-#: ../behaviors.py:92
-msgid "Email"
-msgstr ""
-
-#: ../content/held_position.py:34
-msgid "End date"
-msgstr ""
-
-#: ../vocabulary.py:78
-msgid "Feminine"
-msgstr ""
-
-#: ../content/person.py:27
-msgid "Firstname"
-msgstr ""
-
-#: ../content/person.py:31
-msgid "Gender"
-msgstr ""
-
-#: ../behaviors.py:46
-msgid "Global positioning"
-msgstr ""
-
-#: ../behaviors.py:108
-msgid "Instant messenger handle"
-msgstr ""
-
-#: ../behaviors.py:22
-msgid "Invalid email address"
-msgstr ""
-
-#: ../content/person.py:23
-msgid "Lastname"
-msgstr ""
-
-#: ../behaviors.py:51
-msgid "Latitude"
-msgstr ""
-
-#: ../behaviors.py:59
-msgid "Longitude"
-msgstr ""
-
-#: ../vocabulary.py:78
-msgid "Masculine"
-msgstr ""
-
-#: ../content/directory.py:21
-msgid "Name"
-msgstr ""
-
 #: ../profiles/testing/types/testtype.xml
 msgid "None"
 msgstr ""
 
-#: ../behaviors.py:197
-msgid "Number"
-msgstr ""
-
-#: ../browser/addcontact.py:166
-#: ../content/directory.py:37
-msgid "Organization"
-msgstr ""
-
-#: ../content/directory.py:44
-msgid "Organization level"
-msgstr ""
-
-#: ../content/directory.py:43
-msgid "Organization levels"
-msgstr ""
-
-#: ../content/directory.py:36
-msgid "Organization types"
-msgstr ""
-
-#: ../browser/addcontact.py:171
-msgid "Person"
-msgstr ""
-
-#: ../content/person.py:37
-msgid "Person title"
-msgstr ""
-
-#: ../behaviors.py:98
-msgid "Phone"
-msgstr ""
-
-#: ../content/held_position.py:43
-#: ../content/person.py:45
-msgid "Photo"
-msgstr ""
-
-#: ../browser/addcontact.py:176
-#: ../content/directory.py:30
-msgid "Position"
-msgstr ""
-
-#: ../content/held_position.py:38
-msgid "Position or organization"
-msgstr ""
-
-#: ../content/directory.py:29
-msgid "Position types"
-msgstr ""
-
-#: ../behaviors.py:202
-msgid "Region"
-msgstr ""
-
-#: ../content/held_position.py:30
-msgid "Start date"
-msgstr ""
-
-#: ../behaviors.py:192
-msgid "Street"
-msgstr ""
-
 #: ../profiles/testing/types/testtype.xml
 msgid "Test type"
-msgstr ""
-
-#: ../content/directory.py:22
-msgid "Token"
-msgstr ""
-
-#: ../content/position.py:20
-msgid "Type"
-msgstr ""
-
-#: ../content/organization.py:23
-msgid "Type or level"
-msgstr ""
-
-#: ../behaviors.py:113
-msgid "Use the belonging entity address"
-msgstr ""
-
-#: ../behaviors.py:182
-msgid "Zip Code"
-msgstr ""
+msgstr "Type de test"
 
