@@ -1,16 +1,18 @@
 Changelog
 =========
 
-1.0 (unreleased)
-----------------
+0.11 (unreleased)
+-----------------
 
-- Nothing changed yet.
+- Fixed bug with default views.
+  [cedricmessiant]
 
 
 0.10 (2013-03-07)
 -----------------
 
-- Nothing changed yet.
+- Fixed MANIFEST.in
+  [cedricmessiant]
 
 
 0.9 (2013-03-07)
