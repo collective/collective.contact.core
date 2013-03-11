@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<object name="portal_workflow" meta_type="Plone Workflow Tool">
+ <property
+    name="title">Contains workflow definitions for your portal</property>
+ <object name="collective_contact_core_workflow" meta_type="Workflow"/>
+ <bindings>
+  <type type_id="held_position">
+   <bound-workflow workflow_id="collective_contact_core_workflow"/>
+  </type>
+  <type type_id="organization">
+   <bound-workflow workflow_id="collective_contact_core_workflow"/>
+  </type>
+  <type type_id="person">
+   <bound-workflow workflow_id="collective_contact_core_workflow"/>
+  </type>
+  <type type_id="position">
+   <bound-workflow workflow_id="collective_contact_core_workflow"/>
+  </type>
+ </bindings>
+</object>

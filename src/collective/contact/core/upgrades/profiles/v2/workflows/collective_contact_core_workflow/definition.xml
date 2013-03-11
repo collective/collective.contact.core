@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="collective_contact_core_workflow"
+             title="collective.contact.core Workflow"
+             description=" - Simple workflow with active and deactivated state."
+             state_variable="review_state"
+             initial_state="active"
+             manager_bypass="False"
+             xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+             i18n:domain="collective.contact.core">
+ <permission>Access contents information</permission>
+ <permission>Modify portal content</permission>
+ <permission>View</permission>
+ <state state_id="active" title="Active" i18n:attributes="title">
+  <exit-transition transition_id="deactivate"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Contributor</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Contributor</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Member</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="deactivated" title="Deactivated" i18n:attributes="title">
+  <exit-transition transition_id="activate"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Contributor</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Contributor</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Contributor</permission-role>
+  </permission-map>
+ </state>
+ <transition transition_id="activate" title="Activate the object" new_state="active" trigger="USER" before_script="" after_script="" i18n:attributes="title">
+  <action url="" category="workflow" icon="">Activate</action>
+  <description>The object will be visible.</description>
+  <guard>
+   <guard-permission>Modify portal content</guard-permission>
+  </guard>
+ </transition>
+ <transition transition_id="deactivate" title="Deactivate the object" new_state="deactivated" trigger="USER" before_script="" after_script="" i18n:attributes="title">
+  <action url="" category="workflow" icon="">Deactivate</action>
+  <description>The object will no longer be visible in typeahead lists</description>
+  <guard>
+   <guard-permission>Modify portal content</guard-permission>
+  </guard>
+ </transition>
+ <worklist worklist_id="reviewer_queue" title="">
+  <description>Reviewer tasks</description>
+  <action url="%(portal_url)s/search?review_state=pending" category="global" icon="">Pending (%(count)d)</action>
+  <guard>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+  <match name="review_state" values="pending"/>
+ </worklist>
+ <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
+  <description>Previous transition</description>
+  <default>
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True">
+  <description>The ID of the user who performed the previous transition</description>
+  <default>
+   <expression>user/getId</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="comments" for_catalog="False" for_status="True" update_always="True">
+  <description>Comment about the last transition</description>
+  <default>
+   <expression>python:state_change.kwargs.get('comment', '')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False" for_status="False" update_always="False">
+  <description>Provides access to workflow history</description>
+  <default>
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="False" for_status="True" update_always="True">
+  <description>When the previous transition was performed</description>
+  <default>
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+</dc-workflow>
