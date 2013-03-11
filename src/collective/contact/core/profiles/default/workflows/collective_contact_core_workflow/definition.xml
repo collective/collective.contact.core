@@ -48,14 +48,14 @@
   </permission-map>
  </state>
  <transition transition_id="activate" title="Activate the object" new_state="active" trigger="USER" before_script="" after_script="" i18n:attributes="title">
-  <action url="" category="workflow" icon="">Activate</action>
+  <action url="" category="workflow" icon="" i18n:translate="">Activate</action>
   <description>The object will be visible.</description>
   <guard>
    <guard-permission>Modify portal content</guard-permission>
   </guard>
  </transition>
  <transition transition_id="deactivate" title="Deactivate the object" new_state="deactivated" trigger="USER" before_script="" after_script="" i18n:attributes="title">
-  <action url="" category="workflow" icon="">Deactivate</action>
+  <action url="" category="workflow" icon="" i18n:translate="">Deactivate</action>
   <description>The object will no longer be visible in typeahead lists</description>
   <guard>
    <guard-permission>Modify portal content</guard-permission>
