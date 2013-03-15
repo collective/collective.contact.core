@@ -4,7 +4,12 @@ Changelog
 1.0 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Fixed held_position field showing in Add contact overlay if Plone site id
+  is different of Plone.
+  [vincentfretin]
+
+- Added workflows for contact objects.
+  [cedricmessiant]
 
 
 0.11 (2013-03-11)

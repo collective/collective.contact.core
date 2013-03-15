@@ -79,7 +79,7 @@ class MasterSelectAddContactProvider(BrowserView):
         return """<script type="text/javascript">
 $(document).ready(function() {
 
-  $('#formfield-form-widgets-Plone_0_held_position-position').hide();
+  $('div[id$=held_position-position]').hide();
   var position_fields = '#formfield-form-widgets-position,div[id*=held_position]';
   if (!($('input[name="form.widgets.person:list"]').length > 1 &&
         $('input[name="form.widgets.organization:list"]').length > 1)) {
@@ -139,7 +139,7 @@ $(document).ready(function() {
         $('input[name="form.widgets.organization:list"]').length > 1 &&
         orga.token != '--NOVALUE--') {
       $(position_fields).show('slow');
-      $('#formfield-form-widgets-Plone_0_held_position-position').hide();
+      $('div[id$=held_position-position]').hide();
     }
   });
 
@@ -147,7 +147,7 @@ $(document).ready(function() {
     if ($('input[name="form.widgets.person:list"]').length > 1 &&
         $('input[name="form.widgets.organization:list"]').length > 1) {
       $(position_fields).show('slow');
-      $('#formfield-form-widgets-Plone_0_held_position-position').hide();
+      $('div[id$=held_position-position]').hide();
     }
   });
 
