@@ -17,7 +17,7 @@ USERDEFS = [
 
 PERSON_PERMISSIONS = {'active':
                         {'Access contents information':
-                         ('manager', 'contributor'),
+                         ('manager', 'contributor', 'member'),
                          'Modify portal content':
                          ('manager', 'contributor'),
                          'View':
@@ -29,14 +29,14 @@ PERSON_PERMISSIONS = {'active':
                          'Modify portal content':
                          ('manager', 'contributor'),
                          'View':
-                         ('manager', 'contributor', 'member'),
+                         ('manager', 'contributor'),
                         },
                      }
 
 
 WORKFLOW_TRACK = [('', 'active'),
-                  ('deactivated', 'deactivate'),
-                  ('active', 'activate'),
+                  ('deactivate', 'deactivated'),
+                  ('activate', 'active'),
                  ]
 
 
@@ -56,8 +56,7 @@ class TestSecurity(unittest.TestCase, BaseWorkflowTest):
         degaulle = self.degaulle
         workflow = self.portal.portal_workflow
         self.login('manager')
-
-        self.assertCheckPermissions(degaulle, PERSON_PERMISSIONS, USERDEFS)
+        self.assertCheckPermissions(degaulle, PERSON_PERMISSIONS['active'], USERDEFS)
 
         for (transition, state) in WORKFLOW_TRACK:
             if transition:
