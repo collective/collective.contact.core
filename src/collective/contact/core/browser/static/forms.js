@@ -50,6 +50,7 @@ manage_directory = function(){
 	$('#formfield-form-widgets-position_types thead').hide();
 	$('#formfield-form-widgets-organization_types thead').hide();
 	$('#formfield-form-widgets-organization_levels thead').hide();
+	$('.portaltype-directory .datagridwidget-table-view thead').hide();
 	// update tokens if necessary
 	$('input[id$="-widgets-name"]').blur(update_token);
 }
