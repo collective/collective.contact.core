@@ -4,6 +4,7 @@ from zope import schema
 from five import grok
 
 from plone.autoform.directives import widget
+from plone.autoform import directives as form
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.supermodel import model
@@ -31,6 +32,9 @@ class IDirectory(model.Schema):
                            schema=INameTokenTableRowSchema)
         )
     widget(position_types=DataGridFieldFactory)
+    form.read_permission(position_types='cmf.ManagePortal')
+    form.write_permission(position_types='cmf.ManagePortal')
+    form.mode(position_types='input')
 
     organization_types = schema.List(
         title=_("Organization types"),
@@ -38,6 +42,9 @@ class IDirectory(model.Schema):
                            schema=INameTokenTableRowSchema)
         )
     widget(organization_types=DataGridFieldFactory)
+    form.read_permission(organization_types='cmf.ManagePortal')
+    form.write_permission(organization_types='cmf.ManagePortal')
+    form.mode(organization_types='input')
 
     organization_levels = schema.List(
         title=_("Organization levels"),
@@ -45,6 +52,9 @@ class IDirectory(model.Schema):
                            schema=INameTokenTableRowSchema)
         )
     widget(organization_levels=DataGridFieldFactory)
+    form.read_permission(organization_levels='cmf.ManagePortal')
+    form.write_permission(organization_levels='cmf.ManagePortal')
+    form.mode(organization_levels='input')
 
 
 class Directory(Container):
