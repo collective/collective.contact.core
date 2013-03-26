@@ -79,4 +79,17 @@
     factory=".addcontact.MasterSelectAddContactProvider"
     />
 
+  <browser:defaultView
+      for="..content.directory.IDirectory"
+      name="directory"
+      />
+
+  <browser:page
+      name="directory"
+      for="..content.directory.IDirectory"
+      class=".directory.Directory"
+      template="templates/directory.pt"
+      permission="zope2.View"
+      />
+
 </configure>
