@@ -50,6 +50,8 @@ class Position(Container):
     """Position content type"""
 
     implements(IPosition)
+
+    meta_type = 'position'
     use_parent_address = NO_VALUE
     parent_address = NO_VALUE
 

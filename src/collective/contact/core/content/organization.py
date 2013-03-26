@@ -64,6 +64,8 @@ class OrganizationContactableAdapter(Contactable):
 class Organization(Container):
     """Organization content type"""
     implements(IOrganization)
+
+    meta_type = 'organization'
     use_parent_address = NO_VALUE
     parent_address = NO_VALUE
 

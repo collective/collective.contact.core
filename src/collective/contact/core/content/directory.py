@@ -32,9 +32,6 @@ class IDirectory(model.Schema):
                            schema=INameTokenTableRowSchema)
         )
     widget(position_types=DataGridFieldFactory)
-    form.read_permission(position_types='cmf.ManagePortal')
-    form.write_permission(position_types='cmf.ManagePortal')
-    form.mode(position_types='input')
 
     organization_types = schema.List(
         title=_("Organization types"),
@@ -42,9 +39,6 @@ class IDirectory(model.Schema):
                            schema=INameTokenTableRowSchema)
         )
     widget(organization_types=DataGridFieldFactory)
-    form.read_permission(organization_types='cmf.ManagePortal')
-    form.write_permission(organization_types='cmf.ManagePortal')
-    form.mode(organization_types='input')
 
     organization_levels = schema.List(
         title=_("Organization levels"),
@@ -52,14 +46,13 @@ class IDirectory(model.Schema):
                            schema=INameTokenTableRowSchema)
         )
     widget(organization_levels=DataGridFieldFactory)
-    form.read_permission(organization_levels='cmf.ManagePortal')
-    form.write_permission(organization_levels='cmf.ManagePortal')
-    form.mode(organization_levels='input')
 
 
 class Directory(Container):
     """Directory content type"""
     implements(IDirectory)
+
+    meta_type = 'directory'
 
 
 class DirectorySchemaPolicy(grok.GlobalUtility,

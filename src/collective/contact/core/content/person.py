@@ -61,6 +61,8 @@ class Person(Container):
     """Person content type"""
 
     implements(IPerson)
+
+    meta_type = 'person'
     # plone.dexterity.content.Content.__getattr__ retrieve the field.default
     # so step 1.2.1 in z3c.form.widget.py returns something instead of NO_VALUE
     # then IValue adapter is not looked up...
