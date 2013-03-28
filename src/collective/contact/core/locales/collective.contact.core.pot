@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-03-11 15:37+0000\n"
+"POT-Creation-Date: 2013-03-27 08:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -158,7 +158,7 @@ msgstr ""
 msgid "Masculine"
 msgstr ""
 
-#: ../content/directory.py:21
+#: ../content/directory.py:22
 msgid "Name"
 msgstr ""
 
@@ -167,16 +167,16 @@ msgid "Number"
 msgstr ""
 
 #: ../browser/addcontact.py:166
-#: ../content/directory.py:37
+#: ../content/directory.py:38
 #: ../profiles/default/types/organization.xml
 msgid "Organization"
 msgstr ""
 
-#: ../content/directory.py:44
+#: ../content/directory.py:45
 msgid "Organization level"
 msgstr ""
 
-#: ../content/directory.py:43
+#: ../content/directory.py:44
 msgid "Organization levels"
 msgstr ""
 
@@ -184,7 +184,7 @@ msgstr ""
 msgid "Organization type&nbsp;:"
 msgstr ""
 
-#: ../content/directory.py:36
+#: ../content/directory.py:37
 msgid "Organization types"
 msgstr ""
 
@@ -193,6 +193,7 @@ msgid "Organizations in this organization&nbsp;:"
 msgstr ""
 
 #: ../browser/templates/contact.pt:23
+#: ../browser/templates/directory.pt:17
 msgid "Organizations&nbsp;:"
 msgstr ""
 
@@ -211,6 +212,10 @@ msgstr ""
 msgid "Person title"
 msgstr ""
 
+#: ../browser/templates/directory.pt:30
+msgid "Persons&nbsp;:"
+msgstr ""
+
 #: ../behaviors.py:98
 msgid "Phone"
 msgstr ""
@@ -227,7 +232,7 @@ msgid "Photo"
 msgstr ""
 
 #: ../browser/addcontact.py:176
-#: ../content/directory.py:30
+#: ../content/directory.py:31
 #: ../profiles/default/types/position.xml
 msgid "Position"
 msgstr ""
@@ -240,7 +245,7 @@ msgstr ""
 msgid "Position type&nbsp;:"
 msgstr ""
 
-#: ../content/directory.py:29
+#: ../content/directory.py:30
 msgid "Position types"
 msgstr ""
 
@@ -272,7 +277,7 @@ msgstr ""
 msgid "Street"
 msgstr ""
 
-#: ../content/directory.py:22
+#: ../content/directory.py:23
 msgid "Token"
 msgstr ""
 

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.contact.core\n"
-"POT-Creation-Date: 2013-03-11 15:37+0000\n"
-"PO-Revision-Date: 2013-03-11 16:24+0100\n"
+"POT-Creation-Date: 2013-03-27 08:47+0000\n"
+"PO-Revision-Date: 2013-03-27 09:47+0100\n"
 "Last-Translator: Cédric Messiant <cedricmessiant@ecreall.com>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -155,7 +155,7 @@ msgstr "Longitude"
 msgid "Masculine"
 msgstr "Masculin"
 
-#: ../content/directory.py:21
+#: ../content/directory.py:22
 msgid "Name"
 msgstr "Nom"
 
@@ -164,16 +164,16 @@ msgid "Number"
 msgstr "Numéro"
 
 #: ../browser/addcontact.py:166
-#: ../content/directory.py:37
+#: ../content/directory.py:38
 #: ../profiles/default/types/organization.xml
 msgid "Organization"
 msgstr "Organisation"
 
-#: ../content/directory.py:44
+#: ../content/directory.py:45
 msgid "Organization level"
 msgstr "Niveau d'organisation"
 
-#: ../content/directory.py:43
+#: ../content/directory.py:44
 msgid "Organization levels"
 msgstr "Niveaux d'organisation"
 
@@ -181,7 +181,7 @@ msgstr "Niveaux d'organisation"
 msgid "Organization type&nbsp;:"
 msgstr "Type d'organisation&nbsp;:"
 
-#: ../content/directory.py:36
+#: ../content/directory.py:37
 msgid "Organization types"
 msgstr "Types d'organisations"
 
@@ -190,6 +190,7 @@ msgid "Organizations in this organization&nbsp;:"
 msgstr "Organisations dans cette organisation&nbsp;:"
 
 #: ../browser/templates/contact.pt:23
+#: ../browser/templates/directory.pt:17
 msgid "Organizations&nbsp;:"
 msgstr "Organisations&nbsp;:"
 
@@ -208,6 +209,10 @@ msgstr "Personne"
 msgid "Person title"
 msgstr "Civilité"
 
+#: ../browser/templates/directory.pt:30
+msgid "Persons&nbsp;:"
+msgstr "Personnes&nbsp;:"
+
 #: ../behaviors.py:98
 msgid "Phone"
 msgstr "Téléphone"
@@ -224,7 +229,7 @@ msgid "Photo"
 msgstr "Photo"
 
 #: ../browser/addcontact.py:176
-#: ../content/directory.py:30
+#: ../content/directory.py:31
 #: ../profiles/default/types/position.xml
 msgid "Position"
 msgstr "Fonction"
@@ -237,7 +242,7 @@ msgstr "Fonction ou organisation"
 msgid "Position type&nbsp;:"
 msgstr "Type de fonction&nbsp;:"
 
-#: ../content/directory.py:29
+#: ../content/directory.py:30
 msgid "Position types"
 msgstr "Types de fonctions"
 
@@ -269,7 +274,7 @@ msgstr "Date de début&nbsp;:"
 msgid "Street"
 msgstr "Rue"
 
-#: ../content/directory.py:22
+#: ../content/directory.py:23
 msgid "Token"
 msgstr "Identifiant"
 
