@@ -41,11 +41,8 @@ def postInstall(context):
     # XXX to be done
 
 
-def createTestData(context):
-    """Create test data for collective.contact.core"""
-    if isNotTestDataProfile(context): return
-    portal = context.getSite()
-
+def create_test_contact_data(portal):
+    """Create test contact data in portal"""
     position_types = [{'name': u'General', 'token': u'general'},
                       {'name': u'Sergeant', 'token': u'sergeant'},
                       {'name': u'Colonel', 'token': u'colonel'},
@@ -220,3 +217,10 @@ def createTestData(context):
     params = {'position': RelationValue(intids.getId(capitaine_alpha)),
               }
     draper.invokeFactory('held_position', 'captain_crunch', **params)
+
+
+def createTestData(context):
+    """Create test data for collective.contact.core"""
+    if isNotTestDataProfile(context): return
+    portal = context.getSite()
+    create_test_contact_data(portal)
