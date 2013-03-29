@@ -23,7 +23,6 @@ class TestBehaviors(unittest.TestCase, BaseTest):
     def setUp(self):
         super(TestBehaviors, self).setUp()
         self.portal = self.layer['portal']
-
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.login(TEST_USER_NAME)
         self.portal.invokeFactory('testtype', 'testitem')
