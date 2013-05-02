@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+ -*- coding: utf8 -*-
 
 import unittest2 as unittest
 
@@ -107,7 +107,6 @@ class TestOrganization(TestContentTypes):
                              org.get_root_organization())
 
     def test_get_organizations_titles(self):
-
         corpsa_titles = self.corpsa.get_organizations_titles()
         self.assertIn('Armée de terre', corpsa_titles)
         self.assertIn('Corps A', corpsa_titles)
@@ -156,7 +155,7 @@ class TestPosition(TestContentTypes):
 
     def test_get_full_title(self):
         self.assertEqual(self.general_adt.get_full_title(),
-                         "Général de l'armée de terre (Armée de terre)")
+                         u"Général de l'armée de terre (Armée de terre)")
 
 
 class TestHeldPosition(TestContentTypes):
@@ -180,11 +179,11 @@ class TestHeldPosition(TestContentTypes):
 
     def test_get_full_title(self):
         self.assertEqual(self.adt.get_full_title(),
-                         "Général Charles De Gaulle (Armée de terre)")
+                         u"Général Charles De Gaulle (Armée de terre)")
         self.assertEqual(self.gadt.get_full_title(),
-                         "Général Charles De Gaulle (Armée de terre - Général de l'armée de terre)")
+                         u"Général Charles De Gaulle (Armée de terre - Général de l'armée de terre)")
         self.assertEqual(self.sergent_pepper.get_full_title(),
-                         "Sergent Pepper (Armée de terre - Sergent de la brigade LH)")
+                         u"Sergent Pepper (Armée de terre - Sergent de la brigade LH)")
 
     def test_get_person(self):
         pass

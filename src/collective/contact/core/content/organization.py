@@ -47,7 +47,7 @@ class IOrganization(model.Schema, IContactContent):
         It is constituted by the list of the names of the organizations and
         sub-organizations in this organization separated by slashes
         e.g. for HR service in Division Bar in Organization Foo :
-        "Organization Foo / Division Bar / HR service"
+        u"Organization Foo / Division Bar / HR service"
         """
 
 
@@ -94,7 +94,7 @@ class Organization(Container):
         """Returns the list of titles of the organizations and
         sub-organizations in this organization
         e.g. for HR service in Division Bar in Organization Foo :
-        ["Organization Foo", "Division Bar", "HR service"]
+        [u"Organization Foo", u"Division Bar", u"HR service"]
         """
         return [item.Title() for item in self.get_organizations_chain(first_index=first_index)]
 
@@ -103,7 +103,7 @@ class Organization(Container):
         It is constituted by the list of the names of the organizations and
         sub-organizations in this organization separated by slashes
         e.g. for HR service in Division Bar in Organization Foo :
-        "Organization Foo / Division Bar / HR service"
+        u"Organization Foo / Division Bar / HR service"
         """
         return separator.join(self.get_organizations_titles(first_index=first_index))
 
