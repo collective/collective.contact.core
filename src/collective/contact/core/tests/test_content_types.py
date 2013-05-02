@@ -134,7 +134,7 @@ class TestOrganization(TestContentTypes):
 
     def test_get_full_title(self):
         self.assertEqual(self.armeedeterre.get_full_title(),
-                         "Armée de terre")
+                         u"Armée de terre")
         self.assertEqual(self.brigadelh.get_full_title(),
                          "Armée de terre / Corps A / Division Alpha / Régiment H / Brigade LH")
         self.assertEqual(self.brigadelh.get_full_title(separator=' - '),
