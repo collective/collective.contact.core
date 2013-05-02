@@ -35,14 +35,14 @@ class IOrganization(model.Schema, IContactContent):
         e.g. the company or the institution
         """
 
-    def get_organizations_titles():
+    def get_organizations_titles(self):
         """Returns the list of titles of the organizations and
         sub-organizations in this organization
         e.g. for HR service in Division Bar in Organization Foo :
         ["Organization Foo", "Division Bar", "HR service"]
         """
 
-    def get_full_title():
+    def get_full_title(self):
         """Returns the full title of the organization
         It is constituted by the list of the names of the organizations and
         sub-organizations in this organization separated by slashes
