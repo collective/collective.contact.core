@@ -64,8 +64,7 @@ class Position(Container):
         It is constituted by the name of the position and
         the name of its organization in brackets
         """
-        organization = self.get_organization().Title()
-        return "%s (%s)" % (self.Title(), organization)
+        return u"%s (%s)" % (self.title, self.get_organization().title)
 
 
 class PositionSchemaPolicy(grok.GlobalUtility,

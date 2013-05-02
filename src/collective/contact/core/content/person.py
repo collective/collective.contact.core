@@ -69,13 +69,16 @@ class Person(Container):
     use_parent_address = NO_VALUE
     parent_address = NO_VALUE
 
-    def Title(self):
-        # must return utf8 and not unicode (Title() from basic behavior return utf8)
-        # attributes are stored as unicode
+    def get_title(self):
         person_title = self.person_title or ''
         firstname = self.firstname or ''
         lastname = self.lastname or ''
-        return ' '.join([e.encode('utf8') for e in (person_title, firstname, lastname) if e])
+        return u' '.join((person_title, firstname, lastname))
+
+    def Title(self):
+        # must return utf8 and not unicode (Title() from basic behavior return utf8)
+        # attributes are stored as unicode
+        return self.get_title().encode('utf-8')
 
 
 class PersonSchemaPolicy(grok.GlobalUtility,

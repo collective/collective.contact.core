@@ -47,7 +47,7 @@ class IOrganization(model.Schema, IContactContent):
         It is constituted by the list of the names of the organizations and
         sub-organizations in this organization separated by slashes
         e.g. for HR service in Division Bar in Organization Foo :
-        "Organization Foo / Division Bar / HR service"
+        u"Organization Foo / Division Bar / HR service"
         """
 
 
@@ -94,18 +94,18 @@ class Organization(Container):
         """Returns the list of titles of the organizations and
         sub-organizations in this organization
         e.g. for HR service in Division Bar in Organization Foo :
-        ["Organization Foo", "Division Bar", "HR service"]
+        [u"Organization Foo", u"Division Bar", u"HR service"]
         """
-        return [item.Title() for item in self.get_organizations_chain()]
+        return [item.title for item in self.get_organizations_chain()]
 
     def get_full_title(self):
         """Returns the full title of the organization
         It is constituted by the list of the names of the organizations and
         sub-organizations in this organization separated by slashes
         e.g. for HR service in Division Bar in Organization Foo :
-        "Organization Foo / Division Bar / HR service"
+        u"Organization Foo / Division Bar / HR service"
         """
-        return ' / '.join(self.get_organizations_titles())
+        return u' / '.join(self.get_organizations_titles())
 
 
 class OrganizationSchemaPolicy(grok.GlobalUtility,
