@@ -12,10 +12,10 @@ def organization_searchable_text(obj):
 @indexer(IHeldPosition)
 def held_position_searchable_text(obj):
     indexed_fields = []
-    indexed_fields.append(obj.get_person().Title())
+    indexed_fields.append(obj.get_person().get_title())
     position = obj.get_position()
     if position is not None:
-        indexed_fields.append(position.Title())
+        indexed_fields.append(position.title)
     organization = obj.get_organization()
     indexed_fields.extend(organization.get_organizations_titles())
     return ' '.join(indexed_fields)
