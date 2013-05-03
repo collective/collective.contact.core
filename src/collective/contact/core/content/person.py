@@ -70,10 +70,7 @@ class Person(Container):
     parent_address = NO_VALUE
 
     def get_title(self):
-        person_title = self.person_title or ''
-        firstname = self.firstname or ''
-        lastname = self.lastname or ''
-        return u' '.join((person_title, firstname, lastname))
+        return u' '.join([x for x in (self.person_title, self.firstname, self.lastname) if x])
 
     def Title(self):
         # must return utf8 and not unicode (Title() from basic behavior return utf8)
