@@ -69,7 +69,7 @@ class Organization(Container):
     use_parent_address = NO_VALUE
     parent_address = NO_VALUE
 
-    def get_organizations_chain(self):
+    def get_organizations_chain(self, first_index=0):
         """Returns the list of organizations and sub-organizations in this organization
         e.g. for HR service in Division Bar in Organization Foo :
         [OrganizationFoo, DivisionBar, HRService]
@@ -82,7 +82,7 @@ class Organization(Container):
                 elif item.portal_type == 'organization':
                     organizations_chain.append(item)
         organizations_chain.reverse()
-        return organizations_chain
+        return organizations_chain[first_index:]
 
     def get_root_organization(self):
         """Returns the first organization in the chain
@@ -90,22 +90,22 @@ class Organization(Container):
         """
         return self.get_organizations_chain()[0]
 
-    def get_organizations_titles(self):
+    def get_organizations_titles(self, first_index=0):
         """Returns the list of titles of the organizations and
         sub-organizations in this organization
         e.g. for HR service in Division Bar in Organization Foo :
         ["Organization Foo", "Division Bar", "HR service"]
         """
-        return [item.Title() for item in self.get_organizations_chain()]
+        return [item.Title() for item in self.get_organizations_chain(first_index=first_index)]
 
-    def get_full_title(self):
+    def get_full_title(self, separator=' / ', first_index=0):
         """Returns the full title of the organization
         It is constituted by the list of the names of the organizations and
         sub-organizations in this organization separated by slashes
         e.g. for HR service in Division Bar in Organization Foo :
         "Organization Foo / Division Bar / HR service"
         """
-        return ' / '.join(self.get_organizations_titles())
+        return separator.join(self.get_organizations_titles(first_index=first_index))
 
 
 class OrganizationSchemaPolicy(grok.GlobalUtility,
