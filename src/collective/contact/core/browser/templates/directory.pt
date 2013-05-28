@@ -16,7 +16,7 @@
         <h2 i18n:translate="">Organizations&nbsp;: </h2>
         <ul>
         <tal:block tal:repeat="organization view/organizations">
-            <li><a tal:attributes="href organization/absolute_url">
+            <li><a tal:attributes="href organization/getURL">
                 <img tal:attributes="src organization/getIcon" />
                 <span tal:replace="organization/Title"
                       i18n:translate="" />
@@ -29,7 +29,7 @@
         <h2 i18n:translate="">Persons&nbsp;: </h2>
         <ul>
         <tal:block tal:repeat="person view/persons">
-            <li><a tal:attributes="href person/absolute_url">
+            <li><a tal:attributes="href person/getURL">
                 <img tal:attributes="src person/getIcon" />
                 <span tal:replace="person/Title"
                       i18n:translate="" />
