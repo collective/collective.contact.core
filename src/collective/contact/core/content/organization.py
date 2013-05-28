@@ -22,7 +22,7 @@ class IOrganization(model.Schema, IContactContent):
     organization_type = schema.Choice(
         title=_("Type or level"),
         vocabulary="OrganizationTypesOrLevels",
-        )
+    )
 
     def get_organizations_chain():
         """Returns the list of organizations and sub-organizations in this organization
@@ -65,7 +65,7 @@ class Organization(Container):
     """Organization content type"""
     implements(IOrganization)
 
-    meta_type = 'organization'
+    #meta_type = 'organization'
     use_parent_address = NO_VALUE
     parent_address = NO_VALUE
 
