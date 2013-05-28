@@ -88,13 +88,13 @@ msgstr "Télécharger la VCard"
 
 #: ../behaviors.py:92
 msgid "Email"
-msgstr "Mél"
+msgstr "Courriel"
 
 #: ../browser/templates/contact.pt:53
 #: ../browser/templates/organization.pt:29
 #: ../browser/templates/person.pt:21
 msgid "Email&nbsp;:"
-msgstr "Mél&nbsp;:"
+msgstr "Courriel&nbsp;:"
 
 #: ../content/held_position.py:34
 msgid "End date"
