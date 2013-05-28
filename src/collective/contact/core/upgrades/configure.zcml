@@ -21,4 +21,12 @@
       handler=".upgrades.v2"
       profile="collective.contact.core:default" />
 
+  <genericsetup:upgradeStep
+      title="Migration profile for collective.contact.core to 3"
+      description="Upgrade from 2 to 3"
+      source="2"
+      destination="3"
+      handler=".upgrades.v3"
+      profile="collective.contact.core:default" />
+
 </configure>

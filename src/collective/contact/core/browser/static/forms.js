@@ -55,7 +55,15 @@ manage_directory = function(){
 	$('input[id$="-widgets-name"]').blur(update_token);
 }
 
+/* Hide use_parent_address field if address field is empty */
+manage_hide_use_parent_address = function(){
+	if ($("#address").length == 0) {
+		$("#formfield-form-widgets-IContactDetails-use_parent_address").hide();
+	}
+}
+
 $(document).ready(function(){
     $(document).delegate('#formfield-form-widgets-gender input', 'change', update_person_title);
     manage_directory();
+    manage_hide_use_parent_address();
 });

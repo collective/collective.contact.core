@@ -1,4 +1,5 @@
 from zope.interface import implements
+from zope.interface import Attribute
 from zope import schema
 from z3c.form.interfaces import NO_VALUE
 
@@ -15,6 +16,8 @@ from collective.contact.widget.interfaces import IContactContent
 
 class IPosition(model.Schema, IContactContent):
     """Interface for Position content type"""
+
+    is_created = Attribute(u"Marker to know if the object is already created")
 
     position_type = schema.Choice(
         title=_("Type"),
@@ -52,6 +55,7 @@ class Position(Container):
     implements(IPosition)
 
     meta_type = 'position'
+    is_created = False
     use_parent_address = NO_VALUE
     parent_address = NO_VALUE
 

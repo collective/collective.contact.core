@@ -1,5 +1,6 @@
 from Acquisition import aq_inner, aq_chain
 from zope.interface import implements
+from zope.interface import Attribute
 from zope import schema
 from z3c.form.interfaces import NO_VALUE
 
@@ -18,6 +19,8 @@ from collective.contact.widget.interfaces import IContactContent
 
 class IOrganization(model.Schema, IContactContent):
     """Interface for Organization content type"""
+
+    is_created = Attribute(u"Marker to know if the object is already created")
 
     organization_type = schema.Choice(
         title=_("Type or level"),
@@ -66,6 +69,7 @@ class Organization(Container):
     implements(IOrganization)
 
     #meta_type = 'organization'
+    is_created = False
     use_parent_address = NO_VALUE
     parent_address = NO_VALUE
 

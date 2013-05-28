@@ -8,6 +8,7 @@ from zope.component import getUtility
 from plone import api
 
 from ecreall.helpers.upgrade.interfaces import IUpgradeTool
+from collective.contact.widget.interfaces import IContactContent
 
 
 def reindex_relations(context):
@@ -29,3 +30,11 @@ def v2(context):
     catalog = api.portal.get_tool(name='portal_catalog')
     catalog.clearFindAndRebuild()
     reindex_relations(context)
+
+
+def v3(context):
+    catalog = api.portal.get_tool('portal_catalog')
+    brains = catalog.searchResults(object_provides=IContactContent.__identifier__)
+    for brain in brains:
+        obj = brain.getObject()
+        obj.is_created = True
