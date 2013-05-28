@@ -1,5 +1,6 @@
 from zope import schema
 from zope.interface import implements
+from zope.interface import Attribute
 from z3c.form.interfaces import NO_VALUE
 from z3c.form.browser.radio import RadioFieldWidget
 
@@ -18,6 +19,8 @@ from collective.contact.widget.interfaces import IContactContent
 
 class IPerson(model.Schema, IContactContent):
     """Interface for Person content type"""
+
+    is_created = Attribute(u"Marker to know if the object is already created")
 
     lastname = schema.TextLine(
         title=_("Lastname"),
@@ -63,6 +66,7 @@ class Person(Container):
     implements(IPerson)
 
     meta_type = 'person'
+    is_created = False
     # plone.dexterity.content.Content.__getattr__ retrieve the field.default
     # so step 1.2.1 in z3c.form.widget.py returns something instead of NO_VALUE
     # then IValue adapter is not looked up...

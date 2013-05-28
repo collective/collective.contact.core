@@ -76,8 +76,9 @@ class Contactable(grok.Adapter):
 
     def get_parent_address(self):
         contactables = self._get_contactables()
-        # we don't want self.context address here
-        contactables.remove(self.context)
+        if self.context.is_created:
+            # we don't want self.context address if the object is already created
+            contactables.remove(self.context)
         address = self._get_address(contactables)
         if not address:
             # Very important to return unicode here, RichTextWidget needs it.
