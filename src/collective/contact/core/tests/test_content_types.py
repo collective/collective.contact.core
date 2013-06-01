@@ -108,39 +108,39 @@ class TestOrganization(TestContentTypes):
 
     def test_get_organizations_titles(self):
         corpsa_titles = self.corpsa.get_organizations_titles()
-        self.assertIn('Armée de terre', corpsa_titles)
-        self.assertIn('Corps A', corpsa_titles)
+        self.assertIn(u'Armée de terre', corpsa_titles)
+        self.assertIn(u'Corps A', corpsa_titles)
         self.assertEquals(len(corpsa_titles), 2)
 
         division_alpha_titles = self.divisionalpha.get_organizations_titles()
-        self.assertIn('Armée de terre', division_alpha_titles)
-        self.assertIn('Corps A', division_alpha_titles)
-        self.assertIn('Division Alpha', division_alpha_titles)
+        self.assertIn(u'Armée de terre', division_alpha_titles)
+        self.assertIn(u'Corps A', division_alpha_titles)
+        self.assertIn(u'Division Alpha', division_alpha_titles)
         self.assertEquals(len(division_alpha_titles), 3)
 
         brigadelh_titles = self.brigadelh.get_organizations_titles()
-        self.assertIn('Armée de terre', brigadelh_titles)
-        self.assertIn('Corps A', brigadelh_titles)
-        self.assertIn('Division Alpha', brigadelh_titles)
-        self.assertIn('Régiment H', brigadelh_titles)
-        self.assertIn('Brigade LH', brigadelh_titles)
+        self.assertIn(u'Armée de terre', brigadelh_titles)
+        self.assertIn(u'Corps A', brigadelh_titles)
+        self.assertIn(u'Division Alpha', brigadelh_titles)
+        self.assertIn(u'Régiment H', brigadelh_titles)
+        self.assertIn(u'Brigade LH', brigadelh_titles)
         self.assertEquals(len(brigadelh_titles), 5)
 
         brigadelh_titles = self.brigadelh.get_organizations_titles(first_index=2)
-        self.assertIn('Division Alpha', brigadelh_titles)
-        self.assertIn('Régiment H', brigadelh_titles)
-        self.assertIn('Brigade LH', brigadelh_titles)
+        self.assertIn(u'Division Alpha', brigadelh_titles)
+        self.assertIn(u'Régiment H', brigadelh_titles)
+        self.assertIn(u'Brigade LH', brigadelh_titles)
         self.assertEquals(len(brigadelh_titles), 3)
 
     def test_get_full_title(self):
         self.assertEqual(self.armeedeterre.get_full_title(),
-                         "Armée de terre")
+                         u"Armée de terre")
         self.assertEqual(self.brigadelh.get_full_title(),
-                         "Armée de terre / Corps A / Division Alpha / Régiment H / Brigade LH")
-        self.assertEqual(self.brigadelh.get_full_title(separator=' - '),
-                         "Armée de terre - Corps A - Division Alpha - Régiment H - Brigade LH")
-        self.assertEqual(self.brigadelh.get_full_title(separator=' - ', first_index=2),
-                         "Division Alpha - Régiment H - Brigade LH")
+                         u"Armée de terre / Corps A / Division Alpha / Régiment H / Brigade LH")
+        self.assertEqual(self.brigadelh.get_full_title(separator=u' - '),
+                         u"Armée de terre - Corps A - Division Alpha - Régiment H - Brigade LH")
+        self.assertEqual(self.brigadelh.get_full_title(separator=u' - ', first_index=2),
+                         u"Division Alpha - Régiment H - Brigade LH")
 
 
 class TestPosition(TestContentTypes):

@@ -100,9 +100,9 @@ class Organization(Container):
         e.g. for HR service in Division Bar in Organization Foo :
         [u"Organization Foo", u"Division Bar", u"HR service"]
         """
-        return [item.Title() for item in self.get_organizations_chain(first_index=first_index)]
+        return [item.title for item in self.get_organizations_chain(first_index=first_index)]
 
-    def get_full_title(self, separator=' / ', first_index=0):
+    def get_full_title(self, separator=u' / ', first_index=0):
         """Returns the full title of the organization
         It is constituted by the list of the names of the organizations and
         sub-organizations in this organization separated by slashes

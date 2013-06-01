@@ -4,7 +4,7 @@ python:
 install:
   - mkdir -p buildout-cache/{eggs,downloads}
   - python bootstrap.py -c travis.cfg -d
-  - bin/buildout -Nc travis.cfg
+  - bin/buildout -c travis.cfg -N -q -t 3
 script:
   - bin/test
 notifications:

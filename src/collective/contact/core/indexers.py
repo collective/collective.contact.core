@@ -6,7 +6,7 @@ from collective.contact.core.content.organization import IOrganization
 
 @indexer(IOrganization)
 def organization_searchable_text(obj):
-    return ' '.join(obj.get_organizations_titles())
+    return u' '.join(obj.get_organizations_titles())
 
 
 @indexer(IHeldPosition)
@@ -18,4 +18,4 @@ def held_position_searchable_text(obj):
         indexed_fields.append(position.title)
     organization = obj.get_organization()
     indexed_fields.extend(organization.get_organizations_titles())
-    return ' '.join(indexed_fields)
+    return u' '.join(indexed_fields)
