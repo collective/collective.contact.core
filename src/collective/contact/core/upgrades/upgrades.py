@@ -34,7 +34,7 @@ def v2(context):
 
 def v3(context):
     catalog = api.portal.get_tool('portal_catalog')
-    brains = catalog.searchResults(object_provides=IContactContent.__identifier__)
+    brains = catalog.unrestrictedSearchResults(object_provides=IContactContent.__identifier__)
     for brain in brains:
         obj = brain.getObject()
         obj.is_created = True

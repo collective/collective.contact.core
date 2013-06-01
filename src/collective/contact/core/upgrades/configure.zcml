@@ -14,16 +14,16 @@
       />
 
   <genericsetup:upgradeStep
-      title="Migration profile for collective.contact.core to 2"
-      description="Upgrade from 1 to 2"
+      title="Upgrade from 1 to 2"
+      description="Clear and rebuild plone_catalog and zc.relation catalog"
       source="1"
       destination="2"
       handler=".upgrades.v2"
       profile="collective.contact.core:default" />
 
   <genericsetup:upgradeStep
-      title="Migration profile for collective.contact.core to 3"
-      description="Upgrade from 2 to 3"
+      title="Upgrade from 2 to 3"
+      description="Add is_created attribute on contact content types"
       source="2"
       destination="3"
       handler=".upgrades.v3"
