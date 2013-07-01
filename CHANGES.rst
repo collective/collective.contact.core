@@ -4,6 +4,9 @@ Changelog
 1.0 (unreleased)
 ----------------
 
+- Fixed field customization view.
+  [vincentfretin, thomasdesvenain]
+
 - Fixed held_position field showing in Add contact overlay if Plone site id
   is different of Plone.
   [vincentfretin]

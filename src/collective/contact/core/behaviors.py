@@ -1,6 +1,7 @@
 from zope.interface import alsoProvides
 from zope.interface import Interface
 from zope import schema
+from Acquisition import aq_base
 
 from plone.supermodel import model
 from plone.supermodel.directives import fieldset
@@ -8,6 +9,7 @@ from plone.autoform.interfaces import IFormFieldProvider
 from plone.autoform import directives as form
 from plone.formwidget.masterselect import MasterSelectBoolField
 from plone.app.textfield import RichText
+from plone.app.dexterity.browser.types import TypeSchemaContext
 from z3c.form.widget import ComputedWidgetAttribute
 
 from Products.CMFDefault.utils import checkEmailAddress
@@ -35,6 +37,9 @@ def get_parent_address(adapter):
     """Gets the address of the first parent in hierarchy"""
     if adapter.context.portal_type == "directory":
         return u''
+    elif type(aq_base(adapter.context)) == TypeSchemaContext:
+        return u""
+
     return IContactable(adapter.context).get_parent_address()
 
 
