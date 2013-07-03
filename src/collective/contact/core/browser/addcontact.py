@@ -62,6 +62,9 @@ class ContactWidgetSettings(grok.GlobalUtility):
             actions.append(action)
         return {'actions': actions,
                 'close_on_click': close_on_click,
+                'formatItem': """function(row, idx, count, value) {
+return '<img src="' + portal_url + '/' + row[2] + '_icon.png'
+ +'" /> ' + row[1] }"""
                 }
 
 class MasterSelectAddContactProvider(BrowserView):
