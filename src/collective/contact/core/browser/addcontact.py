@@ -57,9 +57,9 @@ class ContactWidgetSettings(grok.GlobalUtility):
                 if len(portal_types) == 2 and \
                         'organization' in portal_types and \
                         'position' in portal_types:
-                   url = "%s/@@add-organization" % directory_url
+                    url = "%s/@@add-organization" % directory_url
                 else:
-                   url = "%s/@@add-contact" % directory_url
+                    url = "%s/@@add-contact" % directory_url
                 type_name = _(u"Contact")
                 close_on_click = False
                 label = DMF(u"Add ${name}", mapping={'name': type_name})
