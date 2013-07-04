@@ -37,9 +37,7 @@ class Organization(BaseView):
         self.sub_organizations = catalog.searchResults(portal_type="organization",
                                                        path={'query': context_path,
                                                              'depth': 1})
-        self.positions = catalog.searchResults(portal_type="position",
-                                               path={'query': context_path,
-                                                     'depth': 1})
+        self.positions = self.context.get_positions()
 
         contact_details = contactable.get_contact_details()
         self.email = contact_details['email']
@@ -50,3 +48,6 @@ class Organization(BaseView):
 
         # also show fields that were added TTW
         self.ttw_fields = get_ttw_fields(organization)
+
+        held_positions = organization.get_held_positions()
+        self.othercontacts = [hp.get_person() for hp in held_positions]

@@ -68,8 +68,31 @@
         <label i18n:translate="">Positions in this organization:</label>
         <ul>
         <tal:block tal:repeat="position view/positions">
-            <li><a tal:attributes="href position/getURL">
+            <li tal:define="held_positions position/get_held_positions|nothing">
+              <a tal:attributes="href position/absolute_url">
                 <span tal:replace="position/Title"
+                      i18n:translate=""></span></a><tal:semicolon i18n:translate="colon">:
+               </tal:semicolon><tal:person condition="held_positions">
+               <tal:block repeat="held_position held_positions">
+                 <a
+                   tal:define="person held_position/get_person"
+                   tal:attributes="href person/absolute_url">
+                   <span tal:replace="person/Title"
+                         i18n:translate="" />
+                 </a>
+               </tal:block>
+            </tal:person><tal:nobody condition="not:held_positions" i18n:translate="">Not assigned</tal:nobody>
+            </li>
+        </tal:block>
+        </ul>
+    </div>
+
+    <div id="other-contacts" class="field" tal:condition="view/othercontacts">
+        <label i18n:translate="">Other contacts in this organization:</label>
+        <ul>
+        <tal:block tal:repeat="contact view/othercontacts">
+            <li><a tal:attributes="href contact/absolute_url">
+                <span tal:replace="contact/Title"
                       i18n:translate="" />
             </a></li>
         </tal:block>

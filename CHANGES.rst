@@ -4,6 +4,9 @@ Changelog
 1.0 (unreleased)
 ----------------
 
+- Display contacts on organization page.
+  [thomasdesvenain]
+
 - We can find a function with the organization name.
   [thomasdesvenain]
 

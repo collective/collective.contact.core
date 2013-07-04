@@ -12,6 +12,10 @@ from plone.dexterity.schema import DexteritySchemaPolicy
 from collective.contact.core import _
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.widget.interfaces import IContactContent
+from zope.component._api import getUtility
+from zope.intid.interfaces import IIntIds
+from zc.relation.interfaces import ICatalog
+from collective.contact.core.content.held_position import IHeldPosition
 
 
 class IPosition(model.Schema, IContactContent):
@@ -69,6 +73,19 @@ class Position(Container):
         the name of its organization in brackets
         """
         return u"%s (%s)" % (self.title, self.get_organization().title)
+
+    def get_held_positions(self):
+        """Returns the held position
+           that have been linked to this position
+        """
+        intids = getUtility(IIntIds)
+        catalog = getUtility(ICatalog)
+        position_intid = intids.getId(self)
+        contact_relations = catalog.findRelations(
+                              {'to_id': position_intid,
+                               'from_interfaces_flattened': IHeldPosition,
+                               'from_attribute': 'position'})
+        return [c.from_object for c in contact_relations]
 
 
 class PositionSchemaPolicy(grok.GlobalUtility,

@@ -15,6 +15,11 @@ from plone.dexterity.schema import DexteritySchemaPolicy
 from collective.contact.core import _
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.widget.interfaces import IContactContent
+from zope.component._api import getUtility
+from zope.intid.interfaces import IIntIds
+from zc.relation.interfaces import ICatalog
+from collective.contact.core.content.held_position import IHeldPosition
+from Products.CMFCore.utils import getToolByName
 
 
 class IOrganization(model.Schema, IContactContent):
@@ -110,6 +115,27 @@ class Organization(Container):
         u"Organization Foo / Division Bar / HR service"
         """
         return separator.join(self.get_organizations_titles(first_index=first_index))
+
+    def get_positions(self):
+        catalog = getToolByName(self, 'portal_catalog')
+        positions = catalog.searchResults(portal_type="position",
+                                          path={'query': '/'.join(self.getPhysicalPath()),
+                                                'depth': 1})
+        return [c.getObject() for c in positions]
+
+    def get_held_positions(self):
+        """Returns the held positions
+           that have been directly linked to the organization
+           without a position
+        """
+        intids = getUtility(IIntIds)
+        catalog = getUtility(ICatalog)
+        orga_intid = intids.getId(self)
+        contact_relations = catalog.findRelations(
+                              {'to_id': orga_intid,
+                               'from_interfaces_flattened': IHeldPosition,
+                               'from_attribute': 'position'})
+        return [c.from_object for c in contact_relations]
 
 
 class OrganizationSchemaPolicy(grok.GlobalUtility,
