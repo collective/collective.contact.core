@@ -26,6 +26,14 @@ def acqproperty(func):
 class IHeldPosition(model.Schema, IContactContent):
     """Interface for HeldPosition content type"""
 
+    position = ContactChoice(
+        title=_("Position or organization"),
+        addlink=False,
+        source=ContactSourceBinder(portal_type=("organization", "position"))
+    )
+    label = schema.TextLine(title=_("Additional label"),
+                            description=_("Additional label with information that does not appear on position label"),
+                            required=False)
     start_date = schema.Date(
       title=_("Start date"),
       required=False,
@@ -33,11 +41,6 @@ class IHeldPosition(model.Schema, IContactContent):
     end_date = schema.Date(
       title=_("End date"),
       required=False,
-    )
-    position = ContactChoice(
-        title=_("Position or organization"),
-        addlink=False,
-        source=ContactSourceBinder(portal_type=("organization", "position"))
     )
     photo = NamedImage(
         title=_("Photo"),
@@ -120,7 +123,10 @@ class HeldPosition(Container):
         position = self.position.to_object
         organization = self.get_organization().get_root_organization()
         if position == organization:
-            return position.Title()
+            if self.label:
+                return "%s (%s) " % (self.label, position.Title())
+            else:
+                return organization.Title()
         else:
             return "%s (%s)" % (position.Title(),
                                 organization.Title())

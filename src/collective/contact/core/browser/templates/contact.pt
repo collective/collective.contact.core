@@ -51,8 +51,9 @@
 
     <div class="field" tal:condition="view/email">
         <label><tal:block i18n:translate="">Email</tal:block>:</label>
-        <span tal:content="view/email"
-              i18n:translate="" />
+        <a tal:attributes="href string:mailto:${view/email}"
+           tal:content="view/email"
+           i18n:translate=""></a>
     </div>
 
     <div class="field" tal:condition="view/phone">

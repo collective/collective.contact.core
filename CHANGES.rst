@@ -4,6 +4,10 @@ Changelog
 1.0 (unreleased)
 ----------------
 
+- Added an additional input text label to held positions,
+  used on titles if held_position is directly related to an organization.
+  [thomasdesvenain]
+
 - Display contacts on organization page.
   [thomasdesvenain]
 
