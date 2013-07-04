@@ -4,6 +4,9 @@ Changelog
 1.0 (unreleased)
 ----------------
 
+- We can find a function with the organization name.
+  [thomasdesvenain]
+
 - Fixed field customization view.
   [vincentfretin, thomasdesvenain]
 
