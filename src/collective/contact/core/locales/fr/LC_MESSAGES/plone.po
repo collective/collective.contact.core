@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.contact.core\n"
-"POT-Creation-Date: 2013-03-27 08:47+0000\n"
+"POT-Creation-Date: 2013-07-04 14:49+0000\n"
 "PO-Revision-Date: 2013-03-11 16:38+0100\n"
 "Last-Translator: Cédric Messiant <cedricmessiant@ecreall.com>\n"
 "Language-Team: Ecréall\n"
@@ -40,7 +40,7 @@ msgstr "Désactivé"
 
 #: ../profiles/testing/types/testtype.xml
 msgid "None"
-msgstr ""
+msgstr "Aucun"
 
 #: ../profiles/testing/types/testtype.xml
 msgid "Test type"
