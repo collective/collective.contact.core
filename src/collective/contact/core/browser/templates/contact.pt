@@ -12,7 +12,7 @@
     </div>
 
 	<div class="field" tal:condition="view/position">
-		<label i18n:translate="">Position:</label>
+		<label><tal:block i18n:translate="">Position</tal:block>:</label>
 		<a tal:attributes="href view/position/absolute_url">
 		  <span tal:content="view/position/Title"
 		 	  i18n:translate="" />
@@ -20,7 +20,7 @@
 	</div>
 
     <div id="organizations" class="field" tal:condition="view/organizations">
-        <label i18n:translate="">Organizations:</label>
+        <label><tal:block i18n:translate="">Organizations</tal:block>:</label>
         <ul>
         <tal:block tal:repeat="organization view/organizations">
             <li><a tal:attributes="href organization/absolute_url">
@@ -32,43 +32,43 @@
     </div>
 
 	<div class="field" tal:condition="view/start_date">
-		<label i18n:translate="">Start date:</label>
+		<label><tal:block i18n:translate="">Start date</tal:block>:</label>
 		<span tal:content="view/start_date"
 		 	  i18n:translate="" />
 	</div>
 
 	<div class="field" tal:condition="view/end_date">
-		<label i18n:translate="">End date:</label>
+		<label><tal:block i18n:translate="">End date</tal:block>:</label>
 		<span tal:content="view/end_date"
 		 	  i18n:translate="" />
 	</div>
 
     <div class="field" tal:condition="view/birthday">
-        <label i18n:translate="">Birthday:</label>
+        <label><tal:block i18n:translate="">Birthday</tal:block>:</label>
         <span tal:content="view/birthday"
               i18n:translate="" />
     </div>
 
     <div class="field" tal:condition="view/email">
-        <label i18n:translate="">Email:</label>
+        <label><tal:block i18n:translate="">Email</tal:block>:</label>
         <span tal:content="view/email"
               i18n:translate="" />
     </div>
 
     <div class="field" tal:condition="view/phone">
-        <label i18n:translate="">Phone number:</label>
+        <label><tal:block i18n:translate="">Phone number</tal:block>:</label>
         <span tal:content="view/phone"
               i18n:translate="" />
     </div>
 
     <div class="field" tal:condition="view/cell_phone">
-        <label i18n:translate="">Cell phone number:</label>
+        <label><tal:block i18n:translate="">Cell phone number</tal:block>:</label>
         <span tal:content="view/cell_phone"
               i18n:translate="" />
     </div>
 
     <div class="field" tal:condition="view/im_handle">
-        <label i18n:translate="">IM handle:</label>
+        <label><tal:block i18n:translate="">IM handle</tal:block>:</label>
         <span tal:content="view/im_handle"
               i18n:translate="" />
     </div>

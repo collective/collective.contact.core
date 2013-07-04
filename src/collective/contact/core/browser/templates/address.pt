@@ -2,7 +2,7 @@
      i18n:domain="collective.contact.core"
      tal:repeat="address args">
     <div tal:condition="address">
-    <label i18n:translate="">Address:</label>
+    <label><tal:block i18n:translate="">Address</tal:block>:</label>
     <div class="address_line">
         <span i18n:translate="" tal:content="address/number"></span>
         <span i18n:translate="" tal:content="address/additional_address_details"></span>
