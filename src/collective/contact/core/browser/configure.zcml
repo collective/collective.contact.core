@@ -79,13 +79,8 @@
     factory=".addcontact.MasterSelectAddContactProvider"
     />
 
-  <browser:defaultView
-      for="..content.directory.IDirectory"
-      name="directory"
-      />
-
   <browser:page
-      name="directory"
+      name="view"
       for="..content.directory.IDirectory"
       class=".directory.Directory"
       template="templates/directory.pt"
