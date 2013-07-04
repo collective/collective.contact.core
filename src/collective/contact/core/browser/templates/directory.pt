@@ -13,7 +13,7 @@
     <h1 tal:content="context/Title"></h1>
 
     <div id="organizations" tal:condition="view/organizations">
-        <h2 i18n:translate="">Organizations:</h2>
+        <h2><tal:block i18n:translate="">Organizations</tal:block>:</h2>
         <ul>
         <tal:block tal:repeat="organization view/organizations">
             <li><a tal:attributes="href organization/getURL">
@@ -26,7 +26,7 @@
     </div>
 
     <div id="organizations" tal:condition="view/organizations">
-        <h2 i18n:translate="">Persons:</h2>
+        <h2><tal:block i18n:translate="">Persons</tal:block>:</h2>
         <ul>
         <tal:block tal:repeat="person view/persons">
             <li><a tal:attributes="href person/getURL">

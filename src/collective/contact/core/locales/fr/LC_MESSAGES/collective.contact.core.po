@@ -31,8 +31,8 @@ msgid "Additional address details"
 msgstr "Complément d'adresse"
 
 #: ../browser/templates/address.pt:5
-msgid "Address:"
-msgstr "Adresse&nbsp;:"
+msgid "Address"
+msgstr "Adresse&nbsp;"
 
 #: ../content/person.py:41
 msgid "Birthday"
@@ -40,8 +40,8 @@ msgstr "Date de naissance"
 
 #: ../browser/templates/contact.pt:47
 #: ../browser/templates/person.pt:15
-msgid "Birthday:"
-msgstr "Date de naissance&nbsp;:"
+msgid "Birthday"
+msgstr "Date de naissance&nbsp;"
 
 #: ../behaviors.py:103
 msgid "Cell phone"
@@ -50,8 +50,8 @@ msgstr "Téléphone portable"
 #: ../browser/templates/contact.pt:65
 #: ../browser/templates/organization.pt:41
 #: ../browser/templates/person.pt:33
-msgid "Cell phone number:"
-msgstr "Numéro de téléphone portable&nbsp;:"
+msgid "Cell phone number"
+msgstr "Numéro de téléphone portable&nbsp;"
 
 #: ../behaviors.py:187
 msgid "City"
@@ -93,16 +93,16 @@ msgstr "Courriel"
 #: ../browser/templates/contact.pt:53
 #: ../browser/templates/organization.pt:29
 #: ../browser/templates/person.pt:21
-msgid "Email:"
-msgstr "Courriel&nbsp;:"
+msgid "Email"
+msgstr "Courriel&nbsp;"
 
 #: ../content/held_position.py:34
 msgid "End date"
 msgstr "Date de fin"
 
 #: ../browser/templates/contact.pt:41
-msgid "End date:"
-msgstr "Date de fin&nbsp;:"
+msgid "End date"
+msgstr "Date de fin&nbsp;"
 
 #: ../vocabulary.py:78
 msgid "Feminine"
@@ -128,8 +128,8 @@ msgstr "Fonction occupée"
 #: ../browser/templates/contact.pt:71
 #: ../browser/templates/organization.pt:47
 #: ../browser/templates/person.pt:39
-msgid "IM handle:"
-msgstr "Identifiant de messagerie instantanée&nbsp;:"
+msgid "IM handle"
+msgstr "Identifiant de messagerie instantanée&nbsp;"
 
 #: ../behaviors.py:108
 msgid "Instant messenger handle"
@@ -178,26 +178,26 @@ msgid "Organization levels"
 msgstr "Niveaux d'organisation"
 
 #: ../browser/templates/organization.pt:11
-msgid "Organization type:"
-msgstr "Type d'organisation&nbsp;:"
+msgid "Organization type"
+msgstr "Type d'organisation&nbsp;"
 
 #: ../content/directory.py:37
 msgid "Organization types"
 msgstr "Types d'organisations"
 
 #: ../browser/templates/organization.pt:56
-msgid "Organizations in this organization:"
-msgstr "Organisations dans cette organisation&nbsp;:"
+msgid "Organizations in this organization"
+msgstr "Organisations dans cette organisation&nbsp;"
 
 #: ../browser/templates/contact.pt:23
 #: ../browser/templates/directory.pt:17
-msgid "Organizations:"
-msgstr "Organisations&nbsp;:"
+msgid "Organizations"
+msgstr "Organisations&nbsp;"
 
 #: ../browser/templates/organization.pt:17
 #: ../browser/templates/position.pt:17
-msgid "Parent organizations:"
-msgstr "Organisations parentes&nbsp;:"
+msgid "Parent organizations"
+msgstr "Organisations parentes&nbsp;"
 
 #: ../browser/addcontact.py:171
 #: ../profiles/default/types/person.xml
@@ -210,8 +210,8 @@ msgid "Person title"
 msgstr "Civilité"
 
 #: ../browser/templates/directory.pt:30
-msgid "Persons:"
-msgstr "Personnes&nbsp;:"
+msgid "Persons"
+msgstr "Personnes&nbsp;"
 
 #: ../behaviors.py:98
 msgid "Phone"
@@ -220,8 +220,8 @@ msgstr "Téléphone"
 #: ../browser/templates/contact.pt:59
 #: ../browser/templates/organization.pt:35
 #: ../browser/templates/person.pt:27
-msgid "Phone number:"
-msgstr "Numéro de téléphone&nbsp;:"
+msgid "Phone number"
+msgstr "Numéro de téléphone&nbsp;"
 
 #: ../content/held_position.py:43
 #: ../content/person.py:45
@@ -239,24 +239,24 @@ msgid "Position or organization"
 msgstr "Fonction ou organisation"
 
 #: ../browser/templates/position.pt:11
-msgid "Position type:"
-msgstr "Type de fonction&nbsp;:"
+msgid "Position type"
+msgstr "Type de fonction&nbsp;"
 
 #: ../content/directory.py:30
 msgid "Position types"
 msgstr "Types de fonctions"
 
 #: ../browser/templates/contact.pt:15
-msgid "Position:"
-msgstr "Fonction&nbsp;:"
+msgid "Position"
+msgstr "Fonction&nbsp;"
 
 #: ../browser/templates/person.pt:48
-msgid "Positions held by this person:"
-msgstr "Fonctions occupées par cette personne&nbsp;:"
+msgid "Positions held by this person"
+msgstr "Fonctions occupées par cette personne&nbsp;"
 
 #: ../browser/templates/organization.pt:68
-msgid "Positions in this organization:"
-msgstr "Fonctions dans cette organisation&nbsp;:"
+msgid "Positions in this organization"
+msgstr "Fonctions dans cette organisation&nbsp;"
 
 #: ../behaviors.py:202
 msgid "Region"
@@ -267,8 +267,8 @@ msgid "Start date"
 msgstr "Date de début"
 
 #: ../browser/templates/contact.pt:35
-msgid "Start date:"
-msgstr "Date de début&nbsp;:"
+msgid "Start date"
+msgstr "Date de début&nbsp;"
 
 #: ../behaviors.py:192
 msgid "Street"

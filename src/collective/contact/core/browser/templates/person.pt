@@ -12,31 +12,31 @@
     </div>
 
     <div class="field" tal:condition="view/birthday">
-        <label i18n:translate="">Birthday:</label>
+        <label><tal:block i18n:translate="">Birthday</tal:block>:</label>
         <span tal:content="view/birthday"
               i18n:translate="" />
     </div>
 
     <div class="field" tal:condition="view/email">
-        <label i18n:translate="">Email:</label>
+        <label><tal:block i18n:translate="">Email</tal:block>:</label>
         <span tal:content="view/email"
               i18n:translate="" />
     </div>
 
     <div class="field" tal:condition="view/phone">
-        <label i18n:translate="">Phone number:</label>
+        <label><tal:block i18n:translate="">Phone number</tal:block>:</label>
         <span tal:content="view/phone"
               i18n:translate="" />
     </div>
 
     <div class="field" tal:condition="view/cell_phone">
-        <label i18n:translate="">Cell phone number:</label>
+        <label><tal:block i18n:translate="">Cell phone number</tal:block>:</label>
         <span tal:content="view/cell_phone"
               i18n:translate="" />
     </div>
 
     <div class="field" tal:condition="view/im_handle">
-        <label i18n:translate="">IM handle:</label>
+        <label><tal:block i18n:translate="">IM handle</tal:block>:</label>
         <span tal:content="view/im_handle"
               i18n:translate="" />
     </div>
@@ -45,7 +45,7 @@
          tal:replace="structure view/render_address" />
 
     <div id="held_positions" class="field" tal:condition="view/held_positions">
-        <label i18n:translate="">Positions held by this person:</label>
+        <label><tal:block i18n:translate="">Positions held by this person</tal:block>:</label>
         <ul>
         <tal:block tal:repeat="held_position view/held_positions">
             <li><a tal:attributes="href held_position/getURL">
@@ -58,7 +58,7 @@
 
     <tal:block tal:repeat="field view/ttw_fields">
         <div class="field" tal:define="widget python: view.widgets[field]" tal:condition="widget/value">
-            <label tal:content="python: widget.label" i18n:translate="" />
+            <label><tal:block tal:content="python: widget.label" i18n:translate="" />:</label>
             <span tal:content="structure widget/render" />
         </div>
     </tal:block>
