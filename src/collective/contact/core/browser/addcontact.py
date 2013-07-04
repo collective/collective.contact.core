@@ -46,20 +46,28 @@ class ContactWidgetSettings(grok.GlobalUtility):
         if addlink_enabled:
             directory_url = directory.absolute_url()
             if len(portal_types) == 1:
-                addnew_url = '%s/++add++%s' % (directory_url, portal_types[0])
-                fti = getUtility(IDexterityFTI, name=portal_types[0])
+                portal_type = portal_types[0]
+                url = '%s/++add++%s' % (directory_url, portal_type)
+                fti = getUtility(IDexterityFTI, name=portal_type)
                 type_name = fti.Title()
+                label = DMF(u"Add ${name}", mapping={'name': type_name})
+                action = {'url': url, 'label': label}
+                actions.append(action)
             else:
-                addnew_url = "%s/@@add-contact" % directory_url
+                if len(portal_types) == 2 and \
+                        'organization' in portal_types and \
+                        'position' in portal_types:
+                   url = "%s/@@add-organization" % directory_url
+                else:
+                   url = "%s/@@add-contact" % directory_url
                 type_name = _(u"Contact")
                 close_on_click = False
-
-            addlink_label = DMF(u"Add ${name}",
-                    mapping={'name': type_name})
-
-            action = {'url': addnew_url,
-                      'label': addlink_label}
-            actions.append(action)
+                label = DMF(u"Add ${name}", mapping={'name': type_name})
+                action = {'url': url, 'label': label,
+                          'klass': 'addnew',
+                          'formselector' : '#oform',
+                          'closeselector': '[name="oform.buttons.cancel"]'}
+                actions.append(action)
         return {'actions': actions,
                 'close_on_click': close_on_click,
                 'formatItem': """function(row, idx, count, value) {
@@ -82,11 +90,12 @@ class MasterSelectAddContactProvider(BrowserView):
         return """<script type="text/javascript">
 $(document).ready(function() {
 
-  $('div[id$=held_position-position]').hide();
-  var position_fields = '#formfield-form-widgets-position,div[id*=held_position]';
-  if (!($('input[name="form.widgets.person:list"]').length > 1 &&
-        $('input[name="form.widgets.organization:list"]').length > 1)) {
-      $(position_fields).hide();
+  var o = $('#oform');
+  o.find('div[id$=held_position-position]').hide();
+  var position_fields = '#formfield-oform-widgets-position,div[id*=held_position]';
+  if (!(o.find('input[name="oform.widgets.person"]').length >= 1 &&
+        o.find('input[name="oform.widgets.organization"]').length >= 1)) {
+      o.find(position_fields).hide();
  }
 
  function serialize_form(form) {
@@ -100,24 +109,24 @@ $(document).ready(function() {
 
   function get_selected_organization(form) {
     var view = serialize_form(form);
-    var token = view['form.widgets.organization:list'];
-    var title = form.find('#form-widgets-organization-input-fields input[value="'+token+'"]').siblings('.label').find('a').first().text();
+    var token = view['oform.widgets.organization'];
+    var title = form.find('#oform-widgets-organization-input-fields input[value="'+token+'"]').siblings('.label').find('a').first().text();
     var path = '/' + token.split('/').slice(2).join('/');
     return {token: token, title: title, path: path};
   }
 
-  $('#form-widgets-organization-input-fields').delegate('input', 'change', function(e){
+  o.find('#oform-widgets-organization-input-fields').delegate('input', 'change', function(e){
     var form = $(this).closest('form');
     var orga = get_selected_organization(form);
     var add_organization_url, addneworga, add_text;
 
-    addneworga = $('#form-widgets-organization-autocomplete .addnew');
+    addneworga = o.find('#oform-widgets-organization-autocomplete .addnew');
     if (!addneworga.data('pbo').original_src) {
         addneworga.data('pbo').original_src = addneworga.data('pbo').src;
         addneworga.data('pbo').original_text = addneworga.text();
     }
     if (orga.token == '--NOVALUE--') {
-      $(position_fields).hide();
+      o.find(position_fields).hide();
       add_organization_url = addneworga.data('pbo').original_src;
       add_text = addneworga.data('pbo').original_text;
     } else {
@@ -129,33 +138,33 @@ $(document).ready(function() {
     addneworga.text(add_text);
 
     // update position autocomplete field
-    $('#formfield-form-widgets-position > .fieldErrorBox').text('Recherchez ou ajoutez une fonction dans "' + orga.title + '".');
-    $("#form-widgets-position-widgets-query")
+    o.find('#formfield-oform-widgets-position > .fieldErrorBox').text('Recherchez ou ajoutez une fonction dans "' + orga.title + '".');
+    o.find("#oform-widgets-position-widgets-query")
         .setOptions({extraParams: {path: orga.token}}).flushCache();
 
     // update add new position url
     var add_position_url = portal_url + orga.path + '/++add++position';
-    $('#form-widgets-position-autocomplete .addnew').data('pbo').src = add_position_url;
+    o.find('#oform-widgets-position-autocomplete .addnew').data('pbo').src = add_position_url;
 
     // show position and held position fields if orga and person are selected
-    if ($('input[name="form.widgets.person:list"]').length > 1 &&
-        $('input[name="form.widgets.organization:list"]').length > 1 &&
+    if (o.find('input[name="oform.widgets.person"]').length >= 1 &&
+        o.find('input[name="oform.widgets.organization"]').length >= 1 &&
         orga.token != '--NOVALUE--') {
-      $(position_fields).show('slow');
-      $('div[id$=held_position-position]').hide();
+      o.find(position_fields).show('slow');
+      o.find('div[id$=held_position-position]').hide();
     }
   });
 
-  $('#form-widgets-person-input-fields').delegate('input', 'change', function(e){
-    if ($('input[name="form.widgets.person:list"]').length > 1 &&
-        $('input[name="form.widgets.organization:list"]').length > 1) {
-      $(position_fields).show('slow');
-      $('div[id$=held_position-position]').hide();
+  o.find('#oform-widgets-person-input-fields').delegate('input', 'change', function(e){
+    if (o.find('input[name="oform.widgets.person"]').length >= 1 &&
+        o.find('input[name="oform.widgets.organization"]').length >= 1) {
+      o.find(position_fields).show('slow');
+      o.find('div[id$=held_position-position]').hide();
     }
   });
 
-  $('#form-widgets-position-widgets-query').setOptions({minChars: 0});
-  $('#form-widgets-position-widgets-query').focus(function(e){
+  o.find('#oform-widgets-position-widgets-query').setOptions({minChars: 0});
+  o.find('#oform-widgets-position-widgets-query').focus(function(e){
     $(this).trigger('click');
   });
 
@@ -190,6 +199,7 @@ class AddContact(DefaultAddForm, form.AddForm):
     description = u""
     schema = IAddContact
     portal_type = 'held_position'
+    prefix = 'oform'
 
     @property
     def additionalSchemata(self):
