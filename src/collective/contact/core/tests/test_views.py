@@ -213,7 +213,7 @@ class TestOrganizationView(TestView):
     def test_positions(self):
         org_view = self.armeedeterre.restrictedTraverse("@@organization")
         org_view.update()
-        positions_names = [e.Title for e in org_view.positions]
+        positions_names = [e.Title() for e in org_view.positions]
         self.assertEqual(set(["Général de l'armée de terre"]),
                          set(positions_names))
         # no_positions
