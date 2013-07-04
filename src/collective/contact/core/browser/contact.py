@@ -34,6 +34,7 @@ class Contact(BaseView):
         person = held_position.get_person()
         self.person = person
         self.fullname = person.Title()
+        self.title = held_position.Title()
 
         birthday = person.birthday
         if birthday is not None:

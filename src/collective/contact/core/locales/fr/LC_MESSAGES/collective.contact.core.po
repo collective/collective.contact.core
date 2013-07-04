@@ -296,5 +296,5 @@ msgstr "Code postal"
 #. Default: ":"
 #: ../browser/templates/organization.pt:74
 msgid "colon"
-msgstr ": "
+msgstr " :"
 

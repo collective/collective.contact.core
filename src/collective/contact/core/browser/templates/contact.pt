@@ -5,7 +5,8 @@
 <body>
 
 <div metal:fill-slot="main">
-	<h1 tal:content="view/fullname"></h1>
+	<h1><span tal:content="view/fullname"></span><tal:content i18n:translate="colon">:</tal:content>
+	    <span tal:content="view/title"></span></h1>
 
     <div class="field" tal:condition="context/photo">
        <img tal:replace="structure python: view.widgets['photo'].render()" />
