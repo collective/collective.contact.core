@@ -28,7 +28,7 @@ class IPosition(model.Schema, IContactContent):
         vocabulary="PositionTypes",
         )
 
-    def get_organization():
+    def get_organization(self):
         """Returns the organization to which the position is linked"""
 
     def get_full_title(self):

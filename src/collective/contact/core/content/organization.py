@@ -32,7 +32,7 @@ class IOrganization(model.Schema, IContactContent):
         vocabulary="OrganizationTypesOrLevels",
     )
 
-    def get_organizations_chain():
+    def get_organizations_chain(self):
         """Returns the list of organizations and sub-organizations in this organization
         e.g. for HR service in Division Bar in Organization Foo :
         [OrganizationFoo, DivisionBar, HRService]
