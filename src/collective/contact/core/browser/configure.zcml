@@ -72,6 +72,13 @@
       permission="cmf.AddPortalContent"
       />
 
+  <browser:page
+      name="add-organization"
+      for="*"
+      class=".addcontact.AddOrganization"
+      permission="cmf.AddPortalContent"
+      />
+
   <adapter
     name="organization-ms"
     for="zope.interface.Interface z3c.form.interfaces.IFormLayer zope.interface.Interface"

@@ -8,7 +8,7 @@ from plone.dexterity.i18n import MessageFactory as DMF
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.dexterity.utils import addContentToContainer
 from plone.supermodel import model
-from z3c.form import form, button
+from z3c.form import field, form, button
 from z3c.form.contentprovider import ContentProviders
 from z3c.form.interfaces import IFieldsAndContentProvidersForm, HIDDEN_MODE
 from zope.component import getUtility
@@ -58,9 +58,10 @@ class ContactWidgetSettings(grok.GlobalUtility):
                         'organization' in portal_types and \
                         'position' in portal_types:
                     url = "%s/@@add-organization" % directory_url
+                    type_name = _(u"organization or position")
                 else:
                     url = "%s/@@add-contact" % directory_url
-                type_name = _(u"Contact")
+                    type_name = _(u"Contact")
                 close_on_click = False
                 label = DMF(u"Add ${name}", mapping={'name': type_name})
                 action = {'url': url, 'label': label,
@@ -147,7 +148,7 @@ $(document).ready(function() {
     o.find('#oform-widgets-position-autocomplete .addnew').data('pbo').src = add_position_url;
 
     // show position and held position fields if orga and person are selected
-    if (o.find('input[name="oform.widgets.person"]').length >= 1 &&
+    if ((!o.find('#formfield-oform-widgets-person').length || o.find('input[name="oform.widgets.person"]').length >= 1) &&
         o.find('input[name="oform.widgets.organization"]').length >= 1 &&
         orga.token != '--NOVALUE--') {
       o.find(position_fields).show('slow');
@@ -290,3 +291,32 @@ class AddContact(DefaultAddForm, form.AddForm):
         else:
             self.immediate_view = "%s/%s" % (container.absolute_url(),
                                              new_object.id)
+
+
+class AddOrganization(form.AddForm):
+    implements(IFieldsAndContentProvidersForm)
+    contentProviders = ContentProviders(['organization-ms'])
+    contentProviders['organization-ms'].position = -1
+    label = DMF(u"Add ${name}", mapping={'name': _(u"organization or position")})
+    description = u""
+    prefix = 'oform'
+    fields = field.Fields(IAddContact).select('organization', 'position')
+
+    @button.buttonAndHandler(_('Add'), name='save')
+    def handleAdd(self, action):
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+
+        self._finishedAdd = True
+        if data['position'] is not None:
+            self.request.response.redirect(data['position'].absolute_url())
+            return
+        elif data['organization'] is not None:
+            self.request.response.redirect(data['organization'].absolute_url())
+            return
+
+    @button.buttonAndHandler(DMF(u'Cancel'), name='cancel')
+    def handleCancel(self, action):
+        pass

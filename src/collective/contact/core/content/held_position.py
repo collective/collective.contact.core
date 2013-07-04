@@ -28,7 +28,6 @@ class IHeldPosition(model.Schema, IContactContent):
 
     position = ContactChoice(
         title=_("Position or organization"),
-        addlink=False,
         source=ContactSourceBinder(portal_type=("organization", "position"))
     )
     label = schema.TextLine(title=_("Additional label"),
