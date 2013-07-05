@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.contact.core\n"
-"POT-Creation-Date: 2013-07-04 14:49+0000\n"
+"POT-Creation-Date: 2013-07-05 08:47+0000\n"
 "PO-Revision-Date: 2013-03-27 09:47+0100\n"
 "Last-Translator: Cédric Messiant <cedricmessiant@ecreall.com>\n"
 "Language-Team: French\n"
@@ -22,7 +22,7 @@ msgstr "Activer l'objet"
 msgid "Active"
 msgstr "Actif"
 
-#: ../browser/addcontact.py:237
+#: ../browser/addcontact.py:238
 msgid "Add"
 msgstr "Ajouter"
 
@@ -30,11 +30,11 @@ msgstr "Ajouter"
 msgid "Additional address details"
 msgstr "Complément d'adresse"
 
-#: ../content/held_position.py:34
+#: ../content/held_position.py:33
 msgid "Additional label"
 msgstr "Intitulé"
 
-#: ../content/held_position.py:35
+#: ../content/held_position.py:34
 msgid "Additional label with information that does not appear on position label"
 msgstr "Intitulé complétant l'intitulé de poste"
 
@@ -42,7 +42,7 @@ msgstr "Intitulé complétant l'intitulé de poste"
 msgid "Address"
 msgstr "Adresse "
 
-#: ../browser/templates/contact.pt:47
+#: ../browser/templates/contact.pt:48
 #: ../browser/templates/person.pt:15
 #: ../content/person.py:44
 msgid "Birthday"
@@ -52,7 +52,7 @@ msgstr "Date de naissance "
 msgid "Cell phone"
 msgstr "Téléphone portable"
 
-#: ../browser/templates/contact.pt:66
+#: ../browser/templates/contact.pt:67
 #: ../browser/templates/organization.pt:41
 #: ../browser/templates/person.pt:33
 msgid "Cell phone number"
@@ -62,7 +62,7 @@ msgstr "Numéro de téléphone portable "
 msgid "City"
 msgstr "Ville"
 
-#: ../browser/addcontact.py:63
+#: ../browser/addcontact.py:64
 msgid "Contact"
 msgstr "Contact"
 
@@ -87,18 +87,18 @@ msgstr "Désactivé"
 msgid "Directory"
 msgstr "Annuaire"
 
-#: ../browser/templates/contact.pt:100
+#: ../browser/templates/contact.pt:101
 msgid "Download VCard"
 msgstr "Télécharger la VCard"
 
 #: ../behaviors.py:97
-#: ../browser/templates/contact.pt:53
+#: ../browser/templates/contact.pt:54
 #: ../browser/templates/organization.pt:29
 msgid "Email"
 msgstr "Courriel "
 
-#: ../browser/templates/contact.pt:41
-#: ../content/held_position.py:42
+#: ../browser/templates/contact.pt:42
+#: ../content/held_position.py:41
 msgid "End date"
 msgstr "Date de fin "
 
@@ -123,7 +123,7 @@ msgstr "Localisation"
 msgid "Held position"
 msgstr "Fonction occupée"
 
-#: ../browser/templates/contact.pt:72
+#: ../browser/templates/contact.pt:73
 #: ../browser/templates/organization.pt:47
 #: ../browser/templates/person.pt:39
 msgid "IM handle"
@@ -165,7 +165,7 @@ msgstr "Non assigné"
 msgid "Number"
 msgstr "Numéro"
 
-#: ../browser/addcontact.py:178
+#: ../browser/addcontact.py:179
 #: ../content/directory.py:38
 #: ../profiles/default/types/organization.xml
 msgid "Organization"
@@ -187,7 +187,7 @@ msgstr "Type d'organisation "
 msgid "Organization types"
 msgstr "Types d'organisations"
 
-#: ../browser/templates/contact.pt:23
+#: ../browser/templates/contact.pt:24
 #: ../browser/templates/directory.pt:16
 msgid "Organizations"
 msgstr "Organisations "
@@ -205,7 +205,7 @@ msgstr "Autres contacts dans cette organisation :"
 msgid "Parent organizations"
 msgstr "Organisations parentes "
 
-#: ../browser/addcontact.py:183
+#: ../browser/addcontact.py:184
 #: ../profiles/default/types/person.xml
 #: ../upgrades/profiles/v2/types/person.xml
 msgid "Person"
@@ -223,19 +223,19 @@ msgstr "Personnes "
 msgid "Phone"
 msgstr "Téléphone"
 
-#: ../browser/templates/contact.pt:60
+#: ../browser/templates/contact.pt:61
 #: ../browser/templates/organization.pt:35
 #: ../browser/templates/person.pt:27
 msgid "Phone number"
 msgstr "Numéro de téléphone "
 
-#: ../content/held_position.py:46
+#: ../content/held_position.py:45
 #: ../content/person.py:48
 msgid "Photo"
 msgstr "Photo"
 
-#: ../browser/addcontact.py:188
-#: ../browser/templates/contact.pt:15
+#: ../browser/addcontact.py:189
+#: ../browser/templates/contact.pt:16
 #: ../content/directory.py:31
 msgid "Position"
 msgstr "Fonction "
@@ -264,8 +264,8 @@ msgstr "Fonctions dans cette organisation "
 msgid "Region"
 msgstr "Région"
 
-#: ../browser/templates/contact.pt:35
-#: ../content/held_position.py:38
+#: ../browser/templates/contact.pt:36
+#: ../content/held_position.py:37
 msgid "Start date"
 msgstr "Date de début "
 
@@ -294,7 +294,12 @@ msgid "Zip Code"
 msgstr "Code postal"
 
 #. Default: ":"
+#: ../browser/templates/contact.pt:8
 #: ../browser/templates/organization.pt:74
 msgid "colon"
 msgstr " :"
+
+#: ../browser/addcontact.py:61
+msgid "organization or position"
+msgstr "organisation ou fonction"
 
