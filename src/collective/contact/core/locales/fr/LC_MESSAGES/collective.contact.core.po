@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.contact.core\n"
-"POT-Creation-Date: 2013-07-05 08:47+0000\n"
+"POT-Creation-Date: 2013-07-05 10:40+0000\n"
 "PO-Revision-Date: 2013-03-27 09:47+0100\n"
 "Last-Translator: Cédric Messiant <cedricmessiant@ecreall.com>\n"
 "Language-Team: French\n"
@@ -30,11 +30,11 @@ msgstr "Ajouter"
 msgid "Additional address details"
 msgstr "Complément d'adresse"
 
-#: ../content/held_position.py:33
+#: ../content/held_position.py:34
 msgid "Additional label"
 msgstr "Intitulé"
 
-#: ../content/held_position.py:34
+#: ../content/held_position.py:35
 msgid "Additional label with information that does not appear on position label"
 msgstr "Intitulé complétant l'intitulé de poste"
 
@@ -98,7 +98,7 @@ msgid "Email"
 msgstr "Courriel "
 
 #: ../browser/templates/contact.pt:42
-#: ../content/held_position.py:41
+#: ../content/held_position.py:42
 msgid "End date"
 msgstr "Date de fin "
 
@@ -187,6 +187,10 @@ msgstr "Type d'organisation "
 msgid "Organization types"
 msgstr "Types d'organisations"
 
+#: ../content/held_position.py:30
+msgid "Organization/Position"
+msgstr "Organisation/Fonction"
+
 #: ../browser/templates/contact.pt:24
 #: ../browser/templates/directory.pt:16
 msgid "Organizations"
@@ -229,7 +233,7 @@ msgstr "Téléphone"
 msgid "Phone number"
 msgstr "Numéro de téléphone "
 
-#: ../content/held_position.py:45
+#: ../content/held_position.py:46
 #: ../content/person.py:48
 msgid "Photo"
 msgstr "Photo"
@@ -239,10 +243,6 @@ msgstr "Photo"
 #: ../content/directory.py:31
 msgid "Position"
 msgstr "Fonction "
-
-#: ../content/held_position.py:30
-msgid "Position or organization"
-msgstr "Fonction ou organisation"
 
 #: ../browser/templates/position.pt:11
 msgid "Position type"
@@ -265,7 +265,7 @@ msgid "Region"
 msgstr "Région"
 
 #: ../browser/templates/contact.pt:36
-#: ../content/held_position.py:37
+#: ../content/held_position.py:38
 msgid "Start date"
 msgstr "Date de début "
 
@@ -299,7 +299,12 @@ msgstr "Code postal"
 msgid "colon"
 msgstr " :"
 
+#. Default: "Please fill the organization first and then eventually select position"
+#: ../browser/addcontact.py:307
+msgid "help_add_organization_or_position_organization"
+msgstr "Veuillez commencer par sélectionner l'organisation, pour sélectionner ensuite la fonction éventuelle."
+
 #: ../browser/addcontact.py:61
-msgid "organization or position"
-msgstr "organisation ou fonction"
+msgid "organization/position"
+msgstr "organisation/fonction"
 

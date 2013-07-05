@@ -58,7 +58,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
                         'organization' in portal_types and \
                         'position' in portal_types:
                     url = "%s/@@add-organization" % directory_url
-                    type_name = _(u"organization or position")
+                    type_name = _(u"organization/position")
                 else:
                     url = "%s/@@add-contact" % directory_url
                     type_name = _(u"Contact")
@@ -297,10 +297,17 @@ class AddOrganization(form.AddForm):
     implements(IFieldsAndContentProvidersForm)
     contentProviders = ContentProviders(['organization-ms'])
     contentProviders['organization-ms'].position = -1
-    label = DMF(u"Add ${name}", mapping={'name': _(u"organization or position")})
+    label = DMF(u"Add ${name}", mapping={'name': _(u"organization/position")})
     description = u""
     prefix = 'oform'
     fields = field.Fields(IAddContact).select('organization', 'position')
+
+    def updateWidgets(self):
+        super(AddOrganization, self).updateWidgets()
+        self.widgets['organization'].label = _(
+                 'help_add_organization_or_position_organization',
+                 "Please fill the organization first "
+                 "and then eventually select position")
 
     @button.buttonAndHandler(_('Add'), name='save')
     def handleAdd(self, action):

@@ -27,8 +27,9 @@ class IHeldPosition(model.Schema, IContactContent):
     """Interface for HeldPosition content type"""
 
     position = ContactChoice(
-        title=_("Position or organization"),
-        source=ContactSourceBinder(portal_type=("organization", "position"))
+        title=_("Organization/Position"),
+        source=ContactSourceBinder(portal_type=("organization", "position")),
+        required=True,
     )
     label = schema.TextLine(title=_("Additional label"),
                             description=_("Additional label with information that does not appear on position label"),

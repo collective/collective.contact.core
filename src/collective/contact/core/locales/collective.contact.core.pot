@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-07-05 08:47+0000\n"
+"POT-Creation-Date: 2013-07-05 10:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,11 +33,11 @@ msgstr ""
 msgid "Additional address details"
 msgstr ""
 
-#: ../content/held_position.py:33
+#: ../content/held_position.py:34
 msgid "Additional label"
 msgstr ""
 
-#: ../content/held_position.py:34
+#: ../content/held_position.py:35
 msgid "Additional label with information that does not appear on position label"
 msgstr ""
 
@@ -101,7 +101,7 @@ msgid "Email"
 msgstr ""
 
 #: ../browser/templates/contact.pt:42
-#: ../content/held_position.py:41
+#: ../content/held_position.py:42
 msgid "End date"
 msgstr ""
 
@@ -190,6 +190,10 @@ msgstr ""
 msgid "Organization types"
 msgstr ""
 
+#: ../content/held_position.py:30
+msgid "Organization/Position"
+msgstr ""
+
 #: ../browser/templates/contact.pt:24
 #: ../browser/templates/directory.pt:16
 msgid "Organizations"
@@ -232,7 +236,7 @@ msgstr ""
 msgid "Phone number"
 msgstr ""
 
-#: ../content/held_position.py:45
+#: ../content/held_position.py:46
 #: ../content/person.py:48
 msgid "Photo"
 msgstr ""
@@ -241,10 +245,6 @@ msgstr ""
 #: ../browser/templates/contact.pt:16
 #: ../content/directory.py:31
 msgid "Position"
-msgstr ""
-
-#: ../content/held_position.py:30
-msgid "Position or organization"
 msgstr ""
 
 #: ../browser/templates/position.pt:11
@@ -268,7 +268,7 @@ msgid "Region"
 msgstr ""
 
 #: ../browser/templates/contact.pt:36
-#: ../content/held_position.py:37
+#: ../content/held_position.py:38
 msgid "Start date"
 msgstr ""
 
@@ -302,7 +302,12 @@ msgstr ""
 msgid "colon"
 msgstr ""
 
+#. Default: "Please fill the organization first and then eventually select position"
+#: ../browser/addcontact.py:307
+msgid "help_add_organization_or_position_organization"
+msgstr ""
+
 #: ../browser/addcontact.py:61
-msgid "organization or position"
+msgid "organization/position"
 msgstr ""
 

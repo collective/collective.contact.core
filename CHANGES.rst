@@ -4,6 +4,10 @@ Changelog
 1.0 (unreleased)
 ----------------
 
+- Messages that document better the organization / position held position
+  adding process.
+  [thomasdesvenain]
+
 - Display position label in title of held position view page.
   [thomasdesvenain]
 
