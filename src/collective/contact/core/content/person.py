@@ -15,6 +15,7 @@ from plone.supermodel import model
 from collective.contact.core import _
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.widget.interfaces import IContactContent
+from collective.contact.core.content.held_position import IHeldPosition
 
 
 class IPerson(model.Schema, IContactContent):
@@ -49,6 +50,9 @@ class IPerson(model.Schema, IContactContent):
         required=False,
         )
 
+    def get_held_positions(self):
+        """Returns held positions of this person
+        """
 
 class PersonContactableAdapter(Contactable):
     """Contactable adapter for Person content type"""
@@ -81,6 +85,8 @@ class Person(Container):
         # attributes are stored as unicode
         return self.get_title().encode('utf-8')
 
+    def get_held_positions(self):
+        return [obj for obj in self.values() if IHeldPosition.providedBy(obj)]
 
 class PersonSchemaPolicy(grok.GlobalUtility,
                          DexteritySchemaPolicy):
