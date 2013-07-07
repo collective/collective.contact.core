@@ -76,6 +76,11 @@
     />
 
   <adapter
+    name="SearchableText"
+    factory=".indexers.person_searchable_text"
+    />
+
+  <adapter
       factory=".behaviors.DefaultUseParentAddress"
       name="default" />
 
