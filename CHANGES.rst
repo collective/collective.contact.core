@@ -4,6 +4,12 @@ Changelog
 1.0 (unreleased)
 ----------------
 
+- Plain text search improvements :
+    - we can find persons with organization names, functions names,
+    - the same for held positions,
+    - indexation is updated when organization or function changes
+  [thomasdesvenain]
+
 - Messages that document better the organization / position held position
   adding process.
   [thomasdesvenain]

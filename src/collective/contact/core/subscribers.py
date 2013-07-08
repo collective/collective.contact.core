@@ -21,25 +21,25 @@ indexes_to_update = ['SearchableText']
 
 @grok.subscribe(IHeldPosition, IObjectCreatedEvent)
 @grok.subscribe(IHeldPosition, IObjectModifiedEvent)
-def update_related_with_held_position(obj):
+def update_related_with_held_position(obj, event=None):
     obj.get_person().reindexObject(idxs=indexes_to_update)
 
 
 @grok.subscribe(IPosition, IObjectModifiedEvent)
-def update_related_with_position(obj):
+def update_related_with_position(obj, event=None):
     for held_position in obj.get_held_positions():
         held_position.reindexObject(idxs=indexes_to_update)
         update_related_with_held_position(held_position)
 
 
 @grok.subscribe(IPerson, IObjectModifiedEvent)
-def update_related_with_person(obj):
+def update_related_with_person(obj, event=None):
     for held_position in obj.get_held_positions():
         held_position.reindexObject(idxs=indexes_to_update)
 
 
 @grok.subscribe(IOrganization, IObjectModifiedEvent)
-def update_related_with_organization(obj):
+def update_related_with_organization(obj, event=None):
     for held_position in obj.get_held_positions():
         held_position.reindexObject(idxs=indexes_to_update)
         update_related_with_held_position(held_position)
