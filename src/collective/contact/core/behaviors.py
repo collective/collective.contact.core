@@ -79,19 +79,24 @@ class IContactDetails(model.Schema):
     fieldset(
         'contact_details',
         label=_(u'Contact details'),
-        fields=('email',
-                'phone',
+        fields=('phone',
                 'cell_phone',
+                'email',
                 'im_handle',
-                'use_parent_address',
+                )
+        )
+    fieldset(
+        'address',
+        label=_(u'Address'),
+        fields=('use_parent_address',
                 'parent_address',
-                'country',
+                'number',
+                'street',
+                'additional_address_details',
                 'zip_code',
                 'city',
-                'street',
-                'number',
                 'region',
-                'additional_address_details',
+                'country',
                 )
         )
 
