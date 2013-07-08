@@ -19,7 +19,7 @@ def set_is_created(obj, event):
 
 indexes_to_update = ['SearchableText']
 
-@grok.subscribe(IHeldPosition, IObjectCreatedEvent)
+@grok.subscribe(IHeldPosition, IObjectAddedEvent)
 @grok.subscribe(IHeldPosition, IObjectModifiedEvent)
 def update_related_with_held_position(obj, event=None):
     obj.get_person().reindexObject(idxs=indexes_to_update)
