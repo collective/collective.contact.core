@@ -4,6 +4,9 @@ Changelog
 1.0 (unreleased)
 ----------------
 
+- New behaviour to add a "Related organizations" field on a content type.
+  [thomasdesvenain]
+
 - Plain text search improvements :
     - we can find persons with organization names, functions names,
     - the same for held positions,

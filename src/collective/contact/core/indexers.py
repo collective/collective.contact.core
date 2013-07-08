@@ -4,11 +4,19 @@ from collective.contact.core.content.held_position import IHeldPosition
 from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.content.position import IPosition
 from collective.contact.core.content.person import IPerson
+from collective.contact.core.behaviors import IRelatedOrganizations
 
 
 @indexer(IOrganization)
-def organization_searchable_text(obj):
-    return u' '.join(obj.get_organizations_titles())
+def organization_searchable_text(organization):
+    text = ''
+    if IRelatedOrganizations.providedBy(organization) \
+            and organization.related_organizations is not None:
+        for related in organization.related_organizations:
+            text += u' '.join(related.to_object.get_organizations_titles())
+
+    text += u' '.join(organization.get_organizations_titles())
+    return text
 
 
 @indexer(IHeldPosition)
@@ -31,8 +39,8 @@ def position_searchable_text(obj):
 
 @indexer(IPerson)
 def person_searchable_text(obj):
-    searchable_text = obj.SearchableText()
+    text = obj.SearchableText()
     for held_positions in obj.get_held_positions():
-        searchable_text += ' ' + held_position_searchable_text(held_positions)()
+        text += u' ' + held_position_searchable_text(held_positions)()
 
-    return searchable_text
+    return text

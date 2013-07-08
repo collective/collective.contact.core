@@ -21,4 +21,10 @@
         provides=".behaviors.IGlobalPositioning"
         />
 
+    <plone:behavior
+        title="Related organizations"
+        description="We can attach organizations on content."
+        provides=".behaviors.IRelatedOrganizations"
+        />
+
 </configure>

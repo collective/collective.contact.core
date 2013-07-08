@@ -17,6 +17,8 @@ from Products.CMFDefault.exceptions import EmailAddressInvalid
 
 from collective.contact.core import _
 from collective.contact.core.interfaces import IContactable
+from collective.contact.widget.schema import ContactChoice, ContactList
+from collective.contact.widget.source import ContactSourceBinder
 
 
 class InvalidEmailAddress(schema.ValidationError):
@@ -224,3 +226,25 @@ DefaultUseParentAddress = ComputedWidgetAttribute(
 DefaultParentAddress = ComputedWidgetAttribute(
     get_parent_address,
     field=IContactDetails['parent_address'], view=Interface)
+
+
+class IRelatedOrganizations(model.Schema):
+    """A content on which we can attach organizations
+    """
+
+    fieldset(
+        'related_organizations',
+        label=_(u'Related organizations'),
+        fields=('related_organizations',),
+        )
+
+    related_organizations = ContactList(
+            value_type=ContactChoice(
+                    description=_("Search and attach organizations related to this one"),
+                    source=ContactSourceBinder(portal_type=("organization",)),),
+            required=False,
+            addlink=False,
+    )
+
+
+alsoProvides(IRelatedOrganizations, IFormFieldProvider)

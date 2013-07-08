@@ -88,6 +88,7 @@ class Person(Container):
     def get_held_positions(self):
         return [obj for obj in self.values() if IHeldPosition.providedBy(obj)]
 
+
 class PersonSchemaPolicy(grok.GlobalUtility,
                          DexteritySchemaPolicy):
     """Schema policy for Person content type"""
