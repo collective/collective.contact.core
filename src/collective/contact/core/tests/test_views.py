@@ -231,7 +231,7 @@ class TestPersonView(TestView):
         self.assertEqual(person_view.name, "Général Charles De Gaulle")
 
         self.assertEqual(person_view.gender, 'M')
-        self.assertEqual(person_view.birthday, 'Nov 22, 1901')
+        self.assertIn(person_view.birthday, ('Nov 22, 1901', '1901-11-22'))
 
         self.assertEqual(person_view.email, 'charles.de.gaulle@armees.fr')
         self.assertEqual(person_view.phone, '')
