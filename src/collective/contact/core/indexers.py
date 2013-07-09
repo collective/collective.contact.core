@@ -39,8 +39,9 @@ def position_searchable_text(obj):
 
 @indexer(IPerson)
 def person_searchable_text(obj):
+    results = []
     text = obj.SearchableText()
+    results.append(text)
     for held_positions in obj.get_held_positions():
-        text += u' ' + held_position_searchable_text(held_positions)()
-
-    return text
+        results.append(held_position_searchable_text(held_positions)())
+    return results
