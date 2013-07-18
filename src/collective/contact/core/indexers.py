@@ -6,6 +6,11 @@ from collective.contact.core.content.position import IPosition
 from collective.contact.core.content.person import IPerson
 from collective.contact.core.behaviors import IRelatedOrganizations
 
+def ensure_unicode(x):
+    if not isinstance(x, unicode):
+        x = unicode(x, 'utf-8', 'ignore')
+    return x
+
 
 @indexer(IOrganization)
 def organization_searchable_text(organization):
@@ -34,14 +39,13 @@ def held_position_searchable_text(obj):
 
 @indexer(IPosition)
 def position_searchable_text(obj):
-    return obj.SearchableText() + obj.get_organization().Title()
+    return ensure_unicode(obj.SearchableText()) + ensure_unicode(obj.get_organization().Title())
 
 
 @indexer(IPerson)
 def person_searchable_text(obj):
     results = []
-    text = obj.SearchableText()
-    results.append(text)
+    results.append(ensure_unicode(obj.SearchableText()))
     for held_positions in obj.get_held_positions():
-        results.append(held_position_searchable_text(held_positions)())
+        results.append(ensure_unicode(held_position_searchable_text(held_positions)()))
     return results
