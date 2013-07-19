@@ -16,6 +16,8 @@ class NoDirectoryFound(Exception):
 def get_directory(context):
     """Get collective.contact.core Directory"""
     parent = context
+    if not parent:
+        raise NoDirectoryFound
     while parent.portal_type != "directory":
         parent = aq_parent(parent)
         if getattr(parent, 'portal_type', None) is None:
