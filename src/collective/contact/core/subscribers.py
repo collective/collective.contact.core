@@ -1,7 +1,7 @@
 from five import grok
 
 from zope.lifecycleevent.interfaces import IObjectAddedEvent,\
-    IObjectCreatedEvent, IObjectModifiedEvent
+    IObjectModifiedEvent
 
 from collective.contact.widget.interfaces import IContactContent
 from collective.contact.core.content.held_position import IHeldPosition
@@ -18,6 +18,7 @@ def set_is_created(obj, event):
 # update indexes of related content when a content is modified
 
 indexes_to_update = ['SearchableText']
+
 
 @grok.subscribe(IHeldPosition, IObjectAddedEvent)
 @grok.subscribe(IHeldPosition, IObjectModifiedEvent)
