@@ -6,9 +6,4 @@
     id="++resource++collective.contact.core/forms.js"
     />
 
- <javascript cacheable="True" compression="safe" cookable="True"
-    enabled="1" expression=""
-    id="++resource++collective.contact.core/view.js"
-    />
-
 </object>
