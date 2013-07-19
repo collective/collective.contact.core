@@ -22,6 +22,7 @@ from collective.contact.widget.source import ContactSourceBinder
 from collective.contact.widget.interfaces import IContactWidgetSettings
 
 from collective.contact.core import _
+from collective.contact.core.content.person import IPerson
 
 
 class ContactWidgetSettings(grok.GlobalUtility):
@@ -47,9 +48,14 @@ class ContactWidgetSettings(grok.GlobalUtility):
             directory_url = directory.absolute_url()
             if len(portal_types) == 1:
                 portal_type = portal_types[0]
-                url = '%s/++add++%s' % (directory_url, portal_type)
-                fti = getUtility(IDexterityFTI, name=portal_type)
-                type_name = fti.Title()
+                if portal_type == 'held_position' and not IPerson.providedBy(widget.context):
+                    url = "%s/@@add-contact" % directory_url
+                    type_name = _(u"Contact")
+                else:
+                    url = '%s/++add++%s' % (directory_url, portal_type)
+                    fti = getUtility(IDexterityFTI, name=portal_type)
+                    type_name = fti.Title()
+                
                 label = DMF(u"Add ${name}", mapping={'name': type_name})
                 action = {'url': url, 'label': label}
                 actions.append(action)
