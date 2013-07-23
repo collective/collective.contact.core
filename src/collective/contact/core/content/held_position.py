@@ -142,7 +142,7 @@ class HeldPosition(Container):
         if position is None and not self.label:
             return u"%s (%s)" % (person_name,
                                  root_organization)
-        elif position is None and len(self.label) > 0:
+        elif position is None and self.label:
             position_name = self.label
             return u"%s (%s - %s)" % (person_name,
                                       root_organization,
