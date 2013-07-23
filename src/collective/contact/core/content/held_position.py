@@ -139,9 +139,14 @@ class HeldPosition(Container):
         person_name = self.get_person().get_title()
         root_organization = self.get_organization().get_root_organization().title
         position = self.get_position()
-        if position is None:
+        if position is None and not self.label:
             return u"%s (%s)" % (person_name,
                                  root_organization)
+        elif position is None and len(self.label) > 0:
+            position_name = self.label
+            return u"%s (%s - %s)" % (person_name,
+                                      root_organization,
+                                      position_name)
         else:
             position_name = position.title
             return u"%s (%s - %s)" % (person_name,
