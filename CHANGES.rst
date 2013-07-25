@@ -4,6 +4,9 @@ Changelog
 1.0 (unreleased)
 ----------------
 
+- "Add new" popup link is renamed from "Add ..." to "Create ..."
+  [thomasdesvenain]
+
 - New behaviour to add a "Related organizations" field on a content type.
   [thomasdesvenain]
 

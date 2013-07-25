@@ -56,7 +56,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
                     fti = getUtility(IDexterityFTI, name=portal_type)
                     type_name = fti.Title()
                 
-                label = DMF(u"Add ${name}", mapping={'name': type_name})
+                label = _(u"Create ${name}", mapping={'name': type_name})
                 action = {'url': url, 'label': label}
                 actions.append(action)
             else:
@@ -69,7 +69,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
                     url = "%s/@@add-contact" % directory_url
                     type_name = _(u"Contact")
                 close_on_click = False
-                label = DMF(u"Add ${name}", mapping={'name': type_name})
+                label = _(u"Create ${name}", mapping={'name': type_name})
                 action = {'url': url, 'label': label,
                           'klass': 'addnew',
                           'formselector' : '#oform',
@@ -202,7 +202,7 @@ class AddContact(DefaultAddForm, form.AddForm):
     contentProviders = ContentProviders(['organization-ms'])
 #    contentProviders['organization-ms'] = MasterSelectAddContactProvider
     contentProviders['organization-ms'].position = -1
-    label = DMF(u"Add ${name}", mapping={'name': _(u"Contact")})
+    label = _(u"Create ${name}", mapping={'name': _(u"Contact")})
     description = u""
     schema = IAddContact
     portal_type = 'held_position'
@@ -289,7 +289,7 @@ class AddContact(DefaultAddForm, form.AddForm):
         container = self._container
         fti = getUtility(IDexterityFTI, name=self.portal_type)
         new_object = addContentToContainer(container, obj)
-
+        
         if fti.immediate_view:
             self.immediate_view = "%s/%s/%s" % (container.absolute_url(),
                                                 new_object.id,
@@ -303,7 +303,7 @@ class AddOrganization(form.AddForm):
     implements(IFieldsAndContentProvidersForm)
     contentProviders = ContentProviders(['organization-ms'])
     contentProviders['organization-ms'].position = -1
-    label = DMF(u"Add ${name}", mapping={'name': _(u"organization/position")})
+    label = _(u"Create ${name}", mapping={'name': _(u"organization/position")})
     description = u""
     prefix = 'oform'
     fields = field.Fields(IAddContact).select('organization', 'position')

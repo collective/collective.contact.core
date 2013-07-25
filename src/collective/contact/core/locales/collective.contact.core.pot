@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-07-08 09:22+0000\n"
+"POT-Creation-Date: 2013-07-25 09:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,11 +25,11 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: ../browser/addcontact.py:238
+#: ../browser/addcontact.py:244
 msgid "Add"
 msgstr ""
 
-#: ../behaviors.py:214
+#: ../behaviors.py:219
 msgid "Additional address details"
 msgstr ""
 
@@ -41,6 +41,7 @@ msgstr ""
 msgid "Additional label with information that does not appear on position label"
 msgstr ""
 
+#: ../behaviors.py:90
 #: ../browser/templates/address.pt:5
 msgid "Address"
 msgstr ""
@@ -51,7 +52,7 @@ msgstr ""
 msgid "Birthday"
 msgstr ""
 
-#: ../behaviors.py:110
+#: ../behaviors.py:115
 msgid "Cell phone"
 msgstr ""
 
@@ -61,11 +62,11 @@ msgstr ""
 msgid "Cell phone number"
 msgstr ""
 
-#: ../behaviors.py:194
+#: ../behaviors.py:199
 msgid "City"
 msgstr ""
 
-#: ../browser/addcontact.py:64
+#: ../browser/addcontact.py:53
 msgid "Contact"
 msgstr ""
 
@@ -73,8 +74,12 @@ msgstr ""
 msgid "Contact details"
 msgstr ""
 
-#: ../behaviors.py:184
+#: ../behaviors.py:189
 msgid "Country"
+msgstr ""
+
+#: ../browser/addcontact.py:59
+msgid "Create ${name}"
 msgstr ""
 
 #: ../upgrades/profiles/v2/workflows/collective_contact_core_workflow/definition.xml
@@ -94,7 +99,7 @@ msgstr ""
 msgid "Download VCard"
 msgstr ""
 
-#: ../behaviors.py:99
+#: ../behaviors.py:104
 #: ../browser/templates/contact.pt:54
 #: ../browser/templates/organization.pt:29
 msgid "Email"
@@ -105,7 +110,7 @@ msgstr ""
 msgid "End date"
 msgstr ""
 
-#: ../vocabulary.py:78
+#: ../vocabulary.py:80
 msgid "Feminine"
 msgstr ""
 
@@ -132,7 +137,7 @@ msgstr ""
 msgid "IM handle"
 msgstr ""
 
-#: ../behaviors.py:115
+#: ../behaviors.py:120
 msgid "Instant messenger handle"
 msgstr ""
 
@@ -152,7 +157,7 @@ msgstr ""
 msgid "Longitude"
 msgstr ""
 
-#: ../vocabulary.py:78
+#: ../vocabulary.py:80
 msgid "Masculine"
 msgstr ""
 
@@ -164,11 +169,11 @@ msgstr ""
 msgid "Not assigned"
 msgstr ""
 
-#: ../behaviors.py:204
+#: ../behaviors.py:209
 msgid "Number"
 msgstr ""
 
-#: ../browser/addcontact.py:179
+#: ../browser/addcontact.py:185
 #: ../content/directory.py:38
 #: ../profiles/default/types/organization.xml
 msgid "Organization"
@@ -212,7 +217,7 @@ msgstr ""
 msgid "Parent organizations"
 msgstr ""
 
-#: ../browser/addcontact.py:184
+#: ../browser/addcontact.py:190
 #: ../profiles/default/types/person.xml
 #: ../upgrades/profiles/v2/types/person.xml
 msgid "Person"
@@ -226,7 +231,7 @@ msgstr ""
 msgid "Persons"
 msgstr ""
 
-#: ../behaviors.py:105
+#: ../behaviors.py:110
 msgid "Phone"
 msgstr ""
 
@@ -241,7 +246,7 @@ msgstr ""
 msgid "Photo"
 msgstr ""
 
-#: ../browser/addcontact.py:189
+#: ../browser/addcontact.py:195
 #: ../browser/templates/contact.pt:16
 #: ../content/directory.py:31
 msgid "Position"
@@ -263,15 +268,15 @@ msgstr ""
 msgid "Positions in this organization"
 msgstr ""
 
-#: ../behaviors.py:209
+#: ../behaviors.py:214
 msgid "Region"
 msgstr ""
 
-#: ../behaviors.py:237
+#: ../behaviors.py:242
 msgid "Related organizations"
 msgstr ""
 
-#: ../behaviors.py:243
+#: ../behaviors.py:248
 msgid "Search and attach organizations related to this one"
 msgstr ""
 
@@ -280,7 +285,7 @@ msgstr ""
 msgid "Start date"
 msgstr ""
 
-#: ../behaviors.py:199
+#: ../behaviors.py:204
 msgid "Street"
 msgstr ""
 
@@ -296,11 +301,11 @@ msgstr ""
 msgid "Type or level"
 msgstr ""
 
-#: ../behaviors.py:120
+#: ../behaviors.py:125
 msgid "Use the belonging entity address"
 msgstr ""
 
-#: ../behaviors.py:189
+#: ../behaviors.py:194
 msgid "Zip Code"
 msgstr ""
 
@@ -311,11 +316,11 @@ msgid "colon"
 msgstr ""
 
 #. Default: "Please fill the organization first and then eventually select position"
-#: ../browser/addcontact.py:307
+#: ../browser/addcontact.py:313
 msgid "help_add_organization_or_position_organization"
 msgstr ""
 
-#: ../browser/addcontact.py:61
+#: ../browser/addcontact.py:67
 msgid "organization/position"
 msgstr ""
 
