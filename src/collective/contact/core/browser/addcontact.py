@@ -51,14 +51,20 @@ class ContactWidgetSettings(grok.GlobalUtility):
                 if portal_type == 'held_position' and not IPerson.providedBy(widget.context):
                     url = "%s/@@add-contact" % directory_url
                     type_name = _(u"Contact")
+                    label = DMF(u"Add ${name}", mapping={'name': type_name})
+                    action = {'url': url, 'label': label,
+                              'klass': 'addnew',
+                              'formselector' : '#oform',
+                              'closeselector': '[name="oform.buttons.cancel"]'}
+                    actions.append(action)
+                    close_on_click = False
                 else:
                     url = '%s/++add++%s' % (directory_url, portal_type)
                     fti = getUtility(IDexterityFTI, name=portal_type)
                     type_name = fti.Title()
-                
-                label = DMF(u"Add ${name}", mapping={'name': type_name})
-                action = {'url': url, 'label': label}
-                actions.append(action)
+                    label = DMF(u"Add ${name}", mapping={'name': type_name})
+                    action = {'url': url, 'label': label}
+                    actions.append(action)
             else:
                 if len(portal_types) == 2 and \
                         'organization' in portal_types and \
