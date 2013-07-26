@@ -36,12 +36,14 @@ class ContactWidgetSettings(grok.GlobalUtility):
 
         catalog = getToolByName(widget.context, 'portal_catalog')
         results = catalog.unrestrictedSearchResults(portal_type='directory')
-        directory = results[0].getObject()
-
-        sm = getSecurityManager()
         actions = []
-        if not sm.checkPermission("Add portal content", directory):
+        if len(results) == 0:
             addlink_enabled = False
+        else:
+            directory = results[0].getObject()
+            sm = getSecurityManager()
+            if not sm.checkPermission("Add portal content", directory):
+                addlink_enabled = False
 
         close_on_click = True
         if addlink_enabled:
@@ -295,7 +297,7 @@ class AddContact(DefaultAddForm, form.AddForm):
         container = self._container
         fti = getUtility(IDexterityFTI, name=self.portal_type)
         new_object = addContentToContainer(container, obj)
-        
+
         if fti.immediate_view:
             self.immediate_view = "%s/%s/%s" % (container.absolute_url(),
                                                 new_object.id,
