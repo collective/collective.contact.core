@@ -73,6 +73,13 @@
       />
 
   <browser:page
+      name="add-contact"
+      for="..content.organization.IOrganization"
+      class=".addcontact.AddContactFromOrganization"
+      permission="cmf.AddPortalContent"
+      />
+
+  <browser:page
       name="add-organization"
       for="*"
       class=".addcontact.AddOrganization"

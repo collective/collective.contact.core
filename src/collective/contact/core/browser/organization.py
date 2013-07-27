@@ -1,3 +1,4 @@
+from AccessControl import getSecurityManager
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 
@@ -7,6 +8,25 @@ from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.browser.utils import get_ttw_fields
 from collective.contact.core.interfaces import IContactable
 
+
+ADDNEW_OVERLAY = """
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.addnewcontactfromorganization').prepOverlay({
+      subtype: 'ajax',
+      filter: common_content_filter,
+      formselector: '#oform',
+      cssclass: 'overlay-contact-addnew',
+      closeselector: '[name="oform.buttons.cancel"]',
+      noform: function(el, pbo) {return 'reload';},
+      config: {
+          closeOnClick: false,
+          closeOnEsc: false
+      }
+    });
+});
+</script>
+"""
 
 class Organization(BaseView):
 
@@ -51,3 +71,6 @@ class Organization(BaseView):
 
         held_positions = organization.get_held_positions()
         self.othercontacts = [hp.get_person() for hp in held_positions]
+        sm = getSecurityManager()
+        self.can_add = sm.checkPermission('Add portal content', self.context)
+        self.addnew_script = ADDNEW_OVERLAY

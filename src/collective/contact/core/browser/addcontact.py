@@ -183,6 +183,9 @@ $(document).ready(function() {
     $(this).trigger('click');
   });
 
+  // If organization was pre filled, we need to trigger the change event.
+  o.find('#oform-widgets-organization-input-fields input').trigger('change');
+
 });
 </script>
 """
@@ -305,6 +308,14 @@ class AddContact(DefaultAddForm, form.AddForm):
         else:
             self.immediate_view = "%s/%s" % (container.absolute_url(),
                                              new_object.id)
+
+
+class AddContactFromOrganization(AddContact):
+    def updateWidgets(self):
+        if 'oform.widgets.organization' not in self.request.form:
+            self.request.form['oform.widgets.organization'] = '/'.join(
+                    self.context.getPhysicalPath())
+        super(AddContactFromOrganization, self).updateWidgets()
 
 
 class AddOrganization(form.AddForm):

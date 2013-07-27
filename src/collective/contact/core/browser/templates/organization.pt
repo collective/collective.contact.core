@@ -99,6 +99,16 @@
         </ul>
     </div>
 
+    <tal:addnew
+           tal:define="ajax_load request/ajax_load|nothing"
+           tal:condition="python: not ajax_load and view.can_add">
+        <a href="@@add-contact" class="addnewcontactfromorganization"
+           i18n:translate=""
+           tal:attributes="href string:${context/absolute_url}/@@add-contact">
+          Create <tal:i18n i18n:name="name">Contact</tal:i18n></a>
+        <script tal:replace="structure view/addnew_script"></script>
+    </tal:addnew>
+
     <tal:block tal:repeat="field view/ttw_fields">
         <div class="field" tal:define="widget python: view.widgets[field]" tal:condition="widget/value">
             <label><tal:block tal:content="python: widget.label" i18n:translate="" />:</label>
