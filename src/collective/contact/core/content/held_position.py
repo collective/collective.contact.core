@@ -124,7 +124,8 @@ class HeldPosition(Container):
         organization = self.get_organization().get_root_organization()
         if position == organization:
             if self.label:
-                return "%s (%s) " % (self.label, position.Title())
+                return "%s (%s) " % (self.label.encode('utf-8'),
+                                     position.Title())
             else:
                 return organization.Title()
         else:
