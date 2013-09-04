@@ -12,7 +12,7 @@ from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.namedfile.field import NamedImage
 from plone.supermodel import model
-from plone.formwidget.datetime.z3cform import DatetimeWidget
+from plone.formwidget.datetime.z3cform import DateWidget
 
 from collective.contact.core import _
 from collective.contact.core.browser.contactable import Contactable
@@ -20,10 +20,10 @@ from collective.contact.widget.interfaces import IContactContent
 from collective.contact.core.content.held_position import IHeldPosition
 
 
-def DatetimeFieldWidget(field, request):
+def DateFieldWidget(field, request):
     """IFieldWidget factory for DatetimeWidget."""
-    widget = FieldWidget(field, DatetimeWidget(request))
-    widget.years_range = (-100, 1)
+    widget = FieldWidget(field, DateWidget(request))
+    widget.years_range = (-200, 1)
     return widget
 
 
@@ -50,7 +50,7 @@ class IPerson(model.Schema, IContactContent):
         title=_("Person title"),
         required=False,
         )
-    form.widget(birthday=DatetimeFieldWidget)
+    form.widget(birthday=DateFieldWidget)
     birthday = schema.Date(
         title=_("Birthday"),
         required=False,
