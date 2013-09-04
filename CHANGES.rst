@@ -4,6 +4,9 @@ Changelog
 1.0 (unreleased)
 ----------------
 
+- Use (-100, 1) years range for birthday field.
+  [vincentfretin]
+
 - "Add new" popup link is renamed from "Add ..." to "Create ..."
   [thomasdesvenain]
 

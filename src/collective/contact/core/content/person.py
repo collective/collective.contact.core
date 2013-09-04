@@ -3,6 +3,7 @@ from zope.interface import implements
 from zope.interface import Attribute
 from z3c.form.interfaces import NO_VALUE
 from z3c.form.browser.radio import RadioFieldWidget
+from z3c.form.widget import FieldWidget
 
 from five import grok
 
@@ -11,11 +12,19 @@ from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.namedfile.field import NamedImage
 from plone.supermodel import model
+from plone.formwidget.datetime.z3cform import DatetimeWidget
 
 from collective.contact.core import _
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.widget.interfaces import IContactContent
 from collective.contact.core.content.held_position import IHeldPosition
+
+
+def DatetimeFieldWidget(field, request):
+    """IFieldWidget factory for DatetimeWidget."""
+    widget = FieldWidget(field, DatetimeWidget(request))
+    widget.years_range = (-100, 1)
+    return widget
 
 
 class IPerson(model.Schema, IContactContent):
@@ -41,6 +50,7 @@ class IPerson(model.Schema, IContactContent):
         title=_("Person title"),
         required=False,
         )
+    form.widget(birthday=DatetimeFieldWidget)
     birthday = schema.Date(
         title=_("Birthday"),
         required=False,
