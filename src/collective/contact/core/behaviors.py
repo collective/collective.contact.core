@@ -3,14 +3,17 @@ from zope.interface import Interface
 from zope import schema
 from Acquisition import aq_base
 
+from z3c.form.widget import ComputedWidgetAttribute
+from z3c.form.widget import FieldWidget
 from plone.supermodel import model
+
 from plone.supermodel.directives import fieldset
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.autoform import directives as form
 from plone.formwidget.masterselect import MasterSelectBoolField
+from plone.formwidget.datetime.z3cform import DateWidget
 from plone.app.textfield import RichText
 from plone.app.dexterity.browser.types import TypeSchemaContext
-from z3c.form.widget import ComputedWidgetAttribute
 
 from Products.CMFDefault.utils import checkEmailAddress
 from Products.CMFDefault.exceptions import EmailAddressInvalid
@@ -232,6 +235,22 @@ DefaultParentAddress = ComputedWidgetAttribute(
     get_parent_address,
     field=IContactDetails['parent_address'], view=Interface)
 
+
+
+def DateFieldWidget(field, request):
+    """IFieldWidget factory for DatetimeWidget."""
+    widget = FieldWidget(field, DateWidget(request))
+    widget.years_range = (-200, 1)
+    return widget
+
+
+class IBirthday(model.Schema):
+
+    form.widget(birthday=DateFieldWidget)
+    birthday = schema.Date(
+        title=_("Birthday"),
+        required=False,
+        )
 
 class IRelatedOrganizations(model.Schema):
     """A content on which we can attach organizations

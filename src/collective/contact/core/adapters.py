@@ -6,6 +6,7 @@ from Products.CMFPlone.utils import safe_unicode
 from collective.contact.core.interfaces import IVCard, IContactable
 from collective.contact.core.content.held_position import IHeldPosition,\
                                                              HeldPosition
+from collective.contact.core.behaviors import IBirthday
 
 
 class HeldPositionVCard(grok.Adapter):
@@ -35,7 +36,7 @@ class HeldPositionVCard(grok.Adapter):
         vcard.add('fn')
         vcard.fn.value = ' '.join([e for e in (firstname, lastname) if e])
 
-        if person.birthday is not None:
+        if IBirthday.providedBy(person) and person.birthday is not None:
             vcard.add('bday')
             vcard.bday.value = person.birthday.isoformat()
 

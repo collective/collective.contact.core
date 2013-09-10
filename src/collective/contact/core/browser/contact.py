@@ -4,6 +4,7 @@ from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.browser.utils import get_ttw_fields,\
     date_to_DateTime
 from collective.contact.core.interfaces import IContactable
+from collective.contact.core.behaviors import IBirthday
 
 
 class Contact(BaseView):
@@ -35,11 +36,14 @@ class Contact(BaseView):
         self.person = person
         self.fullname = person.Title()
         self.title = held_position.Title()
-
-        birthday = person.birthday
-        if birthday is not None:
-            birthday = date_to_DateTime(birthday)
-            self.birthday = self.context.toLocalizedTime(birthday)
+        
+        if IBirthday.providedBy(person):
+            birthday = person.birthday
+            if birthday is not None:
+                birthday = date_to_DateTime(birthday)
+                self.birthday = self.context.toLocalizedTime(birthday)
+        else:
+            self.birthday = None
 
         self.gender = person.gender or ''
 

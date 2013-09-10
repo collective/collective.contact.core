@@ -4,6 +4,9 @@ Changelog
 1.0 (unreleased)
 ----------------
 
+- Birthday is now optional as a behaviour.
+  [thomasdesvenain]
+
 - Use (-200, 1) years range for birthday field.
   [vincentfretin]
 

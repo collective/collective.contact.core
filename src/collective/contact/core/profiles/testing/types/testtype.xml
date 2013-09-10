@@ -21,6 +21,7 @@
  <property name="behaviors">
  	<element value="collective.contact.core.behaviors.IContactDetails" />
  	<element value="collective.contact.core.behaviors.IGlobalPositioning" />
+ 	<element value="collective.contact.core.behaviors.IBirthday" />
 </property>
  <property name="schema" />
  <!-- DO NOT use a model_source or it removes manually added fields while reapplying the profile -->

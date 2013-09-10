@@ -12,7 +12,7 @@ from ecreall.helpers.testing.base import BaseTest
 
 from collective.contact.core.testing import INTEGRATION
 from collective.contact.core.behaviors import IContactDetails,\
-    IGlobalPositioning
+    IGlobalPositioning, IBirthday
 
 
 class TestBehaviors(unittest.TestCase, BaseTest):
@@ -33,18 +33,22 @@ class TestBehaviors(unittest.TestCase, BaseTest):
                 name='collective.contact.core.behaviors.IContactDetails')
         global_positioning_behavior = getUtility(IBehavior,
                 name='collective.contact.core.behaviors.IGlobalPositioning')
+        birthday_behavior = getUtility(IBehavior,
+                name='collective.contact.core.behaviors.IBirthday')
         self.assertEqual(contact_details_behavior.interface, IContactDetails)
         self.assertEqual(global_positioning_behavior.interface,
                          IGlobalPositioning)
+        self.assertEqual(birthday_behavior.interface, IBirthday)
         IFormFieldProvider.providedBy(contact_details_behavior.interface)
         IFormFieldProvider.providedBy(global_positioning_behavior.interface)
+        IFormFieldProvider.providedBy(birthday_behavior.interface)
 
     def test_contact_details_fields(self):
         item = self.testitem
         self.assertIsNone(item.getAttributes())
         for attr in ('country', 'region', 'zip_code', 'city', 'street',
                      'number', 'im_handle', 'cell_phone', 'phone', 'email',
-                     'additional_address_details'):
+                     'additional_address_details', 'birthday'):
             self.assertTrue(hasattr(item, attr))
         item.phone = '0655443322'
         item.email = 'toto@example.com'
