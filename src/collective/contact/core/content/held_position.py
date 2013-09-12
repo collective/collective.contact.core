@@ -137,7 +137,7 @@ class HeldPosition(Container):
         It is constituted by the person's who held the position name,
         the root organization and the position name (if any)
         """
-        person_name = self.get_person().get_title()
+        person_name = self.get_person_title()
         root_organization = self.get_organization().get_root_organization().title
         position = self.get_position()
         if position is None and not self.label:
@@ -153,7 +153,10 @@ class HeldPosition(Container):
             return u"%s (%s - %s)" % (person_name,
                                       root_organization,
                                       position_name)
-
+    
+    def get_person_title(self):
+        return self.get_person().get_title()
+    
     @acqproperty
     def photo(self):
         """Get photo from Person"""

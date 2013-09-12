@@ -184,6 +184,8 @@ class TestHeldPosition(TestContentTypes):
                          u"Général Charles De Gaulle (Armée de terre - Général de l'armée de terre)")
         self.assertEqual(self.sergent_pepper.get_full_title(),
                          u"Sergent Pepper (Armée de terre - Sergent de la brigade LH)")
+        self.assertEqual(self.gadt.get_person_title(),
+                         u"Général Charles De Gaulle")
 
     def test_get_person(self):
         pass
