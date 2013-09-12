@@ -252,6 +252,9 @@ class IBirthday(model.Schema):
         required=False,
         )
 
+alsoProvides(IBirthday, IFormFieldProvider)
+
+
 class IRelatedOrganizations(model.Schema):
     """A content on which we can attach organizations
     """
