@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0 (unreleased)
+1.0 (2013-09-13)
 ----------------
 
 - Birthday is now optional as a behaviour.
