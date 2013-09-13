@@ -4,7 +4,7 @@ Changelog
 1.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Fixed use parent address if we set Contact Details behaviour on held positions.
 
 
 1.0 (2013-09-13)

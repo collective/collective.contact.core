@@ -226,8 +226,20 @@ class IContactDetails(model.Schema):
 alsoProvides(IContactDetails, IFormFieldProvider)
 
 
+def default_use_parent_address(adapter):
+    """We don't use parent address by default for contacts and level-0 organizations
+    """
+    from collective.contact.core.content.directory import IDirectory
+    if adapter.view._parent.portal_type == 'person':
+        return False
+    if adapter.view._parent.portal_type == 'organization' \
+        and IDirectory.providedBy(adapter.context):
+        return False
+    else:
+        return True
+
 DefaultUseParentAddress = ComputedWidgetAttribute(
-    get_parent_address,
+    default_use_parent_address,
     field=IContactDetails['use_parent_address'], view=Interface)
 
 

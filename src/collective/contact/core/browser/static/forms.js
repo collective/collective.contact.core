@@ -65,5 +65,5 @@ manage_hide_use_parent_address = function(){
 $(document).ready(function(){
     $(document).delegate('#formfield-form-widgets-gender input', 'change', update_person_title);
     manage_directory();
-    manage_hide_use_parent_address();
+    //manage_hide_use_parent_address();
 });

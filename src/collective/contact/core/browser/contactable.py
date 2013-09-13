@@ -40,12 +40,13 @@ class Contactable(grok.Adapter):
         we use the one of the first object in this list which have this information
         """
         contactables = []
-        if self.person is not None:
-            contactables.append(self.person)
-        if self.position is not None:
-            contactables.append(self.position)
-        if self.organizations:
-            contactables.extend(reversed(self.organizations))
+        related_items = [self.context, self.person, self.position] + list(reversed(self.organizations))
+        for related_item in related_items:
+            if related_item is not None \
+              and IContactDetails.providedBy(related_item) \
+              and related_item not in contactables:
+                contactables.append(related_item)
+            
         return contactables
 
     def _get_address(self, contactables):
@@ -70,6 +71,7 @@ class Contactable(grok.Adapter):
                     break
             else:
                 contact_details[field] = ''
+                
         contactables = self._get_contactables()
         contact_details['address'] = self._get_address(contactables)
         return contact_details
