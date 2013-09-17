@@ -124,7 +124,7 @@ $(document).ready(function() {
 
   function get_selected_organization(form) {
     var view = serialize_form(form);
-    var token = view['oform.widgets.organization'];
+    var token = view['oform.widgets.organization:list'];
     var title = form.find('#oform-widgets-organization-input-fields input[value="'+token+'"]').siblings('.label').find('a').first().text();
     var path = '/' + token.split('/').slice(2).join('/');
     return {token: token, title: title, path: path};
