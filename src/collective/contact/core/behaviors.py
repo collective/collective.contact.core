@@ -230,9 +230,14 @@ def default_use_parent_address(adapter):
     """We don't use parent address by default for contacts and level-0 organizations
     """
     from collective.contact.core.content.directory import IDirectory
+    try:
+        parent = adapter.view._parent
+    except AttributeError:
+        return False
+
     if adapter.view._parent.portal_type == 'person':
         return False
-    if adapter.view._parent.portal_type == 'organization' \
+    elif adapter.view._parent.portal_type == 'organization' \
         and IDirectory.providedBy(adapter.context):
         return False
     else:
