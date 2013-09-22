@@ -4,6 +4,8 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Fixed javascript in @@add-organization view.
+
 - Fixed use parent address if we set Contact Details behaviour on held positions.
 
 

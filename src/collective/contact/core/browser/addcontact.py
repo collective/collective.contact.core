@@ -321,7 +321,7 @@ class AddContactFromOrganization(AddContact):
 class AddOrganization(form.AddForm):
     implements(IFieldsAndContentProvidersForm)
     contentProviders = ContentProviders(['organization-ms'])
-    contentProviders['organization-ms'].position = -1
+    contentProviders['organization-ms'].position = 2
     label = _(u"Create ${name}", mapping={'name': _(u"organization/position")})
     description = u""
     prefix = 'oform'
