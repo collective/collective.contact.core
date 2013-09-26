@@ -235,9 +235,15 @@ def default_use_parent_address(adapter):
     except AttributeError:
         return False
 
-    if adapter.view._parent.portal_type == 'person':
+    try:
+        parent_type = parent.portal_type
+    except:
+        # in schema editor
         return False
-    elif adapter.view._parent.portal_type == 'organization' \
+
+    if parent_type == 'person':
+        return False
+    elif parent_type == 'organization' \
         and IDirectory.providedBy(adapter.context):
         return False
     else:
