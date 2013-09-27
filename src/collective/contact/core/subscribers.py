@@ -16,7 +16,7 @@ def set_is_created(obj, event):
 
 
 # update indexes of related content when a content is modified
-
+# you can monkey patch this value if you have an index that needs this
 indexes_to_update = ['SearchableText']
 
 
