@@ -4,6 +4,10 @@ from plone.app.testing import PloneWithPackageLayer
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
 
+from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
+
+from plone.testing import z2
+
 import collective.contact.core
 
 
@@ -28,3 +32,9 @@ INTEGRATION = IntegrationTesting(
 FUNCTIONAL = FunctionalTesting(
     bases=(COLLECTIVE_CONTACT_CORE, ),
     name="FUNCTIONAL")
+
+ACCEPTANCE = FunctionalTesting(
+    bases=(COLLECTIVE_CONTACT_CORE,
+           AUTOLOGIN_LIBRARY_FIXTURE,
+           z2.ZSERVER_FIXTURE),
+    name="ACCEPTANCE")

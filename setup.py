@@ -61,6 +61,7 @@ setup(name='collective.contact.core',
       ],
       extras_require={
           'test': ['plone.app.testing',
+                   'plone.app.robotframework',
                    'ecreall.helpers.testing',
                    ],
           },
