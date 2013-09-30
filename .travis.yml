@@ -1,12 +1,27 @@
 language: python
 python:
-  - 2.7
+- 2.7
 install:
-  - mkdir -p buildout-cache/{eggs,downloads}
-  - python bootstrap.py -c travis.cfg -d
-  - bin/buildout -c travis.cfg -N -q -t 3
+- mkdir -p buildout-cache/{eggs,downloads}
+- python bootstrap.py -c travis.cfg -d
+- bin/buildout -c travis.cfg -N -q -t 3
+- curl -O http://saucelabs.com/downloads/Sauce-Connect-latest.zip
+- unzip Sauce-Connect-latest.zip
+- java -jar Sauce-Connect.jar $SAUCE_USERNAME $SAUCE_ACCESS_KEY -i $TRAVIS_JOB_ID -f CONNECTED &
+- JAVA_PID=$!
+- bash -c "while [ ! -f CONNECTED ]; do sleep 2; done"
 script:
-  - bin/test
+- bin/test
+after_script:
+- kill $JAVA_PID
 notifications:
   email:
-    - prive-ged@listes.entrouvert.com
+  - prive-ged@listes.entrouvert.com
+  - travis-reports@ecreall.com
+env:
+  global:
+  - secure: DyqYMx8BV5o2p37Dj75UkQeTgo59bujzKBYpinon8WLWb1bMr/jmRBicSqR3zzG/Ca3VkD4x9n3xan4oxK6ulkFOFtuewyqketOHpyP3msDQDYjxIkU2N9cXLAew2HGfKCQElb24X02nsjPW6NhQFF/JzmNpQVhkM8uIN0Az6vI=
+  - secure: LSSegWUWMWhFrKsB2KPSH7ykYY0k8t80nFzHWg0wnaxQQ3F0/O8RNFA0LfHI0WgLI4B2ZyDmqZzIs/i+Rqgu8miQ0/8SzP/RKYXPTljh2wRcNnln+WTLjyVb4wfEnsJW1iqp1VHOk9B2LZ/AC8LnTU5popX1PtRBbjC/HHlJAPA=
+  - ROBOT_BUILD_NUMBER=travis-$TRAVIS_BUILD_NUMBER
+  - ROBOT_REMOTE_URL=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com:80/wd/hub
+  - ROBOT_DESIRED_CAPABILITIES=tunnel-identifier:$TRAVIS_JOB_ID
