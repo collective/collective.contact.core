@@ -35,10 +35,22 @@
               i18n:translate="" />
     </div>
 
+    <div class="field" tal:condition="view/fax">
+        <label><tal:block i18n:translate="">Fax number</tal:block>:</label>
+        <span tal:content="view/fax"
+              i18n:translate="" />
+    </div>
+
     <div class="field" tal:condition="view/im_handle">
         <label><tal:block i18n:translate="">IM handle</tal:block>:</label>
         <span tal:content="view/im_handle"
               i18n:translate="" />
+    </div>
+
+    <div class="field" tal:condition="view/website">
+        <label><tal:block i18n:translate="">Website</tal:block>:</label>
+        <a tal:content="view/website"
+           tal:attributes="href view/website" />
     </div>
 
     <div id="address"

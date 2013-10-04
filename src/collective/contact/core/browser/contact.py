@@ -36,7 +36,7 @@ class Contact(BaseView):
         self.person = person
         self.fullname = person.Title()
         self.title = held_position.Title()
-        
+
         if IBirthday.providedBy(person):
             birthday = person.birthday
             if birthday is not None:
@@ -57,7 +57,9 @@ class Contact(BaseView):
         self.email = contact_details['email']
         self.phone = contact_details['phone']
         self.cell_phone = contact_details['cell_phone']
+        self.fax = contact_details['fax']
         self.im_handle = contact_details['im_handle']
+        self.website = contact_details['website']
         self.address = contact_details['address']
 
         # also show fields that were added TTW
