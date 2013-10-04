@@ -48,6 +48,7 @@ class TestBehaviors(unittest.TestCase, BaseTest):
         self.assertIsNone(item.getAttributes())
         for attr in ('country', 'region', 'zip_code', 'city', 'street',
                      'number', 'im_handle', 'cell_phone', 'phone', 'email',
+                     'fax', 'website',
                      'additional_address_details', 'birthday'):
             self.assertTrue(hasattr(item, attr))
         item.phone = '0655443322'
