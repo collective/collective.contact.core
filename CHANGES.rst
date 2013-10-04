@@ -4,6 +4,10 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- When we get the address of a contact, if the most direct address is empty,
+  look for the next.
+  [thomasdesvenain]
+
 - Added Fax and Website fields to IContactDetails and IContactable.
   [thomasdesvenain]
 

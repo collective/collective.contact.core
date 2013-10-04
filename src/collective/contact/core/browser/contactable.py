@@ -35,7 +35,8 @@ class Contactable(grok.Adapter):
         return []
 
     def _get_contactables(self):
-        """Build a list of objects which have the IContactDetails behavior
+        """
+        Build a list of objects which have the IContactDetails behavior
         for each contact information (email, phone, ...)
         we use the one of the first object in this list which have this information
         """
@@ -55,15 +56,19 @@ class Contactable(grok.Adapter):
             if obj.use_parent_address is True:
                 continue
             else:
-                return get_address(obj)
+                address = get_address(obj)
+                if address:
+                    return address
+
         return {}
 
     def get_contact_details(self):
         contact_details = {}
         contact_details_fields = ['email', 'phone', 'cell_phone', 'fax', 'website', 'im_handle']
+        contactables = self._get_contactables()
         for field in contact_details_fields:
             # search the object that carries the field
-            for obj in self._get_contactables():
+            for obj in contactables:
                 obj = aq_base(obj)
                 value = getattr(obj, field, '') or ''
                 if value:
@@ -72,7 +77,6 @@ class Contactable(grok.Adapter):
             else:
                 contact_details[field] = ''
 
-        contactables = self._get_contactables()
         contact_details['address'] = self._get_address(contactables)
         return contact_details
 
@@ -81,10 +85,12 @@ class Contactable(grok.Adapter):
         if self.context.is_created and self.context in contactables:
             # we don't want self.context address if the object is already created
             contactables.remove(self.context)
+
         address = self._get_address(contactables)
         if not address:
             # Very important to return unicode here, RichTextWidget needs it.
             return u''
+
         template_path = os.path.join(TEMPLATES_DIR, 'address.pt')
         template = ViewPageTemplateFile(template_path)
         self.request = getRequest()
