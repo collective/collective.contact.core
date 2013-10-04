@@ -84,8 +84,10 @@ class IContactDetails(model.Schema):
         label=_(u'Contact details'),
         fields=('phone',
                 'cell_phone',
+                'fax',
                 'email',
                 'im_handle',
+                'website',
                 )
         )
     fieldset(
@@ -116,6 +118,16 @@ class IContactDetails(model.Schema):
 
     cell_phone = schema.TextLine(
         title=_(u"Cell phone"),
+        required=False,
+        )
+
+    fax = schema.TextLine(
+        title=_(u"Fax"),
+        required=False,
+        )
+
+    website = schema.TextLine(
+        title=_(u"Website"),
         required=False,
         )
 

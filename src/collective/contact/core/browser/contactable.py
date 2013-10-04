@@ -46,7 +46,7 @@ class Contactable(grok.Adapter):
               and IContactDetails.providedBy(related_item) \
               and related_item not in contactables:
                 contactables.append(related_item)
-            
+
         return contactables
 
     def _get_address(self, contactables):
@@ -60,7 +60,7 @@ class Contactable(grok.Adapter):
 
     def get_contact_details(self):
         contact_details = {}
-        contact_details_fields = ['email', 'phone', 'cell_phone', 'im_handle']
+        contact_details_fields = ['email', 'phone', 'cell_phone', 'fax', 'website', 'im_handle']
         for field in contact_details_fields:
             # search the object that carries the field
             for obj in self._get_contactables():
@@ -71,7 +71,7 @@ class Contactable(grok.Adapter):
                     break
             else:
                 contact_details[field] = ''
-                
+
         contactables = self._get_contactables()
         contact_details['address'] = self._get_address(contactables)
         return contact_details

@@ -4,9 +4,14 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Added Fax and Website fields to IContactDetails and IContactable.
+  [thomasdesvenain]
+
 - Fixed javascript in @@add-organization view.
+  [vincentfretin]
 
 - Fixed use parent address if we set Contact Details behaviour on held positions.
+  [thomasdesvenain]
 
 
 1.0 (2013-09-13)
