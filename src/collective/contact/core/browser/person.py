@@ -14,7 +14,6 @@ class Person(BaseView):
     person_title = ''
     gender = ''
     held_positions = ''
-    photo = ''
 
     def update(self):
         super(Person, self).update()

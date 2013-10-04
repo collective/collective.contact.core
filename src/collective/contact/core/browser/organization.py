@@ -35,6 +35,7 @@ class Organization(BaseView):
     parent_organizations = []
     sub_organizations = []
     positions = []
+    activity = ''
 
     def update(self):
         super(Organization, self).update()
@@ -45,6 +46,7 @@ class Organization(BaseView):
         factory = getUtility(IVocabularyFactory, "OrganizationTypesOrLevels")
         vocabulary = factory(self.context)
         self.type = vocabulary.getTerm(organization.organization_type).title
+        self.activity = self.context.activity
 
         contactable = IContactable(organization)
         organizations = contactable.organizations

@@ -4,6 +4,9 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Added logo and activity rich field on organization type.
+  [thomasdesvenain]
+
 - Fixed generate id from title on held positions and persons.
   [thomasdesvenain]
 

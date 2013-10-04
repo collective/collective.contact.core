@@ -7,10 +7,19 @@
 <div metal:fill-slot="main">
 	<h1 tal:content="view/name"></h1>
 
+    <div id="logo" class="field" tal:condition="context/logo">
+       <img tal:replace="structure python: view.widgets['logo'].render()" />
+    </div>
+
     <div id="type" class="field">
          <label><tal:block i18n:translate="">Organization type</tal:block>:</label>
          <span tal:content="view/type"
                i18n:translate="" />
+    </div>
+
+    <div id="activity" class="field" tal:condition="view/activity">
+         <label><tal:block i18n:translate="">Activity</tal:block>:</label>
+         <span tal:content="structure view/activity/output" />
     </div>
 
     <div id="organizations" class="field" tal:condition="view/parent_organizations">
