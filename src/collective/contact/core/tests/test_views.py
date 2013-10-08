@@ -154,7 +154,7 @@ class TestPositionView(TestView):
         position_view = self.sergent_lh.restrictedTraverse("@@position")
         position_view.update()
 
-        self.assertEqual(position_view.name, "Sergent de la brigade LH, Brigade LH (Armée de terre)")
+        self.assertEqual(position_view.name, u"Sergent de la brigade LH, Brigade LH (Armée de terre)")
         self.assertEqual(position_view.type, "Sergeant")
         organizations = position_view.organizations
         self.assertEqual([self.armeedeterre,
