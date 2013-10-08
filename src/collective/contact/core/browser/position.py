@@ -16,7 +16,7 @@ class Position(BaseView):
         super(Position, self).update()
         self.position = self.context
         position = self.position
-        self.name = position.Title()
+        self.name = position.get_full_title()
         factory = getUtility(IVocabularyFactory, "PositionTypes")
         vocabulary = factory(self.context)
         self.type = vocabulary.getTerm(position.position_type).title
