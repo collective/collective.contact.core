@@ -127,7 +127,7 @@ class HeldPosition(Container):
 
     def Title(self):
         """The held position's title is constituted by the position's
-        title and the root organization's title"""
+        title, the organization's title and the root organization's title"""
         position = self.position.to_object
         organization = self.get_organization()
         root_organization = organization.get_root_organization()
