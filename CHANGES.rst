@@ -4,6 +4,15 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Use full title instead of Title in position view title.
+  [cedricmessiant]
+
+- Show organization's and root organization's name in position's full title.
+  [cedricmessiant]
+
+- Add first organization title in held position's title.
+  [cedricmessiant]
+
 - Added logo and activity rich field on organization type.
   [thomasdesvenain]
 
