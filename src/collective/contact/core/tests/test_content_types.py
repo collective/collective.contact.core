@@ -159,7 +159,7 @@ class TestPosition(TestContentTypes):
         self.assertEqual(self.general_adt.get_full_title(),
                          u"Général de l'armée de terre (Armée de terre)")
         self.assertEqual(self.sergent_lh.get_full_title(),
-                         u"Sergent de la brigade LH (Brigade LH)")
+                         u"Sergent de la brigade LH, Brigade LH (Armée de terre)")
 
 
 class TestHeldPosition(TestContentTypes):
