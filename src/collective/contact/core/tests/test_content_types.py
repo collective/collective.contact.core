@@ -53,6 +53,7 @@ class TestPerson(TestContentTypes):
         self.assertIn('degaulle', self.mydirectory)
         degaulle = self.degaulle
         self.assertEqual('Général Charles De Gaulle', degaulle.Title())
+        self.assertEqual(u'Général Charles De Gaulle', degaulle.title)
         self.assertEqual('De Gaulle', degaulle.lastname)
         self.assertEqual('Charles', degaulle.firstname)
         self.assertEqual(datetime.date(1901, 11, 22), degaulle.birthday)
@@ -171,6 +172,8 @@ class TestHeldPosition(TestContentTypes):
         sergent_pepper = self.sergent_pepper
         self.assertIn('adt', degaulle)
         self.assertEqual(adt.Title(),
+                         "Armée de terre")
+        self.assertEqual(adt.title,
                          "Armée de terre")
         self.assertIn('gadt', degaulle)
         self.assertEqual(gadt.Title(),

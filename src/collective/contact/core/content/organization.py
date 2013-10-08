@@ -2,24 +2,26 @@ from Acquisition import aq_inner, aq_chain
 from zope.interface import implements
 from zope.interface import Attribute
 from zope import schema
+from zope.component import getUtility
+from zope.intid.interfaces import IIntIds
+
 from z3c.form.interfaces import NO_VALUE
+from zc.relation.interfaces import ICatalog
 
 from five import grok
 
 from Products.CMFPlone.utils import base_hasattr
-
+from Products.CMFCore.utils import getToolByName
 from plone.dexterity.content import Container
 from plone.supermodel import model
 from plone.dexterity.schema import DexteritySchemaPolicy
+from plone.namedfile.field import NamedImage
 
 from collective.contact.core import _
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.widget.interfaces import IContactContent
-from zope.component._api import getUtility
-from zope.intid.interfaces import IIntIds
-from zc.relation.interfaces import ICatalog
 from collective.contact.core.content.held_position import IHeldPosition
-from Products.CMFCore.utils import getToolByName
+from plone.app.textfield import RichText
 
 
 class IOrganization(model.Schema, IContactContent):
@@ -27,10 +29,21 @@ class IOrganization(model.Schema, IContactContent):
 
     is_created = Attribute(u"Marker to know if the object is already created")
 
+    activity = RichText(
+        title=_("Activity"),
+        required=False,
+        )
+
     organization_type = schema.Choice(
         title=_("Type or level"),
         vocabulary="OrganizationTypesOrLevels",
     )
+
+    logo = NamedImage(
+        title=_("Logo"),
+        required=False,
+        )
+
 
     def get_organizations_chain(self):
         """Returns the list of organizations and sub-organizations in this organization

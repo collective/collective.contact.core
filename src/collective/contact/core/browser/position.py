@@ -28,8 +28,10 @@ class Position(BaseView):
         self.email = contact_details['email']
         self.phone = contact_details['phone']
         self.cell_phone = contact_details['cell_phone']
+        self.fax = contact_details['fax']
         self.im_handle = contact_details['im_handle']
         self.address = contact_details['address']
+        self.website = contact_details['website']
 
         # also show fields that were added TTW
         self.ttw_fields = get_ttw_fields(position)

@@ -74,8 +74,13 @@ class Person(Container):
     use_parent_address = NO_VALUE
     parent_address = NO_VALUE
 
+    def set_title(self, val):
+        return
+
     def get_title(self):
         return u' '.join([x for x in (self.person_title, self.firstname, self.lastname) if x])
+
+    title = property(get_title, set_title)
 
     def Title(self):
         # must return utf8 and not unicode (Title() from basic behavior return utf8)
@@ -84,10 +89,10 @@ class Person(Container):
 
     def get_held_positions(self):
         return [obj for obj in self.values() if IHeldPosition.providedBy(obj)]
-    
+
     def get_held_positions_titles(self):
         return [p.Title() for p in self.get_held_positions()]
-    
+
 
 class PersonSchemaPolicy(grok.GlobalUtility,
                          DexteritySchemaPolicy):

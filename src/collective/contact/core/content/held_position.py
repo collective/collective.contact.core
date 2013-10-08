@@ -93,6 +93,14 @@ class HeldPosition(Container):
     use_parent_address = NO_VALUE
     parent_address = NO_VALUE
 
+    def set_title(self, val):
+        return
+
+    def get_title(self):
+        return self.Title()
+
+    title = property(get_title, set_title)
+
     def get_person(self):
         """Returns the person who holds the position
         """

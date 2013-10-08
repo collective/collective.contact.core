@@ -4,9 +4,24 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Added logo and activity rich field on organization type.
+  [thomasdesvenain]
+
+- Fixed generate id from title on held positions and persons.
+  [thomasdesvenain]
+
+- When we get the address of a contact, if the most direct address is empty,
+  look for the next.
+  [thomasdesvenain]
+
+- Added Fax and Website fields to IContactDetails and IContactable.
+  [thomasdesvenain]
+
 - Fixed javascript in @@add-organization view.
+  [vincentfretin]
 
 - Fixed use parent address if we set Contact Details behaviour on held positions.
+  [thomasdesvenain]
 
 
 1.0 (2013-09-13)

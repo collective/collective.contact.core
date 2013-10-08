@@ -14,7 +14,6 @@ class Person(BaseView):
     person_title = ''
     gender = ''
     held_positions = ''
-    photo = ''
 
     def update(self):
         super(Person, self).update()
@@ -43,8 +42,10 @@ class Person(BaseView):
         contact_details = contactable.get_contact_details()
         self.email = contact_details['email']
         self.phone = contact_details['phone']
+        self.fax = contact_details['fax']
         self.cell_phone = contact_details['cell_phone']
         self.im_handle = contact_details['im_handle']
+        self.website = contact_details['website']
         self.address = contact_details['address']
 
         # also show fields that were added TTW
