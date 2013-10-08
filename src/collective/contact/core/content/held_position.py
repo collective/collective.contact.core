@@ -121,7 +121,8 @@ class HeldPosition(Container):
         """The held position's title is constituted by the position's
         title and the root organization's title"""
         position = self.position.to_object
-        organization = self.get_organization().get_root_organization()
+        organization = self.get_organization()
+        root_organization = organization.get_root_organization()
         if position == organization:
             if self.label:
                 return "%s (%s) " % (self.label.encode('utf-8'),
@@ -129,8 +130,13 @@ class HeldPosition(Container):
             else:
                 return organization.Title()
         else:
-            return "%s (%s)" % (position.Title(),
-                                organization.Title())
+            if organization == root_organization:
+                return "%s (%s)" % (position.Title(),
+                                    organization.Title())
+            else:
+                return "%s, %s (%s)" % (position.Title(),
+                                    organization.Title(),
+                                    root_organization.Title())
 
     def get_full_title(self):
         """Returns the 'full title' of the held position.
@@ -153,10 +159,10 @@ class HeldPosition(Container):
             return u"%s (%s - %s)" % (person_name,
                                       root_organization,
                                       position_name)
-    
+
     def get_person_title(self):
         return self.get_person().get_title()
-    
+
     @acqproperty
     def photo(self):
         """Get photo from Person"""

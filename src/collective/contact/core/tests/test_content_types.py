@@ -27,6 +27,7 @@ class TestContentTypes(unittest.TestCase, BaseTest):
         self.regimenth = self.divisionalpha['regimenth']
         self.brigadelh = self.regimenth['brigadelh']
         self.general_adt = self.armeedeterre['general_adt']
+        self.sergent_lh = self.brigadelh['sergent_lh']
         self.adt = self.degaulle['adt']
         self.gadt = self.degaulle['gadt']
         self.sergent_pepper = self.pepper['sergent_pepper']
@@ -156,6 +157,8 @@ class TestPosition(TestContentTypes):
     def test_get_full_title(self):
         self.assertEqual(self.general_adt.get_full_title(),
                          u"Général de l'armée de terre (Armée de terre)")
+        self.assertEqual(self.sergent_lh.get_full_title(),
+                         u"Sergent de la brigade LH (Brigade LH)")
 
 
 class TestHeldPosition(TestContentTypes):
@@ -174,7 +177,7 @@ class TestHeldPosition(TestContentTypes):
                          "Général de l'armée de terre (Armée de terre)")
         self.assertIn('sergent_pepper', pepper)
         self.assertEqual(sergent_pepper.Title(),
-                         "Sergent de la brigade LH (Armée de terre)")
+                         "Sergent de la brigade LH, Brigade LH (Armée de terre)")
         self.assertIsNone(sergent_pepper.end_date)
 
     def test_get_full_title(self):
