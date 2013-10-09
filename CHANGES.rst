@@ -3,6 +3,17 @@ Changelog
 
 1.1 (unreleased)
 ----------------
+- Don't show use_parent_address checkbox if there is no parent address.
+  [cedricmessiant]
+
+- Fix parent address in add forms.
+  [cedricmessiant]
+
+- Add more robot framework tests.
+  [cedricmessiant]
+
+- Add 'Create Contact' link on position view.
+  [cedricmessiant]
 
 - Use full title instead of Title in position view title.
   [cedricmessiant]
