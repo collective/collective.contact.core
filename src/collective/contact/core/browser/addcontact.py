@@ -318,6 +318,18 @@ class AddContactFromOrganization(AddContact):
         super(AddContactFromOrganization, self).updateWidgets()
 
 
+class AddContactFromPosition(AddContact):
+    def updateWidgets(self):
+        organization = self.context.get_organization()
+        if 'oform.widgets.organization' not in self.request.form:
+            self.request.form['oform.widgets.organization'] = '/'.join(
+                    organization.getPhysicalPath())
+        if 'oform.widgets.position' not in self.request.form:
+            self.request.form['oform.widgets.position'] = '/'.join(
+                    self.context.getPhysicalPath())
+        super(AddContactFromPosition, self).updateWidgets()
+
+
 class AddOrganization(form.AddForm):
     implements(IFieldsAndContentProvidersForm)
     contentProviders = ContentProviders(['organization-ms'])

@@ -80,6 +80,13 @@
       />
 
   <browser:page
+      name="add-contact"
+      for="..content.position.IPosition"
+      class=".addcontact.AddContactFromPosition"
+      permission="cmf.AddPortalContent"
+      />
+
+  <browser:page
       name="add-organization"
       for="*"
       class=".addcontact.AddOrganization"
