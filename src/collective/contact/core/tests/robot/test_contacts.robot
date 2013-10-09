@@ -114,7 +114,7 @@ Don't show use parent address checkbox if no parent address in creation
     Page should contain element  formfield-form-widgets-IContactDetails-street
     Page should contain element  formfield-form-widgets-IContactDetails-city
     Page should contain element  formfield-form-widgets-IContactDetails-country
-    #Page should not contain element  form-widgets-IContactDetails-use_parent_address-0
+    Element should not be visible  form-widgets-IContactDetails-use_parent_address-0
 
 
 Don't show use parent address checkbox if no parent address in edition
@@ -126,4 +126,4 @@ Don't show use parent address checkbox if no parent address in edition
     Page should contain element  formfield-form-widgets-IContactDetails-street
     Page should contain element  formfield-form-widgets-IContactDetails-city
     Page should contain element  formfield-form-widgets-IContactDetails-country
-    #Page should not contain element  form-widgets-IContactDetails-use_parent_address-0
+    Element should not be visible  form-widgets-IContactDetails-use_parent_address-0
