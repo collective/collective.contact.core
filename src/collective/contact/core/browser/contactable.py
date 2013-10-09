@@ -82,8 +82,9 @@ class Contactable(grok.Adapter):
 
     def get_parent_address(self):
         contactables = self._get_contactables()
-        if self.context.is_created and self.context in contactables:
-            # we don't want self.context address if the object is already created
+        url = self.context.REQUEST.URL
+        # we don't want self.context address if the object is already created
+        if '/++add++' not in url and '/@@add' not in url:
             contactables.remove(self.context)
 
         address = self._get_address(contactables)

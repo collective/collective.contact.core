@@ -9,6 +9,12 @@ Test Setup  Open SauceLabs test browser
 Test Teardown  Run keywords  Report test status  Close all browsers
 
 *** Keywords ***
+Add new
+    [Arguments]   ${name}
+    Open Add New Menu
+    Click link  css=#plone-contentmenu-factories a#${name}
+    Wait Until Page Contains Element  css=#form-widgets-IBasic-title
+
 Go to directory
     Go to  ${PLONE_URL}/mydirectory
 
@@ -24,22 +30,23 @@ Overlay is opened
 
 
 *** Test cases ***
+
 Directory is available
     Log in as site owner
     Click link  css=#portaltab-mydirectory a
     Element should contain  css=#content h1  Military directory
 
+
 Create a new organization
     Log in as site owner
     Go to directory
-    Open Add New Menu
-    Click link  css=#plone-contentmenu-factories a#organization
-    Wait Until Page Contains Element  css=#form-widgets-IBasic-title
+    Add new  organization
     Input Text  css=#form-widgets-IBasic-title  Squadron five
     Click Button    Save
     Page should contain  Squadron five
     Go to directory
     Element should contain  organizations  Squadron five
+
 
 Can create new contact from organization
     Log in as site owner
@@ -55,6 +62,7 @@ Can create new contact from organization
     Click element  css=.ac_results li:nth-child(1)
     Click button  Add
 
+
 Can create new contact from position
     Log in as site owner
     Go to  ${PLONE_URL}/mydirectory/armeedeterre/corpsa/divisionalpha/regimenth/brigadelh/sergent_lh
@@ -69,3 +77,53 @@ Can create new contact from position
     Wait Until Page Contains Element  css=.ac_results
     Click element  css=.ac_results li:nth-child(1)
     Click button  Add
+
+
+Show parent address if it exists in creation
+    Log in as site owner
+    Go to  ${PLONE_URL}/mydirectory/armeedeterre/corpsa
+    Add new  organization
+    Click link  Address
+    Checkbox Should Be Selected  form-widgets-IContactDetails-use_parent_address-0
+    Element should contain  address  rue Philibert Lucot
+    Element should contain  address  Orléans
+    Element should contain  address  France
+    #Page should not contain element  formfield-form-widgets-IContactDetails-number
+    #Page should not contain element  formfield-form-widgets-IContactDetails-street
+
+
+Show parent address if it exists in edition
+    Log in as site owner
+    Go to  ${PLONE_URL}/mydirectory/armeedeterre/corpsa/divisionalpha/capitaine_alpha
+    Click Edit In Edit Bar
+    Click link  Address
+    Checkbox Should Be Selected  form-widgets-IContactDetails-use_parent_address-0
+    Element should contain  address  rue Philibert Lucot
+    Element should contain  address  Orléans
+    Element should contain  address  France
+    #Page should not contain element  formfield-form-widgets-IContactDetails-number
+    #Page should not contain element  formfield-form-widgets-IContactDetails-street
+
+
+Don't show use parent address checkbox if no parent address in creation
+    Log in as site owner
+    Go to  ${PLONE_URL}/mydirectory/armeedeterre/corpsb
+    Add new  position
+    Click link  Address
+    Page should contain element  formfield-form-widgets-IContactDetails-number
+    Page should contain element  formfield-form-widgets-IContactDetails-street
+    Page should contain element  formfield-form-widgets-IContactDetails-city
+    Page should contain element  formfield-form-widgets-IContactDetails-country
+    #Page should not contain element  form-widgets-IContactDetails-use_parent_address-0
+
+
+Don't show use parent address checkbox if no parent address in edition
+    Log in as site owner
+    Go to  ${PLONE_URL}/mydirectory/armeedeterre/corpsb
+    Click Edit In Edit Bar
+    Click link  Address
+    Page should contain element  formfield-form-widgets-IContactDetails-number
+    Page should contain element  formfield-form-widgets-IContactDetails-street
+    Page should contain element  formfield-form-widgets-IContactDetails-city
+    Page should contain element  formfield-form-widgets-IContactDetails-country
+    #Page should not contain element  form-widgets-IContactDetails-use_parent_address-0
