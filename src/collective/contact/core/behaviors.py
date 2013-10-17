@@ -1,7 +1,7 @@
 from zope.interface import alsoProvides
 from zope.interface import Interface
 from zope import schema
-from Acquisition import aq_base
+from zope.component import queryAdapter
 
 from z3c.form.widget import ComputedWidgetAttribute
 from z3c.form.widget import FieldWidget
@@ -13,7 +13,6 @@ from plone.autoform import directives as form
 from plone.formwidget.masterselect import MasterSelectBoolField
 from plone.formwidget.datetime.z3cform import DateWidget
 from plone.app.textfield import RichText
-from plone.app.dexterity.browser.types import TypeSchemaContext
 
 from Products.CMFDefault.utils import checkEmailAddress
 from Products.CMFDefault.exceptions import EmailAddressInvalid
@@ -40,12 +39,11 @@ def validateEmail(value):
 
 def get_parent_address(adapter):
     """Gets the address of the first parent in hierarchy"""
-    if adapter.context.portal_type == "directory":
-        return u''
-    elif type(aq_base(adapter.context)) == TypeSchemaContext:
+    contactable = queryAdapter(adapter.context, IContactable)
+    if not contactable:
         return u""
-
-    return IContactable(adapter.context).get_parent_address()
+    else:
+        return contactable.get_parent_address()
 
 
 class IGlobalPositioning(model.Schema):
@@ -241,25 +239,14 @@ alsoProvides(IContactDetails, IFormFieldProvider)
 def default_use_parent_address(adapter):
     """We don't use parent address by default for contacts and level-0 organizations
     """
-    from collective.contact.core.content.directory import IDirectory
     try:
         parent = adapter.view._parent
     except AttributeError:
         return False
 
-    try:
-        parent_type = parent.portal_type
-    except:
-        # in schema editor
-        return False
+    contactable = queryAdapter(parent, IContactable)
+    return contactable is not None
 
-    if parent_type == 'person':
-        return False
-    elif parent_type == 'organization' \
-        and IDirectory.providedBy(adapter.context):
-        return False
-    else:
-        return True
 
 DefaultUseParentAddress = ComputedWidgetAttribute(
     default_use_parent_address,
