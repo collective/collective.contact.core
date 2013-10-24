@@ -3,6 +3,11 @@ Changelog
 
 1.1 (unreleased)
 ----------------
+
+- Don't crash when deleting position or organization if a held position is
+  associated with it. Show relations that will be broken
+  (plone.app.linkintegrity integration).
+
 - Don't show use_parent_address checkbox if there is no parent address.
   [cedricmessiant]
 

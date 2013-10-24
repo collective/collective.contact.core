@@ -89,4 +89,14 @@
       factory=".behaviors.DefaultParentAddress"
       name="default" />
 
+  <subscriber
+    for="plone.app.relationfield.interfaces.IDexterityHasRelations
+         zope.lifecycleevent.interfaces.IObjectRemovedEvent"
+    handler="plone.app.linkintegrity.handlers.referencedObjectRemoved" />
+
+  <subscriber
+    for="z3c.relationfield.interfaces.IHasIncomingRelations
+         OFS.interfaces.IObjectWillBeRemovedEvent"
+    handler=".subscribers.referenceRemoved" />
+
 </configure>
