@@ -21,8 +21,6 @@ from collective.contact.core.content.held_position import IHeldPosition
 class IPosition(model.Schema, IContactContent):
     """Interface for Position content type"""
 
-    is_created = Attribute(u"Marker to know if the object is already created")
-
     position_type = schema.Choice(
         title=_("Type"),
         vocabulary="PositionTypes",
@@ -59,7 +57,6 @@ class Position(Container):
     implements(IPosition)
 
     meta_type = 'position'
-    is_created = False
     use_parent_address = NO_VALUE
     parent_address = NO_VALUE
 

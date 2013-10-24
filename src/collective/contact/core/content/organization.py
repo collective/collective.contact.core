@@ -27,8 +27,6 @@ from plone.app.textfield import RichText
 class IOrganization(model.Schema, IContactContent):
     """Interface for Organization content type"""
 
-    is_created = Attribute(u"Marker to know if the object is already created")
-
     activity = RichText(
         title=_("Activity"),
         required=False,
@@ -87,7 +85,6 @@ class Organization(Container):
     implements(IOrganization)
 
     #meta_type = 'organization'
-    is_created = False
     use_parent_address = NO_VALUE
     parent_address = NO_VALUE
 

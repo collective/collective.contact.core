@@ -10,11 +10,6 @@ from collective.contact.core.content.person import IPerson
 from collective.contact.core.content.organization import IOrganization
 
 
-@grok.subscribe(IContactContent, IObjectAddedEvent)
-def set_is_created(obj, event):
-    obj.is_created = True
-
-
 # update indexes of related content when a content is modified
 # you can monkey patch this value if you have an index that needs this
 indexes_to_update = ['SearchableText']
