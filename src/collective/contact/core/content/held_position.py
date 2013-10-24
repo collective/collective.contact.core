@@ -78,8 +78,7 @@ class HeldPositionContactableAdapter(Contactable):
     @property
     def organizations(self):
         organization = self.context.get_organization()
-        return organization.get_organizations_chain()
-
+        return organization and organization.get_organizations_chain() or []
 
 
 class HeldPosition(Container):
@@ -110,7 +109,9 @@ class HeldPosition(Container):
         """Returns the position (if position field is a position)
         """
         pos_or_org = self.position.to_object
-        if pos_or_org.portal_type == 'position':
+        if pos_or_org is None:
+            return None
+        elif pos_or_org.portal_type == 'position':
             return pos_or_org
         else:
             return None
@@ -120,7 +121,9 @@ class HeldPosition(Container):
         i.e. position field or parent of the position
         """
         pos_or_org = self.position.to_object
-        if pos_or_org.portal_type == 'position':
+        if pos_or_org is None:
+            return None
+        elif pos_or_org.portal_type == 'position':
             return pos_or_org.get_organization()
         elif pos_or_org.portal_type == 'organization':
             return pos_or_org
@@ -129,6 +132,9 @@ class HeldPosition(Container):
         """The held position's title is constituted by the position's
         title, the organization's title and the root organization's title"""
         position = self.position.to_object
+        if position is None:  # the reference was removed
+            return "REMOVED"
+
         organization = self.get_organization()
         root_organization = organization.get_root_organization()
         if position == organization:
@@ -152,7 +158,11 @@ class HeldPosition(Container):
         the root organization and the position name (if any)
         """
         person_name = self.get_person_title()
-        root_organization = self.get_organization().get_root_organization().title
+        organization = self.get_organization()
+        if organization is not None:
+            root_organization = organization.get_root_organization().title
+        else:
+            root_organization = "REMOVED"
         position = self.get_position()
         if position is None and not self.label:
             return u"%s (%s)" % (person_name,

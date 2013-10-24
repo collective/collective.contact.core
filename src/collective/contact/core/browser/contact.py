@@ -50,7 +50,7 @@ class Contact(BaseView):
         self.position = held_position.get_position()
 
         organization = held_position.get_organization()
-        self.organizations = organization.get_organizations_chain()
+        self.organizations = organization and organization.get_organizations_chain() or []
 
         contactable = IContactable(held_position)
         contact_details = contactable.get_contact_details()
