@@ -3,7 +3,7 @@ python:
 - 2.7
 install:
 - mkdir -p buildout-cache/{eggs,downloads}
-- python bootstrap.py -c travis.cfg
+- python bootstrap.py -c travis.cfg -d
 - bin/buildout -c travis.cfg -N -q -t 3
 - curl -O http://saucelabs.com/downloads/Sauce-Connect-latest.zip
 - unzip Sauce-Connect-latest.zip
