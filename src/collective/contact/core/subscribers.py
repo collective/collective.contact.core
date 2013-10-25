@@ -6,16 +6,23 @@ from zope import component
 from zope.lifecycleevent.interfaces import IObjectAddedEvent,\
     IObjectModifiedEvent
 from zope.container.contained import ContainerModifiedEvent
-from zope.app.intid.interfaces import IIntIds
+from zope.intid.interfaces import IIntIds
 
 from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
+from plone.app.linkintegrity.handlers import referencedObjectRemoved as \
+        baseReferencedObjectRemoved
+try:
+    from plone.app.referenceablebehavior.referenceable import IReferenceable
+except ImportError:
+    from zope.interface import Interface
+    class IReferenceable(Interface):
+        pass
 
 from collective.contact.widget.interfaces import IContactContent
 from collective.contact.core.content.held_position import IHeldPosition
 from collective.contact.core.content.position import IPosition
 from collective.contact.core.content.person import IPerson
 from collective.contact.core.content.organization import IOrganization
-
 
 # update indexes of related content when a content is modified
 # you can monkey patch this value if you have an index that needs this
@@ -89,3 +96,8 @@ def referenceRemoved(obj, event):
     rels = list(catalog.findRelations({'to_id': obj_id}))
     for rel in rels:
         storage.addBreach(rel.from_object, rel.to_object)
+
+
+def referencedObjectRemoved(obj, event):
+    if not IReferenceable.providedBy(obj):
+        baseReferencedObjectRemoved(obj, event)

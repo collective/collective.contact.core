@@ -92,7 +92,7 @@
   <subscriber
     for="plone.app.relationfield.interfaces.IDexterityHasRelations
          zope.lifecycleevent.interfaces.IObjectRemovedEvent"
-    handler="plone.app.linkintegrity.handlers.referencedObjectRemoved" />
+    handler=".subscribers.referencedObjectRemoved" />
 
   <subscriber
     for="z3c.relationfield.interfaces.IHasIncomingRelations
