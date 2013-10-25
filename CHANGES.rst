@@ -7,6 +7,11 @@ Changelog
 - Don't crash when deleting position or organization if a held position is
   associated with it. Show relations that will be broken
   (plone.app.linkintegrity integration).
+  [vincentfretin]
+
+- Fix ObjectModifiedEvent subscribers to not reindex if event is
+  a ContainerModifiedEvent.
+  [vincentfretin]
 
 - Don't show use_parent_address checkbox if there is no parent address.
   [cedricmessiant]
