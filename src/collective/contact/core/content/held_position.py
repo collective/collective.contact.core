@@ -133,7 +133,7 @@ class HeldPosition(Container):
         title, the organization's title and the root organization's title"""
         position = self.position.to_object
         if position is None:  # the reference was removed
-            return "REMOVED"
+            return self.getId()
 
         organization = self.get_organization()
         root_organization = organization.get_root_organization()
@@ -158,12 +158,12 @@ class HeldPosition(Container):
         the root organization and the position name (if any)
         """
         person_name = self.get_person_title()
-        organization = self.get_organization()
-        if organization is not None:
-            root_organization = organization.get_root_organization().title
-        else:
-            root_organization = "REMOVED"
+        if self.position.to_object is None:  # the reference was removed
+            return u"%s (%s)" % (person_name, self.getId())
+
         position = self.get_position()
+        organization = self.get_organization()
+        root_organization = organization.get_root_organization().title
         if position is None and not self.label:
             return u"%s (%s)" % (person_name,
                                  root_organization)
