@@ -73,7 +73,7 @@ def update_related_with_organization(obj, event=None):
             update_related_with_held_position(held_position)
 
 
-def referenceRemoved(obj, event):
+def referenceRemoved(obj, event, toInterface=IContactContent):
     """Store information about the removed link integrity reference.
     """
     # inspired from z3c/relationfield/event.py:breakRelations
@@ -95,7 +95,8 @@ def referenceRemoved(obj, event):
     obj_id = intids.getId(obj)
     rels = list(catalog.findRelations({'to_id': obj_id}))
     for rel in rels:
-        storage.addBreach(rel.from_object, rel.to_object)
+        if toInterface.providedBy(rel.to_object):
+            storage.addBreach(rel.from_object, rel.to_object)
 
 
 def referencedObjectRemoved(obj, event):
