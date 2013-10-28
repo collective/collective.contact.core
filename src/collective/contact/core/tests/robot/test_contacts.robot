@@ -1,32 +1,20 @@
 *** Settings ***
+
 #Test Setup        Open test browser
 #Test Teardown     Close all browsers
 
 Resource  plone/app/robotframework/keywords.robot
 Resource  plone/app/robotframework/saucelabs.robot
+Resource  keywords.robot
 
 Test Setup  Open SauceLabs test browser
 Test Teardown  Run keywords  Report test status  Close all browsers
 
+
 *** Keywords ***
-Add new
-    [Arguments]   ${name}
-    Open Add New Menu
-    Click link  css=#plone-contentmenu-factories a#${name}
-    Wait Until Page Contains Element  css=#form-widgets-IBasic-title
 
 Go to directory
     Go to  ${PLONE_URL}/mydirectory
-
-Close Overlay
-    Click Element  css=div.overlay div.close
-
-Overlay should close
-    Element should not remain visible  id=exposeMask
-    Wait until keyword succeeds  60  1  Page should not contain element  css=div.overlay
-
-Overlay is opened
-    Wait Until Page Contains Element  css=.overlay
 
 
 *** Test cases ***
