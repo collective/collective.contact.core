@@ -20,8 +20,8 @@ notifications:
   - travis-reports@ecreall.com
 env:
   global:
-  - secure: DyqYMx8BV5o2p37Dj75UkQeTgo59bujzKBYpinon8WLWb1bMr/jmRBicSqR3zzG/Ca3VkD4x9n3xan4oxK6ulkFOFtuewyqketOHpyP3msDQDYjxIkU2N9cXLAew2HGfKCQElb24X02nsjPW6NhQFF/JzmNpQVhkM8uIN0Az6vI=
-  - secure: LSSegWUWMWhFrKsB2KPSH7ykYY0k8t80nFzHWg0wnaxQQ3F0/O8RNFA0LfHI0WgLI4B2ZyDmqZzIs/i+Rqgu8miQ0/8SzP/RKYXPTljh2wRcNnln+WTLjyVb4wfEnsJW1iqp1VHOk9B2LZ/AC8LnTU5popX1PtRBbjC/HHlJAPA=
+  - secure: cWOCpwHIR8D5o9EQBUgR+2LZXPHM6sTyfG1uc5dBR8qK4Bw0Nkno5Wg8oA0KMtkMQXs+wmLjACjELye9TY/2scoIgYQ3OidjV7QcP/IMW0fqpyFu/cuMO/h/N8rcpVidDvv84RGhPX3IgtzrGQibC4m+cT45oBWuMr/+lyIe5eY=
+  - secure: pFg9iKr6pbheAJbNcZgYVG0h/UVsKx8V5yjkSA/5qyHMmlzULPJxYGgwJpyiBE0LWp4A9pZC42lnHXFO6xAmTThbeswO+ED6TeWq5wx04krDDB4Zt53ktwRcT37Di+trJOQx37UTNCkF2LQ+fO16hv0wGjGix8EiZRd339HWkH0=
   - ROBOT_BUILD_NUMBER=travis-$TRAVIS_BUILD_NUMBER
   - ROBOT_REMOTE_URL=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com:80/wd/hub
   - ROBOT_DESIRED_CAPABILITIES=tunnel-identifier:$TRAVIS_JOB_ID
