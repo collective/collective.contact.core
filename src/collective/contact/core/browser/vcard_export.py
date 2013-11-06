@@ -1,12 +1,13 @@
 from five import grok
 
-from collective.contact.core.interfaces import IVCard
+from collective.contact.core.interfaces import IVCard, IContactable
 from collective.contact.core.content.held_position import IHeldPosition
+from collective.contact.widget.interfaces import IContactContent
 
 
 class ContactVCF(grok.View):
     grok.name('contact.vcf')
-    grok.context(IHeldPosition)
+    grok.context(IContactContent)
     grok.require("zope2.View")
 
     def render(self):

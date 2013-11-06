@@ -46,3 +46,11 @@ class TestAdapters(unittest.TestCase, BaseTest):
 
         # TODO: test a held_position without address ?? Rambo ? (associate new Organization and Position to Rambo)
         # self.assertFalse(hasattr(vcard, 'adr'))
+
+    def test_regimenth_vcard(self):
+        regimenth = self.directory['armeedeterre']['corpsa']['divisionalpha']['regimenth']
+        vcard_provider = IVCard(regimenth)
+        vcard = vcard_provider.get_vcard()
+        self.assertEqual(vcard.fn.value, u'Régiment H')
+        self.assertEqual(vcard.kind.value, 'org')
+        self.assertTrue(hasattr(vcard, 'adr'))
