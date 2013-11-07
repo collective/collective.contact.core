@@ -53,6 +53,8 @@ Changelog
 - Fixed use parent address if we set Contact Details behaviour on held positions.
   [thomasdesvenain]
 
+- Add vCard support to organizations
+  [ebrehault]
 
 1.0 (2013-09-13)
 ----------------
