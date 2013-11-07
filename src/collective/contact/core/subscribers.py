@@ -92,7 +92,10 @@ def referenceRemoved(obj, event, toInterface=IContactContent):
         return
 
     # find all relations that point to us
-    obj_id = intids.getId(obj)
+    obj_id = intids.queryId(obj)
+    if obj_id is None:
+        return
+
     rels = list(catalog.findRelations({'to_id': obj_id}))
     for rel in rels:
         if toInterface.providedBy(rel.to_object):
