@@ -4,6 +4,12 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- We can hide Use parent address field using a permission:
+  "collective.contact.core.UseParentAddress"
+  So it is possible to remove this feature via rolemap
+  or remove it on some content types via workflow.
+  [thomasdesvenain]
+
 - Don't crash when deleting position or organization if a held position is
   associated with it. Show relations that will be broken
   (plone.app.linkintegrity integration).

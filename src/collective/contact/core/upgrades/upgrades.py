@@ -38,3 +38,7 @@ def v3(context):
     for brain in brains:
         obj = brain.getObject()
         obj.is_created = True
+
+
+def v4(context):
+    IUpgradeTool(context).runImportStep('collective.contact.core', 'rolemap')

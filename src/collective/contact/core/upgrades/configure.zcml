@@ -29,4 +29,12 @@
       handler=".upgrades.v3"
       profile="collective.contact.core:default" />
 
+  <genericsetup:upgradeStep
+      title="Upgrade from 3 to 4"
+      description="Set permission to use parent address on a IContactDetails content"
+      source="3"
+      destination="4"
+      handler=".upgrades.v4"
+      profile="collective.contact.core:default" />
+
 </configure>

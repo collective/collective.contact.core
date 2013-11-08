@@ -44,8 +44,11 @@ def get_parent_address(adapter):
         return u''
     elif type(aq_base(adapter.context)) == TypeSchemaContext:
         return u""
-
-    return IContactable(adapter.context).get_parent_address()
+    try:
+        contactable = IContactable(adapter.context)
+        return contactable.get_parent_address()
+    except TypeError:
+        return u""
 
 
 class IGlobalPositioning(model.Schema):
@@ -78,7 +81,7 @@ alsoProvides(IGlobalPositioning, IFormFieldProvider)
 
 class IContactDetails(model.Schema):
     """Contact details behavior"""
-
+    form.write_permission(use_parent_address='collective.contact.core.UseParentAddress')
     fieldset(
         'contact_details',
         label=_(u'Contact details'),

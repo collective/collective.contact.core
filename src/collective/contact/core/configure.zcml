@@ -99,4 +99,9 @@
          OFS.interfaces.IObjectWillBeRemovedEvent"
     handler=".subscribers.referenceRemoved" />
 
+  <permission
+    id="collective.contact.core.UseParentAddress"
+    title="collective.contact.core: Use parent address"
+    />
+
 </configure>
