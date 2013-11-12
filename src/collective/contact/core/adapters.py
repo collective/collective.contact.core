@@ -1,3 +1,4 @@
+from zope.interface.interface import Interface
 from five import grok
 import vobject
 
@@ -10,6 +11,7 @@ from collective.contact.core.content.organization import IOrganization,\
                                                              Organization
 
 from collective.contact.core.behaviors import IBirthday
+
 
 class ContactableVCard:
 
@@ -66,6 +68,22 @@ class ContactableVCard:
                                                     box=number,
                                                     extended=additional)
 
+        return vcard
+
+
+class ContactDetailsVCard(grok.Adapter, ContactableVCard):
+    grok.context(Interface)
+    grok.provides(IVCard)
+
+    def __init__(self, context):
+        self.context = context
+
+    def get_vcard(self):
+        vcard = ContactableVCard.get_vcard(self)
+        vcard.add('fn')
+        vcard.fn.value = self.context.Title()
+        vcard.add('n')
+        vcard.n.value = vobject.vcard.Name(self.context.Title())
         return vcard
 
 

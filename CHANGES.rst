@@ -4,6 +4,10 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- A content that just implements IContactDetails behavior
+  is adaptatable to IContactable and have a VCal export.
+  [thomasdesvenain]
+
 - We can hide Use parent address field using a permission:
   "collective.contact.core.UseParentAddress"
   So it is possible to remove this feature via rolemap

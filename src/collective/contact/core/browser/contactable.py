@@ -1,6 +1,7 @@
 import os.path
 
 from zope.globalrequest import getRequest
+from zope.interface import Interface
 from five import grok
 from Acquisition import aq_base
 
@@ -14,6 +15,29 @@ from collective.contact.core.browser.address import get_address
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.interfaces import IContactable
 from collective.contact.widget.interfaces import IContactContent
+
+
+class ContactDetailsContactable(grok.Adapter):
+    grok.provides(IContactable)
+    grok.context(Interface)
+
+    def get_contact_details(self):
+        if not IContactDetails.providedBy(self.context):
+            raise TypeError("Your contactable content must provide IContactDetails "
+                            "if it doesn't have a more specific contactable adapter")
+        contact_details = {}
+        contact_details_fields = ['email', 'phone', 'cell_phone', 'fax', 'website', 'im_handle']
+        context = aq_base(self.context)
+        for field in contact_details_fields:
+            # search the object that carries the field
+            value = getattr(context, field, '') or ''
+            contact_details[field] = value
+
+        contact_details['address'] = get_address(context)
+        return contact_details
+
+    def get_parent_address(self):
+        return u""
 
 
 class Contactable(grok.Adapter):
