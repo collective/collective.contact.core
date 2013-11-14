@@ -13,4 +13,3 @@ src/*
 !src/collective/
 var/
 buildout-cache/
-docs/manual/fr/_build/
