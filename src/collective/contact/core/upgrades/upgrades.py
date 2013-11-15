@@ -42,3 +42,7 @@ def v3(context):
 
 def v4(context):
     IUpgradeTool(context).runImportStep('collective.contact.core', 'rolemap')
+
+def v5(context):
+    tool = IUpgradeTool(context)
+    tool.runProfile('collective.contact.widget:default')

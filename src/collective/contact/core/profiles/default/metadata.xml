@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>4</version>
+  <version>5</version>
   <dependencies>
+    <dependency>profile-collective.contact.widget:default</dependency>
     <dependency>profile-plone.app.dexterity:default</dependency>
     <dependency>profile-plone.formwidget.datetime:default</dependency>
     <dependency>profile-plone.formwidget.masterselect:default</dependency>

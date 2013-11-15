@@ -37,4 +37,12 @@
       handler=".upgrades.v4"
       profile="collective.contact.core:default" />
 
+  <genericsetup:upgradeStep
+      title="Upgrade from 4 to 5"
+      description="Install collective.contact.widget default profile"
+      source="4"
+      destination="5"
+      handler=".upgrades.v5"
+      profile="collective.contact.core:default" />
+
 </configure>
