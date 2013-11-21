@@ -9,7 +9,7 @@
 	    <span tal:content="view/title"></span></h1>
 
     <div class="field" tal:condition="context/photo">
-       <img tal:replace="structure python: view.widgets['photo'].render()" />
+      <img tal:replace="structure context/@@images/photo/thumb" />
     </div>
 
 	<div class="field" tal:condition="view/position">

@@ -8,7 +8,7 @@
 	<h1 tal:content="view/name"></h1>
 
     <div id="logo" class="field" tal:condition="context/logo">
-       <img tal:replace="structure python: view.widgets['logo'].render()" />
+        <img tal:replace="structure context/@@images/logo/thumb" />
     </div>
 
     <div id="type" class="field">
