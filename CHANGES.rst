@@ -4,6 +4,15 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Add tooltip overviews for held positions, persons, positions and organizations.
+  [cedricmessiant]
+
+- Use thumb scale for logos and photos.
+  [cedricmessiant]
+
+- Add icon for 'Create Contact' link on position and organization pages.
+  [cedricmessiant]
+
 - Customize sortable_title indexer for Person and add a corresponding brain
   metadata (to enable use of this index in collective.contact.facetednav
   alphabetic search widget).
