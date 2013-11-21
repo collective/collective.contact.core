@@ -49,3 +49,10 @@ def person_searchable_text(obj):
     for held_positions in obj.get_held_positions():
         results.append(ensure_unicode(held_position_searchable_text(held_positions)()))
     return results
+
+@indexer(IPerson)
+def person_sortable_title(obj):
+    if obj.firstname is None:
+        return obj.lastname
+    else:
+        return "%s %s" % (obj.lastname, obj.firstname)

@@ -39,7 +39,7 @@
 
   <genericsetup:upgradeStep
       title="Upgrade from 4 to 5"
-      description="Install collective.contact.widget default profile"
+      description="Install collective.contact.widget default profile and add sortable_title column"
       source="4"
       destination="5"
       handler=".upgrades.v5"

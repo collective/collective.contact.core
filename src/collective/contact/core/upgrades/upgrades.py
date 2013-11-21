@@ -43,6 +43,13 @@ def v3(context):
 def v4(context):
     IUpgradeTool(context).runImportStep('collective.contact.core', 'rolemap')
 
+
 def v5(context):
     tool = IUpgradeTool(context)
     tool.runProfile('collective.contact.widget:default')
+    # add sortable_title column and reindex persons and organizations
+    tool.addMetadata('sortable_title')
+    catalog = api.portal.get_tool(name='portal_catalog')
+    brains = catalog.unrestrictedSearchResults(object_provides=IContactContent.__identifier__)
+    for brain in brains:
+        brain.getObject().reindexObject()

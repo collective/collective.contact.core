@@ -82,6 +82,11 @@
     />
 
   <adapter
+    name="sortable_title"
+    factory=".indexers.person_sortable_title"
+    />
+
+  <adapter
       factory=".behaviors.DefaultUseParentAddress"
       name="default" />
 

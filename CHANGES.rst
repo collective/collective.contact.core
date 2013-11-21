@@ -4,6 +4,11 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Customize sortable_title indexer for Person and add a corresponding brain
+  metadata (to enable use of this index in collective.contact.facetednav
+  alphabetic search widget).
+  [cedricmessiant]
+
 - A content that just implements IContactDetails behavior
   is adaptatable to IContactable and have a VCal export.
   [thomasdesvenain]
