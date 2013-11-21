@@ -60,7 +60,7 @@
         <label><tal:block i18n:translate="">Positions held by this person</tal:block>:</label>
         <ul>
         <tal:block tal:repeat="held_position view/held_positions">
-            <li><a tal:attributes="href held_position/getURL">
+            <li><a class="link-tooltip" tal:attributes="href held_position/getURL">
                 <span tal:replace="held_position/Title"
                       i18n:translate="" />
             </a></li>

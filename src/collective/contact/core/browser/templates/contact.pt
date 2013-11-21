@@ -14,7 +14,7 @@
 
 	<div class="field" tal:condition="view/position">
 		<label><tal:block i18n:translate="">Position</tal:block>:</label>
-		<a tal:attributes="href view/position/absolute_url">
+		<a class="link-tooltip" tal:attributes="href view/position/absolute_url">
 		  <span tal:content="view/position/Title"
 		 	  i18n:translate="" />
 		</a>
@@ -24,7 +24,7 @@
         <label><tal:block i18n:translate="">Organizations</tal:block>:</label>
         <ul>
         <tal:block tal:repeat="organization view/organizations">
-            <li><a tal:attributes="href organization/absolute_url">
+            <li><a class="link-tooltip" tal:attributes="href organization/absolute_url">
                 <span tal:replace="organization/Title"
                       i18n:translate="" />
             </a></li>
