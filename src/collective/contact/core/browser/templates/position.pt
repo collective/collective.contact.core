@@ -70,7 +70,11 @@
         <a href="@@add-contact" class="addnewcontactfromposition"
            i18n:translate=""
            tal:attributes="href string:${context/absolute_url}/@@add-contact">
-          Create <tal:i18n i18n:name="name">Contact</tal:i18n></a>
+            <img tal:attributes="src string:${portal_url}/create_contact.png" />
+            <tal:span i18n:translate="">
+                Create <tal:i18n i18n:name="name">Contact</tal:i18n>
+            </tal:span>
+        </a>
         <script tal:replace="structure view/addnew_script"></script>
     </tal:addnew>
 

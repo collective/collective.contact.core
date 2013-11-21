@@ -124,9 +124,12 @@
            tal:define="ajax_load request/ajax_load|nothing"
            tal:condition="python: not ajax_load and view.can_add">
         <a href="@@add-contact" class="addnewcontactfromorganization"
-           i18n:translate=""
            tal:attributes="href string:${context/absolute_url}/@@add-contact">
-          Create <tal:i18n i18n:name="name">Contact</tal:i18n></a>
+            <img tal:attributes="src string:${portal_url}/create_contact.png" />
+            <tal:span i18n:translate="">
+              Create <tal:i18n i18n:name="name">Contact</tal:i18n>
+            </tal:span>
+        </a>
         <script tal:replace="structure view/addnew_script"></script>
     </tal:addnew>
 
@@ -153,7 +156,7 @@
             <tal:vcard i18n:translate=""> Download VCard</tal:vcard>
         </a>
   </div>
-  
+
 </div>
 
 </body>
