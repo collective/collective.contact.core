@@ -4,6 +4,9 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Fixed: keep order of TTW fields displayed on view pages.
+  [thomasdesvenain]
+
 - Add tooltip overviews for held positions, persons, positions and organizations.
   [cedricmessiant]
 

@@ -20,6 +20,7 @@ def get_ttw_fields(obj):
     schema_policy = getUtility(ISchemaPolicy, name=fti.schema_policy)
     original_schema = schema_policy.bases(None, None)[0]
     original_fields = schema.getFieldsInOrder(original_schema)
-    new_fields = frozenset(dict(all_fields).keys()) - \
-                 frozenset(dict(original_fields).keys())
+    new_fields = [field[0] for field in all_fields
+                  if field[0] not in dict(original_fields).keys()]
+
     return new_fields
