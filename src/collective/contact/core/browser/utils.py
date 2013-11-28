@@ -8,6 +8,7 @@ from plone.behavior.interfaces import IBehavior
 from plone.autoform.interfaces import IFormFieldProvider
 
 from collective.contact.core.behaviors import IContactDetails
+from plone.schemaeditor.utils import non_fieldset_fields
 
 
 def date_to_DateTime(date):
@@ -32,9 +33,10 @@ def get_ttw_fields(obj):
         if behavior == IContactDetails or not IFormFieldProvider.providedBy(behavior):
             continue
 
+        default_fieldset_fields = non_fieldset_fields(behavior)
         behavior_name = behavior_id.split('.')[-1]
         # @TODO: get generic method to get widget id
-        new_fields.extend(['%s.%s' % (behavior_name, field[0])
-                           for field in schema.getFieldsInOrder(behavior)])
+        new_fields.extend(['%s.%s' % (behavior_name, field_name)
+                           for field_name in default_fieldset_fields])
 
     return new_fields

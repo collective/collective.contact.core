@@ -4,7 +4,8 @@ Changelog
 1.1 (unreleased)
 ----------------
 
-- Display behavior fields on contactable views.
+- Display behavior fields on contactable views
+  once they are in default fieldset.
   [thomasdesvenain]
 
 - Fixed: keep order of TTW fields displayed on view pages.

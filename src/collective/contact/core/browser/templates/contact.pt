@@ -91,9 +91,11 @@
          tal:replace="structure view/render_address" />
 
     <tal:block tal:repeat="field view/ttw_fields">
-        <div class="field" tal:define="widget python: view.widgets[field]" tal:condition="widget/value">
+        <div class="field" tal:define="widget python:field in view.widgets and view.widgets[field]"
+             tal:condition="python:widget and widget.value"
+             >
             <label tal:content="python: widget.label" i18n:translate="" />
-            <span tal:content="structure widget/render" />
+            <span tal:content="structure widget/render" tal:on-error="nothing"/>
         </div>
     </tal:block>
 
@@ -105,6 +107,7 @@
             <br />
             <div tal:content="structure widget/render" />
         </div>
+
     </fieldset>
 
 	<div id="download_vcard">
