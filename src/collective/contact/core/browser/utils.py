@@ -4,6 +4,10 @@ from zope import schema
 
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.supermodel.interfaces import ISchemaPolicy
+from plone.behavior.interfaces import IBehavior
+from plone.autoform.interfaces import IFormFieldProvider
+
+from collective.contact.core.behaviors import IContactDetails
 
 
 def date_to_DateTime(date):
@@ -22,5 +26,15 @@ def get_ttw_fields(obj):
     original_fields = schema.getFieldsInOrder(original_schema)
     new_fields = [field[0] for field in all_fields
                   if field[0] not in dict(original_fields).keys()]
+
+    for behavior_id in fti.behaviors:
+        behavior = getUtility(IBehavior, behavior_id).interface
+        if behavior == IContactDetails or not IFormFieldProvider.providedBy(behavior):
+            continue
+
+        behavior_name = behavior_id.split('.')[-1]
+        # @TODO: get generic method to get widget id
+        new_fields.extend(['%s.%s' % (behavior_name, field[0])
+                           for field in schema.getFieldsInOrder(behavior)])
 
     return new_fields
