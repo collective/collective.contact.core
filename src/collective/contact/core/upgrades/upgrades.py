@@ -7,8 +7,9 @@ from zope.component import getUtility
 
 from plone import api
 
-from ecreall.helpers.upgrade.interfaces import IUpgradeTool
 from collective.contact.widget.interfaces import IContactContent
+
+from ecreall.helpers.upgrade.interfaces import IUpgradeTool
 
 
 def reindex_relations(context):
@@ -49,7 +50,4 @@ def v5(context):
     tool.runProfile('collective.contact.widget:default')
     # add sortable_title column and reindex persons and organizations
     tool.addMetadata('sortable_title')
-    catalog = api.portal.get_tool(name='portal_catalog')
-    brains = catalog.unrestrictedSearchResults(object_provides=IContactContent.__identifier__)
-    for brain in brains:
-        brain.getObject().reindexObject()
+    tool.reindexContents(IContactContent, ('sortable_title',))
