@@ -4,6 +4,9 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Manage case users have uploaded non-image formats for logo or photo.
+  [thomasdesvenain]
+
 - Display behavior fields on contactable views
   once they are in default fieldset.
   [thomasdesvenain]

@@ -11,7 +11,7 @@
 	<h1 tal:content="view/name"></h1>
 
     <div id="logo" class="field" tal:condition="context/logo">
-        <img tal:replace="structure context/@@images/logo/thumb" />
+        <img tal:replace="structure context/@@images/logo/thumb|string:Bad logo format" />
     </div>
 
     <div id="type" class="field">

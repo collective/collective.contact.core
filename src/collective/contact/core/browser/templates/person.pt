@@ -11,7 +11,7 @@
 	<h1 tal:content="view/name"></h1>
 
     <div class="field" tal:condition="context/photo">
-        <img tal:replace="structure context/@@images/photo/thumb" />
+        <img tal:replace="structure context/@@images/photo/thumb|string:Bad photo format" />
     </div>
 
     <div class="field" tal:condition="view/birthday">
