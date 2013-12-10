@@ -4,6 +4,7 @@
     <permission name="collective.contact.core: Use parent address"
                 acquire="True">
       <role name="Member"/>
+      <role name="Manager"/>
     </permission>
   </permissions>
 </rolemap>
