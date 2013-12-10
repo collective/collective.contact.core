@@ -33,10 +33,13 @@ def get_ttw_fields(obj):
         if behavior == IContactDetails or not IFormFieldProvider.providedBy(behavior):
             continue
 
-        default_fieldset_fields = non_fieldset_fields(behavior)
-        behavior_name = behavior_id.split('.')[-1]
-        # @TODO: get generic method to get widget id
-        new_fields.extend(['%s.%s' % (behavior_name, field_name)
-                           for field_name in default_fieldset_fields])
+        try:
+            default_fieldset_fields = non_fieldset_fields(behavior)
+            behavior_name = behavior_id.split('.')[-1]
+            # @TODO: get generic method to get widget id
+            new_fields.extend(['%s.%s' % (behavior_name, field_name)
+                               for field_name in default_fieldset_fields])
+        except:
+            pass
 
     return new_fields
