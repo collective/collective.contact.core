@@ -4,6 +4,9 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Use a macro to display contact details.
+  [thomasdesvenain]
+
 - Manage case users have uploaded non-image formats for logo or photo.
   [thomasdesvenain]
 

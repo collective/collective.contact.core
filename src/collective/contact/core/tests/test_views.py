@@ -127,19 +127,17 @@ class TestContactView(TestView):
                           self.brigadelh], organizations)
 
         # Person email comes before Position email
-        self.assertEqual(contact_view.email,
+        self.assertEqual(contact_view.contact_details['email'],
                          "sgt.pepper@armees.fr")
-        self.assertNotEqual(contact_view.email,
-                            "brigade_lh@armees.fr")
-        self.assertEqual(contact_view.phone,
+        self.assertEqual(contact_view.contact_details['phone'],
                          "0288552211")
-        self.assertEqual(contact_view.cell_phone,
+        self.assertEqual(contact_view.contact_details['cell_phone'],
                          '0654875233')
-        self.assertEqual(contact_view.im_handle,
+        self.assertEqual(contact_view.contact_details['im_handle'],
                          "brigade_lh@jabber.org")
 
         # Everything in Sgt Pepper's address is acquired from Régiment H
-        address = contact_view.address
+        address = contact_view.contact_details['address']
         self.assertEqual(address['number'], u'11')
         self.assertEqual(address['street'], u"rue de l'harmonie")
         self.assertEqual(address['city'], u"Villeneuve d'Ascq")
@@ -163,10 +161,10 @@ class TestPositionView(TestView):
                           self.regimenth,
                           self.brigadelh], organizations)
 
-        self.assertEqual(position_view.email,
+        self.assertEqual(position_view.contact_details['email'],
                          "brigade_lh@armees.fr")
 
-        address = position_view.address
+        address = position_view.contact_details['address']
         self.assertEqual(address['number'], u'11')
         self.assertEqual(address['street'], u"rue de l'harmonie")
         self.assertEqual(address['city'], u"Villeneuve d'Ascq")
@@ -188,9 +186,9 @@ class TestOrganizationView(TestView):
         self.assertEqual([self.armeedeterre], parent_organizations)
         self.assertEqual([self.armeedeterre, self.corpsa], organizations)
 
-        self.assertEqual(org_view.email, '')
+        self.assertEqual(org_view.contact_details['email'], '')
 
-        address = org_view.address
+        address = org_view.contact_details['address']
         self.assertEqual(address['number'], u'')
         self.assertEqual(address['street'], u"rue Philibert Lucot")
         self.assertEqual(address['city'], u'Orléans')
@@ -233,12 +231,12 @@ class TestPersonView(TestView):
         self.assertEqual(person_view.gender, 'M')
         self.assertIn(person_view.birthday, ('Nov 22, 1901', '1901-11-22'))
 
-        self.assertEqual(person_view.email, 'charles.de.gaulle@armees.fr')
-        self.assertEqual(person_view.phone, '')
-        self.assertEqual(person_view.cell_phone, '')
-        self.assertEqual(person_view.im_handle, '')
+        self.assertEqual(person_view.contact_details['email'], 'charles.de.gaulle@armees.fr')
+        self.assertEqual(person_view.contact_details['phone'], '')
+        self.assertEqual(person_view.contact_details['cell_phone'], '')
+        self.assertEqual(person_view.contact_details['im_handle'], '')
 
-        address = person_view.address
+        address = person_view.contact_details['address']
         self.assertEqual(address['number'], u'6bis')
         self.assertEqual(address['street'], u"rue Jean Moulin")
         self.assertEqual(address['city'], u'Colombey les deux églises')

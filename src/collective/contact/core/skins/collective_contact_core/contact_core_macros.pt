@@ -36,4 +36,48 @@
 
  </metal:macro>
 
+
+ <metal:macro define-macro="contact-details-fields">
+
+    <div class="field" tal:condition="view/contact_details/email">
+        <label><tal:block i18n:translate="">Email</tal:block>:</label>
+        <span tal:content="view/contact_details/email"
+              i18n:translate="" />
+    </div>
+
+    <div class="field" tal:condition="view/contact_details/phone">
+        <label><tal:block i18n:translate="">Phone number</tal:block>:</label>
+        <span tal:content="view/contact_details/phone"
+              i18n:translate="" />
+    </div>
+
+    <div class="field" tal:condition="view/contact_details/cell_phone">
+        <label><tal:block i18n:translate="">Cell phone number</tal:block>:</label>
+        <span tal:content="view/contact_details/cell_phone"
+              i18n:translate="" />
+    </div>
+
+    <div class="field" tal:condition="view/contact_details/fax">
+        <label><tal:block i18n:translate="">Fax number</tal:block>:</label>
+        <span tal:content="view/contact_details/fax"
+              i18n:translate="" />
+    </div>
+
+    <div class="field" tal:condition="view/contact_details/im_handle">
+        <label><tal:block i18n:translate="">IM handle</tal:block>:</label>
+        <span tal:content="view/contact_details/im_handle"
+              i18n:translate="" />
+    </div>
+
+    <div class="field" tal:condition="view/contact_details/website">
+        <label><tal:block i18n:translate="">Website</tal:block>:</label>
+        <a tal:content="view/contact_details/website"
+           tal:attributes="href view/contact_details/website" />
+    </div>
+
+    <div id="address"
+         tal:replace="structure view/render_address" />
+
+  </metal:macro>
+
 </html>

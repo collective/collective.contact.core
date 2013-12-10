@@ -46,14 +46,7 @@ class Position(BaseView):
         contactable = IContactable(position)
         self.organizations = contactable.organizations
 
-        contact_details = contactable.get_contact_details()
-        self.email = contact_details['email']
-        self.phone = contact_details['phone']
-        self.cell_phone = contact_details['cell_phone']
-        self.fax = contact_details['fax']
-        self.im_handle = contact_details['im_handle']
-        self.address = contact_details['address']
-        self.website = contact_details['website']
+        self.contact_details = contactable.get_contact_details()
 
         # also show fields that were added TTW
         self.ttw_fields = get_ttw_fields(position)

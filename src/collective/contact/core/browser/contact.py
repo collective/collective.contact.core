@@ -53,14 +53,7 @@ class Contact(BaseView):
         self.organizations = organization and organization.get_organizations_chain() or []
 
         contactable = IContactable(held_position)
-        contact_details = contactable.get_contact_details()
-        self.email = contact_details['email']
-        self.phone = contact_details['phone']
-        self.cell_phone = contact_details['cell_phone']
-        self.fax = contact_details['fax']
-        self.im_handle = contact_details['im_handle']
-        self.website = contact_details['website']
-        self.address = contact_details['address']
+        self.contact_details = contactable.get_contact_details()
 
         # also show fields that were added TTW
         self.ttw_fields = get_ttw_fields(held_position)

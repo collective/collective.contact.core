@@ -135,4 +135,4 @@ class BaseView(DefaultView):
     def render_address(self):
         template_path = os.path.join(TEMPLATES_DIR, 'address.pt')
         template = ViewPageTemplateFile(template_path)
-        return template(self, self.address)
+        return template(self, self.contact_details['address'])

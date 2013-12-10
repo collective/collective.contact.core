@@ -39,14 +39,7 @@ class Person(BaseView):
         self.held_positions = results
 
         contactable = IContactable(person)
-        contact_details = contactable.get_contact_details()
-        self.email = contact_details['email']
-        self.phone = contact_details['phone']
-        self.fax = contact_details['fax']
-        self.cell_phone = contact_details['cell_phone']
-        self.im_handle = contact_details['im_handle']
-        self.website = contact_details['website']
-        self.address = contact_details['address']
+        self.contact_details = contactable.get_contact_details()
 
         # also show fields that were added TTW
         self.ttw_fields = get_ttw_fields(person)
