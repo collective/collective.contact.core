@@ -1,10 +1,12 @@
 from plone.indexer import indexer
+from Products.CMFPlone.utils import normalizeString
 
 from collective.contact.core.content.held_position import IHeldPosition
 from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.content.position import IPosition
 from collective.contact.core.content.person import IPerson
 from collective.contact.core.behaviors import IRelatedOrganizations
+
 
 def ensure_unicode(x):
     if not isinstance(x, unicode):
@@ -39,7 +41,8 @@ def held_position_searchable_text(obj):
 
 @indexer(IPosition)
 def position_searchable_text(obj):
-    return ensure_unicode(obj.SearchableText()) + ensure_unicode(obj.get_organization().Title())
+    return ensure_unicode("%s %s" % (obj.SearchableText(),
+                          ensure_unicode(obj.get_organization().Title())))
 
 
 @indexer(IPerson)
@@ -47,12 +50,24 @@ def person_searchable_text(obj):
     results = []
     results.append(ensure_unicode(obj.SearchableText()))
     for held_positions in obj.get_held_positions():
-        results.append(ensure_unicode(held_position_searchable_text(held_positions)()))
+        results.append(ensure_unicode(
+                            held_position_searchable_text(held_positions)()))
     return results
+
 
 @indexer(IPerson)
 def person_sortable_title(obj):
     if obj.firstname is None:
-        return obj.lastname
+        fullname = obj.lastname
     else:
-        return "%s %s" % (obj.lastname, obj.firstname)
+        fullname = "%s %s" % (obj.lastname, obj.firstname)
+
+    return normalizeString(ensure_unicode(fullname), context=obj)
+
+
+@indexer(IHeldPosition)
+def held_position_sortable_title(obj):
+    sortable_fullname = person_sortable_title(obj.get_person())()
+    held_position_title = obj.Title()
+    return "%s-%s" % (sortable_fullname,
+                      normalizeString(unicode(held_position_title), context=obj))

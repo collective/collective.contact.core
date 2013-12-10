@@ -87,6 +87,11 @@
     />
 
   <adapter
+    name="sortable_title"
+    factory=".indexers.held_position_sortable_title"
+    />
+
+  <adapter
       factory=".behaviors.DefaultUseParentAddress"
       name="default" />
 

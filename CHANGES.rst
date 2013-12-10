@@ -23,7 +23,8 @@ Changelog
 - Add icon for 'Create Contact' link on position and organization pages.
   [cedricmessiant]
 
-- Customize sortable_title indexer for Person and add a corresponding brain
+- Customize sortable_title indexer for Person and Held Position
+  and add a corresponding brain
   metadata (to enable use of this index in collective.contact.facetednav
   alphabetic search widget).
   [cedricmessiant]

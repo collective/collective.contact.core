@@ -7,8 +7,9 @@ from Products.CMFCore.utils import getToolByName
 from ecreall.helpers.testing.base import BaseTest
 
 from collective.contact.core.testing import INTEGRATION
-from collective.contact.core.indexers import held_position_searchable_text,\
-    organization_searchable_text, person_sortable_title
+from collective.contact.core.indexers import (
+    held_position_searchable_text, organization_searchable_text,
+    person_sortable_title, held_position_sortable_title)
 
 
 class TestSearch(unittest.TestCase, BaseTest):
@@ -45,10 +46,13 @@ class TestSearch(unittest.TestCase, BaseTest):
                          u"Sergent Pepper Sergent de la brigade LH Armée de terre Corps A Division Alpha Régiment H Brigade LH")
         pepper = self.pepper
         self.assertEqual(person_sortable_title(pepper)(),
-                         u"Pepper")
+                         "pepper")
+        idxr = held_position_sortable_title(self.sergent_pepper)
+        self.assertEqual(idxr(),
+                         "pepper-sergent-de-la-brigade-lh-brigade-lh-armee-de-terre")
         degaulle = self.degaulle
         self.assertEqual(person_sortable_title(degaulle)(),
-                         u"De Gaulle Charles")
+                         'de-gaulle-charles')
 
     def test_searchable_fields(self):
         catalog = getToolByName(self.portal, 'portal_catalog')
