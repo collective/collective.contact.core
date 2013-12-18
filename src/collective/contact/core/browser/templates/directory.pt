@@ -25,7 +25,7 @@
         </ul>
     </div>
 
-    <div id="organizations" tal:condition="view/organizations">
+    <div id="persons" tal:condition="view/persons">
         <h2><tal:block i18n:translate="">Persons</tal:block>:</h2>
         <ul>
         <tal:block tal:repeat="person view/persons">
