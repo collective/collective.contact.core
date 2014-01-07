@@ -78,7 +78,9 @@ class Person(Container):
         return
 
     def get_title(self):
-        return u' '.join([x for x in (self.person_title, self.firstname, self.lastname) if x])
+        return u' '.join([x for x in (self.person_title,
+                                      self.firstname,
+                                      self.lastname) if x])
 
     title = property(get_title, set_title)
 
@@ -92,6 +94,9 @@ class Person(Container):
 
     def get_held_positions_titles(self):
         return [p.Title() for p in self.get_held_positions()]
+
+    def get_full_name(self):
+        return u' '.join([x for x in (self.firstname, self.lastname) if x])
 
 
 class PersonSchemaPolicy(grok.GlobalUtility,

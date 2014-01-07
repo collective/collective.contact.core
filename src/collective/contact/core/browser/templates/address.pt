@@ -1,19 +1,23 @@
-<div class="field" id="address"
+<div class="field adr" id="address"
      i18n:domain="collective.contact.core"
      tal:repeat="address args">
     <div tal:condition="address">
     <label><tal:block i18n:translate="">Address</tal:block>:</label>
-    <div class="address_line">
-        <span i18n:translate="" tal:content="address/number"></span>
-        <span i18n:translate="" tal:content="address/additional_address_details"></span>
-        <span i18n:translate="" tal:content="address/street"></span>
+    <div id="street-address" class="address_line street-address">
+        <span i18n:translate="" tal:replace="address/number"></span>
+        <span i18n:translate="" tal:replace="address/additional_address_details"></span>
+        <span i18n:translate="" tal:replace="address/street"></span>
     </div>
-    <div class="address_line">
-        <span i18n:translate="" tal:content="address/zip_code"></span>
-        <span i18n:translate="" tal:content="address/city"></span>
+    <div id="postal_code_and_locality" class="address_line">
+        <span class="postal-code" i18n:translate="" tal:condition="address/zip_code" tal:content="address/zip_code"></span>
+        <span class="locality" i18n:translate="" tal:condition="address/city" tal:content="address/city"></span>
     </div>
-    <div class="address_line">
-        <span i18n:translate="" tal:content="address/country"></span>
+    <div id="region" class="address_line region" tal:condition="address/region">
+        <span i18n:translate="" tal:replace="address/region"></span>
     </div>
+    <div id="country" class="address_line country-name" tal:condition="address/country">
+        <span i18n:translate="" tal:replace="address/country"></span>
+    </div>
+
     </div>
 </div>
