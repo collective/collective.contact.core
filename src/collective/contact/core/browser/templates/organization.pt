@@ -7,11 +7,11 @@
       i18n:domain="collective.contact.core">
 <body>
 
-<div metal:fill-slot="main">
-	<h1 tal:content="view/name"></h1>
+<div class="vcard" metal:fill-slot="main">
+	<h1 class="org" tal:content="view/name"></h1>
 
     <div id="logo" class="field" tal:condition="context/logo">
-        <img tal:replace="structure context/@@images/logo/thumb|string:Bad logo format" />
+        <img class="photo" tal:replace="structure context/@@images/logo/thumb|string:Bad logo format" />
     </div>
 
     <div id="type" class="field">
@@ -22,7 +22,7 @@
 
     <div id="activity" class="field" tal:condition="view/activity">
          <label><tal:block i18n:translate="">Activity</tal:block>:</label>
-         <span tal:content="structure view/activity/output" />
+         <span class="note" tal:content="structure view/activity/output" />
     </div>
 
     <div id="organizations" class="field" tal:condition="view/parent_organizations">
