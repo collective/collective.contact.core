@@ -101,8 +101,6 @@
         <script tal:replace="structure view/addnew_script"></script>
     </tal:addnew>
 
-  <metal:additional-fields use-macro="context/contact_core_macros/macros/contact-details-fields" />
-
   <metal:additional-fields use-macro="context/contact_core_macros/macros/additional-fields" />
 
   <div id="download_vcard">
