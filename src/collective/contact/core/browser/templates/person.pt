@@ -7,16 +7,19 @@
       i18n:domain="collective.contact.core">
 <body>
 
-<div metal:fill-slot="main">
-	<h1 tal:content="view/name"></h1>
+<div class="vcard" metal:fill-slot="main">
 
-    <div class="field" tal:condition="context/photo">
-        <img tal:replace="structure context/@@images/photo/thumb|string:Bad photo format" />
+	<h1 class="fn" tal:content="view/name"></h1>
+
+    <div id="photo" class="field" tal:condition="context/photo">
+        <img tal:define="scales nocall:context/@@images"
+             tal:replace="structure python:scales.tag('photo', 'thumb', css_class='photo')"
+             tal:on-error="string:Bad photo format" />
     </div>
 
-    <div class="field" tal:condition="view/birthday">
+    <div id="birthday" class="field" tal:condition="view/birthday">
         <label><tal:block i18n:translate="">Birthday</tal:block>:</label>
-        <span tal:content="view/birthday"
+        <span class="bday" tal:content="view/birthday"
               i18n:translate="" />
     </div>
 

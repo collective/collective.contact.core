@@ -1,17 +1,12 @@
 from plone.indexer import indexer
 from Products.CMFPlone.utils import normalizeString
+from Products.CMFPlone.utils import safe_unicode
 
 from collective.contact.core.content.held_position import IHeldPosition
 from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.content.position import IPosition
 from collective.contact.core.content.person import IPerson
 from collective.contact.core.behaviors import IRelatedOrganizations
-
-
-def ensure_unicode(x):
-    if not isinstance(x, unicode):
-        x = unicode(x, 'utf-8', 'ignore')
-    return x
 
 
 @indexer(IOrganization)
@@ -41,17 +36,16 @@ def held_position_searchable_text(obj):
 
 @indexer(IPosition)
 def position_searchable_text(obj):
-    return ensure_unicode("%s %s" % (obj.SearchableText(),
-                          ensure_unicode(obj.get_organization().Title())))
+    return u"%s %s" % (safe_unicode(obj.SearchableText()),
+                       safe_unicode(obj.get_organization().Title()))
 
 
 @indexer(IPerson)
 def person_searchable_text(obj):
     results = []
-    results.append(ensure_unicode(obj.SearchableText()))
+    results.append(safe_unicode(obj.SearchableText()))
     for held_positions in obj.get_held_positions():
-        results.append(ensure_unicode(
-                            held_position_searchable_text(held_positions)()))
+        results.append(held_position_searchable_text(held_positions)())
     return results
 
 
@@ -60,14 +54,15 @@ def person_sortable_title(obj):
     if obj.firstname is None:
         fullname = obj.lastname
     else:
-        fullname = "%s %s" % (obj.lastname, obj.firstname)
+        fullname = u"%s %s" % (obj.lastname, obj.firstname)
 
-    return normalizeString(ensure_unicode(fullname), context=obj)
+    return normalizeString(fullname, context=obj)
 
 
 @indexer(IHeldPosition)
 def held_position_sortable_title(obj):
     sortable_fullname = person_sortable_title(obj.get_person())()
     held_position_title = obj.Title()
-    return "%s-%s" % (sortable_fullname,
-                      normalizeString(unicode(held_position_title), context=obj))
+    return u"%s-%s" % (sortable_fullname,
+                       normalizeString(safe_unicode(held_position_title),
+                                       context=obj))

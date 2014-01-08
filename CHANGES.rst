@@ -4,6 +4,9 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Add hcard microformat (see http://microformats.org/wiki/hcard) for person and organization.
+  [cedricmessiant]
+
 - Use a macro to display contact details.
   [thomasdesvenain]
 
