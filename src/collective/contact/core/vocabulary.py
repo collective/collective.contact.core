@@ -63,10 +63,11 @@ class OrganizationTypesOrLevels(grok.GlobalUtility):
         try:
             directory = get_directory(context)
             container_type = self.get_container_type(context)
-            if container_type == 'directory':
-                return get_vocabulary(directory.organization_types)
-            elif container_type == 'organization':
+            if container_type == 'organization':
                 return get_vocabulary(directory.organization_levels)
+            else:
+                # directory, folder or anything else
+                return get_vocabulary(directory.organization_types)
         except NoDirectoryFound:
             return SimpleVocabulary([])
 
