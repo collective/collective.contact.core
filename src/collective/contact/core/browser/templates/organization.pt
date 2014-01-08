@@ -11,7 +11,9 @@
 	<h1 class="org" tal:content="view/name"></h1>
 
     <div id="logo" class="field" tal:condition="context/logo">
-        <img class="photo" tal:replace="structure context/@@images/logo/thumb|string:Bad logo format" />
+        <img tal:define="scales nocall:context/@@images"
+             tal:replace="structure python:scales.tag('logo', 'thumb', css_class='photo')"
+             tal:on-error="string:Bad logo format" />
     </div>
 
     <div id="type" class="field">

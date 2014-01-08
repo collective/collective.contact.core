@@ -12,7 +12,9 @@
 	<h1 class="fn" tal:content="view/name"></h1>
 
     <div id="photo" class="field" tal:condition="context/photo">
-        <img class="photo" tal:replace="structure context/@@images/photo/thumb|string:Bad photo format" />
+        <img tal:define="scales nocall:context/@@images"
+             tal:replace="structure python:scales.tag('photo', 'thumb', css_class='photo')"
+             tal:on-error="string:Bad photo format" />
     </div>
 
     <div id="birthday" class="field" tal:condition="view/birthday">
