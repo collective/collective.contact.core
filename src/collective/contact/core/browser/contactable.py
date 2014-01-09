@@ -25,6 +25,7 @@ class ContactDetailsContactable(grok.Adapter):
         if not IContactDetails.providedBy(self.context):
             raise TypeError("Your contactable content must provide IContactDetails "
                             "if it doesn't have a more specific contactable adapter")
+
         contact_details = {}
         contact_details_fields = ['email', 'phone', 'cell_phone', 'fax', 'website', 'im_handle']
         context = aq_base(self.context)

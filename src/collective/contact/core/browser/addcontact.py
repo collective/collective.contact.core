@@ -1,4 +1,10 @@
 from AccessControl import getSecurityManager
+from zope.component import getUtility
+from zope.contentprovider.interfaces import IContentProvider
+from zope.event import notify
+from zope.interface import implements
+from zope.publisher.browser import BrowserView
+
 from Products.CMFCore.utils import getToolByName
 from Products.statusmessages.interfaces import IStatusMessage
 from five import grok
@@ -11,11 +17,6 @@ from plone.supermodel import model
 from z3c.form import field, form, button
 from z3c.form.contentprovider import ContentProviders
 from z3c.form.interfaces import IFieldsAndContentProvidersForm, HIDDEN_MODE
-from zope.component import getUtility
-from zope.contentprovider.interfaces import IContentProvider
-from zope.event import notify
-from zope.interface import implements
-from zope.publisher.browser import BrowserView
 
 from collective.contact.widget.schema import ContactChoice
 from collective.contact.widget.source import ContactSourceBinder
@@ -76,6 +77,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
                 else:
                     url = "%s/@@add-contact" % directory_url
                     type_name = _(u"Contact")
+
                 close_on_click = False
                 label = _(u"Create ${name}", mapping={'name': type_name})
                 action = {'url': url, 'label': label,
@@ -83,6 +85,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
                           'formselector' : '#oform',
                           'closeselector': '[name="oform.buttons.cancel"]'}
                 actions.append(action)
+
         return {'actions': actions,
                 'close_on_click': close_on_click,
                 'formatItem': """function(row, idx, count, value) {
@@ -258,6 +261,7 @@ class AddContact(DefaultAddForm, form.AddForm):
         if errors:
             self.status = self.formErrorsMessage
             return
+
         obj = self.createAndAdd(data)
         if obj is not None:
             # mark only as finished if we get the new object
@@ -324,9 +328,11 @@ class AddContactFromPosition(AddContact):
         if 'oform.widgets.organization' not in self.request.form:
             self.request.form['oform.widgets.organization'] = '/'.join(
                     organization.getPhysicalPath())
+
         if 'oform.widgets.position' not in self.request.form:
             self.request.form['oform.widgets.position'] = '/'.join(
                     self.context.getPhysicalPath())
+
         super(AddContactFromPosition, self).updateWidgets()
 
 

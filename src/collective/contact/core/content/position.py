@@ -1,5 +1,4 @@
 from zope.interface import implements
-from zope.interface import Attribute
 from zope import schema
 from z3c.form.interfaces import NO_VALUE
 

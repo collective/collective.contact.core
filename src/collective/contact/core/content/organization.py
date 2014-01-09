@@ -1,6 +1,5 @@
 from Acquisition import aq_inner, aq_chain
 from zope.interface import implements
-from zope.interface import Attribute
 from zope import schema
 from zope.component import getUtility
 from zope.intid.interfaces import IIntIds
@@ -16,12 +15,12 @@ from plone.dexterity.content import Container
 from plone.supermodel import model
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.namedfile.field import NamedImage
+from plone.app.textfield import RichText
 
 from collective.contact.core import _
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.widget.interfaces import IContactContent
 from collective.contact.core.content.held_position import IHeldPosition
-from plone.app.textfield import RichText
 
 
 class IOrganization(model.Schema, IContactContent):
@@ -100,6 +99,7 @@ class Organization(Container):
                     break
                 elif item.portal_type == 'organization':
                     organizations_chain.append(item)
+
         organizations_chain.reverse()
         return organizations_chain[first_index:]
 

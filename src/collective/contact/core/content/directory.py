@@ -4,7 +4,6 @@ from zope import schema
 from five import grok
 
 from plone.autoform.directives import widget
-from plone.autoform import directives as form
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.supermodel import model
