@@ -27,7 +27,9 @@
         </ul>
     </div>
 
-    <metal:additional-fields use-macro="context/contact_core_macros/macros/contact-details-fields" />
+    <div tal:replace="structure context/@@contactdetails" />
+
+    <metal:additional-fields use-macro="context/contact_core_macros/macros/additional-fields" />
 
     <tal:addnew
            tal:define="ajax_load request/ajax_load|nothing"
@@ -42,8 +44,6 @@
         </a>
         <script tal:replace="structure view/addnew_script"></script>
     </tal:addnew>
-
-  <metal:additional-fields use-macro="context/contact_core_macros/macros/additional-fields" />
 
 </div>
 

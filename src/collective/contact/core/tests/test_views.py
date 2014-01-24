@@ -161,6 +161,9 @@ class TestPositionView(TestView):
                           self.regimenth,
                           self.brigadelh], organizations)
 
+    def test_position_contact_details_view(self):
+        position_view = self.sergent_lh.restrictedTraverse("@@contactdetails")
+        position_view.update()
         self.assertEqual(position_view.contact_details['email'],
                          "brigade_lh@armees.fr")
 
@@ -186,6 +189,10 @@ class TestOrganizationView(TestView):
         self.assertEqual([self.armeedeterre], parent_organizations)
         self.assertEqual([self.armeedeterre, self.corpsa], organizations)
 
+
+    def test_organization_contact_details_view(self):
+        org_view = self.corpsa.restrictedTraverse("@@contactdetails")
+        org_view.update()
         self.assertEqual(org_view.contact_details['email'], '')
 
         address = org_view.contact_details['address']
@@ -231,6 +238,9 @@ class TestPersonView(TestView):
         self.assertEqual(person_view.gender, 'M')
         self.assertIn(person_view.birthday, ('Nov 22, 1901', '1901-11-22'))
 
+    def test_person_contact_details_view(self):
+        person_view = self.degaulle.restrictedTraverse("@@contactdetails")
+        person_view.update()
         self.assertEqual(person_view.contact_details['email'], 'charles.de.gaulle@armees.fr')
         self.assertEqual(person_view.contact_details['phone'], '')
         self.assertEqual(person_view.contact_details['cell_phone'], '')
@@ -245,6 +255,10 @@ class TestPersonView(TestView):
         self.assertEqual(address['country'], u'France')
         self.assertEqual(address['additional_address_details'], u'bâtiment D')
 
+
+    def test_person_held_positions_view(self):
+        person_view = self.degaulle.restrictedTraverse("@@heldpositions")
+        person_view.update()
         held_positions = [b.getObject() for b in person_view.held_positions]
         self.assertIn(self.adt, held_positions)
         self.assertIn(self.gadt, held_positions)

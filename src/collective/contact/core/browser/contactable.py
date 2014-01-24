@@ -17,6 +17,9 @@ from collective.contact.core.interfaces import IContactable
 from collective.contact.widget.interfaces import IContactContent
 
 
+grok.templatedir(TEMPLATES_DIR)
+
+
 class ContactDetailsContactable(grok.Adapter):
     grok.provides(IContactable)
     grok.context(Interface)
@@ -39,6 +42,21 @@ class ContactDetailsContactable(grok.Adapter):
 
     def get_parent_address(self):
         return u""
+
+
+class ContactDetails(grok.View):
+    grok.name('contactdetails')
+    grok.template('contactdetails')
+    grok.context(IContactContent)
+
+    def update(self):
+        contactable = IContactable(self.context)
+        self.contact_details = contactable.get_contact_details()
+
+    def render_address(self):
+        template_path = os.path.join(TEMPLATES_DIR, 'address.pt')
+        template = ViewPageTemplateFile(template_path)
+        return template(self, self.contact_details['address'])
 
 
 class Contactable(grok.Adapter):
@@ -132,8 +150,3 @@ class BaseView(DefaultView):
         if IContactDetails in additional_schemata:
             additional_schemata.remove(IContactDetails)
         return additional_schemata
-
-    def render_address(self):
-        template_path = os.path.join(TEMPLATES_DIR, 'address.pt')
-        template = ViewPageTemplateFile(template_path)
-        return template(self, self.contact_details['address'])

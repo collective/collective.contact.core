@@ -5,6 +5,7 @@
 <body>
 
 <div metal:fill-slot="main">
+
 	<h1><span tal:content="view/fullname"></span><tal:content i18n:translate="colon">:</tal:content>
 	    <span tal:content="view/title"></span></h1>
 
@@ -50,16 +51,9 @@
               i18n:translate="" />
     </div>
 
-    <metal:additional-fields use-macro="context/contact_core_macros/macros/contact-details-fields" />
+    <div tal:replace="structure context/@@contactdetails" />
 
-    <tal:block tal:repeat="field view/ttw_fields">
-        <div class="field" tal:define="widget python:field in view.widgets and view.widgets[field]"
-             tal:condition="python:widget and widget.value"
-             >
-            <label tal:content="python: widget.label" i18n:translate="" />
-            <span tal:content="structure widget/render" tal:on-error="nothing"/>
-        </div>
-    </tal:block>
+    <metal:additional-fields use-macro="context/contact_core_macros/macros/additional-fields" />
 
     <fieldset tal:repeat="group view/groups"
               tal:attributes="id python:''.join((group.prefix, 'groups.', group.__name__)).replace('.', '-')">
@@ -71,13 +65,6 @@
         </div>
 
     </fieldset>
-
-	<div id="download_vcard" tal:condition="view/contact_details">
-        <a href="@@contact.vcf" tal:attributes="href string: ${context/absolute_url}/@@contact.vcf">
-            <img tal:attributes="src string:${portal_url}/vcard_icon.png" />
-            <tal:vcard i18n:translate=""> Download VCard</tal:vcard>
-        </a>
-	</div>
 
 </div>
 

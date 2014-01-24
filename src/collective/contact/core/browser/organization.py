@@ -61,8 +61,6 @@ class Organization(BaseView):
                                                              'depth': 1})
         self.positions = self.context.get_positions()
 
-        self.contact_details = contactable.get_contact_details()
-
         # also show fields that were added TTW
         self.ttw_fields = get_ttw_fields(organization)
 

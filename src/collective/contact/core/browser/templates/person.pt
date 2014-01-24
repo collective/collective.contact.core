@@ -23,21 +23,10 @@
               i18n:translate="" />
     </div>
 
-    <metal:additional-fields use-macro="context/contact_core_macros/macros/contact-details-fields" />
+    <div tal:replace="structure context/@@contactdetails" />
+    <metal:additional-fields use-macro="context/contact_core_macros/macros/additional-fields" />
 
-    <div id="held_positions" class="field" tal:condition="view/held_positions">
-        <label><tal:block i18n:translate="">Positions held by this person</tal:block>:</label>
-        <ul>
-        <tal:block tal:repeat="held_position view/held_positions">
-            <li><a class="link-tooltip" tal:attributes="href held_position/getURL">
-                <span tal:replace="held_position/Title"
-                      i18n:translate="" />
-            </a></li>
-        </tal:block>
-        </ul>
-    </div>
-
-  <metal:additional-fields use-macro="context/contact_core_macros/macros/additional-fields" />
+    <div tal:replace="structure context/@@heldpositions" />
 
 </div>
 

@@ -1,10 +1,17 @@
+from five import grok
+
 from Products.CMFCore.utils import getToolByName
 
+from collective.contact.core.behaviors import IBirthday
+from collective.contact.core.browser import TEMPLATES_DIR
 from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.browser.utils import date_to_DateTime,\
-                                                     get_ttw_fields
+                                                  get_ttw_fields
+from collective.contact.core.content.person import IPerson
 from collective.contact.core.interfaces import IContactable
-from collective.contact.core.behaviors import IBirthday
+
+
+grok.templatedir(TEMPLATES_DIR)
 
 
 class Person(BaseView):
@@ -32,14 +39,18 @@ class Person(BaseView):
         self.person_title = person.person_title
         self.gender = person.gender or ''
 
-        catalog = getToolByName(self.context, 'portal_catalog')
-        context_path = '/'.join(person.getPhysicalPath())
-        results = catalog.searchResults(path={'query': context_path,
-                                              'depth': 1})
-        self.held_positions = results
-
-        contactable = IContactable(person)
-        self.contact_details = contactable.get_contact_details()
-
         # also show fields that were added TTW
         self.ttw_fields = get_ttw_fields(person)
+
+
+class HeldPositions(grok.View):
+    """Displays held positions list"""
+    grok.name('heldpositions')
+    grok.template('heldpositions')
+    grok.context(IPerson)
+
+    def update(self):
+        person = self.context
+        catalog = getToolByName(person, 'portal_catalog')
+        context_path = '/'.join(person.getPhysicalPath())
+        self.held_positions = catalog.searchResults(path={'query': context_path, 'depth': 1})

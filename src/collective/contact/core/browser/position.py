@@ -46,8 +46,6 @@ class Position(BaseView):
         contactable = IContactable(position)
         self.organizations = contactable.organizations
 
-        self.contact_details = contactable.get_contact_details()
-
         # also show fields that were added TTW
         self.ttw_fields = get_ttw_fields(position)
 
