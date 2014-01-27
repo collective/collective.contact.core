@@ -47,6 +47,7 @@ def v4(context):
 
 def v5(context):
     tool = IUpgradeTool(context)
+    tool.runImportStep('collective.contact.core', 'typeinfo')
     tool.runProfile('collective.contact.widget:default')
     # add sortable_title column and reindex persons and organizations
     tool.addMetadata('sortable_title')

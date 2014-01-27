@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      i18n:domain="collective.contact.core" tal:omit-tag="">
+
+    <h1 class="fn" tal:content="view/name"></h1>
+
+    <div id="photo" class="field" tal:condition="context/photo">
+        <img tal:define="scales nocall:context/@@images"
+             tal:replace="structure python:scales.tag('photo', 'thumb', css_class='photo')"
+             tal:on-error="string:Bad photo format" />
+    </div>
+
+    <div id="birthday" class="field" tal:condition="view/birthday">
+        <label><tal:block i18n:translate="">Birthday</tal:block>:</label>
+        <span class="bday" tal:content="view/birthday"
+              i18n:translate="" />
+    </div>
+
+</html>

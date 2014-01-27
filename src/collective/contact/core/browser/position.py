@@ -30,24 +30,16 @@ $(document).ready(function(){
 
 class Position(BaseView):
 
-    name = ''
-    type = ''
-    organizations = []
-
     def update(self):
         super(Position, self).update()
         self.position = self.context
         position = self.position
-        self.name = position.get_full_title()
         factory = getUtility(IVocabularyFactory, "PositionTypes")
         vocabulary = factory(self.context)
         self.type = vocabulary.getTerm(position.position_type).title
 
         contactable = IContactable(position)
         self.organizations = contactable.organizations
-
-        # also show fields that were added TTW
-        self.ttw_fields = get_ttw_fields(position)
 
         sm = getSecurityManager()
         self.can_add = sm.checkPermission('Add portal content', self.context)

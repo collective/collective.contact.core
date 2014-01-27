@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      i18n:domain="collective.contact.core" tal:omit-tag="">
+<body>
+
+    <h1 class="org" tal:content="view/name"></h1>
+
+    <div id="logo" class="field" tal:condition="context/logo">
+        <img tal:define="scales nocall:context/@@images"
+             tal:replace="structure python:scales.tag('logo', 'thumb', css_class='photo')"
+             tal:on-error="string:Bad logo format" />
+    </div>
+
+    <div id="type" class="field">
+         <label><tal:block i18n:translate="">Organization type</tal:block>:</label>
+         <span tal:content="view/type"
+               i18n:translate="" />
+    </div>
+
+    <div id="activity" class="field" tal:condition="view/activity">
+         <label><tal:block i18n:translate="">Activity</tal:block>:</label>
+         <span class="note" tal:content="structure view/activity/output" />
+    </div>
+
+</body>
+</html>

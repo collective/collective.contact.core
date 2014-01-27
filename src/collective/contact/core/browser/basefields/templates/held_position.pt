@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="collective.contact.core">
+
+  <h1><span tal:content="view/fullname"></span><tal:content i18n:translate="colon">:</tal:content>
+      <span tal:content="view/title"></span></h1>
+
+  <div class="field" tal:condition="context/photo">
+    <img tal:replace="structure context/@@images/photo/thumb" />
+  </div>
+
+  <div class="field" tal:condition="view/position">
+      <label><tal:block i18n:translate="">Position</tal:block>:</label>
+      <a class="link-tooltip" tal:attributes="href view/position/absolute_url">
+        <span tal:content="view/position/Title"
+            i18n:translate="" />
+      </a>
+  </div>
+
+  <div class="field" tal:condition="view/start_date">
+      <label><tal:block i18n:translate="">Start date</tal:block>:</label>
+      <span tal:content="view/start_date"
+            i18n:translate="" />
+  </div>
+
+  <div class="field" tal:condition="view/end_date">
+      <label><tal:block i18n:translate="">End date</tal:block>:</label>
+      <span tal:content="view/end_date"
+            i18n:translate="" />
+  </div>
+
+</html>

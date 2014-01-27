@@ -1,0 +1,17 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      i18n:domain="collective.contact.core" tal:omit-tag="">
+<body>
+
+    <h1 tal:content="view/name"></h1>
+
+    <div id="type" class="field">
+         <label><tal:block i18n:translate="">Position type</tal:block>:</label>
+         <span tal:content="view/type" i18n:translate="" />
+    </div>
+
+</body>
+</html>

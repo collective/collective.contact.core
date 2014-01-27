@@ -5,3 +5,8 @@
 #download_vcard {
     margin-bottom: 1em;
 }
+
+/* hide download vcard link for positions on person page */
+.portaltype-person #held_positions .held_position #download_vcard {
+    display: none;
+}

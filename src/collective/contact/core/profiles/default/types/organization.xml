@@ -8,7 +8,7 @@
  <property
     name="add_view_expr">string:${folder_url}/++add++organization</property>
  <property name="link_target"></property>
- <property name="immediate_view">@@organization</property>
+ <property name="immediate_view">view</property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
@@ -16,8 +16,9 @@
   <element value="organization"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">@@organization</property>
+ <property name="default_view">view</property>
  <property name="view_methods">
+  <element value="view"/>
  </property>
  <property name="default_view_fallback">False</property>
  <property name="add_permission">cmf.AddPortalContent</property>

@@ -14,55 +14,35 @@
       />
 
   <browser:page
-      name="contact"
+      name="view"
       for="..content.held_position.IHeldPosition"
       class=".contact.Contact"
       template="templates/contact.pt"
       permission="zope2.View"
       />
 
-  <browser:defaultView
-      for="..content.held_position.IHeldPosition"
-      name="contact"
-      />
-
   <browser:page
-      name="organization"
+      name="view"
       for="..content.organization.IOrganization"
       class=".organization.Organization"
       template="templates/organization.pt"
       permission="zope2.View"
       />
 
-  <browser:defaultView
-      for="..content.organization.IOrganization"
-      name="organization"
-      />
-
   <browser:page
-      name="position"
+      name="view"
       for="..content.position.IPosition"
       class=".position.Position"
       template="templates/position.pt"
       permission="zope2.View"
       />
 
-  <browser:defaultView
-      for="..content.position.IPosition"
-      name="position"
-      />
-
   <browser:page
-      name="person"
+      name="view"
       for="..content.person.IPerson"
       class=".person.Person"
       template="templates/person.pt"
       permission="zope2.View"
-      />
-
-  <browser:defaultView
-      for="..content.person.IPerson"
-      name="person"
       />
 
   <browser:page

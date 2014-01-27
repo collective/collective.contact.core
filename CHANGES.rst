@@ -4,6 +4,13 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Rewrite every contact content view in separate views (basefields, contactdetails, etc) so
+  that we can override only a specific part of the view in customer projects.
+  [cedricmessiant]
+
+- Rename all contact content views to "view".
+  [cedricmessiant]
+
 - Add hcard microformat (see http://microformats.org/wiki/hcard) for person and organization.
   [cedricmessiant]
 

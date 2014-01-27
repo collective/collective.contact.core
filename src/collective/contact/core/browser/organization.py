@@ -1,6 +1,4 @@
 from AccessControl import getSecurityManager
-from zope.component import getUtility
-from zope.schema.interfaces import IVocabularyFactory
 
 from Products.CMFCore.utils import getToolByName
 
@@ -30,29 +28,15 @@ $(document).ready(function(){
 
 class Organization(BaseView):
 
-    name = ''
-    type = ''
-    parent_organizations = []
-    sub_organizations = []
-    positions = []
-    activity = ''
-
     def update(self):
         super(Organization, self).update()
         self.organization = self.context
         organization = self.organization
 
-        self.name = organization.Title()
-        factory = getUtility(IVocabularyFactory, "OrganizationTypesOrLevels")
-        vocabulary = factory(self.context)
-        self.type = vocabulary.getTerm(organization.organization_type).title
-        self.activity = self.context.activity
-
         contactable = IContactable(organization)
         organizations = contactable.organizations
         self.parent_organizations = [org for org in organizations]
         self.parent_organizations.remove(organization)
-        self.organizations = organizations
 
         catalog = getToolByName(self.context, 'portal_catalog')
         context_path = '/'.join(organization.getPhysicalPath())
@@ -61,11 +45,9 @@ class Organization(BaseView):
                                                              'depth': 1})
         self.positions = self.context.get_positions()
 
-        # also show fields that were added TTW
-        self.ttw_fields = get_ttw_fields(organization)
-
         held_positions = organization.get_held_positions()
         self.othercontacts = [hp.get_person() for hp in held_positions]
         sm = getSecurityManager()
         self.can_add = sm.checkPermission('Add portal content', self.context)
         self.addnew_script = ADDNEW_OVERLAY
+

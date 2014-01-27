@@ -1,0 +1,23 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      i18n:domain="collective.contact.core" tal:omit-tag="">
+<body>
+
+    <tal:block tal:repeat="field view/ttw_fields">
+
+        <div class="field"
+             tal:define="widgets view/widgets;
+                         widget python:widgets[field];"
+             tal:on-error="nothing"
+             tal:condition="widget/value">
+            <label><tal:block tal:content="widget/label" i18n:translate="" />:</label>
+            <span tal:content="structure widget/render">
+            </span>
+        </div>
+    </tal:block>
+
+</body>
+</html>

@@ -8,19 +8,6 @@
 
  <metal:macro define-macro="additional-fields">
 
-    <tal:block tal:repeat="field view/ttw_fields">
-
-        <div class="field"
-             tal:define="widgets view/widgets;
-                         widget python:widgets[field];"
-             tal:on-error="nothing"
-             tal:condition="widget/value">
-            <label><tal:block tal:content="widget/label" i18n:translate="" />:</label>
-            <span tal:content="structure widget/render">
-            </span>
-        </div>
-    </tal:block>
-
   <tal:fieldset repeat="group view/groups">
     <fieldset tal:define="prefix group/prefix;
                           group_name group/__name__"

@@ -87,16 +87,16 @@ class TestAddressView(TestView):
 class TestContactView(TestView):
 
     def xtest_contact_view(self):
-        contact_view = self.gadt.restrictedTraverse("@@contact")
-        contact_view.update()
+        view = self.gadt.restrictedTraverse("view")
+        view.update()
 
-        self.assertEqual(contact_view.fullname,
+        self.assertEqual(view.fullname,
                          "Général Charles De Gaulle")
-        self.assertEqual([self.armeedeterre], contact_view.organizations)
-        self.assertEqual(contact_view.birthday, 'Nov 22, 1901')
+        self.assertEqual([self.armeedeterre], view.organizations)
+        self.assertEqual(view.birthday, 'Nov 22, 1901')
 
         # address is acquired from degaulle
-        address = contact_view.address
+        address = view.address
         self.assertEqual(address['number'], u'6bis')
         self.assertEqual(address['street'], u"rue Jean Moulin")
         self.assertEqual(address['city'], u"Colombey les deux églises")
@@ -105,21 +105,21 @@ class TestContactView(TestView):
         self.assertEqual(address['additional_address_details'], u'bâtiment D')
 
     def xtest_empty_fields(self):
-        contact_view = self.captain_crunch.restrictedTraverse("@@contact")
-        contact_view.update()
-        self.assertEqual(contact_view.start_date, u'')
-        self.assertEqual(contact_view.end_date, u'')
-        self.assertEqual(contact_view.birthday, u'')
-        self.assertEqual(contact_view.gender, u'')
-        self.assertEqual(contact_view.photo, u'')
+        view = self.captain_crunch.restrictedTraverse("view")
+        view.update()
+        self.assertEqual(view.start_date, u'')
+        self.assertEqual(view.end_date, u'')
+        self.assertEqual(view.birthday, u'')
+        self.assertEqual(view.gender, u'')
+        self.assertEqual(view.photo, u'')
 
     def xtest_contact_details_acquisition(self):
-        contact_view = self.sergent_pepper.restrictedTraverse("@@contact")
-        contact_view.update()
-        self.assertEqual(contact_view.fullname, "Sergent Pepper")
+        view = self.sergent_pepper.restrictedTraverse("view")
+        view.update()
+        self.assertEqual(view.fullname, "Sergent Pepper")
         self.assertEqual(self.sergent_lh,
-                         contact_view.position)
-        organizations = contact_view.organizations
+                         view.position)
+        organizations = view.organizations
         self.assertEqual([self.armeedeterre,
                           self.corpsa,
                           self.divisionalpha,
@@ -127,17 +127,17 @@ class TestContactView(TestView):
                           self.brigadelh], organizations)
 
         # Person email comes before Position email
-        self.assertEqual(contact_view.contact_details['email'],
+        self.assertEqual(view.contact_details['email'],
                          "sgt.pepper@armees.fr")
-        self.assertEqual(contact_view.contact_details['phone'],
+        self.assertEqual(view.contact_details['phone'],
                          "0288552211")
-        self.assertEqual(contact_view.contact_details['cell_phone'],
+        self.assertEqual(view.contact_details['cell_phone'],
                          '0654875233')
-        self.assertEqual(contact_view.contact_details['im_handle'],
+        self.assertEqual(view.contact_details['im_handle'],
                          "brigade_lh@jabber.org")
 
         # Everything in Sgt Pepper's address is acquired from Régiment H
-        address = contact_view.contact_details['address']
+        address = view.contact_details['address']
         self.assertEqual(address['number'], u'11')
         self.assertEqual(address['street'], u"rue de l'harmonie")
         self.assertEqual(address['city'], u"Villeneuve d'Ascq")
@@ -148,13 +148,16 @@ class TestContactView(TestView):
 
 class TestPositionView(TestView):
 
-    def test_position_view(self):
-        position_view = self.sergent_lh.restrictedTraverse("@@position")
-        position_view.update()
+    def test_position_basefields_view(self):
+        view = self.sergent_lh.restrictedTraverse("@@basefields")
+        view.update()
+        self.assertEqual(view.name, u"Sergent de la brigade LH, Brigade LH (Armée de terre)")
+        self.assertEqual(view.type, "Sergeant")
 
-        self.assertEqual(position_view.name, u"Sergent de la brigade LH, Brigade LH (Armée de terre)")
-        self.assertEqual(position_view.type, "Sergeant")
-        organizations = position_view.organizations
+    def test_position_view(self):
+        view = self.sergent_lh.restrictedTraverse("view")
+        view.update()
+        organizations = view.organizations
         self.assertEqual([self.armeedeterre,
                           self.corpsa,
                           self.divisionalpha,
@@ -162,12 +165,12 @@ class TestPositionView(TestView):
                           self.brigadelh], organizations)
 
     def test_position_contact_details_view(self):
-        position_view = self.sergent_lh.restrictedTraverse("@@contactdetails")
-        position_view.update()
-        self.assertEqual(position_view.contact_details['email'],
+        view = self.sergent_lh.restrictedTraverse("@@contactdetails")
+        view.update()
+        self.assertEqual(view.contact_details['email'],
                          "brigade_lh@armees.fr")
 
-        address = position_view.contact_details['address']
+        address = view.contact_details['address']
         self.assertEqual(address['number'], u'11')
         self.assertEqual(address['street'], u"rue de l'harmonie")
         self.assertEqual(address['city'], u"Villeneuve d'Ascq")
@@ -178,24 +181,24 @@ class TestPositionView(TestView):
 
 class TestOrganizationView(TestView):
 
+    def test_organization_basefields_view(self):
+        view = self.corpsa.restrictedTraverse("@@basefields")
+        view.update()
+        self.assertEqual(view.name, "Corps A")
+        self.assertEqual(view.type, "Corps")
+
     def test_organization_view(self):
-        org_view = self.corpsa.restrictedTraverse("@@organization")
-        org_view.update()
-
-        self.assertEqual(org_view.name, "Corps A")
-        self.assertEqual(org_view.type, "Corps")
-        organizations = org_view.organizations
-        parent_organizations = org_view.parent_organizations
+        view = self.corpsa.restrictedTraverse("view")
+        view.update()
+        parent_organizations = view.parent_organizations
         self.assertEqual([self.armeedeterre], parent_organizations)
-        self.assertEqual([self.armeedeterre, self.corpsa], organizations)
-
 
     def test_organization_contact_details_view(self):
-        org_view = self.corpsa.restrictedTraverse("@@contactdetails")
-        org_view.update()
-        self.assertEqual(org_view.contact_details['email'], '')
+        view = self.corpsa.restrictedTraverse("@@contactdetails")
+        view.update()
+        self.assertEqual(view.contact_details['email'], '')
 
-        address = org_view.contact_details['address']
+        address = view.contact_details['address']
         self.assertEqual(address['number'], u'')
         self.assertEqual(address['street'], u"rue Philibert Lucot")
         self.assertEqual(address['city'], u'Orléans')
@@ -205,48 +208,46 @@ class TestOrganizationView(TestView):
         self.assertEqual(address['additional_address_details'], u'')
 
     def test_sub_organizations(self):
-        org_view = self.armeedeterre.restrictedTraverse("@@organization")
-        org_view.update()
-        sub_organizations_names = [e.Title for e in org_view.sub_organizations]
+        view = self.armeedeterre.restrictedTraverse("view")
+        view.update()
+        sub_organizations_names = [e.Title for e in view.sub_organizations]
         self.assertEqual(set(['Corps A', 'Corps B']),
                          set(sub_organizations_names))
         # no sub-organizations
-        org_view = self.brigadelh.restrictedTraverse("@@organization")
-        org_view.update()
-        self.assertEqual(0, len(org_view.sub_organizations))
+        view = self.brigadelh.restrictedTraverse("view")
+        view.update()
+        self.assertEqual(0, len(view.sub_organizations))
 
     def test_positions(self):
-        org_view = self.armeedeterre.restrictedTraverse("@@organization")
-        org_view.update()
-        positions_names = [e.Title() for e in org_view.positions]
+        view = self.armeedeterre.restrictedTraverse("view")
+        view.update()
+        positions_names = [e.Title() for e in view.positions]
         self.assertEqual(set(["Général de l'armée de terre"]),
                          set(positions_names))
         # no_positions
-        org_view = self.corpsa.restrictedTraverse("@@organization")
-        org_view.update()
-        self.assertEqual(0, len(org_view.positions))
+        view = self.corpsa.restrictedTraverse("view")
+        view.update()
+        self.assertEqual(0, len(view.positions))
 
 
 class TestPersonView(TestView):
 
-    def test_person_view(self):
-        person_view = self.degaulle.restrictedTraverse("@@person")
-        person_view.update()
-
-        self.assertEqual(person_view.name, "Général Charles De Gaulle")
-
-        self.assertEqual(person_view.gender, 'M')
-        self.assertIn(person_view.birthday, ('Nov 22, 1901', '1901-11-22'))
+    def test_person_basefields_view(self):
+        view = self.degaulle.restrictedTraverse("@@basefields")
+        view.update()
+        self.assertEqual(view.name, "Général Charles De Gaulle")
+        self.assertEqual(view.gender, 'M')
+        self.assertIn(view.birthday, ('Nov 22, 1901', '1901-11-22'))
 
     def test_person_contact_details_view(self):
-        person_view = self.degaulle.restrictedTraverse("@@contactdetails")
-        person_view.update()
-        self.assertEqual(person_view.contact_details['email'], 'charles.de.gaulle@armees.fr')
-        self.assertEqual(person_view.contact_details['phone'], '')
-        self.assertEqual(person_view.contact_details['cell_phone'], '')
-        self.assertEqual(person_view.contact_details['im_handle'], '')
+        view = self.degaulle.restrictedTraverse("@@contactdetails")
+        view.update()
+        self.assertEqual(view.contact_details['email'], 'charles.de.gaulle@armees.fr')
+        self.assertEqual(view.contact_details['phone'], '')
+        self.assertEqual(view.contact_details['cell_phone'], '')
+        self.assertEqual(view.contact_details['im_handle'], '')
 
-        address = person_view.contact_details['address']
+        address = view.contact_details['address']
         self.assertEqual(address['number'], u'6bis')
         self.assertEqual(address['street'], u"rue Jean Moulin")
         self.assertEqual(address['city'], u'Colombey les deux églises')
@@ -257,8 +258,20 @@ class TestPersonView(TestView):
 
 
     def test_person_held_positions_view(self):
-        person_view = self.degaulle.restrictedTraverse("@@heldpositions")
-        person_view.update()
-        held_positions = [b.getObject() for b in person_view.held_positions]
-        self.assertIn(self.adt, held_positions)
-        self.assertIn(self.gadt, held_positions)
+        view = self.degaulle.restrictedTraverse("@@heldpositions")
+        view.update()
+        held_positions = view.held_positions
+        self.assertEqual(len(held_positions), 2)
+
+        first = held_positions[0]
+        self.assertEqual(self.adt, first['object'])
+        self.assertEqual(self.adt.label, first['label'])
+        self.assertEqual(self.adt.start_date, first['start_date'])
+        self.assertEqual(self.armeedeterre, first['organization'])
+
+        second = held_positions[1]
+        self.assertEqual(self.gadt, second['object'])
+        self.assertEqual(self.gadt.label, second['label'])
+        self.assertEqual(self.gadt.start_date, second['start_date'])
+        self.assertEqual(self.gadt.end_date, second['end_date'])
+        self.assertEqual(self.armeedeterre, second['organization'])

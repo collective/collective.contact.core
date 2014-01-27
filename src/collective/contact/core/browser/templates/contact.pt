@@ -1,70 +1,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="collective.contact.core">
 <body>
 
 <div metal:fill-slot="main">
 
-	<h1><span tal:content="view/fullname"></span><tal:content i18n:translate="colon">:</tal:content>
-	    <span tal:content="view/title"></span></h1>
+  <div tal:replace="structure context/@@basefields" />
 
-    <div class="field" tal:condition="context/photo">
-      <img tal:replace="structure context/@@images/photo/thumb" />
-    </div>
+  <div id="organizations" class="field" tal:condition="view/organizations">
+      <label><tal:block i18n:translate="">Organizations</tal:block>:</label>
+      <ul>
+      <tal:block tal:repeat="organization view/organizations">
+          <li><a class="link-tooltip" tal:attributes="href organization/absolute_url">
+              <span tal:replace="organization/Title"
+                    i18n:translate="" />
+          </a></li>
+      </tal:block>
+      </ul>
+  </div>
 
-	<div class="field" tal:condition="view/position">
-		<label><tal:block i18n:translate="">Position</tal:block>:</label>
-		<a class="link-tooltip" tal:attributes="href view/position/absolute_url">
-		  <span tal:content="view/position/Title"
-		 	  i18n:translate="" />
-		</a>
-	</div>
+  <div tal:replace="structure context/@@contactdetails" />
 
-    <div id="organizations" class="field" tal:condition="view/organizations">
-        <label><tal:block i18n:translate="">Organizations</tal:block>:</label>
-        <ul>
-        <tal:block tal:repeat="organization view/organizations">
-            <li><a class="link-tooltip" tal:attributes="href organization/absolute_url">
-                <span tal:replace="organization/Title"
-                      i18n:translate="" />
-            </a></li>
-        </tal:block>
-        </ul>
-    </div>
+  <div tal:replace="structure context/@@ttwfields" />
 
-	<div class="field" tal:condition="view/start_date">
-		<label><tal:block i18n:translate="">Start date</tal:block>:</label>
-		<span tal:content="view/start_date"
-		 	  i18n:translate="" />
-	</div>
-
-	<div class="field" tal:condition="view/end_date">
-		<label><tal:block i18n:translate="">End date</tal:block>:</label>
-		<span tal:content="view/end_date"
-		 	  i18n:translate="" />
-	</div>
-
-    <div class="field" tal:condition="view/birthday">
-        <label><tal:block i18n:translate="">Birthday</tal:block>:</label>
-        <span tal:content="view/birthday"
-              i18n:translate="" />
-    </div>
-
-    <div tal:replace="structure context/@@contactdetails" />
-
-    <metal:additional-fields use-macro="context/contact_core_macros/macros/additional-fields" />
-
-    <fieldset tal:repeat="group view/groups"
-              tal:attributes="id python:''.join((group.prefix, 'groups.', group.__name__)).replace('.', '-')">
-        <legend tal:content="group/label" />
-        <div class="field" tal:repeat="widget group/widgets/values">
-            <label tal:content="widget/label" />
-            <br />
-            <div tal:content="structure widget/render" />
-        </div>
-
-    </fieldset>
+  <metal:additional-fields use-macro="context/contact_core_macros/macros/additional-fields" />
 
 </div>
 

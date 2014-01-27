@@ -47,8 +47,7 @@
            tal:attributes="href view/contact_details/website" />
     </div>
 
-    <div id="address"
-         tal:replace="structure view/render_address" />
+    <div id="address" tal:replace="structure view/render_address" />
 
     <div id="download_vcard" tal:condition="view/contact_details">
         <a href="@@contact.vcf" tal:attributes="href string: ${context/absolute_url}/@@contact.vcf">

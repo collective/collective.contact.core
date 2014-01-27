@@ -6,15 +6,37 @@
       i18n:domain="collective.contact.core" tal:omit-tag="">
 
     <div id="held_positions" class="field" tal:condition="view/held_positions">
-        <label><tal:block i18n:translate="">Positions held by this person</tal:block>:</label>
-        <ul>
+        <h2 i18n:translate="">Positions</h2>
         <tal:block tal:repeat="held_position view/held_positions">
-            <li><a class="link-tooltip" tal:attributes="href held_position/getURL">
-                <span tal:replace="held_position/Title"
-                      i18n:translate="" />
-            </a></li>
+            <div class="held_position">
+              <h3 tal:content="held_position/label" i18n:translate="" />
+
+              <a class="edit-held-position" tal:attributes="href python: held_position['url'] + '/edit'">
+                <img alt="Edit" src="edit.png" i18n:attributes="alt" />
+              </a>
+              <a class="delete-held-position" tal:attributes="href python: held_position['url'] + '/delete_confirmation'">
+                <img alt="Delete" src="delete_icon.png" i18n:attributes="alt" />
+              </a>
+
+              <div class="field" tal:condition="held_position/start_date">
+                <label><tal:block i18n:translate="">Start date</tal:block>:</label>
+                <span tal:content="held_position/start_date" i18n:translate="" />
+              </div>
+
+              <div tal:replace="structure held_position/object/@@contactdetails" />
+
+              <div class="organization" tal:define="organization nocall:held_position/organization">
+                  <div id="logo" class="field" tal:condition="organization/logo">
+                      <img tal:define="scales nocall:organization/@@images"
+                           tal:replace="structure python:scales.tag('logo', 'tile', css_class='photo')"
+                           tal:on-error="string:Bad logo format" />
+                  </div>
+                  <h4 tal:content="organization/Title" />
+
+                  <div tal:replace="structure held_position/organization/@@contactdetails" />
+              </div>
+            </div>
         </tal:block>
-        </ul>
     </div>
 
 </html>

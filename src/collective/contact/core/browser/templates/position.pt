@@ -1,19 +1,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:tal="http://xml.zope.org/namespaces/tal"
-	  xmlns:metal="http://xml.zope.org/namespaces/metal"
-	  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  	  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  	  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  	  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="collective.contact.core">
 <body>
 
 <div metal:fill-slot="main">
-	<h1 tal:content="view/name"></h1>
 
-	<div id="type" class="field">
-	     <label><tal:block i18n:translate="">Position type</tal:block>:</label>
-	     <span tal:content="view/type" i18n:translate="" />
-	</div>
+  <div tal:replace="structure context/@@basefields" />
 
 	<div id="organizations" class="field" tal:condition="view/organizations">
         <label><tal:block i18n:translate="">Parent organizations</tal:block>:</label>
@@ -28,6 +24,8 @@
     </div>
 
     <div tal:replace="structure context/@@contactdetails" />
+
+    <div tal:replace="structure context/@@ttwfields" />
 
     <metal:additional-fields use-macro="context/contact_core_macros/macros/additional-fields" />
 
