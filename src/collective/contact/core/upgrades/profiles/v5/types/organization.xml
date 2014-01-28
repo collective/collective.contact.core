@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<object name="organization" meta_type="Dexterity FTI" i18n:domain="collective.contact.core"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="immediate_view">view</property>
+ <property name="default_view">view</property>
+ <property name="view_methods">
+  <element value="view"/>
+ </property>
+</object>
