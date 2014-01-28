@@ -3,8 +3,6 @@ from five import grok
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 
-from plone import api
-
 from collective.contact.core.behaviors import IBirthday
 from collective.contact.core.browser.utils import date_to_DateTime
 from collective.contact.core.content.person import IPerson
