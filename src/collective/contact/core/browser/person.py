@@ -33,12 +33,12 @@ class HeldPositions(grok.View):
                                            path={'query': context_path, 'depth': 1}):
             held_position = {}
             obj = brain.getObject()
-            held_position['label'] = obj.label
+            held_position['label'] = obj.label or obj.Title()
             held_position['start_date'] = obj.start_date
             held_position['end_date'] = obj.end_date
             #held_position['phone'] = obj.phone
             #held_position['email'] = obj.email
             held_position['object'] = obj
-            held_position['organization'] = obj.get_organization().get_root_organization()
+            held_position['organization'] =  obj.get_organization().get_root_organization()
             held_positions.append(held_position)
         self.held_positions = held_positions
