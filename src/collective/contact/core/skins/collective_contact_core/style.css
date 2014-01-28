@@ -6,7 +6,36 @@
     margin-bottom: 1em;
 }
 
+.portaltype-person #person .actions {
+    float: right;
+}
+
+.portaltype-person #held_positions .held_position {
+    border: 1px solid black;
+    padding: 1em;
+    margin: 1em;
+    width: 25%;
+    min-height: 30em;
+    float: left;
+}
+
+.portaltype-person #held_positions .held_position .actions {
+    float: right;
+}
+
 /* hide download vcard link for positions on person page */
 .portaltype-person #held_positions .held_position #download_vcard {
     display: none;
+}
+
+.portaltype-person #held_positions .held_position .organization {
+    border: 1px solid black;
+    padding: 1em;
+    margin: 1em;
+    background-color: #DDD;
+}
+
+.portaltype-person #held_positions .held_position .organization #logo {
+    float: left;
+    padding-right: 1em;
 }

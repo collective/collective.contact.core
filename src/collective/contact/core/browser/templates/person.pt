@@ -5,7 +5,7 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="collective.contact.core" lang="en">
 
-<div class="vcard" metal:fill-slot="main">
+<div id="person" class="vcard" metal:fill-slot="main">
 
     <div tal:replace="structure context/@@basefields" />
 
