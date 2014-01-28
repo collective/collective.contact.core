@@ -4,7 +4,6 @@ from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 
 from collective.contact.core.browser.contactable import BaseView
-from collective.contact.core.browser.utils import get_ttw_fields
 from collective.contact.core.interfaces import IContactable
 
 
