@@ -5,6 +5,11 @@
       lang="en"
       i18n:domain="collective.contact.core" tal:omit-tag="">
 
+    <div class="actions">
+      <a class="edit-person" tal:attributes="href python: context.absolute_url() + '/edit'">
+        <img alt="Edit" src="edit.png" i18n:attributes="alt" />
+      </a>
+    </div>
     <h1 class="fn" tal:content="view/name"></h1>
 
     <div id="photo" class="field" tal:condition="context/photo">
