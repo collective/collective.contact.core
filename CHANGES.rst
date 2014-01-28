@@ -4,6 +4,10 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Add ICustomSettings adapter lookup in widget settings utility to be
+  able to overrides add_url_for_portal_type method in some projects.
+  [vincentfretin]
+
 - Rewrite every contact content view in separate views (basefields, contactdetails, etc) so
   that we can override only a specific part of the view in customer projects.
   [cedricmessiant]

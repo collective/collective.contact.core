@@ -1,8 +1,8 @@
 from AccessControl import getSecurityManager
-from zope.component import getUtility
+from zope.component import getUtility, queryAdapter
 from zope.contentprovider.interfaces import IContentProvider
 from zope.event import notify
-from zope.interface import implements
+from zope.interface import implements, Interface
 from zope.publisher.browser import BrowserView
 
 from Products.CMFCore.utils import getToolByName
@@ -26,8 +26,23 @@ from collective.contact.core import _
 from collective.contact.core.content.person import IPerson
 
 
+class ICustomSettings(Interface):
+    """You can overrides those methods by writing an adapter to IDirectory.
+    If none is found, it fallbacks to the implementation in
+    ContactWidgetSettings utility.
+    """
+    def add_url_for_portal_type(self, directory_url, portal_type):
+        """Return add url for the specified portal_type.
+        """
+
+
 class ContactWidgetSettings(grok.GlobalUtility):
-    grok.implements(IContactWidgetSettings)
+    grok.provides(IContactWidgetSettings)
+    grok.implements(ICustomSettings)
+
+    def add_url_for_portal_type(self, directory_url, portal_type):
+        url = '%s/++add++%s' % (directory_url, portal_type)
+        return url
 
     def add_contact_infos(self, widget):
         source = widget.bound_source
@@ -62,7 +77,8 @@ class ContactWidgetSettings(grok.GlobalUtility):
                     actions.append(action)
                     close_on_click = False
                 else:
-                    url = '%s/++add++%s' % (directory_url, portal_type)
+                    custom_settings = queryAdapter(directory, ICustomSettings, default=self)
+                    url = custom_settings.add_url_for_portal_type(directory_url, portal_type)
                     fti = getUtility(IDexterityFTI, name=portal_type)
                     type_name = fti.Title()
                     label = _(u"Create ${name}", mapping={'name': type_name})
