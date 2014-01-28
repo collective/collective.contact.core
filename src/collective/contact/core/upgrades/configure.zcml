@@ -37,20 +37,28 @@
       handler=".upgrades.v4"
       profile="collective.contact.core:default" />
 
-  <genericsetup:registerProfile
-      name="v5"
-      title="Migration profile for collective.contact.core to 5"
-      directory="profiles/v5"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
-      />
-
   <genericsetup:upgradeStep
       title="Upgrade from 4 to 5"
       description="Install collective.contact.widget default profile and add sortable_title column"
       source="4"
       destination="5"
       handler=".upgrades.v5"
+      profile="collective.contact.core:default" />
+
+  <genericsetup:registerProfile
+      name="v6"
+      title="Migration profile for collective.contact.core to 6"
+      directory="profiles/v6"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+      />
+
+  <genericsetup:upgradeStep
+      title="Upgrade from 5 to 6"
+      description="Rename all contact content views in 'view'"
+      source="5"
+      destination="6"
+      handler=".upgrades.v6"
       profile="collective.contact.core:default" />
 
 </configure>
