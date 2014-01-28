@@ -56,3 +56,4 @@ def v5(context):
 def v6(context):
     tool = IUpgradeTool(context)
     tool.runProfile('collective.contact.core.upgrades:v6')
+    tool.refreshResources()

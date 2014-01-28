@@ -1,9 +1,7 @@
 from plone import api
 
 from collective.contact.core.browser.contactable import BaseView
-from collective.contact.core.browser.utils import get_ttw_fields,\
-    date_to_DateTime
-from collective.contact.core.interfaces import IContactable
+from collective.contact.core.browser.utils import date_to_DateTime
 from collective.contact.core.behaviors import IBirthday
 
 

@@ -3,7 +3,6 @@ from AccessControl import getSecurityManager
 from Products.CMFCore.utils import getToolByName
 
 from collective.contact.core.browser.contactable import BaseView
-from collective.contact.core.browser.utils import get_ttw_fields
 from collective.contact.core.interfaces import IContactable
 
 
