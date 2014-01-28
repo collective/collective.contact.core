@@ -12,20 +12,20 @@
             <div class="held_position" tal:define="url held_position/object/absolute_url">
 
               <div class="actions">
-                <a class="zoom-held-position" tal:attributes="href string:${url}/view">
+                <a class="zoom-held-position contactoverlay" tal:attributes="href string:${url}/view">
                   <img alt="View" title="View"
                        i18n:domain="plone"
                        tal:attributes="src string:${portal_url}/search_icon.png"
                        i18n:attributes="alt; title" />
                 </a>
-                <a class="edit-held-position"
+                <a class="edit-held-position contactoverlay"
                    tal:attributes="href string:${url}/edit">
                   <img alt="Edit" title="Edit"
                        i18n:domain="plone"
                        tal:attributes="src string:${portal_url}/edit.png"
                        i18n:attributes="alt; title" />
                 </a>
-                <a class="delete-held-position" tal:attributes="href string:${url}/delete_confirmation">
+                <a class="delete-held-position deleteoverlay" tal:attributes="href string:${url}/delete_confirmation">
                   <img alt="Delete" title="Delete"
                        i18n:domain="plone"
                        tal:attributes="src string:${portal_url}/delete_icon.png"
@@ -33,9 +33,7 @@
                 </a>
               </div>
 
-              <h3>
-                <a tal:attributes="href url; title held_position/label" tal:content="held_position/label"></a>
-              </h3>
+              <h3 tal:content="held_position/label" />
 
               <div class="field" tal:condition="held_position/start_date">
                 <label><tal:block i18n:translate="">Start date</tal:block>:</label>

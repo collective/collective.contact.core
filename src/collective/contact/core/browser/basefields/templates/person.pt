@@ -7,8 +7,10 @@
       i18n:domain="collective.contact.core" tal:omit-tag="">
 
   <div class="actions">
-    <a class="edit-person" tal:attributes="href string:${context/absolute_url}/edit">
-      <img alt="Edit" tal:attributes="src string:${portal_url}/edit.png" i18n:attributes="alt" />
+    <a class="edit-person contactoverlay" tal:attributes="href string:${context/absolute_url}/edit">
+      <img alt="Edit" title="Edit"
+           tal:attributes="src string:${portal_url}/edit.png"
+           i18n:attributes="alt; title" />
     </a>
   </div>
   <h1 class="fn" tal:content="view/name"></h1>

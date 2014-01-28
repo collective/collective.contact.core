@@ -66,4 +66,21 @@ $(document).ready(function(){
     $(document).delegate('#formfield-form-widgets-gender input', 'change', update_person_title);
     manage_directory();
     manage_hide_use_parent_address();
+
+    $('.contactoverlay').prepOverlay({
+      subtype: 'ajax',
+      filter: common_content_filter,
+      formselector: '#form',
+      closeselector: '[name="form.buttons.cancel"]',
+      noform: function(el, pbo) {return 'reload';},
+    });
+
+    $('.deleteoverlay').prepOverlay({
+      subtype: 'ajax',
+      filter: common_content_filter,
+      formselector: '#delete_confirmation',
+      closeselector: '[name="form.button.Cancel"]',
+      noform: function(el, pbo) {return 'reload';},
+    });
+
 });
