@@ -34,7 +34,6 @@ class HeldPositions(grok.View):
             held_position = {}
             obj = brain.getObject()
             held_position['label'] = obj.label
-            held_position['url'] = brain.getURL()
             held_position['start_date'] = obj.start_date
             held_position['end_date'] = obj.end_date
             #held_position['phone'] = obj.phone

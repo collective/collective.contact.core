@@ -8,15 +8,18 @@
     <div id="held_positions" class="field" tal:condition="view/held_positions">
         <h2 i18n:translate="">Positions</h2>
         <tal:block tal:repeat="held_position view/held_positions">
-            <div class="held_position">
-              <h3 tal:content="held_position/label" i18n:translate="" />
+            <div class="held_position" tal:define="url held_position/object/absolute_url">
 
-              <a class="edit-held-position" tal:attributes="href python: held_position['url'] + '/edit'">
-                <img alt="Edit" src="edit.png" i18n:attributes="alt" />
-              </a>
-              <a class="delete-held-position" tal:attributes="href python: held_position['url'] + '/delete_confirmation'">
-                <img alt="Delete" src="delete_icon.png" i18n:attributes="alt" />
-              </a>
+              <div class="actions">
+                <a class="edit-held-position" tal:attributes="href string:${url}/edit">
+                  <img alt="Edit" src="edit.png" i18n:attributes="alt" />
+                </a>
+                <a class="delete-held-position" tal:attributes="href string:${url}/delete_confirmation">
+                  <img alt="Delete" src="delete_icon.png" i18n:attributes="alt" />
+                </a>
+              </div>
+
+              <h3 tal:content="held_position/label" i18n:translate="" />
 
               <div class="field" tal:condition="held_position/start_date">
                 <label><tal:block i18n:translate="">Start date</tal:block>:</label>
