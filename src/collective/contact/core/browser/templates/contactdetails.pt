@@ -8,9 +8,10 @@
 
     <div id="email" class="field" tal:condition="view/contact_details/email">
         <label><tal:block i18n:translate="">Email</tal:block>:</label>
-        <span class="email"
-              tal:content="view/contact_details/email"
-              i18n:translate="" />
+        <a class="email"
+           tal:content="view/contact_details/email"
+           tal:attributes="href string:mailto:${view/contact_details/email}"
+           i18n:translate="" />
     </div>
 
     <div id="phone" class="field" tal:condition="view/contact_details/phone">
