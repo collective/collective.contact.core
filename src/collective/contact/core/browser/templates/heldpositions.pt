@@ -3,6 +3,7 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
+      tal:define="portal_url context/@@plone_portal_state/portal_url;"
       i18n:domain="collective.contact.core" tal:omit-tag="">
 
     <div id="held_positions" class="field" tal:condition="view/held_positions">
@@ -12,10 +13,10 @@
 
               <div class="actions">
                 <a class="edit-held-position" tal:attributes="href string:${url}/edit">
-                  <img alt="Edit" src="edit.png" i18n:attributes="alt" />
+                  <img alt="Edit" tal:attributes="src string:${portal_url}/edit.png" i18n:attributes="alt" />
                 </a>
                 <a class="delete-held-position" tal:attributes="href string:${url}/delete_confirmation">
-                  <img alt="Delete" src="delete_icon.png" i18n:attributes="alt" />
+                  <img alt="Delete" tal:attributes="src string:${portal_url}/delete_icon.png" i18n:attributes="alt" />
                 </a>
               </div>
 

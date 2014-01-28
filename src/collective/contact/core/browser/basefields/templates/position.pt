@@ -4,7 +4,6 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
       i18n:domain="collective.contact.core" tal:omit-tag="">
-<body>
 
     <h1 tal:content="view/name"></h1>
 
@@ -13,5 +12,4 @@
          <span tal:content="view/type" i18n:translate="" />
     </div>
 
-</body>
 </html>
