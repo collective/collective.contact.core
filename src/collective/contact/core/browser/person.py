@@ -1,5 +1,7 @@
 from five import grok
 
+from AccessControl import getSecurityManager
+
 from Products.CMFCore.utils import getToolByName
 
 from collective.contact.core.browser import TEMPLATES_DIR
@@ -28,6 +30,7 @@ class HeldPositions(grok.View):
     def update(self):
         person = self.context
         catalog = getToolByName(person, 'portal_catalog')
+        sm = getSecurityManager()
         context_path = '/'.join(person.getPhysicalPath())
         held_positions = []
         for brain in catalog.searchResults(portal_type='held_position',
@@ -51,6 +54,8 @@ class HeldPositions(grok.View):
             #held_position['email'] = obj.email
             held_position['object'] = obj
             held_position['organization'] =  obj.get_organization().get_root_organization()
+            held_position['can_edit'] = sm.checkPermission('Modify portal content', obj)
+            held_position['can_delete'] = sm.checkPermission('Delete objects', obj)
             held_positions.append(held_position)
 
         self.held_positions = held_positions

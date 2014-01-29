@@ -19,13 +19,16 @@
                        i18n:attributes="alt; title" />
                 </a>
                 <a class="edit-held-position contactoverlay"
-                   tal:attributes="href string:${url}/edit">
+                   tal:attributes="href string:${url}/edit"
+                   tal:condition="held_position/can_edit">
                   <img alt="Edit" title="Edit"
                        i18n:domain="plone"
                        tal:attributes="src string:${portal_url}/edit.png"
                        i18n:attributes="alt; title" />
                 </a>
-                <a class="delete-held-position deleteoverlay" tal:attributes="href string:${url}/delete_confirmation">
+                <a class="delete-held-position deleteoverlay"
+                   tal:attributes="href string:${url}/delete_confirmation"
+                   tal:condition="held_position/can_delete">
                   <img alt="Delete" title="Delete"
                        i18n:domain="plone"
                        tal:attributes="src string:${portal_url}/delete_icon.png"

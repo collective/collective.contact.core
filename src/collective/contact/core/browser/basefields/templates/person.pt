@@ -10,6 +10,7 @@
     <a class="edit-person contactoverlay" tal:attributes="href string:${context/absolute_url}/edit">
       <img alt="Edit" title="Edit"
            tal:attributes="src string:${portal_url}/edit.png"
+           tal:condition="view/can_edit"
            i18n:attributes="alt; title" />
     </a>
   </div>

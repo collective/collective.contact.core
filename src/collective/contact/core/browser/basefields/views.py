@@ -1,3 +1,5 @@
+from AccessControl import getSecurityManager
+
 from five import grok
 
 from zope.component import getUtility
@@ -27,6 +29,7 @@ class PersonBaseFields(grok.View):
     def update(self):
         self.person = self.context
         person = self.person
+        sm = getSecurityManager()
 
         self.name = person.Title()
         if IBirthday.providedBy(person):
@@ -39,6 +42,7 @@ class PersonBaseFields(grok.View):
 
         self.person_title = person.person_title
         self.gender = person.gender or ''
+        self.can_edit = sm.checkPermission('Modify portal content', person)
 
 
 class OrganizationBaseFields(grok.View):
