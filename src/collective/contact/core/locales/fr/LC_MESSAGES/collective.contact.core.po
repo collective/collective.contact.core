@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.contact.core\n"
-"POT-Creation-Date: 2014-01-28 10:38+0000\n"
+"POT-Creation-Date: 2014-01-30 16:02+0000\n"
 "PO-Revision-Date: 2014-01-27 15:59+0100\n"
 "Last-Translator: Cédric Messiant <cedric.messiant@gmail.com>\n"
 "Language-Team: French\n"
@@ -23,12 +23,12 @@ msgstr "Activer l'objet"
 msgid "Active"
 msgstr "Actif"
 
-#: ../browser/basefields/templates/organization.pt:24
+#: ../browser/basefields/templates/organization.pt:23
 #: ../content/organization.py:30
 msgid "Activity"
 msgstr "Activité"
 
-#: ../browser/addcontact.py:258
+#: ../browser/addcontact.py:274
 msgid "Add"
 msgstr "Ajouter"
 
@@ -50,7 +50,7 @@ msgid "Address"
 msgstr "Adresse "
 
 #: ../behaviors.py:289
-#: ../browser/basefields/templates/person.pt:22
+#: ../browser/basefields/templates/person.pt:27
 msgid "Birthday"
 msgstr "Date de naissance "
 
@@ -58,7 +58,7 @@ msgstr "Date de naissance "
 msgid "Cell phone"
 msgstr "Téléphone portable"
 
-#: ../browser/templates/contactdetails.pt:24
+#: ../browser/templates/contactdetails.pt:25
 msgid "Cell phone number"
 msgstr "Numéro de téléphone portable "
 
@@ -66,7 +66,7 @@ msgstr "Numéro de téléphone portable "
 msgid "City"
 msgstr "Ville"
 
-#: ../browser/addcontact.py:56
+#: ../browser/addcontact.py:71
 msgid "Contact"
 msgstr "Contact"
 
@@ -78,7 +78,7 @@ msgstr "Coordonnées"
 msgid "Country"
 msgstr "Pays"
 
-#: ../browser/addcontact.py:57
+#: ../browser/addcontact.py:72
 #: ../browser/templates/organization.pt:86
 #: ../browser/templates/position.pt:39
 msgid "Create ${name}"
@@ -92,23 +92,14 @@ msgstr "Désactiver l'objet"
 msgid "Deactivated"
 msgstr "Désactivé"
 
-#: ../browser/templates/heldpositions.pt:18
-msgid "Delete"
-msgstr "Supprimer"
-
 #: ../profiles/default/types/directory.xml
 #: ../upgrades/profiles/v2/types/directory.xml
 msgid "Directory"
 msgstr "Annuaire"
 
-#: ../browser/templates/contactdetails.pt:55
+#: ../browser/templates/contactdetails.pt:56
 msgid "Download VCard"
 msgstr "Télécharger la VCard"
-
-#: ../browser/basefields/templates/person.pt:10
-#: ../browser/templates/heldpositions.pt:15
-msgid "Edit"
-msgstr "Modifier"
 
 #: ../behaviors.py:112
 #: ../browser/templates/contactdetails.pt:10
@@ -116,6 +107,7 @@ msgid "Email"
 msgstr "Courriel "
 
 #: ../browser/basefields/templates/held_position.pt:29
+#: ../browser/templates/heldpositions.pt:47
 #: ../content/held_position.py:42
 msgid "End date"
 msgstr "Date de fin "
@@ -124,7 +116,7 @@ msgstr "Date de fin "
 msgid "Fax"
 msgstr "Fax"
 
-#: ../browser/templates/contactdetails.pt:31
+#: ../browser/templates/contactdetails.pt:32
 msgid "Fax number"
 msgstr "Numéro de fax"
 
@@ -149,7 +141,7 @@ msgstr "Localisation"
 msgid "Held position"
 msgstr "Fonction occupée"
 
-#: ../browser/templates/contactdetails.pt:38
+#: ../browser/templates/contactdetails.pt:39
 msgid "IM handle"
 msgstr "Identifiant de messagerie instantanée "
 
@@ -193,7 +185,7 @@ msgstr "Non assigné"
 msgid "Number"
 msgstr "Numéro"
 
-#: ../browser/addcontact.py:199
+#: ../browser/addcontact.py:215
 #: ../content/directory.py:37
 #: ../profiles/default/types/organization.xml
 msgid "Organization"
@@ -207,7 +199,7 @@ msgstr "Niveau d'organisation"
 msgid "Organization levels"
 msgstr "Niveaux d'organisation"
 
-#: ../browser/basefields/templates/organization.pt:18
+#: ../browser/basefields/templates/organization.pt:17
 msgid "Organization type"
 msgstr "Type d'organisation "
 
@@ -237,7 +229,7 @@ msgstr "Autres contacts dans cette organisation :"
 msgid "Parent organizations"
 msgstr "Organisations parentes "
 
-#: ../browser/addcontact.py:204
+#: ../browser/addcontact.py:220
 #: ../profiles/default/types/person.xml
 #: ../upgrades/profiles/v2/types/person.xml
 msgid "Person"
@@ -255,7 +247,7 @@ msgstr "Personnes "
 msgid "Phone"
 msgstr "Téléphone"
 
-#: ../browser/templates/contactdetails.pt:17
+#: ../browser/templates/contactdetails.pt:18
 msgid "Phone number"
 msgstr "Numéro de téléphone "
 
@@ -264,13 +256,13 @@ msgstr "Numéro de téléphone "
 msgid "Photo"
 msgstr "Photo"
 
-#: ../browser/addcontact.py:209
+#: ../browser/addcontact.py:225
 #: ../browser/basefields/templates/held_position.pt:15
 #: ../content/directory.py:30
 msgid "Position"
 msgstr "Fonction "
 
-#: ../browser/basefields/templates/position.pt:12
+#: ../browser/basefields/templates/position.pt:11
 msgid "Position type"
 msgstr "Type de fonction "
 
@@ -278,7 +270,7 @@ msgstr "Type de fonction "
 msgid "Position types"
 msgstr "Types de fonctions"
 
-#: ../browser/templates/heldpositions.pt:9
+#: ../browser/templates/heldpositions.pt:10
 msgid "Positions"
 msgstr "Fonctions occupées"
 
@@ -299,7 +291,7 @@ msgid "Search and attach organizations related to this one"
 msgstr "Recherchez et associez les organisations liées à cette organisation."
 
 #: ../browser/basefields/templates/held_position.pt:23
-#: ../browser/templates/heldpositions.pt:25
+#: ../browser/templates/heldpositions.pt:42
 #: ../content/held_position.py:38
 msgid "Start date"
 msgstr "Date de début "
@@ -325,7 +317,7 @@ msgid "Use the belonging entity address"
 msgstr "Utiliser l'adresse de l'entité d'appartenance"
 
 #: ../behaviors.py:133
-#: ../browser/templates/contactdetails.pt:44
+#: ../browser/templates/contactdetails.pt:45
 msgid "Website"
 msgstr "Site web"
 
@@ -340,11 +332,11 @@ msgid "colon"
 msgstr " :"
 
 #. Default: "Please fill the organization first and then eventually select position"
-#: ../browser/addcontact.py:350
+#: ../browser/addcontact.py:366
 msgid "help_add_organization_or_position_organization"
 msgstr "Veuillez commencer par sélectionner l'organisation, pour sélectionner ensuite la fonction éventuelle."
 
-#: ../browser/addcontact.py:76
+#: ../browser/addcontact.py:92
 msgid "organization/position"
 msgstr "organisation/fonction"
 

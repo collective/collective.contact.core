@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-01-28 10:38+0000\n"
+"POT-Creation-Date: 2014-01-30 16:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,12 +25,12 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: ../browser/basefields/templates/organization.pt:24
+#: ../browser/basefields/templates/organization.pt:23
 #: ../content/organization.py:30
 msgid "Activity"
 msgstr ""
 
-#: ../browser/addcontact.py:258
+#: ../browser/addcontact.py:274
 msgid "Add"
 msgstr ""
 
@@ -52,7 +52,7 @@ msgid "Address"
 msgstr ""
 
 #: ../behaviors.py:289
-#: ../browser/basefields/templates/person.pt:22
+#: ../browser/basefields/templates/person.pt:27
 msgid "Birthday"
 msgstr ""
 
@@ -60,7 +60,7 @@ msgstr ""
 msgid "Cell phone"
 msgstr ""
 
-#: ../browser/templates/contactdetails.pt:24
+#: ../browser/templates/contactdetails.pt:25
 msgid "Cell phone number"
 msgstr ""
 
@@ -68,7 +68,7 @@ msgstr ""
 msgid "City"
 msgstr ""
 
-#: ../browser/addcontact.py:56
+#: ../browser/addcontact.py:71
 msgid "Contact"
 msgstr ""
 
@@ -80,7 +80,7 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: ../browser/addcontact.py:57
+#: ../browser/addcontact.py:72
 #: ../browser/templates/organization.pt:86
 #: ../browser/templates/position.pt:39
 msgid "Create ${name}"
@@ -94,22 +94,13 @@ msgstr ""
 msgid "Deactivated"
 msgstr ""
 
-#: ../browser/templates/heldpositions.pt:18
-msgid "Delete"
-msgstr ""
-
 #: ../profiles/default/types/directory.xml
 #: ../upgrades/profiles/v2/types/directory.xml
 msgid "Directory"
 msgstr ""
 
-#: ../browser/templates/contactdetails.pt:55
+#: ../browser/templates/contactdetails.pt:56
 msgid "Download VCard"
-msgstr ""
-
-#: ../browser/basefields/templates/person.pt:10
-#: ../browser/templates/heldpositions.pt:15
-msgid "Edit"
 msgstr ""
 
 #: ../behaviors.py:112
@@ -118,6 +109,7 @@ msgid "Email"
 msgstr ""
 
 #: ../browser/basefields/templates/held_position.pt:29
+#: ../browser/templates/heldpositions.pt:47
 #: ../content/held_position.py:42
 msgid "End date"
 msgstr ""
@@ -126,7 +118,7 @@ msgstr ""
 msgid "Fax"
 msgstr ""
 
-#: ../browser/templates/contactdetails.pt:31
+#: ../browser/templates/contactdetails.pt:32
 msgid "Fax number"
 msgstr ""
 
@@ -151,7 +143,7 @@ msgstr ""
 msgid "Held position"
 msgstr ""
 
-#: ../browser/templates/contactdetails.pt:38
+#: ../browser/templates/contactdetails.pt:39
 msgid "IM handle"
 msgstr ""
 
@@ -195,7 +187,7 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
-#: ../browser/addcontact.py:199
+#: ../browser/addcontact.py:215
 #: ../content/directory.py:37
 #: ../profiles/default/types/organization.xml
 msgid "Organization"
@@ -209,7 +201,7 @@ msgstr ""
 msgid "Organization levels"
 msgstr ""
 
-#: ../browser/basefields/templates/organization.pt:18
+#: ../browser/basefields/templates/organization.pt:17
 msgid "Organization type"
 msgstr ""
 
@@ -239,7 +231,7 @@ msgstr ""
 msgid "Parent organizations"
 msgstr ""
 
-#: ../browser/addcontact.py:204
+#: ../browser/addcontact.py:220
 #: ../profiles/default/types/person.xml
 #: ../upgrades/profiles/v2/types/person.xml
 msgid "Person"
@@ -257,7 +249,7 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: ../browser/templates/contactdetails.pt:17
+#: ../browser/templates/contactdetails.pt:18
 msgid "Phone number"
 msgstr ""
 
@@ -266,13 +258,13 @@ msgstr ""
 msgid "Photo"
 msgstr ""
 
-#: ../browser/addcontact.py:209
+#: ../browser/addcontact.py:225
 #: ../browser/basefields/templates/held_position.pt:15
 #: ../content/directory.py:30
 msgid "Position"
 msgstr ""
 
-#: ../browser/basefields/templates/position.pt:12
+#: ../browser/basefields/templates/position.pt:11
 msgid "Position type"
 msgstr ""
 
@@ -280,7 +272,7 @@ msgstr ""
 msgid "Position types"
 msgstr ""
 
-#: ../browser/templates/heldpositions.pt:9
+#: ../browser/templates/heldpositions.pt:10
 msgid "Positions"
 msgstr ""
 
@@ -301,7 +293,7 @@ msgid "Search and attach organizations related to this one"
 msgstr ""
 
 #: ../browser/basefields/templates/held_position.pt:23
-#: ../browser/templates/heldpositions.pt:25
+#: ../browser/templates/heldpositions.pt:42
 #: ../content/held_position.py:38
 msgid "Start date"
 msgstr ""
@@ -327,7 +319,7 @@ msgid "Use the belonging entity address"
 msgstr ""
 
 #: ../behaviors.py:133
-#: ../browser/templates/contactdetails.pt:44
+#: ../browser/templates/contactdetails.pt:45
 msgid "Website"
 msgstr ""
 
@@ -342,11 +334,11 @@ msgid "colon"
 msgstr ""
 
 #. Default: "Please fill the organization first and then eventually select position"
-#: ../browser/addcontact.py:350
+#: ../browser/addcontact.py:366
 msgid "help_add_organization_or_position_organization"
 msgstr ""
 
-#: ../browser/addcontact.py:76
+#: ../browser/addcontact.py:92
 msgid "organization/position"
 msgstr ""
 
