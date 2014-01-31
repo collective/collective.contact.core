@@ -64,4 +64,6 @@
         </tal:block>
     </div>
 
+    <div class="visualClear" />
+
 </html>
