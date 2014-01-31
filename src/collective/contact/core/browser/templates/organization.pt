@@ -64,17 +64,7 @@
         </ul>
     </div>
 
-    <div id="other-contacts" class="field" tal:condition="view/othercontacts">
-        <label i18n:translate="">Other contacts in this organization:</label>
-        <ul>
-        <tal:block tal:repeat="contact view/othercontacts">
-            <li><a class="link-tooltip" tal:attributes="href contact/absolute_url">
-                <span tal:replace="contact/Title"
-                      i18n:translate="" />
-            </a></li>
-        </tal:block>
-        </ul>
-    </div>
+    <div tal:replace="structure context/@@othercontacts" />
 
     <tal:addnew
            tal:define="ajax_load request/ajax_load|nothing"

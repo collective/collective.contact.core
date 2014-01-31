@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      tal:define="portal_url context/@@plone_portal_state/portal_url;"
+      i18n:domain="collective.contact.core" tal:omit-tag="">
+
+    <div id="other-contacts" tal:condition="view/othercontacts">
+      <h3 i18n:translate="">Other contacts in this organization:</h3>
+
+      <tal:block tal:repeat="contact view/othercontacts">
+          <div class="contact">
+          <a tal:attributes="href contact/obj/absolute_url;"
+             tal:define="has_photo contact/obj/photo|nothing;
+                         title contact/title">
+            <span class="contact-photo">
+              <img tal:condition="has_photo"
+                   tal:replace="structure contact/obj/@@images/photo/tile|string:X" />
+              <img tal:condition="not:has_photo" style="border: none" src="defaultUser.png"
+                   height="64" />
+            </span>
+            <span class="contact-title" tal:content="title"></span>
+          </a>
+          <span id="contact-held-position" tal:condition="contact/held_position" tal:content="contact/held_position" />
+          <span id="contact-label" tal:condition="contact/label" tal:content="contact/label" />
+
+          <span id="contact-phone"tal:condition="contact/phone" tal:content="contact/phone" />
+          <span id="contact-cellphone"tal:condition="contact/cell_phone" tal:content="contact/cell_phone" />
+          <span id="contact-fax" tal:condition="contact/fax" tal:content="contact/fax" />
+          <a tal:attributes="href string:mailto:${contact/email}" id="contact-email" tal:condition="contact/email" tal:content="contact/email" />
+          <span id="contact-im_handle" tal:condition="contact/im_handle" tal:content="contact/im_handle" />
+          <a tal:attributes="href contact/website" id="contact-website" tal:condition="contact/website" tal:content="contact/website" />
+        </div>
+      </tal:block>
+    </div>
+
+</html>

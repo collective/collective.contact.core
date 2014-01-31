@@ -4,6 +4,9 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Display more information about "other contacts" in organization view.
+  [cedricmessiant]
+
 - Add ICustomSettings adapter lookup in widget settings utility to be
   able to overrides add_url_for_portal_type method in some projects.
   [vincentfretin]

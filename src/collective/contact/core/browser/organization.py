@@ -1,9 +1,13 @@
+from five import grok
+
 from AccessControl import getSecurityManager
 
 from Products.CMFCore.utils import getToolByName
 
 from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.interfaces import IContactable
+from collective.contact.core.behaviors import IContactDetails
+from collective.contact.core.content.organization import IOrganization
 
 
 ADDNEW_OVERLAY = """
@@ -25,6 +29,10 @@ $(document).ready(function(){
 </script>
 """
 
+
+grok.templatedir('templates')
+
+
 class Organization(BaseView):
 
     def update(self):
@@ -43,10 +51,41 @@ class Organization(BaseView):
                                                        path={'query': context_path,
                                                              'depth': 1})
         self.positions = self.context.get_positions()
-
-        held_positions = organization.get_held_positions()
-        self.othercontacts = [hp.get_person() for hp in held_positions]
         sm = getSecurityManager()
         self.can_add = sm.checkPermission('Add portal content', self.context)
         self.addnew_script = ADDNEW_OVERLAY
 
+
+class OtherContacts(grok.View):
+    """Displays other contacts list"""
+    grok.name('othercontacts')
+    grok.context(IOrganization)
+
+    held_positions = ''
+
+    def update(self):
+        organization = self.context
+        othercontacts = []
+        held_positions = organization.get_held_positions()
+        for hp in held_positions:
+            contact = {}
+            person = hp.get_person()
+            contact['title'] = person.Title()
+            contact['held_position'] = hp.Title()
+            contact['label'] = hp.label
+            contact['obj'] = hp
+
+            if IContactDetails.providedBy(hp):
+                contactable = hp
+            elif IContactDetails.providedBy(person):
+                contactable = person
+
+            contact['email'] = contactable.email
+            contact['phone'] = contactable.phone
+            contact['cell_phone'] = contactable.cell_phone
+            contact['fax'] = contactable.fax
+            contact['im_handle'] = contactable.im_handle
+            contact['website'] = contactable.website
+
+            othercontacts.append(contact)
+        self.othercontacts = othercontacts

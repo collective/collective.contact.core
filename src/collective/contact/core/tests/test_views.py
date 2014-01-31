@@ -229,6 +229,21 @@ class TestOrganizationView(TestView):
         view.update()
         self.assertEqual(0, len(view.positions))
 
+    def test_othercontacts(self):
+        view = self.armeedeterre.restrictedTraverse("@@othercontacts")
+        view.update()
+        contact = view.othercontacts[0]
+        self.assertEqual(contact['title'], 'Général Charles De Gaulle')
+        self.assertEqual(contact['held_position'], 'Armée de terre')
+        self.assertIsNone(contact['label'])
+        self.assertEqual(contact['obj'], self.adt)
+        self.assertEqual(contact['email'], u'charles.de.gaulle@armees.fr')
+        self.assertIsNone(contact['phone'])
+        self.assertIsNone(contact['cell_phone'])
+        self.assertIsNone(contact['fax'])
+        self.assertIsNone(contact['im_handle'])
+        self.assertIsNone(contact['website'])
+
 
 class TestPersonView(TestView):
 
