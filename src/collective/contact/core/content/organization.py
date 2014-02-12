@@ -83,10 +83,6 @@ class Organization(Container):
     """Organization content type"""
     implements(IOrganization)
 
-    #meta_type = 'organization'
-    use_parent_address = NO_VALUE
-    parent_address = NO_VALUE
-
     def get_organizations_chain(self, first_index=0):
         """Returns the list of organizations and sub-organizations in this organization
         e.g. for HR service in Division Bar in Organization Foo :
