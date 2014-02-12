@@ -63,6 +63,14 @@ class Position(Container):
         """Returns the organization to which the position is linked"""
         return self.getParentNode()
 
+    def get_organizations_chain(self, first_index=0):
+        """Return all organizations in the chain AND the position itself
+        """
+        organization = self.context.get_organization()
+        chain = organization.get_organizations_chain(first_index=first_index)
+        chain.append(self.context)
+        return chain
+
     def get_full_title(self):
         """Returns the full title of the position
         It is constituted by the name of the position,
