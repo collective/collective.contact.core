@@ -66,9 +66,9 @@ class Position(Container):
     def get_organizations_chain(self, first_index=0):
         """Return all organizations in the chain AND the position itself
         """
-        organization = self.context.get_organization()
+        organization = self.get_organization()
         chain = organization.get_organizations_chain(first_index=first_index)
-        chain.append(self.context)
+        chain.append(self)
         return chain
 
     def get_full_title(self):
