@@ -214,16 +214,19 @@ class IAddContact(model.Schema):
     organization = ContactChoice(
             title=_(u"Organization"),
             required=False,
+            description=_(u"Select the organization where the person holds the position"),
             source=ContactSourceBinder(portal_type="organization"))
 
     person = ContactChoice(
             title=_(u"Person"),
+            description=_(u"Select the person who holds the position"),
             required=False,
             source=ContactSourceBinder(portal_type="person"))
 
     position = ContactChoice(
             title=_(u"Position"),
             required=False,
+            description=_(u"Select the position held by this person in the selected organization"),
             source=ContactSourceBinder(portal_type="position"))
 
 
@@ -233,7 +236,7 @@ class AddContact(DefaultAddForm, form.AddForm):
 #    contentProviders['organization-ms'] = MasterSelectAddContactProvider
     contentProviders['organization-ms'].position = -1
     label = _(u"Create ${name}", mapping={'name': _(u"Contact")})
-    description = u""
+    description = _(u"A contact is a position held by a person in an organization")
     schema = IAddContact
     portal_type = 'held_position'
     prefix = 'oform'

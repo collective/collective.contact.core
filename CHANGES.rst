@@ -4,6 +4,9 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Add help messages on add contact form.
+  [thomasdesvenain]
+
 - Display more information about "other contacts" in organization view.
   [cedricmessiant]
 
