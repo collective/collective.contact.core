@@ -4,6 +4,10 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Fix if for any reason use_parent_address is True, content has an address and
+  has no parent with an address.
+  [thomasdesvenain]
+
 - Add help messages on add contact form.
   [thomasdesvenain]
 

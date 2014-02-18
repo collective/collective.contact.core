@@ -95,13 +95,9 @@ class Contactable(grok.Adapter):
 
     def _get_address(self, contactables):
         for obj in contactables:
-            obj = aq_base(obj)
-            if obj.use_parent_address is True:
-                continue
-            else:
-                address = get_address(obj)
-                if address:
-                    return address
+            address = get_address(obj)
+            if address:
+                return address
 
         return {}
 
