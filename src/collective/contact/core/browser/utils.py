@@ -2,13 +2,14 @@ from DateTime import DateTime
 from zope.component import getUtility
 from zope import schema
 
-from plone.dexterity.interfaces import IDexterityFTI
 from plone.supermodel.interfaces import ISchemaPolicy
-from plone.behavior.interfaces import IBehavior
 from plone.autoform.interfaces import IFormFieldProvider
+from plone.behavior.interfaces import IBehavior
+from plone.schemaeditor.utils import non_fieldset_fields
+from plone.dexterity.interfaces import IDexterityFTI
+from plone.app.dexterity.behaviors.metadata import IBasic
 
 from collective.contact.core.behaviors import IContactDetails
-from plone.schemaeditor.utils import non_fieldset_fields
 
 
 def date_to_DateTime(date):
@@ -30,7 +31,7 @@ def get_ttw_fields(obj):
 
     for behavior_id in fti.behaviors:
         behavior = getUtility(IBehavior, behavior_id).interface
-        if behavior == IContactDetails or not IFormFieldProvider.providedBy(behavior):
+        if behavior in (IContactDetails, IBasic) or not IFormFieldProvider.providedBy(behavior):
             continue
 
         try:
