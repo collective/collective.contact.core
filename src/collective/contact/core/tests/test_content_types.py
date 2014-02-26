@@ -7,6 +7,8 @@ import datetime
 from ecreall.helpers.testing.base import BaseTest
 
 from collective.contact.core.testing import INTEGRATION
+from plone.app.testing.interfaces import TEST_USER_ID, TEST_USER_NAME
+from plone.app.testing.helpers import setRoles
 
 
 class TestContentTypes(unittest.TestCase, BaseTest):
@@ -31,6 +33,8 @@ class TestContentTypes(unittest.TestCase, BaseTest):
         self.adt = self.degaulle['adt']
         self.gadt = self.degaulle['gadt']
         self.sergent_pepper = self.pepper['sergent_pepper']
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.login(TEST_USER_NAME)
 
 
 class TestDirectory(TestContentTypes):
@@ -69,6 +73,11 @@ class TestPerson(TestContentTypes):
         with self.assertRaises(ValueError):
             self.portal.invokeFactory('person', 'error',
                                       {'lastname': "Casper"})
+
+    def test_copy_paste(self):
+        cb = self.mydirectory.manage_copyObjects(['pepper'])
+        self.mydirectory.manage_pasteObjects(cb)
+        self.assertIn('copy_of_pepper',  self.mydirectory.keys())
 
 
 class TestOrganization(TestContentTypes):
@@ -144,6 +153,11 @@ class TestOrganization(TestContentTypes):
         self.assertEqual(self.brigadelh.get_full_title(separator=u' - ', first_index=2),
                          u"Division Alpha - Régiment H - Brigade LH")
 
+    def test_copy_paste(self):
+        cb = self.mydirectory.manage_copyObjects(['armeedeterre'])
+        self.mydirectory.manage_pasteObjects(cb)
+        self.assertIn('copy_of_armeedeterre',  self.mydirectory.keys())
+
 
 class TestPosition(TestContentTypes):
 
@@ -160,6 +174,11 @@ class TestPosition(TestContentTypes):
                          u"Général de l'armée de terre (Armée de terre)")
         self.assertEqual(self.sergent_lh.get_full_title(),
                          u"Sergent de la brigade LH, Brigade LH (Armée de terre)")
+
+    def test_copy_paste(self):
+        cb = self.armeedeterre.manage_copyObjects(['general_adt'])
+        self.armeedeterre.manage_pasteObjects(cb)
+        self.assertIn('copy_of_general_adt',  self.armeedeterre.keys())
 
 
 class TestHeldPosition(TestContentTypes):
