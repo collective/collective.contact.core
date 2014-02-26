@@ -4,6 +4,9 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Remove meta_type override because it breaks copy support.
+  [thomasdesvenain]
+
 - Fix if for any reason use_parent_address is True, content has an address and
   has no parent with an address.
   [thomasdesvenain]

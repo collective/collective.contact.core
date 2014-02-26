@@ -88,7 +88,6 @@ class HeldPosition(Container):
 
     implements(IHeldPosition)
 
-    meta_type = 'held_position'
     use_parent_address = NO_VALUE
     parent_address = NO_VALUE
 

@@ -51,8 +51,6 @@ class Directory(Container):
     """Directory content type"""
     implements(IDirectory)
 
-    meta_type = 'directory'
-
 
 class DirectorySchemaPolicy(grok.GlobalUtility,
                             DexteritySchemaPolicy):
