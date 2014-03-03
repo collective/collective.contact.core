@@ -1,5 +1,8 @@
-.addnew {
+.addnew-block {
 	width: 75%;
+}
+.addnew{
+	font-weight: 500;
 }
 
 #download_vcard {
