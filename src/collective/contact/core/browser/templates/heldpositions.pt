@@ -9,7 +9,7 @@
     <div id="held_positions" class="field" tal:condition="view/held_positions">
         <h2 i18n:translate="">Positions</h2>
         <tal:block tal:repeat="held_position view/held_positions">
-            <div class="held_position" tal:define="url held_position/object/absolute_url">
+            <div class="held_position vcard" tal:define="url held_position/object/absolute_url">
 
               <div class="actions">
                 <a class="zoom-held-position contactoverlay" tal:attributes="href string:${url}/view">
@@ -50,7 +50,7 @@
 
               <div tal:replace="structure held_position/object/@@contactdetails"></div>
 
-              <div class="organization" tal:define="organization nocall:held_position/organization">
+              <div class="organization vcard" tal:define="organization nocall:held_position/organization">
                   <div id="logo" class="field" tal:condition="organization/logo">
                       <img tal:define="scales nocall:organization/@@images"
                            tal:replace="structure python:scales.tag('logo', 'tile', css_class='photo')"
