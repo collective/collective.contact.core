@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1 (unreleased)
+1.1 (2014-03-11)
 ----------------
 
 - Remove meta_type override because it breaks copy support.
