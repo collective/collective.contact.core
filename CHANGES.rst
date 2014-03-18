@@ -4,7 +4,10 @@ Changelog
 1.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Tools for excel export with collective.excelexport:
+  - renderer for contact field,
+  - exportable to show person infos on held_position export.
+  [thomasdesvenain]
 
 
 1.1 (2014-03-11)

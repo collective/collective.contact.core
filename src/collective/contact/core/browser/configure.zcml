@@ -1,9 +1,8 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:grok="http://namespaces.zope.org/grok"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:browser="http://namespaces.zope.org/browser"
-    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="collective.contact.core">
 
   <include package="plone.formwidget.autocomplete" />
@@ -87,5 +86,8 @@
       template="templates/directory.pt"
       permission="zope2.View"
       />
+
+  <include zcml:condition="installed collective.excelexport"
+           file="excelexport.zcml" />
 
 </configure>
