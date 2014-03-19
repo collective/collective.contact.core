@@ -1,4 +1,5 @@
 from zope import schema
+from zope.component import queryUtility
 from zope.interface import implements
 from zope.interface import Attribute
 from z3c.form.interfaces import NO_VALUE
@@ -10,10 +11,12 @@ from plone.autoform import directives as form
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.namedfile.field import NamedImage
+from plone.registry.interfaces import IRegistry
 from plone.supermodel import model
 
 from collective.contact.core import _
 from collective.contact.core.browser.contactable import Contactable
+from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.widget.interfaces import IContactContent
 from collective.contact.core.content.held_position import IHeldPosition
 
@@ -77,9 +80,15 @@ class Person(Container):
         return
 
     def get_title(self):
-        return u' '.join([x for x in (self.person_title,
-                                      self.firstname,
-                                      self.lastname) if x])
+        displayed = (self.person_title, self.firstname, self.lastname)
+        registry = queryUtility(IRegistry)
+        if registry is not None:
+            record = registry.forInterface(IContactCoreParameters, None)
+            if record is not None:
+                if not record.person_title_in_title:
+                    displayed = (self.firstname, self.lastname)
+
+        return u' '.join([x for x in displayed if x])
 
     title = property(get_title, set_title)
 

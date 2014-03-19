@@ -4,6 +4,9 @@ Changelog
 1.2 (unreleased)
 ----------------
 
+- Add parameter to choose if we want to display person title in person's displayed title.
+  [cedricmessiant]
+
 - Tools for excel export with collective.excelexport:
   - renderer for contact field,
   - exportable to show person infos on held_position export.
