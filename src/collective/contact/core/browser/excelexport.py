@@ -1,15 +1,17 @@
 from zope.component import adapts
+from zope.component import getMultiAdapter
 from zope.interface import Interface
 
 from plone.dexterity.interfaces import IDexterityFTI
+from plone import api
 
 from collective.excelexport.exportables.dexterityfields import BaseFieldRenderer
-from collective.contact.widget.interfaces import IContactChoice
 from collective.excelexport.exportables.base import BaseExportableFactory
 from collective.excelexport.exportables.dexterityfields import get_ordered_fields
-from plone import api
-from zope.component._api import getMultiAdapter
 from collective.excelexport.interfaces import IExportable
+
+from collective.contact.widget.interfaces import IContactChoice
+from collective.contact.core.content.held_position import IHeldPosition
 
 
 class ContactFieldRenderer(BaseFieldRenderer):
@@ -20,7 +22,13 @@ class ContactFieldRenderer(BaseFieldRenderer):
         return self.render_collection_entry(obj, value)
 
     def render_collection_entry(self, obj, value):
-        return value and value.to_object and value.to_object.get_full_title() or u""
+        rel_obj = value and value.to_object
+        if not rel_obj:
+            return u""
+        if IHeldPosition.providedBy(rel_obj):
+            return rel_obj.get_full_title() or u""
+        else:
+            return rel_obj.Title()
 
 
 class HeldPositionPersonInfoExportableFactory(BaseExportableFactory):
