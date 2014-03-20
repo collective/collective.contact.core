@@ -6,7 +6,7 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    i18n_domain="collective.excelexport">
+    i18n_domain="collective.contact.core">
 
     <adapter factory=".excelexport.ContactFieldRenderer"
              provides="collective.excelexport.interfaces.IExportable" />
