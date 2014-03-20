@@ -1,4 +1,7 @@
 from zope.interface import Interface
+from zope import schema
+
+from collective.contact.core import _
 
 
 class IContactable(Interface):
@@ -19,3 +22,10 @@ class IVCard(Interface):
         See http://vobject.skyhouseconsulting.com/usage.html#vcards and
             ftp://ftp.rfc-editor.org/in-notes/rfc6350.txt
         """
+
+
+class IContactCoreParameters(Interface):
+
+    person_title_in_title = schema.Bool(title=_(u"Display person title in displayed person's title."),
+                                        description=u"",
+                                        required=False, default=True)

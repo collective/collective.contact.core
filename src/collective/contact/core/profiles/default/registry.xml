@@ -1,0 +1,12 @@
+<registry>
+  <record name="collective.contact.core.interfaces.IContactCoreParameters.person_title_in_title"
+          interface="collective.contact.core.interfaces.IContactCoreParameters"
+          field="person_title_in_title">
+    <field type="plone.registry.field.Bool">
+      <default>True</default>
+      <required>False</required>
+      <title>Person title in title</title>
+    </field>
+    <value>True</value>
+  </record>
+</registry>
