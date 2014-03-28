@@ -244,7 +244,9 @@ alsoProvides(IContactDetails, IFormFieldProvider)
 def default_use_parent_address(adapter):
     """We don't use parent address by default for contacts and level-0 organizations
     """
-    from collective.contact.core.content.directory import IDirectory
+    from collective.contact.core.content.organization import IOrganization
+    from collective.contact.core.content.position import IPosition
+
     try:
         parent = adapter.view._parent
     except AttributeError:
@@ -259,10 +261,12 @@ def default_use_parent_address(adapter):
     if parent_type == 'person':
         return False
     elif parent_type == 'organization' \
-        and IDirectory.providedBy(adapter.context):
+      and not IOrganization.providedBy(adapter.context) \
+      and not IPosition.providedBy(adapter.context):
         return False
     else:
         return True
+
 
 DefaultUseParentAddress = ComputedWidgetAttribute(
     default_use_parent_address,
