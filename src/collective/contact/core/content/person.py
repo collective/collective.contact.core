@@ -92,6 +92,8 @@ class Person(Container):
 
     title = property(get_title, set_title)
 
+    get_full_title = get_title
+
     def Title(self):
         # must return utf8 and not unicode (Title() from basic behavior return utf8)
         # attributes are stored as unicode

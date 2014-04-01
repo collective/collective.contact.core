@@ -4,7 +4,6 @@ from zope import schema
 from zope.component import getUtility
 from zope.intid.interfaces import IIntIds
 
-from z3c.form.interfaces import NO_VALUE
 from zc.relation.interfaces import ICatalog
 
 from five import grok
