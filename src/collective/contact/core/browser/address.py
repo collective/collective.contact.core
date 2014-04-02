@@ -25,7 +25,7 @@ def get_address(obj):
         value = getattr(obj, field, '') or ''
         address[field] = value
 
-    if not ''.join(address.values()):
+    if not [v for v in address.values() if v]:
         # no value in address fields
         return {}
 
