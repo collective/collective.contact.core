@@ -10,9 +10,6 @@ Changelog
 - Add an api to make dependencies between a contact field and an other one.
   [thomasdesvenain]
 
-- If we have no result, provides a link to add an organization or a person.
-  [thomasdesvenain]
-
 - Add parameter to choose if we want to display person title in person's displayed title.
   [cedricmessiant]
 
