@@ -132,21 +132,8 @@ $(document).ready(function() {
       o.find(position_fields).hide();
  }
 
- function serialize_form(form) {
-    viewArr = form.serializeArray(),
-    view = {};
-    for (var i in viewArr) {
-      view[viewArr[i].name] = viewArr[i].value;
-    }
-    return view;
-  }
-
   function get_selected_organization(form) {
-    var view = serialize_form(form);
-    var token = view['oform.widgets.organization'];
-    var title = form.find('#oform-widgets-organization-input-fields input[value="'+token+'"]').siblings('.label').find('a').first().text();
-    var path = '/' + token.split('/').slice(2).join('/');
-    return {token: token, title: title, path: path};
+    return contactswidget.get_selected_contact(form, 'oform.widgets.organization');
   }
 
   o.find('#oform-widgets-organization-input-fields').delegate('input', 'change', function(e){
