@@ -8,6 +8,7 @@ Changelog
   [thomasdesvenain]
 
 - Add an api to make dependencies between a contact field and an other one.
+  (needs collective.contact.widget >= 1.2)
   [thomasdesvenain]
 
 - Add parameter to choose if we want to display person title in person's displayed title.
