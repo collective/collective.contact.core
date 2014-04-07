@@ -40,7 +40,7 @@ class TestSearch(unittest.TestCase, BaseTest):
                          u"Armée de terre Corps A Division Alpha")
         gadt = self.gadt
         self.assertEqual(held_position_searchable_text(gadt)(),\
-                         u"Général Charles De Gaulle Général de l'armée de terre Armée de terre")
+                         u"Général Charles De Gaulle Général de l'armée de terre Armée de terre Émissaire OTAN")
         sergent_pepper = self.sergent_pepper
         self.assertEqual(held_position_searchable_text(sergent_pepper)(),\
                          u"Sergent Pepper Sergent de la brigade LH Armée de terre Corps A Division Alpha Régiment H Brigade LH")
@@ -78,3 +78,5 @@ class TestSearch(unittest.TestCase, BaseTest):
         self.assertEqual(len(results), 4)
         results = catalog.searchResults(SearchableText='brigade')
         self.assertEqual(len(results), 4)
+        results = catalog.searchResults(SearchableText='Émissaire')
+        self.assertEqual(len(results), 2)

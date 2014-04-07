@@ -31,6 +31,10 @@ def held_position_searchable_text(obj):
 
     organization = obj.get_organization()
     indexed_fields.extend(organization.get_organizations_titles())
+
+    if obj.label:
+        indexed_fields.append(obj.label)
+
     return u' '.join(indexed_fields)
 
 
