@@ -286,7 +286,7 @@ class TestPersonView(TestView):
 
         second = held_positions[1]
         self.assertEqual(self.gadt, second['object'])
-        self.assertEqual(self.gadt.Title(), second['label'])
+        self.assertEqual(self.gadt.label, second['label'])
         self.assertEqual(second['start_date'], u'May 25, 1940')
         self.assertEqual(second['end_date'], u'Nov 09, 1970')
         self.assertEqual(self.armeedeterre, second['organization'])
