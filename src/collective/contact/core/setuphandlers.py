@@ -83,6 +83,7 @@ def create_test_contact_data(portal):
               'zip_code': u'52330',
               'additional_address_details': u'bâtiment D',
               'use_parent_address': False,
+              'website': 'www.charles-de-gaulle.org'
               }
     mydirectory.invokeFactory('person', 'degaulle', **params)
     degaulle = mydirectory['degaulle']

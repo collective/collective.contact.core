@@ -11,7 +11,8 @@ from z3c.relationfield.relation import RelationValue
 from ecreall.helpers.testing.base import BaseTest
 
 from collective.contact.core.testing import INTEGRATION
-from collective.contact.core.interfaces import IVCard, IPersonHeldPositions
+from collective.contact.core.interfaces import IVCard, IPersonHeldPositions,\
+    IContactable
 
 
 class TestAdapters(unittest.TestCase, BaseTest):
@@ -101,3 +102,17 @@ class TestAdapters(unittest.TestCase, BaseTest):
         api.content.transition(degaulle.president, 'deactivate')
         self.assertEqual(adapter.get_main_position(), degaulle.gadt)
 
+    def test_contact_details(self):
+        details = IContactable(self.degaulle).get_contact_details()
+        self.assertEqual(details['website'], 'www.charles-de-gaulle.org')
+        self.assertEqual(details['email'], 'charles.de.gaulle@armees.fr')
+        self.assertEqual(details['address'], {'city': u'Colombey les deux \xe9glises',
+                                              'country': u'France', 'region': '',
+                                              'additional_address_details': u'b\xe2timent D',
+                                              'number': u'6bis',
+                                              'street': u'rue Jean Moulin',
+                                              'zip_code': u'52330'})
+
+
+        details = IContactable(self.degaulle).get_contact_details(keys=('email',))
+        self.assertEqual(details, {'email': 'charles.de.gaulle@armees.fr'})

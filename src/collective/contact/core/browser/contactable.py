@@ -24,20 +24,26 @@ class ContactDetailsContactable(grok.Adapter):
     grok.provides(IContactable)
     grok.context(Interface)
 
-    def get_contact_details(self):
+    def get_contact_details(self, keys=()):
         if not IContactDetails.providedBy(self.context):
             raise TypeError("Your contactable content must provide IContactDetails "
                             "if it doesn't have a more specific contactable adapter")
 
         contact_details = {}
-        contact_details_fields = ['email', 'phone', 'cell_phone', 'fax', 'website', 'im_handle']
+        if keys:
+            contact_details_fields = [k for k in keys if k != 'address']
+        else:
+            contact_details_fields = ['email', 'phone', 'cell_phone', 'fax', 'website', 'im_handle']
+
         context = aq_base(self.context)
         for field in contact_details_fields:
             # search the object that carries the field
             value = getattr(context, field, '') or ''
             contact_details[field] = value
 
-        contact_details['address'] = get_address(context)
+        if (not keys) or ('address' in keys):
+            contact_details['address'] = get_address(context)
+
         return contact_details
 
     def get_parent_address(self):
@@ -104,9 +110,13 @@ class Contactable(grok.Adapter):
 
         return {}
 
-    def get_contact_details(self):
+    def get_contact_details(self, keys=()):
         contact_details = {}
-        contact_details_fields = ['email', 'phone', 'cell_phone', 'fax', 'website', 'im_handle']
+        if keys:
+            contact_details_fields = [k for k in keys if k != 'address']
+        else:
+            contact_details_fields = ['email', 'phone', 'cell_phone', 'fax', 'website', 'im_handle']
+
         contactables = self._get_contactables()
         for field in contact_details_fields:
             # search the object that carries the field
@@ -119,7 +129,9 @@ class Contactable(grok.Adapter):
             else:
                 contact_details[field] = ''
 
-        contact_details['address'] = self._get_address(contactables)
+        if (not keys) or ('address' in keys):
+            contact_details['address'] = self._get_address(contactables)
+
         return contact_details
 
     def get_parent_address(self):
