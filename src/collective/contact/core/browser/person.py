@@ -8,6 +8,7 @@ from collective.contact.core.browser import TEMPLATES_DIR
 from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.content.person import IPerson
 from collective.contact.core.browser.utils import date_to_DateTime
+from collective.contact.core.interfaces import IContactable
 
 
 grok.templatedir(TEMPLATES_DIR)
@@ -17,6 +18,9 @@ class Person(BaseView):
 
     def update(self):
         super(Person, self).update()
+        #Do not show person contact details
+        #if they are the same as the main held position
+        self.show_contact_details = IContactable(self.context).held_position is None
 
 
 class HeldPositions(grok.View):

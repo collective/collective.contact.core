@@ -1,4 +1,5 @@
 from zope import schema
+from zope.cachedescriptors.property import CachedProperty
 from zope.component import queryUtility
 from zope.interface import implements
 from zope.interface import Attribute
@@ -16,7 +17,8 @@ from plone.supermodel import model
 
 from collective.contact.core import _
 from collective.contact.core.browser.contactable import Contactable
-from collective.contact.core.interfaces import IContactCoreParameters
+from collective.contact.core.interfaces import IContactCoreParameters,\
+    IPersonHeldPositions, IContactable
 from collective.contact.widget.interfaces import IContactContent
 from collective.contact.core.content.held_position import IHeldPosition
 
@@ -62,6 +64,24 @@ class PersonContactableAdapter(Contactable):
     @property
     def person(self):
         return self.context
+
+    @CachedProperty
+    def held_position(self):
+        return IPersonHeldPositions(self.person).get_main_position()
+
+    @property
+    def position(self):
+        held_position = self.held_position
+        if held_position:
+            return IContactable(held_position).position
+
+    @property
+    def organizations(self):
+        held_position = self.held_position
+        if held_position:
+            return IContactable(held_position).organizations
+        else:
+            return ()
 
 
 class Person(Container):

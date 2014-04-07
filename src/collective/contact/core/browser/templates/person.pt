@@ -9,7 +9,8 @@
 
     <div tal:replace="structure context/@@basefields" />
 
-    <div tal:replace="structure context/@@contactdetails" />
+    <div tal:condition="view/show_contact_details"
+         tal:replace="structure context/@@contactdetails" />
 
     <div tal:replace="structure context/@@ttwfields" />
 

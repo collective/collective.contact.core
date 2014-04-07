@@ -1,9 +1,10 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
+<div xmlns="http://www.w3.org/1999/xhtml"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
-      i18n:domain="collective.contact.core" tal:omit-tag=""
+      i18n:domain="collective.contact.core"
+      class="contact-details"
       tal:define="portal_url context/@@plone_portal_state/portal_url;">
 
     <div id="email" class="field" tal:condition="view/contact_details/email">
@@ -57,4 +58,4 @@
         </a>
     </div>
 
-</html>
+</div>

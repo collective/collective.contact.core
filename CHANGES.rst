@@ -4,6 +4,10 @@ Changelog
 1.2 (unreleased)
 ----------------
 
+- Contact details of a person fallbacks to person's main position
+  get from IPersonHeldPositions adapter.
+  [thomasdesvenain]
+
 - Added an IPersonHeldPositions adapter that gets positions sorted by status :
   a main position, all current positions, closed positions.
   [thomasdesvenain]

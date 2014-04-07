@@ -69,6 +69,9 @@ class Contactable(grok.Adapter):
     def person(self):
         return None
 
+    def held_position(self):
+        return None
+
     @property
     def position(self):
         return None
@@ -84,7 +87,7 @@ class Contactable(grok.Adapter):
         we use the one of the first object in this list which have this information
         """
         contactables = []
-        related_items = [self.context, self.person, self.position] + list(reversed(self.organizations))
+        related_items = [self.context, self.held_position, self.person, self.position] + list(reversed(self.organizations))
         for related_item in related_items:
             if related_item is not None \
               and IContactDetails.providedBy(related_item) \
