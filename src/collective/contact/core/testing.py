@@ -3,6 +3,8 @@
 from plone.app.testing import PloneWithPackageLayer
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 
 from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 
@@ -17,6 +19,7 @@ class ContactContentLayer(PloneWithPackageLayer):
         self.applyProfile(portal, 'collective.contact.core:testing')
         # insert some test data
         self.applyProfile(portal, 'collective.contact.core:test_data')
+        setRoles(portal, TEST_USER_ID, ['Manager'])
 
 
 COLLECTIVE_CONTACT_CORE = ContactContentLayer(

@@ -4,6 +4,10 @@ Changelog
 1.2 (unreleased)
 ----------------
 
+- Added an IPersonHeldPositions adapter that gets positions sorted by status :
+  a main position, all current positions, closed positions.
+  [thomasdesvenain]
+
 - js functions have a namespace.
   [thomasdesvenain]
 

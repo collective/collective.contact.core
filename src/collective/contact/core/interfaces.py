@@ -29,3 +29,23 @@ class IContactCoreParameters(Interface):
     person_title_in_title = schema.Bool(title=_(u"Display person title in displayed person's title."),
                                         description=u"",
                                         required=False, default=True)
+
+
+class IPersonHeldPositions(Interface):
+    """Adapter interface to get ordered positions of a person
+    adapts person object and layer
+    """
+
+    def get_main_position(self):
+        """When you have to deal with just one position for the person,
+        (for example, you want to notify contacts but only once per person)
+        this method gives the main position of the person
+        """
+
+    def get_current_positions(self):
+        """Give the current positions of the person
+        """
+
+    def get_sorted_positions(self):
+        """Get sorted positions
+        """

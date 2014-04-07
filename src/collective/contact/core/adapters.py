@@ -1,15 +1,18 @@
-from zope.interface.interface import Interface
-from five import grok
+import datetime
 import vobject
 
-from Products.CMFPlone.utils import safe_unicode
+from zope.interface import Interface, implements
+from five import grok
 
-from collective.contact.core.interfaces import IVCard, IContactable
+from Products.CMFPlone.utils import safe_unicode
+from plone import api
+
+from collective.contact.core.interfaces import IVCard, IContactable,\
+    IPersonHeldPositions
 from collective.contact.core.content.held_position import IHeldPosition,\
                                                              HeldPosition
 from collective.contact.core.content.organization import IOrganization,\
                                                              Organization
-
 from collective.contact.core.behaviors import IBirthday
 
 
@@ -143,6 +146,7 @@ class HeldPositionVCard(grok.Adapter, ContactableVCard):
 
         return vcard
 
+
 class OrganizationVCard(grok.Adapter, ContactableVCard):
     grok.implements(IOrganization)
     grok.context(Organization)
@@ -164,3 +168,54 @@ class OrganizationVCard(grok.Adapter, ContactableVCard):
         vcard.fn.value = organization.Title()
 
         return vcard
+
+
+def sort_closed_positions(position1, position2):
+    if position1.end_date == position2.end_date:
+        return 0
+    elif not position1.end_date: # position without end date is greater
+        return 1
+    elif not position2.end_date:
+        return -1
+    else:
+        return cmp(position1.end_date, position2.end_date)
+
+
+class PersonHeldPositionsAdapter(object):
+    implements(IPersonHeldPositions)
+
+    def __init__(self, person):
+        self.person = person
+
+    def get_main_position(self):
+        """First active current position in container
+        if there is no active position, select first inactive one
+        """
+        current_positions = self.get_current_positions()
+        if not current_positions:
+            return None
+
+        for position in current_positions:
+            if api.content.get_state(position) == 'active':
+                return position
+        else:
+            return current_positions[0]
+
+    def get_current_positions(self):
+        """Get not ended positions
+        """
+        positions = self.person.get_held_positions()
+        return tuple([p for p in positions
+                      if (not p.end_date or p.end_date > datetime.date.today())])
+
+    def get_closed_positions(self):
+        """Get closed positions by descending order of end date
+        """
+        all_positions = self.person.get_held_positions()
+        active_positions = self.get_current_positions()
+        closed_positions = [p for p in all_positions if p not in active_positions]
+        closed_positions.sort(cmp=sort_closed_positions, reverse=True)
+        return tuple(closed_positions)
+
+    def get_sorted_positions(self):
+        return self.get_current_positions() + self.get_closed_positions()

@@ -114,4 +114,9 @@
     title="collective.contact.core: Use parent address"
     />
 
+  <adapter
+    for="collective.contact.core.content.person.IPerson"
+    provides="collective.contact.core.interfaces.IPersonHeldPositions"
+    factory=".adapters.PersonHeldPositionsAdapter"
+    />
 </configure>
