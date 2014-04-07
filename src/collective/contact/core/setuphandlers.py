@@ -206,7 +206,7 @@ def create_test_contact_data(portal):
     params = {'start_date': datetime.date(1940, 5, 25),
               'end_date': datetime.date(1970, 11, 9),
               'position': RelationValue(intids.getId(general_adt)),
-              'label': "Émissaire OTAN"
+              'label': u"Émissaire OTAN"
               }
     degaulle.invokeFactory('held_position', 'gadt', **params)
 
