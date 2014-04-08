@@ -8,7 +8,8 @@ from collective.contact.core.browser import TEMPLATES_DIR
 from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.content.person import IPerson
 from collective.contact.core.browser.utils import date_to_DateTime
-from collective.contact.core.interfaces import IContactable
+from collective.contact.core.interfaces import IContactable,\
+    IPersonHeldPositions
 
 
 grok.templatedir(TEMPLATES_DIR)
@@ -33,14 +34,10 @@ class HeldPositions(grok.View):
 
     def update(self):
         person = self.context
-        catalog = getToolByName(person, 'portal_catalog')
         sm = getSecurityManager()
-        context_path = '/'.join(person.getPhysicalPath())
         held_positions = []
-        for brain in catalog.searchResults(portal_type='held_position',
-                                           path={'query': context_path, 'depth': 1}):
+        for obj in IPersonHeldPositions(person).get_sorted_positions():
             held_position = {}
-            obj = brain.getObject()
             held_position['label'] = obj.label or obj.Title()
             if obj.start_date is not None:
                 start_date = date_to_DateTime(obj.start_date)

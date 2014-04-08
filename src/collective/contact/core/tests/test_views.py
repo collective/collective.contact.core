@@ -242,7 +242,7 @@ class TestOrganizationView(TestView):
         self.assertIsNone(contact['cell_phone'])
         self.assertIsNone(contact['fax'])
         self.assertIsNone(contact['im_handle'])
-        self.assertIsNone(contact['website'])
+        self.assertEqual(contact['website'], 'www.charles-de-gaulle.org')
 
 
 class TestPersonView(TestView):
