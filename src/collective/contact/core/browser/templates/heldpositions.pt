@@ -56,13 +56,13 @@
                            tal:replace="structure python:scales.tag('logo', 'tile', css_class='photo')"
                            tal:on-error="string:Bad logo format" />
                   </div>
-                  <h4 tal:content="organization/Title"></h4>
+                  <h4><a tal:attributes="href organization/absolute_url" tal:content="organization/Title"></a></h4>
 
                   <div tal:replace="structure held_position/organization/@@contactdetails"></div>
               </div>
             </div>
         </tal:block>
-        <div class="visualClear" />
+        <div class="visualClear"><!--  --></div>
     </div>
 
 
