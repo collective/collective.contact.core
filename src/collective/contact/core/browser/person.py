@@ -2,14 +2,13 @@ from five import grok
 
 from AccessControl import getSecurityManager
 
-from Products.CMFCore.utils import getToolByName
-
 from collective.contact.core.browser import TEMPLATES_DIR
 from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.content.person import IPerson
 from collective.contact.core.browser.utils import date_to_DateTime
 from collective.contact.core.interfaces import IContactable,\
     IPersonHeldPositions
+from collective.contact.core.behaviors import IContactDetails
 
 
 grok.templatedir(TEMPLATES_DIR)
@@ -21,7 +20,11 @@ class Person(BaseView):
         super(Person, self).update()
         #Do not show person contact details
         #if they are the same as the main held position
-        self.show_contact_details = IContactable(self.context).held_position is None
+        contactable_held_position = IContactable(self.context).held_position
+        if IContactDetails.providedBy(contactable_held_position) and not IContactDetails.providedBy(self.context):
+            self.show_contact_details = False
+        else:
+            self.show_contact_details = True
 
 
 class HeldPositions(grok.View):
