@@ -1,11 +1,10 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
+<div xmlns="http://www.w3.org/1999/xhtml"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
-      i18n:domain="collective.contact.core" tal:omit-tag="">
-<body>
-
+      i18n:domain="collective.contact.core"
+      class="contact-ttwfields">
     <tal:block tal:repeat="field view/ttw_fields">
         <div class="field"
              tal:define="widgets view/widgets;
@@ -16,6 +15,4 @@
             </span>
         </div>
     </tal:block>
-
-</body>
-</html>
+</div>
