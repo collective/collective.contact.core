@@ -12,6 +12,10 @@ Changelog
   a main position, all current positions, closed positions.
   [thomasdesvenain]
 
+- Add plone.abovecontenttitle viewlet manager to person, organization, position
+  and contact (held_position) views.
+  [vincentfretin]
+
 - js functions have a namespace.
   [thomasdesvenain]
 

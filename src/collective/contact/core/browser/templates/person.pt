@@ -3,9 +3,11 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
 	    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="context/main_template/macros/master"
+      tal:define="ajax_load request/ajax_load | nothing;"
       i18n:domain="collective.contact.core" lang="en">
 
   <div id="person" class="vcard" metal:fill-slot="main">
+    <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" tal:condition="not:ajax_load" />
 
     <div tal:replace="structure context/@@basefields" />
 
