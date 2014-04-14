@@ -88,14 +88,25 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
      * master_field is on format : form.widgets.mymasterfield,
      * slave_field is on format : form.widgets.myslavefield,
      */
-
-    $('body').on('change', '#'+master_field.replace(/\./g, '-')+'-input-fields input', function(e){
-        var form = $(this).parents('form').first();
+    apply_relation_dependency = function(input){
+        var form = input.parents('form').first();
         var selected = contactswidget.get_selected_contact(form, master_field);
         var relations = {};
         relations['relations.' + relation + ':record'] = selected.token;
         var slave_field_query = $('#' + slave_field.replace(/\./g, '-') + '-widgets-query')
         slave_field_query.setOptions({extraParams: relations}).flushCache();
+    }
+
+    var selector = '#' + master_field.replace(/\./g, '-') + '-input-fields input';
+
+    $('body').on('change', selector, function(e){
+        apply_relation_dependency($(this));
+    });
+
+    $(document).ready(function(){
+        $('body').find(selector).each(function(){
+            apply_relation_dependency($(this));
+        })
     });
 }
 
