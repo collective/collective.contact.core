@@ -89,7 +89,7 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
      * slave_field is on format : form.widgets.myslavefield,
      */
 
-    $('#'+master_field.replace(/\./g, '-')+'-input-fields').delegate('input', 'change', function(e){
+    $('body').on('change', '#'+master_field.replace(/\./g, '-')+'-input-fields input', function(e){
         var form = $(this).parents('form').first();
         var selected = contactswidget.get_selected_contact(form, master_field);
         var relations = {};
