@@ -67,6 +67,15 @@ class IOrganization(model.Schema, IContactContent):
         u"Organization Foo / Division Bar / HR service"
         """
 
+    def get_positions(self):
+        """Returns the positions"""
+
+    def get_held_positions(self):
+        """Returns the held positions
+           that have been directly linked to the organization
+           without a position
+        """
+
 
 class OrganizationContactableAdapter(Contactable):
     """Contactable adapter for Organization content type"""
@@ -140,7 +149,10 @@ class Organization(Container):
                               {'to_id': orga_intid,
                                'from_interfaces_flattened': IHeldPosition,
                                'from_attribute': 'position'})
-        return [c.from_object for c in contact_relations]
+        results = [c.from_object for c in contact_relations]
+        from collective.contact.core.indexers import held_position_sortable_title
+        results.sort(key=lambda x: held_position_sortable_title(x)())
+        return results
 
 
 class OrganizationSchemaPolicy(grok.GlobalUtility,

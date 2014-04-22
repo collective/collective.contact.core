@@ -4,6 +4,9 @@ Changelog
 1.2 (unreleased)
 ----------------
 
+- Sort get_held_positions results
+  [cedricmessiant]
+
 - Add plone.abovecontenttitle viewlet manager to person, organization, position
   and contact (held_position) views.
   [vincentfretin]

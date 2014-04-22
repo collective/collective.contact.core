@@ -88,4 +88,5 @@ class OtherContacts(grok.View):
             contact['website'] = contactable.website
 
             othercontacts.append(contact)
+
         self.othercontacts = othercontacts
