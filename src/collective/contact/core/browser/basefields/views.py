@@ -63,7 +63,10 @@ class OrganizationBaseFields(grok.View):
         self.name = organization.Title()
         factory = getUtility(IVocabularyFactory, "OrganizationTypesOrLevels")
         vocabulary = factory(self.context)
-        self.type = vocabulary.getTerm(organization.organization_type).title
+        try:
+            self.type = vocabulary.getTerm(organization.organization_type).title
+        except LookupError:
+            pass
         self.activity = self.context.activity
 
 
