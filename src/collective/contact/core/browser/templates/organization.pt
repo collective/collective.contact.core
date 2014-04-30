@@ -8,7 +8,7 @@
     i18n:domain="collective.contact.core">
 <body>
 
-<div class="vcard" metal:fill-slot="main">
+<div id="organization" class="vcard" metal:fill-slot="main">
 
     <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" tal:condition="not:ajax_load" />
 	  <div tal:replace="structure context/@@basefields" />
