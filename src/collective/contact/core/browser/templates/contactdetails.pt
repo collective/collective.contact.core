@@ -6,55 +6,55 @@
       i18n:domain="collective.contact.core" tal:omit-tag=""
       tal:define="portal_url context/@@plone_portal_state/portal_url;">
 
-    <div id="email" class="field" tal:condition="view/contact_details/email">
+    <p id="email" class="field" tal:condition="view/contact_details/email">
         <label><tal:block i18n:translate="">Email</tal:block>:</label>
         <a class="email"
            tal:content="view/contact_details/email"
            tal:attributes="href string:mailto:${view/contact_details/email}"
            i18n:translate="" />
-    </div>
+    </p>
 
-    <div id="phone" class="field" tal:condition="view/contact_details/phone">
+    <p id="phone" class="field" tal:condition="view/contact_details/phone">
         <label><tal:block i18n:translate="">Phone number</tal:block>:</label>
         <span class="tel"
               tal:content="view/contact_details/phone"
               i18n:translate="" />
-    </div>
+    </p>
 
-    <div id="cell_phone" class="field" tal:condition="view/contact_details/cell_phone">
+    <p id="cell_phone" class="field" tal:condition="view/contact_details/cell_phone">
         <label><tal:block i18n:translate="">Cell phone number</tal:block>:</label>
         <span class="tel"
               tal:content="view/contact_details/cell_phone"
               i18n:translate="" />
-    </div>
+    </p>
 
-    <div id="fax" class="field" tal:condition="view/contact_details/fax">
+    <p id="fax" class="field" tal:condition="view/contact_details/fax">
         <label><tal:block i18n:translate="">Fax number</tal:block>:</label>
         <span class="tel"
               tal:content="view/contact_details/fax"
               i18n:translate="" />
-    </div>
+    </p>
 
-    <div id="im_handle" class="field" tal:condition="view/contact_details/im_handle">
+    <p id="im_handle" class="field" tal:condition="view/contact_details/im_handle">
         <label><tal:block i18n:translate="">IM handle</tal:block>:</label>
         <span tal:content="view/contact_details/im_handle"
               i18n:translate="" />
-    </div>
+    </p>
 
-    <div id="website" class="field" tal:condition="view/contact_details/website">
+    <p id="website" class="field" tal:condition="view/contact_details/website">
         <label><tal:block i18n:translate="">Website</tal:block>:</label>
         <a class="url"
            tal:content="view/contact_details/website"
            tal:attributes="href view/contact_details/website" />
-    </div>
+    </p>
 
-    <div id="address" tal:replace="structure view/render_address" />
+    <p id="address" tal:replace="structure view/render_address" />
 
-    <div id="download_vcard" tal:condition="view/contact_details">
+    <p id="download_vcard" tal:condition="view/contact_details">
         <a href="@@contact.vcf" tal:attributes="href string: ${context/absolute_url}/@@contact.vcf">
             <img tal:attributes="src string:${portal_url}/vcard_icon.png" />
             <tal:vcard i18n:translate=""> Download VCard</tal:vcard>
         </a>
-    </div>
+    </p>
 
 </html>

@@ -7,14 +7,14 @@
 <body>
 
     <tal:block tal:repeat="field view/ttw_fields">
-        <div class="field"
+        <p class="field"
              tal:define="widgets view/widgets;
                          widget python:widgets[field];"
              tal:condition="widget/value">
             <label><tal:block tal:content="widget/label" i18n:translate="" />:</label>
             <span tal:on-error="nothing" tal:content="structure widget/render">
             </span>
-        </div>
+        </p>
     </tal:block>
 
 </body>
