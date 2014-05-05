@@ -12,7 +12,9 @@ grok.templatedir(TEMPLATES_DIR)
 def get_address(obj):
     """Returns a dictionary which contains address fields"""
     address = {}
-    if aq_base(obj).use_parent_address is True and IContactDetails.providedBy(obj.aq_parent):
+    if (aq_base(obj).use_parent_address is True
+        and hasattr(obj, 'aq_parent')
+        and IContactDetails.providedBy(obj.aq_parent)):
         address = get_address(obj.aq_parent)
         if address:
             return address
