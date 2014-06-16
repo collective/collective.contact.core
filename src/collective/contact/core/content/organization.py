@@ -149,10 +149,7 @@ class Organization(Container):
                               {'to_id': orga_intid,
                                'from_interfaces_flattened': IHeldPosition,
                                'from_attribute': 'position'})
-        results = [c.from_object for c in contact_relations]
-        from collective.contact.core.indexers import held_position_sortable_title
-        results.sort(key=lambda x: held_position_sortable_title(x)())
-        return results
+        return [c.from_object for c in contact_relations]
 
 
 class OrganizationSchemaPolicy(grok.GlobalUtility,

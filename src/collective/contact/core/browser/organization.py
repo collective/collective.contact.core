@@ -6,6 +6,7 @@ from Products.CMFCore.utils import getToolByName
 
 from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.interfaces import IContactable
+from collective.contact.core.indexers import held_position_sortable_title
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.content.organization import IOrganization
 
@@ -67,6 +68,7 @@ class OtherContacts(grok.View):
         organization = self.context
         othercontacts = []
         held_positions = organization.get_held_positions()
+        held_positions.sort(key=lambda x: held_position_sortable_title(x)())
         for hp in held_positions:
             contact = {}
             person = hp.get_person()
