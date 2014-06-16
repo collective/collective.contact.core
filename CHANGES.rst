@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2 (unreleased)
+1.2 (2014-06-16)
 ----------------
 
 - Contact details of a person fallbacks to person's main position
