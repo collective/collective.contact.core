@@ -4,6 +4,9 @@ Changelog
 1.2 (unreleased)
 ----------------
 
+- Contact might not have any  aq_parent
+  [ebrehault]
+
 - Contact details of a person fallbacks to person's main position
   get from IPersonHeldPositions adapter.
   [thomasdesvenain]
