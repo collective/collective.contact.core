@@ -4,7 +4,8 @@ Changelog
 1.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- VCard : avoid failure if no 'person_title' is set on content.
+  [thomasdesvenain]
 
 
 1.2 (2014-06-16)
