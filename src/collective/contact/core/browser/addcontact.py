@@ -5,18 +5,21 @@ from zope.event import notify
 from zope.interface import implements, Interface
 from zope.publisher.browser import BrowserView
 
+from z3c.form import field, form, button
+from z3c.form.contentprovider import ContentProviders
+from z3c.form.interfaces import IFieldsAndContentProvidersForm, HIDDEN_MODE
+
 from Products.CMFCore.utils import getToolByName
 from Products.statusmessages.interfaces import IStatusMessage
 from five import grok
+
+from plone import api
 from plone.dexterity.browser.add import DefaultAddForm
 from plone.dexterity.events import AddCancelledEvent
 from plone.dexterity.i18n import MessageFactory as DMF
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.dexterity.utils import addContentToContainer
 from plone.supermodel import model
-from z3c.form import field, form, button
-from z3c.form.contentprovider import ContentProviders
-from z3c.form.interfaces import IFieldsAndContentProvidersForm, HIDDEN_MODE
 
 from collective.contact.widget.schema import ContactChoice
 from collective.contact.widget.source import ContactSourceBinder
@@ -70,6 +73,18 @@ class ContactWidgetSettings(grok.GlobalUtility):
                     url = "%s/@@add-contact" % directory_url
                     type_name = _(u"Contact")
                     label = _(u"Create ${name}", mapping={'name': type_name})
+                    if getattr(source, 'relations', None):
+                        # if we have a relation, with an organization or a position
+                        # we will pre-complete contact creation form
+                        if 'position' in source.relations:
+                            related_path = source.relations['position']
+                            related_to = api.content.get(related_path)
+                            label = _(u"Create ${name} (${position})",
+                                      mapping={'name': type_name,
+                                               'position': related_to.Title()})
+                            url += '?oform.widgets.%s=%s' % (related_to.portal_type,
+                                               '/'.join(related_to.getPhysicalPath()))
+
                     action = {'url': url, 'label': label,
                               'klass': 'addnew',
                               'formselector' : '#oform',

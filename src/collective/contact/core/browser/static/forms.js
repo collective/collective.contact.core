@@ -76,6 +76,9 @@ contactswidget.manage_hide_use_parent_address = function(){
 contactswidget.get_selected_contact = function(form, field_id) {
   var view = contactswidget.serialize_form(form);
   var token = view[field_id];
+  if(token === undefined){
+      return undefined;
+  }
   var input = form.find('#' + field_id.replace(/\./g, '-') + '-input-fields input[value="'+token+'"]');
   var title = input.siblings('.label').find('a').first().text();
   var path = '/' + token.split('/').slice(2).join('/');
@@ -91,10 +94,30 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
     apply_relation_dependency = function(input){
         var form = input.parents('form').first();
         var selected = contactswidget.get_selected_contact(form, master_field);
+        if(selected === undefined){
+            return
+        }
+        /* set new relation search parameter on slave field */
         var relations = {};
         relations['relations.' + relation + ':record'] = selected.token;
         var slave_field_query = $('#' + slave_field.replace(/\./g, '-') + '-widgets-query')
         slave_field_query.setOptions({extraParams: relations}).flushCache();
+
+        /* change create link so that master field selection is selected by default */
+        console.log(slave_field_query);
+        var add_link = $('#formfield-' + slave_field.replace(/\./g, '-')).find('.addnew');
+        if(add_link.length == 1){
+            var orig_href = add_link.attr('href');
+            var base_add_url = orig_href.substr(0, orig_href.indexOf('@add-contact') + 12);
+            var new_url = base_add_url + '?oform.widgets.organization=' + selected.token;
+            new_url += '&oform.widgets.position=' + selected.token;
+            if(add_link.orig_text === undefined){
+                add_link.orig_text = add_link.text();
+            }
+            add_link.attr('href', new_url);
+            add_link.data('pbo').src = new_url;
+            add_link.text(add_link.orig_text + ' (' + selected.title + ')')
+        }
     }
 
     var selector = '#' + master_field.replace(/\./g, '-') + '-input-fields input';

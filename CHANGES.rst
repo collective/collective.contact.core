@@ -4,9 +4,14 @@ Changelog
 1.3 (unreleased)
 ----------------
 
+- If a contact field is dependent to a position or an organization,
+  we update 'add new' link of the contact field
+  so that the 'position' or 'organization' field is pre-selected in the overlay.
+  [thomasdesvenain]
+
 - VCard : avoid failure if no 'person_title' is set on content.
   [thomasdesvenain]
-  
+
 - Contact might not have any  aq_parent
   [ebrehault]
 
