@@ -6,6 +6,9 @@ Changelog
 
 - VCard : avoid failure if no 'person_title' is set on content.
   [thomasdesvenain]
+  
+- Contact might not have any  aq_parent
+  [ebrehault]
 
 
 1.2 (2014-06-16)
