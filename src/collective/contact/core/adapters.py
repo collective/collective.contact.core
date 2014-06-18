@@ -113,8 +113,7 @@ class HeldPositionVCard(grok.Adapter, ContactableVCard):
         vcard.add('n')
         firstname = safe_unicode(person.firstname or '', encoding='utf8')
         lastname = safe_unicode(person.lastname or '', encoding='utf8')
-        person_title = safe_unicode(getattr(person, 'person_title', '') or '',
-                                    encoding='utf8')
+        person_title = safe_unicode(person.person_title or '', encoding='utf8')
         vcard.n.value = vobject.vcard.Name(prefix=person_title,
                                            family=lastname,
                                            given=firstname)
