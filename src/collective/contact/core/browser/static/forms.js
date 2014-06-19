@@ -104,7 +104,6 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
         slave_field_query.setOptions({extraParams: relations}).flushCache();
 
         /* change create link so that master field selection is selected by default */
-        console.log(slave_field_query);
         var add_link = $('#formfield-' + slave_field.replace(/\./g, '-')).find('.addnew');
         if(add_link.length == 1){
             var orig_href = add_link.attr('href');
