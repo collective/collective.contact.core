@@ -4,18 +4,21 @@ Changelog
 1.3 (unreleased)
 ----------------
 
-- Fix : address fallback in excel export.
-  [thomasdesvenain]
-
-- If a contact field is dependent to a position or an organization,
+- UI: If a contact field is dependent to a position or an organization,
   we update 'add new' link of the contact field
   so that the 'position' or 'organization' field is pre-selected in the overlay.
   [thomasdesvenain]
 
-- VCard : avoid failure if no 'person_title' is set on content.
+- Fix: Switch street and additional data on address view.
   [thomasdesvenain]
 
-- Contact might not have any  aq_parent
+- Fix: address fallback in excel export.
+  [thomasdesvenain]
+
+- Fix: VCard - avoid failure if no 'person_title' is set on content.
+  [thomasdesvenain]
+
+- Fix: Contact might not have any aq_parent
   [ebrehault]
 
 

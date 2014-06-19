@@ -5,8 +5,8 @@
     <label><tal:block i18n:translate="">Address</tal:block>:</label>
     <div id="street-address" class="address_line street-address">
         <span i18n:translate="" tal:replace="address/number"></span>
-        <span i18n:translate="" tal:replace="address/additional_address_details"></span>
         <span i18n:translate="" tal:replace="address/street"></span>
+        <span i18n:translate="" tal:replace="address/additional_address_details"></span>
     </div>
     <div id="postal_code_and_locality" class="address_line">
         <span class="postal-code" i18n:translate="" tal:condition="address/zip_code" tal:content="address/zip_code"></span>
