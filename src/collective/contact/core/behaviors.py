@@ -79,6 +79,16 @@ class IGlobalPositioning(model.Schema):
 alsoProvides(IGlobalPositioning, IFormFieldProvider)
 
 
+ADDRESS_FIELDS = ('number',
+                'street',
+                'additional_address_details',
+                'zip_code',
+                'city',
+                'region',
+                'country',
+                )
+
+
 class IContactDetails(model.Schema):
     """Contact details behavior"""
     form.write_permission(use_parent_address='collective.contact.core.UseParentAddress')
@@ -97,15 +107,8 @@ class IContactDetails(model.Schema):
         'address',
         label=_(u'Address'),
         fields=('use_parent_address',
-                'parent_address',
-                'number',
-                'street',
-                'additional_address_details',
-                'zip_code',
-                'city',
-                'region',
-                'country',
-                )
+                'parent_address') + ADDRESS_FIELDS
+
         )
 
     email = schema.TextLine(

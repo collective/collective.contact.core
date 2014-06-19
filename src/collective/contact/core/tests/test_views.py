@@ -6,11 +6,7 @@ from plone.app.testing.interfaces import TEST_USER_NAME
 from ecreall.helpers.testing.base import BaseTest
 
 from collective.contact.core.testing import INTEGRATION
-
-
-ADDRESS_FIELDS = ['country', 'region', 'zip_code',
-                  'city', 'street', 'number',
-                  'additional_address_details']
+from collective.contact.core.behaviors import ADDRESS_FIELDS
 
 
 class TestView(unittest.TestCase, BaseTest):

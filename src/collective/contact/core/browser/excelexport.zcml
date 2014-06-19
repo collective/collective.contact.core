@@ -15,4 +15,7 @@
              provides="collective.excelexport.interfaces.IExportableFactory"
              name="personinfo" />
 
+    <adapter factory=".excelexport.ContactValueGetter"
+             provides="collective.excelexport.exportables.dexterityfields.IFieldValueGetter" />
+
 </configure>

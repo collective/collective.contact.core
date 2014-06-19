@@ -1,21 +1,25 @@
 from zope.component import adapts
 from zope.component import getMultiAdapter
 from zope.interface import Interface
+from zope.interface import implements
 
 from plone.dexterity.interfaces import IDexterityFTI
 from plone import api
+from collective.contact.core.interfaces import IContactable
 
 try:
     from collective.excelexport.exportables.dexterityfields import BaseFieldRenderer
     from collective.excelexport.exportables.base import BaseExportableFactory
     from collective.excelexport.exportables.dexterityfields import get_ordered_fields
     from collective.excelexport.interfaces import IExportable
+    from collective.excelexport.exportables.dexterityfields import IFieldValueGetter
     HAS_EXCELEXPORT = True
 except ImportError:
     HAS_EXCELEXPORT = False
 
-from collective.contact.widget.interfaces import IContactChoice
+from collective.contact.widget.interfaces import IContactChoice, IContactContent
 from collective.contact.core.content.held_position import IHeldPosition
+from collective.contact.core.behaviors import ADDRESS_FIELDS
 
 
 if HAS_EXCELEXPORT:
@@ -51,3 +55,18 @@ if HAS_EXCELEXPORT:
                                             interface=IExportable)
                            for field in person_fields]
             return exportables
+
+
+    class ContactValueGetter(object):
+        adapts(IContactContent)
+        implements(IFieldValueGetter)
+
+        def __init__(self, context):
+            self.context = context
+
+        def get(self, field):
+            if field.__name__ in ADDRESS_FIELDS:
+                address = IContactable(self.context).get_contact_details(('address',))['address']
+                return address.get(field.__name__, None)
+
+            return getattr(self.context, field.__name__, None)

@@ -4,6 +4,7 @@ from five import grok
 
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.browser import TEMPLATES_DIR
+from collective.contact.core.behaviors import ADDRESS_FIELDS
 
 
 grok.templatedir(TEMPLATES_DIR)
@@ -19,9 +20,7 @@ def get_address(obj):
         if address:
             return address
 
-    address_fields = ['country', 'region', 'zip_code',
-                      'city', 'street', 'number',
-                      'additional_address_details']
+    address_fields = ADDRESS_FIELDS
     obj = aq_base(obj)
     for field in address_fields:
         value = getattr(obj, field, '') or ''
