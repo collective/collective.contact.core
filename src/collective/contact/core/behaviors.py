@@ -79,7 +79,8 @@ class IGlobalPositioning(model.Schema):
 alsoProvides(IGlobalPositioning, IFormFieldProvider)
 
 
-ADDRESS_FIELDS = ('number',
+ADDRESS_FIELDS = (
+                'number',
                 'street',
                 'additional_address_details',
                 'zip_code',
@@ -88,6 +89,14 @@ ADDRESS_FIELDS = ('number',
                 'country',
                 )
 
+CONTACT_DETAILS_FIELDS = (
+                'phone',
+                'cell_phone',
+                'fax',
+                'email',
+                'im_handle',
+                'website',
+                )
 
 class IContactDetails(model.Schema):
     """Contact details behavior"""
@@ -95,13 +104,7 @@ class IContactDetails(model.Schema):
     fieldset(
         'contact_details',
         label=_(u'Contact details'),
-        fields=('phone',
-                'cell_phone',
-                'fax',
-                'email',
-                'im_handle',
-                'website',
-                )
+        fields=CONTACT_DETAILS_FIELDS
         )
     fieldset(
         'address',

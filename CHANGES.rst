@@ -4,6 +4,12 @@ Changelog
 1.3 (unreleased)
 ----------------
 
+- API: added a nonfallbackcontactdetails view that displays only direct contact details.
+  Useful when you want to display contact details of a contact and contact details
+  of objects it is related to on the same page: it avoids double displays.
+  Apply it on held positions view.
+  [thomasdesvenain]
+
 - UI: If a contact field is dependent to a position or an organization,
   we update 'add new' link of the contact field
   so that the 'position' or 'organization' field is pre-selected in the overlay.

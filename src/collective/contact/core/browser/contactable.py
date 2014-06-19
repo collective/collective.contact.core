@@ -15,16 +15,18 @@ from collective.contact.core.browser.address import get_address
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.interfaces import IContactable
 from collective.contact.widget.interfaces import IContactContent
+from collective.contact.core.behaviors import CONTACT_DETAILS_FIELDS
 
 
 grok.templatedir(TEMPLATES_DIR)
 
 
 class ContactDetailsContactable(grok.Adapter):
+    """Common adapter class for objects that just implement the IContactDetails behavior"""
     grok.provides(IContactable)
     grok.context(Interface)
 
-    def get_contact_details(self, keys=()):
+    def get_contact_details(self, keys=(), fallback=True):
         if not IContactDetails.providedBy(self.context):
             raise TypeError("Your contactable content must provide IContactDetails "
                             "if it doesn't have a more specific contactable adapter")
@@ -33,7 +35,7 @@ class ContactDetailsContactable(grok.Adapter):
         if keys:
             contact_details_fields = [k for k in keys if k != 'address']
         else:
-            contact_details_fields = ['email', 'phone', 'cell_phone', 'fax', 'website', 'im_handle']
+            contact_details_fields = CONTACT_DETAILS_FIELDS
 
         context = aq_base(self.context)
         for field in contact_details_fields:
@@ -65,8 +67,16 @@ class ContactDetails(grok.View):
         return template(self, self.contact_details['address'])
 
 
+class NonFallbackContactDetails(ContactDetails):
+    grok.name('nonfallbackcontactdetails')
+
+    def update(self):
+        contactable = IContactable(self.context)
+        self.contact_details = contactable.get_contact_details(fallback=False)
+
+
 class Contactable(grok.Adapter):
-    """Base adapter class for objects that have the IContactDetails behavior fields"""
+    """Base adapter class for contact content types with fallback system"""
     grok.provides(IContactable)
     grok.context(IContactContent)
     grok.baseclass()
@@ -110,14 +120,18 @@ class Contactable(grok.Adapter):
 
         return {}
 
-    def get_contact_details(self, keys=()):
+    def get_contact_details(self, keys=(), fallback=True):
         contact_details = {}
         if keys:
             contact_details_fields = [k for k in keys if k != 'address']
         else:
-            contact_details_fields = ['email', 'phone', 'cell_phone', 'fax', 'website', 'im_handle']
+            contact_details_fields = CONTACT_DETAILS_FIELDS
 
-        contactables = self._get_contactables()
+        if fallback:
+            contactables = self._get_contactables()
+        else:
+            contactables = [self.context]
+
         for field in contact_details_fields:
             # search the object that carries the field
             for obj in contactables:
