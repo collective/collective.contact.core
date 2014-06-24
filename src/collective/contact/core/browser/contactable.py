@@ -67,8 +67,8 @@ class ContactDetails(grok.View):
         return template(self, self.contact_details['address'])
 
 
-class NonFallbackContactDetails(ContactDetails):
-    grok.name('nonfallbackcontactdetails')
+class NoFallbackContactDetails(ContactDetails):
+    grok.name('nofallbackcontactdetails')
 
     def update(self):
         contactable = IContactable(self.context)

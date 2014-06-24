@@ -48,7 +48,7 @@
                 <span tal:replace="held_position/end_date" />
               </div>
 
-              <div tal:replace="structure held_position/object/@@nonfallbackcontactdetails"></div>
+              <div tal:replace="structure held_position/object/@@nofallbackcontactdetails"></div>
 
               <div class="organization vcard" tal:define="organization nocall:held_position/organization">
                   <div class="logo" class="field" tal:condition="organization/logo">

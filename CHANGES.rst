@@ -4,6 +4,9 @@ Changelog
 1.3 (unreleased)
 ----------------
 
+- Avoid the contact information of a person be displayed two times
+  when it fall backs from organization or function.
+
 - API: added a nonfallbackcontactdetails view that displays only direct contact details.
   Useful when you want to display contact details of a contact and contact details
   of objects it is related to on the same page: it avoids double displays.
