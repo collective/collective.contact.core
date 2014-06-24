@@ -157,21 +157,23 @@ $(document).ready(function() {
     var add_organization_url, addneworga, add_text;
 
     addneworga = o.find('#oform-widgets-organization-autocomplete .addnew');
-    if (!addneworga.data('pbo').original_src) {
-        addneworga.data('pbo').original_src = addneworga.data('pbo').src;
-        addneworga.data('pbo').original_text = addneworga.text();
-    }
-    if (orga.token == '--NOVALUE--') {
-      o.find(position_fields).hide();
-      add_organization_url = addneworga.data('pbo').original_src;
-      add_text = addneworga.data('pbo').original_text;
-    } else {
-      // update add new orga link to add sub orga
-      add_organization_url = portal_url + orga.path + '/++add++organization';
-      add_text = addneworga.data('pbo').original_text + ' dans ' + orga.title;
-    }
-    addneworga.data('pbo').src = add_organization_url;
-    addneworga.text(add_text);
+    addneworga.each(function(){
+        if (!addneworga.data('pbo').original_src) {
+            addneworga.data('pbo').original_src = addneworga.data('pbo').src;
+            addneworga.data('pbo').original_text = addneworga.text();
+        }
+        if (orga.token == '--NOVALUE--') {
+          o.find(position_fields).hide();
+          add_organization_url = addneworga.data('pbo').original_src;
+          add_text = addneworga.data('pbo').original_text;
+        } else {
+          // update add new orga link to add sub orga
+          add_organization_url = portal_url + orga.path + '/++add++organization';
+          add_text = addneworga.data('pbo').original_text + ' dans ' + orga.title;
+        }
+        addneworga.data('pbo').src = add_organization_url;
+        addneworga.text(add_text);
+    })
 
     // update position autocomplete field
     o.find('#formfield-oform-widgets-position > .fieldErrorBox').text('Recherchez ou ajoutez une fonction dans "' + orga.title + '".');
@@ -180,7 +182,9 @@ $(document).ready(function() {
 
     // update add new position url
     var add_position_url = portal_url + orga.path + '/++add++position';
-    o.find('#oform-widgets-position-autocomplete .addnew').data('pbo').src = add_position_url;
+    o.find('#oform-widgets-position-autocomplete .addnew').each(function(){
+        jQuery(this).data('pbo').src = add_position_url;
+    })
 
     // show position and held position fields if orga and person are selected
     if ((!o.find('#formfield-oform-widgets-person').length || o.find('input[name="oform.widgets.person"]').length >= 1) &&
