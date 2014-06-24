@@ -4,6 +4,9 @@ Changelog
 1.3 (unreleased)
 ----------------
 
+- Simple validator for phone number.
+  [thomasdesvenain]
+
 - Avoid the contact information of a person be displayed two times
   when it fall backs from organization or function.
 

@@ -1,3 +1,5 @@
+import re
+
 from zope.interface import alsoProvides
 from zope.interface import Interface
 from zope import schema
@@ -35,6 +37,20 @@ def validateEmail(value):
         checkEmailAddress(value)
     except EmailAddressInvalid:
         raise InvalidEmailAddress(value)
+    return True
+
+
+class InvalidPhone(schema.ValidationError):
+    """Exception for invalid address"""
+    __doc__ = _(u"Invalid phone")
+
+
+_PHONE_RE = re.compile(r'[+]?[0-9 \(\)]*')
+
+def validatePhone(value):
+    """Simple email validator"""
+    if not _PHONE_RE.match(value):
+        raise InvalidPhone(value)
     return True
 
 
@@ -123,6 +139,7 @@ class IContactDetails(model.Schema):
     phone = schema.TextLine(
         title=_(u"Phone"),
         required=False,
+        constraint=validatePhone,
         )
 
     cell_phone = schema.TextLine(
