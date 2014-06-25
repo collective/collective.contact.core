@@ -4,6 +4,9 @@ Changelog
 1.3 (unreleased)
 ----------------
 
+- Open external web site in a new window.
+  [vincentfretin]
+
 - Simple validator for phone number.
   [thomasdesvenain]
 

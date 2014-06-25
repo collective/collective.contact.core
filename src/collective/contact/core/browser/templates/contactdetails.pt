@@ -44,7 +44,7 @@
 
     <p id="website" class="field" tal:condition="view/contact_details/website">
         <label><tal:block i18n:translate="">Website</tal:block>:</label>
-        <a class="url"
+        <a class="url" target="_new"
            tal:content="view/contact_details/website"
            tal:attributes="href view/contact_details/website" />
     </p>
