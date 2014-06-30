@@ -45,7 +45,7 @@ class InvalidPhone(schema.ValidationError):
     __doc__ = _(u"Invalid phone")
 
 
-_PHONE_RE = re.compile(r'[+]?[0-9 \(\)]*')
+_PHONE_RE = re.compile(r'[+]?[0-9 \(\)]*$')
 
 def validatePhone(value):
     """Simple email validator"""
