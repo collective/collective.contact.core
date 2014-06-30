@@ -78,7 +78,7 @@ class Genders(grok.GlobalUtility):
 
     def __call__(self, context):
         terms = []
-        genders = {'M': _("Masculine"), 'F': _("Feminine")}
+        genders = {'M': _("Male"), 'F': _("Female")}
         for (token, value) in genders.iteritems():
             term = SimpleVocabulary.createTerm(token, token, value)
             terms.append(term)

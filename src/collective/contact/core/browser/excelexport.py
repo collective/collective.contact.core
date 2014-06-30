@@ -1,5 +1,6 @@
 from zope.component import adapts
 from zope.component import getMultiAdapter
+from zope.component.interfaces import ComponentLookupError
 from zope.interface import Interface
 from zope.interface import implements
 
@@ -49,11 +50,25 @@ if HAS_EXCELEXPORT:
         def get_exportables(self):
             position_fields = [f[0] for f in get_ordered_fields(self.fti)]
             person_fti = api.portal.get_tool('portal_types').person
-            person_fields = [f for n, f in get_ordered_fields(person_fti)
+            person_fields = [(n, f) for n, f in get_ordered_fields(person_fti)
                              if n not in position_fields]
-            exportables = [getMultiAdapter((field, self.context, self.request),
-                                            interface=IExportable)
-                           for field in person_fields]
+
+            exportables = []
+            for field_name, field in person_fields:
+                try:
+                    # check if there is a specific adapter for the field name
+                    exportable = getMultiAdapter(
+                                        (field, self.context, self.request),
+                                        interface=IExportable,
+                                        name=field_name)
+                except ComponentLookupError:
+                    # get the generic adapter for the field
+                    exportable = getMultiAdapter(
+                                        (field, self.context, self.request),
+                                        interface=IExportable)
+
+                exportables.append(exportable)
+
             return exportables
 
 

@@ -44,6 +44,8 @@ class IPerson(model.Schema, IContactContent):
     form.widget(gender=RadioFieldWidget)
     person_title = schema.TextLine(
         title=_("Person title"),
+        description=_('help_person_title',
+                      u"Doctor, Mrs..."),
         required=False,
         )
     photo = NamedImage(
