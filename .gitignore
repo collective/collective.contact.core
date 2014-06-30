@@ -14,3 +14,8 @@ src/*
 var/
 buildout-cache/
 htmlcov
+.coverage
+*.html
+*.log
+output.xml
+*.swp
