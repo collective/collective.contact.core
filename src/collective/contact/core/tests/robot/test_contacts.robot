@@ -51,6 +51,24 @@ Can create new contact from organization
     Click button  Add
 
 
+Can create new person from organization
+    Log in as site owner
+    Go to    ${PLONE_URL}/mydirectory/armeedeterre/corpsa/divisionalpha
+    Click link    css=.addnewcontactfromorganization
+    Wait For Condition    return $('.overlay h1').text() === "Create Contact"
+    Input text    oform-widgets-person-widgets-query    Chuck Norris
+    Element should become visible    css=#formfield-oform-widgets-person .addnew-block
+    Click link    Create Person
+    Wait Until Page Contains    Add Person
+    Textfield Value Should Be    form-widgets-lastname    Norris
+    Textfield Value Should Be    form-widgets-firstname    Chuck
+    Click element    form-widgets-gender-0
+    Click button    Save
+    Page should contain    Chuck Norris
+    Click button    Add
+    Element should contain    other-contacts    Chuck Norris
+
+
 Can create new contact from position
     Log in as site owner
     Go to  ${PLONE_URL}/mydirectory/armeedeterre/corpsa/divisionalpha/regimenth/brigadelh/sergent_lh
