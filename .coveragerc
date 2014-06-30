@@ -1,10 +1,6 @@
 [report]
+include =
+    src/collective/*
+    src/collective.contact.widget/*
 omit =
-    /home/*/.buildout/eggs/*
-    /usr/*
-    bin/test
-    buildout-cache/eggs/*
-    eggs/*
-    parts/*
-    ../cache/*
-
+    */test*

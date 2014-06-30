@@ -13,6 +13,10 @@ install:
 - bash -c "while [ ! -f CONNECTED ]; do sleep 2; done"
 script:
 - bin/test
+- bin/createcoverage
+after_success:
+- pip install coveralls
+- coveralls
 after_script:
 - kill $JAVA_PID
 notifications:
