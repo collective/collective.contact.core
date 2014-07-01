@@ -87,7 +87,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
 
                     action = {'url': url, 'label': label,
                               'klass': 'addnew',
-                              'formselector' : '#oform',
+                              'formselector': '#oform',
                               'closeselector': '[name="oform.buttons.cancel"]'}
                     actions.append(action)
                     close_on_click = False
@@ -113,7 +113,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
                 label = _(u"Create ${name}", mapping={'name': type_name})
                 action = {'url': url, 'label': label,
                           'klass': 'addnew',
-                          'formselector' : '#oform',
+                          'formselector': '#oform',
                           'closeselector': '[name="oform.buttons.cancel"]'}
                 actions.append(action)
 
@@ -123,6 +123,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
 return '<img src="' + portal_url + '/' + row[2] + '_icon.png'
  +'" /> ' + row[1] }"""
                 }
+
 
 class MasterSelectAddContactProvider(BrowserView):
     implements(IContentProvider)

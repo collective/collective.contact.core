@@ -30,13 +30,14 @@ def isNotTestDataProfile(context):
 def postInstall(context):
     """Called as at the end of the setup process. """
     # the right place for your custom code
-    if isNotCollectiveContactContentProfile(context): return
+    if isNotCollectiveContactContentProfile(context):
+        return
     # we CAN NOT reinstall the product using portal_quickinstaller because
     # it removes manualy added fields for dexterity types
     import traceback
     for line in traceback.format_stack():
         if 'QuickInstallerTool.py' in line and 'reinstallProducts' in line:
-            raise Exception, 'You can not reinstall this product, use portal_setup to re-apply the relevant profile !'
+            raise Exception('You can not reinstall this product, use portal_setup to re-apply the relevant profile !')
     # we need to remove the default model_source added to our portal_types
     # XXX to be done
 
@@ -223,6 +224,7 @@ def create_test_contact_data(portal):
 
 def createTestData(context):
     """Create test data for collective.contact.core"""
-    if isNotTestDataProfile(context): return
+    if isNotTestDataProfile(context):
+        return
     portal = context.getSite()
     create_test_contact_data(portal)

@@ -106,8 +106,8 @@ class Contactable(grok.Adapter):
         related_items = [self.context, self.held_position, self.person, self.position] + list(reversed(self.organizations))
         for related_item in related_items:
             if related_item is not None \
-              and IContactDetails.providedBy(related_item) \
-              and related_item not in contactables:
+               and IContactDetails.providedBy(related_item) \
+               and related_item not in contactables:
                 contactables.append(related_item)
 
         return contactables

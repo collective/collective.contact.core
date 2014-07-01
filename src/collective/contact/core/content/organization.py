@@ -40,7 +40,6 @@ class IOrganization(model.Schema, IContactContent):
         required=False,
         )
 
-
     def get_organizations_chain(self):
         """Returns the list of organizations and sub-organizations in this organization
         e.g. for HR service in Division Bar in Organization Foo :

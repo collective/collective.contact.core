@@ -267,7 +267,6 @@ class TestPersonView(TestView):
         self.assertEqual(address['country'], u'France')
         self.assertEqual(address['additional_address_details'], u'bâtiment D')
 
-
     def test_person_held_positions_view(self):
         view = self.degaulle.restrictedTraverse("@@heldpositions")
         view.update()

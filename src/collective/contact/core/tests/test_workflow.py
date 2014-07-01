@@ -9,9 +9,9 @@ from collective.contact.core.testing import INTEGRATION
 
 
 USERDEFS = [
-        {'user': 'manager', 'roles': ('Manager', 'Member', ), 'groups': ()},
-        {'user': 'contributor', 'roles': ('Contributor', 'Member' ), 'groups': ()},
-        {'user': 'member', 'roles': ('Member', ), 'groups': ()},
+        {'user': 'manager', 'roles': ('Manager', 'Member',), 'groups': ()},
+        {'user': 'contributor', 'roles': ('Contributor', 'Member',), 'groups': ()},
+        {'user': 'member', 'roles': ('Member',), 'groups': ()},
         ]
 
 

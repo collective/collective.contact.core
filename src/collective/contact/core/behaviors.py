@@ -47,6 +47,7 @@ class InvalidPhone(schema.ValidationError):
 
 _PHONE_RE = re.compile(r'[+]?[0-9 \(\)]*$')
 
+
 def validatePhone(value):
     """Simple email validator"""
     if not _PHONE_RE.match(value):
@@ -113,6 +114,7 @@ CONTACT_DETAILS_FIELDS = (
                 'im_handle',
                 'website',
                 )
+
 
 class IContactDetails(model.Schema):
     """Contact details behavior"""
@@ -299,7 +301,6 @@ DefaultUseParentAddress = ComputedWidgetAttribute(
 DefaultParentAddress = ComputedWidgetAttribute(
     get_parent_address,
     field=IContactDetails['parent_address'], view=Interface)
-
 
 
 def DateFieldWidget(field, request):

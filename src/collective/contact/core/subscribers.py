@@ -15,6 +15,7 @@ try:
     from plone.app.referenceablebehavior.referenceable import IReferenceable
 except ImportError:
     from zope.interface import Interface
+
     class IReferenceable(Interface):
         pass
 

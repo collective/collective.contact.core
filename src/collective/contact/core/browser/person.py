@@ -18,8 +18,8 @@ class Person(BaseView):
 
     def update(self):
         super(Person, self).update()
-        #Do not show person contact details
-        #if they are the same as the main held position
+        # Do not show person contact details
+        # if they are the same as the main held position
         contactable_held_position = IContactable(self.context).held_position
         if IContactDetails.providedBy(contactable_held_position) and not IContactDetails.providedBy(self.context):
             self.show_contact_details = False
@@ -54,10 +54,10 @@ class HeldPositions(grok.View):
             else:
                 held_position['end_date'] = None
 
-            #held_position['phone'] = obj.phone
-            #held_position['email'] = obj.email
+            # held_position['phone'] = obj.phone
+            # held_position['email'] = obj.email
             held_position['object'] = obj
-            held_position['organization'] =  obj.get_organization().get_root_organization()
+            held_position['organization'] = obj.get_organization().get_root_organization()
             held_position['can_edit'] = sm.checkPermission('Modify portal content', obj)
             held_position['can_delete'] = sm.checkPermission('Delete objects', obj)
             held_positions.append(held_position)

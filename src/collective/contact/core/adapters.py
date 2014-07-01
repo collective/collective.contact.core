@@ -136,8 +136,8 @@ class HeldPositionVCard(grok.Adapter, ContactableVCard):
                                         encoding='utf8') for org in organizations]
 
         # TODO ?
-        #vcard.add('photo')
-        #vcard.photo.value = person.photo
+        # vcard.add('photo')
+        # vcard.photo.value = person.photo
 
 #        if person.latitude is not None and \
 #           person.longitude is not None:
@@ -173,7 +173,8 @@ class OrganizationVCard(grok.Adapter, ContactableVCard):
 def sort_closed_positions(position1, position2):
     if position1.end_date == position2.end_date:
         return 0
-    elif not position1.end_date: # position without end date is greater
+    elif not position1.end_date:
+        # position without end date is greater
         return 1
     elif not position2.end_date:
         return -1

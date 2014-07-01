@@ -35,18 +35,18 @@ class IHeldPosition(model.Schema, IContactContent):
                             description=_("Additional label with information that does not appear on position label"),
                             required=False)
     start_date = schema.Date(
-      title=_("Start date"),
-      required=False,
+        title=_("Start date"),
+        required=False,
     )
     end_date = schema.Date(
-      title=_("End date"),
-      required=False,
+        title=_("End date"),
+        required=False,
     )
     photo = NamedImage(
         title=_("Photo"),
         required=False,
         readonly=True,
-        )
+    )
 
     def get_person():
         """Returns the person who holds the position

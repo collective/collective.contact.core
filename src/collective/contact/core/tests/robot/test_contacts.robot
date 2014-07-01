@@ -56,6 +56,7 @@ Can create new person from organization
     Go to    ${PLONE_URL}/mydirectory/armeedeterre/corpsa/divisionalpha
     Click link    css=.addnewcontactfromorganization
     Wait For Condition    return $('.overlay h1').text() === "Create Contact"
+    Element should not be visible    css=#formfield-oform-widgets-person .addnew-block
     Input text    oform-widgets-person-widgets-query    Chuck Norris
     Element should become visible    css=#formfield-oform-widgets-person .addnew-block
     Click link    Create Person
@@ -66,7 +67,8 @@ Can create new person from organization
     Click button    Save
     Page should contain    Chuck Norris
     Click button    Add
-    Element should contain    other-contacts    Chuck Norris
+    Wait Until Page Contains Element    other-contacts 
+    Element Should Contain    other-contacts    Chuck Norris
 
 
 Can create new contact from position

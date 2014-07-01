@@ -70,16 +70,16 @@ class TestAdapters(unittest.TestCase, BaseTest):
         api.content.create(container=self.directory, type='organization', id='france',
                            )
         api.content.create(container=degaulle, type='held_position', id='president',
-                           start_date=datetime.date(1959,1,8),
+                           start_date=datetime.date(1959, 1, 8),
                            position=RelationValue(intids.getId(self.directory.france)))
         api.content.create(container=degaulle, type='held_position', id='lieutenant-colonel',
                            position=RelationValue(intids.getId(self.directory.armeedeterre)),
-                           end_date=datetime.date(1940,6,1),
-                           start_date=datetime.date(1933,12,25))
+                           end_date=datetime.date(1940, 6, 1),
+                           start_date=datetime.date(1933, 12, 25))
         api.content.create(container=degaulle, type='held_position', id='commandant',
                            position=RelationValue(intids.getId(self.directory.armeedeterre)),
-                           start_date=datetime.date(1927,10,9),
-                           end_date=datetime.date(1933,12,25))
+                           start_date=datetime.date(1927, 10, 9),
+                           end_date=datetime.date(1933, 12, 25))
         del self.degaulle.gadt.end_date
         self.degaulle.moveObjectsToTop(['president'])
 
@@ -112,7 +112,6 @@ class TestAdapters(unittest.TestCase, BaseTest):
                                               'number': u'6bis',
                                               'street': u'rue Jean Moulin',
                                               'zip_code': u'52330'})
-
 
         details = IContactable(self.degaulle).get_contact_details(keys=('email',))
         self.assertEqual(details, {'email': 'charles.de.gaulle@armees.fr'})

@@ -84,7 +84,6 @@ class Position(Container):
             return u"%s, %s (%s)" % (self.title, organization.title,
                                      root_organization.title)
 
-
     def get_held_positions(self):
         """Returns the held position
            that have been linked to this position

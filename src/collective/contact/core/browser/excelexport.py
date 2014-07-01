@@ -41,7 +41,6 @@ if HAS_EXCELEXPORT:
             else:
                 return rel_obj.Title()
 
-
     class HeldPositionPersonInfoExportableFactory(BaseExportableFactory):
         adapts(IDexterityFTI, Interface, Interface)
         portal_types = ('held_position',)
@@ -70,7 +69,6 @@ if HAS_EXCELEXPORT:
                 exportables.append(exportable)
 
             return exportables
-
 
     class ContactValueGetter(object):
         adapts(IContactContent)

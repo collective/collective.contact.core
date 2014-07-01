@@ -77,7 +77,7 @@ class TestPerson(TestContentTypes):
     def test_copy_paste(self):
         cb = self.mydirectory.manage_copyObjects(['pepper'])
         self.mydirectory.manage_pasteObjects(cb)
-        self.assertIn('copy_of_pepper',  self.mydirectory.keys())
+        self.assertIn('copy_of_pepper', self.mydirectory.keys())
 
 
 class TestOrganization(TestContentTypes):
@@ -156,7 +156,7 @@ class TestOrganization(TestContentTypes):
     def test_copy_paste(self):
         cb = self.mydirectory.manage_copyObjects(['armeedeterre'])
         self.mydirectory.manage_pasteObjects(cb)
-        self.assertIn('copy_of_armeedeterre',  self.mydirectory.keys())
+        self.assertIn('copy_of_armeedeterre', self.mydirectory.keys())
 
 
 class TestPosition(TestContentTypes):
@@ -178,7 +178,7 @@ class TestPosition(TestContentTypes):
     def test_copy_paste(self):
         cb = self.armeedeterre.manage_copyObjects(['general_adt'])
         self.armeedeterre.manage_pasteObjects(cb)
-        self.assertIn('copy_of_general_adt',  self.armeedeterre.keys())
+        self.assertIn('copy_of_general_adt', self.armeedeterre.keys())
 
 
 class TestHeldPosition(TestContentTypes):
