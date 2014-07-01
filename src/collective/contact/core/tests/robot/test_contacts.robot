@@ -65,7 +65,7 @@ Can create new person from organization
     Textfield Value Should Be    form-widgets-firstname    Chuck
     Click element    form-widgets-gender-0
     Click button    Save
-    Page should contain    Chuck Norris
+    Wait Until Page Contains    Chuck Norris
     Click button    Add
     Wait Until Page Contains Element    other-contacts 
     Element Should Contain    other-contacts    Chuck Norris
