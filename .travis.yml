@@ -13,7 +13,7 @@ install:
 - bash -c "while [ ! -f CONNECTED ]; do sleep 2; done"
 script:
 - bin/test
-- bin/createcoverage
+- ./bin/coverage run ./bin/test -t \!robot
 after_success:
 - pip install coveralls
 - coveralls
