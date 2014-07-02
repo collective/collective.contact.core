@@ -30,3 +30,5 @@ env:
   - ROBOT_BUILD_NUMBER=travis-$TRAVIS_BUILD_NUMBER
   - ROBOT_REMOTE_URL=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com:80/wd/hub
   - ROBOT_DESIRED_CAPABILITIES=tunnel-identifier:$TRAVIS_JOB_ID
+  - secure: CzgI0VlMIlQDkJ+P8q0ULuiT2QiEwEkvMgb7Fxgd5qdFdYu5Y0+U7iWOc+ikmaCh1KJaiGRqSG4aBOQBPftJXsR8hUhIwUrbBZExfS1t4zyrIhLV7VbapOdt1/U4JgzFbWpg5+W57zC719uZEFnEei6+TEUCoSWxu0zW2eQj+rU=
+  - secure: go7RU9Q2nA488fXKomg01bEncbW6qH3LL/qjQkSw6ZcQ9vDqjdh0SGSWYi/fOszSiq5GuLcmMLWr7gnY7tiZKALCCcHH+QR1pPGhOt98r9f0n3So+dydDKS2Ht3v/depbfyyyEqmcI2zrM+bmyC4lDJP5OGQUdrOX+77YlxkLBw=
