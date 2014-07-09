@@ -4,6 +4,10 @@ Changelog
 1.3 (unreleased)
 ----------------
 
+- If 'use parent address' has been selected,
+  ensure content address fields are cleared.
+  [thomasdesvenain]
+
 - Open external web site in a new window.
   [vincentfretin]
 
