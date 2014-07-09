@@ -2,6 +2,8 @@
 import unittest2 as unittest
 
 from zope.component import getUtility
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
 
 from plone.behavior.interfaces import IBehavior
 from plone.autoform.interfaces import IFormFieldProvider
@@ -53,8 +55,17 @@ class TestBehaviors(unittest.TestCase, BaseTest):
             self.assertTrue(hasattr(item, attr))
         item.phone = '0655443322'
         item.email = 'toto@example.com'
+        item.zip_code = '59650'
         self.assertEqual(item.phone, '0655443322')
         self.assertEqual(item.email, 'toto@example.com')
+        self.assertEqual(item.zip_code, '59650')
+
+        # test clear values when use_parent_address is selected
+        item.use_parent_address = True
+        notify(ObjectModifiedEvent(item))
+        self.assertEqual(item.zip_code, None)
+        self.assertEqual(item.phone, '0655443322')
+
 
     def test_global_positioning_fields(self):
         item = self.testitem

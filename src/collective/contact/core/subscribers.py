@@ -7,10 +7,12 @@ from zope.lifecycleevent.interfaces import IObjectAddedEvent,\
     IObjectModifiedEvent
 from zope.container.contained import ContainerModifiedEvent
 from zope.intid.interfaces import IIntIds
+from zope.schema import getFields
 
 from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
 from plone.app.linkintegrity.handlers import referencedObjectRemoved as \
         baseReferencedObjectRemoved
+from Products.CMFPlone.utils import base_hasattr
 try:
     from plone.app.referenceablebehavior.referenceable import IReferenceable
 except ImportError:
@@ -20,6 +22,7 @@ except ImportError:
         pass
 
 from collective.contact.widget.interfaces import IContactContent
+from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.content.held_position import IHeldPosition
 from collective.contact.core.content.position import IPosition
 from collective.contact.core.content.person import IPerson
@@ -106,3 +109,18 @@ def referenceRemoved(obj, event, toInterface=IContactContent):
 def referencedObjectRemoved(obj, event):
     if not IReferenceable.providedBy(obj):
         baseReferencedObjectRemoved(obj, event)
+
+
+@grok.subscribe(IContactDetails, IObjectModifiedEvent)
+def clear_fields_use_parent_address(obj, event):
+    """If 'use parent address' has been selected,
+    ensure content address fields are cleared
+    """
+    if obj.use_parent_address:
+        upa_field = getFields(IContactDetails)['use_parent_address']
+        slave_ids = [f['name'] for f in upa_field.slave_fields]
+        for field_name in slave_ids:
+            try:
+                delattr(obj, field_name)
+            except AttributeError:
+                pass
