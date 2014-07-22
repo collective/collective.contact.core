@@ -137,6 +137,7 @@ class MasterSelectAddContactProvider(BrowserView):
 
     def render(self):
         # If we fill organization and person, show position and held position fields
+        return ""
         return """<script type="text/javascript">
 $(document).ready(function() {
 
