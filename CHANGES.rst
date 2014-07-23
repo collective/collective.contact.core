@@ -8,14 +8,20 @@ Changelog
   ensure content address fields are cleared.
   [thomasdesvenain]
 
-- Open external web site in a new window.
-  [vincentfretin]
-
 - Simple validator for phone number.
   [thomasdesvenain]
 
-- Avoid the contact information of a person be displayed two times
+- UI: Open external web site in a new window.
+  [vincentfretin]
+
+- UI: Avoid the contact information of a person be displayed two times
   when it fall backs from organization or function.
+  [thomasdesvenain]
+
+- UI: If a contact field is dependent to a position or an organization,
+  we update 'add new' link of the contact field
+  so that the 'position' or 'organization' field is pre-selected in the overlay.
+  [thomasdesvenain]
 
 - API: added a nonfallbackcontactdetails view that displays only direct contact details.
   Useful when you want to display contact details of a contact and contact details
@@ -23,9 +29,8 @@ Changelog
   Apply it on held positions view.
   [thomasdesvenain]
 
-- UI: If a contact field is dependent to a position or an organization,
-  we update 'add new' link of the contact field
-  so that the 'position' or 'organization' field is pre-selected in the overlay.
+- Fix: Avoid failure on person
+  if for any reason person title, firstname or lastname attribute is not set.
   [thomasdesvenain]
 
 - Fix: Switch street and additional data on address view.
