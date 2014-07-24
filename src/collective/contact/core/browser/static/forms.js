@@ -68,7 +68,6 @@ contactswidget.manage_directory = function(){
 
 /* Hide use_parent_address field if address field is empty */
 contactswidget.manage_hide_use_parent_address = function(){
-    console.log($('#address'));
     if ($("#address").length === 0) {
         if($('#formfield-form-widgets-position').length === 0){
             /* except on held position form because, there,
