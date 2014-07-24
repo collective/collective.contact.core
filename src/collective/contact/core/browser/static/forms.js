@@ -68,9 +68,15 @@ contactswidget.manage_directory = function(){
 
 /* Hide use_parent_address field if address field is empty */
 contactswidget.manage_hide_use_parent_address = function(){
-	if ($("#address").length == 0) {
-		$("#formfield-form-widgets-IContactDetails-use_parent_address").hide();
-	}
+    console.log($('#address'));
+    if ($("#address").length == 0) {
+        if($('#formfield-form-widgets-position').length==0){
+            /* except on held position form because, there,
+             * actual parent address can change during edition
+             */
+            $("#formfield-form-widgets-IContactDetails-use_parent_address").hide();
+        }
+    }
 }
 
 contactswidget.get_selected_contact = function(form, field_id) {
@@ -137,6 +143,11 @@ $(document).ready(function(){
                          contactswidget.update_person_title);
     contactswidget.manage_directory();
     contactswidget.manage_hide_use_parent_address();
+
+    jQuery(document).bind('loadInsideOverlay',
+            function(e, pbajax, responseText, errorText, api){
+        contactswidget.manage_hide_use_parent_address();
+    });
 
     $('.contactoverlay').prepOverlay({
       subtype: 'ajax',

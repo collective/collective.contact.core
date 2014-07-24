@@ -33,6 +33,11 @@ Changelog
   Apply it on held positions view.
   [thomasdesvenain]
 
+- Fix: Hide use parent address:
+     - works in overlays,
+     - always display use parent address on held position if it implements contact details.
+  [thomasdesvenain]
+
 - Fix: Avoid failure on person
   if for any reason person title, firstname or lastname attribute is not set.
   [thomasdesvenain]
