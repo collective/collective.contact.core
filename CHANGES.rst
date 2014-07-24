@@ -4,6 +4,10 @@ Changelog
 1.3 (unreleased)
 ----------------
 
+- If held position implements IContactDetails behavior,
+  then show contact details fields on add contact form.
+  [thomasdesvenain]
+
 - If 'use parent address' has been selected,
   ensure content address fields are cleared.
   [thomasdesvenain]

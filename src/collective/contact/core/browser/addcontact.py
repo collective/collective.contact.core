@@ -7,7 +7,8 @@ from zope.publisher.browser import BrowserView
 
 from z3c.form import field, form, button
 from z3c.form.contentprovider import ContentProviders
-from z3c.form.interfaces import IFieldsAndContentProvidersForm, HIDDEN_MODE
+from z3c.form.interfaces import IFieldsAndContentProvidersForm, HIDDEN_MODE,\
+    DISPLAY_MODE
 
 from Products.CMFCore.utils import getToolByName
 from Products.statusmessages.interfaces import IStatusMessage
@@ -27,6 +28,7 @@ from collective.contact.widget.interfaces import IContactWidgetSettings
 
 from collective.contact.core import _
 from collective.contact.core.content.person import IPerson
+from collective.contact.core.behaviors import IContactDetails
 
 
 class ICustomSettings(Interface):
@@ -264,6 +266,10 @@ class AddContact(DefaultAddForm, form.AddForm):
         # TODO: there is no hidden template for autocomplete widget,
         # we hide it in javascript for now.
         self.fields[self._schema_name + '.position'].mode = HIDDEN_MODE
+        hp_fti = api.portal.get_tool('portal_types').held_position
+        if IContactDetails.__identifier__ in hp_fti.behaviors:
+            self.fields += field.Fields(IContactDetails)
+
 
     def updateWidgets(self):
         super(AddContact, self).updateWidgets()
@@ -274,6 +280,9 @@ class AddContact(DefaultAddForm, form.AddForm):
                 # We need to revert this after updateActions
                 # because this change impact the held position form
                 widget.field.required = False
+
+        if 'parent_address' in self.widgets:
+            self.widgets['parent_address'].mode = DISPLAY_MODE
 
     def update(self):
         super(AddContact, self).update()
