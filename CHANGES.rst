@@ -27,6 +27,10 @@ Changelog
   so that the 'position' or 'organization' field is pre-selected in the overlay.
   [thomasdesvenain]
 
+- UI: use classes instead of ids on address because it can be used
+  several times on the same page.
+  [thomasdesvenain]
+
 - API: added a nonfallbackcontactdetails view that displays only direct contact details.
   Useful when you want to display contact details of a contact and contact details
   of objects it is related to on the same page: it avoids double displays.
