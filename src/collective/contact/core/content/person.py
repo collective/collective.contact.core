@@ -108,7 +108,7 @@ class Person(Container):
             record = registry.forInterface(IContactCoreParameters, None)
             if record is not None:
                 if not record.person_title_in_title:
-                    displayed_attrs = ('person_title', 'firstname', 'lastname')
+                    displayed_attrs = ('firstname', 'lastname')
 
         displayed = [getattr(self, attr, None) for attr in displayed_attrs]
         return u' '.join([x for x in displayed if x])
