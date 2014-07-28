@@ -68,7 +68,7 @@ contactswidget.manage_directory = function(){
 
 /* Hide use_parent_address field if address field is empty */
 contactswidget.manage_hide_use_parent_address = function(){
-    if ($("#address").length === 0) {
+    if ($("#form-widgets-IContactDetails-parent_address").text().trim().length === 0) {
         if($('#formfield-form-widgets-position').length === 0){
             /* except on held position form because, there,
              * actual parent address can change during edition
