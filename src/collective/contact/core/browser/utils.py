@@ -12,6 +12,9 @@ from plone.app.dexterity.behaviors.metadata import IBasic
 from collective.contact.core.behaviors import IContactDetails
 
 
+IGNORED_BEHAVIORS = [IContactDetails, IBasic]
+
+
 def date_to_DateTime(date):
     """Convert datetime.date to DateTime.DateTime format"""
     return DateTime(date.year, date.month, date.day).Date()
@@ -31,7 +34,7 @@ def get_ttw_fields(obj):
 
     for behavior_id in fti.behaviors:
         behavior = getUtility(IBehavior, behavior_id).interface
-        if behavior in (IContactDetails, IBasic) or not IFormFieldProvider.providedBy(behavior):
+        if behavior in IGNORED_BEHAVIORS or not IFormFieldProvider.providedBy(behavior):
             continue
 
         try:
