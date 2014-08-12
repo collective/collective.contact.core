@@ -16,6 +16,7 @@ from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.interfaces import IContactable
 from collective.contact.widget.interfaces import IContactContent
 from collective.contact.core.behaviors import CONTACT_DETAILS_FIELDS
+from collective.contact.core.browser.utils import get_valid_url
 
 
 grok.templatedir(TEMPLATES_DIR)
@@ -45,6 +46,10 @@ class ContactDetailsContactable(grok.Adapter):
 
         if (not keys) or ('address' in keys):
             contact_details['address'] = get_address(context)
+
+        if 'website' in contact_details:
+            contact_details['website'] = get_valid_url(
+                contact_details['website'])
 
         return contact_details
 
@@ -145,6 +150,9 @@ class Contactable(grok.Adapter):
 
         if (not keys) or ('address' in keys):
             contact_details['address'] = self._get_address(contactables)
+
+        if 'website' in contact_details:
+            contact_details['website'] = get_valid_url(contact_details['website'])
 
         return contact_details
 

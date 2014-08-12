@@ -98,6 +98,7 @@ def create_test_contact_data(portal):
               'city': u'Liverpool',
               'country': u'England',
               'use_parent_address': False,
+              'website': 'http://www.sergent-pepper.org'
               }
     mydirectory.invokeFactory('person', 'pepper', **params)
     pepper = mydirectory['pepper']

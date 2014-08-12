@@ -4,6 +4,9 @@ Changelog
 1.3 (unreleased)
 ----------------
 
+- If website doesn't start with http, add http:// at its beginning.
+  [cedricmessiant]
+
 - If held position implements IContactDetails behavior,
   then show contact details fields on add contact form.
   [thomasdesvenain]

@@ -47,3 +47,12 @@ def get_ttw_fields(obj):
             pass
 
     return new_fields
+
+
+def get_valid_url(url):
+    """Returns valid url (i.e. an url which starts with http or https)
+    """
+    if url and not url.startswith('http'):
+        return "http://{}".format(url)
+    else:
+        return url
