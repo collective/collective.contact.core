@@ -1,4 +1,5 @@
 import re
+import datetime
 
 from zope.interface import alsoProvides
 from zope.interface import Interface
@@ -306,7 +307,9 @@ DefaultParentAddress = ComputedWidgetAttribute(
 def DateFieldWidget(field, request):
     """IFieldWidget factory for DatetimeWidget."""
     widget = FieldWidget(field, DateWidget(request))
-    widget.years_range = (-200, 1)
+    currentYear = datetime.date.today().year
+    minimumYearRange = currentYear - 1900  # don't display dates before 1900
+    widget.years_range = (-minimumYearRange, 1)
     return widget
 
 
