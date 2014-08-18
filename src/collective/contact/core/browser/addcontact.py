@@ -270,7 +270,6 @@ class AddContact(DefaultAddForm, form.AddForm):
         if IContactDetails.__identifier__ in hp_fti.behaviors:
             self.fields += field.Fields(IContactDetails)
 
-
     def updateWidgets(self):
         super(AddContact, self).updateWidgets()
         for widget in self.widgets.values():
