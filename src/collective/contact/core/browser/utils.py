@@ -9,10 +9,11 @@ from plone.schemaeditor.utils import non_fieldset_fields
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.app.dexterity.behaviors.metadata import IBasic
 
+from collective.contact.core.behaviors import IBirthday
 from collective.contact.core.behaviors import IContactDetails
 
 
-IGNORED_BEHAVIORS = [IContactDetails, IBasic]
+IGNORED_BEHAVIORS = [IContactDetails, IBasic, IBirthday]
 
 
 def date_to_DateTime(date):
