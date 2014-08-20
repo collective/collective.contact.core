@@ -6,7 +6,6 @@ from zope.interface import implements
 
 from plone.dexterity.interfaces import IDexterityFTI
 from plone import api
-from collective.contact.core.interfaces import IContactable
 
 try:
     from collective.excelexport.exportables.dexterityfields import BaseFieldRenderer
@@ -20,6 +19,7 @@ except ImportError:
 
 from collective.contact.widget.interfaces import IContactChoice, IContactContent
 from collective.contact.core.content.held_position import IHeldPosition
+from collective.contact.core.interfaces import IContactable
 from collective.contact.core.behaviors import ADDRESS_FIELDS
 
 

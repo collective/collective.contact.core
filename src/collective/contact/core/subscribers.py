@@ -12,7 +12,6 @@ from zope.schema import getFields
 from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
 from plone.app.linkintegrity.handlers import referencedObjectRemoved as \
         baseReferencedObjectRemoved
-from Products.CMFPlone.utils import base_hasattr
 try:
     from plone.app.referenceablebehavior.referenceable import IReferenceable
 except ImportError:

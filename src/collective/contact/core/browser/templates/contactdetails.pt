@@ -42,11 +42,13 @@
               i18n:translate="" />
     </p>
 
-    <p id="website" class="field" tal:condition="view/contact_details/website">
+    <p id="website" class="field"
+       tal:condition="view/contact_details/website"
+       tal:define="website view/contact_details/website">
         <label><tal:block i18n:translate="">Website</tal:block>:</label>
         <a class="url" target="_new"
-           tal:content="view/contact_details/website"
-           tal:attributes="href view/contact_details/website" />
+           tal:content="website"
+           tal:attributes="href website" />
     </p>
 
     <p id="address" tal:replace="structure view/render_address" />

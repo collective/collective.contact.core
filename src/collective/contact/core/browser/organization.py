@@ -9,6 +9,7 @@ from collective.contact.core.interfaces import IContactable
 from collective.contact.core.indexers import held_position_sortable_title
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.content.organization import IOrganization
+from collective.contact.core.browser.utils import get_valid_url
 
 
 ADDNEW_OVERLAY = """
@@ -87,7 +88,7 @@ class OtherContacts(grok.View):
             contact['cell_phone'] = contactable.cell_phone
             contact['fax'] = contactable.fax
             contact['im_handle'] = contactable.im_handle
-            contact['website'] = contactable.website
+            contact['website'] = get_valid_url(contactable.website)
 
             othercontacts.append(contact)
 

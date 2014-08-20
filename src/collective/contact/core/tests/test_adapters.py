@@ -104,7 +104,7 @@ class TestAdapters(unittest.TestCase, BaseTest):
 
     def test_contact_details(self):
         details = IContactable(self.degaulle).get_contact_details()
-        self.assertEqual(details['website'], 'www.charles-de-gaulle.org')
+        self.assertEqual(details['website'], 'http://www.charles-de-gaulle.org')
         self.assertEqual(details['email'], 'charles.de.gaulle@armees.fr')
         self.assertEqual(details['address'], {'city': u'Colombey les deux \xe9glises',
                                               'country': u'France', 'region': '',
@@ -115,3 +115,6 @@ class TestAdapters(unittest.TestCase, BaseTest):
 
         details = IContactable(self.degaulle).get_contact_details(keys=('email',))
         self.assertEqual(details, {'email': 'charles.de.gaulle@armees.fr'})
+
+        details = IContactable(self.pepper).get_contact_details()
+        self.assertEqual(details['website'], 'http://www.sergent-pepper.org')

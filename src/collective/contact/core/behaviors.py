@@ -1,4 +1,5 @@
 import re
+import datetime
 
 from zope.interface import alsoProvides
 from zope.interface import Interface
@@ -167,50 +168,50 @@ class IContactDetails(model.Schema):
     use_parent_address = MasterSelectBoolField(
         title=_("Use the belonging entity address"),
         slave_fields=(
-            {'masterID': 'form-widgets-IContactDetails-use_parent_address-0',
+            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, #oform-widgets-use_parent_address-0',
              'name': 'country',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
             },
-            {'masterID': 'form-widgets-IContactDetails-use_parent_address-0',
+            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, #oform-widgets-use_parent_address-0',
              'name': 'region',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
             },
-            {'masterID': 'form-widgets-IContactDetails-use_parent_address-0',
+            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, #oform-widgets-use_parent_address-0',
              'name': 'zip_code',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
             },
-            {'masterID': 'form-widgets-IContactDetails-use_parent_address-0',
+            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, #oform-widgets-use_parent_address-0',
              'name': 'city',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
             },
-            {'masterID': 'form-widgets-IContactDetails-use_parent_address-0',
+            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, #oform-widgets-use_parent_address-0',
              'name': 'number',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
             },
-            {'masterID': 'form-widgets-IContactDetails-use_parent_address-0',
+            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, #oform-widgets-use_parent_address-0',
              'name': 'street',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
             },
-            {'masterID': 'form-widgets-IContactDetails-use_parent_address-0',
+            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, #oform-widgets-use_parent_address-0',
              'name': 'additional_address_details',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
             },
 
-            {'masterID': 'form-widgets-IContactDetails-use_parent_address-0',
+            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, #oform-widgets-use_parent_address-0',
              'name': 'parent_address',
              'action': 'hide',
              'hide_values': 0,
@@ -306,7 +307,9 @@ DefaultParentAddress = ComputedWidgetAttribute(
 def DateFieldWidget(field, request):
     """IFieldWidget factory for DatetimeWidget."""
     widget = FieldWidget(field, DateWidget(request))
-    widget.years_range = (-200, 1)
+    currentYear = datetime.date.today().year
+    minimumYearRange = currentYear - 1900  # don't display dates before 1900
+    widget.years_range = (-minimumYearRange, 1)
     return widget
 
 

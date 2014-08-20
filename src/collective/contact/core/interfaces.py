@@ -7,13 +7,13 @@ from collective.contact.core import _
 class IContactable(Interface):
     """Interface for Contactable adapter"""
 
-    def get_contact_details(keys=(), fallback=True):
+    def get_contact_details(self, keys=(), fallback=True):
         """Returns a dict containing the contact details inherited from the hierarchy
         If keys is set, we only get requested values
         If fallback is False, we don't fallback contact details on objects it is related
         """
 
-    def get_parent_address():
+    def get_parent_address(self,):
         """Returns the address of the first element in the chain with a relevant address"""
 
 

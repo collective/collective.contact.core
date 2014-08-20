@@ -10,9 +10,17 @@
              tal:define="widgets view/widgets;
                          widget python:widgets[field];"
              tal:condition="widget/value">
-            <label><tal:block tal:content="widget/label" i18n:translate="" />:</label>
-            <span tal:on-error="nothing" tal:content="structure widget/render">
-            </span>
+
+            <tal:with-label tal:condition="widget/label">
+                <label><tal:block tal:content="widget/label" i18n:translate="" />:</label>
+                <span tal:on-error="nothing" tal:content="structure widget/render">
+                </span>
+            </tal:with-label>
+
+            <tal:without-label tal:condition="not: widget/label">
+                <label><span tal:on-error="nothing" tal:replace="structure widget/render" /></label>
+            </tal:without-label>
+
         </p>
     </tal:block>
 </div>

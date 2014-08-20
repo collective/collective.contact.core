@@ -130,7 +130,7 @@ msgstr "Fax"
 
 #: ../browser/templates/contactdetails.pt:33
 msgid "Fax number"
-msgstr "Numéro de fax"
+msgstr "Numéro de fax "
 
 #: ../vocabulary.py:81
 msgid "Female"
@@ -347,7 +347,7 @@ msgstr "Utiliser l'adresse de l'entité d'appartenance"
 #: ../behaviors.py:156
 #: ../browser/templates/contactdetails.pt:46
 msgid "Website"
-msgstr "Site web"
+msgstr "Site web "
 
 #: ../behaviors.py:235
 msgid "Zip Code"

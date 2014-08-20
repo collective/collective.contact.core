@@ -48,15 +48,15 @@ class IHeldPosition(model.Schema, IContactContent):
         readonly=True,
     )
 
-    def get_person():
+    def get_person(self):
         """Returns the person who holds the position
         """
 
-    def get_position():
+    def get_position(self):
         """Returns the position (if position field is a position)
         """
 
-    def get_organization():
+    def get_organization(self):
         """Returns the first organization related to HeldPosition
         i.e. position field or parent of the position
         """

@@ -17,7 +17,8 @@ class TTWFields(grok.View):
     grok.context(Interface)
 
     def update(self):
-        self.ttw_fields = get_ttw_fields(self.context)
         contact_view = self.context.unrestrictedTraverse('view')
         contact_view.update()
         self.widgets = contact_view.widgets
+        ttw_fields = get_ttw_fields(self.context)
+        self.ttw_fields = [field for field in ttw_fields if field in self.widgets.keys()]

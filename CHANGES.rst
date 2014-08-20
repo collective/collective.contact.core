@@ -4,18 +4,35 @@ Changelog
 1.3 (unreleased)
 ----------------
 
+- If website doesn't start with http, add http:// at its beginning.
+  [cedricmessiant]
+
+- If held position implements IContactDetails behavior,
+  then show contact details fields on add contact form.
+  [thomasdesvenain]
+
 - If 'use parent address' has been selected,
   ensure content address fields are cleared.
   [thomasdesvenain]
 
-- Open external web site in a new window.
-  [vincentfretin]
-
 - Simple validator for phone number.
   [thomasdesvenain]
 
-- Avoid the contact information of a person be displayed two times
+- UI: Open external web site in a new window.
+  [vincentfretin]
+
+- UI: Avoid the contact information of a person be displayed two times
   when it fall backs from organization or function.
+  [thomasdesvenain]
+
+- UI: If a contact field is dependent to a position or an organization,
+  we update 'add new' link of the contact field
+  so that the 'position' or 'organization' field is pre-selected in the overlay.
+  [thomasdesvenain]
+
+- UI: use classes instead of ids on address because it can be used
+  several times on the same page.
+  [thomasdesvenain]
 
 - API: added a nonfallbackcontactdetails view that displays only direct contact details.
   Useful when you want to display contact details of a contact and contact details
@@ -23,9 +40,13 @@ Changelog
   Apply it on held positions view.
   [thomasdesvenain]
 
-- UI: If a contact field is dependent to a position or an organization,
-  we update 'add new' link of the contact field
-  so that the 'position' or 'organization' field is pre-selected in the overlay.
+- Fix: Hide use parent address:
+     - works in overlays,
+     - always display use parent address on held position if it implements contact details.
+  [thomasdesvenain]
+
+- Fix: Avoid failure on person
+  if for any reason person title, firstname or lastname attribute is not set.
   [thomasdesvenain]
 
 - Fix: Switch street and additional data on address view.
