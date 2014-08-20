@@ -67,7 +67,7 @@ Can create new person from organization
     Click button    Save
     Wait Until Page Contains    Chuck Norris
     Click button    Add
-    Wait Until Page Contains Element    other-contacts 
+    Wait Until Page Contains Element    other-contacts
     Element Should Contain    other-contacts    Chuck Norris
 
 
@@ -95,9 +95,9 @@ Show parent address if it exists in creation
     Add new  organization
     Click link  Address
     Checkbox Should Be Selected  form-widgets-IContactDetails-use_parent_address-0
-    Element should contain  address  rue Philibert Lucot
-    Element should contain  address  Orléans
-    Element should contain  address  France
+    Element should contain  css=.address  rue Philibert Lucot
+    Element should contain  css=.address  Orléans
+    Element should contain  css=.address  France
     Element should not be visible  formfield-form-widgets-IContactDetails-number
     Element should not be visible  formfield-form-widgets-IContactDetails-street
     Element should not be visible  formfield-form-widgets-IContactDetails-city
@@ -112,10 +112,10 @@ Show parent address if it exists in edition
     ${original_speed} =  Get Selenium speed
     Set Selenium speed  1
     Checkbox Should Be Selected  form-widgets-IContactDetails-use_parent_address-0
-    Element should contain  address  rue Philibert Lucot
+    Element should contain  css=.address  rue Philibert Lucot
     Set Selenium speed  ${original_speed}
-    Element should contain  address  Orléans
-    Element should contain  address  France
+    Element should contain  css=.address  Orléans
+    Element should contain  css=.address  France
     Element should not be visible  formfield-form-widgets-IContactDetails-number
     Element should not be visible  formfield-form-widgets-IContactDetails-street
     Element should not be visible  formfield-form-widgets-IContactDetails-city

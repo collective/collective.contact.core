@@ -1,7 +1,8 @@
-<div class="field adr" class="address"
+<div xmlns:tal="http://xml.zope.org/namespaces/tal"
+     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
      i18n:domain="collective.contact.core"
      tal:repeat="address args">
-    <div tal:condition="address">
+    <div tal:condition="address" class="field adr address">
     <label><tal:block i18n:translate="">Address</tal:block>:</label>
     <div class="street-address" class="address_line street-address">
         <span i18n:translate="" tal:replace="address/number"></span>
