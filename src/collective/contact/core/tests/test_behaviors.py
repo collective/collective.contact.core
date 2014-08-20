@@ -66,7 +66,6 @@ class TestBehaviors(unittest.TestCase, BaseTest):
         self.assertEqual(item.zip_code, None)
         self.assertEqual(item.phone, '0655443322')
 
-
     def test_global_positioning_fields(self):
         item = self.testitem
         item.latitude = 45.2
