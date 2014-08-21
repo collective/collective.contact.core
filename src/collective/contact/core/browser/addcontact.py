@@ -81,11 +81,12 @@ class ContactWidgetSettings(grok.GlobalUtility):
                         if 'position' in source.relations:
                             related_path = source.relations['position']
                             related_to = api.content.get(related_path)
-                            label = _(u"Create ${name} (${position})",
-                                      mapping={'name': type_name,
-                                               'position': related_to.Title()})
-                            url += '?oform.widgets.%s=%s' % (related_to.portal_type,
-                                               '/'.join(related_to.getPhysicalPath()))
+                            if related_to is not None:
+                                label = _(u"Create ${name} (${position})",
+                                          mapping={'name': type_name,
+                                                   'position': related_to.Title()})
+                                url += '?oform.widgets.%s=%s' % (related_to.portal_type,
+                                                   '/'.join(related_to.getPhysicalPath()))
 
                     action = {'url': url, 'label': label,
                               'klass': 'addnew',
