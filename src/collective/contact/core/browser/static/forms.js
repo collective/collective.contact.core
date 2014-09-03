@@ -66,16 +66,20 @@ contactswidget.manage_directory = function(){
 	$('input[id$="-widgets-name"]').blur(contactswidget.update_token);
 };
 
-/* Hide use_parent_address field if address field is empty */
+/* Hide use_parent_address field if parent address is empty and if
+   use_parent_address is not checked */
 contactswidget.manage_hide_use_parent_address = function(){
-    if ($("#form-widgets-IContactDetails-parent_address").text().trim().length === 0) {
-        if($('#formfield-form-widgets-position').length === 0){
-            /* except on held position form because, there,
-             * actual parent address can change during edition
-             */
-            $("#formfield-form-widgets-IContactDetails-use_parent_address").hide();
-        }
+  if ($("#form-widgets-IContactDetails-parent_address").text().trim().length === 0) {
+    if($('#form-widgets-IContactDetails-use_parent_address-0').length > 0
+      && $('#form-widgets-IContactDetails-use_parent_address-0:checked').length == 0) {
+      if($('#formfield-form-widgets-position').length === 0){
+        /* except on held position form because, there,
+         * actual parent address can change during edition
+         */
+        $("#formfield-form-widgets-IContactDetails-use_parent_address").hide();
+      }
     }
+  }
 };
 
 contactswidget.get_selected_contact = function(form, field_id) {
