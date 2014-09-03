@@ -231,7 +231,7 @@ class IAddContact(model.Schema):
     person = ContactChoice(
             title=_(u"Person"),
             description=_(u"Select the person who holds the position"),
-            required=False,
+            required=True,
             source=ContactSourceBinder(portal_type="person"))
 
     position = ContactChoice(
