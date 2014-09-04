@@ -61,6 +61,9 @@ Changelog
 - Fix: Contact might not have any aq_parent
   [ebrehault]
 
+- Hide 'Use parent address' checkbox only if it is not checked and if parent
+  address is empty
+  [ebrehault]
 
 1.2 (2014-06-16)
 ----------------
