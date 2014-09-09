@@ -122,7 +122,7 @@ Show parent address if it exists in edition
     Element should not be visible  formfield-form-widgets-IContactDetails-country
 
 
-Don't show use parent address checkbox if no parent address in creation
+Show use parent address checkbox if no parent address when creating a position
     Log in as site owner
     Go to  ${PLONE_URL}/mydirectory/armeedeterre/corpsb
     Add new  position
@@ -131,10 +131,21 @@ Don't show use parent address checkbox if no parent address in creation
     Page should contain element  formfield-form-widgets-IContactDetails-street
     Page should contain element  formfield-form-widgets-IContactDetails-city
     Page should contain element  formfield-form-widgets-IContactDetails-country
+    Element should be visible  form-widgets-IContactDetails-use_parent_address-0
+
+
+Don't show use parent address checkbox in edition if no parent address and use parent address is False
+    Log in as site owner
+    Go to  ${PLONE_URL}/mydirectory/armeedeterre/corpsa
+    Click Edit In Edit Bar
+    Click link  Address
+    Page should contain element  formfield-form-widgets-IContactDetails-number
+    Page should contain element  formfield-form-widgets-IContactDetails-street
+    Page should contain element  formfield-form-widgets-IContactDetails-city
+    Page should contain element  formfield-form-widgets-IContactDetails-country
     Element should not be visible  form-widgets-IContactDetails-use_parent_address-0
 
-
-Don't show use parent address checkbox if no parent address in edition
+Show use parent address checkbox in edition if no parent address and use parent address is True
     Log in as site owner
     Go to  ${PLONE_URL}/mydirectory/armeedeterre/corpsb
     Click Edit In Edit Bar
@@ -143,4 +154,4 @@ Don't show use parent address checkbox if no parent address in edition
     Page should contain element  formfield-form-widgets-IContactDetails-street
     Page should contain element  formfield-form-widgets-IContactDetails-city
     Page should contain element  formfield-form-widgets-IContactDetails-country
-    Element should not be visible  form-widgets-IContactDetails-use_parent_address-0
+    Element should be visible  form-widgets-IContactDetails-use_parent_address-0
