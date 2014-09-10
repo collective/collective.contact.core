@@ -4,19 +4,11 @@ Changelog
 1.3 (unreleased)
 ----------------
 
-- If website doesn't start with http, add http:// at its beginning.
+- Feature: Simple validator for phone number.
+  [thomasdesvenain]
+
+- UI: If website doesn't start with http, add http:// at its beginning.
   [cedricmessiant]
-
-- If held position implements IContactDetails behavior,
-  then show contact details fields on add contact form.
-  [thomasdesvenain]
-
-- If 'use parent address' has been selected,
-  ensure content address fields are cleared.
-  [thomasdesvenain]
-
-- Simple validator for phone number.
-  [thomasdesvenain]
 
 - UI: Open external web site in a new window.
   [vincentfretin]
@@ -38,6 +30,14 @@ Changelog
   Useful when you want to display contact details of a contact and contact details
   of objects it is related to on the same page: it avoids double displays.
   Apply it on held positions view.
+  [thomasdesvenain]
+
+- Fix: If held position implements IContactDetails behavior,
+  then show contact details fields on add contact form.
+  [thomasdesvenain]
+
+- Fix: If 'use parent address' has been selected,
+  ensure content address fields are cleared.
   [thomasdesvenain]
 
 - Fix: Hide use parent address:
