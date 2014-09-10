@@ -111,6 +111,7 @@ def referencedObjectRemoved(obj, event):
 
 
 @grok.subscribe(IContactDetails, IObjectModifiedEvent)
+@grok.subscribe(IContactDetails, IObjectAddedEvent)
 def clear_fields_use_parent_address(obj, event):
     """If 'use parent address' has been selected,
     ensure content address fields are cleared
