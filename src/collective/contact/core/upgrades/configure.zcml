@@ -61,4 +61,20 @@
       handler=".upgrades.v6"
       profile="collective.contact.core:default" />
 
+  <genericsetup:registerProfile
+      name="v7"
+      title="Migration profile for collective.contact.core to 7"
+      directory="profiles/v7"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+      />
+
+  <genericsetup:upgradeStep
+      title="Upgrade from 6 to 7"
+      description="Add use_held_position_to_search_person record in registry"
+      source="6"
+      destination="7"
+      handler=".upgrades.v7"
+      profile="collective.contact.core:default" />
+
 </configure>

@@ -4,7 +4,9 @@ Changelog
 1.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Feature: Add parameter to choose if we want to use held positions to search
+  persons.
+  [cedricmessiant]
 
 
 1.3 (2014-09-11)

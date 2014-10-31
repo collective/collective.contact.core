@@ -1,3 +1,4 @@
+from plone import api
 from plone.indexer import indexer
 from Products.CMFPlone.utils import normalizeString
 from Products.CMFPlone.utils import safe_unicode
@@ -48,8 +49,12 @@ def position_searchable_text(obj):
 def person_searchable_text(obj):
     results = []
     results.append(safe_unicode(obj.SearchableText()))
-    for held_positions in obj.get_held_positions():
-        results.append(held_position_searchable_text(held_positions)())
+    use_held_positions = api.portal.get_registry_record(
+        "collective.contact.core.interfaces.IContactCoreParameters."\
+        "use_held_positions_to_search_person")
+    if use_held_positions:
+        for held_positions in obj.get_held_positions():
+            results.append(held_position_searchable_text(held_positions)())
     return results
 
 
