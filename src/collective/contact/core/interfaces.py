@@ -29,9 +29,15 @@ class IVCard(Interface):
 
 class IContactCoreParameters(Interface):
 
-    person_title_in_title = schema.Bool(title=_(u"Display person title in displayed person's title."),
-                                        description=u"",
-                                        required=False, default=True)
+    person_title_in_title = schema.Bool(
+        title=_(u"Display person title in displayed person's title."),
+        description=u"",
+        required=False, default=True)
+
+    use_held_positions_to_search_person = schema.Bool(
+        title=_(u"Use held positions to search persons."),
+        description=u"",
+        required=False, default=True)
 
 
 class IPersonHeldPositions(Interface):
