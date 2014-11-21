@@ -17,9 +17,11 @@
 
     <p id="phone" class="field" tal:condition="view/contact_details/phone">
         <label><tal:block i18n:translate="">Phone number</tal:block>:</label>
+        <a tal:attributes="href string:tel:${view/contact_details/phone}">
         <span class="tel"
               tal:content="view/contact_details/phone"
               i18n:translate="" />
+        </a>
     </p>
 
     <p id="cell_phone" class="field" tal:condition="view/contact_details/cell_phone">

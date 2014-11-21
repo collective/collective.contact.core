@@ -3,6 +3,8 @@ Changelog
 
 1.4 (unreleased)
 ----------------
+- UI: Turn phone numbers into clickable tel: links.
+  [jazwsophie]
 
 - Feature: Add parameter to choose if we want to use held positions to search
   persons.
