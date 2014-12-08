@@ -39,6 +39,11 @@ class IContactCoreParameters(Interface):
         description=u"",
         required=False, default=True)
 
+    use_description_to_search_person = schema.Bool(
+        title=_(u"Use description to search persons."),
+        description=u"",
+        required=False, default=True)
+
 
 class IPersonHeldPositions(Interface):
     """Adapter interface to get ordered positions of a person

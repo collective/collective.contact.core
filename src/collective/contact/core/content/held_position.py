@@ -31,9 +31,11 @@ class IHeldPosition(model.Schema, IContactContent):
         source=ContactSourceBinder(portal_type=("organization", "position")),
         required=True,
     )
-    label = schema.TextLine(title=_("Additional label"),
-                            description=_("Additional label with information that does not appear on position label"),
-                            required=False)
+    label = schema.TextLine(
+        title=_("Additional label"),
+        description=_("Additional label with information that does not appear "\
+                      "on position label"),
+        required=False)
     start_date = schema.Date(
         title=_("Start date"),
         required=False,

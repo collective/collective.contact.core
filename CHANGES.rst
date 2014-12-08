@@ -3,6 +3,11 @@ Changelog
 
 1.4 (unreleased)
 ----------------
+
+- Feature: Add parameter to choose if we want to use description to search
+  persons.
+  [cedricmessiant]
+
 - UI: Turn phone numbers into clickable tel: links.
   [jazwsophie]
 
