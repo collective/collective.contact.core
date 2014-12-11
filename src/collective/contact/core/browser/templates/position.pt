@@ -44,6 +44,7 @@
       <script tal:replace="structure view/addnew_script"></script>
   </tal:addnew>
 
+    <div tal:replace="structure provider:plone.belowcontentbody" tal:condition="not:ajax_load" />
 </div>
 
 </body>
