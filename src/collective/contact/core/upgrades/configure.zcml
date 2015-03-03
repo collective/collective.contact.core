@@ -77,4 +77,20 @@
       handler=".upgrades.v7"
       profile="collective.contact.core:default" />
 
+  <genericsetup:registerProfile
+      name="v8"
+      title="Migration profile for collective.contact.core to 8"
+      directory="profiles/v8"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+      />
+
+  <genericsetup:upgradeStep
+      title="Upgrade from 7 to 8"
+      description="Add use_description_to_search_person record in registry"
+      source="7"
+      destination="8"
+      handler=".upgrades.v8"
+      profile="collective.contact.core:default" />
+
 </configure>

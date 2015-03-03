@@ -1,0 +1,12 @@
+<registry>
+  <record name="collective.contact.core.interfaces.IContactCoreParameters.use_description_to_search_person"
+          interface="collective.contact.core.interfaces.IContactCoreParameters"
+          field="use_description_to_search_person">
+    <field type="plone.registry.field.Bool">
+      <default>True</default>
+      <required>False</required>
+      <title>Use description to search persons</title>
+    </field>
+    <value>True</value>
+  </record>
+</registry>
