@@ -4,6 +4,8 @@ Changelog
 1.4 (unreleased)
 ----------------
 
+- Fix javascript that was disabled by error in addcontact view.
+
 - Feature: Add parameter to choose if we want to use description to search
   persons.
   [cedricmessiant]
