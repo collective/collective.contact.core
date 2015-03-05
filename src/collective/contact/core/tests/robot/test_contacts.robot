@@ -63,14 +63,14 @@ Can create new contact from position
     Click link    css=.addnewcontactfromposition
     Overlay is opened
     Wait For Condition    return $('.overlay h1').text() === "Create Contact"
-    Wait until keyword succeeds    60    1    Element should be visible    oform-widgets-organization-input-fields
+    Element should not be visible    css=#oform-widgets-position-input-fields
     Element should contain    oform-widgets-organization-input-fields    Armée de terre / Corps A / Division Alpha / Régiment H / Brigade LH
-    Wait until keyword succeeds    60    1    Element should be visible    oform-widgets-position-input-fields
-    Element should contain    oform-widgets-position-input-fields    Sergent de la brigade LH, Brigade LH (Armée de terre)
     Input text    oform-widgets-person-widgets-query    Ramb
     Click element    oform-widgets-person-widgets-query
     Wait Until Page Contains Element    css=.ac_results
     Click element    css=.ac_results li:nth-child(1)
+    Element should become visible    css=#oform-widgets-position-input-fields
+    Element should contain    oform-widgets-position-input-fields    Sergent de la brigade LH, Brigade LH (Armée de terre)
     Click button    Add
 
 Show parent address if it exists in creation
