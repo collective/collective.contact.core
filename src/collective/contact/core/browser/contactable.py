@@ -62,13 +62,14 @@ class ContactDetails(grok.View):
     grok.template('contactdetails')
     grok.context(IContactContent)
 
+    template_path = os.path.join(TEMPLATES_DIR, 'address.pt')
+
     def update(self):
         contactable = IContactable(self.context)
         self.contact_details = contactable.get_contact_details()
 
     def render_address(self):
-        template_path = os.path.join(TEMPLATES_DIR, 'address.pt')
-        template = ViewPageTemplateFile(template_path)
+        template = ViewPageTemplateFile(self.template_path)
         return template(self, self.contact_details['address'])
 
 
