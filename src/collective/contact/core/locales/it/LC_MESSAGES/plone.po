@@ -1,0 +1,51 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2014-06-30 08:41+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: Luca Fabbri <keul@redturtle.it>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: it\n"
+"Language-Name: Italian\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+
+#: ../profiles/default/workflows/collective_contact_core_workflow/definition.xml
+msgid "Activate"
+msgstr "Attiva"
+
+#: ../profiles/default/workflows/collective_contact_core_workflow/definition.xml
+msgid "Activate the object"
+msgstr "Attiva l'oggetto"
+
+#: ../profiles/default/workflows/collective_contact_core_workflow/definition.xml
+msgid "Active"
+msgstr "Attivo"
+
+#: ../profiles/default/workflows/collective_contact_core_workflow/definition.xml
+msgid "Deactivate"
+msgstr "Disattiva"
+
+#: ../profiles/default/workflows/collective_contact_core_workflow/definition.xml
+msgid "Deactivate the object"
+msgstr "Disattiva l'oggetto"
+
+#: ../profiles/default/workflows/collective_contact_core_workflow/definition.xml
+msgid "Deactivated"
+msgstr "Disattivato"
+
+#: ../profiles/testing/types/testtype.xml
+msgid "None"
+msgstr "Nulla"
+
+#: ../profiles/testing/types/testtype.xml
+msgid "Test type"
+msgstr "Tipo di test"
+

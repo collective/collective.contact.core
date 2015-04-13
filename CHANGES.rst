@@ -4,9 +4,10 @@ Changelog
 1.5 (unreleased)
 ----------------
 
+- Added italian translation
+  [keul]
 - JSLint fixes (invalid commas)
   [keul]
-
 
 1.4 (2015-04-03)
 ----------------

@@ -1,0 +1,376 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2014-06-30 08:41+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: Luca Fabbri <keul@redturtle.it>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: it\n"
+"Language-Name: Italian\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.contact.core\n"
+
+#: ../browser/addcontact.py:245
+msgid "A contact is a position held by a person in an organization"
+msgstr "Un contatto è una posizione tenuta da una persona in una organizzazione"
+
+#: ../upgrades/profiles/v2/workflows/collective_contact_core_workflow/definition.xml
+msgid "Activate the object"
+msgstr "Attiva l'oggetto"
+
+#: ../upgrades/profiles/v2/workflows/collective_contact_core_workflow/definition.xml
+msgid "Active"
+msgstr "Attivo"
+
+#: ../browser/basefields/templates/organization.pt:23
+#: ../content/organization.py:29
+msgid "Activity"
+msgstr "Attività"
+
+#: ../browser/addcontact.py:283
+msgid "Add"
+msgstr "Aggiungi"
+
+#: ../behaviors.py:260
+msgid "Additional address details"
+msgstr "Dettagli aggiuntivi dell'indirizzo"
+
+#: ../content/held_position.py:34
+msgid "Additional label"
+msgstr "Etichetta aggiuntiva"
+
+#: ../content/held_position.py:35
+msgid "Additional label with information that does not appear on position label"
+msgstr "Etichetta aggiuntiva con informazioni che non compaiono nell'etichetta della posizione"
+
+#: ../behaviors.py:127
+#: ../browser/templates/address.pt:5
+msgid "Address"
+msgstr "Indirizzo"
+
+#: ../behaviors.py:316
+#: ../browser/basefields/templates/person.pt:27
+msgid "Birthday"
+msgstr "Data di nascita"
+
+#: ../behaviors.py:146
+msgid "Cell phone"
+msgstr "Telefono cellulare"
+
+#: ../browser/templates/contactdetails.pt:26
+msgid "Cell phone number"
+msgstr "Telefono cellulare"
+
+#: ../behaviors.py:240
+msgid "City"
+msgstr "Città"
+
+#: ../browser/addcontact.py:74
+msgid "Contact"
+msgstr "Contatto"
+
+#: ../behaviors.py:122
+msgid "Contact details"
+msgstr "Dettagli contatto"
+
+#: ../behaviors.py:230
+msgid "Country"
+msgstr "Paese"
+
+#: ../browser/addcontact.py:75
+#: ../browser/templates/organization.pt:78
+#: ../browser/templates/position.pt:41
+msgid "Create ${name}"
+msgstr "Crea ${name}"
+
+#: ../browser/addcontact.py:82
+msgid "Create ${name} (${position})"
+msgstr "Crea ${name} (${position})"
+
+#: ../upgrades/profiles/v2/workflows/collective_contact_core_workflow/definition.xml
+msgid "Deactivate the object"
+msgstr "Disattiva l'oggetto"
+
+#: ../upgrades/profiles/v2/workflows/collective_contact_core_workflow/definition.xml
+msgid "Deactivated"
+msgstr "Disattivato"
+
+#: ../profiles/default/types/directory.xml
+#: ../upgrades/profiles/v2/types/directory.xml
+msgid "Directory"
+msgstr ""
+
+#: ../interfaces.py:32
+msgid "Display person title in displayed person's title."
+msgstr "Visualizza il titolo della persona nel titolo della persona visualizzata "
+
+#: ../browser/templates/contactdetails.pt:57
+msgid "Download VCard"
+msgstr "Scarica VCard"
+
+#: ../behaviors.py:134
+#: ../browser/templates/contactdetails.pt:11
+msgid "Email"
+msgstr "E-mail"
+
+#: ../browser/basefields/templates/held_position.pt:29
+#: ../browser/templates/heldpositions.pt:47
+#: ../content/held_position.py:42
+msgid "End date"
+msgstr "Data fine"
+
+#: ../behaviors.py:151
+msgid "Fax"
+msgstr ""
+
+#: ../browser/templates/contactdetails.pt:33
+msgid "Fax number"
+msgstr "Numero di Fax"
+
+#: ../vocabulary.py:81
+msgid "Female"
+msgstr "Donna"
+
+#: ../content/person.py:36
+msgid "Firstname"
+msgstr "Nome"
+
+#: ../content/person.py:40
+msgid "Gender"
+msgstr "Sesso"
+
+#: ../behaviors.py:75
+msgid "Global positioning"
+msgstr "Posizione globale"
+
+#: ../profiles/default/types/held_position.xml
+#: ../upgrades/profiles/v2/types/held_position.xml
+msgid "Held position"
+msgstr "Posizione tenuta"
+
+#: ../browser/templates/contactdetails.pt:40
+msgid "IM handle"
+msgstr "Instant messaging"
+
+#: ../behaviors.py:161
+msgid "Instant messenger handle"
+msgstr "Instant messaging usato"
+
+#: ../behaviors.py:31
+msgid "Invalid email address"
+msgstr "Indirizzo e-mail invalido"
+
+#: ../behaviors.py:45
+msgid "Invalid phone"
+msgstr "Telefono invalido"
+
+#: ../content/person.py:32
+msgid "Lastname"
+msgstr "Cognome"
+
+#: ../behaviors.py:80
+msgid "Latitude"
+msgstr "Latitudine"
+
+#: ../content/organization.py:39
+msgid "Logo"
+msgstr ""
+
+#: ../behaviors.py:88
+msgid "Longitude"
+msgstr "Longitudine"
+
+#: ../vocabulary.py:81
+msgid "Male"
+msgstr "Uomo"
+
+#: ../content/directory.py:21
+msgid "Name"
+msgstr "Nome"
+
+#: ../browser/templates/organization.pt:63
+msgid "Not assigned"
+msgstr "Non assegnata"
+
+#: ../behaviors.py:250
+msgid "Number"
+msgstr "Numero"
+
+#: ../browser/addcontact.py:221
+#: ../content/directory.py:37
+#: ../profiles/default/types/organization.xml
+msgid "Organization"
+msgstr "Organizzazione"
+
+#: ../content/directory.py:44
+msgid "Organization level"
+msgstr "Livello organizzazione"
+
+#: ../content/directory.py:43
+msgid "Organization levels"
+msgstr "Livelli organizzazione"
+
+#: ../browser/basefields/templates/organization.pt:17
+msgid "Organization type"
+msgstr "Tipo organizzazione"
+
+#: ../content/directory.py:36
+msgid "Organization types"
+msgstr "Tipi organizzazione"
+
+#: ../content/held_position.py:30
+msgid "Organization/Position"
+msgstr "Organizzazione/Posizione"
+
+#: ../browser/templates/contact.pt:17
+#: ../browser/templates/directory.pt:16
+msgid "Organizations"
+msgstr "Organizzazioni"
+
+#: ../browser/templates/organization.pt:35
+msgid "Organizations in this organization"
+msgstr "Organizzazioni in questa organizzazione"
+
+#: ../browser/templates/othercontacts.pt:10
+msgid "Other contacts in this organization:"
+msgstr "Altri contatti in questa organizzazione:"
+
+#: ../browser/templates/organization.pt:17
+#: ../browser/templates/position.pt:17
+msgid "Parent organizations"
+msgstr "Organizzazione padre"
+
+#: ../browser/addcontact.py:227
+#: ../profiles/default/types/person.xml
+#: ../upgrades/profiles/v2/types/person.xml
+msgid "Person"
+msgstr "Persona"
+
+#: ../content/person.py:46
+msgid "Person title"
+msgstr "Titolo della persona"
+
+#: ../browser/templates/directory.pt:29
+msgid "Persons"
+msgstr "Persone"
+
+#: ../behaviors.py:140
+msgid "Phone"
+msgstr "Telefono"
+
+#: ../browser/templates/contactdetails.pt:19
+msgid "Phone number"
+msgstr "Numero di telefono"
+
+#: ../content/held_position.py:46
+#: ../content/person.py:52
+msgid "Photo"
+msgstr "Foto"
+
+#: ../browser/addcontact.py:233
+#: ../browser/basefields/templates/held_position.pt:15
+#: ../content/directory.py:30
+msgid "Position"
+msgstr "Posizione"
+
+#: ../browser/basefields/templates/position.pt:11
+msgid "Position type"
+msgstr "Tipo di posizione"
+
+#: ../content/directory.py:29
+msgid "Position types"
+msgstr "Tipi di posizione"
+
+#: ../browser/templates/heldpositions.pt:10
+msgid "Positions"
+msgstr "Posizioni"
+
+#: ../browser/templates/organization.pt:47
+msgid "Positions in this organization"
+msgstr ""
+
+#: ../behaviors.py:255
+msgid "Region"
+msgstr "Regione"
+
+#: ../behaviors.py:329
+msgid "Related organizations"
+msgstr "Organizzazioni correlate"
+
+#: ../behaviors.py:335
+msgid "Search and attach organizations related to this one"
+msgstr "Cerca e collega organizzazione collegate a questa"
+
+#: ../browser/addcontact.py:223
+msgid "Select the organization where the person holds the position"
+msgstr "Seleziona l'organizzazione dove la persona mantiene la posizione"
+
+#: ../browser/addcontact.py:228
+msgid "Select the person who holds the position"
+msgstr "Seleziona la persona che mantiene la posizione"
+
+#: ../browser/addcontact.py:235
+msgid "Select the position held by this person in the selected organization"
+msgstr "Seleziona la posizione tenuta da questa persona nell'organizzazione selezionata"
+
+#: ../browser/basefields/templates/held_position.pt:23
+#: ../browser/templates/heldpositions.pt:42
+#: ../content/held_position.py:38
+msgid "Start date"
+msgstr "Datas inizio"
+
+#: ../behaviors.py:245
+msgid "Street"
+msgstr "Vita"
+
+#: ../content/directory.py:22
+msgid "Token"
+msgstr ""
+
+#: ../content/position.py:24
+msgid "Type"
+msgstr "Tipo"
+
+#: ../content/organization.py:34
+msgid "Type or level"
+msgstr "Tipo o livello"
+
+#: ../behaviors.py:166
+msgid "Use the belonging entity address"
+msgstr ""
+
+#: ../behaviors.py:156
+#: ../browser/templates/contactdetails.pt:46
+msgid "Website"
+msgstr "Sito web"
+
+#: ../behaviors.py:235
+msgid "Zip Code"
+msgstr "CAP"
+
+#. Default: ":"
+#: ../browser/basefields/templates/held_position.pt:7
+#: ../browser/templates/organization.pt:53
+msgid "colon"
+msgstr ""
+
+#. Default: "Please fill the organization first and then eventually select position"
+#: ../browser/addcontact.py:375
+msgid "help_add_organization_or_position_organization"
+msgstr "Prego compila prima l'organizzazione poi eventualmente seleziona una posizione"
+
+#. Default: "Doctor, Mrs..."
+#: ../content/person.py:47
+msgid "help_person_title"
+msgstr "Dottor, Sig.ra"
+
+#: ../browser/addcontact.py:107
+msgid "organization/position"
+msgstr "organizzazione/posizione"
