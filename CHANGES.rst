@@ -4,7 +4,8 @@ Changelog
 1.5 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- JSLint fixes (invalid commas)
+  [keul]
 
 
 1.4 (2015-04-03)

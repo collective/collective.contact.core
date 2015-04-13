@@ -157,7 +157,7 @@ $(document).ready(function(){
       filter: common_content_filter,
       formselector: '#form',
       closeselector: '[name="form.buttons.cancel"]',
-      noform: function(el, pbo) {return 'reload';},
+      noform: function(el, pbo) {return 'reload';}
     });
 
     $('.deleteoverlay').prepOverlay({
@@ -165,7 +165,7 @@ $(document).ready(function(){
       filter: common_content_filter,
       formselector: '#delete_confirmation',
       closeselector: '[name="form.button.Cancel"]',
-      noform: function(el, pbo) {return 'reload';},
+      noform: function(el, pbo) {return 'reload';}
     });
 
 });
