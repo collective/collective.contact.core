@@ -215,7 +215,7 @@ msgstr "Livello organizzazione"
 
 #: ../content/directory.py:43
 msgid "Organization levels"
-msgstr "Livelli organizzazione"
+msgstr "Livelli di organizzazione"
 
 #: ../browser/basefields/templates/organization.pt:17
 msgid "Organization type"
@@ -223,7 +223,7 @@ msgstr "Tipo organizzazione"
 
 #: ../content/directory.py:36
 msgid "Organization types"
-msgstr "Tipi organizzazione"
+msgstr "Tipi di organizzazione"
 
 #: ../content/held_position.py:30
 msgid "Organization/Position"
