@@ -2,6 +2,7 @@ from AccessControl import getSecurityManager
 from zope.component import getUtility, queryAdapter
 from zope.contentprovider.interfaces import IContentProvider
 from zope.event import notify
+from zope.i18n import Message
 from zope.interface import implements, Interface
 from zope.publisher.browser import BrowserView
 
@@ -53,15 +54,18 @@ class ContactWidgetSettings(grok.GlobalUtility):
     grok.implements(ICustomSettings)
 
     def label_for_portal_type(self, portal_type):
-        # May be overwritten, see below
-        fti = getUtility(IDexterityFTI, name=portal_type)
-        type_name = fti.Title()
+        if isinstance(portal_type, Message):
+            type_name = portal_type
+        else:
+            fti = getUtility(IDexterityFTI, name=portal_type)
+            type_name = fti.Title()
+
         label = _(u"Create ${name}", mapping={'name': type_name})
         return label
 
     def prelabel_for_portal_type(self, portal_type):
         return _(
-            name='help_widget_add_new_elt',
+            'help_widget_add_new_elt',
             default="If the item doesn't exist, you can add it to the database :")
 
     def add_url_for_portal_type(self, directory_url, portal_type):
@@ -91,12 +95,11 @@ class ContactWidgetSettings(grok.GlobalUtility):
             if len(portal_types) == 1:
                 portal_type = portal_types[0]
                 custom_settings = queryAdapter(directory, ICustomSettings, default=self)
-                label = custom_settings.label_for_portal_type(portal_type)
                 prelabel = custom_settings.prelabel_for_portal_type(portal_type)
                 if portal_type == 'held_position' and not IPerson.providedBy(widget.context):
                     url = "%s/@@add-contact" % directory_url
                     type_name = _(u"Contact")
-                    label = _(u"Create ${name}", mapping={'name': type_name})
+                    label = custom_settings.label_for_portal_type(type_name)
                     if getattr(source, 'relations', None):
                         # if we have a relation, with an organization or a position
                         # we will pre-complete contact creation form
@@ -104,9 +107,11 @@ class ContactWidgetSettings(grok.GlobalUtility):
                             related_path = source.relations['position']
                             related_to = api.content.get(related_path)
                             if related_to is not None:
-                                label = _(u"Create ${name} (${position})",
-                                          mapping={'name': type_name,
-                                                   'position': related_to.Title()})
+                                type_name = _(
+                                    "${name} (${position}",
+                                    mapping={'name': type_name,
+                                             'position': related_to.Title()})
+                                label = custom_settings.label_for_portal_type(type_name)
                                 url += '?oform.widgets.%s=%s' % (related_to.portal_type,
                                                    '/'.join(related_to.getPhysicalPath()))
 
@@ -119,6 +124,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
                     actions.append(action)
                     close_on_click = False
                 else:
+                    label = custom_settings.label_for_portal_type(portal_type)
                     url = custom_settings.add_url_for_portal_type(directory_url, portal_type)
                     action = {
                         'url': url,
@@ -137,9 +143,10 @@ class ContactWidgetSettings(grok.GlobalUtility):
                     type_name = _(u"Contact")
 
                 close_on_click = False
-                label = _(u"Create ${name}", mapping={'name': type_name})
-                action = {'url': url, 'label': label,
+                label = custom_settings.label_for_portal_type(type_name)
+                action = {'url': url,
                           'klass': 'addnew',
+                          'label': label,
                           'formselector': '#oform',
                           'closeselector': '[name="oform.buttons.cancel"]'}
                 actions.append(action)
