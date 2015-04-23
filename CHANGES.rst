@@ -4,8 +4,12 @@ Changelog
 1.5 (unreleased)
 ----------------
 
+- Feature: Add custom settings to override prelabel and label of the 'Create' link in widget.
+  [cedricmessiant]
+
 - Added italian translation
   [keul]
+
 - JSLint fixes (invalid commas)
   [keul]
 

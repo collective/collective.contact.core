@@ -36,7 +36,14 @@ class ICustomSettings(Interface):
     If none is found, it fallbacks to the implementation in
     ContactWidgetSettings utility.
     """
-    def add_url_for_portal_type(self, directory_url, portal_type):
+
+    def label_for_portal_type(self, portal_type):
+        """Return label for the specified portal_type."""
+
+    def prelabel_for_portal_type(self, directory_url, portal_type):
+        """Return prelabel for the specified portal_type."""
+
+    def add_url_for_portal_type(self, portal_type):
         """Return add url for the specified portal_type.
         """
 
@@ -44,6 +51,18 @@ class ICustomSettings(Interface):
 class ContactWidgetSettings(grok.GlobalUtility):
     grok.provides(IContactWidgetSettings)
     grok.implements(ICustomSettings)
+
+    def label_for_portal_type(self, portal_type):
+        # May be overwritten, see below
+        fti = getUtility(IDexterityFTI, name=portal_type)
+        type_name = fti.Title()
+        label = _(u"Create ${name}", mapping={'name': type_name})
+        return label
+
+    def prelabel_for_portal_type(self, portal_type):
+        return _(
+            name='help_widget_add_new_elt',
+            default="If the item doesn't exist, you can add it to the database :")
 
     def add_url_for_portal_type(self, directory_url, portal_type):
         url = '%s/++add++%s' % (directory_url, portal_type)
@@ -71,6 +90,9 @@ class ContactWidgetSettings(grok.GlobalUtility):
             directory_url = directory.absolute_url()
             if len(portal_types) == 1:
                 portal_type = portal_types[0]
+                custom_settings = queryAdapter(directory, ICustomSettings, default=self)
+                label = custom_settings.label_for_portal_type(portal_type)
+                prelabel = custom_settings.prelabel_for_portal_type(portal_type)
                 if portal_type == 'held_position' and not IPerson.providedBy(widget.context):
                     url = "%s/@@add-contact" % directory_url
                     type_name = _(u"Contact")
@@ -88,19 +110,21 @@ class ContactWidgetSettings(grok.GlobalUtility):
                                 url += '?oform.widgets.%s=%s' % (related_to.portal_type,
                                                    '/'.join(related_to.getPhysicalPath()))
 
-                    action = {'url': url, 'label': label,
+                    action = {'url': url,
+                              'label': label,
+                              'prelabel': prelabel,
                               'klass': 'addnew',
                               'formselector': '#oform',
                               'closeselector': '[name="oform.buttons.cancel"]'}
                     actions.append(action)
                     close_on_click = False
                 else:
-                    custom_settings = queryAdapter(directory, ICustomSettings, default=self)
                     url = custom_settings.add_url_for_portal_type(directory_url, portal_type)
-                    fti = getUtility(IDexterityFTI, name=portal_type)
-                    type_name = fti.Title()
-                    label = _(u"Create ${name}", mapping={'name': type_name})
-                    action = {'url': url, 'label': label}
+                    action = {
+                        'url': url,
+                        'label': label,
+                        'prelabel': prelabel,
+                        }
                     actions.append(action)
             else:
                 if len(portal_types) == 2 and \
