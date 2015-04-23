@@ -40,10 +40,10 @@ class ICustomSettings(Interface):
     def label_for_portal_type(self, portal_type):
         """Return label for the specified portal_type."""
 
-    def prelabel_for_portal_type(self, directory_url, portal_type):
+    def prelabel_for_portal_type(self, portal_type):
         """Return prelabel for the specified portal_type."""
 
-    def add_url_for_portal_type(self, portal_type):
+    def add_url_for_portal_type(self, directory_url, portal_type):
         """Return add url for the specified portal_type.
         """
 
