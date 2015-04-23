@@ -90,11 +90,11 @@ class ContactWidgetSettings(grok.GlobalUtility):
                 addlink_enabled = False
 
         close_on_click = True
+        custom_settings = queryAdapter(directory, ICustomSettings, default=self)
         if addlink_enabled:
             directory_url = directory.absolute_url()
             if len(portal_types) == 1:
                 portal_type = portal_types[0]
-                custom_settings = queryAdapter(directory, ICustomSettings, default=self)
                 prelabel = custom_settings.prelabel_for_portal_type(portal_type)
                 if portal_type == 'held_position' and not IPerson.providedBy(widget.context):
                     url = "%s/@@add-contact" % directory_url
