@@ -63,7 +63,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
         label = _(u"Create ${name}", mapping={'name': type_name})
         return label
 
-    def prelabel_for_portal_type(self, portal_type):
+    def prelabel_for_portal_type(self, portal_type=None):
         return _(
             'help_widget_add_new_elt',
             default="If the item doesn't exist, you can add it to the database :")
@@ -144,9 +144,11 @@ class ContactWidgetSettings(grok.GlobalUtility):
 
                 close_on_click = False
                 label = custom_settings.label_for_portal_type(type_name)
+                prelabel = prelabel = custom_settings.prelabel_for_portal_type()
                 action = {'url': url,
                           'klass': 'addnew',
                           'label': label,
+                          'prelabel': prelabel,
                           'formselector': '#oform',
                           'closeselector': '[name="oform.buttons.cancel"]'}
                 actions.append(action)
