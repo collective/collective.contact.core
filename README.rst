@@ -3,7 +3,10 @@
 Introduction
 ============
 
+This add-on is part of the ``collective.contact.*`` suite. For an overview and a demo of these suite, see `collective.contact.demo <https://github.com/collective/collective.contact.demo>`__.
+
 A Plone add-on that provides a directory where you create persons, organizations, sub-organizations and positions.
+
 
 How-to
 ======
