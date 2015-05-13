@@ -10,6 +10,7 @@ from collective.contact.core.indexers import held_position_sortable_title
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.browser.utils import get_valid_url
+from collective.contact.core.browser.utils import date_to_DateTime
 
 
 ADDNEW_OVERLAY = """
@@ -56,6 +57,10 @@ class Organization(BaseView):
         sm = getSecurityManager()
         self.can_add = sm.checkPermission('Add portal content', self.context)
         self.addnew_script = ADDNEW_OVERLAY
+
+    def display_date(self, date):
+        """Display date nicely in template."""
+        return self.context.toLocalizedTime(date_to_DateTime(date))
 
 
 class OtherContacts(grok.View):

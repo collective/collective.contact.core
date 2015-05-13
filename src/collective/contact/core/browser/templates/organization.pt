@@ -4,13 +4,15 @@
 	  xmlns:metal="http://xml.zope.org/namespaces/metal"
 	  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     metal:use-macro="context/main_template/macros/master"
-    tal:define="ajax_load request/ajax_load | nothing;"
     i18n:domain="collective.contact.core">
 <body>
 
 <div id="organization" class="vcard" metal:fill-slot="main">
 
-    <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" tal:condition="not:ajax_load" />
+    <div id="viewlet-above-content-title"
+         tal:define="ajax_load request/ajax_load | nothing;"
+         tal:content="structure provider:plone.abovecontenttitle"
+         tal:condition="not:ajax_load" />
 	  <div tal:replace="structure context/@@basefields" />
 
     <div id="organizations" class="field" tal:condition="view/parent_organizations">
@@ -59,6 +61,9 @@
                    <span tal:replace="person/Title"
                          i18n:translate="" />
                  </a>
+                 <tal:block condition="held_position/start_date">
+                   (<i18n:block translate="">from</i18n:block> <span tal:replace="python:view.display_date(held_position.start_date)"></span><span tal:condition="held_position/end_date"><i18n:block translate=""> to</i18n:block> <span tal:replace="python:view.display_date(held_position.end_date)"></span></span>)
+                 </tal:block>
                </tal:block>
             </tal:person><tal:nobody condition="not:held_positions" i18n:translate="">Not assigned</tal:nobody>
             </li>

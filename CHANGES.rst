@@ -4,6 +4,9 @@ Changelog
 1.5 (unreleased)
 ----------------
 
+- Feature: Display held positions start date and end date on organization view.
+  [cedricmessiant]
+
 - Feature: Add custom settings to override prelabel and label of the 'Create' link in widget.
   [cedricmessiant]
 
