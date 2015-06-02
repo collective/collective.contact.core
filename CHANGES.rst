@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.5 (unreleased)
+1.5 (2015-06-02)
 ----------------
 
 - Feature: Display held positions start date and end date on organization view.
