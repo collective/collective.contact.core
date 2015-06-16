@@ -177,9 +177,10 @@ class MasterSelectAddContactProvider(BrowserView):
 $(document).ready(function() {
 
   var o = $('#oform');
+  var add_held_position_form = %s;
   var position_fields = '#formfield-oform-widgets-position,div[id*=held_position]';
-  if (!(o.find('input[name="oform.widgets.person"]').length >= 1 &&
-        o.find('input[name="oform.widgets.organization"]').length >= 1)) {
+  if (!add_held_position_form && !(o.find('input[name="oform.widgets.person"]').length >= 2 &&
+        o.find('input[name="oform.widgets.organization"]').length >= 2)) {
       o.find(position_fields).hide();
   }
 
@@ -187,7 +188,7 @@ $(document).ready(function() {
     return contactswidget.get_selected_contact(form, 'oform.widgets.organization');
   }
 
-  o.find('#oform-widgets-organization-input-fields').delegate('input', 'change', function(e){
+  o.find('#oform-widgets-organization-input-fields').on('change', 'input', function(e){
     var form = $(this).closest('form');
     var orga = get_selected_organization(form);
     var add_organization_url, addneworga, add_text;
@@ -225,22 +226,23 @@ $(document).ready(function() {
         })
 
         // show position and held position fields if orga and person are selected
-        if ((!o.find('#formfield-oform-widgets-person').length || o.find('input[name="oform.widgets.person"]').length >= 1) &&
-            o.find('input[name="oform.widgets.organization"]').length >= 1 &&
+        if (!add_held_position_form && (!o.find('#formfield-oform-widgets-person').length || o.find('input[name="oform.widgets.person"]').length >= 2) &&
+            o.find('input[name="oform.widgets.organization"]').length >= 2 &&
             orga.token != '--NOVALUE--') {
           o.find(position_fields).show('slow');
-          o.find('div[id$=held_position-position]').hide();
         }
     }
 
   });
 
-  o.find('#oform-widgets-person-input-fields').delegate('input', 'change', function(e){
-    if (o.find('input[name="oform.widgets.person"]').length >= 1 &&
-        o.find('input[name="oform.widgets.organization"]').length >= 1) {
-      o.find(position_fields).show('slow');
-    }
-  });
+  if (!add_held_position_form) {
+      o.find('#oform-widgets-person-input-fields').on('change', 'input', function(e){
+        if (o.find('input[name="oform.widgets.person"]').length >= 2 &&
+            o.find('input[name="oform.widgets.organization"]').length >= 2) {
+          o.find(position_fields).show('slow');
+        }
+      });
+  }
 
   o.find('#oform-widgets-position-widgets-query').setOptions({minChars: 0});
   o.find('#oform-widgets-position-widgets-query').focus(function(e){
@@ -252,7 +254,7 @@ $(document).ready(function() {
 
 });
 </script>
-"""
+""" % str(bool(self.__parent__.form.schema == IAddHeldPosition)).lower()
 
 
 class IAddHeldPosition(model.Schema):
