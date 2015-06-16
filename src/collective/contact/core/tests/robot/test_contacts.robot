@@ -47,7 +47,10 @@ Can create new person from organization
     Element should become visible    css=#formfield-oform-widgets-person .addnew-block
     Click link    Create Person
     Wait Until Page Contains    Add Person
+    ${original_speed} =    Get Selenium speed
+    Set Selenium speed    1
     Textfield Value Should Be    form-widgets-lastname    Norris
+    Set Selenium speed    ${original_speed}
     Textfield Value Should Be    form-widgets-firstname    Chuck
     Click element    form-widgets-gender-0
     Click button    Save
