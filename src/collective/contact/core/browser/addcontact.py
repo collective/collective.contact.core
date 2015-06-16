@@ -178,9 +178,15 @@ $(document).ready(function() {
 
   var o = $('#oform');
   var add_held_position_form = %s;
+  var min_radio;
+  if (add_held_position_form) {
+    min_radio = 1;
+  } else {
+    min_radio = 2;
+  }
   var position_fields = '#formfield-oform-widgets-position,div[id*=held_position]';
-  if (!add_held_position_form && !(o.find('input[name="oform.widgets.person"]').length >= 2 &&
-        o.find('input[name="oform.widgets.organization"]').length >= 2)) {
+  if (!(o.find('input[name="oform.widgets.person"]').length >= min_radio &&
+        o.find('input[name="oform.widgets.organization"]').length >= min_radio)) {
       o.find(position_fields).hide();
   }
 
@@ -226,8 +232,8 @@ $(document).ready(function() {
         })
 
         // show position and held position fields if orga and person are selected
-        if (!add_held_position_form && (!o.find('#formfield-oform-widgets-person').length || o.find('input[name="oform.widgets.person"]').length >= 2) &&
-            o.find('input[name="oform.widgets.organization"]').length >= 2 &&
+        if ((!o.find('#formfield-oform-widgets-person').length || o.find('input[name="oform.widgets.person"]').length >= min_radio) &&
+            o.find('input[name="oform.widgets.organization"]').length >= min_radio &&
             orga.token != '--NOVALUE--') {
           o.find(position_fields).show('slow');
         }
@@ -235,14 +241,12 @@ $(document).ready(function() {
 
   });
 
-  if (!add_held_position_form) {
-      o.find('#oform-widgets-person-input-fields').on('change', 'input', function(e){
-        if (o.find('input[name="oform.widgets.person"]').length >= 2 &&
-            o.find('input[name="oform.widgets.organization"]').length >= 2) {
-          o.find(position_fields).show('slow');
-        }
-      });
-  }
+  o.find('#oform-widgets-person-input-fields').on('change', 'input', function(e){
+    if (o.find('input[name="oform.widgets.person"]').length >= min_radio &&
+        o.find('input[name="oform.widgets.organization"]').length >= min_radio) {
+      o.find(position_fields).show('slow');
+    }
+  });
 
   o.find('#oform-widgets-position-widgets-query').setOptions({minChars: 0});
   o.find('#oform-widgets-position-widgets-query').focus(function(e){
@@ -254,7 +258,7 @@ $(document).ready(function() {
 
 });
 </script>
-""" % str(bool(self.__parent__.form.schema == IAddHeldPosition)).lower()
+""" % str(bool(getattr(self.__parent__.form, 'schema', None) == IAddHeldPosition)).lower()
 
 
 class IAddHeldPosition(model.Schema):
