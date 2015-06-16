@@ -52,6 +52,13 @@
       />
 
   <browser:page
+      name="add-held-position"
+      for="*"
+      class=".addcontact.AddHeldPosition"
+      permission="cmf.AddPortalContent"
+      />
+
+  <browser:page
       name="add-contact"
       for="..content.organization.IOrganization"
       class=".addcontact.AddContactFromOrganization"

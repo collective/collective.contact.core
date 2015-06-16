@@ -97,7 +97,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
                 portal_type = portal_types[0]
                 prelabel = custom_settings.prelabel_for_portal_type(portal_type)
                 if portal_type == 'held_position' and not IPerson.providedBy(widget.context):
-                    url = "%s/@@add-contact" % directory_url
+                    url = "%s/@@add-held-position" % directory_url
                     type_name = _(u"Contact")
                     label = custom_settings.label_for_portal_type(type_name)
                     if getattr(source, 'relations', None):
@@ -199,7 +199,7 @@ $(document).ready(function() {
             addneworga.data('pbo').original_src = addneworga.data('pbo').src;
             addneworga.data('pbo').original_text = addneworga.text();
         }
-        if (orga.token == '--NOVALUE--') {
+        if (orga === undefined || orga.token == '--NOVALUE--') {
           o.find(position_fields).hide();
           add_organization_url = addneworga.data('pbo').original_src;
           add_text = addneworga.data('pbo').original_text;
@@ -212,24 +212,28 @@ $(document).ready(function() {
         addneworga.text(add_text);
     })
 
-    // update position autocomplete field
-    o.find('#formfield-oform-widgets-position > .fieldErrorBox').text('Recherchez ou ajoutez une fonction dans "' + orga.title + '".');
-    o.find("#oform-widgets-position-widgets-query")
-        .setOptions({extraParams: {path: orga.token}}).flushCache();
+    if (orga !== undefined) {
 
-    // update add new position url
-    var add_position_url = portal_url + orga.path + '/++add++position';
-    o.find('#oform-widgets-position-autocomplete .addnew').each(function(){
-        jQuery(this).data('pbo').src = add_position_url;
-    })
+        // update position autocomplete field
+        o.find('#formfield-oform-widgets-position > .fieldErrorBox').text('Recherchez ou ajoutez une fonction dans "' + orga.title + '".');
+        o.find("#oform-widgets-position-widgets-query")
+            .setOptions({extraParams: {path: orga.token}}).flushCache();
 
-    // show position and held position fields if orga and person are selected
-    if ((!o.find('#formfield-oform-widgets-person').length || o.find('input[name="oform.widgets.person"]').length >= 1) &&
-        o.find('input[name="oform.widgets.organization"]').length >= 1 &&
-        orga.token != '--NOVALUE--') {
-      o.find(position_fields).show('slow');
-      o.find('div[id$=held_position-position]').hide();
+        // update add new position url
+        var add_position_url = portal_url + orga.path + '/++add++position';
+        o.find('#oform-widgets-position-autocomplete .addnew').each(function(){
+            jQuery(this).data('pbo').src = add_position_url;
+        })
+
+        // show position and held position fields if orga and person are selected
+        if ((!o.find('#formfield-oform-widgets-person').length || o.find('input[name="oform.widgets.person"]').length >= 1) &&
+            o.find('input[name="oform.widgets.organization"]').length >= 1 &&
+            orga.token != '--NOVALUE--') {
+          o.find(position_fields).show('slow');
+          o.find('div[id$=held_position-position]').hide();
+        }
     }
+
   });
 
   o.find('#oform-widgets-person-input-fields').delegate('input', 'change', function(e){
@@ -253,10 +257,15 @@ $(document).ready(function() {
 """
 
 
-class IAddContact(model.Schema):
+class IAddHeldPosition(model.Schema):
+
+    """Schema to add held position
+
+    Organization and person fields are required."""
+
     organization = ContactChoice(
             title=_(u"Organization"),
-            required=False,
+            required=True,
             description=_(u"Select the organization where the person holds the position"),
             source=ContactSourceBinder(portal_type="organization"))
 
@@ -273,7 +282,42 @@ class IAddContact(model.Schema):
             source=ContactSourceBinder(portal_type="position"))
 
 
+class IAddContact(model.Schema):
+
+    """Schema to add held position, person or organization
+
+    Fields are not required."""
+
+    organization = ContactChoice(
+            title=_(u"Organization"),
+            required=False,
+            description=_(u"Select the organization where the person holds the position"),
+            source=ContactSourceBinder(portal_type="organization"))
+
+    person = ContactChoice(
+            title=_(u"Person"),
+            description=_(u"Select the person who holds the position"),
+            required=False,
+            source=ContactSourceBinder(portal_type="person"))
+
+    position = ContactChoice(
+            title=_(u"Position"),
+            required=False,
+            description=_(u"Select the position held by this person in the selected organization"),
+            source=ContactSourceBinder(portal_type="position"))
+
+
 class AddContact(DefaultAddForm, form.AddForm):
+    """
+    The following is possible with this AddContact form:
+
+    - Returning a contact (held position) when you select an organization and
+      a person.
+    - Returning a person when you select only a person
+    - Returning a organization when you select only an organization.
+      It's for this case we want no required errors in the form if the
+      IHeldPosition required fields are not filled.
+    """
     implements(IFieldsAndContentProvidersForm)
     contentProviders = ContentProviders(['organization-ms'])
 #    contentProviders['organization-ms'] = MasterSelectAddContactProvider
@@ -294,34 +338,34 @@ class AddContact(DefaultAddForm, form.AddForm):
 
     def updateFieldsFromSchemata(self):
         super(AddContact, self).updateFieldsFromSchemata()
-        # IHeldPosition and IAddContact have both a field named position
-        # hide the one from IHeldPosition
-        # TODO: there is no hidden template for autocomplete widget,
-        # we hide it in javascript for now.
-        self.fields[self._schema_name + '.position'].mode = HIDDEN_MODE
         hp_fti = api.portal.get_tool('portal_types').held_position
         if IContactDetails.__identifier__ in hp_fti.behaviors:
             self.fields += field.Fields(IContactDetails)
 
     def updateWidgets(self):
         super(AddContact, self).updateWidgets()
-        for widget in self.widgets.values():
-            if getattr(widget, 'required', False):
-                # This is really a hack to not have required field errors
-                # but have the visual required nevertheless.
-                # We need to revert this after updateActions
-                # because this change impact the held position form
-                widget.field.required = False
+        # IHeldPosition and IAddContact have both a field named position
+        # del the widget of the one from IHeldPosition but keep its field
+        del self.widgets[self._schema_name + '.position']
+        if self.schema != IAddHeldPosition:
+            for widget in self.widgets.values():
+                if getattr(widget, 'required', False):
+                    # This is really a hack to not have required field errors
+                    # but have the visual required nevertheless.
+                    # We need to revert this after updateActions
+                    # because this change impact the held position form
+                    widget.field.required = False
 
         if 'parent_address' in self.widgets:
             self.widgets['parent_address'].mode = DISPLAY_MODE
 
     def update(self):
         super(AddContact, self).update()
-        # revert required field changes
-        for widget in self.widgets.values():
-            if getattr(widget, 'required', False):
-                widget.field.required = True
+        if self.schema != IAddHeldPosition:
+            # revert required field changes
+            for widget in self.widgets.values():
+                if getattr(widget, 'required', False):
+                    widget.field.required = True
 
     @button.buttonAndHandler(_('Add'), name='save')
     def handleAdd(self, action):
@@ -380,6 +424,13 @@ class AddContact(DefaultAddForm, form.AddForm):
         else:
             self.immediate_view = "%s/%s" % (container.absolute_url(),
                                              new_object.id)
+
+
+class AddHeldPosition(AddContact):
+
+    """Add an held position."""
+
+    schema = IAddHeldPosition
 
 
 class AddContactFromOrganization(AddContact):
