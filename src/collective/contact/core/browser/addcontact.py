@@ -239,7 +239,6 @@ $(document).ready(function() {
     if (o.find('input[name="oform.widgets.person"]').length >= 1 &&
         o.find('input[name="oform.widgets.organization"]').length >= 1) {
       o.find(position_fields).show('slow');
-      o.find('div[id$=held_position-position]').hide();
     }
   });
 
