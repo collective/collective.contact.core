@@ -187,7 +187,7 @@ $(document).ready(function() {
     return contactswidget.get_selected_contact(form, 'oform.widgets.organization');
   }
 
-  o.find('#oform-widgets-organization-input-fields').delegate('input', 'change', function(e){
+  o.find('#oform-widgets-organization-input-fields').on('input', 'change', function(e){
     var form = $(this).closest('form');
     var orga = get_selected_organization(form);
     var add_organization_url, addneworga, add_text;
@@ -235,7 +235,7 @@ $(document).ready(function() {
 
   });
 
-  o.find('#oform-widgets-person-input-fields').delegate('input', 'change', function(e){
+  o.find('#oform-widgets-person-input-fields').on('input', 'change', function(e){
     if (o.find('input[name="oform.widgets.person"]').length >= 1 &&
         o.find('input[name="oform.widgets.organization"]').length >= 1) {
       o.find(position_fields).show('slow');

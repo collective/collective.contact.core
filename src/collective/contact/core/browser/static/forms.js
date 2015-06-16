@@ -142,8 +142,8 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
 };
 
 $(document).ready(function(){
-    $(document).delegate('#formfield-form-widgets-gender input', 'change',
-                         contactswidget.update_person_title);
+    $(document).on('#formfield-form-widgets-gender input', 'change',
+                   contactswidget.update_person_title);
     contactswidget.manage_directory();
     contactswidget.manage_hide_use_parent_address();
 
