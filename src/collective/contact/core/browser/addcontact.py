@@ -177,7 +177,6 @@ class MasterSelectAddContactProvider(BrowserView):
 $(document).ready(function() {
 
   var o = $('#oform');
-  o.find('div[id$=held_position-position]').hide();
   var position_fields = '#formfield-oform-widgets-position,div[id*=held_position]';
   if (!(o.find('input[name="oform.widgets.person"]').length >= 1 &&
         o.find('input[name="oform.widgets.organization"]').length >= 1)) {
