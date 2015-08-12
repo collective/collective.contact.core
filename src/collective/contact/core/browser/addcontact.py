@@ -42,7 +42,8 @@ class ICustomSettings(Interface):
         """Return label for the specified portal_type."""
 
     def prelabel_for_portal_type(self, portal_type):
-        """Return prelabel for the specified portal_type."""
+        """Return prelabel for the specified portal_type,
+        portal_type can be a list."""
 
     def add_url_for_portal_type(self, directory_url, portal_type):
         """Return add url for the specified portal_type.
@@ -63,7 +64,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
         label = _(u"Create ${name}", mapping={'name': type_name})
         return label
 
-    def prelabel_for_portal_type(self, portal_type=None):
+    def prelabel_for_portal_type(self, portal_type):
         return _(
             'help_widget_add_new_elt',
             default="If the item doesn't exist, you can add it to the database :")
@@ -144,7 +145,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
 
                 close_on_click = False
                 label = custom_settings.label_for_portal_type(type_name)
-                prelabel = prelabel = custom_settings.prelabel_for_portal_type()
+                prelabel = custom_settings.prelabel_for_portal_type(portal_types)
                 action = {'url': url,
                           'klass': 'addnew',
                           'label': label,
