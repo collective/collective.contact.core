@@ -30,21 +30,21 @@ class IDirectory(model.Schema):
         value_type=DictRow(title=_(u'Position'),
                            schema=INameTokenTableRowSchema)
         )
-    widget(position_types=DataGridFieldFactory)
+    widget('position_types', DataGridFieldFactory, allow_reorder=True)
 
     organization_types = schema.List(
         title=_("Organization types"),
         value_type=DictRow(title=_(u'Organization'),
                            schema=INameTokenTableRowSchema)
         )
-    widget(organization_types=DataGridFieldFactory)
+    widget('organization_types', DataGridFieldFactory, allow_reorder=True)
 
     organization_levels = schema.List(
         title=_("Organization levels"),
         value_type=DictRow(title=_(u'Organization level'),
                            schema=INameTokenTableRowSchema)
         )
-    widget(organization_levels=DataGridFieldFactory)
+    widget('organization_levels', DataGridFieldFactory, allow_reorder=True)
 
 
 class Directory(Container):
