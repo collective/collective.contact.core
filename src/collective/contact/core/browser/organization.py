@@ -2,7 +2,7 @@ from five import grok
 
 from AccessControl import getSecurityManager
 
-from Products.CMFCore.utils import getToolByName
+from plone import api
 
 from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.interfaces import IContactable
@@ -48,7 +48,7 @@ class Organization(BaseView):
         self.parent_organizations = [org for org in organizations]
         self.parent_organizations.remove(organization)
 
-        catalog = getToolByName(self.context, 'portal_catalog')
+        catalog = api.portal.get_tool('portal_catalog')
         context_path = '/'.join(organization.getPhysicalPath())
         self.sub_organizations = catalog.searchResults(portal_type="organization",
                                                        path={'query': context_path,

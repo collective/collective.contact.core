@@ -2,7 +2,7 @@
 
 import unittest2 as unittest
 
-from Products.CMFCore.utils import getToolByName
+from plone import api
 
 from ecreall.helpers.testing.base import BaseTest
 
@@ -55,7 +55,7 @@ class TestSearch(unittest.TestCase, BaseTest):
                          'de-gaulle-charles')
 
     def test_searchable_fields(self):
-        catalog = getToolByName(self.portal, 'portal_catalog')
+        catalog = api.portal.get_tool('portal_catalog')
         results = catalog.searchResults(SearchableText='Gaulle')
         self.assertEqual(len(results), 3)
         results = catalog.searchResults(SearchableText='Général')

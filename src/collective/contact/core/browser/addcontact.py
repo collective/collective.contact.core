@@ -11,7 +11,6 @@ from z3c.form.contentprovider import ContentProviders
 from z3c.form.interfaces import IFieldsAndContentProvidersForm, HIDDEN_MODE,\
     DISPLAY_MODE
 
-from Products.CMFCore.utils import getToolByName
 from Products.statusmessages.interfaces import IStatusMessage
 from five import grok
 
@@ -79,7 +78,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
         addlink_enabled = widget.field.addlink
         portal_types = criteria.get('portal_type', [])
 
-        catalog = getToolByName(widget.context, 'portal_catalog')
+        catalog = api.portal.get_tool('portal_catalog')
         results = catalog.unrestrictedSearchResults(portal_type='directory')
         actions = []
         if len(results) == 0:

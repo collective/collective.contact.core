@@ -9,7 +9,7 @@ from zc.relation.interfaces import ICatalog
 from five import grok
 
 from Products.CMFPlone.utils import base_hasattr
-from Products.CMFCore.utils import getToolByName
+from plone import api
 from plone.dexterity.content import Container
 from plone.supermodel import model
 from plone.dexterity.schema import DexteritySchemaPolicy
@@ -130,7 +130,7 @@ class Organization(Container):
         return separator.join(self.get_organizations_titles(first_index=first_index))
 
     def get_positions(self):
-        catalog = getToolByName(self, 'portal_catalog')
+        catalog = api.portal.get_tool('portal_catalog')
         positions = catalog.searchResults(portal_type="position",
                                           path={'query': '/'.join(self.getPhysicalPath()),
                                                 'depth': 1})
