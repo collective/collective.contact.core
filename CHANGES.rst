@@ -4,7 +4,8 @@ Changelog
 1.6 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Fix slave field creation button for held positions
+  [ebrehault]
 
 
 1.5 (2015-06-02)

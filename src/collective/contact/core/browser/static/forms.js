@@ -116,15 +116,24 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
         var add_link = $('#formfield-' + slave_field.replace(/\./g, '-')).find('.addnew');
         if(add_link.length == 1){
             var orig_href = add_link.attr('href');
-            var base_add_url = orig_href.substr(0, orig_href.indexOf('@add-contact') + 12);
-            var new_url = base_add_url + '?oform.widgets.organization=' + selected.token;
-            new_url += '&oform.widgets.position=' + selected.token;
-            if(add_link.orig_text === undefined){
-                add_link.orig_text = add_link.text();
+            var key;
+            if(orig_href.indexOf('@add-contact') > -1) {
+                key = '@add-contact';
             }
-            add_link.attr('href', new_url);
-            add_link.data('pbo').src = new_url;
-            add_link.text(add_link.orig_text + ' (' + selected.title + ')');
+            if(orig_href.indexOf('@add-held-position') > -1) {
+                key = '@add-held-position';
+            }
+            if(key) {
+                var base_add_url = orig_href.substr(0, orig_href.indexOf(key) + key.length);
+                var new_url = base_add_url + '?oform.widgets.organization=' + selected.token;
+                new_url += '&oform.widgets.position=' + selected.token;
+                if(add_link.orig_text === undefined){
+                    add_link.orig_text = add_link.text();
+                }
+                add_link.attr('href', new_url);
+                add_link.data('pbo').src = new_url;
+                add_link.text(add_link.orig_text + ' (' + selected.title + ')');
+            }
         }
     };
 
