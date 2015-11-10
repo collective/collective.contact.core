@@ -12,14 +12,14 @@ from collective.contact.core.behaviors import IRelatedOrganizations
 
 @indexer(IOrganization)
 def organization_searchable_text(organization):
-    text = ''
+    words = []
     if IRelatedOrganizations.providedBy(organization) \
             and organization.related_organizations is not None:
         for related in organization.related_organizations:
-            text += u' '.join(related.to_object.get_organizations_titles())
+            words += related.to_object.get_organizations_titles()
 
-    text += u' '.join(organization.get_organizations_titles())
-    return text
+    words += organization.get_organizations_titles()
+    return u' '.join(words)
 
 
 @indexer(IHeldPosition)

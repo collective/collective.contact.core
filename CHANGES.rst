@@ -7,6 +7,9 @@ Changelog
 - Fix slave field creation button for held positions
   [ebrehault]
 
+- Fix organization searchable text when related organizations
+  [ebrehault]
+
 
 1.5 (2015-06-02)
 ----------------
