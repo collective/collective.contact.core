@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.6 (unreleased)
+1.6 (2015-11-24)
 ----------------
 
 - Fix slave field creation button for held positions
