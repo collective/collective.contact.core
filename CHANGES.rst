@@ -10,6 +10,15 @@ Changelog
 - Fix organization searchable text when related organizations
   [ebrehault]
 
+- Allow reorder on directory fields
+  [cedricmessiant]
+
+- Fix prelabel_for_portal_type signature.
+  Some javascript fixes or improvements. 
+  [vincentfretin]
+
+- Use different views/schemas for different use cases for add-contact widget
+  [cedricmessiant]
 
 1.5 (2015-06-02)
 ----------------
