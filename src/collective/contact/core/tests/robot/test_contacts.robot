@@ -31,6 +31,7 @@ Can create new contact from organization
     Overlay is opened
     Wait For Condition    return $('.overlay h1').text() === "Create Contact"
     Element should contain    oform-widgets-organization-input-fields    Armée de terre / Corps A / Division Alpha
+    Sleep  1
     Input text    oform-widgets-person-widgets-query    Ramb
     Click element    oform-widgets-person-widgets-query
     Wait Until Page Contains Element    css=.ac_results
@@ -43,6 +44,7 @@ Can create new person from organization
     Click link    css=.addnewcontactfromorganization
     Wait For Condition    return $('.overlay h1').text() === "Create Contact"
     Element should not be visible    css=#formfield-oform-widgets-person .addnew-block
+    Sleep  1
     Input text    oform-widgets-person-widgets-query    Chuck Norris
     Element should become visible    css=#formfield-oform-widgets-person .addnew-block
     Click link    Create Person
@@ -72,6 +74,7 @@ Can create new contact from position
     Click element    oform-widgets-person-widgets-query
     Wait Until Page Contains Element    css=.ac_results
     Click element    css=.ac_results li:nth-child(1)
+    Sleep  1
     Element should become visible    css=#oform-widgets-position-input-fields
     Element should contain    oform-widgets-position-input-fields    Sergent de la brigade LH, Brigade LH (Armée de terre)
     Click button    Add
