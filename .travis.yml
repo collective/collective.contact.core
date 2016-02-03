@@ -23,6 +23,7 @@ notifications:
   email:
   - prive-ged@listes.entrouvert.com
   - travis-reports@ecreall.com
+  - devs@imio.be
 env:
   global:
   - secure: vUcL3IrMd2Wc2fEnrIR6jD/e1tqnNKiJHKy83EPJM08xLPUghDbx5VoGtfrIur4GN22Ov+nCIH3U6n4BMrsaIj7KGSrOS31tY+UDQHpiu9t03oCfg5e7wHi1/4tn6aVN5UZI1A8a4xJO4S+ziXkM/VbOk2Ln5Petpsck/c2I9ps=
