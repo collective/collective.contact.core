@@ -276,12 +276,12 @@ class TestPersonView(TestView):
         first = held_positions[0]
         self.assertEqual(self.adt, first['object'])
         self.assertEqual(self.adt.Title(), first['label'])
-        self.assertEqual(first['start_date'], u'May 25, 1940')
+        self.assertIn(first['start_date'], [u'May 25, 1940', '1940-05-25'])
         self.assertEqual(self.armeedeterre, first['organization'])
 
         second = held_positions[1]
         self.assertEqual(self.gadt, second['object'])
         self.assertEqual(self.gadt.label, second['label'])
-        self.assertEqual(second['start_date'], u'May 25, 1940')
-        self.assertEqual(second['end_date'], u'Nov 09, 1970')
+        self.assertIn(second['start_date'], [u'May 25, 1940', '1940-05-25'])
+        self.assertIn(second['end_date'], [u'Nov 09, 1970', '1970-11-09'])
         self.assertEqual(self.armeedeterre, second['organization'])
