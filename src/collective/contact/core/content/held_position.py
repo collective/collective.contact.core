@@ -33,7 +33,7 @@ class IHeldPosition(model.Schema, IContactContent):
     )
     label = schema.TextLine(
         title=_("Additional label"),
-        description=_("Additional label with information that does not appear "\
+        description=_("Additional label with information that does not appear "
                       "on position label"),
         required=False)
     start_date = schema.Date(
@@ -150,8 +150,8 @@ class HeldPosition(Container):
                                     organization.Title())
             else:
                 return "%s, %s (%s)" % (position.Title(),
-                                    organization.Title(),
-                                    root_organization.Title())
+                                        organization.Title(),
+                                        root_organization.Title())
 
     def get_full_title(self):
         """Returns the 'full title' of the held position.
