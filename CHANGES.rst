@@ -4,8 +4,8 @@ Changelog
 1.7 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Do not hide token column in edit mode
+  [sgeulette]
 
 1.6 (2015-11-24)
 ----------------

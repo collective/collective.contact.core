@@ -153,7 +153,7 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
 $(document).ready(function(){
     $(document).on('change', '#formfield-form-widgets-gender input',
                          contactswidget.update_person_title);
-    contactswidget.manage_directory();
+    /* contactswidget.manage_directory();  Do not hide token column in edit mode */
     contactswidget.manage_hide_use_parent_address();
 
     jQuery(document).bind('loadInsideOverlay',
