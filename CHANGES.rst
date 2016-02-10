@@ -7,6 +7,9 @@ Changelog
 - Nothing changed yet.
 
 
+- Expose person_title in held_position
+  [ebrehault]
+
 1.6 (2015-11-24)
 ----------------
 

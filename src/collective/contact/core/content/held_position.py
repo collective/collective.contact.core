@@ -183,6 +183,10 @@ class HeldPosition(Container):
         return self.get_person().get_title()
 
     @acqproperty
+    def person_title(self):
+        return self.get_person().person_title
+
+    @acqproperty
     def photo(self):
         """Get photo from Person"""
         person = self.get_person()
