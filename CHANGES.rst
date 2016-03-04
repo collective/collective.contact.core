@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.7 (unreleased)
+1.7 (2016-03-04)
 ----------------
 
 - Do not hide token column in edit mode
