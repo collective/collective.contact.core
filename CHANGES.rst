@@ -103,6 +103,7 @@ Changelog
 - Fix: Hide use parent address:
      - works in overlays,
      - always display use parent address on held position if it implements contact details.
+
   [thomasdesvenain]
 
 - Fix: Avoid failure on person
@@ -295,10 +296,11 @@ Changelog
 - New behaviour to add a "Related organizations" field on a content type.
   [thomasdesvenain]
 
-- Plain text search improvements :
+- Plain text search improvements:
     - we can find persons with organization names, functions names,
     - the same for held positions,
     - indexation is updated when organization or function changes
+
   [thomasdesvenain]
 
 - Messages that document better the organization / position held position
