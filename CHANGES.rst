@@ -4,8 +4,8 @@ Changelog
 1.8 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Sort sub organizations by folder position in organization view
+  [sgeulette]
 
 1.7 (2016-03-04)
 ----------------
@@ -15,9 +15,6 @@ Changelog
 
 - Expose person_title in held_position
   [ebrehault]
-
-- Sort sub organizations by folder position in organization view
-  [sgeulette]
 
 1.6 (2015-11-24)
 ----------------
