@@ -52,7 +52,8 @@ class Organization(BaseView):
         context_path = '/'.join(organization.getPhysicalPath())
         self.sub_organizations = catalog.searchResults(portal_type="organization",
                                                        path={'query': context_path,
-                                                             'depth': 1})
+                                                             'depth': 1},
+                                                       sort_on='getObjPositionInParent')
         self.positions = self.context.get_positions()
         sm = getSecurityManager()
         self.can_add = sm.checkPermission('Add portal content', self.context)

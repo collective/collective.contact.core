@@ -10,6 +10,9 @@ Changelog
 - Expose person_title in held_position
   [ebrehault]
 
+- Sort sub organizations by folder position in organization view
+  [sgeulette]
+
 1.6 (2015-11-24)
 ----------------
 
