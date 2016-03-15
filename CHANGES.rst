@@ -1,7 +1,13 @@
 Changelog
 =========
 
-1.7 (unreleased)
+1.8 (unreleased)
+----------------
+
+- Nothing changed yet.
+
+
+1.7 (2016-03-04)
 ----------------
 
 - Do not hide token column in edit mode
@@ -106,6 +112,7 @@ Changelog
 - Fix: Hide use parent address:
      - works in overlays,
      - always display use parent address on held position if it implements contact details.
+
   [thomasdesvenain]
 
 - Fix: Avoid failure on person
@@ -298,10 +305,11 @@ Changelog
 - New behaviour to add a "Related organizations" field on a content type.
   [thomasdesvenain]
 
-- Plain text search improvements :
+- Plain text search improvements:
     - we can find persons with organization names, functions names,
     - the same for held positions,
     - indexation is updated when organization or function changes
+
   [thomasdesvenain]
 
 - Messages that document better the organization / position held position
