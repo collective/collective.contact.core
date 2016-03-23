@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<object name="portal_properties" meta_type="Plone Properties Tool">
+
+ <object name="navtree_properties" meta_type="Plone Property Sheet">
+    <property name="metaTypesNotToList" type="lines"
+              purge="False">
+      <element value="held_position"/>
+      <element value="organization"/>
+      <element value="person"/>
+      <element value="position"/>
+    </property>
+  </object>
+</object>

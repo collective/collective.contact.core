@@ -4,6 +4,9 @@ Changelog
 1.8 (unreleased)
 ----------------
 
+- Hide contact types from the navigation.
+  [pcdummy]
+
 - Sort sub organizations by folder position in organization view
   [sgeulette]
 
@@ -29,7 +32,7 @@ Changelog
   [cedricmessiant]
 
 - Fix prelabel_for_portal_type signature.
-  Some javascript fixes or improvements. 
+  Some javascript fixes or improvements.
   [vincentfretin]
 
 - Use different views/schemas for different use cases for add-contact widget
