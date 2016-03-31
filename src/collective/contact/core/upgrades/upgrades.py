@@ -67,3 +67,8 @@ def v7(context):
 def v8(context):
     tool = IUpgradeTool(context)
     tool.runProfile('collective.contact.core.upgrades:v8')
+
+
+def v9(context):
+    tool = IUpgradeTool(context)
+    tool.runProfile('collective.contact.core.upgrades:v9')

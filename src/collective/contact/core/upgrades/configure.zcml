@@ -93,4 +93,20 @@
       handler=".upgrades.v8"
       profile="collective.contact.core:default" />
 
+  <genericsetup:registerProfile
+      name="v9"
+      title="Migration profile for collective.contact.core to 9"
+      directory="profiles/v9"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+      />
+
+  <genericsetup:upgradeStep
+      title="Upgrade from 8 to 9"
+      description="Hide contact types from the navigation"
+      source="8"
+      destination="9"
+      handler=".upgrades.v9"
+      profile="collective.contact.core:default" />
+
 </configure>
