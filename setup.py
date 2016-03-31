@@ -14,7 +14,7 @@ long_description = (
     + '\n')
 
 setup(name='collective.contact.core',
-      version='1.8.dev0',
+      version='1.8',
       description="Core package for collective.contact add-ons",
       long_description=long_description,
       # Get more strings from
@@ -31,7 +31,7 @@ setup(name='collective.contact.core',
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
       keywords='',
-      author='"CĂŠdric Messiant"',
+      author='"Cedric Messiant"',
       author_email='cedricmessiant@ecreall.com',
       url='http://svn.plone.org/svn/collective/',
       license='gpl',

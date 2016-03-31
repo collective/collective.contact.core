@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.8 (unreleased)
+1.8 (2016-03-31)
 ----------------
 
 - Hide contact types from the navigation.
