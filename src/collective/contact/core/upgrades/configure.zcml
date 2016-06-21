@@ -109,4 +109,12 @@
       handler=".upgrades.v9"
       profile="collective.contact.core:default" />
 
+  <genericsetup:upgradeStep
+      title="Upgrade from 9 to 10"
+      description="Use start and end indexes"
+      source="9"
+      destination="10"
+      handler=".upgrades.v10"
+      profile="collective.contact.core:default" />
+
 </configure>

@@ -1,5 +1,6 @@
 # -*- coding: utf8 -*-
 
+import datetime
 import unittest2 as unittest
 
 from plone import api
@@ -9,7 +10,7 @@ from ecreall.helpers.testing.base import BaseTest
 from collective.contact.core.testing import INTEGRATION
 from collective.contact.core.indexers import (
     held_position_searchable_text, organization_searchable_text,
-    person_sortable_title, held_position_sortable_title)
+    person_sortable_title, held_position_sortable_title, start_date, end_date)
 
 
 class TestSearch(unittest.TestCase, BaseTest):
@@ -53,6 +54,11 @@ class TestSearch(unittest.TestCase, BaseTest):
         degaulle = self.degaulle
         self.assertEqual(person_sortable_title(degaulle)(),
                          'de-gaulle-charles')
+        self.assertEqual(start_date(sergent_pepper)(), datetime.date(1980, 6, 5))
+        self.assertEqual(end_date(sergent_pepper)(), datetime.date(2100, 1, 1))
+        self.assertEqual(end_date(self.gadt)(), datetime.date(1970, 11, 9))
+        self.assertEqual(start_date(self.mydirectory['draper']['captain_crunch'])(),
+                         self.mydirectory['draper']['captain_crunch'].created())
 
     def test_searchable_fields(self):
         catalog = api.portal.get_tool('portal_catalog')
@@ -79,4 +85,12 @@ class TestSearch(unittest.TestCase, BaseTest):
         results = catalog.searchResults(SearchableText='brigade')
         self.assertEqual(len(results), 4)
         results = catalog.searchResults(SearchableText='Émissaire')
+        self.assertEqual(len(results), 2)
+        results = catalog.searchResults(portal_type='held_position')
+        self.assertEqual(len(results), 4)
+        results = catalog.searchResults(portal_type='held_position',
+                                        start={'query': datetime.date(1981, 1, 1), 'range': 'min'})
+        self.assertEqual(len(results), 1)
+        results = catalog.searchResults(portal_type='held_position',
+                                        end={'query': datetime.date(1971, 1, 1), 'range': 'max'})
         self.assertEqual(len(results), 2)

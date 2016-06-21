@@ -4,8 +4,8 @@ Changelog
 1.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Use start and end indexes for held_position.
+  [sgeulette]
 
 1.8 (2016-03-31)
 ----------------
@@ -365,4 +365,3 @@ Changelog
 
 - Initial release
   [cedricmessiant]
-

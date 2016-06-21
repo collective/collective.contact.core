@@ -1,3 +1,4 @@
+from datetime import date
 from plone import api
 from plone.indexer import indexer
 from Products.CMFPlone.utils import normalizeString
@@ -83,3 +84,19 @@ def held_position_sortable_title(obj):
     return u"%s-%s" % (sortable_fullname,
                        normalizeString(safe_unicode(held_position_title),
                                        context=obj))
+
+
+@indexer(IHeldPosition)
+def start_date(obj):
+    if obj.start_date:
+        return obj.start_date
+    # if empty, we return creation date
+    return obj.created()
+
+
+@indexer(IHeldPosition)
+def end_date(obj):
+    if obj.end_date:
+        return obj.end_date
+    # if empty we return future date
+    return date(2100, 01, 01)

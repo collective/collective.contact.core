@@ -8,8 +8,9 @@ from zope.component import getUtility
 from plone import api
 
 from collective.contact.widget.interfaces import IContactContent
-
 from ecreall.helpers.upgrade.interfaces import IUpgradeTool
+
+from ..content.held_position import IHeldPosition
 
 
 def reindex_relations(context):
@@ -72,3 +73,10 @@ def v8(context):
 def v9(context):
     tool = IUpgradeTool(context)
     tool.runProfile('collective.contact.core.upgrades:v9')
+
+
+def v10(context):
+    catalog = api.portal.get_tool('portal_catalog')
+    brains = catalog.searchResults(object_provides=IHeldPosition.__identifier__)
+    for brain in brains:
+        brain.getObject().reindexObject(['start', 'end'])
