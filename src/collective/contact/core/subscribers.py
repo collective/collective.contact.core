@@ -75,6 +75,11 @@ def update_related_with_organization(obj, event=None):
             held_position.reindexObject(idxs=indexes_to_update)
             update_related_with_held_position(held_position)
 
+    for child in obj.values():
+        if IOrganization.providedBy(child):
+            child.reindexObject(idxs=indexes_to_update)
+            update_related_with_organization(child)
+
 
 def referenceRemoved(obj, event, toInterface=IContactContent):
     """Store information about the removed link integrity reference.

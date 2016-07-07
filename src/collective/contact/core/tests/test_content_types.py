@@ -153,6 +153,15 @@ class TestOrganization(TestContentTypes):
         self.assertEqual(self.brigadelh.get_full_title(separator=u' - ', first_index=2),
                          u"Division Alpha - Régiment H - Brigade LH")
 
+    def test_reindex_suborganization(self):
+        before = self.portal.portal_catalog(UID=self.brigadelh.UID())[0].get_full_title
+        self.assertEqual(before, u'Arm\xe9e de terre / Corps A / Division Alpha / R\xe9giment H / Brigade LH')
+        self.armeedeterre.title = u"Armée de l'air"
+        from zope.lifecycleevent import modified
+        modified(self.armeedeterre)
+        after = self.portal.portal_catalog(UID=self.brigadelh.UID())[0].get_full_title
+        self.assertEqual(after, u"Arm\xe9e de l'air / Corps A / Division Alpha / R\xe9giment H / Brigade LH")
+
     def test_copy_paste(self):
         cb = self.mydirectory.manage_copyObjects(['armeedeterre'])
         self.mydirectory.manage_pasteObjects(cb)

@@ -4,6 +4,10 @@ Changelog
 1.9 (unreleased)
 ----------------
 
+- Reindex suborganizations (and positions and held positions) when an
+  organization is modified.
+  [vincentfretin]
+
 - Use start and end indexes for held_position.
   [sgeulette]
 
