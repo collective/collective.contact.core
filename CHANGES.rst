@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.9 (unreleased)
+1.9 (2016-07-07)
 ----------------
 
 - Reindex suborganizations (and positions and held positions) when an
