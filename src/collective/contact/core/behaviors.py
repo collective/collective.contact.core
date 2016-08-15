@@ -18,13 +18,17 @@ from plone.formwidget.datetime.z3cform import DateWidget
 from plone.app.textfield import RichText
 from plone.app.dexterity.browser.types import TypeSchemaContext
 
-from Products.CMFDefault.utils import checkEmailAddress
-from Products.CMFDefault.exceptions import EmailAddressInvalid
+# from Products.CMFDefault.utils import checkEmailAddress
+# from Products.CMFDefault.exceptions import EmailAddressInvalid
 
 from collective.contact.core import _
 from collective.contact.core.interfaces import IContactable
 from collective.contact.widget.schema import ContactChoice, ContactList
 from collective.contact.widget.source import ContactSourceBinder
+
+# Taken from http://www.regular-expressions.info/email.html
+_isemail = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}"
+_isemail = re.compile(_isemail).match
 
 
 class InvalidEmailAddress(schema.ValidationError):
@@ -32,13 +36,21 @@ class InvalidEmailAddress(schema.ValidationError):
     __doc__ = _(u"Invalid email address")
 
 
-def validateEmail(value):
-    """Simple email validator"""
-    try:
-        checkEmailAddress(value)
-    except EmailAddressInvalid:
-        raise InvalidEmailAddress(value)
-    return True
+# def validateEmail(value):
+#     super(Email, self)._validate(value)
+#     if _isemail(value):
+#         return
+
+#     raise InvalidEmail(value)
+
+
+# def validateEmail(value):
+#     """Simple email validator"""
+#     try:
+#         checkEmailAddress(value)
+#     except EmailAddressInvalid:
+#         raise InvalidEmailAddress(value)
+#     return True
 
 
 class InvalidPhone(schema.ValidationError):
@@ -135,7 +147,7 @@ class IContactDetails(model.Schema):
 
     email = schema.TextLine(
         title=_(u"Email"),
-        constraint=validateEmail,
+        # constraint=validateEmail,
         required=False,
         )
 
