@@ -12,7 +12,7 @@ ADDNEW_OVERLAY = """
 $(document).ready(function(){
     $('.addnewcontactfromposition').prepOverlay({
       subtype: 'ajax',
-      filter: common_content_filter,
+//      filter: common_content_filter,
       formselector: '#oform',
       cssclass: 'overlay-contact-addnew',
       closeselector: '[name="oform.buttons.cancel"]',
