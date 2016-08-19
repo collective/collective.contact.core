@@ -56,10 +56,10 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
-  <utility
+  <!-- <utility
       component=".fields.RelationChoiceHandler"
       name="z3c.relationfield.schema.RelationChoice"
-      />
+      /> -->
 
   <adapter
     name="SearchableText"
