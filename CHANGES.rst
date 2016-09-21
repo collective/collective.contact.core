@@ -4,7 +4,8 @@ Changelog
 1.10 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Fix AddContact form problem with security hotfix 20160830
+  [ebrehault]
 
 
 1.9 (2016-07-07)
