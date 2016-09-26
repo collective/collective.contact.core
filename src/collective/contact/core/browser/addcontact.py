@@ -331,6 +331,7 @@ class AddContact(DefaultAddForm, form.AddForm):
     schema = IAddContact
     portal_type = 'held_position'
     prefix = 'oform'
+    allow_prefill_from_GET_request = True
 
     @property
     def additionalSchemata(self):
