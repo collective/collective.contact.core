@@ -57,7 +57,7 @@
 
     <p id="download_vcard" tal:condition="view/contact_details">
         <a href="@@contact.vcf" tal:attributes="href string: ${context/absolute_url}/@@contact.vcf">
-            <img tal:attributes="src string:${portal_url}/vcard_icon.png" />
+            <img tal:attributes="src string:${portal_url}/++resource++collective.contact.core/vcard_icon.png" />
             <tal:vcard i18n:translate=""> Download VCard</tal:vcard>
         </a>
     </p>
