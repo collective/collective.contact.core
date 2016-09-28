@@ -2,7 +2,7 @@
 <object name="portal_css">
 
     <stylesheet title=""
-        id="style.css"
+        id="++resource++collective.contact.core/style.css"
         media="screen" rel="stylesheet" rendering="import"
         cacheable="False" compression="safe" cookable="True"
         enabled="1" expression=""/>

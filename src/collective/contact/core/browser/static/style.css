@@ -42,3 +42,11 @@
     float: left;
     padding-right: 1em;
 }
+
+/* Reset widget styling for Plone 5 */
+#formfield-form-widgets-IBirthday-birthday select {
+    width: unset;
+    display: unset;
+}
+
+
