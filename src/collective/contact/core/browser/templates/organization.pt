@@ -78,7 +78,7 @@
            tal:condition="python: not ajax_load and view.can_add">
         <a href="@@add-contact" class="addnewcontactfromorganization"
            tal:attributes="href string:${context/absolute_url}/@@add-contact">
-            <img tal:attributes="src string:${portal_url}/create_contact.png" />
+            <img tal:attributes="src string:${portal_url}/++resource++collective.contact.core/create_contact.png" />
             <tal:span i18n:translate="">
               Create <tal:i18n i18n:name="name">Contact</tal:i18n>
             </tal:span>

@@ -23,7 +23,7 @@
                    tal:condition="held_position/can_edit">
                   <img alt="Edit" title="Edit"
                        i18n:domain="plone"
-                       tal:attributes="src string:${portal_url}/edit.png"
+                       tal:attributes="src string:${portal_url}/++resource++collective.contact.core/edit.png"
                        i18n:attributes="alt; title" />
                 </a>
                 <a class="delete-held-position deleteoverlay"
