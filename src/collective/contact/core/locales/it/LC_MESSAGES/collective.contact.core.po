@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-04-23 08:07+0000\n"
+"POT-Creation-Date: 2016-09-29 10:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: Luca Fabbri <keul@redturtle.it>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,11 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.contact.core\n"
 
-#: ../browser/addcontact.py:273
+#: ../browser/addcontact.py:110
+msgid "${name} (${position}"
+msgstr ""
+
+#: ../browser/addcontact.py:330
 msgid "A contact is a position held by a person in an organization"
 msgstr "Un contatto è una posizione tenuta da una persona in una organizzazione"
 
@@ -34,7 +38,7 @@ msgstr "Attivo"
 msgid "Activity"
 msgstr "Attività"
 
-#: ../browser/addcontact.py:317
+#: ../browser/addcontact.py:375
 msgid "Add"
 msgstr "Aggiungi"
 
@@ -72,7 +76,7 @@ msgstr "Telefono cellulare"
 msgid "City"
 msgstr "Città"
 
-#: ../browser/addcontact.py:98
+#: ../browser/addcontact.py:101
 msgid "Contact"
 msgstr "Contatto"
 
@@ -84,15 +88,11 @@ msgstr "Dettagli contatto"
 msgid "Country"
 msgstr "Paese"
 
-#: ../browser/addcontact.py:59
-#: ../browser/templates/organization.pt:78
+#: ../browser/addcontact.py:63
+#: ../browser/templates/organization.pt:83
 #: ../browser/templates/position.pt:41
 msgid "Create ${name}"
 msgstr "Crea ${name}"
-
-#: ../browser/addcontact.py:107
-msgid "Create ${name} (${position})"
-msgstr "Crea ${name} (${position})"
 
 #: ../upgrades/profiles/v2/workflows/collective_contact_core_workflow/definition.xml
 msgid "Deactivate the object"
@@ -195,7 +195,7 @@ msgstr "Uomo"
 msgid "Name"
 msgstr "Nome"
 
-#: ../browser/templates/organization.pt:63
+#: ../browser/templates/organization.pt:68
 msgid "Not assigned"
 msgstr "Non assegnata"
 
@@ -203,7 +203,7 @@ msgstr "Non assegnata"
 msgid "Number"
 msgstr "Numero"
 
-#: ../browser/addcontact.py:249
+#: ../browser/addcontact.py:271
 #: ../content/directory.py:37
 #: ../profiles/default/types/organization.xml
 msgid "Organization"
@@ -234,7 +234,7 @@ msgstr "Organizzazione/Posizione"
 msgid "Organizations"
 msgstr "Organizzazioni"
 
-#: ../browser/templates/organization.pt:35
+#: ../browser/templates/organization.pt:37
 msgid "Organizations in this organization"
 msgstr "Organizzazioni in questa organizzazione"
 
@@ -242,12 +242,12 @@ msgstr "Organizzazioni in questa organizzazione"
 msgid "Other contacts in this organization:"
 msgstr "Altri contatti in questa organizzazione:"
 
-#: ../browser/templates/organization.pt:17
+#: ../browser/templates/organization.pt:19
 #: ../browser/templates/position.pt:17
 msgid "Parent organizations"
 msgstr "Organizzazione padre"
 
-#: ../browser/addcontact.py:255
+#: ../browser/addcontact.py:277
 #: ../profiles/default/types/person.xml
 #: ../upgrades/profiles/v2/types/person.xml
 msgid "Person"
@@ -274,7 +274,7 @@ msgstr "Numero di telefono"
 msgid "Photo"
 msgstr "Foto"
 
-#: ../browser/addcontact.py:261
+#: ../browser/addcontact.py:283
 #: ../browser/basefields/templates/held_position.pt:15
 #: ../content/directory.py:30
 msgid "Position"
@@ -292,7 +292,7 @@ msgstr "Tipi di posizione"
 msgid "Positions"
 msgstr "Posizioni"
 
-#: ../browser/templates/organization.pt:47
+#: ../browser/templates/organization.pt:49
 msgid "Positions in this organization"
 msgstr ""
 
@@ -308,15 +308,15 @@ msgstr "Organizzazioni correlate"
 msgid "Search and attach organizations related to this one"
 msgstr "Cerca e collega organizzazione collegate a questa"
 
-#: ../browser/addcontact.py:251
+#: ../browser/addcontact.py:273
 msgid "Select the organization where the person holds the position"
 msgstr "Seleziona l'organizzazione dove la persona mantiene la posizione"
 
-#: ../browser/addcontact.py:256
+#: ../browser/addcontact.py:278
 msgid "Select the person who holds the position"
 msgstr "Seleziona la persona che mantiene la posizione"
 
-#: ../browser/addcontact.py:263
+#: ../browser/addcontact.py:285
 msgid "Select the position held by this person in the selected organization"
 msgstr "Seleziona la posizione tenuta da questa persona nell'organizzazione selezionata"
 
@@ -365,12 +365,16 @@ msgstr "CAP"
 
 #. Default: ":"
 #: ../browser/basefields/templates/held_position.pt:7
-#: ../browser/templates/organization.pt:53
+#: ../browser/templates/organization.pt:55
 msgid "colon"
 msgstr ""
 
+#: ../browser/templates/organization.pt:65
+msgid "from"
+msgstr ""
+
 #. Default: "Please fill the organization first and then eventually select position"
-#: ../browser/addcontact.py:409
+#: ../browser/addcontact.py:474
 msgid "help_add_organization_or_position_organization"
 msgstr "Prego compila prima l'organizzazione poi eventualmente seleziona una posizione"
 
@@ -380,11 +384,15 @@ msgid "help_person_title"
 msgstr "Dottor, Sig.ra"
 
 #. Default: "If the item doesn't exist, you can add it to the database :"
-#: ../browser/addcontact.py:63
+#: ../browser/addcontact.py:67
 msgid "help_widget_add_new_elt"
 msgstr ""
 
-#: ../browser/addcontact.py:134
+#: ../browser/addcontact.py:140
 msgid "organization/position"
 msgstr "organizzazione/posizione"
+
+#: ../browser/templates/organization.pt:65
+msgid "to"
+msgstr ""
 

@@ -1,21 +1,18 @@
-# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
-# SOME DESCRIPTIVE TITLE.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: collective.contact.core\n"
 "POT-Creation-Date: 2016-09-29 10:34+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2013-03-11 16:38+0100\n"
+"Last-Translator: Cédric Messiant <cedricmessiant@ecreall.com>\n"
+"Language-Team: Ecréall\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
+"Language-Code: de\n"
+"Language-Name: German\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: plone\n"
+"Domain: DOMAIN\n"
 
 #: ../profiles/default/workflows/collective_contact_core_workflow/definition.xml
 msgid "Activate"
