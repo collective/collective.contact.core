@@ -164,8 +164,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
         return {'actions': actions,
                 'close_on_click': close_on_click,
                 'formatItem': """function(row, idx, count, value) {
-return '<img src="' + %s + '/' + row[2] + '_icon.png'
- +'" /> ' + row[1] }""" % (getSite().absolute_url())
+return '<img src="%s/++resource++collective.contact.core/' + row[2] + '_icon.png" /> ' + row[1] }""" % (getSite().absolute_url())
                 }
 
 
@@ -219,7 +218,7 @@ $(document).ready(function() {
           add_text = addneworga.data('pbo').original_text;
         } else {
           // update add new orga link to add sub orga
-          add_organization_url = %s + orga.path + '/++add++organization';
+          add_organization_url = "%s" + orga.path + '/++add++organization';
           add_text = addneworga.data('pbo').original_text + ' dans ' + orga.title;
         }
         addneworga.data('pbo').src = add_organization_url;
@@ -234,7 +233,7 @@ $(document).ready(function() {
             .setOptions({extraParams: {path: orga.token}}).flushCache();
 
         // update add new position url
-        var add_position_url = %s + orga.path + '/++add++position';
+        var add_position_url = "%s" + orga.path + '/++add++position';
         o.find('#oform-widgets-position-autocomplete .addnew').each(function(){
             jQuery(this).data('pbo').src = add_position_url;
         })
