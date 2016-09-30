@@ -30,6 +30,10 @@ from collective.contact.core import _
 from collective.contact.core.content.person import IPerson
 from collective.contact.core.behaviors import IContactDetails
 
+from zope.interface import implementer
+from zope.interface import provider
+from zope.component.hooks import getSite
+
 
 class ICustomSettings(Interface):
     """You can overrides those methods by writing an adapter to IDirectory.
@@ -49,9 +53,11 @@ class ICustomSettings(Interface):
         """
 
 
+@provider(IContactWidgetSettings)
+@implementer(ICustomSettings)
 class ContactWidgetSettings(grok.GlobalUtility):
-    grok.provides(IContactWidgetSettings)
-    grok.implements(ICustomSettings)
+    # grok.provides(IContactWidgetSettings)
+    # grok.implements(ICustomSettings)
 
     def label_for_portal_type(self, portal_type):
         if isinstance(portal_type, Message):
@@ -156,8 +162,8 @@ class ContactWidgetSettings(grok.GlobalUtility):
         return {'actions': actions,
                 'close_on_click': close_on_click,
                 'formatItem': """function(row, idx, count, value) {
-return '<img src="' + portal_url + '/' + row[2] + '_icon.png'
- +'" /> ' + row[1] }"""
+return '<img src="' + %s + '/' + row[2] + '_icon.png'
+ +'" /> ' + row[1] }""" % (getSite().absolute_url())
                 }
 
 
@@ -211,7 +217,7 @@ $(document).ready(function() {
           add_text = addneworga.data('pbo').original_text;
         } else {
           // update add new orga link to add sub orga
-          add_organization_url = portal_url + orga.path + '/++add++organization';
+          add_organization_url = %s + orga.path + '/++add++organization';
           add_text = addneworga.data('pbo').original_text + ' dans ' + orga.title;
         }
         addneworga.data('pbo').src = add_organization_url;
@@ -226,7 +232,7 @@ $(document).ready(function() {
             .setOptions({extraParams: {path: orga.token}}).flushCache();
 
         // update add new position url
-        var add_position_url = portal_url + orga.path + '/++add++position';
+        var add_position_url = %s + orga.path + '/++add++position';
         o.find('#oform-widgets-position-autocomplete .addnew').each(function(){
             jQuery(this).data('pbo').src = add_position_url;
         })
@@ -258,7 +264,10 @@ $(document).ready(function() {
 
 });
 </script>
-""" % str(bool(getattr(self.__parent__.form, 'schema', None) == IAddHeldPosition)).lower()
+""" % (str(bool(getattr(self.__parent__.form, 'schema', None) == IAddHeldPosition)).lower(),
+        getSite().absolute_url(),
+        getSite().absolute_url(),
+        )
 
 
 class IAddHeldPosition(model.Schema):
