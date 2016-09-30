@@ -55,11 +55,11 @@ class ICustomSettings(Interface):
         """
 
 
-@provider(IContactWidgetSettings)
-@implementer(ICustomSettings)
+# @provider(IContactWidgetSettings)
+# @implementer(ICustomSettings)
 class ContactWidgetSettings(grok.GlobalUtility):
-    # grok.provides(IContactWidgetSettings)
-    # grok.implements(ICustomSettings)
+    grok.provides(IContactWidgetSettings)
+    grok.implements(ICustomSettings)
 
     def label_for_portal_type(self, portal_type):
         if isinstance(portal_type, Message):
