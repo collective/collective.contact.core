@@ -33,6 +33,8 @@ from collective.contact.core.behaviors import IContactDetails
 from zope.interface import implementer
 from zope.interface import provider
 from zope.component.hooks import getSite
+from zope.interface import alsoProvides
+from plone.z3cform.interfaces import IDeferSecurityCheck
 
 
 class ICustomSettings(Interface):
@@ -374,6 +376,7 @@ class AddContact(DefaultAddForm, form.AddForm):
             self.widgets['parent_address'].mode = DISPLAY_MODE
 
     def update(self):
+        alsoProvides(self.request, IDeferSecurityCheck)
         super(AddContact, self).update()
         if self.schema != IAddHeldPosition:
             # revert required field changes
