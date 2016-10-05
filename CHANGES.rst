@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.10 (unreleased)
+1.10 (2016-10-05)
 -----------------
 
 - Fix AddContact form problem with security hotfix 20160830
