@@ -49,4 +49,11 @@
     display: unset;
 }
 
-
+#oform input[type="text"],
+#oform input[type="email"],
+#oform input[type="password"],
+#oform textarea,
+#oform select  {
+    width: auto!important;
+    display: inline-block;
+}
