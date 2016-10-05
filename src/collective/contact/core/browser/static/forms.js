@@ -100,7 +100,7 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
      * master_field is on format : form.widgets.mymasterfield,
      * slave_field is on format : form.widgets.myslavefield,
      */
-    apply_relation_dependency = function(input){
+    function apply_relation_dependency(input, master_field, slave_field, relation) {
         var form = input.parents('form').first();
         var selected = contactswidget.get_selected_contact(form, master_field);
         if(selected === undefined){
@@ -135,17 +135,17 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
                 add_link.text(add_link.orig_text + ' (' + selected.title + ')');
             }
         }
-    };
+    }
 
     var selector = '#' + master_field.replace(/\./g, '-') + '-input-fields input';
 
-    $('body').on('change', selector, function(e){
-        apply_relation_dependency($(this));
+    $('body').on('change', selector, function(){
+        apply_relation_dependency($(this), master_field, slave_field, relation);
     });
 
     $(document).ready(function(){
         $('body').find(selector).each(function(){
-            apply_relation_dependency($(this));
+            apply_relation_dependency($(this), master_field, slave_field, relation);
         });
     });
 };

@@ -4,7 +4,8 @@ Changelog
 1.11 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Fix setup_relation_dependency when many are setup on the same page.
+  [thomasdesvenain]
 
 
 1.10 (2016-10-05)
