@@ -103,12 +103,11 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
     function apply_relation_dependency(input, master_field, slave_field, relation) {
         var form = input.parents('form').first();
         var selected = contactswidget.get_selected_contact(form, master_field);
-        if(selected === undefined){
-            return;
-        }
         /* set new relation search parameter on slave field */
         var relations = {};
-        relations['relations.' + relation + ':record'] = selected.token;
+        if(selected !== undefined){
+            relations['relations.' + relation + ':record'] = selected.token;
+        }
         var slave_field_query = $('#' + slave_field.replace(/\./g, '-') + '-widgets-query');
         slave_field_query.setOptions({extraParams: relations}).flushCache();
 
@@ -132,7 +131,13 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
                 }
                 add_link.attr('href', new_url);
                 add_link.data('pbo').src = new_url;
-                add_link.text(add_link.orig_text + ' (' + selected.title + ')');
+                var text_wo_company = add_link.orig_text.replace(/ *\([^)]*\) */g, "");
+                if (selected.token === '--NOVALUE--') {
+                    add_link.text(text_wo_company);
+                } else {
+                    add_link.text(text_wo_company + ' (' + selected.title + ')');
+                }
+
             }
         }
     }
