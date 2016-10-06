@@ -1,7 +1,17 @@
 Changelog
 =========
 
-1.10 (unreleased)
+1.11 (unreleased)
+-----------------
+
+- Fix setup_relation_dependency when many are setup on the same page.
+  [thomasdesvenain]
+
+- Fix "create contact" widget link when master organization field value has
+  changed or has become empty.
+  [thomasdesvenain]
+
+1.10 (2016-10-05)
 -----------------
 
 - Fix AddContact form problem with security hotfix 20160830
