@@ -4,6 +4,9 @@ Changelog
 1.11 (unreleased)
 -----------------
 
+- Add translations for de, it, fr and sl
+  [fRiSi]
+
 - Fix setup_relation_dependency when many are setup on the same page.
   [thomasdesvenain]
 
