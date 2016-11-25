@@ -59,11 +59,10 @@
                     tal:define="person held_position/get_person"
                     tal:attributes="href person/absolute_url">
                    <span tal:replace="person/Title"
-                         i18n:translate="" />
-                 </a>
-                 <tal:block condition="held_position/start_date">
-                   (<i18n:block translate="">from</i18n:block> <span tal:replace="python:view.display_date(held_position.start_date)"></span><span tal:condition="held_position/end_date"> <i18n:block translate="">to</i18n:block> <span tal:replace="python:view.display_date(held_position.end_date)"></span></span>)
-                 </tal:block>
+                         i18n:translate=""
+                 /></a><tal:block condition="held_position/start_date">
+                   (<i18n:block translate="">from</i18n:block> <span tal:replace="python:view.display_date(held_position.start_date)"></span><span tal:condition="held_position/end_date"><i18n:block translate=""> to</i18n:block> <span tal:replace="python:view.display_date(held_position.end_date)"></span></span>)
+                 </tal:block><tal:comma condition="python:not repeat['held_position'].end">,</tal:comma>
                </tal:block>
             </tal:person><tal:nobody condition="not:held_positions" i18n:translate="">Not assigned</tal:nobody>
             </li>
