@@ -23,7 +23,6 @@
             <span class="contact-title" tal:content="title"></span>
           </a>
           <span id="contact-held-position" tal:condition="contact/held_position" tal:content="contact/held_position" />
-          <span id="contact-label" tal:condition="contact/label" tal:content="contact/label" />
 
           <span id="contact-phone"tal:condition="contact/phone" tal:content="contact/phone" />
           <span id="contact-cellphone"tal:condition="contact/cell_phone" tal:content="contact/cell_phone" />
