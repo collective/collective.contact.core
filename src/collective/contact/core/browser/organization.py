@@ -71,11 +71,14 @@ class OtherContacts(grok.View):
 
     held_positions = ''
 
+    def held_position_order_key(self, held_position):
+        return held_position_sortable_title(held_position)
+
     def update(self):
         organization = self.context
         othercontacts = []
         held_positions = organization.get_held_positions()
-        held_positions.sort(key=lambda x: held_position_sortable_title(x)())
+        held_positions.sort(key=lambda x: self.held_position_order_key(x))
         for hp in held_positions:
             contact = {}
             person = hp.get_person()
