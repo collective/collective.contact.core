@@ -1,398 +1,384 @@
-# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
-# SOME DESCRIPTIVE TITLE.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: collective.contact.core\n"
 "POT-Creation-Date: 2016-09-29 10:34+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2016-10-01 22:38+0200\n"
+"Last-Translator: Cédric Messiant <cedric.messiant@gmail.com>\n"
+"Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language-Code: sl\n"
+"Language-Name: SL\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.contact.core\n"
+"X-Generator: Poedit 1.8.8\n"
+"Language: sl\n"
 
 #: ../browser/addcontact.py:110
 msgid "${name} (${position}"
-msgstr ""
+msgstr "${name} (${position}"
 
 #: ../browser/addcontact.py:330
 msgid "A contact is a position held by a person in an organization"
-msgstr ""
+msgstr "Kontakt pomeni pozicijo, ki jo ima oseba v organizaciji"
 
 #: ../upgrades/profiles/v2/workflows/collective_contact_core_workflow/definition.xml
 msgid "Activate the object"
-msgstr ""
+msgstr "Aktiviraj objekt"
 
 #: ../upgrades/profiles/v2/workflows/collective_contact_core_workflow/definition.xml
 msgid "Active"
-msgstr ""
+msgstr "akitven"
 
 #: ../browser/basefields/templates/organization.pt:23
 #: ../content/organization.py:29
 msgid "Activity"
-msgstr ""
+msgstr "Aktivnost"
 
 #: ../browser/addcontact.py:375
 msgid "Add"
-msgstr ""
+msgstr "Dodaj"
 
 #: ../behaviors.py:263
 msgid "Additional address details"
-msgstr ""
+msgstr "Podatki o dodatnem naslovu"
 
 #: ../content/held_position.py:35
 msgid "Additional label"
-msgstr ""
+msgstr "Dodatna oznaka"
 
 #: ../content/held_position.py:36
 msgid "Additional label with information that does not appear on position label"
-msgstr ""
+msgstr "Dodatna oznaka z informacijami, ki niso vidne na oznaki pozicije"
 
-#: ../behaviors.py:130
-#: ../browser/templates/address.pt:6
+#: ../behaviors.py:130 ../browser/templates/address.pt:6
 msgid "Address"
-msgstr ""
+msgstr "Naslov"
 
-#: ../behaviors.py:320
-#: ../browser/basefields/templates/person.pt:27
+#: ../behaviors.py:320 ../browser/basefields/templates/person.pt:27
 msgid "Birthday"
-msgstr ""
+msgstr "Rojstni dan"
 
 #: ../behaviors.py:149
 msgid "Cell phone"
-msgstr ""
+msgstr "GSM"
 
 #: ../browser/templates/contactdetails.pt:28
 msgid "Cell phone number"
-msgstr ""
+msgstr "GSM Številka"
 
 #: ../behaviors.py:243
 msgid "City"
-msgstr ""
+msgstr "Mesto"
 
 #: ../browser/addcontact.py:101
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #: ../behaviors.py:125
 msgid "Contact details"
-msgstr ""
+msgstr "Podrobnosti o kontaktu"
 
 #: ../behaviors.py:233
 msgid "Country"
-msgstr ""
+msgstr "Država"
 
-#: ../browser/addcontact.py:63
-#: ../browser/templates/organization.pt:83
+#: ../browser/addcontact.py:63 ../browser/templates/organization.pt:83
 #: ../browser/templates/position.pt:41
 msgid "Create ${name}"
-msgstr ""
+msgstr "Ustvari  ${name}"
 
 #: ../upgrades/profiles/v2/workflows/collective_contact_core_workflow/definition.xml
 msgid "Deactivate the object"
-msgstr ""
+msgstr "Deaktiviraj objekt"
 
 #: ../upgrades/profiles/v2/workflows/collective_contact_core_workflow/definition.xml
 msgid "Deactivated"
-msgstr ""
+msgstr "Deaktiviran"
 
 #: ../profiles/default/types/directory.xml
 #: ../upgrades/profiles/v2/types/directory.xml
 msgid "Directory"
-msgstr ""
+msgstr "Imenik"
 
 #: ../interfaces.py:33
 msgid "Display person title in displayed person's title."
-msgstr ""
+msgstr "Pokaži naziv osebe v prikazanem nazivu osebe"
 
 #: ../browser/templates/contactdetails.pt:61
 msgid "Download VCard"
-msgstr ""
+msgstr "Naloži VCard"
 
-#: ../behaviors.py:137
-#: ../browser/templates/contactdetails.pt:11
+#: ../behaviors.py:137 ../browser/templates/contactdetails.pt:11
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: ../browser/basefields/templates/held_position.pt:29
-#: ../browser/templates/heldpositions.pt:47
-#: ../content/held_position.py:44
+#: ../browser/templates/heldpositions.pt:47 ../content/held_position.py:44
 msgid "End date"
-msgstr ""
+msgstr "Končni datum"
 
 #: ../behaviors.py:154
 msgid "Fax"
-msgstr ""
+msgstr "Telefaks"
 
 #: ../browser/templates/contactdetails.pt:35
 msgid "Fax number"
-msgstr ""
+msgstr "Telefaks številka"
 
 #: ../vocabulary.py:81
 msgid "Female"
-msgstr ""
+msgstr "ženski"
 
 #: ../content/person.py:36
 msgid "Firstname"
-msgstr ""
+msgstr "Ime"
 
 #: ../content/person.py:40
 msgid "Gender"
-msgstr ""
+msgstr "Spol"
 
 #: ../behaviors.py:77
 msgid "Global positioning"
-msgstr ""
+msgstr "Globalna pozicija"
 
 #: ../profiles/default/types/held_position.xml
 #: ../upgrades/profiles/v2/types/held_position.xml
 msgid "Held position"
-msgstr ""
+msgstr "Trenutna pozicija"
 
 #: ../browser/templates/contactdetails.pt:42
 msgid "IM handle"
-msgstr ""
+msgstr "IM krmilka"
 
 #: ../behaviors.py:164
 msgid "Instant messenger handle"
-msgstr ""
+msgstr "Instant messenger krmilka"
 
 #: ../behaviors.py:32
 msgid "Invalid email address"
-msgstr ""
+msgstr "Napačen email naslov"
 
 #: ../behaviors.py:46
 msgid "Invalid phone"
-msgstr ""
+msgstr "Napačna telefonska številka"
 
 #: ../content/person.py:32
 msgid "Lastname"
-msgstr ""
+msgstr "Priimek"
 
 #: ../behaviors.py:82
 msgid "Latitude"
-msgstr ""
+msgstr "Zemljepisna šririna"
 
 #: ../content/organization.py:39
 msgid "Logo"
-msgstr ""
+msgstr "Logotip"
 
 #: ../behaviors.py:90
 msgid "Longitude"
-msgstr ""
+msgstr "Zemljepisna dolžina"
 
 #: ../vocabulary.py:81
 msgid "Male"
-msgstr ""
+msgstr "moški"
 
 #: ../content/directory.py:21
 msgid "Name"
-msgstr ""
+msgstr "Ime"
 
 #: ../browser/templates/organization.pt:68
 msgid "Not assigned"
-msgstr ""
+msgstr "Ni dodeljen"
 
 #: ../behaviors.py:253
 msgid "Number"
-msgstr ""
+msgstr "Številka"
 
-#: ../browser/addcontact.py:271
-#: ../content/directory.py:37
+#: ../browser/addcontact.py:271 ../content/directory.py:37
 #: ../profiles/default/types/organization.xml
 msgid "Organization"
-msgstr ""
+msgstr "Organizacija"
 
 #: ../content/directory.py:44
 msgid "Organization level"
-msgstr ""
+msgstr "Organizacijski nivo"
 
 #: ../content/directory.py:43
 msgid "Organization levels"
-msgstr ""
+msgstr "Organizacijski nivoji"
 
 #: ../browser/basefields/templates/organization.pt:17
 msgid "Organization type"
-msgstr ""
+msgstr "Tip organizacije"
 
 #: ../content/directory.py:36
 msgid "Organization types"
-msgstr ""
+msgstr "Tipi organizacij"
 
 #: ../content/held_position.py:30
 msgid "Organization/Position"
-msgstr ""
+msgstr "Organizacija/pozicija"
 
-#: ../browser/templates/contact.pt:17
-#: ../browser/templates/directory.pt:19
+#: ../browser/templates/contact.pt:17 ../browser/templates/directory.pt:19
 msgid "Organizations"
-msgstr ""
+msgstr "Organizacije"
 
 #: ../browser/templates/organization.pt:37
 msgid "Organizations in this organization"
-msgstr ""
+msgstr "Organizacije v tej organizaciji"
 
 #: ../browser/templates/othercontacts.pt:10
 msgid "Other contacts in this organization:"
-msgstr ""
+msgstr "Drugi kontakti v tej organizaciji"
 
-#: ../browser/templates/organization.pt:19
-#: ../browser/templates/position.pt:17
+#: ../browser/templates/organization.pt:19 ../browser/templates/position.pt:17
 msgid "Parent organizations"
-msgstr ""
+msgstr "Krovne organizacije"
 
-#: ../browser/addcontact.py:277
-#: ../profiles/default/types/person.xml
+#: ../browser/addcontact.py:277 ../profiles/default/types/person.xml
 #: ../upgrades/profiles/v2/types/person.xml
 msgid "Person"
-msgstr ""
+msgstr "Oseba"
 
 #: ../content/person.py:46
 msgid "Person title"
-msgstr ""
+msgstr "Naziv osebe"
 
 #: ../browser/templates/directory.pt:32
 msgid "Persons"
-msgstr ""
+msgstr "Osebe"
 
 #: ../behaviors.py:143
 msgid "Phone"
-msgstr ""
+msgstr "Telefon"
 
 #: ../browser/templates/contactdetails.pt:19
 msgid "Phone number"
-msgstr ""
+msgstr "Telefonske številke"
 
-#: ../content/held_position.py:48
-#: ../content/person.py:52
+#: ../content/held_position.py:48 ../content/person.py:52
 msgid "Photo"
-msgstr ""
+msgstr "Foto"
 
 #: ../browser/addcontact.py:283
 #: ../browser/basefields/templates/held_position.pt:15
 #: ../content/directory.py:30
 msgid "Position"
-msgstr ""
+msgstr "Pozicija"
 
 #: ../browser/basefields/templates/position.pt:11
 msgid "Position type"
-msgstr ""
+msgstr "Tip pozicije"
 
 #: ../content/directory.py:29
 msgid "Position types"
-msgstr ""
+msgstr "Tipi pozicij"
 
 #: ../browser/templates/heldpositions.pt:10
 msgid "Positions"
-msgstr ""
+msgstr "Pozicije"
 
 #: ../browser/templates/organization.pt:49
 msgid "Positions in this organization"
-msgstr ""
+msgstr "Pozicije v tej organizaciji"
 
 #: ../behaviors.py:258
 msgid "Region"
-msgstr ""
+msgstr "Regija"
 
 #: ../behaviors.py:333
 msgid "Related organizations"
-msgstr ""
+msgstr "Sorodne organizacije"
 
 #: ../behaviors.py:339
 msgid "Search and attach organizations related to this one"
-msgstr ""
+msgstr "Poišči in pripni organizacijo, ki je sorodna tej"
 
 #: ../browser/addcontact.py:273
 msgid "Select the organization where the person holds the position"
-msgstr ""
+msgstr "Izberi organizacijo"
 
 #: ../browser/addcontact.py:278
 msgid "Select the person who holds the position"
-msgstr ""
+msgstr "Izberi osebo, ki zaseda pozicijo"
 
 #: ../browser/addcontact.py:285
 msgid "Select the position held by this person in the selected organization"
-msgstr ""
+msgstr "Izberi pozicijo, ki jo zaseda ta oseba v izbrani organizaciji"
 
 #: ../browser/basefields/templates/held_position.pt:23
-#: ../browser/templates/heldpositions.pt:42
-#: ../content/held_position.py:40
+#: ../browser/templates/heldpositions.pt:42 ../content/held_position.py:40
 msgid "Start date"
-msgstr ""
+msgstr "Začetni datum"
 
 #: ../behaviors.py:248
 msgid "Street"
-msgstr ""
+msgstr "Ulica"
 
 #: ../content/directory.py:22
 msgid "Token"
-msgstr ""
+msgstr "Žeton"
 
 #: ../content/position.py:24
 msgid "Type"
-msgstr ""
+msgstr "Tip"
 
 #: ../content/organization.py:34
 msgid "Type or level"
-msgstr ""
+msgstr "Tip ali nivo"
 
 #: ../interfaces.py:43
 msgid "Use description to search persons."
-msgstr ""
+msgstr "Uporabi opis za iskanje osebe"
 
 #: ../interfaces.py:38
 msgid "Use held positions to search persons."
-msgstr ""
+msgstr "Uporabi trenutne pozicije za iskanje osebe"
 
 #: ../behaviors.py:169
 msgid "Use the belonging entity address"
-msgstr ""
+msgstr "Uporabi pripadajoč naslov entitete"
 
-#: ../behaviors.py:159
-#: ../browser/templates/contactdetails.pt:50
+#: ../behaviors.py:159 ../browser/templates/contactdetails.pt:50
 msgid "Website"
-msgstr ""
+msgstr "Spletna stran"
 
 #: ../behaviors.py:238
 msgid "Zip Code"
-msgstr ""
+msgstr "Poštna številka"
 
 #. Default: ":"
 #: ../browser/basefields/templates/held_position.pt:7
 #: ../browser/templates/organization.pt:55
 msgid "colon"
-msgstr ""
+msgstr "dvopičje"
 
 #: ../browser/templates/organization.pt:65
 msgid "from"
-msgstr ""
+msgstr "od"
 
 #. Default: "Please fill the organization first and then eventually select position"
 #: ../browser/addcontact.py:474
 msgid "help_add_organization_or_position_organization"
-msgstr ""
+msgstr "Najprej vnesite organizacijo in nato po potrebi izberite pozicijo"
 
 #. Default: "Doctor, Mrs..."
 #: ../content/person.py:47
 msgid "help_person_title"
-msgstr ""
+msgstr "dr., mag. ..."
 
 #. Default: "If the item doesn't exist, you can add it to the database :"
 #: ../browser/addcontact.py:67
 msgid "help_widget_add_new_elt"
-msgstr ""
+msgstr "Če predmet ne obstaja, ga lahko dodaš v podatkovno bazo"
 
 #: ../browser/addcontact.py:140
 msgid "organization/position"
-msgstr ""
+msgstr "Organizacija/pozicija"
 
 #: ../browser/templates/organization.pt:65
 msgid "to"
-msgstr ""
-
+msgstr "za"

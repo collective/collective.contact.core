@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.contact.core\n"
-"POT-Creation-Date: 2015-04-23 08:07+0000\n"
-"PO-Revision-Date: 2015-04-23 10:09+0100\n"
+"POT-Creation-Date: 2016-09-29 10:34+0000\n"
+"PO-Revision-Date: 2016-10-04 15:22+0200\n"
 "Last-Translator: Cédric Messiant <cedric.messiant@gmail.com>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -13,13 +13,16 @@ msgstr ""
 "Language-Name: French\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.contact.core\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 1.8.8\n"
 "Language: fr\n"
 
-#: ../browser/addcontact.py:273
-msgid "A contact is a position held by a person in an organization"
+#: ../browser/addcontact.py:110
+msgid "${name} (${position}"
 msgstr ""
-"Un contact est une fonction occupée par une personne dans une organisation"
+
+#: ../browser/addcontact.py:330
+msgid "A contact is a position held by a person in an organization"
+msgstr "Un contact est une fonction occupée par une personne dans une organisation"
 
 #: ../upgrades/profiles/v2/workflows/collective_contact_core_workflow/definition.xml
 msgid "Activate the object"
@@ -34,7 +37,7 @@ msgstr "Actif"
 msgid "Activity"
 msgstr "Activité"
 
-#: ../browser/addcontact.py:317
+#: ../browser/addcontact.py:375
 msgid "Add"
 msgstr "Ajouter"
 
@@ -47,8 +50,7 @@ msgid "Additional label"
 msgstr "Intitulé"
 
 #: ../content/held_position.py:36
-msgid ""
-"Additional label with information that does not appear on position label"
+msgid "Additional label with information that does not appear on position label"
 msgstr "Intitulé complétant l'intitulé de poste"
 
 #: ../behaviors.py:130 ../browser/templates/address.pt:6
@@ -71,7 +73,7 @@ msgstr "Numéro de téléphone portable "
 msgid "City"
 msgstr "Ville"
 
-#: ../browser/addcontact.py:98
+#: ../browser/addcontact.py:101
 msgid "Contact"
 msgstr "Contact"
 
@@ -83,14 +85,10 @@ msgstr "Coordonnées"
 msgid "Country"
 msgstr "Pays"
 
-#: ../browser/addcontact.py:59 ../browser/templates/organization.pt:78
+#: ../browser/addcontact.py:63 ../browser/templates/organization.pt:83
 #: ../browser/templates/position.pt:41
 msgid "Create ${name}"
 msgstr "Créer ${name}"
-
-#: ../browser/addcontact.py:107
-msgid "Create ${name} (${position})"
-msgstr "Créer ${name} (${position})"
 
 #: ../upgrades/profiles/v2/workflows/collective_contact_core_workflow/definition.xml
 msgid "Deactivate the object"
@@ -191,7 +189,7 @@ msgstr "Masculin"
 msgid "Name"
 msgstr "Nom"
 
-#: ../browser/templates/organization.pt:63
+#: ../browser/templates/organization.pt:68
 msgid "Not assigned"
 msgstr "Non assigné"
 
@@ -199,7 +197,7 @@ msgstr "Non assigné"
 msgid "Number"
 msgstr "Numéro"
 
-#: ../browser/addcontact.py:249 ../content/directory.py:37
+#: ../browser/addcontact.py:271 ../content/directory.py:37
 #: ../profiles/default/types/organization.xml
 msgid "Organization"
 msgstr "Organisation"
@@ -228,7 +226,7 @@ msgstr "Organisation/Fonction"
 msgid "Organizations"
 msgstr "Organisations "
 
-#: ../browser/templates/organization.pt:35
+#: ../browser/templates/organization.pt:37
 msgid "Organizations in this organization"
 msgstr "Organisations dans cette organisation "
 
@@ -236,11 +234,11 @@ msgstr "Organisations dans cette organisation "
 msgid "Other contacts in this organization:"
 msgstr "Autres contacts dans cette organisation :"
 
-#: ../browser/templates/organization.pt:17 ../browser/templates/position.pt:17
+#: ../browser/templates/organization.pt:19 ../browser/templates/position.pt:17
 msgid "Parent organizations"
 msgstr "Organisations parentes "
 
-#: ../browser/addcontact.py:255 ../profiles/default/types/person.xml
+#: ../browser/addcontact.py:277 ../profiles/default/types/person.xml
 #: ../upgrades/profiles/v2/types/person.xml
 msgid "Person"
 msgstr "Personne"
@@ -265,7 +263,7 @@ msgstr "Numéro de téléphone "
 msgid "Photo"
 msgstr "Photo"
 
-#: ../browser/addcontact.py:261
+#: ../browser/addcontact.py:283
 #: ../browser/basefields/templates/held_position.pt:15
 #: ../content/directory.py:30
 msgid "Position"
@@ -283,7 +281,7 @@ msgstr "Types de fonctions"
 msgid "Positions"
 msgstr "Fonctions occupées"
 
-#: ../browser/templates/organization.pt:47
+#: ../browser/templates/organization.pt:49
 msgid "Positions in this organization"
 msgstr "Fonctions dans cette organisation "
 
@@ -299,19 +297,17 @@ msgstr "Organisations rattachées"
 msgid "Search and attach organizations related to this one"
 msgstr "Recherchez et associez les organisations liées à cette organisation."
 
-#: ../browser/addcontact.py:251
+#: ../browser/addcontact.py:273
 msgid "Select the organization where the person holds the position"
 msgstr "Sélectionnez l'organisation où la personne occupe la fonction"
 
-#: ../browser/addcontact.py:256
+#: ../browser/addcontact.py:278
 msgid "Select the person who holds the position"
 msgstr "Sélectionnez la personne qui occupe cette fonction"
 
-#: ../browser/addcontact.py:263
+#: ../browser/addcontact.py:285
 msgid "Select the position held by this person in the selected organization"
-msgstr ""
-"Sélectionnez la fonction occupée par cette personne dans l'organisation "
-"sélectionnée"
+msgstr "Sélectionnez la fonction occupée par cette personne dans l'organisation sélectionnée"
 
 #: ../browser/basefields/templates/held_position.pt:23
 #: ../browser/templates/heldpositions.pt:42 ../content/held_position.py:40
@@ -336,11 +332,11 @@ msgstr "Type ou niveau"
 
 #: ../interfaces.py:43
 msgid "Use description to search persons."
-msgstr ""
+msgstr "Utiliser la description pour rechercher des personnes."
 
 #: ../interfaces.py:38
 msgid "Use held positions to search persons."
-msgstr ""
+msgstr "Utiliser la position occupée pour rechercher des personnes."
 
 #: ../behaviors.py:169
 msgid "Use the belonging entity address"
@@ -356,16 +352,18 @@ msgstr "Code postal"
 
 #. Default: ":"
 #: ../browser/basefields/templates/held_position.pt:7
-#: ../browser/templates/organization.pt:53
+#: ../browser/templates/organization.pt:55
 msgid "colon"
 msgstr " :"
 
+#: ../browser/templates/organization.pt:65
+msgid "from"
+msgstr "de"
+
 #. Default: "Please fill the organization first and then eventually select position"
-#: ../browser/addcontact.py:409
+#: ../browser/addcontact.py:474
 msgid "help_add_organization_or_position_organization"
-msgstr ""
-"Veuillez commencer par sélectionner l'organisation, pour sélectionner "
-"ensuite la fonction éventuelle."
+msgstr "Veuillez commencer par sélectionner l'organisation, pour sélectionner ensuite la fonction éventuelle."
 
 #. Default: "Doctor, Mrs..."
 #: ../content/person.py:47
@@ -373,10 +371,14 @@ msgid "help_person_title"
 msgstr "Docteur, Mme..."
 
 #. Default: "If the item doesn't exist, you can add it to the database :"
-#: ../browser/addcontact.py:63
+#: ../browser/addcontact.py:67
 msgid "help_widget_add_new_elt"
 msgstr "Si l'élément n'existe pas, vous pouvez l'ajouter à la base :"
 
-#: ../browser/addcontact.py:134
+#: ../browser/addcontact.py:140
 msgid "organization/position"
 msgstr "organisation/fonction"
+
+#: ../browser/templates/organization.pt:65
+msgid "to"
+msgstr "à"
