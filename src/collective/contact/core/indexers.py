@@ -32,7 +32,8 @@ def held_position_searchable_text(obj):
         indexed_fields.append(position.title)
 
     organization = obj.get_organization()
-    indexed_fields.extend(organization.get_organizations_titles())
+    if organization:
+        indexed_fields.extend(organization.get_organizations_titles())
 
     if obj.label:
         indexed_fields.append(obj.label)
