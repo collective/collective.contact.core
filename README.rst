@@ -7,6 +7,11 @@ This add-on is part of the ``collective.contact.*`` suite. For an overview and a
 
 A Plone add-on that provides a directory where you create persons, organizations, sub-organizations and positions.
 
+Plone Version Compatibility
+===========================
+
+collective.contact.core 1.11 works with Plone 5
+
 
 How-to
 ======
