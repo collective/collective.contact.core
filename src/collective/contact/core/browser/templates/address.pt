@@ -4,9 +4,9 @@
      tal:repeat="address args">
     <div tal:condition="address" class="field adr address">
     <label><tal:block i18n:translate="">Address</tal:block>:</label>
-    <div class="street-address" class="address_line street-address">
-        <span i18n:translate="" tal:replace="address/number"></span>
-        <span i18n:translate="" tal:replace="address/street"></span>
+    <div class="street-address" class="address_line street-address" i18n:translate="address_line">
+        <span i18n:name="street" tal:replace="address/street"></span>
+        <span i18n:name="number" tal:replace="address/number"></span>
     </div>
     <div class="additional_address_details" class="address_line">
         <span i18n:translate="" tal:replace="address/additional_address_details"></span>

@@ -4,6 +4,9 @@ Changelog
 1.11 (unreleased)
 -----------------
 
+- Localize Address: `<street> <nr>` as default, `<nr> <street>` for french
+ (fixes #29) [fRiSi]
+
 - Fixed indexing a held position which organization has been removed.
   [thomasdesvenain]
 
