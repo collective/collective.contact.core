@@ -98,8 +98,8 @@ alsoProvides(IGlobalPositioning, IFormFieldProvider)
 
 
 ADDRESS_FIELDS = (
-                'number',
                 'street',
+                'number',
                 'additional_address_details',
                 'zip_code',
                 'city',
