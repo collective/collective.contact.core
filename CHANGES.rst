@@ -4,30 +4,11 @@ Changelog
 1.11 (unreleased)
 -----------------
 
-- Change field order for address (street before number - as this is more common in most countries) (refs #29)
+- Change field order for address (`<street> <nr>` - as this is more common in most countries)
 
-  If you want the previous field order back, patch `collective.contact.core.behaviors`::
+  * address format can be localized by using msgid `address_line`
+  * field order in add- and editforms can be patched (see README for details)
 
-    <monkey:patch
-      description="Change order of street and number - https://github.com/collective/collective.contact.core/pull/36"
-      module="collective.contact.core.behaviors"
-      original="ADDRESS_FIELDS"
-      replacement=".patches.ADDRESS_FIELDS"
-      />
-
-    ADDRESS_FIELDS = (
-        'number',
-        'street',
-        'additional_address_details',
-        'zip_code',
-        'city',
-        'region',
-        'country',
-    )
-
-  [fRiSi]
-
-- Localize Address: `<street> <nr>` as default, `<nr> <street>` for french
  (fixes #29) [fRiSi]
 
 - Fixed indexing a held position which organization has been removed.

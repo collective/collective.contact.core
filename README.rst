@@ -21,6 +21,36 @@ Modify your directory to customize the organization types and the position types
 
 Look at the test data profile collective.contact.core test data for detailed examples.
 
+Localization
+============
+
+In some countries (ie. France) the format of an address is `<nr> <street>` instead of `<street> <nr>`.
+
+You an provide a translation for the `address_line` i18n-msgid in the collective.contact.core translations if this is the case for your country.
+
+You can also patch `collective.contact.core.behaviors.ADDRESS_FIELDS` to make the number field show up before the street in add- and editforms.
+
+::
+
+  <monkey:patch
+      description="Change order of street and number - https://github.com/collective/collective.contact.core/pull/36"
+      module="collective.contact.core.behaviors"
+      original="ADDRESS_FIELDS"
+      replacement=".patches.ADDRESS_FIELDS"
+      />
+
+  ADDRESS_FIELDS = (
+      'number',
+      'street',
+      'additional_address_details',
+      'zip_code',
+      'city',
+      'region',
+      'country',
+  )
+
+
+
 Installation
 ============
 
