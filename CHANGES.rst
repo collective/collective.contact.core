@@ -4,8 +4,13 @@ Changelog
 1.13 (unreleased)
 -----------------
 
+
 - Avoid error in addcontact when there is no directory.
   [cedricmessiant]
+
+- Prevent fatal error if by chance a held position related to a position or an organisation has been removed
+  but the relation always exist. An error is logged.
+  [thomasdesvenain]
 
 - Refactor: move complex sortable title methods into content objects.
   [thomasdesvenain]
