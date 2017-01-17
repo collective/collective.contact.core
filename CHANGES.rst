@@ -7,6 +7,9 @@ Changelog
 - Avoid error in addcontact when there is no directory.
   [cedricmessiant]
 
+- Refactor: move complex sortable title methods into content objects.
+  [thomasdesvenain]
+
 
 1.12 (2017-01-17)
 -----------------

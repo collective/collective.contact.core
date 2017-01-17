@@ -70,21 +70,12 @@ def person_searchable_text(obj):
 
 @indexer(IPerson)
 def person_sortable_title(obj):
-    if obj.firstname is None:
-        fullname = obj.lastname
-    else:
-        fullname = u"%s %s" % (obj.lastname, obj.firstname)
-
-    return normalizeString(fullname, context=obj)
+    return obj.get_sortable_title()
 
 
 @indexer(IHeldPosition)
 def held_position_sortable_title(obj):
-    sortable_fullname = person_sortable_title(obj.get_person())()
-    held_position_title = obj.Title()
-    return u"%s-%s" % (sortable_fullname,
-                       normalizeString(safe_unicode(held_position_title),
-                                       context=obj))
+    return obj.get_sortable_title()
 
 
 @indexer(IHeldPosition)

@@ -6,7 +6,6 @@ from plone import api
 
 from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.interfaces import IContactable
-from collective.contact.core.indexers import held_position_sortable_title
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.browser.utils import get_valid_url
@@ -75,7 +74,7 @@ class OtherContacts(grok.View):
         organization = self.context
         othercontacts = []
         held_positions = organization.get_held_positions()
-        held_positions.sort(key=lambda x: held_position_sortable_title(x)())
+        held_positions.sort(key=lambda x: x.get_sortable_title())
         for hp in held_positions:
             contact = {}
             person = hp.get_person()

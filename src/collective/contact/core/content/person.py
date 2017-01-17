@@ -1,3 +1,4 @@
+from Products.CMFPlone.utils import normalizeString
 from zope import schema
 from zope.cachedescriptors.property import CachedProperty
 from zope.component import queryUtility
@@ -121,6 +122,13 @@ class Person(Container):
         # must return utf8 and not unicode (Title() from basic behavior return utf8)
         # attributes are stored as unicode
         return self.get_title().encode('utf-8')
+
+    def get_sortable_title(self):
+        if self.firstname is None:
+            fullname = self.lastname
+        else:
+            fullname = u"%s %s" % (self.lastname, self.firstname)
+        return normalizeString(fullname)
 
     def get_held_positions(self):
         return [obj for obj in self.values() if IHeldPosition.providedBy(obj)]
