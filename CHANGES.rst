@@ -4,6 +4,13 @@ Changelog
 1.11 (unreleased)
 -----------------
 
+- Change field order for address (`<street> <nr>` - as this is more common in most countries)
+
+  * address format can be localized by using msgid `address_line`
+  * field order in add and edit forms can be patched (see README for details)
+
+  (fixes #29) [fRiSi]
+
 - Fixed indexing a held position which organization has been removed.
   [thomasdesvenain]
 

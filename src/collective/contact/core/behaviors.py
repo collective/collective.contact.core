@@ -97,15 +97,23 @@ class IGlobalPositioning(model.Schema):
 alsoProvides(IGlobalPositioning, IFormFieldProvider)
 
 
-ADDRESS_FIELDS = (
-                'number',
+# must stay a list so it can be patched
+ADDRESS_FIELDS = [
                 'street',
+                'number',
                 'additional_address_details',
                 'zip_code',
                 'city',
                 'region',
                 'country',
-                )
+                ]
+
+
+# must stay a list so it can be patched
+ADDRESS_FIELDS_PLUS_PARENT = [
+    'use_parent_address',
+    'parent_address'] + ADDRESS_FIELDS
+
 
 CONTACT_DETAILS_FIELDS = (
                 'phone',
@@ -128,8 +136,7 @@ class IContactDetails(model.Schema):
     fieldset(
         'address',
         label=_(u'Address'),
-        fields=('use_parent_address',
-                'parent_address') + ADDRESS_FIELDS
+        fields=ADDRESS_FIELDS_PLUS_PARENT
 
         )
 

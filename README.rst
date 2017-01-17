@@ -21,6 +21,24 @@ Modify your directory to customize the organization types and the position types
 
 Look at the test data profile collective.contact.core test data for detailed examples.
 
+Localization
+============
+
+In some countries (ie. France) the format of an address is `<nr> <street>` instead of `<street> <nr>`.
+
+You can provide a translation for the `address_line` i18n-msgid in the collective.contact.core translations if this is the case for your country.
+
+You can also patch `collective.contact.core.behaviors.ADDRESS_FIELDS` to make the number field show up before the street in add and edit forms.
+
+In your addon, create a `patches.py` file with this content::
+
+    from collective.contact.core import behaviors
+    behaviors.ADDRESS_FIELDS[0:2] = reversed(behaviors.ADDRESS_FIELDS[0:2])
+    behaviors.ADDRESS_FIELDS_PLUS_PARENT[2:4] = reversed(behaviors.ADDRESS_FIELDS_PLUS_PARENT[2:4])
+
+and import it in yout `__init__.py` so the patches takes effect.
+
+
 Installation
 ============
 

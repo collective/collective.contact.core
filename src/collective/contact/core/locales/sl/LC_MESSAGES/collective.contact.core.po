@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.contact.core\n"
-"POT-Creation-Date: 2016-09-29 10:34+0000\n"
+"POT-Creation-Date: 2017-01-13 13:05+0000\n"
 "PO-Revision-Date: 2016-10-01 22:38+0200\n"
 "Last-Translator: Cédric Messiant <cedric.messiant@gmail.com>\n"
 "Language-Team: French\n"
@@ -53,11 +53,13 @@ msgstr "Dodatna oznaka"
 msgid "Additional label with information that does not appear on position label"
 msgstr "Dodatna oznaka z informacijami, ki niso vidne na oznaki pozicije"
 
-#: ../behaviors.py:130 ../browser/templates/address.pt:6
+#: ../behaviors.py:130
+#: ../browser/templates/address.pt:6
 msgid "Address"
 msgstr "Naslov"
 
-#: ../behaviors.py:320 ../browser/basefields/templates/person.pt:27
+#: ../behaviors.py:320
+#: ../browser/basefields/templates/person.pt:27
 msgid "Birthday"
 msgstr "Rojstni dan"
 
@@ -85,7 +87,8 @@ msgstr "Podrobnosti o kontaktu"
 msgid "Country"
 msgstr "Država"
 
-#: ../browser/addcontact.py:63 ../browser/templates/organization.pt:83
+#: ../browser/addcontact.py:63
+#: ../browser/templates/organization.pt:83
 #: ../browser/templates/position.pt:41
 msgid "Create ${name}"
 msgstr "Ustvari  ${name}"
@@ -111,12 +114,14 @@ msgstr "Pokaži naziv osebe v prikazanem nazivu osebe"
 msgid "Download VCard"
 msgstr "Naloži VCard"
 
-#: ../behaviors.py:137 ../browser/templates/contactdetails.pt:11
+#: ../behaviors.py:137
+#: ../browser/templates/contactdetails.pt:11
 msgid "Email"
 msgstr "Email"
 
 #: ../browser/basefields/templates/held_position.pt:29
-#: ../browser/templates/heldpositions.pt:47 ../content/held_position.py:44
+#: ../browser/templates/heldpositions.pt:47
+#: ../content/held_position.py:44
 msgid "End date"
 msgstr "Končni datum"
 
@@ -197,7 +202,8 @@ msgstr "Ni dodeljen"
 msgid "Number"
 msgstr "Številka"
 
-#: ../browser/addcontact.py:271 ../content/directory.py:37
+#: ../browser/addcontact.py:271
+#: ../content/directory.py:37
 #: ../profiles/default/types/organization.xml
 msgid "Organization"
 msgstr "Organizacija"
@@ -222,7 +228,8 @@ msgstr "Tipi organizacij"
 msgid "Organization/Position"
 msgstr "Organizacija/pozicija"
 
-#: ../browser/templates/contact.pt:17 ../browser/templates/directory.pt:19
+#: ../browser/templates/contact.pt:17
+#: ../browser/templates/directory.pt:19
 msgid "Organizations"
 msgstr "Organizacije"
 
@@ -234,11 +241,13 @@ msgstr "Organizacije v tej organizaciji"
 msgid "Other contacts in this organization:"
 msgstr "Drugi kontakti v tej organizaciji"
 
-#: ../browser/templates/organization.pt:19 ../browser/templates/position.pt:17
+#: ../browser/templates/organization.pt:19
+#: ../browser/templates/position.pt:17
 msgid "Parent organizations"
 msgstr "Krovne organizacije"
 
-#: ../browser/addcontact.py:277 ../profiles/default/types/person.xml
+#: ../browser/addcontact.py:277
+#: ../profiles/default/types/person.xml
 #: ../upgrades/profiles/v2/types/person.xml
 msgid "Person"
 msgstr "Oseba"
@@ -259,7 +268,8 @@ msgstr "Telefon"
 msgid "Phone number"
 msgstr "Telefonske številke"
 
-#: ../content/held_position.py:48 ../content/person.py:52
+#: ../content/held_position.py:48
+#: ../content/person.py:52
 msgid "Photo"
 msgstr "Foto"
 
@@ -310,7 +320,8 @@ msgid "Select the position held by this person in the selected organization"
 msgstr "Izberi pozicijo, ki jo zaseda ta oseba v izbrani organizaciji"
 
 #: ../browser/basefields/templates/held_position.pt:23
-#: ../browser/templates/heldpositions.pt:42 ../content/held_position.py:40
+#: ../browser/templates/heldpositions.pt:42
+#: ../content/held_position.py:40
 msgid "Start date"
 msgstr "Začetni datum"
 
@@ -342,13 +353,19 @@ msgstr "Uporabi trenutne pozicije za iskanje osebe"
 msgid "Use the belonging entity address"
 msgstr "Uporabi pripadajoč naslov entitete"
 
-#: ../behaviors.py:159 ../browser/templates/contactdetails.pt:50
+#: ../behaviors.py:159
+#: ../browser/templates/contactdetails.pt:50
 msgid "Website"
 msgstr "Spletna stran"
 
 #: ../behaviors.py:238
 msgid "Zip Code"
 msgstr "Poštna številka"
+
+#. Default: "${street} ${number}"
+#: ../browser/templates/address.pt:9
+msgid "address_line"
+msgstr ""
 
 #. Default: ":"
 #: ../browser/basefields/templates/held_position.pt:7
@@ -382,3 +399,4 @@ msgstr "Organizacija/pozicija"
 #: ../browser/templates/organization.pt:65
 msgid "to"
 msgstr "za"
+
