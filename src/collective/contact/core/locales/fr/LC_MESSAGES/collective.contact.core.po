@@ -366,7 +366,7 @@ msgstr "Code postal"
 #. Default: "${street} ${number}"
 #: ../browser/templates/address.pt:9
 msgid "address_line"
-msgstr "${number} ${street}"
+msgstr "${street} ${number}"
 
 #. Default: ":"
 #: ../browser/basefields/templates/held_position.pt:7

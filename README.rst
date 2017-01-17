@@ -24,7 +24,7 @@ Look at the test data profile collective.contact.core test data for detailed exa
 Localization
 ============
 
-In some countries (ie. France) the format of an address is `<nr> <street>` instead of `<street> <nr>`.
+In some countries (i.e. France) the format of an address is `<nr> <street>` instead of `<street> <nr>`.
 
 You can provide a translation for the `address_line` i18n-msgid in the collective.contact.core translations if this is the case for your country.
 
