@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.11 (unreleased)
+1.11 (2017-01-17)
 -----------------
 
 - Change field order for address (`<street> <nr>` - as this is more common in most countries)
