@@ -4,12 +4,6 @@ Changelog
 1.12 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
-
-1.11 (2017-01-17)
------------------
-
 - Change field order for address (`<street> <nr>` - as this is more common in most countries)
 
   * address format can be localized by using msgid `address_line`
@@ -23,6 +17,9 @@ Changelog
 - Add translations for de, it, fr and sl.
   [fRiSi]
 
+1.11 (2016-10-13)
+-----------------
+
 - Fix setup_relation_dependency when many are setup on the same page.
   [thomasdesvenain]
 
@@ -35,7 +32,6 @@ Changelog
 
 - Fix AddContact form problem with security hotfix 20160830
   [ebrehault]
-
 
 1.9 (2016-07-07)
 ----------------
