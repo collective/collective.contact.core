@@ -1,20 +1,18 @@
-from zope.interface import implements
-from zope import schema
-from z3c.form.interfaces import NO_VALUE
-
-from five import grok
-
-from plone.dexterity.content import Container
-from plone.supermodel import model
-from plone.dexterity.schema import DexteritySchemaPolicy
-
+# -*- coding: utf-8 -*-
 from collective.contact.core import _
 from collective.contact.core.browser.contactable import Contactable
-from collective.contact.widget.interfaces import IContactContent
-from zope.component._api import getUtility
-from zope.intid.interfaces import IIntIds
-from zc.relation.interfaces import ICatalog
 from collective.contact.core.content.held_position import IHeldPosition
+from collective.contact.widget.interfaces import IContactContent
+from five import grok
+from plone.dexterity.content import Container
+from plone.dexterity.schema import DexteritySchemaPolicy
+from plone.supermodel import model
+from z3c.form.interfaces import NO_VALUE
+from zc.relation.interfaces import ICatalog
+from zope import schema
+from zope.component._api import getUtility
+from zope.interface import implements
+from zope.intid.interfaces import IIntIds
 
 
 class IPosition(model.Schema, IContactContent):
@@ -37,8 +35,6 @@ class IPosition(model.Schema, IContactContent):
 
 class PositionContactableAdapter(Contactable):
     """Contactable adapter for Position content type"""
-
-    grok.context(IPosition)
 
     @property
     def position(self):

@@ -1,16 +1,13 @@
-from zope.interface import Interface, implements
-from zope import schema
-
+# -*- coding: utf-8 -*-
+from collective.contact.core import _
+from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
 from five import grok
-
 from plone.autoform.directives import widget
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.supermodel import model
-
-from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
-
-from collective.contact.core import _
+from zope import schema
+from zope.interface import Interface, implements
 
 
 class INameTokenTableRowSchema(Interface):

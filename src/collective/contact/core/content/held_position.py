@@ -1,21 +1,18 @@
+# -*- coding: utf-8 -*-
+from collective.contact.core import _
+from collective.contact.core.browser.contactable import Contactable
+from collective.contact.core.schema import ContactChoice
+from collective.contact.widget.interfaces import IContactContent
+from collective.contact.widget.source import ContactSourceBinder
 from ComputedAttribute import ComputedAttribute
-
-from z3c.form.interfaces import NO_VALUE
-from zope.interface import implements
-from zope import schema
-
 from five import grok
-
-from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.dexterity.content import Container
+from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.namedfile.field import NamedImage
 from plone.supermodel import model
-
-from collective.contact.core import _
-from collective.contact.core.schema import ContactChoice
-from collective.contact.core.browser.contactable import Contactable
-from collective.contact.widget.source import ContactSourceBinder
-from collective.contact.widget.interfaces import IContactContent
+from z3c.form.interfaces import NO_VALUE
+from zope import schema
+from zope.interface import implements
 
 
 def acqproperty(func):
@@ -66,8 +63,6 @@ class IHeldPosition(model.Schema, IContactContent):
 
 class HeldPositionContactableAdapter(Contactable):
     """Contactable adapter for HeldPosition content type"""
-
-    grok.context(IHeldPosition)
 
     @property
     def person(self):

@@ -24,6 +24,7 @@
       name="view"
       for="..content.organization.IOrganization"
       class=".organization.Organization"
+      allowed_attributes="parent_organizations sub_organizations positions can_add addnew_script"
       template="templates/organization.pt"
       permission="zope2.View"
       />
@@ -33,6 +34,76 @@
       for="..content.position.IPosition"
       class=".position.Position"
       template="templates/position.pt"
+      permission="zope2.View"
+      />
+
+  <adapter
+    for="*"
+    factory=".contactable.ContactDetailsContactable"
+    />
+
+  <adapter
+    for="collective.contact.widget.interfaces.IContactContent"
+    factory=".contactable.ContactDetailsContactable"
+    />
+
+  <adapter
+    for="..content.organization.IOrganization"
+    factory="..content.organization.OrganizationContactableAdapter"
+    />
+
+  <adapter
+    for="..content.person.IPerson"
+    factory="..content.person.PersonContactableAdapter"
+    />
+
+  <adapter
+    for="..content.held_position.IHeldPosition"
+    factory="..content.held_position.HeldPositionContactableAdapter"
+    />
+
+  <adapter
+    for="..content.position.IPosition"
+    factory="..content.position.PositionContactableAdapter"
+    />
+
+  <browser:page
+      name="contactdetails"
+      for=".contactable.IContactContent"
+      class=".contactable.ContactDetails"
+      template="templates/contactdetails.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="nofallbackcontactdetails"
+      for=".contactable.IContactContent"
+      class=".contactable.NoFallbackContactDetails"
+      template="templates/contactdetails.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="heldpositions"
+      for=".person.IPerson"
+      class=".person.HeldPositions"
+      template="templates/heldpositions.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="othercontacts"
+      for=".organization.IOrganization"
+      class=".organization.OtherContacts"
+      template="templates/othercontacts.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="ttwfields"
+      for="*"
+      class=".ttwfields.TTWFields"
+      template="templates/ttwfields.pt"
       permission="zope2.View"
       />
 

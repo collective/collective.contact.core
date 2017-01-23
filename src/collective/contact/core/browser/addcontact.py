@@ -1,19 +1,12 @@
+# -*- coding: utf-8 -*-
 from AccessControl import getSecurityManager
-from zope.component import getUtility, queryAdapter
-from zope.contentprovider.interfaces import IContentProvider
-from zope.event import notify
-from zope.i18n import Message
-from zope.interface import implements, Interface
-from zope.publisher.browser import BrowserView
-
-from z3c.form import field, form, button
-from z3c.form.contentprovider import ContentProviders
-from z3c.form.interfaces import IFieldsAndContentProvidersForm, HIDDEN_MODE,\
-    DISPLAY_MODE
-
-from Products.statusmessages.interfaces import IStatusMessage
+from collective.contact.core import _
+from collective.contact.core.behaviors import IContactDetails
+from collective.contact.core.content.person import IPerson
+from collective.contact.widget.interfaces import IContactWidgetSettings
+from collective.contact.widget.schema import ContactChoice
+from collective.contact.widget.source import ContactSourceBinder
 from five import grok
-
 from plone import api
 from plone.dexterity.browser.add import DefaultAddForm
 from plone.dexterity.events import AddCancelledEvent
@@ -21,20 +14,22 @@ from plone.dexterity.i18n import MessageFactory as DMF
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.dexterity.utils import addContentToContainer
 from plone.supermodel import model
-
-from collective.contact.widget.schema import ContactChoice
-from collective.contact.widget.source import ContactSourceBinder
-from collective.contact.widget.interfaces import IContactWidgetSettings
-
-from collective.contact.core import _
-from collective.contact.core.content.person import IPerson
-from collective.contact.core.behaviors import IContactDetails
-
-from zope.interface import implementer
-from zope.interface import provider
-from zope.component.hooks import getSite
-from zope.interface import alsoProvides
 from plone.z3cform.interfaces import IDeferSecurityCheck
+from Products.statusmessages.interfaces import IStatusMessage
+from z3c.form import field, form, button
+from z3c.form.contentprovider import ContentProviders
+from z3c.form.interfaces import IFieldsAndContentProvidersForm, \
+    HIDDEN_MODE, DISPLAY_MODE
+from zope.component import getUtility, queryAdapter
+from zope.component.hooks import getSite
+from zope.contentprovider.interfaces import IContentProvider
+from zope.event import notify
+from zope.i18n import Message
+from zope.interface import alsoProvides
+from zope.interface import implementer
+from zope.interface import implements, Interface
+from zope.interface import provider
+from zope.publisher.browser import BrowserView
 
 
 class ICustomSettings(Interface):
@@ -55,8 +50,6 @@ class ICustomSettings(Interface):
         """
 
 
-# @provider(IContactWidgetSettings)
-# @implementer(ICustomSettings)
 class ContactWidgetSettings(grok.GlobalUtility):
     grok.provides(IContactWidgetSettings)
     grok.implements(ICustomSettings)

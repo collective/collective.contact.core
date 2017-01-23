@@ -1,16 +1,13 @@
-from five import grok
-
 from AccessControl import getSecurityManager
-
-from plone import api
-
-from collective.contact.core.browser.contactable import BaseView
-from collective.contact.core.interfaces import IContactable
-from collective.contact.core.indexers import held_position_sortable_title
 from collective.contact.core.behaviors import IContactDetails
-from collective.contact.core.content.organization import IOrganization
-from collective.contact.core.browser.utils import get_valid_url
+from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.browser.utils import date_to_DateTime
+from collective.contact.core.browser.utils import get_valid_url
+from collective.contact.core.content.organization import IOrganization
+from collective.contact.core.indexers import held_position_sortable_title
+from collective.contact.core.interfaces import IContactable
+from plone import api
+from Products.Five import BrowserView
 
 
 ADDNEW_OVERLAY = """
@@ -33,13 +30,9 @@ $(document).ready(function(){
 """
 
 
-grok.templatedir('templates')
-
-
 class Organization(BaseView):
 
     def update(self):
-        super(Organization, self).update()
         self.organization = self.context
         organization = self.organization
 
@@ -59,22 +52,21 @@ class Organization(BaseView):
         self.can_add = sm.checkPermission('Add portal content', self.context)
         self.addnew_script = ADDNEW_OVERLAY
 
+
     def display_date(self, date):
         """Display date nicely in template."""
         return self.context.toLocalizedTime(date_to_DateTime(date))
 
 
-class OtherContacts(grok.View):
+class OtherContacts(BrowserView):
     """Displays other contacts list"""
-    grok.name('othercontacts')
-    grok.context(IOrganization)
 
     held_positions = ''
 
     def held_position_order_key(self, held_position):
         return held_position_sortable_title(held_position)
 
-    def update(self):
+    def __call__(self):
         organization = self.context
         othercontacts = []
         held_positions = organization.get_held_positions()
@@ -102,3 +94,4 @@ class OtherContacts(grok.View):
             othercontacts.append(contact)
 
         self.othercontacts = othercontacts
+        return super(OtherContacts, self).__call__()

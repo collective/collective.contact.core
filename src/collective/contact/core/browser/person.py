@@ -1,17 +1,13 @@
-from five import grok
-
+# -*- coding: utf-8 -*-
 from AccessControl import getSecurityManager
-
+from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.browser import TEMPLATES_DIR
 from collective.contact.core.browser.contactable import BaseView
-from collective.contact.core.content.person import IPerson
 from collective.contact.core.browser.utils import date_to_DateTime
-from collective.contact.core.interfaces import IContactable,\
+from collective.contact.core.content.person import IPerson
+from collective.contact.core.interfaces import IContactable, \
     IPersonHeldPositions
-from collective.contact.core.behaviors import IContactDetails
-
-
-grok.templatedir(TEMPLATES_DIR)
+from Products.Five import BrowserView
 
 
 class Person(BaseView):
@@ -27,15 +23,12 @@ class Person(BaseView):
             self.show_contact_details = True
 
 
-class HeldPositions(grok.View):
+class HeldPositions(BrowserView):
     """Displays held positions list"""
-    grok.name('heldpositions')
-    grok.template('heldpositions')
-    grok.context(IPerson)
 
     held_positions = ''
 
-    def update(self):
+    def __call__(self):
         person = self.context
         sm = getSecurityManager()
         held_positions = []
@@ -63,3 +56,4 @@ class HeldPositions(grok.View):
             held_positions.append(held_position)
 
         self.held_positions = held_positions
+        return super(HeldPositions, self).__call__()
