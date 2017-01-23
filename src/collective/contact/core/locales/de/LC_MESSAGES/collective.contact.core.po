@@ -371,7 +371,7 @@ msgstr ""
 #: ../browser/basefields/templates/held_position.pt:7
 #: ../browser/templates/organization.pt:55
 msgid "colon"
-msgstr "\":\""
+msgstr ":"
 
 #: ../browser/templates/organization.pt:65
 msgid "from"
