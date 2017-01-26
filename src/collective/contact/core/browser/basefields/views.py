@@ -1,25 +1,13 @@
+# -*- coding: utf-8 -*-
 from AccessControl import getSecurityManager
-
-from five import grok
-
+from collective.contact.core.behaviors import IBirthday
+from collective.contact.core.browser.utils import date_to_DateTime
+from Products.Five import BrowserView
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 
-from collective.contact.core.behaviors import IBirthday
-from collective.contact.core.browser.utils import date_to_DateTime
-from collective.contact.core.content.person import IPerson
-from collective.contact.core.content.organization import IOrganization
-from collective.contact.core.content.position import IPosition
-from collective.contact.core.content.held_position import IHeldPosition
 
-
-grok.templatedir('templates')
-
-
-class PersonBaseFields(grok.View):
-    grok.name('basefields')
-    grok.template('person')
-    grok.context(IPerson)
+class PersonBaseFields(BrowserView):
 
     name = ''
     birthday = ''
@@ -44,12 +32,12 @@ class PersonBaseFields(grok.View):
         self.gender = person.gender or ''
         self.can_edit = sm.checkPermission('Modify portal content', person)
 
+    def __call__(self):
+        self.update()
+        return super(PersonBaseFields, self).__call__()
 
-class OrganizationBaseFields(grok.View):
 
-    grok.name('basefields')
-    grok.template('organization')
-    grok.context(IOrganization)
+class OrganizationBaseFields(BrowserView):
 
     name = ''
     type = ''
@@ -64,17 +52,19 @@ class OrganizationBaseFields(grok.View):
         factory = getUtility(IVocabularyFactory, "OrganizationTypesOrLevels")
         vocabulary = factory(self.context)
         try:
-            self.type = vocabulary.getTerm(organization.organization_type).title
+            self.type = vocabulary.getTerm(
+                organization.organization_type
+            ).title
         except LookupError:
             pass
         self.activity = self.context.activity
 
+    def __call__(self):
+        self.update()
+        return super(OrganizationBaseFields, self).__call__()
 
-class PositionBaseFields(grok.View):
 
-    grok.name('basefields')
-    grok.template('position')
-    grok.context(IPosition)
+class PositionBaseFields(BrowserView):
 
     name = ''
     type = ''
@@ -87,11 +77,12 @@ class PositionBaseFields(grok.View):
         vocabulary = factory(self.context)
         self.type = vocabulary.getTerm(position.position_type).title
 
+    def __call__(self):
+        self.update()
+        return super(PositionBaseFields, self).__call__()
 
-class HeldPositionBaseFields(grok.View):
-    grok.name('basefields')
-    grok.template('held_position')
-    grok.context(IHeldPosition)
+
+class HeldPositionBaseFields(BrowserView):
 
     start_date = ''
     end_date = ''
@@ -119,3 +110,7 @@ class HeldPositionBaseFields(grok.View):
         self.title = held_position.Title()
 
         self.position = held_position.get_position()
+
+    def __call__(self):
+        self.update()
+        return super(HeldPositionBaseFields, self).__call__()

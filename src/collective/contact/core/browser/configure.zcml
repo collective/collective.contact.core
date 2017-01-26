@@ -6,6 +6,7 @@
     i18n_domain="collective.contact.core">
 
   <include package="plone.formwidget.autocomplete" />
+  <include package=".basefields" />
 
   <browser:resourceDirectory
       name="collective.contact.core"

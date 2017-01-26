@@ -3,7 +3,8 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
-      tal:define="portal_url context/@@plone_portal_state/portal_url;"
+      tal:define="portal_url context/@@plone_portal_state/portal_url;
+                  checkPermission nocall: context/portal_membership/checkPermission;"
       i18n:domain="collective.contact.core" tal:omit-tag="">
 
     <div id="held_positions" class="field" tal:condition="view/held_positions">
@@ -11,7 +12,7 @@
         <tal:block tal:repeat="held_position view/held_positions">
             <div class="held_position vcard" tal:define="url held_position/object/absolute_url">
 
-              <div class="actions">
+              <div class="actions" tal:condition="python: checkPermission('Modify portal content', context)">
                 <a class="zoom-held-position contactoverlay" tal:attributes="href string:${url}/view">
                   <img alt="View" title="View"
                        i18n:domain="plone"
