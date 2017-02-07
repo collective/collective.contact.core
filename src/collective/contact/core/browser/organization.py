@@ -33,6 +33,7 @@ $(document).ready(function(){
 class Organization(BaseView):
 
     def update(self):
+        super(Organization, self).update()
         self.organization = self.context
         organization = self.organization
 
@@ -66,7 +67,7 @@ class OtherContacts(BrowserView):
     def held_position_order_key(self, held_position):
         return held_position_sortable_title(held_position)
 
-    def __call__(self):
+    def update(self):
         organization = self.context
         othercontacts = []
         held_positions = organization.get_held_positions()
@@ -94,4 +95,8 @@ class OtherContacts(BrowserView):
             othercontacts.append(contact)
 
         self.othercontacts = othercontacts
+        return super(OtherContacts, self).__call__()
+
+    def __call__(self):
+        self.update()
         return super(OtherContacts, self).__call__()

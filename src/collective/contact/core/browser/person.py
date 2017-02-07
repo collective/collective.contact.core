@@ -28,7 +28,7 @@ class HeldPositions(BrowserView):
 
     held_positions = ''
 
-    def __call__(self):
+    def update(self):
         person = self.context
         sm = getSecurityManager()
         held_positions = []
@@ -56,4 +56,8 @@ class HeldPositions(BrowserView):
             held_positions.append(held_position)
 
         self.held_positions = held_positions
+        return super(HeldPositions, self).__call__()
+
+    def __call__(self):
+        self.update()
         return super(HeldPositions, self).__call__()
