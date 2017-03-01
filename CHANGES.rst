@@ -4,7 +4,8 @@ Changelog
 1.13 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Avoid error in addcontact when there is no directory.
+  [cedricmessiant]
 
 
 1.12 (2017-01-17)

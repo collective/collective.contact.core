@@ -90,8 +90,8 @@ class ContactWidgetSettings(grok.GlobalUtility):
                 addlink_enabled = False
 
         close_on_click = True
-        custom_settings = queryAdapter(directory, ICustomSettings, default=self)
         if addlink_enabled:
+            custom_settings = queryAdapter(directory, ICustomSettings, default=self)
             directory_url = directory.absolute_url()
             if len(portal_types) == 1:
                 portal_type = portal_types[0]
