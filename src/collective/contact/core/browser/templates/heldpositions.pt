@@ -16,7 +16,7 @@
                 <a class="zoom-held-position contactoverlay" tal:attributes="href string:${url}/view">
                   <img alt="View" title="View"
                        i18n:domain="plone"
-                       tal:attributes="src string:${portal_url}/search_icon.png"
+                       tal:attributes="src string:${portal_url}/++resource++collective.contact.core/search_icon.png"
                        i18n:attributes="alt; title" />
                 </a>
                 <a class="edit-held-position contactoverlay"
@@ -32,7 +32,7 @@
                    tal:condition="held_position/can_delete">
                   <img alt="Delete" title="Delete"
                        i18n:domain="plone"
-                       tal:attributes="src string:${portal_url}/delete_icon.png"
+                       tal:attributes="src string:${portal_url}/++resource++collective.contact.core/delete_icon.png"
                        i18n:attributes="alt; title" />
                 </a>
               </div>
