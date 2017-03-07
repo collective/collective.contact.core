@@ -10,6 +10,7 @@ class Directory(DefaultView):
         search_path = {'query': directory_path, 'depth': 1}
         catalog = api.portal.get_tool('portal_catalog')
         self.persons = catalog.searchResults(portal_type="person",
-                                             path=search_path)
+                                             path=search_path,
+                                             sort_on='sortable_title')
         self.organizations = catalog.searchResults(portal_type="organization",
                                                    path=search_path)
