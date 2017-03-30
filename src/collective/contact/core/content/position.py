@@ -11,10 +11,11 @@ from plone.dexterity.schema import DexteritySchemaPolicy
 from collective.contact.core import _
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.widget.interfaces import IContactContent
-from zope.component._api import getUtility
+from zope.component import getUtility
 from zope.intid.interfaces import IIntIds
 from zc.relation.interfaces import ICatalog
 from collective.contact.core.content.held_position import IHeldPosition
+from collective.contact.core import logger
 
 
 class IPosition(model.Schema, IContactContent):
@@ -95,7 +96,14 @@ class Position(Container):
                               {'to_id': position_intid,
                                'from_interfaces_flattened': IHeldPosition,
                                'from_attribute': 'position'})
-        return [c.from_object for c in contact_relations]
+        held_positions = []
+        for relation in contact_relations:
+            held_position = relation.from_object
+            if not held_position:
+                logger.error("from_object missing for relation from held_position to position %s: %s", self, relation.__dict__)
+                continue
+            held_positions.append(held_position)
+        return held_positions
 
 
 class PositionSchemaPolicy(grok.GlobalUtility,

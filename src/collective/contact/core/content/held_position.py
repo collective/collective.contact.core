@@ -1,4 +1,5 @@
 from ComputedAttribute import ComputedAttribute
+from Products.CMFPlone.utils import normalizeString, safe_unicode
 
 from z3c.form.interfaces import NO_VALUE
 from zope.interface import implements
@@ -181,6 +182,14 @@ class HeldPosition(Container):
 
     def get_person_title(self):
         return self.get_person().get_title()
+
+    def get_sortable_title(self):
+        sortable_fullname = self.get_person().get_sortable_title()
+        held_position_title = self.Title()
+        return u"%s-%s" % (
+            sortable_fullname,
+            normalizeString(safe_unicode(held_position_title))
+        )
 
     @acqproperty
     def person_title(self):

@@ -16,11 +16,10 @@ from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.namedfile.field import NamedImage
 from plone.app.textfield import RichText
 
-from collective.contact.core import _
+from collective.contact.core import _, logger
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.widget.interfaces import IContactContent
 from collective.contact.core.content.held_position import IHeldPosition
-
 
 class IOrganization(model.Schema, IContactContent):
     """Interface for Organization content type"""
@@ -148,7 +147,14 @@ class Organization(Container):
                               {'to_id': orga_intid,
                                'from_interfaces_flattened': IHeldPosition,
                                'from_attribute': 'position'})
-        return [c.from_object for c in contact_relations]
+        held_positions = []
+        for relation in contact_relations:
+            held_position = relation.from_object
+            if not held_position:
+                logger.error("from_object missing for relation from held_position to organisation %s: %s", self, relation.__dict__)
+                continue
+            held_positions.append(held_position)
+        return held_positions
 
 
 class OrganizationSchemaPolicy(grok.GlobalUtility,
