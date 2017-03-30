@@ -4,6 +4,9 @@ Changelog
 1.13 (unreleased)
 -----------------
 
+- Use a python view to provide gender/person title mapping. In this way, the terms can be translated.
+  [cedricmessiant]
+
 - Avoid error in addcontact when there is no directory.
   [cedricmessiant]
 

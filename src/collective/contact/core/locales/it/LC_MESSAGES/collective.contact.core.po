@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-01-13 13:05+0000\n"
+"POT-Creation-Date: 2017-03-30 13:55+0000\n"
 "PO-Revision-Date: 2016-10-04 18:45+0200\n"
 "Last-Translator: Luca Fabbri <keul@redturtle.it>\n"
 "Language-Team: \n"
@@ -36,7 +36,7 @@ msgid "Active"
 msgstr "Attivo"
 
 #: ../browser/basefields/templates/organization.pt:23
-#: ../content/organization.py:29
+#: ../content/organization.py:28
 msgid "Activity"
 msgstr "Attività"
 
@@ -44,29 +44,30 @@ msgstr "Attività"
 msgid "Add"
 msgstr "Aggiungi"
 
-#: ../behaviors.py:263
+#: ../behaviors.py:270
 msgid "Additional address details"
 msgstr "Dettagli aggiuntivi dell'indirizzo"
 
-#: ../content/held_position.py:35
+#: ../content/held_position.py:36
 msgid "Additional label"
 msgstr "Etichetta aggiuntiva"
 
-#: ../content/held_position.py:36
+#: ../content/held_position.py:37
 msgid "Additional label with information that does not appear on position label"
 msgstr "Etichetta aggiuntiva con informazioni che non compaiono nell'etichetta della posizione"
 
-#: ../behaviors.py:130
+#: ../behaviors.py:138
 #: ../browser/templates/address.pt:6
 msgid "Address"
 msgstr "Indirizzo"
 
-#: ../behaviors.py:320
+#: ../behaviors.py:327
+#: ../behaviors.zcml:28
 #: ../browser/basefields/templates/person.pt:27
 msgid "Birthday"
 msgstr "Data di nascita"
 
-#: ../behaviors.py:149
+#: ../behaviors.py:156
 msgid "Cell phone"
 msgstr "Telefono cellulare"
 
@@ -74,7 +75,7 @@ msgstr "Telefono cellulare"
 msgid "Cell phone number"
 msgstr "Telefono cellulare"
 
-#: ../behaviors.py:243
+#: ../behaviors.py:250
 msgid "City"
 msgstr "Città"
 
@@ -82,11 +83,20 @@ msgstr "Città"
 msgid "Contact"
 msgstr "Contatto"
 
-#: ../behaviors.py:125
+#: ../behaviors.py:133
+#: ../behaviors.zcml:16
 msgid "Contact details"
 msgstr "Dettagli contatto"
 
-#: ../behaviors.py:233
+#: ../behaviors.zcml:16
+msgid "Contact details (phone number, address, email, ...)."
+msgstr ""
+
+#: ../behaviors.zcml:28
+msgid "Contact have a birthday."
+msgstr ""
+
+#: ../behaviors.py:240
 msgid "Country"
 msgstr "Paese"
 
@@ -117,18 +127,18 @@ msgstr "Visualizza il titolo della persona nel titolo della persona visualizzata
 msgid "Download VCard"
 msgstr "Scarica VCard"
 
-#: ../behaviors.py:137
+#: ../behaviors.py:144
 #: ../browser/templates/contactdetails.pt:11
 msgid "Email"
 msgstr "E-mail"
 
 #: ../browser/basefields/templates/held_position.pt:29
 #: ../browser/templates/heldpositions.pt:47
-#: ../content/held_position.py:44
+#: ../content/held_position.py:45
 msgid "End date"
 msgstr "Data fine"
 
-#: ../behaviors.py:154
+#: ../behaviors.py:161
 msgid "Fax"
 msgstr "Fax"
 
@@ -140,17 +150,22 @@ msgstr "Numero di Fax"
 msgid "Female"
 msgstr "Donna"
 
-#: ../content/person.py:36
+#: ../content/person.py:37
 msgid "Firstname"
 msgstr "Nome"
 
-#: ../content/person.py:40
+#: ../content/person.py:41
 msgid "Gender"
 msgstr "Sesso"
 
 #: ../behaviors.py:77
+#: ../behaviors.zcml:22
 msgid "Global positioning"
 msgstr "Posizione globale"
+
+#: ../behaviors.zcml:22
+msgid "Global positioning (latitude and longitude)."
+msgstr ""
 
 #: ../profiles/default/types/held_position.xml
 #: ../upgrades/profiles/v2/types/held_position.xml
@@ -161,7 +176,15 @@ msgstr "Posizione tenuta"
 msgid "IM handle"
 msgstr "Instant messaging"
 
-#: ../behaviors.py:164
+#: ../configure.zcml:57
+msgid "Installs test data for the collective.contact.core package"
+msgstr ""
+
+#: ../configure.zcml:49
+msgid "Installs the collective.contact.core package"
+msgstr ""
+
+#: ../behaviors.py:171
 msgid "Instant messenger handle"
 msgstr "Instant messaging usato"
 
@@ -173,7 +196,7 @@ msgstr "Indirizzo e-mail invalido"
 msgid "Invalid phone"
 msgstr "Telefono invalido"
 
-#: ../content/person.py:32
+#: ../content/person.py:33
 msgid "Lastname"
 msgstr "Cognome"
 
@@ -181,7 +204,7 @@ msgstr "Cognome"
 msgid "Latitude"
 msgstr "Latitudine"
 
-#: ../content/organization.py:39
+#: ../content/organization.py:38
 msgid "Logo"
 msgstr "Logo"
 
@@ -193,6 +216,34 @@ msgstr "Longitudine"
 msgid "Male"
 msgstr "Uomo"
 
+#: ../upgrades/configure.zcml:14
+msgid "Migration profile for collective.contact.core to 2"
+msgstr ""
+
+#: ../upgrades/configure.zcml:54
+msgid "Migration profile for collective.contact.core to 6"
+msgstr ""
+
+#: ../upgrades/configure.zcml:70
+msgid "Migration profile for collective.contact.core to 7"
+msgstr ""
+
+#: ../upgrades/configure.zcml:86
+msgid "Migration profile for collective.contact.core to 8"
+msgstr ""
+
+#: ../upgrades/configure.zcml:102
+msgid "Migration profile for collective.contact.core to 9"
+msgstr ""
+
+#: ../browser/person_title_mapping.py:22
+msgid "Mr"
+msgstr ""
+
+#: ../browser/person_title_mapping.py:23
+msgid "Mrs"
+msgstr ""
+
 #: ../content/directory.py:21
 msgid "Name"
 msgstr "Nome"
@@ -201,7 +252,7 @@ msgstr "Nome"
 msgid "Not assigned"
 msgstr "Non assegnata"
 
-#: ../behaviors.py:253
+#: ../behaviors.py:260
 msgid "Number"
 msgstr "Numero"
 
@@ -227,7 +278,7 @@ msgstr "Tipo organizzazione"
 msgid "Organization types"
 msgstr "Tipi di organizzazione"
 
-#: ../content/held_position.py:30
+#: ../content/held_position.py:31
 msgid "Organization/Position"
 msgstr "Organizzazione/Posizione"
 
@@ -255,7 +306,7 @@ msgstr "Organizzazione padre"
 msgid "Person"
 msgstr "Persona"
 
-#: ../content/person.py:46
+#: ../content/person.py:47
 msgid "Person title"
 msgstr "Titolo della persona"
 
@@ -263,7 +314,7 @@ msgstr "Titolo della persona"
 msgid "Persons"
 msgstr "Persone"
 
-#: ../behaviors.py:143
+#: ../behaviors.py:150
 msgid "Phone"
 msgstr "Telefono"
 
@@ -271,8 +322,8 @@ msgstr "Telefono"
 msgid "Phone number"
 msgstr "Numero di telefono"
 
-#: ../content/held_position.py:48
-#: ../content/person.py:52
+#: ../content/held_position.py:49
+#: ../content/person.py:53
 msgid "Photo"
 msgstr "Foto"
 
@@ -298,15 +349,16 @@ msgstr "Posizioni"
 msgid "Positions in this organization"
 msgstr "Posizione in questa organizzazione"
 
-#: ../behaviors.py:258
+#: ../behaviors.py:265
 msgid "Region"
 msgstr "Regione"
 
-#: ../behaviors.py:333
+#: ../behaviors.py:340
+#: ../behaviors.zcml:34
 msgid "Related organizations"
 msgstr "Organizzazioni correlate"
 
-#: ../behaviors.py:339
+#: ../behaviors.py:346
 msgid "Search and attach organizations related to this one"
 msgstr "Cerca e collega organizzazione collegate a questa"
 
@@ -324,11 +376,15 @@ msgstr "Seleziona la posizione tenuta da questa persona nell'organizzazione sele
 
 #: ../browser/basefields/templates/held_position.pt:23
 #: ../browser/templates/heldpositions.pt:42
-#: ../content/held_position.py:40
+#: ../content/held_position.py:41
 msgid "Start date"
 msgstr "Datas inizio"
 
-#: ../behaviors.py:248
+#: ../testing.zcml:18
+msgid "Steps to ease tests of collective.contact.core"
+msgstr ""
+
+#: ../behaviors.py:255
 msgid "Street"
 msgstr "Vita"
 
@@ -336,11 +392,11 @@ msgstr "Vita"
 msgid "Token"
 msgstr "Token"
 
-#: ../content/position.py:24
+#: ../content/position.py:25
 msgid "Type"
 msgstr "Tipo"
 
-#: ../content/organization.py:34
+#: ../content/organization.py:33
 msgid "Type or level"
 msgstr "Tipo o livello"
 
@@ -352,22 +408,38 @@ msgstr "Usa una descrizione per cercare le persone."
 msgid "Use held positions to search persons."
 msgstr "Usa le posizioni ricoperte per cercare le persone."
 
-#: ../behaviors.py:169
+#: ../behaviors.py:176
 msgid "Use the belonging entity address"
 msgstr "Usa l’indirizzo dell’ente di appartenenza"
 
-#: ../behaviors.py:159
+#: ../behaviors.zcml:34
+msgid "We can attach organizations on content."
+msgstr ""
+
+#: ../behaviors.py:166
 #: ../browser/templates/contactdetails.pt:50
 msgid "Website"
 msgstr "Sito web"
 
-#: ../behaviors.py:238
+#: ../behaviors.py:245
 msgid "Zip Code"
 msgstr "CAP"
 
 #. Default: "${street} ${number}"
 #: ../browser/templates/address.pt:9
 msgid "address_line"
+msgstr ""
+
+#: ../configure.zcml:49
+msgid "collective.contact.core"
+msgstr ""
+
+#: ../configure.zcml:57
+msgid "collective.contact.core test data"
+msgstr ""
+
+#: ../testing.zcml:18
+msgid "collective.contact.core tests"
 msgstr ""
 
 #. Default: ":"
@@ -386,7 +458,7 @@ msgid "help_add_organization_or_position_organization"
 msgstr "Prego compila prima l'organizzazione poi eventualmente seleziona una posizione"
 
 #. Default: "Doctor, Mrs..."
-#: ../content/person.py:47
+#: ../content/person.py:48
 msgid "help_person_title"
 msgstr "Dottor, Sig.ra"
 
@@ -402,4 +474,3 @@ msgstr "organizzazione/posizione"
 #: ../browser/templates/organization.pt:65
 msgid "to"
 msgstr "A"
-
