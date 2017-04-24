@@ -1,3 +1,5 @@
+import copy
+
 from AccessControl import getSecurityManager
 from zope.component import getUtility, queryAdapter
 from zope.contentprovider.interfaces import IContentProvider
@@ -355,10 +357,8 @@ class AddContact(DefaultAddForm, form.AddForm):
         if self.schema != IAddHeldPosition:
             for widget in self.widgets.values():
                 if getattr(widget, 'required', False):
-                    # This is really a hack to not have required field errors
-                    # but have the visual required nevertheless.
-                    # We need to revert this after updateActions
-                    # because this change impact the held position form
+                    # copy field to not modify original one
+                    widget.field = copy.copy(widget.field)
                     widget.field.required = False
 
         if 'parent_address' in self.widgets:
@@ -366,11 +366,6 @@ class AddContact(DefaultAddForm, form.AddForm):
 
     def update(self):
         super(AddContact, self).update()
-        if self.schema != IAddHeldPosition:
-            # revert required field changes
-            for widget in self.widgets.values():
-                if getattr(widget, 'required', False):
-                    widget.field.required = True
 
     @button.buttonAndHandler(_('Add'), name='save')
     def handleAdd(self, action):
