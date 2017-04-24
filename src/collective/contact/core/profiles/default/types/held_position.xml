@@ -21,6 +21,7 @@
  <property name="klass">collective.contact.core.content.held_position.HeldPosition</property>
  <property name="behaviors">
   <element value="plone.app.content.interfaces.INameFromTitle"/>
+  <element value="collective.contact.core.behaviors.IContactDetails" />
  </property>
  <property name="schema"/>
  <!-- DO NOT use a model_source or it removes manually added fields while reapplying the profile -->
