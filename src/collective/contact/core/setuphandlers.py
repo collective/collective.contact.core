@@ -62,6 +62,31 @@ def create_test_contact_data(portal):
                            {'name': u'Regiment', 'token': u'regiment'},
                            {'name': u'Squad', 'token': u'squad'},
                            ]
+# Examples structure
+# ------------------
+# organizations (* = organization, £ = position)
+#     * Armée de terre
+#         * Corps A
+#             * Division Alpha
+#                 * Régiment H
+#                     * Brigade LH
+#                         £ Sergent
+#                 £ Capitaine
+#             * Division Beta
+#         * Corps B
+#         £ Général
+#
+# persons (> = person, @ = held_position)
+#     > De Gaulle
+#         @ Armée de terre
+#         @ Général
+#     > Pepper
+#         @ Sergent
+#     > Rambo
+#         @ Brigade LH
+#     > Draper
+#         @ Capitaine
+#         @ Division Beta
 
     params = {'title': u"Military directory",
               'position_types': position_types,
@@ -76,7 +101,7 @@ def create_test_contact_data(portal):
               'gender': u'M',
               'person_title': u'Général',
               'birthday': datetime.date(1901, 11, 22),
-              'email': u'charles.de.gaulle@armees.fr',
+              'email': u'charles.de.gaulle@private.com',
               'country': u'France',
               'city': u"Colombey les deux églises",
               'number': u'6bis',
@@ -91,14 +116,14 @@ def create_test_contact_data(portal):
 
     params = {'lastname': u'Pepper',
               'gender': u'M',
-              'person_title': u'Sergent',
+              'person_title': u'Mister',
               'birthday': datetime.date(1967, 6, 1),
-              'email': u'sgt.pepper@armees.fr',
-              'phone': u'0288552211',
+              'email': u'stephen.pepper@private.com',
+              'phone': u'0288443344',
               'city': u'Liverpool',
               'country': u'England',
               'use_parent_address': False,
-              'website': 'http://www.sergent-pepper.org'
+              'website': 'http://www.stephen-pepper.org'
               }
     mydirectory.invokeFactory('person', 'pepper', **params)
     pepper = mydirectory['pepper']
@@ -109,18 +134,27 @@ def create_test_contact_data(portal):
               'use_parent_address': True,
               }
     mydirectory.invokeFactory('person', 'rambo', **params)
+    rambo = mydirectory['rambo']
 
     params = {'lastname': u'Draper',
               'firstname': u'John',
               'person_title': u'Mister',
-              'use_parent_address': True,
+              'use_parent_address': False,
               }
+
     mydirectory.invokeFactory('person', 'draper', **params)
     draper = mydirectory['draper']
 
     params = {'title': u"Armée de terre",
               'organization_type': u'army',
-              'use_parent_address': True,
+              'phone': u'01000000001',
+              'email': u'contact@armees.fr',
+              'use_parent_address': False,
+              'city': u'Paris',
+              'street': u'Avenue des Champs-Élysées',
+              'number': u'1',
+              'zip_code': u'75008',
+              'country': u'France',
               }
     mydirectory.invokeFactory('organization', 'armeedeterre', **params)
     armeedeterre = mydirectory['armeedeterre']
@@ -154,6 +188,7 @@ def create_test_contact_data(portal):
     corpsa.invokeFactory('organization', 'divisionbeta', **params)
 
     divisionalpha = corpsa['divisionalpha']
+    divisionbeta = corpsa['divisionbeta']
 
     params = {'title': u"Régiment H",
               'organization_type': u'regiment',
@@ -176,7 +211,13 @@ def create_test_contact_data(portal):
 
     params = {'title': u"Général de l'armée de terre",
               'position_type': u'general',
-              'use_parent_address': True,
+              'email': u'general@armees.fr',
+              'use_parent_address': False,
+              'city': u'Lille',
+              'street': u"Rue de la Porte d'Ypres",
+              'number': u'1',
+              'zip_code': u'59800',
+              'country': u'France',
               }
     armeedeterre.invokeFactory('position', 'general_adt', **params)
 
@@ -209,18 +250,41 @@ def create_test_contact_data(portal):
     params = {'start_date': datetime.date(1940, 5, 25),
               'end_date': datetime.date(1970, 11, 9),
               'position': RelationValue(intids.getId(general_adt)),
-              'label': u"Émissaire OTAN"
+              'label': u"Émissaire OTAN",
+              'phone': u'0987654321',
+              'country': u'France',
+              'use_parent_address': True,
               }
     degaulle.invokeFactory('held_position', 'gadt', **params)
 
     params = {'start_date': datetime.date(1980, 6, 5),
               'position': RelationValue(intids.getId(sergent_lh)),
+              'email': u'sgt.pepper@armees.fr',
+              'phone': u'0288552211',
+              'city': u'Liverpool',
+              'street': u'Water Street',
+              'number': u'1',
+              'zip_code': u'L3 4FP',
+              'country': u'England',
+              'use_parent_address': False,
+              'website': 'http://www.sergent-pepper.org'
               }
     pepper.invokeFactory('held_position', 'sergent_pepper', **params)
 
     params = {'position': RelationValue(intids.getId(capitaine_alpha)),
+              'use_parent_address': True,
               }
     draper.invokeFactory('held_position', 'captain_crunch', **params)
+
+    params = {'position': RelationValue(intids.getId(divisionbeta)),
+              'use_parent_address': True,
+              }
+    draper.invokeFactory('held_position', 'divisionbeta', **params)
+
+    params = {'position': RelationValue(intids.getId(brigadelh)),
+              'use_parent_address': True,
+              }
+    rambo.invokeFactory('held_position', 'brigadelh', **params)
 
 
 def createTestData(context):

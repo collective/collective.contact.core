@@ -44,7 +44,7 @@ class TestSearch(unittest.TestCase, BaseTest):
                          u"Général Charles De Gaulle Général de l'armée de terre Armée de terre Émissaire OTAN")
         sergent_pepper = self.sergent_pepper
         self.assertEqual(held_position_searchable_text(sergent_pepper)(),
-                         u"Sergent Pepper Sergent de la brigade LH Armée de terre Corps A Division Alpha Régiment H Brigade LH")
+                         u"Mister Pepper Sergent de la brigade LH Armée de terre Corps A Division Alpha Régiment H Brigade LH")
         pepper = self.pepper
         self.assertEqual(person_sortable_title(pepper)(),
                          "pepper")
@@ -67,7 +67,7 @@ class TestSearch(unittest.TestCase, BaseTest):
         results = catalog.searchResults(SearchableText='Général')
         self.assertEqual(len(results), 4)
         results = catalog.searchResults(SearchableText='Corps')
-        self.assertEqual(len(results), 10)
+        self.assertEqual(len(results), 13)
         results_objects = [res.getObject() for res in results]
         self.assertIn(self.corpsa, results_objects)
         self.assertIn(self.corpsb, results_objects)
@@ -77,20 +77,20 @@ class TestSearch(unittest.TestCase, BaseTest):
         self.assertIn(self.brigadelh, results_objects)
         self.assertIn(self.sergent_pepper, results_objects)
         results = catalog.searchResults(SearchableText='armée')
-        self.assertEqual(len(results), 15)
+        self.assertEqual(len(results), 18)
         results = catalog.searchResults(SearchableText='beta')
-        self.assertEqual(len(results), 1)
+        self.assertEqual(len(results), 3)
         results = catalog.searchResults(SearchableText='régiment')
-        self.assertEqual(len(results), 4)
+        self.assertEqual(len(results), 6)
         results = catalog.searchResults(SearchableText='brigade')
-        self.assertEqual(len(results), 4)
+        self.assertEqual(len(results), 6)
         results = catalog.searchResults(SearchableText='Émissaire')
         self.assertEqual(len(results), 2)
         results = catalog.searchResults(portal_type='held_position')
-        self.assertEqual(len(results), 4)
+        self.assertEqual(len(results), 6)
         results = catalog.searchResults(portal_type='held_position',
                                         start={'query': datetime.date(1981, 1, 1), 'range': 'min'})
-        self.assertEqual(len(results), 1)
+        self.assertEqual(len(results), 3)
         results = catalog.searchResults(portal_type='held_position',
                                         end={'query': datetime.date(1971, 1, 1), 'range': 'max'})
         self.assertEqual(len(results), 2)

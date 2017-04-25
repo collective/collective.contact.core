@@ -64,7 +64,7 @@ class TestPerson(TestContentTypes):
 
     def test_no_firstname(self):
         pepper = self.mydirectory['pepper']
-        self.assertEqual('Sergent Pepper', pepper.Title())
+        self.assertEqual('Mister Pepper', pepper.Title())
 
     def test_no_person_title(self):
         rambo = self.mydirectory['rambo']
@@ -217,7 +217,7 @@ class TestHeldPosition(TestContentTypes):
         self.assertEqual(self.gadt.get_full_title(),
                          u"Général Charles De Gaulle (Armée de terre - Général de l'armée de terre)")
         self.assertEqual(self.sergent_pepper.get_full_title(),
-                         u"Sergent Pepper (Armée de terre - Sergent de la brigade LH)")
+                         u"Mister Pepper (Armée de terre - Sergent de la brigade LH)")
         self.assertEqual(self.gadt.get_person_title(),
                          u"Général Charles De Gaulle")
 
