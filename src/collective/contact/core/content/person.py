@@ -19,9 +19,8 @@ from plone.supermodel import model
 from collective.contact.core import _
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.core.interfaces import IContactCoreParameters,\
-    IPersonHeldPositions, IContactable
+    IPersonHeldPositions, IContactable, IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
-from collective.contact.core.content.held_position import IHeldPosition
 
 
 class IPerson(model.Schema, IContactContent):

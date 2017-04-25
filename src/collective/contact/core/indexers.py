@@ -1,14 +1,13 @@
 from datetime import date
 from plone import api
 from plone.indexer import indexer
-from Products.CMFPlone.utils import normalizeString
 from Products.CMFPlone.utils import safe_unicode
 
-from collective.contact.core.content.held_position import IHeldPosition
 from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.content.position import IPosition
 from collective.contact.core.content.person import IPerson
 from collective.contact.core.behaviors import IRelatedOrganizations
+from collective.contact.core.interfaces import IHeldPosition
 
 
 @indexer(IOrganization)

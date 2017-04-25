@@ -8,9 +8,8 @@ from Products.CMFPlone.utils import safe_unicode
 from plone import api
 
 from collective.contact.core.interfaces import IVCard, IContactable,\
-    IPersonHeldPositions
-from collective.contact.core.content.held_position import IHeldPosition,\
-                                                             HeldPosition
+    IPersonHeldPositions, IHeldPosition
+from collective.contact.core.content.held_position import HeldPosition
 from collective.contact.core.content.organization import IOrganization,\
                                                              Organization
 from collective.contact.core.behaviors import IBirthday

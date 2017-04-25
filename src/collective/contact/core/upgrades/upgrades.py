@@ -10,7 +10,7 @@ from plone import api
 from collective.contact.widget.interfaces import IContactContent
 from ecreall.helpers.upgrade.interfaces import IUpgradeTool
 
-from ..content.held_position import IHeldPosition
+from ..interfaces import IHeldPosition
 
 
 def reindex_relations(context):
