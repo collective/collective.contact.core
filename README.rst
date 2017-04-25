@@ -13,9 +13,13 @@ How-to
 
 First, create a directory in your site. This directory will contain all the informations related to your contacts.
 
-You can then add organizations to his directory. An organization can contain organizations (such as services, divisions or department) or positions (such as CEO, mayor or developer).
+You can then add organizations to this directory. An organization can contain organizations (such as services, divisions or department) or positions (such as CEO, mayor or developer).
 
 You can also add persons to this directory. A person is a physical person that can hold one or more positions or be member of one or more organizations. To associate a person with an organization or a position, add a held position content type in the person's context.
+
+Consider the following:
+* the person type will contain personal contact details
+* the held_position type will contain professional contact details
 
 Modify your directory to customize the organization types and the position types that you will associate with your organizations, sub-organizations and positions.
 
