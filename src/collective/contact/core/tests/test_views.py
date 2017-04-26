@@ -192,7 +192,7 @@ class TestOrganizationView(TestView):
     def test_organization_contact_details_view(self):
         view = self.corpsa.restrictedTraverse("@@contactdetails")
         view.update()
-        self.assertEqual(view.contact_details['email'], '')
+        self.assertEqual(view.contact_details['email'], 'contact@armees.fr')
 
         address = view.contact_details['address']
         self.assertEqual(address['number'], u'')
@@ -233,12 +233,12 @@ class TestOrganizationView(TestView):
         self.assertEqual(contact['held_position'], 'Armée de terre')
         self.assertIsNone(contact['label'])
         self.assertEqual(contact['obj'], self.adt)
-        self.assertEqual(contact['email'], u'charles.de.gaulle@armees.fr')
+        self.assertEqual(contact['email'], None)
         self.assertIsNone(contact['phone'])
         self.assertIsNone(contact['cell_phone'])
         self.assertIsNone(contact['fax'])
         self.assertIsNone(contact['im_handle'])
-        self.assertEqual(contact['website'], 'http://www.charles-de-gaulle.org')
+        self.assertEqual(contact['website'], None)
 
 
 class TestPersonView(TestView):
@@ -253,7 +253,7 @@ class TestPersonView(TestView):
     def test_person_contact_details_view(self):
         view = self.degaulle.restrictedTraverse("@@contactdetails")
         view.update()
-        self.assertEqual(view.contact_details['email'], 'charles.de.gaulle@armees.fr')
+        self.assertEqual(view.contact_details['email'], 'charles.de.gaulle@private.com')
         self.assertEqual(view.contact_details['phone'], '')
         self.assertEqual(view.contact_details['cell_phone'], '')
         self.assertEqual(view.contact_details['im_handle'], '')

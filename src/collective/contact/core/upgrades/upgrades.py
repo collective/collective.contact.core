@@ -7,10 +7,11 @@ from zope.component import getUtility
 
 from plone import api
 
+from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.widget.interfaces import IContactContent
 from ecreall.helpers.upgrade.interfaces import IUpgradeTool
 
-from ..content.held_position import IHeldPosition
+from ..interfaces import IHeldPosition
 
 
 def reindex_relations(context):
@@ -80,3 +81,12 @@ def v10(context):
     brains = catalog.searchResults(object_provides=IHeldPosition.__identifier__)
     for brain in brains:
         brain.getObject().reindexObject(['start', 'end'])
+
+
+def v11(context):
+    IUpgradeTool(context).runImportStep('collective.contact.core', 'typeinfo')
+    IUpgradeTool(context).runImportStep('collective.contact.core', 'plone.app.registry')
+    val = api.portal.get_registry_record(name='person_contact_details_private', interface=IContactCoreParameters)
+    if val is None:
+        api.portal.set_registry_record(name='person_contact_details_private', value=True,
+                                       interface=IContactCoreParameters)

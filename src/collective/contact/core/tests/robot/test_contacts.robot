@@ -10,7 +10,7 @@ Directory is available
     [Tags]    Go
     Log in as site owner and wait
     Click link    css=#portaltab-mydirectory a
-    Element should contain    css=#content h1    Military directory
+    Wait until element is visible  xpath=//h1[.='Military directory']  5
 
 Create a new organization
     [Tags]    Go

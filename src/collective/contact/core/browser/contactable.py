@@ -7,17 +7,17 @@ from Acquisition import aq_base
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+from plone import api
 from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.utils import getAdditionalSchemata
 
 from collective.contact.core.browser import TEMPLATES_DIR
 from collective.contact.core.browser.address import get_address
 from collective.contact.core.behaviors import IContactDetails
-from collective.contact.core.interfaces import IContactable
+from collective.contact.core.interfaces import IContactable, IContactCoreParameters
 from collective.contact.widget.interfaces import IContactContent
 from collective.contact.core.behaviors import CONTACT_DETAILS_FIELDS
 from collective.contact.core.browser.utils import get_valid_url
-
 
 grok.templatedir(TEMPLATES_DIR)
 
@@ -109,7 +109,9 @@ class Contactable(grok.Adapter):
         we use the one of the first object in this list which have this information
         """
         contactables = []
-        related_items = [self.context, self.held_position, self.person, self.position] + list(reversed(self.organizations))
+        related_items = [self.context, self.held_position, self.position] + list(reversed(self.organizations))
+        if not api.portal.get_registry_record(name='person_contact_details_private', interface=IContactCoreParameters):
+            related_items.insert(2, self.person)
         for related_item in related_items:
             if related_item is not None \
                and IContactDetails.providedBy(related_item) \

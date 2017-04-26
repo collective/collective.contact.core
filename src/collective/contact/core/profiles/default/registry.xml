@@ -1,32 +1,3 @@
 <registry>
-  <record name="collective.contact.core.interfaces.IContactCoreParameters.person_title_in_title"
-          interface="collective.contact.core.interfaces.IContactCoreParameters"
-          field="person_title_in_title">
-    <field type="plone.registry.field.Bool">
-      <default>True</default>
-      <required>False</required>
-      <title>Person title in title</title>
-    </field>
-    <value>True</value>
-  </record>
-  <record name="collective.contact.core.interfaces.IContactCoreParameters.use_held_positions_to_search_person"
-          interface="collective.contact.core.interfaces.IContactCoreParameters"
-          field="use_held_positions_to_search_person">
-    <field type="plone.registry.field.Bool">
-      <default>True</default>
-      <required>False</required>
-      <title>Use held positions to search persons</title>
-    </field>
-    <value>True</value>
-  </record>
-  <record name="collective.contact.core.interfaces.IContactCoreParameters.use_description_to_search_person"
-          interface="collective.contact.core.interfaces.IContactCoreParameters"
-          field="use_description_to_search_person">
-    <field type="plone.registry.field.Bool">
-      <default>True</default>
-      <required>False</required>
-      <title>Use description to search persons</title>
-    </field>
-    <value>True</value>
-  </record>
+  <records interface="collective.contact.core.interfaces.IContactCoreParameters" />
 </registry>

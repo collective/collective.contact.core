@@ -3,66 +3,19 @@ from Products.CMFPlone.utils import normalizeString, safe_unicode
 
 from z3c.form.interfaces import NO_VALUE
 from zope.interface import implements
-from zope import schema
 
 from five import grok
 
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.dexterity.content import Container
-from plone.namedfile.field import NamedImage
-from plone.supermodel import model
 
-from collective.contact.core import _
-from collective.contact.core.schema import ContactChoice
 from collective.contact.core.browser.contactable import Contactable
-from collective.contact.widget.source import ContactSourceBinder
-from collective.contact.widget.interfaces import IContactContent
+from collective.contact.core.interfaces import IHeldPosition
 
 
 def acqproperty(func):
     """Property that manages acquisition"""
     return ComputedAttribute(func, 1)
-
-
-class IHeldPosition(model.Schema, IContactContent):
-    """Interface for HeldPosition content type"""
-
-    position = ContactChoice(
-        title=_("Organization/Position"),
-        source=ContactSourceBinder(portal_type=("organization", "position")),
-        required=True,
-    )
-    label = schema.TextLine(
-        title=_("Additional label"),
-        description=_("Additional label with information that does not appear "
-                      "on position label"),
-        required=False)
-    start_date = schema.Date(
-        title=_("Start date"),
-        required=False,
-    )
-    end_date = schema.Date(
-        title=_("End date"),
-        required=False,
-    )
-    photo = NamedImage(
-        title=_("Photo"),
-        required=False,
-        readonly=True,
-    )
-
-    def get_person(self):
-        """Returns the person who holds the position
-        """
-
-    def get_position(self):
-        """Returns the position (if position field is a position)
-        """
-
-    def get_organization(self):
-        """Returns the first organization related to HeldPosition
-        i.e. position field or parent of the position
-        """
 
 
 class HeldPositionContactableAdapter(Contactable):

@@ -10,7 +10,7 @@ from collective.contact.core.browser.utils import date_to_DateTime
 from collective.contact.core.content.person import IPerson
 from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.content.position import IPosition
-from collective.contact.core.content.held_position import IHeldPosition
+from collective.contact.core.interfaces import IHeldPosition
 
 
 grok.templatedir('templates')

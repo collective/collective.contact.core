@@ -18,8 +18,9 @@ from plone.app.textfield import RichText
 
 from collective.contact.core import _, logger
 from collective.contact.core.browser.contactable import Contactable
+from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
-from collective.contact.core.content.held_position import IHeldPosition
+
 
 class IOrganization(model.Schema, IContactContent):
     """Interface for Organization content type"""

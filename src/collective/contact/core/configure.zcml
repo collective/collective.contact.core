@@ -31,6 +31,7 @@
       title="collective.contact.core postInstall import step"
       description="Post install import step from collective.contact.core"
       handler=".setuphandlers.postInstall">
+      <depends name="plone.app.registry"/>
   </genericsetup:importStep>
 
   <genericsetup:importStep

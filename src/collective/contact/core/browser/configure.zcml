@@ -14,7 +14,7 @@
 
   <browser:page
       name="view"
-      for="..content.held_position.IHeldPosition"
+      for="..interfaces.IHeldPosition"
       class=".contact.Contact"
       template="templates/contact.pt"
       permission="zope2.View"

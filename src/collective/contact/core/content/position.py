@@ -14,7 +14,7 @@ from collective.contact.widget.interfaces import IContactContent
 from zope.component import getUtility
 from zope.intid.interfaces import IIntIds
 from zc.relation.interfaces import ICatalog
-from collective.contact.core.content.held_position import IHeldPosition
+from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.core import logger
 
 

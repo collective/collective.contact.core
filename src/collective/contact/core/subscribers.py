@@ -22,10 +22,10 @@ except ImportError:
 
 from collective.contact.widget.interfaces import IContactContent
 from collective.contact.core.behaviors import IContactDetails
-from collective.contact.core.content.held_position import IHeldPosition
 from collective.contact.core.content.position import IPosition
 from collective.contact.core.content.person import IPerson
 from collective.contact.core.content.organization import IOrganization
+from collective.contact.core.interfaces import IHeldPosition
 
 # update indexes of related content when a content is modified
 # you can monkey patch this value if you have an index that needs this
