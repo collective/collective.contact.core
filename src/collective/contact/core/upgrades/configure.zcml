@@ -117,4 +117,12 @@
       handler=".upgrades.v10"
       profile="collective.contact.core:default" />
 
+  <genericsetup:upgradeStep
+      title="Upgrade from 10 to 11"
+      description="Use contact details behavior on held position. Set person details as private."
+      source="10"
+      destination="11"
+      handler=".upgrades.v11"
+      profile="collective.contact.core:default" />
+
 </configure>

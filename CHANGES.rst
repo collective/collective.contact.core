@@ -4,6 +4,10 @@ Changelog
 1.13 (unreleased)
 -----------------
 
+- Set IContactDetails behavior on held_position type.
+  Person contact details are considered as personal data.
+  [sgeulette]
+
 - Use a python view to provide gender/person title mapping. In this way, the terms can be translated.
   [cedricmessiant]
 
