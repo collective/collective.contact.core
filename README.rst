@@ -15,15 +15,32 @@ First, create a directory in your site. This directory will contain all the info
 
 You can then add organizations to this directory. An organization can contain organizations (such as services, divisions or department) or positions (such as CEO, mayor or developer).
 
-You can also add persons to this directory. A person is a physical person that can hold one or more positions or be member of one or more organizations. To associate a person with an organization or a position, add a held position content type in the person's context.
+You can also add persons to this directory. A person is a physical person that can hold one or more positions or be member of one or more organizations.
+To associate a person with an organization or a position, add a held position content type in the person's context.
 
 Consider the following:
+
 * the person type will contain personal contact details
 * the held_position type will contain professional contact details
 
 Modify your directory to customize the organization types and the position types that you will associate with your organizations, sub-organizations and positions.
 
 Look at the test data profile collective.contact.core test data for detailed examples.
+
+
+Configuration
+=============
+
+The following configuration can be adapted in the plone registry (prefix=IContactCoreParameters):
+
+* person_contact_details_private : boolean, default to True.
+    The person contact details are private and will not be used in other context, like held position.
+* person_title_in_title : boolean, default to True.
+    Display person title in displayed person's title.
+* use_held_positions_to_search_person : boolean, default to True.
+    Use held positions to search persons.
+* use_description_to_search_person : boolean, default to True.
+    Use description to search persons.
 
 Localization
 ============

@@ -35,6 +35,11 @@ class IVCard(Interface):
 
 class IContactCoreParameters(Interface):
 
+    person_contact_details_private = schema.Bool(
+        title=_(u"The person contact details are private and will not be used in other context, like held position."),
+        description=u"",
+        required=False, default=True)
+
     person_title_in_title = schema.Bool(
         title=_(u"Display person title in displayed person's title."),
         description=u"",

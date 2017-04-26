@@ -15,8 +15,13 @@ from zope.intid.interfaces import IIntIds
 
 from z3c.relationfield.relation import RelationValue
 
+from plone import api
+#from plone.registry.interfaces import IRegistry
+
 import logging
 logger = logging.getLogger('collective.contact.core: setuphandlers')
+
+from collective.contact.core.interfaces import IContactCoreParameters
 
 
 def isNotCollectiveContactContentProfile(context):
@@ -38,6 +43,14 @@ def postInstall(context):
     for line in traceback.format_stack():
         if 'QuickInstallerTool.py' in line and 'reinstallProducts' in line:
             raise Exception('You can not reinstall this product, use portal_setup to re-apply the relevant profile !')
+    # Set default values in registry
+    for name in ('person_contact_details_private', 'person_title_in_title', 'use_held_positions_to_search_person',
+                 'use_description_to_search_person'):
+        val = api.portal.get_registry_record(name=name, interface=IContactCoreParameters)
+        if val is None:
+            api.portal.set_registry_record(name=name, value=True, interface=IContactCoreParameters)
+    api.portal.set_registry_record(name='person_contact_details_private', value=False,
+                                   interface=IContactCoreParameters)
     # we need to remove the default model_source added to our portal_types
     # XXX to be done
 
