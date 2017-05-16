@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.14 (unreleased)
+1.14 (2017-05-16)
 -----------------
 
 - Lint for code-analysis.
