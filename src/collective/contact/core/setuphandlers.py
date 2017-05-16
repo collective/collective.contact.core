@@ -16,7 +16,7 @@ from zope.intid.interfaces import IIntIds
 from z3c.relationfield.relation import RelationValue
 
 from plone import api
-#from plone.registry.interfaces import IRegistry
+# from plone.registry.interfaces import IRegistry
 
 import logging
 logger = logging.getLogger('collective.contact.core: setuphandlers')

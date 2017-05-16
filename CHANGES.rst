@@ -4,7 +4,8 @@ Changelog
 1.14 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Lint for code-analysis.
+  [bsuttor]
 
 
 1.13 (2017-05-16)

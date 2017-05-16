@@ -113,7 +113,7 @@ class TestAdapters(unittest.TestCase, BaseTest):
         self.assertEqual(adapter.get_main_position(), degaulle.gadt)
 
     def test_contact_details(self):
-        ## person contact details are private
+        # # person contact details are private
         api.portal.set_registry_record(name='person_contact_details_private', value=True,
                                        interface=IContactCoreParameters)
         # test a person
@@ -181,7 +181,7 @@ class TestAdapters(unittest.TestCase, BaseTest):
                                                   'street': u'Water Street',
                                                   'zip_code': u'L3 4FP'})
 
-        ## person contact details are not private
+        # # person contact details are not private
         api.portal.set_registry_record(name='person_contact_details_private', value=False,
                                        interface=IContactCoreParameters)
         # test an held position using parent address and related to an organization
