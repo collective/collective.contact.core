@@ -1,7 +1,13 @@
 Changelog
 =========
 
-1.13 (unreleased)
+1.14 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+1.13 (2017-05-16)
 -----------------
 
 - Set IContactDetails behavior on held_position type.
