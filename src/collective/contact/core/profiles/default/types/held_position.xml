@@ -19,7 +19,7 @@
  <property name="default_view_fallback">False</property>
  <property name="add_permission">cmf.AddPortalContent</property>
  <property name="klass">collective.contact.core.content.held_position.HeldPosition</property>
- <property name="behaviors">
+ <property name="behaviors" purge="False">
   <element value="plone.app.content.interfaces.INameFromTitle"/>
   <element value="collective.contact.core.behaviors.IContactDetails" />
  </property>

@@ -4,8 +4,8 @@ Changelog
 1.15 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Don't purge behaviors when reinstalling.
+  [sgeulette]
 
 1.14 (2017-05-16)
 -----------------
