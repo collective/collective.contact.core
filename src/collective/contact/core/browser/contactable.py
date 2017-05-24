@@ -91,6 +91,7 @@ class Contactable(grok.Adapter):
     def person(self):
         return None
 
+    @property
     def held_position(self):
         return None
 
