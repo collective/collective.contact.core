@@ -7,6 +7,10 @@ Changelog
 - Don't purge behaviors when reinstalling.
   [sgeulette]
 
+- Set plone.app.textfield maximum version as 1.2.7
+  [thomasdesvenain]
+
+
 1.14 (2017-05-16)
 -----------------
 
