@@ -4,6 +4,9 @@ Changelog
 1.15 (unreleased)
 -----------------
 
+- Fix robot tests.
+  [thomasdesvenain]
+
 - Don't purge behaviors when reinstalling.
   [sgeulette]
 

@@ -57,6 +57,7 @@ Can create new person from organization
     Click element    form-widgets-gender-0
     Click button    Save
     Wait Until Page Contains    Chuck Norris
+    Sleep  1
     Click button    Add
     Wait Until Page Contains Element    other-contacts
     Element Should Contain    other-contacts    Chuck Norris
