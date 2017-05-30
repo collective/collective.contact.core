@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.15 (unreleased)
+1.15 (2017-05-30)
 -----------------
 
 - Fix robot tests.
