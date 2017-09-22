@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.16 (unreleased)
+1.16 (2017-09-22)
 -----------------
 
 - Set person_contact_details_private option to true by default.
