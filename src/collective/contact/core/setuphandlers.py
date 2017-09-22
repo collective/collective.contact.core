@@ -49,8 +49,6 @@ def postInstall(context):
         val = api.portal.get_registry_record(name=name, interface=IContactCoreParameters)
         if val is None:
             api.portal.set_registry_record(name=name, value=True, interface=IContactCoreParameters)
-    api.portal.set_registry_record(name='person_contact_details_private', value=False,
-                                   interface=IContactCoreParameters)
     # we need to remove the default model_source added to our portal_types
     # XXX to be done
 

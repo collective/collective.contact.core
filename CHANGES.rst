@@ -4,8 +4,8 @@ Changelog
 1.16 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Set person_contact_details_private option to true by default.
+  [sgeulette]
 
 1.15 (2017-05-30)
 -----------------
