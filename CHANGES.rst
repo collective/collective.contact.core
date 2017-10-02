@@ -4,7 +4,8 @@ Changelog
 1.17 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Fix get_valid_url mehtod when there is accent into url.
+  [bsuttor]
 
 
 1.16 (2017-09-22)
