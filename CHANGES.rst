@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.17 (unreleased)
+1.17 (2017-10-02)
 -----------------
 
 - Fix get_valid_url mehtod when there is accent into url.
