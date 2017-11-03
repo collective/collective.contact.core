@@ -50,7 +50,9 @@
 
               <div tal:replace="structure held_position/object/@@nofallbackcontactdetails"></div>
 
-              <div class="organization vcard" tal:define="organization nocall:held_position/organization">
+              <div class="organization vcard"
+                   tal:condition="python:held_position.get('organization', None)"
+                   tal:define="organization nocall:held_position/organization">
                   <div class="logo" class="field" tal:condition="organization/logo">
                       <img tal:define="scales nocall:organization/@@images"
                            tal:replace="structure python:scales.tag('logo', 'tile', css_class='photo')"

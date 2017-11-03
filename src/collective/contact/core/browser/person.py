@@ -57,7 +57,8 @@ class HeldPositions(grok.View):
             # held_position['phone'] = obj.phone
             # held_position['email'] = obj.email
             held_position['object'] = obj
-            held_position['organization'] = obj.get_organization().get_root_organization()
+            organization = obj.get_organization()
+            held_position['organization'] = organization.get_root_organization() if organization else None
             held_position['can_edit'] = sm.checkPermission('Modify portal content', obj)
             held_position['can_delete'] = sm.checkPermission('Delete objects', obj)
             held_positions.append(held_position)

@@ -4,7 +4,8 @@ Changelog
 1.18 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Prevent fatal error if there is no organization on held_position.
+  [thomasdesvenain]
 
 
 1.17 (2017-10-02)
