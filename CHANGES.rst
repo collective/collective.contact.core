@@ -4,6 +4,9 @@ Changelog
 1.18 (unreleased)
 -----------------
 
+- Prevent title ascii error on organization vcard export.
+  [bsuttor]
+
 - Prevent fatal error if there is no organization on held_position.
   [thomasdesvenain]
 
