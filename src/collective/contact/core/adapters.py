@@ -161,11 +161,11 @@ class OrganizationVCard(grok.Adapter, ContactableVCard):
         vcard.kind.value = "org"
 
         organization = self.context
+        title = safe_unicode(organization.Title(), encoding='utf8')
         vcard.add('n')
-        vcard.n.value = vobject.vcard.Name(organization.Title())
+        vcard.n.value = vobject.vcard.Name(title)
         vcard.add('fn')
-        vcard.fn.value = organization.Title()
-
+        vcard.fn.value = title
         return vcard
 
 
