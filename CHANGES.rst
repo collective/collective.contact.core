@@ -4,6 +4,10 @@ Changelog
 1.18 (unreleased)
 -----------------
 
+
+- Prevent address field from being erased if they are changed programmaticaly before any manual edition.
+  [thomasdesvenain]
+
 - Prevent title ascii error on organization vcard export.
   [bsuttor]
 

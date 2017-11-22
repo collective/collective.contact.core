@@ -1,5 +1,6 @@
 from Acquisition import aq_get
 from five import grok
+from z3c.form.interfaces import NO_VALUE
 
 from zc.relation.interfaces import ICatalog
 from zope import component
@@ -121,7 +122,7 @@ def clear_fields_use_parent_address(obj, event):
     """If 'use parent address' has been selected,
     ensure content address fields are cleared
     """
-    if obj.use_parent_address:
+    if obj.use_parent_address and obj.use_parent_address != NO_VALUE:
         upa_field = getFields(IContactDetails)['use_parent_address']
         slave_ids = [f['name'] for f in upa_field.slave_fields]
         for field_name in slave_ids:
