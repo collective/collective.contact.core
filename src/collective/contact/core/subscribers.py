@@ -1,26 +1,19 @@
-from Acquisition import aq_get
 from five import grok
-
-from zc.relation.interfaces import ICatalog
-from zope import component
-from zope.lifecycleevent.interfaces import IObjectAddedEvent,\
-    IObjectModifiedEvent
+from z3c.form.interfaces import NO_VALUE
 from zope.container.contained import ContainerModifiedEvent
-from zope.intid.interfaces import IIntIds
+from zope.lifecycleevent.interfaces import IObjectAddedEvent, \
+    IObjectModifiedEvent
 from zope.schema import getFields
 
-# from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
-# from plone.app.linkintegrity.handlers import referencedObjectRemoved as \
-#         baseReferencedObjectRemoved
 try:
     from plone.app.referenceablebehavior.referenceable import IReferenceable
 except ImportError:
     from zope.interface import Interface
 
+
     class IReferenceable(Interface):
         pass
 
-from collective.contact.widget.interfaces import IContactContent
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.content.held_position import IHeldPosition
 from collective.contact.core.content.position import IPosition
@@ -121,7 +114,7 @@ def clear_fields_use_parent_address(obj, event):
     """If 'use parent address' has been selected,
     ensure content address fields are cleared
     """
-    if obj.use_parent_address:
+    if obj.use_parent_address and obj.use_parent_address != NO_VALUE:
         upa_field = getFields(IContactDetails)['use_parent_address']
         slave_ids = [f['name'] for f in upa_field.slave_fields]
         for field_name in slave_ids:

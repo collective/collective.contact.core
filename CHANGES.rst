@@ -4,6 +4,9 @@ Changelog
 1.13 (unreleased)
 -----------------
 
+- Prevent address field from being erased if they are changed programmaticaly before any manual edition.
+  [thomasdesvenain]
+
 - Avoid error in addcontact when there is no directory.
   [cedricmessiant]
 
