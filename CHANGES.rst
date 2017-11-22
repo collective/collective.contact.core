@@ -5,7 +5,7 @@ Changelog
 -----------------
 
 
-- Prevent address field from being erased if they are changed programmaticaly before any manual edition.
+- Prevent address fields from being erased if they are changed programmaticaly before any manual edition.
   [thomasdesvenain]
 
 - Prevent title ascii error on organization vcard export.
