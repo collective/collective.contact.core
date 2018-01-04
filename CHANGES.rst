@@ -14,6 +14,9 @@ Changelog
 - Prevent fatal error if there is no organization on held_position.
   [thomasdesvenain]
 
+- Prevent error when person is None on held_position.
+  [Gagaro]
+
 
 1.17 (2017-10-02)
 -----------------
@@ -39,9 +42,6 @@ Changelog
 
 - Set plone.app.textfield maximum version as 1.2.7
   [thomasdesvenain]
-
-- Check person is not None in HeldPosition.
-  [Gagaro]
 
 
 1.14 (2017-05-16)
