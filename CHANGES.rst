@@ -40,6 +40,9 @@ Changelog
 - Set plone.app.textfield maximum version as 1.2.7
   [thomasdesvenain]
 
+- Check person is not None in HeldPosition.
+  [Gagaro]
+
 
 1.14 (2017-05-16)
 -----------------

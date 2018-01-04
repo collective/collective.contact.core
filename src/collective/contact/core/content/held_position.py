@@ -134,10 +134,16 @@ class HeldPosition(Container):
                                       position_name)
 
     def get_person_title(self):
-        return self.get_person().get_title()
+        person = self.get_person()
+        if person is None:
+            return u""
+        return person.get_title()
 
     def get_sortable_title(self):
-        sortable_fullname = self.get_person().get_sortable_title()
+        person = self.get_person()
+        if person is None:
+            return u""
+        sortable_fullname = person.get_sortable_title()
         held_position_title = self.Title()
         return u"%s-%s" % (
             sortable_fullname,
@@ -146,12 +152,17 @@ class HeldPosition(Container):
 
     @acqproperty
     def person_title(self):
-        return self.get_person().person_title
+        person = self.get_person()
+        if person is None:
+            return u""
+        return person.person_title
 
     @acqproperty
     def photo(self):
         """Get photo from Person"""
         person = self.get_person()
+        if person is None:
+            return None
         return person.photo
 
 
