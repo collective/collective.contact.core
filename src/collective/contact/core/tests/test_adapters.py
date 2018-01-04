@@ -68,7 +68,7 @@ class TestAdapters(unittest.TestCase, BaseTest):
         regimenth = self.directory['armeedeterre']['corpsa']['divisionalpha']['regimenth']
         vcard_provider = IVCard(regimenth)
         vcard = vcard_provider.get_vcard()
-        self.assertEqual(vcard.fn.value, u'Régiment H'.encode('utf-8'))
+        self.assertEqual(vcard.fn.value, u'Régiment H')
         self.assertEqual(vcard.kind.value, 'org')
         self.assertTrue(hasattr(vcard, 'adr'))
 
