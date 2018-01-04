@@ -21,3 +21,4 @@ htmlcov
 *.log
 output.xml
 *.swp
+/.idea
