@@ -182,7 +182,8 @@ class TestPosition(TestContentTypes):
         self.assertEqual(self.general_adt.get_full_title(),
                          u"Général de l'armée de terre (Armée de terre)")
         self.assertEqual(self.sergent_lh.get_full_title(),
-                         u"Sergent de la brigade LH, Brigade LH (Armée de terre)")
+                         u"Sergent de la brigade LH (Armée de terre / Corps A / Division Alpha / Régiment H / "
+                         u"Brigade LH)")
 
     def test_copy_paste(self):
         cb = self.armeedeterre.manage_copyObjects(['general_adt'])
@@ -215,9 +216,10 @@ class TestHeldPosition(TestContentTypes):
         self.assertEqual(self.adt.get_full_title(),
                          u"Général Charles De Gaulle (Armée de terre)")
         self.assertEqual(self.gadt.get_full_title(),
-                         u"Général Charles De Gaulle (Armée de terre - Général de l'armée de terre)")
+                         u"Général Charles De Gaulle (Armée de terre, Général de l'armée de terre)")
         self.assertEqual(self.sergent_pepper.get_full_title(),
-                         u"Mister Pepper (Armée de terre - Sergent de la brigade LH)")
+                         u"Mister Pepper (Armée de terre / Corps A / Division Alpha / Régiment H / Brigade LH, "
+                         u"Sergent de la brigade LH)")
         self.assertEqual(self.gadt.get_person_title(),
                          u"Général Charles De Gaulle")
 

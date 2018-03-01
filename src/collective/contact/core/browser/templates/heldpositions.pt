@@ -58,7 +58,7 @@
                            tal:replace="structure python:scales.tag('logo', 'tile', css_class='photo')"
                            tal:on-error="string:Bad logo format" />
                   </div>
-                  <h4><a tal:attributes="href organization/absolute_url" tal:content="organization/Title"></a></h4>
+                  <h4><a tal:attributes="href organization/absolute_url" tal:content="organization/get_full_title"></a></h4>
 
                   <div tal:replace="structure held_position/organization/@@contactdetails"></div>
               </div>

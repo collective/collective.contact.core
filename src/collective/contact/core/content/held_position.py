@@ -107,10 +107,10 @@ class HeldPosition(Container):
                                         organization.Title(),
                                         root_organization.Title())
 
-    def get_full_title(self):
+    def get_full_title(self, separator=u' / ', first_index=0):
         """Returns the 'full title' of the held position.
         It is constituted by the person's who held the position name,
-        the root organization and the position name (if any)
+        the full root organization and the position name (if any)
         """
         person_name = self.get_person_title()
         if self.position.to_object is None:  # the reference was removed
@@ -118,20 +118,17 @@ class HeldPosition(Container):
 
         position = self.get_position()
         organization = self.get_organization()
-        root_organization = organization.get_root_organization().title
         if position is None and not self.label:
             return u"%s (%s)" % (person_name,
-                                 root_organization)
+                                 organization.get_full_title(separator=separator, first_index=first_index))
         elif position is None and self.label:
-            position_name = self.label
-            return u"%s (%s - %s)" % (person_name,
-                                      root_organization,
-                                      position_name)
+            return u"%s (%s, %s)" % (person_name,
+                                      organization.get_full_title(separator=separator, first_index=first_index),
+                                      self.label)
         else:
-            position_name = position.title
-            return u"%s (%s - %s)" % (person_name,
-                                      root_organization,
-                                      position_name)
+            return u"%s (%s, %s)" % (person_name,
+                                      organization.get_full_title(separator=separator, first_index=first_index),
+                                      position.title)
 
     def get_person_title(self):
         person = self.get_person()

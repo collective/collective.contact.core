@@ -4,6 +4,9 @@ Changelog
 1.18 (unreleased)
 -----------------
 
+- Use real full title in held_position and position get_full_title methods.
+  Necessary to display to the end user the right organization, without ambiguity.
+  [sgeulette]
 
 - Prevent address fields from being erased if they are changed programmaticaly before any manual edition.
   [thomasdesvenain]
