@@ -28,7 +28,6 @@ Can create new contact from organization
     Go to    ${PLONE_URL}/mydirectory/armeedeterre/corpsa/divisionalpha
     Page should contain link    css=.addnewcontactfromorganization
     Click link    css=.addnewcontactfromorganization
-    Sleep  1
     Overlay is opened
     Wait For Condition    return $('.overlay h1').text() === "Create Contact"
     Element should contain    oform-widgets-organization-input-fields    Armée de terre / Corps A / Division Alpha
