@@ -71,19 +71,13 @@ class Position(Container):
         chain.append(self)
         return chain
 
-    def get_full_title(self):
+    def get_full_title(self, separator=u' / ', first_index=0):
         """Returns the full title of the position
         It is constituted by the name of the position,
-        the name of its organization and the name of the
-        root organization in brackets.
+        the full name of its organization.
         """
         organization = self.get_organization()
-        root_organization = organization.get_root_organization()
-        if organization == root_organization:
-            return u"%s (%s)" % (self.title, organization.title)
-        else:
-            return u"%s, %s (%s)" % (self.title, organization.title,
-                                     root_organization.title)
+        return u"%s (%s)" % (self.title, organization.get_full_title(separator=separator, first_index=first_index))
 
     def get_held_positions(self):
         """Returns the held position

@@ -147,7 +147,8 @@ class TestPositionView(TestView):
     def test_position_basefields_view(self):
         view = self.sergent_lh.restrictedTraverse("@@basefields")
         view.update()
-        self.assertEqual(view.name, u"Sergent de la brigade LH, Brigade LH (Armée de terre)")
+        self.assertEqual(view.name, u"Sergent de la brigade LH (Armée de terre / Corps A / Division Alpha / "
+                         u"Régiment H / Brigade LH)")
         self.assertEqual(view.type, "Sergeant")
 
     def test_position_view(self):
