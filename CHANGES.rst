@@ -25,6 +25,10 @@ Changelog
   (See https://github.com/plone/plone.app.textfield/issues/22).
   [gbastien]
 
+- Display positions on the organization view respecting order (getObjPositionInParent).
+  [gbastien]
+
+
 1.17 (2017-10-02)
 -----------------
 

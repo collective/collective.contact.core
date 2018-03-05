@@ -167,6 +167,22 @@ class TestOrganization(TestContentTypes):
         self.mydirectory.manage_pasteObjects(cb)
         self.assertIn('copy_of_armeedeterre', self.mydirectory.keys())
 
+    def test_get_positions(self):
+        # add some positions to self.armeedeterre
+        self.armeedeterre.invokeFactory('position', 'colonel_adt', title="Colonel de l'armée de terre")
+        self.armeedeterre.invokeFactory('position', 'lieutenant_adt', title="Lieutenant de l'armée de terre")
+        self.armeedeterre.invokeFactory('position', 'sergent_adt', title="Sergent de l'armée de terre")
+        self.assertEquals(
+            [pos.id for pos in self.armeedeterre.get_positions()],
+            ['general_adt', 'colonel_adt', 'lieutenant_adt', 'sergent_adt'])
+        # get_positions sorts positions using getObjPositionInParent
+        # move 'general_adt' to last position
+        self.armeedeterre.moveObjectToPosition(
+            'general_adt', len(self.armeedeterre.objectIds()))
+        self.assertEquals(
+            [pos.id for pos in self.armeedeterre.get_positions()],
+            ['colonel_adt', 'lieutenant_adt', 'sergent_adt', 'general_adt'])
+
 
 class TestPosition(TestContentTypes):
 

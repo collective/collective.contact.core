@@ -133,7 +133,8 @@ class Organization(Container):
         catalog = api.portal.get_tool('portal_catalog')
         positions = catalog.searchResults(portal_type="position",
                                           path={'query': '/'.join(self.getPhysicalPath()),
-                                                'depth': 1})
+                                                'depth': 1},
+                                          sort_on='getObjPositionInParent')
         return [c.getObject() for c in positions]
 
     def get_held_positions(self):
