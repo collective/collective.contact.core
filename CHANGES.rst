@@ -17,6 +17,10 @@ Changelog
 - Prevent error when person is None on held_position.
   [Gagaro]
 
+- Use another version than 1.2.8 for plone.app.textfield as version 1.2.9
+  fixes issue we had in tests.
+  (See https://github.com/plone/plone.app.textfield/issues/22).
+  [gbastien]
 
 1.17 (2017-10-02)
 -----------------
