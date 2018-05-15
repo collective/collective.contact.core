@@ -60,7 +60,7 @@ class OrganizationBaseFields(grok.View):
         self.organization = self.context
         organization = self.organization
 
-        self.name = organization.Title()
+        self.name = organization.get_full_title()
         factory = getUtility(IVocabularyFactory, "OrganizationTypesOrLevels")
         vocabulary = factory(self.context)
         try:
@@ -116,6 +116,6 @@ class HeldPositionBaseFields(grok.View):
         person = held_position.get_person()
         self.person = person
         self.fullname = person.Title()
-        self.title = held_position.Title()
+        self.title = held_position.get_full_title()
 
         self.position = held_position.get_position()

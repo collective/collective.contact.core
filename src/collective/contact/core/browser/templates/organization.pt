@@ -1,10 +1,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  lang="en"
-	  xmlns:tal="http://xml.zope.org/namespaces/tal"
-	  xmlns:metal="http://xml.zope.org/namespaces/metal"
-	  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    metal:use-macro="context/main_template/macros/master"
-    i18n:domain="collective.contact.core">
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="collective.contact.core">
 <body>
 
 <div id="organization" class="vcard" metal:fill-slot="main">
@@ -13,13 +13,13 @@
          tal:define="ajax_load request/ajax_load | nothing;"
          tal:content="structure provider:plone.abovecontenttitle"
          tal:condition="not:ajax_load" />
-	  <div tal:replace="structure context/@@basefields" />
+    <div tal:replace="structure context/@@basefields" />
 
     <div id="organizations" class="field" tal:condition="view/parent_organizations">
         <label><tal:block i18n:translate="">Parent organizations</tal:block>:</label>
         <ul>
         <tal:block tal:repeat="organization view/parent_organizations">
-            <li><a tal:attributes="href organization/absolute_url">
+            <li><img tal:attributes="src organization/getIcon" /> <a tal:attributes="href organization/absolute_url">
                 <span tal:replace="organization/Title"
                       i18n:translate="" />
             </a></li>
@@ -37,7 +37,7 @@
         <label><tal:block i18n:translate="">Organizations in this organization</tal:block>:</label>
         <ul>
         <tal:block tal:repeat="sub_org view/sub_organizations">
-            <li><a tal:attributes="href sub_org/getURL">
+            <li><img tal:attributes="src sub_org/getIcon" /> <a tal:attributes="href sub_org/getURL">
                 <span tal:replace="sub_org/Title"
                       i18n:translate="" />
             </a></li>
@@ -50,13 +50,13 @@
         <ul>
         <tal:block tal:repeat="position view/positions">
             <li tal:define="held_positions position/get_held_positions|nothing">
-              <a class="link-tooltip" tal:attributes="href position/absolute_url">
+              <img tal:attributes="src position/getIcon" /> <a class="link-tooltip" tal:attributes="href position/absolute_url">
                 <span tal:replace="position/Title"
                       i18n:translate=""></span></a><tal:semicolon i18n:translate="colon">:
                </tal:semicolon><tal:person condition="held_positions">
-               <tal:block repeat="held_position held_positions">
-                 <a class="link-tooltip"
-                    tal:define="person held_position/get_person"
+               <ul tal:repeat="held_position held_positions">
+                <li tal:define="person held_position/get_person">
+                 <img tal:attributes="src person/getIcon" /> <a class="link-tooltip"
                     tal:attributes="href person/absolute_url">
                    <span tal:replace="person/Title"
                          i18n:translate="" />
@@ -64,7 +64,8 @@
                  <tal:block condition="held_position/start_date">
                    (<i18n:block translate="">from</i18n:block> <span tal:replace="python:view.display_date(held_position.start_date)"></span><span tal:condition="held_position/end_date"> <i18n:block translate="">to</i18n:block> <span tal:replace="python:view.display_date(held_position.end_date)"></span></span>)
                  </tal:block>
-               </tal:block>
+                </li>
+               </ul>
             </tal:person><tal:nobody condition="not:held_positions" i18n:translate="">Not assigned</tal:nobody>
             </li>
         </tal:block>

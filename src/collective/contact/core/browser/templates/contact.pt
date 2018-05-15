@@ -17,7 +17,7 @@
       <label><tal:block i18n:translate="">Organizations</tal:block>:</label>
       <ul>
       <tal:block tal:repeat="organization view/organizations">
-          <li><a class="link-tooltip" tal:attributes="href organization/absolute_url">
+          <li><img tal:attributes="src organization/getIcon" /> <a class="link-tooltip" tal:attributes="href organization/absolute_url">
               <span tal:replace="organization/Title"
                     i18n:translate="" />
           </a></li>

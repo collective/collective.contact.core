@@ -41,7 +41,7 @@ class HeldPositions(grok.View):
         held_positions = []
         for obj in IPersonHeldPositions(person).get_sorted_positions():
             held_position = {}
-            held_position['label'] = obj.label or obj.Title()
+            held_position['title'] = obj.Title()
             if obj.start_date is not None:
                 start_date = date_to_DateTime(obj.start_date)
                 held_position['start_date'] = person.toLocalizedTime(start_date)
@@ -58,6 +58,7 @@ class HeldPositions(grok.View):
             # held_position['email'] = obj.email
             held_position['object'] = obj
             organization = obj.get_organization()
+            held_position['icon'] = obj.getIcon()
             held_position['organization'] = organization if organization else None
             held_position['can_edit'] = sm.checkPermission('Modify portal content', obj)
             held_position['can_delete'] = sm.checkPermission('Delete objects', obj)

@@ -4,8 +4,7 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       i18n:domain="collective.contact.core">
 
-  <h1><span tal:content="view/fullname"></span><tal:content i18n:translate="colon">:</tal:content>
-      <span tal:content="view/title"></span></h1>
+  <h1 class="heldpos"><img tal:attributes="src context/getIcon" /> <span tal:content="view/title" /></h1>
 
   <div class="field" tal:condition="context/photo">
     <img tal:replace="structure context/@@images/photo/thumb" />
@@ -13,7 +12,7 @@
 
   <div class="field" tal:condition="view/position">
       <label><tal:block i18n:translate="">Position</tal:block>:</label>
-      <a class="link-tooltip" tal:attributes="href view/position/absolute_url">
+      <img tal:attributes="src view/position/getIcon" /> <a class="link-tooltip" tal:attributes="href view/position/absolute_url">
         <span tal:content="view/position/Title"
             i18n:translate="" />
       </a>

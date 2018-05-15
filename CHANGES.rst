@@ -28,6 +28,12 @@ Changelog
 - Display positions on the organization view respecting order (getObjPositionInParent).
   [gbastien]
 
+- Display various content title consistently everywhere in the application.
+  [gbastien]
+
+- Display content icon before content title.
+  [gbastien]
+
 
 1.17 (2017-10-02)
 -----------------

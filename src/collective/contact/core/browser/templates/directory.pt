@@ -13,7 +13,7 @@
 <body>
 
 <div metal:fill-slot="main">
-    <h1 tal:content="context/Title"></h1>
+    <h1 class="directory"><img tal:attributes="src context/getIcon" /> <span tal:content="context/Title" /></h1>
 
     <div id="organizations" tal:condition="view/organizations">
         <h2><tal:block i18n:translate="">Organizations</tal:block>:</h2>

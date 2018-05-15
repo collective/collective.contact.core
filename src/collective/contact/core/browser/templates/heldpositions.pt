@@ -36,7 +36,7 @@
                 </a>
               </div>
 
-              <h3 tal:content="held_position/label" />
+              <h3><img tal:attributes="src held_position/icon" /> <span tal:content="held_position/title" /></h3>
 
               <div class="start_date" class="field" tal:condition="held_position/start_date">
                 <label><tal:block i18n:translate="">Start date</tal:block>:</label>
@@ -58,7 +58,7 @@
                            tal:replace="structure python:scales.tag('logo', 'tile', css_class='photo')"
                            tal:on-error="string:Bad logo format" />
                   </div>
-                  <h4><a tal:attributes="href organization/absolute_url" tal:content="organization/get_full_title"></a></h4>
+                  <h4><img tal:attributes="src organization/getIcon" /> <a tal:attributes="href organization/absolute_url" tal:content="organization/get_full_title"></a></h4>
 
                   <div tal:replace="structure held_position/organization/@@contactdetails"></div>
               </div>

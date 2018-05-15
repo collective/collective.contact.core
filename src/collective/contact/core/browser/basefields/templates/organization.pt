@@ -5,7 +5,7 @@
       lang="en"
       i18n:domain="collective.contact.core" tal:omit-tag="">
 
-    <h1 class="org" tal:content="view/name"></h1>
+    <h1 class="org"><img tal:attributes="src context/getIcon" /> <span tal:content="view/name" /></h1>
 
     <div id="logo" class="field" tal:condition="context/logo">
         <img tal:define="scales nocall:context/@@images"
