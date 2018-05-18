@@ -49,6 +49,6 @@ h3 img, h4 img {
     vertical-align: baseline;
 }
 
-#content a.link-tooltip {
+#content a:link.link-tooltip {
     border-bottom: 1px dotted;
 }
