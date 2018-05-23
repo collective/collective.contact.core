@@ -90,3 +90,7 @@ def v11(context):
     if val is None:
         api.portal.set_registry_record(name='person_contact_details_private', value=True,
                                        interface=IContactCoreParameters)
+
+
+def v12(context):
+    IUpgradeTool(context).runImportStep('collective.contact.core', 'plone.app.registry')

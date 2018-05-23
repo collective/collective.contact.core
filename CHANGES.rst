@@ -34,6 +34,10 @@ Changelog
 - Display content icon before content title.
   [gbastien]
 
+- Added parameter display_contact_photo_on_organization_view to the registry,
+  it True (default), the contact photo is displayed in the @@othercontacts, if
+  False, the person content_type icon is displayed.
+  [gbastien]
 
 1.17 (2017-10-02)
 -----------------
