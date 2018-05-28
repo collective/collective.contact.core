@@ -15,7 +15,7 @@
            i18n:attributes="alt; title" />
     </a>
   </div>
-  <h1 class="fn"><img tal:attributes="src context/getIcon" /> <span tal:content="view/name" /></h1>
+  <h1 class="fn"><img tal:attributes="src context/getIconURL" /> <span tal:content="view/name" /></h1>
 
   <div id="photo" class="field" tal:condition="context/photo">
       <img tal:define="scales nocall:context/@@images"

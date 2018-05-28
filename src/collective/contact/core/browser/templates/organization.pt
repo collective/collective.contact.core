@@ -19,7 +19,7 @@
         <label><tal:block i18n:translate="">Parent organizations</tal:block>:</label>
         <ul>
         <tal:block tal:repeat="organization view/parent_organizations">
-            <li><img tal:attributes="src organization/getIcon" /> <a tal:attributes="href organization/absolute_url">
+            <li><img tal:attributes="src organization/getIconURL" /> <a tal:attributes="href organization/absolute_url">
                 <span tal:replace="organization/Title"
                       i18n:translate="" />
             </a></li>
@@ -37,7 +37,7 @@
         <label><tal:block i18n:translate="">Organizations in this organization</tal:block>:</label>
         <ul>
         <tal:block tal:repeat="sub_org view/sub_organizations">
-            <li><img tal:attributes="src sub_org/getIcon" /> <a tal:attributes="href sub_org/getURL">
+            <li><img tal:attributes="src string:${portal_url}/${sub_org/getIcon}" /> <a tal:attributes="href sub_org/getURL">
                 <span tal:replace="sub_org/Title"
                       i18n:translate="" />
             </a></li>
@@ -50,13 +50,13 @@
         <ul>
         <tal:block tal:repeat="position view/positions">
             <li tal:define="held_positions position/get_held_positions|nothing">
-              <img tal:attributes="src position/getIcon" /> <a class="link-tooltip" tal:attributes="href position/absolute_url">
+              <img tal:attributes="src position/getIconURL" /> <a class="link-tooltip" tal:attributes="href position/absolute_url">
                 <span tal:replace="position/Title"
                       i18n:translate=""></span></a><tal:semicolon i18n:translate="colon">:
                </tal:semicolon><tal:person condition="held_positions">
                <ul tal:repeat="held_position held_positions">
                 <li tal:define="person held_position/get_person">
-                 <img tal:attributes="src person/getIcon" /> <a class="link-tooltip"
+                 <img tal:attributes="src person/getIconURL" /> <a class="link-tooltip"
                     tal:attributes="href person/absolute_url">
                    <span tal:replace="person/Title"
                          i18n:translate="" />

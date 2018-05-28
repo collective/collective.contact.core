@@ -19,13 +19,13 @@
               <img tal:condition="not:contact/has_photo" style="border: none" src="defaultUser.png"
                    height="64" />
             </span>
-            <img tal:condition="not:contact/display_photo" tal:attributes="src contact/person/getIcon"/>
+            <img tal:condition="not:contact/display_photo" tal:attributes="src contact/person/getIconURL"/>
 
             <span class="contact-title" tal:content="title"></span>
           </a>
 
           <a tal:attributes="href contact/obj/absolute_url;">
-          <img tal:attributes="src contact/obj/getIcon"/>
+          <img tal:attributes="src contact/obj/getIconURL"/>
           <span id="contact-held-position" tal:condition="contact/held_position" tal:content="contact/held_position" />
           </a>
 

@@ -13,14 +13,14 @@
 <body>
 
 <div metal:fill-slot="main">
-    <h1 class="directory"><img tal:attributes="src context/getIcon" /> <span tal:content="context/Title" /></h1>
+    <h1 class="directory"><img tal:attributes="src context/getIconURL" /> <span tal:content="context/Title" /></h1>
 
     <div id="organizations" tal:condition="view/organizations">
         <h2><tal:block i18n:translate="">Organizations</tal:block>:</h2>
         <ul>
         <tal:block tal:repeat="organization view/organizations">
             <li><a tal:attributes="href organization/getURL">
-                <img tal:attributes="src organization/getIcon" />
+                <img tal:attributes="src organization/getIconURL" />
                 <span tal:replace="organization/Title"
                       i18n:translate="" />
             </a></li>
@@ -33,7 +33,7 @@
         <ul>
         <tal:block tal:repeat="person view/persons">
             <li><a tal:attributes="href person/getURL">
-                <img tal:attributes="src person/getIcon" />
+                <img tal:attributes="src person/getIconURL" />
                 <span tal:replace="person/Title"
                       i18n:translate="" />
             </a></li>

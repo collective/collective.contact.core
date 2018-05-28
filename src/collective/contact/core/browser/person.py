@@ -58,7 +58,7 @@ class HeldPositions(grok.View):
             # held_position['email'] = obj.email
             held_position['object'] = obj
             organization = obj.get_organization()
-            held_position['icon'] = obj.getIcon()
+            held_position['icon'] = obj.getIconURL()
             held_position['organization'] = organization if organization else None
             held_position['can_edit'] = sm.checkPermission('Modify portal content', obj)
             held_position['can_delete'] = sm.checkPermission('Delete objects', obj)
