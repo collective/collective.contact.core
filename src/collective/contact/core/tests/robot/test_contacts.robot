@@ -10,7 +10,7 @@ Directory is available
     [Tags]    Go
     Log in as site owner and wait
     Click link    css=#portaltab-mydirectory a
-    Wait until element is visible  xpath=//h1[.='Military directory']  5
+    Wait until element is visible  xpath=//h1/span[.='Military directory']  5
 
 Create a new organization
     [Tags]    Go
