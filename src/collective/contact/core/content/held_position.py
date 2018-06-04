@@ -83,7 +83,7 @@ class HeldPosition(Container):
         elif pos_or_org.portal_type == 'organization':
             return pos_or_org
 
-    def Title(self):
+    def Title(self, separator=u' / ', first_index=0):
         """The held position's title is constituted by the position's
            title (or held_position label) and the organizations chain."""
         position = self.position.to_object
@@ -93,15 +93,16 @@ class HeldPosition(Container):
         position = self.get_position()
         organization = self.get_organization()
         if position is None and not self.label:
-            return "(%s)" % organization.get_full_title().encode('utf8')
+            return "(%s)" % organization.get_full_title(separator=separator, first_index=first_index).encode('utf8')
         # we display the position title or the label
         position_title = self.label or position.title
-        return "%s (%s)" % (position_title.encode('utf8'), organization.get_full_title().encode('utf8'))
+        return "%s (%s)" % (position_title.encode('utf8'),
+                            organization.get_full_title(separator=separator, first_index=first_index).encode('utf8'))
 
     def get_full_title(self, separator=u' / ', first_index=0):
         """Returns the 'title' and include person name."""
         person_name = self.get_person_title()
-        title = self.Title().decode('utf8')
+        title = self.Title(separator=separator, first_index=first_index).decode('utf8')
         if title[0:1] == '(':
             return u"%s %s" % (person_name, title)
         else:
