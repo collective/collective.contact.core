@@ -29,7 +29,7 @@ Changelog
   [gbastien]
 
 - Display various content title consistently everywhere in the application.
-  [gbastien]
+  [gbastien, sgeulette]
 
 - Display content icon before content title.
   [gbastien]

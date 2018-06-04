@@ -50,7 +50,7 @@ class TestSearch(unittest.TestCase, BaseTest):
                          "pepper")
         idxr = held_position_sortable_title(self.sergent_pepper)
         self.assertEqual(idxr(),
-                         "pepper-sergent-de-la-brigade-lh-brigade-lh-armee-de-terre")
+                         u'pepper-sergent-de-la-brigade-lh-armee-de-terre-corps-a')
         degaulle = self.degaulle
         self.assertEqual(person_sortable_title(degaulle)(),
                          'de-gaulle-charles')

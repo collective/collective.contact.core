@@ -93,15 +93,19 @@ class HeldPosition(Container):
         position = self.get_position()
         organization = self.get_organization()
         if position is None and not self.label:
-            return organization.get_full_title()
+            return "(%s)" % organization.get_full_title().encode('utf8')
         # we display the position title or the label
         position_title = self.label or position.title
-        return u"%s (%s)" % (position_title, organization.get_full_title())
+        return "%s (%s)" % (position_title.encode('utf8'), organization.get_full_title().encode('utf8'))
 
     def get_full_title(self, separator=u' / ', first_index=0):
         """Returns the 'title' and include person name."""
         person_name = self.get_person_title()
-        return u"%s, %s" % (person_name, self.Title())
+        title = self.Title().decode('utf8')
+        if title[0:1] == '(':
+            return u"%s %s" % (person_name, title)
+        else:
+            return u"%s, %s" % (person_name, title)
 
     def get_person_title(self):
         person = self.get_person()
