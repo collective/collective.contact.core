@@ -55,6 +55,11 @@ class IContactCoreParameters(Interface):
         description=u"",
         required=False, default=True)
 
+    display_contact_photo_on_organization_view = schema.Bool(
+        title=_(u"Display contact photo on organization view (instead person content type icon)."),
+        description=u"",
+        required=False, default=True)
+
 
 class IPersonHeldPositions(Interface):
     """Adapter interface to get ordered positions of a person

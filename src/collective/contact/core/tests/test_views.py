@@ -181,7 +181,7 @@ class TestOrganizationView(TestView):
     def test_organization_basefields_view(self):
         view = self.corpsa.restrictedTraverse("@@basefields")
         view.update()
-        self.assertEqual(view.name, "Corps A")
+        self.assertEqual(view.name, u"Armée de terre / Corps A")
         self.assertEqual(view.type, "Corps")
 
     def test_organization_view(self):
@@ -231,7 +231,7 @@ class TestOrganizationView(TestView):
         view.update()
         contact = view.othercontacts[0]
         self.assertEqual(contact['title'], 'Général Charles De Gaulle')
-        self.assertEqual(contact['held_position'], 'Armée de terre')
+        self.assertEqual(contact['held_position'], '(Armée de terre)')
         self.assertIsNone(contact['label'])
         self.assertEqual(contact['obj'], self.adt)
         self.assertEqual(contact['email'], None)
@@ -273,16 +273,15 @@ class TestPersonView(TestView):
         view.update()
         held_positions = view.held_positions
         self.assertEqual(len(held_positions), 2)
-
         first = held_positions[0]
         self.assertEqual(self.adt, first['object'])
-        self.assertEqual(self.adt.Title(), first['label'])
+        self.assertEqual(self.adt.Title(), first['title'])
         self.assertIn(first['start_date'], [u'May 25, 1940', '1940-05-25'])
         self.assertEqual(self.armeedeterre, first['organization'])
 
         second = held_positions[1]
         self.assertEqual(self.gadt, second['object'])
-        self.assertEqual(self.gadt.label, second['label'])
+        self.assertEqual(self.gadt.Title(), second['title'])
         self.assertIn(second['start_date'], [u'May 25, 1940', '1940-05-25'])
         self.assertIn(second['end_date'], [u'Nov 09, 1970', '1970-11-09'])
         self.assertEqual(self.armeedeterre, second['organization'])

@@ -217,25 +217,26 @@ class TestHeldPosition(TestContentTypes):
         sergent_pepper = self.sergent_pepper
         self.assertIn('adt', degaulle)
         self.assertEqual(adt.Title(),
-                         "Armée de terre")
+                         "(Armée de terre)")
         self.assertEqual(adt.title,
-                         "Armée de terre")
+                         "(Armée de terre)")
         self.assertIn('gadt', degaulle)
         self.assertEqual(gadt.Title(),
-                         "Général de l'armée de terre (Armée de terre)")
+                         "Émissaire OTAN (Armée de terre)")
         self.assertIn('sergent_pepper', pepper)
         self.assertEqual(sergent_pepper.Title(),
-                         "Sergent de la brigade LH, Brigade LH (Armée de terre)")
+                         "Sergent de la brigade LH (Armée de terre / Corps A / Division Alpha / Régiment H / "
+                         "Brigade LH)")
         self.assertIsNone(sergent_pepper.end_date)
 
     def test_get_full_title(self):
         self.assertEqual(self.adt.get_full_title(),
                          u"Général Charles De Gaulle (Armée de terre)")
         self.assertEqual(self.gadt.get_full_title(),
-                         u"Général Charles De Gaulle (Armée de terre, Général de l'armée de terre)")
+                         u"Général Charles De Gaulle, Émissaire OTAN (Armée de terre)")
         self.assertEqual(self.sergent_pepper.get_full_title(),
-                         u"Mister Pepper (Armée de terre / Corps A / Division Alpha / Régiment H / Brigade LH, "
-                         u"Sergent de la brigade LH)")
+                         u"Mister Pepper, Sergent de la brigade LH (Armée de terre / Corps A / Division Alpha / "
+                         u"Régiment H / Brigade LH)")
         self.assertEqual(self.gadt.get_person_title(),
                          u"Général Charles De Gaulle")
 

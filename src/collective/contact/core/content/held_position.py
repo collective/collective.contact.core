@@ -83,52 +83,30 @@ class HeldPosition(Container):
         elif pos_or_org.portal_type == 'organization':
             return pos_or_org
 
-    def Title(self):
+    def Title(self, separator=u' / ', first_index=0):
         """The held position's title is constituted by the position's
-        title, the organization's title and the root organization's title"""
+           title (or held_position label) and the organizations chain."""
         position = self.position.to_object
         if position is None:  # the reference was removed
             return self.getId()
 
-        organization = self.get_organization()
-        root_organization = organization.get_root_organization()
-        if position == organization:
-            if self.label:
-                return "%s (%s) " % (self.label.encode('utf-8'),
-                                     position.Title())
-            else:
-                return organization.Title()
-        else:
-            if organization == root_organization:
-                return "%s (%s)" % (position.Title(),
-                                    organization.Title())
-            else:
-                return "%s, %s (%s)" % (position.Title(),
-                                        organization.Title(),
-                                        root_organization.Title())
-
-    def get_full_title(self, separator=u' / ', first_index=0):
-        """Returns the 'full title' of the held position.
-        It is constituted by the person's who held the position name,
-        the full root organization and the position name (if any)
-        """
-        person_name = self.get_person_title()
-        if self.position.to_object is None:  # the reference was removed
-            return u"%s (%s)" % (person_name, self.getId())
-
         position = self.get_position()
         organization = self.get_organization()
         if position is None and not self.label:
-            return u"%s (%s)" % (person_name,
-                                 organization.get_full_title(separator=separator, first_index=first_index))
-        elif position is None and self.label:
-            return u"%s (%s, %s)" % (person_name,
-                                      organization.get_full_title(separator=separator, first_index=first_index),
-                                      self.label)
+            return "(%s)" % organization.get_full_title(separator=separator, first_index=first_index).encode('utf8')
+        # we display the position title or the label
+        position_title = self.label or position.title
+        return "%s (%s)" % (position_title.encode('utf8'),
+                            organization.get_full_title(separator=separator, first_index=first_index).encode('utf8'))
+
+    def get_full_title(self, separator=u' / ', first_index=0):
+        """Returns the 'title' and include person name."""
+        person_name = self.get_person_title()
+        title = self.Title(separator=separator, first_index=first_index).decode('utf8')
+        if title[0:1] == '(':
+            return u"%s %s" % (person_name, title)
         else:
-            return u"%s (%s, %s)" % (person_name,
-                                      organization.get_full_title(separator=separator, first_index=first_index),
-                                      position.title)
+            return u"%s, %s" % (person_name, title)
 
     def get_person_title(self):
         person = self.get_person()

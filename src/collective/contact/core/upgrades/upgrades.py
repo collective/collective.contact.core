@@ -90,3 +90,11 @@ def v11(context):
     if val is None:
         api.portal.set_registry_record(name='person_contact_details_private', value=True,
                                        interface=IContactCoreParameters)
+
+
+def v12(context):
+    IUpgradeTool(context).runImportStep('collective.contact.core', 'plone.app.registry')
+    catalog = api.portal.get_tool('portal_catalog')
+    brains = catalog.unrestrictedSearchResults(object_provides=IContactContent.__identifier__)
+    for brain in brains:
+        brain.getObject().reindexObject(['Title', 'sortable_title', 'get_full_title', 'SearchableText'])

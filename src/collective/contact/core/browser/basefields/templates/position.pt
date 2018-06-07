@@ -5,7 +5,7 @@
       lang="en"
       i18n:domain="collective.contact.core" tal:omit-tag="">
 
-    <h1 tal:content="view/name"></h1>
+    <h1 class="pos"><img tal:attributes="src context/getIconURL" /> <span tal:content="view/name" /></h1>
 
     <div id="type" class="field">
          <label><tal:block i18n:translate="">Position type</tal:block>:</label>

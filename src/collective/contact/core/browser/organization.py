@@ -10,6 +10,7 @@ from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.browser.utils import get_valid_url
 from collective.contact.core.browser.utils import date_to_DateTime
+from collective.contact.core.interfaces import IContactCoreParameters
 
 
 ADDNEW_OVERLAY = """
@@ -78,10 +79,15 @@ class OtherContacts(grok.View):
         for hp in held_positions:
             contact = {}
             person = hp.get_person()
+            contact['person'] = person
             contact['title'] = person.Title()
             contact['held_position'] = hp.Title()
             contact['label'] = hp.label
             contact['obj'] = hp
+            contact['display_photo'] = api.portal.get_registry_record(
+                name='display_contact_photo_on_organization_view',
+                interface=IContactCoreParameters)
+            contact['has_photo'] = contact['display_photo'] and hp.photo or None
 
             if IContactDetails.providedBy(hp):
                 contactable = hp

@@ -125,4 +125,12 @@
       handler=".upgrades.v11"
       profile="collective.contact.core:default" />
 
+  <genericsetup:upgradeStep
+      title="Upgrade from 11 to 12"
+      description="Reapply plone.app.registry to add the 'display_contact_photo_on_organization_view' parameter."
+      source="11"
+      destination="12"
+      handler=".upgrades.v12"
+      profile="collective.contact.core:default" />
+
 </configure>
