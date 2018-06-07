@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.18 (unreleased)
+1.18 (2018-06-07)
 -----------------
 
 - Use real full title in held_position and position get_full_title methods.
