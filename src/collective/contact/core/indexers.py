@@ -6,6 +6,7 @@ from Products.CMFPlone.utils import safe_unicode
 from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.content.position import IPosition
 from collective.contact.core.content.person import IPerson
+from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.behaviors import IRelatedOrganizations
 from collective.contact.core.interfaces import IHeldPosition
 
@@ -58,6 +59,9 @@ def person_searchable_text(obj):
         text = obj.Title()
 
     results.append(safe_unicode(text))
+
+    results.append(IContactDetails(obj).email)
+
     use_held_positions = api.portal.get_registry_record(
         "collective.contact.core.interfaces.IContactCoreParameters."
         "use_held_positions_to_search_person")

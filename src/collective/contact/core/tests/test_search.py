@@ -94,3 +94,7 @@ class TestSearch(unittest.TestCase, BaseTest):
         results = catalog.searchResults(portal_type='held_position',
                                         end={'query': datetime.date(1971, 1, 1), 'range': 'max'})
         self.assertEqual(len(results), 2)
+        restults = catalog.searchResults(
+            SearchableText='charles.de.gaulle@private.com')
+        self.assertEqual(len(restults), 1)
+        self.assertEqual(restults[0].getPath(), '/plone/mydirectory/degaulle')
