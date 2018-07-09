@@ -1,12 +1,12 @@
 Changelog
 =========
 
-1.19 (unreleased)
+1.19 (2018-07-09)
 -----------------
 
 - Add email to SearchableText of a person. Useful when fixing contact data for
-  smtp error reports after sending a newsletter with collectice.contact.mailaction
-
+  smtp error reports after sending a newsletter with collective.contact.mailaction
+  [fRiSi]
 
 1.18 (2018-06-07)
 -----------------
