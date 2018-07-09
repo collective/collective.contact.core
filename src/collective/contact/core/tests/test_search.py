@@ -43,8 +43,11 @@ class TestSearch(unittest.TestCase, BaseTest):
         self.assertEqual(held_position_searchable_text(gadt)(),
                          u"Général Charles De Gaulle Général de l'armée de terre Armée de terre Émissaire OTAN")
         sergent_pepper = self.sergent_pepper
-        self.assertEqual(held_position_searchable_text(sergent_pepper)(),
-                         u"Mister Pepper Sergent de la brigade LH Armée de terre Corps A Division Alpha Régiment H Brigade LH")
+        self.assertEqual(
+            held_position_searchable_text(sergent_pepper)(),
+            (u"Mister Pepper Sergent de la brigade LH Armée de terre Corps A "
+             u"Division Alpha Régiment H Brigade LH sgt.pepper@armees.fr")
+            )
         pepper = self.pepper
         self.assertEqual(person_sortable_title(pepper)(),
                          "pepper")
@@ -94,3 +97,7 @@ class TestSearch(unittest.TestCase, BaseTest):
         results = catalog.searchResults(portal_type='held_position',
                                         end={'query': datetime.date(1971, 1, 1), 'range': 'max'})
         self.assertEqual(len(results), 2)
+        restults = catalog.searchResults(
+            SearchableText='charles.de.gaulle@private.com')
+        self.assertEqual(len(restults), 1)
+        self.assertEqual(restults[0].getPath(), '/plone/mydirectory/degaulle')

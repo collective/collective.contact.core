@@ -4,7 +4,8 @@ Changelog
 1.19 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Add email to SearchableText of a person. Useful when fixing contact data for
+  smtp error reports after sending a newsletter with collectice.contact.mailaction
 
 
 1.18 (2018-06-07)
