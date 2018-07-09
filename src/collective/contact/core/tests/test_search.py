@@ -43,8 +43,11 @@ class TestSearch(unittest.TestCase, BaseTest):
         self.assertEqual(held_position_searchable_text(gadt)(),
                          u"Général Charles De Gaulle Général de l'armée de terre Armée de terre Émissaire OTAN")
         sergent_pepper = self.sergent_pepper
-        self.assertEqual(held_position_searchable_text(sergent_pepper)(),
-                         u"Mister Pepper Sergent de la brigade LH Armée de terre Corps A Division Alpha Régiment H Brigade LH")
+        self.assertEqual(
+            held_position_searchable_text(sergent_pepper)(),
+            (u"Mister Pepper Sergent de la brigade LH Armée de terre Corps A "
+             u"Division Alpha Régiment H Brigade LH sgt.pepper@armees.fr")
+            )
         pepper = self.pepper
         self.assertEqual(person_sortable_title(pepper)(),
                          "pepper")
