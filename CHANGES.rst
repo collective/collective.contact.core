@@ -4,8 +4,10 @@ Changelog
 1.20 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Added 'utils.get_gender_and_number' that returns the gender and number of a
+  given list of contacts.  This is useful to manage gender (female/male) and
+  number (singular/plural) for generated words.
+  [gbastien]
 
 1.19 (2018-07-09)
 -----------------
