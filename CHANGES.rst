@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.20 (unreleased)
+1.20 (2018-07-20)
 -----------------
 
 - Added 'utils.get_gender_and_number' that returns the gender and number of a
