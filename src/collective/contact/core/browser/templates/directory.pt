@@ -32,7 +32,7 @@
         <h2><tal:block i18n:translate="">Persons</tal:block>:</h2>
         <ul>
         <tal:block tal:repeat="person view/persons">
-            <li><a tal:attributes="href person/getURL">
+            <li><a class="link-tooltip" tal:attributes="href person/getURL">
                 <img tal:attributes="src person/getIconURL" />
                 <span tal:replace="person/Title"
                       i18n:translate="" />
