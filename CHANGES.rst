@@ -4,8 +4,9 @@ Changelog
 1.21 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- On persons listed on the directory view, display held_positions when hovering
+  person title (tooltip).
+  [gbastien]
 
 1.20 (2018-07-20)
 -----------------
