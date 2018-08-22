@@ -7,6 +7,8 @@ Changelog
 - On persons listed on the directory view, display held_positions when hovering
   person title (tooltip).
   [gbastien]
+- Display organization details (tooltip) when hovering organization link.
+  [gbastien]
 
 1.20 (2018-07-20)
 -----------------
