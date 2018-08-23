@@ -64,6 +64,19 @@ class Organization(BaseView):
         return self.context.toLocalizedTime(date_to_DateTime(date))
 
 
+class SubOrganizations(BaseView):
+
+    def update(self):
+        super(SubOrganizations, self).update()
+
+        catalog = api.portal.get_tool('portal_catalog')
+        context_path = '/'.join(self.context.getPhysicalPath())
+        self.sub_organizations = catalog.searchResults(portal_type="organization",
+                                                       path={'query': context_path,
+                                                             'depth': 1},
+                                                       sort_on='getObjPositionInParent')
+
+
 class OtherContacts(grok.View):
     """Displays other contacts list"""
     grok.name('othercontacts')
