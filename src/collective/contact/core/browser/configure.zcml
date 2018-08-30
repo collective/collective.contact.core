@@ -29,6 +29,14 @@
       />
 
   <browser:page
+      name="suborganizations"
+      for="collective.contact.core.content.organization.IOrganization"
+      class=".organization.SubOrganizations"
+      template="templates/suborganizations.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
       name="view"
       for="..content.position.IPosition"
       class=".position.Position"
