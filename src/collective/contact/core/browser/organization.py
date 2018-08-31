@@ -1,16 +1,16 @@
-from five import grok
+# -*- coding: utf-8 -*-
 
 from AccessControl import getSecurityManager
-
-from plone import api
-
-from collective.contact.core.browser.contactable import BaseView
-from collective.contact.core.interfaces import IContactable
 from collective.contact.core.behaviors import IContactDetails
-from collective.contact.core.content.organization import IOrganization
-from collective.contact.core.browser.utils import get_valid_url
+from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.browser.utils import date_to_DateTime
+from collective.contact.core.browser.utils import get_valid_url
+from collective.contact.core.content.organization import IOrganization
+from collective.contact.core.interfaces import IContactable
 from collective.contact.core.interfaces import IContactCoreParameters
+from five import grok
+from plone import api
+from Products.Five import BrowserView
 
 
 ADDNEW_OVERLAY = """
@@ -62,6 +62,18 @@ class Organization(BaseView):
     def display_date(self, date):
         """Display date nicely in template."""
         return self.context.toLocalizedTime(date_to_DateTime(date))
+
+
+class SubOrganizations(BrowserView):
+
+    def __call__(self):
+        catalog = api.portal.get_tool('portal_catalog')
+        context_path = '/'.join(self.context.getPhysicalPath())
+        self.sub_organizations = catalog.searchResults(portal_type="organization",
+                                                       path={'query': context_path,
+                                                             'depth': 1},
+                                                       sort_on='getObjPositionInParent')
+        return self.index()
 
 
 class OtherContacts(grok.View):

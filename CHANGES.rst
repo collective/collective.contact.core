@@ -8,6 +8,8 @@ Changelog
   person title (tooltip).
   [gbastien]
 - Display organization details (tooltip) when hovering organization link.
+- Make it easy to override the way sub organizations are displayed on an
+  organization by calling a @@suborganizations view.
   [gbastien]
 
 1.20 (2018-07-20)
