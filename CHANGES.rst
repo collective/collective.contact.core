@@ -7,6 +7,7 @@ Changelog
 - On persons listed on the directory view, display held_positions when hovering
   person title (tooltip).
   [gbastien]
+- Display organization details (tooltip) when hovering organization link.
 - Make it easy to override the way sub organizations are displayed on an
   organization by calling a @@suborganizations view.
   [gbastien]
