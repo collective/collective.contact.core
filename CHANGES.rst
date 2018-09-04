@@ -15,6 +15,8 @@ Changelog
   in an `Organization` like it is already the case for `Held positions` and
   `Other contacts`.
   [gbastien]
+- Do not use `unittest2` anymore, use `unittest` instead.
+  [gbastien]
 
 1.20 (2018-07-20)
 -----------------

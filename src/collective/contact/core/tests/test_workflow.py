@@ -1,6 +1,6 @@
 # -*- coding: utf8 -*-
 
-import unittest2 as unittest
+import unittest
 
 from ecreall.helpers.testing import member as memberhelpers
 from ecreall.helpers.testing.workflow import BaseWorkflowTest

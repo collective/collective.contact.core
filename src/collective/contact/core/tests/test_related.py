@@ -2,7 +2,7 @@
 
 from ecreall.helpers.testing.base import BaseTest
 from plone import api
-import unittest2 as unittest
+import unittest
 from z3c.relationfield.relation import RelationValue
 from zope.intid.interfaces import IIntIds
 from zope.component import getUtility

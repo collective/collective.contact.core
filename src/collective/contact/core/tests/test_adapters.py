@@ -1,6 +1,6 @@
 # -*- coding: utf8 -*-
 import datetime
-import unittest2 as unittest
+import unittest
 
 from zope.intid.interfaces import IIntIds
 from zope.component import getUtility

@@ -5,7 +5,7 @@ from collective.contact.core.utils import get_gender_and_number
 from ecreall.helpers.testing.base import BaseTest
 from plone.app.testing.interfaces import TEST_USER_NAME
 
-import unittest2 as unittest
+import unittest
 
 
 class TestUtils(unittest.TestCase, BaseTest):
