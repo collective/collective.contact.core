@@ -36,7 +36,7 @@
     <div tal:replace="structure context/@@suborganizations" />
 
     <div id="positions" class="field" tal:condition="view/positions">
-        <label><tal:block i18n:translate="">Positions in this organization</tal:block>:</label>
+        <h3><tal:block i18n:translate="">Positions in this organization</tal:block>:</h3>
         <ul>
         <tal:block tal:repeat="position view/positions">
             <li tal:define="held_positions position/get_held_positions|nothing">

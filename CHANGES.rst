@@ -11,6 +11,10 @@ Changelog
 - Make it easy to override the way sub organizations are displayed on an
   organization by calling a @@suborganizations view.
   [gbastien]
+- Use a tag `<h3>` to display label of `Organizations` and `Positions` contained
+  in an `Organization` like it is already the case for `Held positions` and
+  `Other contacts`.
+  [gbastien]
 
 1.20 (2018-07-20)
 -----------------

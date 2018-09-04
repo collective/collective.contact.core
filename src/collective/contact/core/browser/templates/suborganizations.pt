@@ -7,7 +7,7 @@
       tal:define="portal_url context/@@plone_portal_state/portal_url;">
 
     <div id="sub_organizations" class="field" tal:condition="view/sub_organizations">
-        <label><tal:block i18n:translate="">Organizations in this organization</tal:block>:</label>
+        <h3><tal:block i18n:translate="">Organizations in this organization</tal:block>:</h3>
         <ul>
         <tal:block tal:repeat="sub_org view/sub_organizations">
             <li><img tal:attributes="src string:${portal_url}/${sub_org/getIcon}" /> <a class="link-tooltip" tal:attributes="href sub_org/getURL">
