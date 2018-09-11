@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.21 (unreleased)
+1.21 (2018-09-11)
 -----------------
 
 - On persons listed on the directory view, display held_positions when hovering
