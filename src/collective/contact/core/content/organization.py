@@ -1,25 +1,23 @@
-from Acquisition import aq_inner, aq_chain
-from zope.interface import implements
-from zope import schema
-from zope.component import getUtility
-from zope.intid.interfaces import IIntIds
-
-from zc.relation.interfaces import ICatalog
-
-from five import grok
-
-from Products.CMFPlone.utils import base_hasattr
-from plone import api
-from plone.dexterity.content import Container
-from plone.supermodel import model
-from plone.dexterity.schema import DexteritySchemaPolicy
-from plone.namedfile.field import NamedImage
-from plone.app.textfield import RichText
-
-from collective.contact.core import _, logger
+from Acquisition import aq_chain
+from Acquisition import aq_inner
+from collective.contact.core import _
+from collective.contact.core import logger
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
+from five import grok
+from plone import api
+from plone.app.textfield import RichText
+from plone.dexterity.content import Container
+from plone.dexterity.schema import DexteritySchemaPolicy
+from plone.namedfile.field import NamedImage
+from plone.supermodel import model
+from Products.CMFPlone.utils import base_hasattr
+from zc.relation.interfaces import ICatalog
+from zope import schema
+from zope.component import getUtility
+from zope.interface import implements
+from zope.intid.interfaces import IIntIds
 
 
 class IOrganization(model.Schema, IContactContent):
@@ -153,7 +151,9 @@ class Organization(Container):
         for relation in contact_relations:
             held_position = relation.from_object
             if not held_position:
-                logger.error("from_object missing for relation from held_position to organisation %s: %s", self, relation.__dict__)
+                logger.error(
+                    "from_object missing for relation from held_position to organisation %s: %s",
+                    self, relation.__dict__)
                 continue
             held_positions.append(held_position)
         return held_positions
