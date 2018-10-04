@@ -4,8 +4,11 @@ Changelog
 1.22 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Render `plone.abovecontenttitle` and `plone.belowcontentbody` viewlets
+  in the directory view.
+  [gbastien]
+- Removed useless call to `plone.belowcontent` viewlet in person view.
+  [gbastien]
 
 1.21 (2018-09-11)
 -----------------
