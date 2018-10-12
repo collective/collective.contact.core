@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.22 (unreleased)
+1.22 (2018-10-12)
 -----------------
 
 - Render `plone.abovecontenttitle` and `plone.belowcontentbody` viewlets
