@@ -1,26 +1,26 @@
-from Products.CMFPlone.utils import normalizeString
-from zope import schema
-from zope.cachedescriptors.property import CachedProperty
-from zope.component import queryUtility
-from zope.interface import implements
-from zope.interface import Attribute
-from z3c.form.interfaces import NO_VALUE
-from z3c.form.browser.radio import RadioFieldWidget
+# -*- coding: utf-8 -*-
 
+from collective.contact.core import _
+from collective.contact.core.browser.contactable import Contactable
+from collective.contact.core.interfaces import IContactable
+from collective.contact.core.interfaces import IContactCoreParameters
+from collective.contact.core.interfaces import IHeldPosition
+from collective.contact.core.interfaces import IPersonHeldPositions
+from collective.contact.widget.interfaces import IContactContent
 from five import grok
-
 from plone.autoform import directives as form
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.namedfile.field import NamedImage
 from plone.registry.interfaces import IRegistry
 from plone.supermodel import model
-
-from collective.contact.core import _
-from collective.contact.core.browser.contactable import Contactable
-from collective.contact.core.interfaces import IContactCoreParameters,\
-    IPersonHeldPositions, IContactable, IHeldPosition
-from collective.contact.widget.interfaces import IContactContent
+from Products.CMFPlone.utils import normalizeString
+from z3c.form.browser.radio import RadioFieldWidget
+from z3c.form.interfaces import NO_VALUE
+from zope import schema
+from zope.cachedescriptors.property import CachedProperty
+from zope.component import queryUtility
+from zope.interface import implements
 
 
 class IPerson(model.Schema, IContactContent):
