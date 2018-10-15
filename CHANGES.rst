@@ -7,6 +7,8 @@ Changelog
 - Removed useless Attribute field `is_created` from `IPerson` schema.
   Added corresponding migration.
   [gbastien]
+- Make `held_position.get_title` return unicode.
+  [gbastien]
 
 1.22 (2018-10-12)
 -----------------
