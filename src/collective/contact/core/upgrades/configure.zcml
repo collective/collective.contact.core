@@ -133,4 +133,12 @@
       handler=".upgrades.v12"
       profile="collective.contact.core:default" />
 
+  <genericsetup:upgradeStep
+      title="Upgrade from 12 to 13"
+      description="Remove no more used is_created attribute on contact content types"
+      source="12"
+      destination="13"
+      handler=".upgrades.v13"
+      profile="collective.contact.core:default" />
+
 </configure>

@@ -26,8 +26,6 @@ from collective.contact.widget.interfaces import IContactContent
 class IPerson(model.Schema, IContactContent):
     """Interface for Person content type"""
 
-    is_created = Attribute(u"Marker to know if the object is already created")
-
     lastname = schema.TextLine(
         title=_("Lastname"),
         required=True
@@ -91,7 +89,6 @@ class Person(Container):
 
     implements(IPerson)
 
-    is_created = False
     # plone.dexterity.content.Content.__getattr__ retrieve the field.default
     # so step 1.2.1 in z3c.form.widget.py returns something instead of NO_VALUE
     # then IValue adapter is not looked up...

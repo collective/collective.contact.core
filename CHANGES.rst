@@ -4,8 +4,9 @@ Changelog
 1.23 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Removed useless Attribute field `is_created` from `IPerson` schema.
+  Added corresponding migration.
+  [gbastien]
 
 1.22 (2018-10-12)
 -----------------
