@@ -51,7 +51,7 @@ class HeldPosition(Container):
         return
 
     def get_title(self):
-        return self.Title()
+        return safe_unicode(self.Title())
 
     title = property(get_title, set_title)
 

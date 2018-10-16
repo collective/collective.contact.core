@@ -219,7 +219,7 @@ class TestHeldPosition(TestContentTypes):
         self.assertEqual(adt.Title(),
                          "(Armée de terre)")
         self.assertEqual(adt.title,
-                         "(Armée de terre)")
+                         u"(Armée de terre)")
         self.assertIn('gadt', degaulle)
         self.assertEqual(gadt.Title(),
                          "Émissaire OTAN (Armée de terre)")
