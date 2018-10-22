@@ -112,7 +112,7 @@ class HeldPosition(Container):
         person = self.get_person()
         if person is None:
             return u""
-        return person.get_title(include_person_title=True)
+        return person.get_title(include_person_title=include_person_title)
 
     def get_sortable_title(self):
         person = self.get_person()

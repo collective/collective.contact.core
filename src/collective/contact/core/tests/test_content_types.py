@@ -6,7 +6,9 @@ import datetime
 
 from ecreall.helpers.testing.base import BaseTest
 
+from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.testing import INTEGRATION
+from plone import api
 from plone.app.testing.interfaces import TEST_USER_ID, TEST_USER_NAME
 from plone.app.testing.helpers import setRoles
 
@@ -237,8 +239,16 @@ class TestHeldPosition(TestContentTypes):
         self.assertEqual(self.sergent_pepper.get_full_title(),
                          u"Mister Pepper, Sergent de la brigade LH (Armée de terre / Corps A / Division Alpha / "
                          u"Régiment H / Brigade LH)")
+
+    def test_get_person_title(self):
         self.assertEqual(self.gadt.get_person_title(),
                          u"Général Charles De Gaulle")
+        self.assertEqual(self.gadt.get_person_title(include_person_title=False),
+                         u"Charles De Gaulle")
+        api.portal.set_registry_record(
+            name='person_title_in_title', value=False, interface=IContactCoreParameters)
+        self.assertEqual(self.gadt.get_person_title(include_person_title=True),
+                         u"Charles De Gaulle")
 
     def test_get_person(self):
         pass
