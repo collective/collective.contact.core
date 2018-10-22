@@ -52,7 +52,8 @@ class OrganizationTypesOrLevels(grok.GlobalUtility):
     grok.implements(IVocabularyFactory)
 
     def get_container_type(self, context):
-        if "++add++organization" in getRequest().getURL():
+        request = getRequest()
+        if request and "++add++organization" in request.getURL():
             # creation mode
             return context.portal_type
         else:
