@@ -29,4 +29,11 @@
             i18n:translate="" />
   </div>
 
+  <div id="signature" class="field" tal:condition="context/signature">
+      <label><tal:block i18n:translate="">Signature</tal:block>:</label>
+      <img tal:define="scales nocall:context/@@images"
+           tal:replace="structure python:scales.tag('signature', 'mini', css_class='signature')"
+           tal:on-error="string:Bad signature format" />
+  </div>
+
 </html>

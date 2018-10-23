@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-04-26 06:48+0000\n"
+"POT-Creation-Date: 2018-10-23 08:18+0000\n"
 "PO-Revision-Date: 2016-10-04 18:45+0200\n"
 "Last-Translator: Luca Fabbri <keul@redturtle.it>\n"
 "Language-Team: \n"
@@ -36,7 +36,7 @@ msgid "Active"
 msgstr "Attivo"
 
 #: ../browser/basefields/templates/organization.pt:23
-#: ../content/organization.py:29
+#: ../content/organization.py:27
 msgid "Activity"
 msgstr "Attività"
 
@@ -48,11 +48,11 @@ msgstr "Aggiungi"
 msgid "Additional address details"
 msgstr "Dettagli aggiuntivi dell'indirizzo"
 
-#: ../interfaces.py:88
+#: ../interfaces.py:93
 msgid "Additional label"
 msgstr "Etichetta aggiuntiva"
 
-#: ../interfaces.py:89
+#: ../interfaces.py:94
 msgid "Additional label with information that does not appear on position label"
 msgstr "Etichetta aggiuntiva con informazioni che non compaiono nell'etichetta della posizione"
 
@@ -101,7 +101,7 @@ msgid "Country"
 msgstr "Paese"
 
 #: ../browser/addcontact.py:65
-#: ../browser/templates/organization.pt:83
+#: ../browser/templates/organization.pt:74
 #: ../browser/templates/position.pt:41
 msgid "Create ${name}"
 msgstr "Crea ${name}"
@@ -119,6 +119,10 @@ msgstr "Disattivato"
 msgid "Directory"
 msgstr "Directory"
 
+#: ../interfaces.py:59
+msgid "Display contact photo on organization view (instead person content type icon)."
+msgstr ""
+
 #: ../interfaces.py:44
 msgid "Display person title in displayed person's title."
 msgstr "Visualizza il titolo della persona nel titolo della persona visualizzata "
@@ -132,9 +136,9 @@ msgstr "Scarica VCard"
 msgid "Email"
 msgstr "E-mail"
 
-#: ../browser/basefields/templates/held_position.pt:29
+#: ../browser/basefields/templates/held_position.pt:28
 #: ../browser/templates/heldpositions.pt:47
-#: ../interfaces.py:97
+#: ../interfaces.py:102
 msgid "End date"
 msgstr "Data fine"
 
@@ -150,11 +154,11 @@ msgstr "Numero di Fax"
 msgid "Female"
 msgstr "Donna"
 
-#: ../content/person.py:36
+#: ../content/person.py:34
 msgid "Firstname"
 msgstr "Nome"
 
-#: ../content/person.py:40
+#: ../content/person.py:38
 msgid "Gender"
 msgstr "Sesso"
 
@@ -196,7 +200,7 @@ msgstr "Indirizzo e-mail invalido"
 msgid "Invalid phone"
 msgstr "Telefono invalido"
 
-#: ../content/person.py:32
+#: ../content/person.py:30
 msgid "Lastname"
 msgstr "Cognome"
 
@@ -204,7 +208,7 @@ msgstr "Cognome"
 msgid "Latitude"
 msgstr "Latitudine"
 
-#: ../content/organization.py:39
+#: ../content/organization.py:37
 msgid "Logo"
 msgstr "Logo"
 
@@ -248,7 +252,7 @@ msgstr ""
 msgid "Name"
 msgstr "Nome"
 
-#: ../browser/templates/organization.pt:68
+#: ../browser/templates/organization.pt:59
 msgid "Not assigned"
 msgstr "Non assegnata"
 
@@ -278,16 +282,16 @@ msgstr "Tipo organizzazione"
 msgid "Organization types"
 msgstr "Tipi di organizzazione"
 
-#: ../interfaces.py:83
+#: ../interfaces.py:88
 msgid "Organization/Position"
 msgstr "Organizzazione/Posizione"
 
 #: ../browser/templates/contact.pt:17
-#: ../browser/templates/directory.pt:19
+#: ../browser/templates/directory.pt:22
 msgid "Organizations"
 msgstr "Organizzazioni"
 
-#: ../browser/templates/organization.pt:37
+#: ../browser/templates/suborganizations.pt:10
 msgid "Organizations in this organization"
 msgstr "Organizzazioni in questa organizzazione"
 
@@ -306,11 +310,11 @@ msgstr "Organizzazione padre"
 msgid "Person"
 msgstr "Persona"
 
-#: ../content/person.py:46
+#: ../content/person.py:44
 msgid "Person title"
 msgstr "Titolo della persona"
 
-#: ../browser/templates/directory.pt:32
+#: ../browser/templates/directory.pt:35
 msgid "Persons"
 msgstr "Persone"
 
@@ -322,13 +326,13 @@ msgstr "Telefono"
 msgid "Phone number"
 msgstr "Numero di telefono"
 
-#: ../content/person.py:52
-#: ../interfaces.py:101
+#: ../content/person.py:50
+#: ../interfaces.py:106
 msgid "Photo"
 msgstr "Foto"
 
 #: ../browser/addcontact.py:286
-#: ../browser/basefields/templates/held_position.pt:15
+#: ../browser/basefields/templates/held_position.pt:14
 #: ../content/directory.py:30
 msgid "Position"
 msgstr "Posizione"
@@ -345,7 +349,7 @@ msgstr "Tipi di posizione"
 msgid "Positions"
 msgstr "Posizioni"
 
-#: ../browser/templates/organization.pt:49
+#: ../browser/templates/organization.pt:39
 msgid "Positions in this organization"
 msgstr "Posizione in questa organizzazione"
 
@@ -357,6 +361,10 @@ msgstr "Regione"
 #: ../behaviors.zcml:34
 msgid "Related organizations"
 msgstr "Organizzazioni correlate"
+
+#: ../content/person.py:55
+msgid "Scanned signature"
+msgstr ""
 
 #: ../behaviors.py:346
 msgid "Search and attach organizations related to this one"
@@ -374,9 +382,14 @@ msgstr "Seleziona la persona che mantiene la posizione"
 msgid "Select the position held by this person in the selected organization"
 msgstr "Seleziona la posizione tenuta da questa persona nell'organizzazione selezionata"
 
-#: ../browser/basefields/templates/held_position.pt:23
+#: ../browser/basefields/templates/person.pt:33
+#: ../content/person.py:54
+msgid "Signature"
+msgstr ""
+
+#: ../browser/basefields/templates/held_position.pt:22
 #: ../browser/templates/heldpositions.pt:42
-#: ../interfaces.py:93
+#: ../interfaces.py:98
 msgid "Start date"
 msgstr "Datas inizio"
 
@@ -400,7 +413,7 @@ msgstr "Token"
 msgid "Type"
 msgstr "Tipo"
 
-#: ../content/organization.py:34
+#: ../content/organization.py:32
 msgid "Type or level"
 msgstr "Tipo o livello"
 
@@ -447,12 +460,11 @@ msgid "collective.contact.core tests"
 msgstr ""
 
 #. Default: ":"
-#: ../browser/basefields/templates/held_position.pt:7
-#: ../browser/templates/organization.pt:55
+#: ../browser/templates/organization.pt:45
 msgid "colon"
 msgstr ":"
 
-#: ../browser/templates/organization.pt:65
+#: ../browser/templates/organization.pt:55
 msgid "from"
 msgstr "Da"
 
@@ -462,7 +474,7 @@ msgid "help_add_organization_or_position_organization"
 msgstr "Prego compila prima l'organizzazione poi eventualmente seleziona una posizione"
 
 #. Default: "Doctor, Mrs..."
-#: ../content/person.py:47
+#: ../content/person.py:45
 msgid "help_person_title"
 msgstr "Dottor, Sig.ra"
 
@@ -475,6 +487,6 @@ msgstr "Se la voce non esiste, puoi aggiungerla al database:"
 msgid "organization/position"
 msgstr "organizzazione/posizione"
 
-#: ../browser/templates/organization.pt:65
+#: ../browser/templates/organization.pt:55
 msgid "to"
 msgstr "A"
