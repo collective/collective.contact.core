@@ -36,6 +36,7 @@ Can create new contact from organization
     Click element    oform-widgets-person-widgets-query
     Wait Until Page Contains Element    css=.ac_results
     Click element    css=.ac_results li:nth-child(1)
+    Sleep  1
     Click button    Add
 
 Can create new person from organization
