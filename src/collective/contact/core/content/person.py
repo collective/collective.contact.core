@@ -98,14 +98,17 @@ class Person(Container):
     def set_title(self, val):
         return
 
-    def get_title(self):
+    def get_title(self, include_person_title=True):
         displayed_attrs = ('person_title', 'firstname', 'lastname')
-        registry = queryUtility(IRegistry)
-        if registry is not None:
-            record = registry.forInterface(IContactCoreParameters, None)
-            if record is not None:
-                if not record.person_title_in_title:
-                    displayed_attrs = ('firstname', 'lastname')
+        if not include_person_title:
+            displayed_attrs = ('firstname', 'lastname')
+        else:
+            registry = queryUtility(IRegistry)
+            if registry is not None:
+                record = registry.forInterface(IContactCoreParameters, None)
+                if record is not None:
+                    if not record.person_title_in_title:
+                        displayed_attrs = ('firstname', 'lastname')
 
         displayed = [getattr(self, attr, None) for attr in displayed_attrs]
         return u' '.join([x for x in displayed if x])

@@ -2,7 +2,6 @@ from Acquisition import aq_parent
 
 from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.interfaces import IVocabularyFactory
-from zope.globalrequest import getRequest
 
 from five import grok
 
@@ -52,7 +51,8 @@ class OrganizationTypesOrLevels(grok.GlobalUtility):
     grok.implements(IVocabularyFactory)
 
     def get_container_type(self, context):
-        if "++add++organization" in getRequest().getURL():
+        request = context.REQUEST
+        if request and "++add++organization" in request.getURL():
             # creation mode
             return context.portal_type
         else:

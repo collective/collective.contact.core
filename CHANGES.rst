@@ -9,6 +9,10 @@ Changelog
   [gbastien]
 - Make `held_position.get_title` return unicode.
   [gbastien]
+- Added parameter `include_person_title=True` to `person.get_title` and to
+  `held_position.get_person_title` so we get person `firstname/lastname`
+  without `person_title`.
+  [gbastien]
 
 1.22 (2018-10-12)
 -----------------
