@@ -13,6 +13,8 @@ Changelog
   `held_position.get_person_title` so we get person `firstname/lastname`
   without `person_title`.
   [gbastien]
+- Added image field `person.signature`.
+  [gbastien]
 
 1.22 (2018-10-12)
 -----------------

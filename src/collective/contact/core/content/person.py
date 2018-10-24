@@ -50,6 +50,11 @@ class IPerson(model.Schema, IContactContent):
         title=_("Photo"),
         required=False,
         )
+    signature = NamedImage(
+        title=_("Signature"),
+        description=_("Scanned signature"),
+        required=False,
+        )
 
     def get_held_positions(self):
         """Returns held positions of this person
