@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.23 (unreleased)
+1.23 (2018-11-20)
 -----------------
 
 - Removed useless Attribute field `is_created` from `IPerson` schema.
