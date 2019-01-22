@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+import copy
 from AccessControl import getSecurityManager
 from collective.contact.core import _
 from collective.contact.core.behaviors import IContactDetails
@@ -195,7 +195,8 @@ $(document).ready(function() {
   } else {
     min_radio = 2;
   }
-  var position_fields = '#formfield-oform-widgets-position,div[id*=held_position]';
+  o.find('#formfield-oform-widgets-use_parent_address input').prop("checked", true);
+  var position_fields = '#formfield-oform-widgets-position,div[id*=held_position],#formfield-oform-widgets-email,#formfield-oform-widgets-phone,#formfield-oform-widgets-cell_phone,#formfield-oform-widgets-fax,#formfield-oform-widgets-website,#formfield-oform-widgets-im_handle,#formfield-oform-widgets-use_parent_address';
   if (!(o.find('input[name="oform.widgets.person"]').length >= min_radio &&
         o.find('input[name="oform.widgets.organization"]').length >= min_radio)) {
       o.find(position_fields).hide();
@@ -369,23 +370,15 @@ class AddContact(DefaultAddForm, form.AddForm):
         if self.schema != IAddHeldPosition:
             for widget in self.widgets.values():
                 if getattr(widget, 'required', False):
-                    # This is really a hack to not have required field errors
-                    # but have the visual required nevertheless.
-                    # We need to revert this after updateActions
-                    # because this change impact the held position form
+                    # copy field to not modify original one
+                    widget.field = copy.copy(widget.field)
                     widget.field.required = False
-
         if 'parent_address' in self.widgets:
             self.widgets['parent_address'].mode = DISPLAY_MODE
 
     def update(self):
         alsoProvides(self.request, IDeferSecurityCheck)
         super(AddContact, self).update()
-        if self.schema != IAddHeldPosition:
-            # revert required field changes
-            for widget in self.widgets.values():
-                if getattr(widget, 'required', False):
-                    widget.field.required = True
 
     @button.buttonAndHandler(_('Add'), name='save')
     def handleAdd(self, action):

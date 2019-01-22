@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from AccessControl import getSecurityManager
 from collective.contact.core.behaviors import IBirthday
 from collective.contact.core.browser.utils import date_to_DateTime
+
+from AccessControl import getSecurityManager
 from Products.Five import BrowserView
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
@@ -48,7 +49,7 @@ class OrganizationBaseFields(BrowserView):
         self.organization = self.context
         organization = self.organization
 
-        self.name = organization.Title()
+        self.name = organization.get_full_title()
         factory = getUtility(IVocabularyFactory, "OrganizationTypesOrLevels")
         vocabulary = factory(self.context)
         try:
@@ -107,7 +108,7 @@ class HeldPositionBaseFields(BrowserView):
         person = held_position.get_person()
         self.person = person
         self.fullname = person.Title()
-        self.title = held_position.Title()
+        self.title = held_position.get_full_title()
 
         self.position = held_position.get_position()
 

@@ -13,8 +13,153 @@ Changelog
 - Prevent address field from being erased if they are changed programmaticaly before any manual edition.
   [thomasdesvenain]
 
+
+1.23 (2018-11-20)
+-----------------
+
+- Removed useless Attribute field `is_created` from `IPerson` schema.
+  Added corresponding migration.
+  [gbastien]
+- Make `held_position.get_title` return unicode.
+  [gbastien]
+- Added parameter `include_person_title=True` to `person.get_title` and to
+  `held_position.get_person_title` so we get person `firstname/lastname`
+  without `person_title`.
+  [gbastien]
+- Added image field `person.signature`.
+  [gbastien]
+
+1.22 (2018-10-12)
+-----------------
+
+- Render `plone.abovecontenttitle` and `plone.belowcontentbody` viewlets
+  in the directory view.
+  [gbastien]
+- Removed useless call to `plone.belowcontent` viewlet in person view.
+  [gbastien]
+
+1.21 (2018-09-11)
+-----------------
+
+- On persons listed on the directory view, display held_positions when hovering
+  person title (tooltip).
+  [gbastien]
+- Display organization details (tooltip) when hovering organization link.
+- Make it easy to override the way sub organizations are displayed on an
+  organization by calling a @@suborganizations view.
+  [gbastien]
+- Use a tag `<h3>` to display label of `Organizations` and `Positions` contained
+  in an `Organization` like it is already the case for `Held positions` and
+  `Other contacts`.
+  [gbastien]
+- Do not use `unittest2` anymore, use `unittest` instead.
+  [gbastien]
+
+1.20 (2018-07-20)
+-----------------
+
+- Added 'utils.get_gender_and_number' that returns the gender and number of a
+  given list of contacts.  This is useful to manage gender (female/male) and
+  number (singular/plural) for generated words.
+  [gbastien]
+
+1.19 (2018-07-09)
+-----------------
+
+- Add email to SearchableText of a person. Useful when fixing contact data for
+  smtp error reports after sending a newsletter with collective.contact.mailaction
+  [fRiSi]
+
+1.18 (2018-06-07)
+-----------------
+
+- Use real full title in held_position and position get_full_title methods.
+  Necessary to display to the end user the right organization, without ambiguity.
+  [sgeulette]
+
+- Prevent address fields from being erased if they are changed programmaticaly before any manual edition.
+  [thomasdesvenain]
+
+- Prevent title ascii error on organization vcard export.
+  [bsuttor]
+
+- Prevent fatal error if there is no organization on held_position.
+  [thomasdesvenain]
+
+- Prevent error when person is None on held_position.
+  [Gagaro]
+
+- Use another version than 1.2.8 for plone.app.textfield as version 1.2.9
+  fixes issue we had in tests.
+  (See https://github.com/plone/plone.app.textfield/issues/22).
+  [gbastien]
+
+- Display positions on the organization view respecting order (getObjPositionInParent).
+  [gbastien]
+
+- Display various content title consistently everywhere in the application.
+  [gbastien, sgeulette]
+
+- Display content icon before content title.
+  [gbastien]
+
+- Added parameter display_contact_photo_on_organization_view to the registry,
+  it True (default), the contact photo is displayed in the @@othercontacts, if
+  False, the person content_type icon is displayed.
+  [gbastien]
+
+1.17 (2017-10-02)
+-----------------
+
+- Fix get_valid_url mehtod when there is accent into url.
+  [bsuttor]
+
+
+1.16 (2017-09-22)
+-----------------
+
+- Set person_contact_details_private option to true by default.
+  [sgeulette]
+
+1.15 (2017-05-30)
+-----------------
+
+- Fix robot tests.
+  [thomasdesvenain]
+
+- Don't purge behaviors when reinstalling.
+  [sgeulette]
+
+- Set plone.app.textfield maximum version as 1.2.7
+  [thomasdesvenain]
+
+
+1.14 (2017-05-16)
+-----------------
+
+- Lint for code-analysis.
+  [bsuttor]
+
+
+1.13 (2017-05-16)
+-----------------
+
+- Set IContactDetails behavior on held_position type.
+  Person contact details are considered as personal data.
+  [sgeulette]
+
+- Use a python view to provide gender/person title mapping. In this way, the terms can be translated.
+  [cedricmessiant]
+
 - Avoid error in addcontact when there is no directory.
   [cedricmessiant]
+
+- Prevent fatal error if by chance a held position related to a position or an organisation has been removed
+  but the relation always exist. An error is logged.
+  [thomasdesvenain]
+
+- Refactor: move complex sortable title methods into content objects.
+  [thomasdesvenain]
 
 
 1.12 (2017-01-17)

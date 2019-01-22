@@ -26,12 +26,13 @@
   <include file="behaviors.zcml" />
   <include file="skins.zcml" />
 
-  <!-- <genericsetup:importStep
+  <genericsetup:importStep
       name="collective.contact.core-postInstall"
       title="collective.contact.core postInstall import step"
       description="Post install import step from collective.contact.core"
       handler=".setuphandlers.postInstall">
-  </genericsetup:importStep> -->
+      <depends name="plone.app.registry"/>
+  </genericsetup:importStep>
 
   <genericsetup:importStep
       name="collective.contact.core-createTestData"

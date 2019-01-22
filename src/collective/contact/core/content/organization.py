@@ -3,6 +3,12 @@ from Acquisition import aq_inner, aq_chain
 from collective.contact.core import _
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.core.content.held_position import IHeldPosition
+from Acquisition import aq_chain
+from Acquisition import aq_inner
+from collective.contact.core import _
+from collective.contact.core import logger
+from collective.contact.core.browser.contactable import Contactable
+from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
 from five import grok
 from plone import api
@@ -128,7 +134,8 @@ class Organization(Container):
         catalog = api.portal.get_tool('portal_catalog')
         positions = catalog.searchResults(portal_type="position",
                                           path={'query': '/'.join(self.getPhysicalPath()),
-                                                'depth': 1})
+                                                'depth': 1},
+                                          sort_on='getObjPositionInParent')
         return [c.getObject() for c in positions]
 
     def get_held_positions(self):
@@ -143,7 +150,16 @@ class Organization(Container):
                               {'to_id': orga_intid,
                                'from_interfaces_flattened': IHeldPosition,
                                'from_attribute': 'position'})
-        return [c.from_object for c in contact_relations]
+        held_positions = []
+        for relation in contact_relations:
+            held_position = relation.from_object
+            if not held_position:
+                logger.error(
+                    "from_object missing for relation from held_position to organisation %s: %s",
+                    self, relation.__dict__)
+                continue
+            held_positions.append(held_position)
+        return held_positions
 
 
 class OrganizationSchemaPolicy(grok.GlobalUtility,

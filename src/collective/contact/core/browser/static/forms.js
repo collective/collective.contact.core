@@ -1,16 +1,13 @@
 contactswidget = {};
 
 /* Update person_title when gender changes (if person_title hasn't been set manually) */
-contactswidget.update_person_title = function(){
-	var gender = $(this).val();
+contactswidget.update_person_title = function(genderInput, mapping) {
+	var gender = $(genderInput).val();
 	var person_title = $('#form-widgets-person_title').val();
-	if (person_title === '' || person_title == 'M.' || person_title == 'Mme') {
-		if (gender == 'M') {
-			$('#form-widgets-person_title').val("M.");
-		} else {
-			$('#form-widgets-person_title').val("Mme");
-		}
-	}
+  var values = Object.values(mapping);
+  if (person_title === '' || values.indexOf(person_title) !== -1) {
+    $('#form-widgets-person_title').val(mapping[gender]);
+  }
 };
 
 /* Replace spaces with underscores, removes accents and other special characters */
@@ -156,8 +153,15 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
 };
 
 $(document).ready(function(){
-    $(document).on('change', '#formfield-form-widgets-gender input',
-                         contactswidget.update_person_title);
+    var url = 'gender_person_title_mapping.json';
+    $.get(url, function (mapping) {
+      $(document).on(
+        'change',
+        '#formfield-form-widgets-gender input',
+        function () { contactswidget.update_person_title(this, mapping) }
+      );
+    });
+
     /* contactswidget.manage_directory();  Do not hide token column in edit mode */
     contactswidget.manage_hide_use_parent_address();
 

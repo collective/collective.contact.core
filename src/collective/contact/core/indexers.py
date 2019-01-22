@@ -1,14 +1,14 @@
 from datetime import date
 from plone import api
 from plone.indexer import indexer
-from Products.CMFPlone.utils import normalizeString
 from Products.CMFPlone.utils import safe_unicode
 
-from collective.contact.core.content.held_position import IHeldPosition
 from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.content.position import IPosition
 from collective.contact.core.content.person import IPerson
+from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.behaviors import IRelatedOrganizations
+from collective.contact.core.interfaces import IHeldPosition
 
 
 @indexer(IOrganization)
@@ -20,6 +20,11 @@ def organization_searchable_text(organization):
             words += related.to_object.get_organizations_titles()
 
     words += organization.get_organizations_titles()
+
+    email = IContactDetails(organization).email
+    if email:
+        words.append(email)
+
     return u' '.join(words)
 
 
@@ -38,13 +43,21 @@ def held_position_searchable_text(obj):
     if obj.label:
         indexed_fields.append(obj.label)
 
+    email = IContactDetails(obj).email
+    if email:
+        indexed_fields.append(email)
+
     return u' '.join(indexed_fields)
 
 
 @indexer(IPosition)
 def position_searchable_text(obj):
-    return u"%s %s" % (safe_unicode(obj.SearchableText()),
-                       safe_unicode(obj.get_organization().Title()))
+    result = [safe_unicode(obj.SearchableText())]
+    result.append(safe_unicode(obj.get_organization().Title()))
+    email = IContactDetails(obj).email
+    if email:
+        result.append(email)
+    return u' '.join(result)
 
 
 @indexer(IPerson)
@@ -59,6 +72,11 @@ def person_searchable_text(obj):
         text = obj.Title()
 
     results.append(safe_unicode(text))
+
+    email = IContactDetails(obj).email
+    if email:
+        results.append(email)
+
     use_held_positions = api.portal.get_registry_record(
         "collective.contact.core.interfaces.IContactCoreParameters."
         "use_held_positions_to_search_person")
@@ -70,21 +88,12 @@ def person_searchable_text(obj):
 
 @indexer(IPerson)
 def person_sortable_title(obj):
-    if obj.firstname is None:
-        fullname = obj.lastname
-    else:
-        fullname = u"%s %s" % (obj.lastname, obj.firstname)
-
-    return normalizeString(fullname, context=obj)
+    return obj.get_sortable_title()
 
 
 @indexer(IHeldPosition)
 def held_position_sortable_title(obj):
-    sortable_fullname = person_sortable_title(obj.get_person())()
-    held_position_title = obj.Title()
-    return u"%s-%s" % (sortable_fullname,
-                       normalizeString(safe_unicode(held_position_title),
-                                       context=obj))
+    return obj.get_sortable_title()
 
 
 @indexer(IHeldPosition)

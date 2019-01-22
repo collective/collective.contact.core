@@ -15,7 +15,7 @@
            i18n:attributes="alt; title" />
     </a>
   </div>
-  <h1 class="fn" tal:content="view/name"></h1>
+  <h1 class="fn"><img tal:attributes="src context/getIconURL" /> <span tal:content="view/name" /></h1>
 
   <div id="photo" class="field" tal:condition="context/photo">
       <img tal:define="scales nocall:context/@@images"
@@ -27,6 +27,13 @@
       <label><tal:block i18n:translate="">Birthday</tal:block>:</label>
       <span class="bday" tal:content="view/birthday"
             i18n:translate="" />
+  </div>
+
+  <div id="signature" class="field" tal:condition="context/signature">
+      <label><tal:block i18n:translate="">Signature</tal:block>:</label>
+      <img tal:define="scales nocall:context/@@images"
+           tal:replace="structure python:scales.tag('signature', 'mini', css_class='signature')"
+           tal:on-error="string:Bad signature format" />
   </div>
 
 </html>

@@ -1,64 +1,19 @@
 # -*- coding: utf-8 -*-
-from collective.contact.core import _
 from collective.contact.core.browser.contactable import Contactable
-from collective.contact.core.schema import ContactChoice
-from collective.contact.widget.interfaces import IContactContent
-from collective.contact.widget.source import ContactSourceBinder
+from collective.contact.core.interfaces import IHeldPosition
+
 from ComputedAttribute import ComputedAttribute
+from Products.CMFPlone.utils import normalizeString, safe_unicode
 from five import grok
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
-from plone.namedfile.field import NamedImage
-from plone.supermodel import model
 from z3c.form.interfaces import NO_VALUE
-from zope import schema
 from zope.interface import implements
 
 
 def acqproperty(func):
     """Property that manages acquisition"""
     return ComputedAttribute(func, 1)
-
-
-class IHeldPosition(model.Schema, IContactContent):
-    """Interface for HeldPosition content type"""
-
-    position = ContactChoice(
-        title=_("Organization/Position"),
-        source=ContactSourceBinder(portal_type=("organization", "position")),
-        required=True,
-    )
-    label = schema.TextLine(
-        title=_("Additional label"),
-        description=_("Additional label with information that does not appear "
-                      "on position label"),
-        required=False)
-    start_date = schema.Date(
-        title=_("Start date"),
-        required=False,
-    )
-    end_date = schema.Date(
-        title=_("End date"),
-        required=False,
-    )
-    photo = NamedImage(
-        title=_("Photo"),
-        required=False,
-        readonly=True,
-    )
-
-    def get_person(self):
-        """Returns the person who holds the position
-        """
-
-    def get_position(self):
-        """Returns the position (if position field is a position)
-        """
-
-    def get_organization(self):
-        """Returns the first organization related to HeldPosition
-        i.e. position field or parent of the position
-        """
 
 
 class HeldPositionContactableAdapter(Contactable):
@@ -92,7 +47,7 @@ class HeldPosition(Container):
         return
 
     def get_title(self):
-        return self.Title()
+        return safe_unicode(self.Title())
 
     title = property(get_title, set_title)
 
@@ -124,67 +79,61 @@ class HeldPosition(Container):
         elif pos_or_org.portal_type == 'organization':
             return pos_or_org
 
-    def Title(self):
+    def Title(self, separator=u' / ', first_index=0):
         """The held position's title is constituted by the position's
-        title, the organization's title and the root organization's title"""
+           title (or held_position label) and the organizations chain."""
         position = self.position.to_object
         if position is None:  # the reference was removed
             return self.getId()
 
-        organization = self.get_organization()
-        root_organization = organization.get_root_organization()
-        if position == organization:
-            if self.label:
-                return "%s (%s) " % (self.label.encode('utf-8'),
-                                     position.Title())
-            else:
-                return organization.Title()
-        else:
-            if organization == root_organization:
-                return "%s (%s)" % (position.Title(),
-                                    organization.Title())
-            else:
-                return "%s, %s (%s)" % (position.Title(),
-                                        organization.Title(),
-                                        root_organization.Title())
-
-    def get_full_title(self):
-        """Returns the 'full title' of the held position.
-        It is constituted by the person's who held the position name,
-        the root organization and the position name (if any)
-        """
-        person_name = self.get_person_title()
-        if self.position.to_object is None:  # the reference was removed
-            return u"%s (%s)" % (person_name, self.getId())
-
         position = self.get_position()
         organization = self.get_organization()
-        root_organization = organization.get_root_organization().title
         if position is None and not self.label:
-            return u"%s (%s)" % (person_name,
-                                 root_organization)
-        elif position is None and self.label:
-            position_name = self.label
-            return u"%s (%s - %s)" % (person_name,
-                                      root_organization,
-                                      position_name)
-        else:
-            position_name = position.title
-            return u"%s (%s - %s)" % (person_name,
-                                      root_organization,
-                                      position_name)
+            return "(%s)" % organization.get_full_title(separator=separator, first_index=first_index).encode('utf8')
+        # we display the position title or the label
+        position_title = self.label or position.title
+        return "%s (%s)" % (position_title.encode('utf8'),
+                            organization.get_full_title(separator=separator, first_index=first_index).encode('utf8'))
 
-    def get_person_title(self):
-        return self.get_person().get_title()
+    def get_full_title(self, separator=u' / ', first_index=0):
+        """Returns the 'title' and include person name."""
+        person_name = self.get_person_title()
+        title = self.Title(separator=separator, first_index=first_index).decode('utf8')
+        if title[0:1] == '(':
+            return u"%s %s" % (person_name, title)
+        else:
+            return u"%s, %s" % (person_name, title)
+
+    def get_person_title(self, include_person_title=True):
+        person = self.get_person()
+        if person is None:
+            return u""
+        return person.get_title(include_person_title=include_person_title)
+
+    def get_sortable_title(self):
+        person = self.get_person()
+        if person is None:
+            return u""
+        sortable_fullname = person.get_sortable_title()
+        held_position_title = self.Title()
+        return u"%s-%s" % (
+            sortable_fullname,
+            normalizeString(safe_unicode(held_position_title))
+        )
 
     @acqproperty
     def person_title(self):
-        return self.get_person().person_title
+        person = self.get_person()
+        if person is None:
+            return u""
+        return person.person_title
 
     @acqproperty
     def photo(self):
         """Get photo from Person"""
         person = self.get_person()
+        if person is None:
+            return None
         return person.photo
 
 

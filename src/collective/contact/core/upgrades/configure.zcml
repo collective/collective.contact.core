@@ -117,4 +117,28 @@
       handler=".upgrades.v10"
       profile="collective.contact.core:default" />
 
+  <genericsetup:upgradeStep
+      title="Upgrade from 10 to 11"
+      description="Use contact details behavior on held position. Set person details as private."
+      source="10"
+      destination="11"
+      handler=".upgrades.v11"
+      profile="collective.contact.core:default" />
+
+  <genericsetup:upgradeStep
+      title="Upgrade from 11 to 12"
+      description="Reapply plone.app.registry to add the 'display_contact_photo_on_organization_view' parameter."
+      source="11"
+      destination="12"
+      handler=".upgrades.v12"
+      profile="collective.contact.core:default" />
+
+  <genericsetup:upgradeStep
+      title="Upgrade from 12 to 13"
+      description="Remove no more used is_created attribute on contact content types"
+      source="12"
+      destination="13"
+      handler=".upgrades.v13"
+      profile="collective.contact.core:default" />
+
 </configure>

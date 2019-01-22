@@ -10,7 +10,7 @@ Directory is available
     [Tags]    Go
     Log in as site owner and wait
     Click link    css=#portaltab-mydirectory a
-    Element should contain    css=#content h1    Military directory
+    Wait until element is visible  xpath=//h1/span[.='Military directory']  5
 
 Create a new organization
     [Tags]    Go
@@ -36,6 +36,7 @@ Can create new contact from organization
     Click element    oform-widgets-person-widgets-query
     Wait Until Page Contains Element    css=.ac_results
     Click element    css=.ac_results li:nth-child(1)
+    Sleep  1
     Click button    Add
 
 Can create new person from organization
@@ -57,6 +58,7 @@ Can create new person from organization
     Click element    form-widgets-gender-0
     Click button    Save
     Wait Until Page Contains    Chuck Norris
+    Sleep  1
     Click button    Add
     Wait Until Page Contains Element    other-contacts
     Element Should Contain    other-contacts    Chuck Norris
@@ -70,13 +72,14 @@ Can create new contact from position
     Wait For Condition    return $('.overlay h1').text() === "Create Contact"
     Element should not be visible    css=#oform-widgets-position-input-fields
     Element should contain    oform-widgets-organization-input-fields    Armée de terre / Corps A / Division Alpha / Régiment H / Brigade LH
+    Sleep  1
     Input text    oform-widgets-person-widgets-query    Ramb
     Click element    oform-widgets-person-widgets-query
     Wait Until Page Contains Element    css=.ac_results
     Click element    css=.ac_results li:nth-child(1)
     Sleep  1
     Element should become visible    css=#oform-widgets-position-input-fields
-    Element should contain    oform-widgets-position-input-fields    Sergent de la brigade LH, Brigade LH (Armée de terre)
+    Element should contain    oform-widgets-position-input-fields    Sergent de la brigade LH (Armée de terre / Corps A / Division Alpha / Régiment H / Brigade LH)
     Click button    Add
 
 Show parent address if it exists in creation

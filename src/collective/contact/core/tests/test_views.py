@@ -1,5 +1,5 @@
 # -*- coding: utf8 -*-
-import unittest2 as unittest
+import unittest
 
 from plone.app.testing.interfaces import TEST_USER_NAME
 
@@ -147,7 +147,8 @@ class TestPositionView(TestView):
     def test_position_basefields_view(self):
         view = self.sergent_lh.restrictedTraverse("@@basefields")
         view.update()
-        self.assertEqual(view.name, u"Sergent de la brigade LH, Brigade LH (Armée de terre)")
+        self.assertEqual(view.name, u"Sergent de la brigade LH (Armée de terre / Corps A / Division Alpha / "
+                         u"Régiment H / Brigade LH)")
         self.assertEqual(view.type, "Sergeant")
 
     def test_position_view(self):
@@ -180,7 +181,7 @@ class TestOrganizationView(TestView):
     def test_organization_basefields_view(self):
         view = self.corpsa.restrictedTraverse("@@basefields")
         view.update()
-        self.assertEqual(view.name, "Corps A")
+        self.assertEqual(view.name, u"Armée de terre / Corps A")
         self.assertEqual(view.type, "Corps")
 
     def test_organization_view(self):
@@ -192,7 +193,7 @@ class TestOrganizationView(TestView):
     def test_organization_contact_details_view(self):
         view = self.corpsa.restrictedTraverse("@@contactdetails")
         view.update()
-        self.assertEqual(view.contact_details['email'], '')
+        self.assertEqual(view.contact_details['email'], 'contact@armees.fr')
 
         address = view.contact_details['address']
         self.assertEqual(address['number'], u'')
@@ -230,15 +231,15 @@ class TestOrganizationView(TestView):
         view.update()
         contact = view.othercontacts[0]
         self.assertEqual(contact['title'], 'Général Charles De Gaulle')
-        self.assertEqual(contact['held_position'], 'Armée de terre')
+        self.assertEqual(contact['held_position'], '(Armée de terre)')
         self.assertIsNone(contact['label'])
         self.assertEqual(contact['obj'], self.adt)
-        self.assertEqual(contact['email'], u'charles.de.gaulle@armees.fr')
+        self.assertEqual(contact['email'], None)
         self.assertIsNone(contact['phone'])
         self.assertIsNone(contact['cell_phone'])
         self.assertIsNone(contact['fax'])
         self.assertIsNone(contact['im_handle'])
-        self.assertEqual(contact['website'], 'http://www.charles-de-gaulle.org')
+        self.assertEqual(contact['website'], None)
 
 
 class TestPersonView(TestView):
@@ -253,7 +254,7 @@ class TestPersonView(TestView):
     def test_person_contact_details_view(self):
         view = self.degaulle.restrictedTraverse("@@contactdetails")
         view.update()
-        self.assertEqual(view.contact_details['email'], 'charles.de.gaulle@armees.fr')
+        self.assertEqual(view.contact_details['email'], 'charles.de.gaulle@private.com')
         self.assertEqual(view.contact_details['phone'], '')
         self.assertEqual(view.contact_details['cell_phone'], '')
         self.assertEqual(view.contact_details['im_handle'], '')
@@ -272,16 +273,15 @@ class TestPersonView(TestView):
         view.update()
         held_positions = view.held_positions
         self.assertEqual(len(held_positions), 2)
-
         first = held_positions[0]
         self.assertEqual(self.adt, first['object'])
-        self.assertEqual(self.adt.Title(), first['label'])
+        self.assertEqual(self.adt.Title(), first['title'])
         self.assertIn(first['start_date'], [u'May 25, 1940', '1940-05-25'])
         self.assertEqual(self.armeedeterre, first['organization'])
 
         second = held_positions[1]
         self.assertEqual(self.gadt, second['object'])
-        self.assertEqual(self.gadt.label, second['label'])
+        self.assertEqual(self.gadt.Title(), second['title'])
         self.assertIn(second['start_date'], [u'May 25, 1940', '1940-05-25'])
         self.assertIn(second['end_date'], [u'Nov 09, 1970', '1970-11-09'])
         self.assertEqual(self.armeedeterre, second['organization'])

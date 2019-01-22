@@ -15,7 +15,7 @@
 
   <browser:page
       name="view"
-      for="..content.held_position.IHeldPosition"
+      for="..interfaces.IHeldPosition"
       class=".contact.Contact"
       template="templates/contact.pt"
       permission="zope2.View"
@@ -27,6 +27,14 @@
       class=".organization.Organization"
       allowed_attributes="parent_organizations sub_organizations positions can_add addnew_script"
       template="templates/organization.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="suborganizations"
+      for="collective.contact.core.content.organization.IOrganization"
+      class=".organization.SubOrganizations"
+      template="templates/suborganizations.pt"
       permission="zope2.View"
       />
 

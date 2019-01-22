@@ -14,7 +14,7 @@ long_description = (
     + '\n')
 
 setup(name='collective.contact.core',
-      version='1.13.dev0',
+      version='1.24.dev0',
       description="Core package for collective.contact add-ons",
       long_description=long_description,
       # Get more strings from
@@ -49,10 +49,11 @@ setup(name='collective.contact.core',
           'ecreall.helpers.upgrade >= 1.1.6.dev0',
           'five.grok',
           'five.globalrequest',
-          'plone.api',
+          'plone.api>=1.4.11',
           'plone.app.dexterity',
           'plone.app.linkintegrity',
           'plone.app.relationfield',
+          'plone.app.textfield!=1.2.8',
           'plone.autoform',
           'plone.formwidget.datetime',
           'plone.formwidget.masterselect>=1.3',

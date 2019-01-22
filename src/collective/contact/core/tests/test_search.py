@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 
 import datetime
-import unittest2 as unittest
+import unittest
 
 from plone import api
 
@@ -43,14 +43,17 @@ class TestSearch(unittest.TestCase, BaseTest):
         self.assertEqual(held_position_searchable_text(gadt)(),
                          u"Général Charles De Gaulle Général de l'armée de terre Armée de terre Émissaire OTAN")
         sergent_pepper = self.sergent_pepper
-        self.assertEqual(held_position_searchable_text(sergent_pepper)(),
-                         u"Sergent Pepper Sergent de la brigade LH Armée de terre Corps A Division Alpha Régiment H Brigade LH")
+        self.assertEqual(
+            held_position_searchable_text(sergent_pepper)(),
+            (u"Mister Pepper Sergent de la brigade LH Armée de terre Corps A "
+             u"Division Alpha Régiment H Brigade LH sgt.pepper@armees.fr")
+            )
         pepper = self.pepper
         self.assertEqual(person_sortable_title(pepper)(),
                          "pepper")
         idxr = held_position_sortable_title(self.sergent_pepper)
         self.assertEqual(idxr(),
-                         "pepper-sergent-de-la-brigade-lh-brigade-lh-armee-de-terre")
+                         u'pepper-sergent-de-la-brigade-lh-armee-de-terre-corps-a')
         degaulle = self.degaulle
         self.assertEqual(person_sortable_title(degaulle)(),
                          'de-gaulle-charles')
@@ -67,7 +70,7 @@ class TestSearch(unittest.TestCase, BaseTest):
         results = catalog.searchResults(SearchableText='Général')
         self.assertEqual(len(results), 4)
         results = catalog.searchResults(SearchableText='Corps')
-        self.assertEqual(len(results), 10)
+        self.assertEqual(len(results), 13)
         results_objects = [res.getObject() for res in results]
         self.assertIn(self.corpsa, results_objects)
         self.assertIn(self.corpsb, results_objects)
@@ -77,20 +80,24 @@ class TestSearch(unittest.TestCase, BaseTest):
         self.assertIn(self.brigadelh, results_objects)
         self.assertIn(self.sergent_pepper, results_objects)
         results = catalog.searchResults(SearchableText='armée')
-        self.assertEqual(len(results), 15)
+        self.assertEqual(len(results), 18)
         results = catalog.searchResults(SearchableText='beta')
-        self.assertEqual(len(results), 1)
+        self.assertEqual(len(results), 3)
         results = catalog.searchResults(SearchableText='régiment')
-        self.assertEqual(len(results), 4)
+        self.assertEqual(len(results), 6)
         results = catalog.searchResults(SearchableText='brigade')
-        self.assertEqual(len(results), 4)
+        self.assertEqual(len(results), 6)
         results = catalog.searchResults(SearchableText='Émissaire')
         self.assertEqual(len(results), 2)
         results = catalog.searchResults(portal_type='held_position')
-        self.assertEqual(len(results), 4)
+        self.assertEqual(len(results), 6)
         results = catalog.searchResults(portal_type='held_position',
                                         start={'query': datetime.date(1981, 1, 1), 'range': 'min'})
-        self.assertEqual(len(results), 1)
+        self.assertEqual(len(results), 3)
         results = catalog.searchResults(portal_type='held_position',
                                         end={'query': datetime.date(1971, 1, 1), 'range': 'max'})
         self.assertEqual(len(results), 2)
+        restults = catalog.searchResults(
+            SearchableText='charles.de.gaulle@private.com')
+        self.assertEqual(len(restults), 1)
+        self.assertEqual(restults[0].getPath(), '/plone/mydirectory/degaulle')

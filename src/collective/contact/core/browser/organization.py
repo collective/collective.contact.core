@@ -1,14 +1,15 @@
-from AccessControl import getSecurityManager
+# -*- coding: utf-8 -*-
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.browser.utils import date_to_DateTime
 from collective.contact.core.browser.utils import get_valid_url
-from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.indexers import held_position_sortable_title
+from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.interfaces import IContactable
-from plone import api
-from Products.Five import BrowserView
 
+from AccessControl import getSecurityManager
+from Products.Five import BrowserView
+from plone import api
 
 ADDNEW_OVERLAY = """
 <script type="text/javascript">
@@ -59,6 +60,18 @@ class Organization(BaseView):
         return self.context.toLocalizedTime(date_to_DateTime(date))
 
 
+class SubOrganizations(BrowserView):
+
+    def __call__(self):
+        catalog = api.portal.get_tool('portal_catalog')
+        context_path = '/'.join(self.context.getPhysicalPath())
+        self.sub_organizations = catalog.searchResults(portal_type="organization",
+                                                       path={'query': context_path,
+                                                             'depth': 1},
+                                                       sort_on='getObjPositionInParent')
+        return self.index()
+
+
 class OtherContacts(BrowserView):
     """Displays other contacts list"""
 
@@ -75,10 +88,15 @@ class OtherContacts(BrowserView):
         for hp in held_positions:
             contact = {}
             person = hp.get_person()
+            contact['person'] = person
             contact['title'] = person.Title()
             contact['held_position'] = hp.Title()
             contact['label'] = hp.label
             contact['obj'] = hp
+            contact['display_photo'] = api.portal.get_registry_record(
+                name='display_contact_photo_on_organization_view',
+                interface=IContactCoreParameters)
+            contact['has_photo'] = contact['display_photo'] and hp.photo or None
 
             if IContactDetails.providedBy(hp):
                 contactable = hp
@@ -95,7 +113,6 @@ class OtherContacts(BrowserView):
             othercontacts.append(contact)
 
         self.othercontacts = othercontacts
-        return super(OtherContacts, self).__call__()
 
     def __call__(self):
         self.update()

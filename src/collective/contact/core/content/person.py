@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 from collective.contact.core import _
 from collective.contact.core.browser.contactable import Contactable
-from collective.contact.core.content.held_position import IHeldPosition
-from collective.contact.core.interfaces import IContactCoreParameters, \
-    IPersonHeldPositions, IContactable
+from collective.contact.core.interfaces import IContactCoreParameters
+from collective.contact.core.interfaces import IContactable
+from collective.contact.core.interfaces import IHeldPosition
+from collective.contact.core.interfaces import IPersonHeldPositions
 from collective.contact.widget.interfaces import IContactContent
+
+from Products.CMFPlone.utils import normalizeString
 from five import grok
 from plone.autoform import directives as form
 from plone.dexterity.content import Container
@@ -17,14 +20,11 @@ from z3c.form.interfaces import NO_VALUE
 from zope import schema
 from zope.cachedescriptors.property import CachedProperty
 from zope.component import queryUtility
-from zope.interface import Attribute
 from zope.interface import implements
 
 
 class IPerson(model.Schema, IContactContent):
     """Interface for Person content type"""
-
-    is_created = Attribute(u"Marker to know if the object is already created")
 
     lastname = schema.TextLine(
         title=_("Lastname"),
@@ -48,6 +48,11 @@ class IPerson(model.Schema, IContactContent):
         )
     photo = NamedImage(
         title=_("Photo"),
+        required=False,
+        )
+    signature = NamedImage(
+        title=_("Signature"),
+        description=_("Scanned signature"),
         required=False,
         )
 
@@ -87,7 +92,6 @@ class Person(Container):
 
     implements(IPerson)
 
-    is_created = False
     # plone.dexterity.content.Content.__getattr__ retrieve the field.default
     # so step 1.2.1 in z3c.form.widget.py returns something instead of NO_VALUE
     # then IValue adapter is not looked up...
@@ -97,14 +101,17 @@ class Person(Container):
     def set_title(self, val):
         return
 
-    def get_title(self):
+    def get_title(self, include_person_title=True):
         displayed_attrs = ('person_title', 'firstname', 'lastname')
-        registry = queryUtility(IRegistry)
-        if registry is not None:
-            record = registry.forInterface(IContactCoreParameters, None)
-            if record is not None:
-                if not record.person_title_in_title:
-                    displayed_attrs = ('firstname', 'lastname')
+        if not include_person_title:
+            displayed_attrs = ('firstname', 'lastname')
+        else:
+            registry = queryUtility(IRegistry)
+            if registry is not None:
+                record = registry.forInterface(IContactCoreParameters, None)
+                if record is not None:
+                    if not record.person_title_in_title:
+                        displayed_attrs = ('firstname', 'lastname')
 
         displayed = [getattr(self, attr, None) for attr in displayed_attrs]
         return u' '.join([x for x in displayed if x])
@@ -117,6 +124,13 @@ class Person(Container):
         # must return utf8 and not unicode (Title() from basic behavior return utf8)
         # attributes are stored as unicode
         return self.get_title().encode('utf-8')
+
+    def get_sortable_title(self):
+        if self.firstname is None:
+            fullname = self.lastname
+        else:
+            fullname = u"%s %s" % (self.lastname, self.firstname)
+        return normalizeString(fullname)
 
     def get_held_positions(self):
         return [obj for obj in self.values() if IHeldPosition.providedBy(obj)]

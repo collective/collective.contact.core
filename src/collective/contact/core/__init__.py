@@ -1,5 +1,8 @@
 from zope.i18nmessageid import MessageFactory
 
+import logging
+logger = logging.getLogger('collective.contact.core')
+
 _ = MessageFactory("collective.contact.core")
 
 

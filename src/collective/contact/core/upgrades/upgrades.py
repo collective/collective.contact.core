@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from zc.relation.interfaces import ICatalog
-from z3c.relationfield.event import updateRelations
-from z3c.relationfield.interfaces import IHasRelations
-from zope.component import getUtility
-
-from plone import api
-
+from collective.contact.core.interfaces import IContactCoreParameters
+from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
 from ecreall.helpers.upgrade.interfaces import IUpgradeTool
-
-from ..content.held_position import IHeldPosition
+from plone import api
+from Products.CMFPlone.utils import base_hasattr
+from z3c.relationfield.event import updateRelations
+from z3c.relationfield.interfaces import IHasRelations
+from zc.relation.interfaces import ICatalog
+from zope.component import getUtility
 
 
 def reindex_relations(context):
@@ -80,3 +79,29 @@ def v10(context):
     brains = catalog.searchResults(object_provides=IHeldPosition.__identifier__)
     for brain in brains:
         brain.getObject().reindexObject(['start', 'end'])
+
+
+def v11(context):
+    IUpgradeTool(context).runImportStep('collective.contact.core', 'typeinfo')
+    IUpgradeTool(context).runImportStep('collective.contact.core', 'plone.app.registry')
+    val = api.portal.get_registry_record(name='person_contact_details_private', interface=IContactCoreParameters)
+    if val is None:
+        api.portal.set_registry_record(name='person_contact_details_private', value=True,
+                                       interface=IContactCoreParameters)
+
+
+def v12(context):
+    IUpgradeTool(context).runImportStep('collective.contact.core', 'plone.app.registry')
+    catalog = api.portal.get_tool('portal_catalog')
+    brains = catalog.unrestrictedSearchResults(object_provides=IContactContent.__identifier__)
+    for brain in brains:
+        brain.getObject().reindexObject(['Title', 'sortable_title', 'get_full_title', 'SearchableText'])
+
+
+def v13(context):
+    catalog = api.portal.get_tool('portal_catalog')
+    brains = catalog.unrestrictedSearchResults(object_provides=IContactContent.__identifier__)
+    for brain in brains:
+        obj = brain.getObject()
+        if base_hasattr(obj, 'is_created'):
+            delattr(obj, 'is_created')

@@ -23,6 +23,4 @@
   <div tal:replace="structure provider:plone.belowcontentbody" tal:condition="not:ajax_load" />
   </div>
 
-  <div id="viewlet-below-content" tal:content="structure provider:plone.belowcontent" />
-
 </html>

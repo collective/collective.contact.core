@@ -11,18 +11,23 @@
 
       <tal:block tal:repeat="contact view/othercontacts">
           <div class="contact">
-          <a tal:attributes="href contact/obj/absolute_url;"
-             tal:define="has_photo contact/obj/photo|nothing;
-                         title contact/title">
-            <span class="contact-photo">
-              <img tal:condition="has_photo"
+          <a tal:attributes="href contact/person/absolute_url;"
+             tal:define="title contact/title">
+            <span class="contact-photo" tal:condition="contact/display_photo">
+              <img tal:condition="contact/has_photo"
                    tal:replace="structure contact/obj/@@images/photo/tile|string:X" />
-              <img tal:condition="not:has_photo" style="border: none" src="defaultUser.png"
+              <img tal:condition="not:contact/has_photo" style="border: none" src="defaultUser.png"
                    height="64" />
             </span>
+            <img tal:condition="not:contact/display_photo" tal:attributes="src contact/person/getIconURL"/>
+
             <span class="contact-title" tal:content="title"></span>
           </a>
-          <span id="contact-held-position" tal:condition="contact/held_position" tal:content="contact/held_position" />
+
+          <a tal:attributes="href contact/obj/absolute_url">
+            <img tal:attributes="src contact/obj/getIconURL"/>
+            <span id="contact-held-position" tal:condition="contact/held_position" tal:content="contact/held_position"></span>
+          </a>
 
           <span id="contact-phone"tal:condition="contact/phone" tal:content="contact/phone" />
           <span id="contact-cellphone"tal:condition="contact/cell_phone" tal:content="contact/cell_phone" />

@@ -1,25 +1,22 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_base
+import os.path
+
 from collective.contact.core.behaviors import CONTACT_DETAILS_FIELDS
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.browser import TEMPLATES_DIR
 from collective.contact.core.browser.address import get_address
 from collective.contact.core.browser.utils import get_valid_url
-from collective.contact.core.interfaces import IContactable
-from collective.contact.widget.interfaces import IContactContent
-from five import grok
-from plone.dexterity.browser.view import DefaultView
-from plone.dexterity.utils import getAdditionalSchemata
+from collective.contact.core.interfaces import IContactable, IContactCoreParameters
+
+from Acquisition import aq_base
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from five import grok
+from plone import api
+from plone.dexterity.browser.view import DefaultView
+from plone.dexterity.utils import getAdditionalSchemata
 from zope.globalrequest import getRequest
-from zope.interface import adapter
 from zope.interface import implementer
-from zope.interface import Interface
-from zope.interface import provider
-
-import os.path
-
 
 grok.templatedir(TEMPLATES_DIR)
 
@@ -95,6 +92,7 @@ class Contactable(object):
     def person(self):
         return None
 
+    @property
     def held_position(self):
         return None
 
@@ -113,7 +111,9 @@ class Contactable(object):
         we use the one of the first object in this list which have this information
         """
         contactables = []
-        related_items = [self.context, self.held_position, self.person, self.position] + list(reversed(self.organizations))
+        related_items = [self.context, self.held_position, self.position] + list(reversed(self.organizations))
+        if not api.portal.get_registry_record(name='person_contact_details_private', interface=IContactCoreParameters):
+            related_items.insert(2, self.person)
         for related_item in related_items:
             if related_item is not None \
                and IContactDetails.providedBy(related_item) \

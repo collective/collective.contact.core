@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 from collective.contact.core import _
+from collective.contact.core import logger
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.core.content.held_position import IHeldPosition
+from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
+
 from five import grok
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
@@ -10,7 +13,7 @@ from plone.supermodel import model
 from z3c.form.interfaces import NO_VALUE
 from zc.relation.interfaces import ICatalog
 from zope import schema
-from zope.component._api import getUtility
+from zope.component import getUtility
 from zope.interface import implements
 from zope.intid.interfaces import IIntIds
 
@@ -66,19 +69,13 @@ class Position(Container):
         chain.append(self)
         return chain
 
-    def get_full_title(self):
+    def get_full_title(self, separator=u' / ', first_index=0):
         """Returns the full title of the position
         It is constituted by the name of the position,
-        the name of its organization and the name of the
-        root organization in brackets.
+        the full name of its organization.
         """
         organization = self.get_organization()
-        root_organization = organization.get_root_organization()
-        if organization == root_organization:
-            return u"%s (%s)" % (self.title, organization.title)
-        else:
-            return u"%s, %s (%s)" % (self.title, organization.title,
-                                     root_organization.title)
+        return u"%s (%s)" % (self.title, organization.get_full_title(separator=separator, first_index=first_index))
 
     def get_held_positions(self):
         """Returns the held position
@@ -91,7 +88,14 @@ class Position(Container):
                               {'to_id': position_intid,
                                'from_interfaces_flattened': IHeldPosition,
                                'from_attribute': 'position'})
-        return [c.from_object for c in contact_relations]
+        held_positions = []
+        for relation in contact_relations:
+            held_position = relation.from_object
+            if not held_position:
+                logger.error("from_object missing for relation from held_position to position %s: %s", self, relation.__dict__)
+                continue
+            held_positions.append(held_position)
+        return held_positions
 
 
 class PositionSchemaPolicy(grok.GlobalUtility,

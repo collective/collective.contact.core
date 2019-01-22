@@ -8,9 +8,8 @@ from Products.CMFPlone.utils import safe_unicode
 from plone import api
 
 from collective.contact.core.interfaces import IVCard, IContactable,\
-    IPersonHeldPositions
-from collective.contact.core.content.held_position import IHeldPosition,\
-                                                             HeldPosition
+    IPersonHeldPositions, IHeldPosition
+from collective.contact.core.content.held_position import HeldPosition
 from collective.contact.core.content.organization import IOrganization,\
                                                              Organization
 from collective.contact.core.behaviors import IBirthday
@@ -162,11 +161,11 @@ class OrganizationVCard(grok.Adapter, ContactableVCard):
         vcard.kind.value = "org"
 
         organization = self.context
+        title = safe_unicode(organization.Title(), encoding='utf8')
         vcard.add('n')
-        vcard.n.value = vobject.vcard.Name(organization.Title())
+        vcard.n.value = vobject.vcard.Name(title)
         vcard.add('fn')
-        vcard.fn.value = organization.Title()
-
+        vcard.fn.value = title
         return vcard
 
 
