@@ -24,7 +24,7 @@ class IPosition(model.Schema, IContactContent):
     position_type = schema.Choice(
         title=_("Type"),
         vocabulary="PositionTypes",
-        )
+    )
 
     def get_organization(self):
         """Returns the organization to which the position is linked"""
@@ -85,14 +85,15 @@ class Position(Container):
         catalog = getUtility(ICatalog)
         position_intid = intids.getId(self)
         contact_relations = catalog.findRelations(
-                              {'to_id': position_intid,
-                               'from_interfaces_flattened': IHeldPosition,
-                               'from_attribute': 'position'})
+            {'to_id': position_intid,
+             'from_interfaces_flattened': IHeldPosition,
+             'from_attribute': 'position'})
         held_positions = []
         for relation in contact_relations:
             held_position = relation.from_object
             if not held_position:
-                logger.error("from_object missing for relation from held_position to position %s: %s", self, relation.__dict__)
+                logger.error("from_object missing for relation from held_position to position %s: %s", self,
+                             relation.__dict__)
                 continue
             held_positions.append(held_position)
         return held_positions

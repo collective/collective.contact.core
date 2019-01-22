@@ -1,5 +1,5 @@
 import copy
-from AccessControl import getSecurityManager
+
 from collective.contact.core import _
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.content.person import IPerson
@@ -7,7 +7,9 @@ from collective.contact.widget.interfaces import IContactWidgetSettings
 from collective.contact.widget.schema import ContactChoice
 from collective.contact.widget.source import ContactSourceBinder
 
+from AccessControl import getSecurityManager
 from Products.CMFPlone.interfaces import IConstrainTypes
+from Products.statusmessages.interfaces import IStatusMessage
 from five import grok
 from plone import api
 from plone.dexterity.browser.add import DefaultAddForm
@@ -17,20 +19,17 @@ from plone.dexterity.interfaces import IDexterityFTI
 from plone.dexterity.utils import addContentToContainer
 from plone.supermodel import model
 from plone.z3cform.interfaces import IDeferSecurityCheck
-from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import field, form, button
 from z3c.form.contentprovider import ContentProviders
 from z3c.form.interfaces import IFieldsAndContentProvidersForm, \
-    HIDDEN_MODE, DISPLAY_MODE
+    DISPLAY_MODE
 from zope.component import getUtility, queryAdapter
 from zope.component.hooks import getSite
 from zope.contentprovider.interfaces import IContentProvider
 from zope.event import notify
 from zope.i18n import Message
 from zope.interface import alsoProvides
-from zope.interface import implementer
 from zope.interface import implements, Interface
-from zope.interface import provider
 from zope.publisher.browser import BrowserView
 
 
@@ -125,7 +124,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
                                              'position': related_to.Title()})
                                 label = custom_settings.label_for_portal_type(type_name)
                                 url += '?oform.widgets.%s=%s' % (related_to.portal_type,
-                                                   '/'.join(related_to.getPhysicalPath()))
+                                                                 '/'.join(related_to.getPhysicalPath()))
 
                     action = {'url': url,
                               'label': label,
@@ -142,7 +141,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
                         'url': url,
                         'label': label,
                         'prelabel': prelabel,
-                        }
+                    }
                     actions.append(action)
             else:
                 if len(portal_types) == 2 and \
@@ -168,7 +167,8 @@ class ContactWidgetSettings(grok.GlobalUtility):
         return {'actions': actions,
                 'close_on_click': close_on_click,
                 'formatItem': """function(row, idx, count, value) {
-return '<img src="%s/++resource++collective.contact.core/' + row[2] + '_icon.png" /> ' + row[1] }""" % (getSite().absolute_url())
+return '<img src="%s/++resource++collective.contact.core/' + row[2] + '_icon.png" /> ' + row[1] }""" % (
+                    getSite().absolute_url())
                 }
 
 
@@ -271,59 +271,57 @@ $(document).ready(function() {
 });
 </script>
 """ % (str(bool(getattr(self.__parent__.form, 'schema', None) == IAddHeldPosition)).lower(),
-        getSite().absolute_url(),
-        getSite().absolute_url(),
-        )
+       getSite().absolute_url(),
+       getSite().absolute_url(),
+       )
 
 
 class IAddHeldPosition(model.Schema):
-
     """Schema to add held position
 
     Organization and person fields are required."""
 
     organization = ContactChoice(
-            title=_(u"Organization"),
-            required=True,
-            description=_(u"Select the organization where the person holds the position"),
-            source=ContactSourceBinder(portal_type="organization"))
+        title=_(u"Organization"),
+        required=True,
+        description=_(u"Select the organization where the person holds the position"),
+        source=ContactSourceBinder(portal_type="organization"))
 
     person = ContactChoice(
-            title=_(u"Person"),
-            description=_(u"Select the person who holds the position"),
-            required=True,
-            source=ContactSourceBinder(portal_type="person"))
+        title=_(u"Person"),
+        description=_(u"Select the person who holds the position"),
+        required=True,
+        source=ContactSourceBinder(portal_type="person"))
 
     position = ContactChoice(
-            title=_(u"Position"),
-            required=False,
-            description=_(u"Select the position held by this person in the selected organization"),
-            source=ContactSourceBinder(portal_type="position"))
+        title=_(u"Position"),
+        required=False,
+        description=_(u"Select the position held by this person in the selected organization"),
+        source=ContactSourceBinder(portal_type="position"))
 
 
 class IAddContact(model.Schema):
-
     """Schema to add held position, person or organization
 
     Fields are not required."""
 
     organization = ContactChoice(
-            title=_(u"Organization"),
-            required=False,
-            description=_(u"Select the organization where the person holds the position"),
-            source=ContactSourceBinder(portal_type="organization"))
+        title=_(u"Organization"),
+        required=False,
+        description=_(u"Select the organization where the person holds the position"),
+        source=ContactSourceBinder(portal_type="organization"))
 
     person = ContactChoice(
-            title=_(u"Person"),
-            description=_(u"Select the person who holds the position"),
-            required=False,
-            source=ContactSourceBinder(portal_type="person"))
+        title=_(u"Person"),
+        description=_(u"Select the person who holds the position"),
+        required=False,
+        source=ContactSourceBinder(portal_type="person"))
 
     position = ContactChoice(
-            title=_(u"Position"),
-            required=False,
-            description=_(u"Select the position held by this person in the selected organization"),
-            source=ContactSourceBinder(portal_type="position"))
+        title=_(u"Position"),
+        required=False,
+        description=_(u"Select the position held by this person in the selected organization"),
+        source=ContactSourceBinder(portal_type="position"))
 
 
 class AddContact(DefaultAddForm, form.AddForm):
@@ -339,7 +337,7 @@ class AddContact(DefaultAddForm, form.AddForm):
     """
     implements(IFieldsAndContentProvidersForm)
     contentProviders = ContentProviders(['organization-ms'])
-#    contentProviders['organization-ms'] = MasterSelectAddContactProvider
+    #    contentProviders['organization-ms'] = MasterSelectAddContactProvider
     contentProviders['organization-ms'].position = -1
     label = _(u"Create ${name}", mapping={'name': _(u"Contact")})
     description = _(u"A contact is a position held by a person in an organization")
@@ -440,7 +438,6 @@ class AddContact(DefaultAddForm, form.AddForm):
 
 
 class AddHeldPosition(AddContact):
-
     """Add an held position."""
 
     schema = IAddHeldPosition
@@ -450,7 +447,7 @@ class AddContactFromOrganization(AddContact):
     def updateWidgets(self):
         if 'oform.widgets.organization' not in self.request.form:
             self.request.form['oform.widgets.organization'] = '/'.join(
-                    self.context.getPhysicalPath())
+                self.context.getPhysicalPath())
         super(AddContactFromOrganization, self).updateWidgets()
 
 
@@ -459,11 +456,11 @@ class AddContactFromPosition(AddContact):
         organization = self.context.get_organization()
         if 'oform.widgets.organization' not in self.request.form:
             self.request.form['oform.widgets.organization'] = '/'.join(
-                    organization.getPhysicalPath())
+                organization.getPhysicalPath())
 
         if 'oform.widgets.position' not in self.request.form:
             self.request.form['oform.widgets.position'] = '/'.join(
-                    self.context.getPhysicalPath())
+                self.context.getPhysicalPath())
 
         super(AddContactFromPosition, self).updateWidgets()
 
@@ -480,9 +477,9 @@ class AddOrganization(form.AddForm):
     def updateWidgets(self):
         super(AddOrganization, self).updateWidgets()
         self.widgets['organization'].label = _(
-                 'help_add_organization_or_position_organization',
-                 "Please fill the organization first "
-                 "and then eventually select position")
+            'help_add_organization_or_position_organization',
+            "Please fill the organization first "
+            "and then eventually select position")
 
     @button.buttonAndHandler(_('Add'), name='save')
     def handleAdd(self, action):

@@ -54,7 +54,6 @@ class Organization(BaseView):
         self.can_add = sm.checkPermission('Add portal content', self.context)
         self.addnew_script = ADDNEW_OVERLAY
 
-
     def display_date(self, date):
         """Display date nicely in template."""
         return self.context.toLocalizedTime(date_to_DateTime(date))

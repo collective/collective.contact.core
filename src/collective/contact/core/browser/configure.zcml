@@ -1,7 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:zcml="http://namespaces.zope.org/zcml"
-    xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="collective.contact.core">
 
@@ -78,7 +77,7 @@
 
   <browser:page
       name="contactdetails"
-      for=".contactable.IContactContent"
+      for="collective.contact.widget.interfaces.IContactContent"
       class=".contactable.ContactDetails"
       template="templates/contactdetails.pt"
       permission="zope2.View"
@@ -86,7 +85,7 @@
 
   <browser:page
       name="nofallbackcontactdetails"
-      for=".contactable.IContactContent"
+      for="collective.contact.widget.interfaces.IContactContent"
       class=".contactable.NoFallbackContactDetails"
       template="templates/contactdetails.pt"
       permission="zope2.View"
@@ -102,7 +101,7 @@
 
   <browser:page
       name="othercontacts"
-      for=".organization.IOrganization"
+      for="collective.contact.core.content.organization.IOrganization"
       class=".organization.OtherContacts"
       template="templates/othercontacts.pt"
       permission="zope2.View"
@@ -140,14 +139,14 @@
 
   <browser:page
       name="add-contact"
-      for="..content.organization.IOrganization"
+      for="collective.contact.core.content.organization.IOrganization"
       class=".addcontact.AddContactFromOrganization"
       permission="cmf.AddPortalContent"
       />
 
   <browser:page
       name="add-contact"
-      for="..content.position.IPosition"
+      for="collective.contact.core.content.position.IPosition"
       class=".addcontact.AddContactFromPosition"
       permission="cmf.AddPortalContent"
       />
@@ -168,7 +167,7 @@
 
   <browser:page
       name="view"
-      for="..content.directory.IDirectory"
+      for="collective.contact.core.content.directory.IDirectory"
       class=".directory.Directory"
       template="templates/directory.pt"
       permission="zope2.View"
