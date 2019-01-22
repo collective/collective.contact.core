@@ -11,7 +11,6 @@ try:
 except ImportError:
     from zope.interface import Interface
 
-
     class IReferenceable(Interface):
         pass
 

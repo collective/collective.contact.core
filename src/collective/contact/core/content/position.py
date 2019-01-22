@@ -2,7 +2,6 @@
 from collective.contact.core import _
 from collective.contact.core import logger
 from collective.contact.core.browser.contactable import Contactable
-from collective.contact.core.content.held_position import IHeldPosition
 from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
 

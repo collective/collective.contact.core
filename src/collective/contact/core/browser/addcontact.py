@@ -270,10 +270,11 @@ $(document).ready(function() {
 
 });
 </script>
-""" % (str(bool(getattr(self.__parent__.form, 'schema', None) == IAddHeldPosition)).lower(),
-       getSite().absolute_url(),
-       getSite().absolute_url(),
-       )
+""" % (
+            str(bool(getattr(self.__parent__.form, 'schema', None) == IAddHeldPosition)).lower(),
+            getSite().absolute_url(),
+            getSite().absolute_url(),
+        )
 
 
 class IAddHeldPosition(model.Schema):
