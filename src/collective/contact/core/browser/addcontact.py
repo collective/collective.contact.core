@@ -6,6 +6,8 @@ from collective.contact.core.content.person import IPerson
 from collective.contact.widget.interfaces import IContactWidgetSettings
 from collective.contact.widget.schema import ContactChoice
 from collective.contact.widget.source import ContactSourceBinder
+
+from Products.CMFPlone.interfaces import IConstrainTypes
 from five import grok
 from plone import api
 from plone.dexterity.browser.add import DefaultAddForm
@@ -88,6 +90,15 @@ class ContactWidgetSettings(grok.GlobalUtility):
             directory = results[0].getObject()
             sm = getSecurityManager()
             if not sm.checkPermission("Add portal content", directory):
+                addlink_enabled = False
+
+            allowed_types = api.portal.get_tool('portal_types').directory.allowed_content_types
+            portal_types = [p for p in portal_types if p in allowed_types]
+            constrains = IConstrainTypes(directory, None)
+            if constrains:
+                portal_types = [p for p in portal_types if p in constrains.getLocallyAllowedTypes()]
+
+            if len(portal_types) == 0:
                 addlink_enabled = False
 
         close_on_click = True

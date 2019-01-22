@@ -1,6 +1,12 @@
 Changelog
 =========
 
+2.0 (unreleased)
+----------------
+
+- Do not show add link if content type is not allowed as directory subcontent.
+  [thomasdesvenain]
+
 1.13 (unreleased)
 -----------------
 
