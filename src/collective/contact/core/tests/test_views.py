@@ -1,6 +1,8 @@
 # -*- coding: utf8 -*-
 import unittest
 
+from collective.contact.core.setuphandlers import create_test_held_positions
+
 from plone.app.testing.interfaces import TEST_USER_NAME
 
 from ecreall.helpers.testing.base import BaseTest
@@ -18,6 +20,7 @@ class TestView(unittest.TestCase, BaseTest):
         self.login(TEST_USER_NAME)
         self.app = self.layer['app']
         self.portal = self.layer['portal']
+        create_test_held_positions(self.portal)
         mydirectory = self.portal['mydirectory']
         self.degaulle = mydirectory['degaulle']
         self.adt = self.degaulle['adt']

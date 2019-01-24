@@ -2,17 +2,17 @@
 import datetime
 import unittest
 
-from zope.intid.interfaces import IIntIds
-from zope.component import getUtility
+from collective.contact.core.interfaces import IVCard, IPersonHeldPositions, \
+    IContactable, IContactCoreParameters
+from collective.contact.core.setuphandlers import create_test_held_positions
+from collective.contact.core.testing import INTEGRATION
+
+from ecreall.helpers.testing.base import BaseTest
 from plone import api
 from plone.app.testing.interfaces import TEST_USER_NAME
 from z3c.relationfield.relation import RelationValue
-
-from ecreall.helpers.testing.base import BaseTest
-
-from collective.contact.core.testing import INTEGRATION
-from collective.contact.core.interfaces import IVCard, IPersonHeldPositions,\
-    IContactable, IContactCoreParameters
+from zope.component import getUtility
+from zope.intid.interfaces import IIntIds
 
 
 class TestAdapters(unittest.TestCase, BaseTest):
@@ -23,6 +23,7 @@ class TestAdapters(unittest.TestCase, BaseTest):
     def setUp(self):
         super(TestAdapters, self).setUp()
         self.portal = self.layer['portal']
+        create_test_held_positions(self.portal)
         self.directory = self.portal['mydirectory']
         self.degaulle = self.directory['degaulle']
         self.pepper = self.directory['pepper']
@@ -97,7 +98,7 @@ class TestAdapters(unittest.TestCase, BaseTest):
         self.assertEqual(adapter.get_main_position(), self.degaulle.president)
         self.assertEqual(adapter.get_current_positions(),
                          (self.degaulle.president,
-                          self.degaulle.gadt, ))
+                          self.degaulle.gadt,))
         self.assertEqual(adapter.get_sorted_positions(),
                          (self.degaulle.president,
                           self.degaulle.gadt,

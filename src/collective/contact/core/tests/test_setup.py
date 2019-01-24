@@ -10,6 +10,7 @@ class TestSetup(unittest.TestCase):
     layer = INTEGRATION
 
     def setUp(self):
+        super(TestSetup, self).setUp()
         self.app = self.layer['app']
         self.portal = self.layer['portal']
         self.qi_tool = api.portal.get_tool('portal_quickinstaller')
@@ -18,7 +19,7 @@ class TestSetup(unittest.TestCase):
         """ Validate that our products GS profile has been run and the product
             installed
         """
-        pid = 'collective.contact.core'
-        installed = [p['id'] for p in self.qi_tool.listInstalledProducts()]
-        self.assertTrue(pid in installed,
-                        'package appears not to have been installed')
+        self.assertTrue(self.qi_tool.isProductInstalled('collective.contact.core'))
+
+    def test_test_data_created(self):
+        self.assertTrue('mydirectory' in self.portal)

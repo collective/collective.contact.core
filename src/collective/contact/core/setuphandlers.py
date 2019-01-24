@@ -5,6 +5,7 @@
 #
 # GNU General Public License (GPL)
 #
+from zope.lifecycleevent import modified
 
 __docformat__ = 'plaintext'
 
@@ -19,6 +20,7 @@ from plone import api
 # from plone.registry.interfaces import IRegistry
 
 import logging
+
 logger = logging.getLogger('collective.contact.core: setuphandlers')
 
 from collective.contact.core.interfaces import IContactCoreParameters
@@ -73,31 +75,31 @@ def create_test_contact_data(portal):
                            {'name': u'Regiment', 'token': u'regiment'},
                            {'name': u'Squad', 'token': u'squad'},
                            ]
-# Examples structure
-# ------------------
-# organizations (* = organization, £ = position)
-#     * Armée de terre
-#         * Corps A
-#             * Division Alpha
-#                 * Régiment H
-#                     * Brigade LH
-#                         £ Sergent
-#                 £ Capitaine
-#             * Division Beta
-#         * Corps B
-#         £ Général
-#
-# persons (> = person, @ = held_position)
-#     > De Gaulle
-#         @ Armée de terre
-#         @ Général
-#     > Pepper
-#         @ Sergent
-#     > Rambo
-#         @ Brigade LH
-#     > Draper
-#         @ Capitaine
-#         @ Division Beta
+    # Examples structure
+    # ------------------
+    # organizations (* = organization, £ = position)
+    #     * Armée de terre
+    #         * Corps A
+    #             * Division Alpha
+    #                 * Régiment H
+    #                     * Brigade LH
+    #                         £ Sergent
+    #                 £ Capitaine
+    #             * Division Beta
+    #         * Corps B
+    #         £ Général
+    #
+    # persons (> = person, @ = held_position)
+    #     > De Gaulle
+    #         @ Armée de terre
+    #         @ Général
+    #     > Pepper
+    #         @ Sergent
+    #     > Rambo
+    #         @ Brigade LH
+    #     > Draper
+    #         @ Capitaine
+    #         @ Division Beta
 
     params = {'title': u"Military directory",
               'position_types': position_types,
@@ -123,7 +125,6 @@ def create_test_contact_data(portal):
               'website': 'www.charles-de-gaulle.org'
               }
     mydirectory.invokeFactory('person', 'degaulle', **params)
-    degaulle = mydirectory['degaulle']
 
     params = {'lastname': u'Pepper',
               'gender': u'M',
@@ -137,7 +138,6 @@ def create_test_contact_data(portal):
               'website': 'http://www.stephen-pepper.org'
               }
     mydirectory.invokeFactory('person', 'pepper', **params)
-    pepper = mydirectory['pepper']
 
     params = {'lastname': u'Rambo',
               'firstname': u'John',
@@ -145,7 +145,6 @@ def create_test_contact_data(portal):
               'use_parent_address': True,
               }
     mydirectory.invokeFactory('person', 'rambo', **params)
-    rambo = mydirectory['rambo']
 
     params = {'lastname': u'Draper',
               'firstname': u'John',
@@ -154,7 +153,6 @@ def create_test_contact_data(portal):
               }
 
     mydirectory.invokeFactory('person', 'draper', **params)
-    draper = mydirectory['draper']
 
     params = {'title': u"Armée de terre",
               'organization_type': u'army',
@@ -199,7 +197,6 @@ def create_test_contact_data(portal):
     corpsa.invokeFactory('organization', 'divisionbeta', **params)
 
     divisionalpha = corpsa['divisionalpha']
-    divisionbeta = corpsa['divisionbeta']
 
     params = {'title': u"Régiment H",
               'organization_type': u'regiment',
@@ -237,7 +234,6 @@ def create_test_contact_data(portal):
               'use_parent_address': True,
               }
     divisionalpha.invokeFactory('position', 'capitaine_alpha', **params)
-    capitaine_alpha = divisionalpha['capitaine_alpha']
 
     params = {'title': u"Sergent de la brigade LH",
               'position_type': u'sergeant',
@@ -247,15 +243,30 @@ def create_test_contact_data(portal):
               'use_parent_address': True,
               }
     brigadelh.invokeFactory('position', 'sergent_lh', **params)
-    sergent_lh = brigadelh['sergent_lh']
 
+
+def create_test_held_positions(portal):
+    mydirectory = portal['mydirectory']
+    armeedeterre = mydirectory['armeedeterre']
     intids = component.getUtility(IIntIds)
+    degaulle = mydirectory['degaulle']
+    rambo = mydirectory['rambo']
+    draper = mydirectory['draper']
+    corpsa = armeedeterre['corpsa']
+    divisionalpha = corpsa['divisionalpha']
+    divisionbeta = corpsa['divisionbeta']
+    capitaine_alpha = divisionalpha['capitaine_alpha']
+    regimenth = divisionalpha['regimenth']
+    brigadelh = regimenth['brigadelh']
+    sergent_lh = brigadelh['sergent_lh']
+    pepper = mydirectory['pepper']
 
     params = {'start_date': datetime.date(1940, 5, 25),
               'end_date': datetime.date(1970, 11, 9),
               'position': RelationValue(intids.getId(armeedeterre)),
               }
     degaulle.invokeFactory('held_position', 'adt', **params)
+    modified(degaulle['adt'])
 
     general_adt = armeedeterre['general_adt']
     params = {'start_date': datetime.date(1940, 5, 25),

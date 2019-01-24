@@ -1,16 +1,16 @@
 # -*- coding: utf8 -*-
 
+import datetime
 import unittest
 
-import datetime
+from collective.contact.core.interfaces import IContactCoreParameters
+from collective.contact.core.setuphandlers import create_test_held_positions
+from collective.contact.core.testing import INTEGRATION
 
 from ecreall.helpers.testing.base import BaseTest
-
-from collective.contact.core.interfaces import IContactCoreParameters
-from collective.contact.core.testing import INTEGRATION
 from plone import api
-from plone.app.testing.interfaces import TEST_USER_ID, TEST_USER_NAME
 from plone.app.testing.helpers import setRoles
+from plone.app.testing.interfaces import TEST_USER_ID, TEST_USER_NAME
 
 
 class TestContentTypes(unittest.TestCase, BaseTest):
@@ -21,6 +21,7 @@ class TestContentTypes(unittest.TestCase, BaseTest):
     def setUp(self):
         super(TestContentTypes, self).setUp()
         self.portal = self.layer['portal']
+        create_test_held_positions(self.portal)
         self.mydirectory = self.portal['mydirectory']
         self.degaulle = self.mydirectory['degaulle']
         self.pepper = self.mydirectory['pepper']

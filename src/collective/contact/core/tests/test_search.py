@@ -3,14 +3,14 @@
 import datetime
 import unittest
 
-from plone import api
-
-from ecreall.helpers.testing.base import BaseTest
-
-from collective.contact.core.testing import INTEGRATION
 from collective.contact.core.indexers import (
     held_position_searchable_text, organization_searchable_text,
     person_sortable_title, held_position_sortable_title, start_date, end_date)
+from collective.contact.core.setuphandlers import create_test_held_positions
+from collective.contact.core.testing import INTEGRATION
+
+from ecreall.helpers.testing.base import BaseTest
+from plone import api
 
 
 class TestSearch(unittest.TestCase, BaseTest):
@@ -21,6 +21,7 @@ class TestSearch(unittest.TestCase, BaseTest):
     def setUp(self):
         super(TestSearch, self).setUp()
         self.portal = self.layer['portal']
+        create_test_held_positions(self.portal)
         self.mydirectory = self.portal['mydirectory']
         self.degaulle = self.mydirectory['degaulle']
         self.pepper = self.mydirectory['pepper']
@@ -47,7 +48,7 @@ class TestSearch(unittest.TestCase, BaseTest):
             held_position_searchable_text(sergent_pepper)(),
             (u"Mister Pepper Sergent de la brigade LH Armée de terre Corps A "
              u"Division Alpha Régiment H Brigade LH sgt.pepper@armees.fr")
-            )
+        )
         pepper = self.pepper
         self.assertEqual(person_sortable_title(pepper)(),
                          "pepper")
