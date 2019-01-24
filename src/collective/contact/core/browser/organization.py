@@ -94,7 +94,7 @@ class OtherContacts(grok.View):
             contact['person'] = person
             contact['title'] = person.Title()
             contact['held_position'] = hp.Title()
-            contact['label'] = hp.label
+            contact['label'] = hp.get_label()
             contact['obj'] = hp
             contact['display_photo'] = api.portal.get_registry_record(
                 name='display_contact_photo_on_organization_view',

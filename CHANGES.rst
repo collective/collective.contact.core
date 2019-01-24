@@ -4,8 +4,9 @@ Changelog
 1.24 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Added method `held_position.get_label` to get the `held_position` label so it
+  is easy to override.
+  [gbastien]
 
 1.23 (2018-11-20)
 -----------------
