@@ -49,6 +49,11 @@ class HeldPosition(Container):
 
     title = property(get_title, set_title)
 
+    def get_label(self):
+        """Returns the held_position label.
+           Made to be overrided."""
+        return self.label
+
     def get_person(self):
         """Returns the person who holds the position
         """
@@ -86,10 +91,11 @@ class HeldPosition(Container):
 
         position = self.get_position()
         organization = self.get_organization()
-        if position is None and not self.label:
+        label = self.get_label()
+        if position is None and not label:
             return "(%s)" % organization.get_full_title(separator=separator, first_index=first_index).encode('utf8')
         # we display the position title or the label
-        position_title = self.label or position.title
+        position_title = label or position.title
         return "%s (%s)" % (position_title.encode('utf8'),
                             organization.get_full_title(separator=separator, first_index=first_index).encode('utf8'))
 

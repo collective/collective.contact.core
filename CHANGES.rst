@@ -14,6 +14,12 @@ Changelog
 - Prevent address field from being erased if they are changed programmaticaly before any manual edition.
   [thomasdesvenain]
 
+1.24 (unreleased)
+-----------------
+
+- Added method `held_position.get_label` to get the `held_position` label so it
+  is easy to override.
+  [gbastien]
 
 1.23 (2018-11-20)
 -----------------
