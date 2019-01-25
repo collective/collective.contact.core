@@ -14,7 +14,7 @@
 
 <div metal:fill-slot="main">
 
-    <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" tal:condition="not:ajax_load" />
+    <div tal:replace="structure provider:plone.abovecontenttitle" />
 
     <h1 class="directory"><img tal:attributes="src context/getIconURL" /> <span tal:content="context/Title" /></h1>
 
@@ -44,7 +44,7 @@
         </ul>
     </div>
 
-  <div tal:replace="structure provider:plone.belowcontentbody" tal:condition="not:ajax_load" />
+  <div tal:replace="structure provider:plone.belowcontentbody" />
 
 </div>
 
