@@ -74,38 +74,48 @@ class ContactWidgetSettings(grok.GlobalUtility):
         url = '%s/++add++%s' % (directory_url, portal_type)
         return url
 
+    def get_directory(self):
+        catalog = api.portal.get_tool('portal_catalog')
+        results = catalog.searchResults(portal_type='directory')
+        if len(results) == 0:
+            return None
+        else:
+            return results[0].getObject()
+
     def add_contact_infos(self, widget):
         source = widget.bound_source
         criteria = source.selectable_filter.criteria
         addlink_enabled = widget.field.addlink
-        portal_types = criteria.get('portal_type', [])
+        field_portal_types = criteria.get('portal_type', [])
 
-        catalog = api.portal.get_tool('portal_catalog')
-        results = catalog.unrestrictedSearchResults(portal_type='directory')
         actions = []
-        if len(results) == 0:
+        directory = self.get_directory()
+        if not directory:
             addlink_enabled = False
         else:
-            directory = results[0].getObject()
             sm = getSecurityManager()
             if not sm.checkPermission("Add portal content", directory):
                 addlink_enabled = False
 
-            allowed_types = api.portal.get_tool('portal_types').directory.allowed_content_types
-            portal_types = [p for p in portal_types if p in allowed_types]
+            allowed_directory_types = api.portal.get_tool('portal_types').directory.allowed_content_types
+            allowed_portal_types = set(p for p in field_portal_types if p in allowed_directory_types)
             constrains = IConstrainTypes(directory, None)
             if constrains:
-                portal_types = [p for p in portal_types if p in constrains.getLocallyAllowedTypes()]
+                allowed_portal_types = set(p for p in allowed_portal_types if p in constrains.getLocallyAllowedTypes())
 
-            if len(portal_types) == 0:
+            if 'held_position' in field_portal_types:
+                # held position is always allowed because it has a special wizard that creates organization and person
+                allowed_portal_types.add('held_position')
+
+            if len(allowed_portal_types) == 0:
                 addlink_enabled = False
 
         close_on_click = True
         if addlink_enabled:
             custom_settings = queryAdapter(directory, ICustomSettings, default=self)
             directory_url = directory.absolute_url()
-            if len(portal_types) == 1:
-                portal_type = portal_types[0]
+            if len(allowed_portal_types) == 1:
+                portal_type = list(allowed_portal_types)[0]
                 prelabel = custom_settings.prelabel_for_portal_type(portal_type)
                 if portal_type == 'held_position' and not IPerson.providedBy(widget.context):
                     url = "%s/@@add-held-position" % directory_url
@@ -144,9 +154,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
                     }
                     actions.append(action)
             else:
-                if len(portal_types) == 2 and \
-                        'organization' in portal_types and \
-                        'position' in portal_types:
+                if allowed_portal_types == {'organization', 'person'}:
                     url = "%s/@@add-organization" % directory_url
                     type_name = _(u"organization/position")
                 else:
@@ -155,7 +163,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
 
                 close_on_click = False
                 label = custom_settings.label_for_portal_type(type_name)
-                prelabel = custom_settings.prelabel_for_portal_type(portal_types)
+                prelabel = custom_settings.prelabel_for_portal_type(allowed_portal_types)
                 action = {'url': url,
                           'klass': 'addnew',
                           'label': label,
