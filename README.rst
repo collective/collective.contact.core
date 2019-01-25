@@ -69,6 +69,7 @@ Installation
 ============
 
 * Add collective.contact.core to your eggs.
+* Under Plone 4, set collective.z3cform.datagridfield to 1.2.x
 * Re-run buildout.
 * Install the product in your plone site.
 
