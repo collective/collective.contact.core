@@ -141,4 +141,12 @@
       handler=".upgrades.v13"
       profile="collective.contact.core:default" />
 
+  <genericsetup:upgradeStep
+      title="Upgrade from 13 to 14"
+      description="Reimport types step"
+      source="13"
+      destination="14"
+      handler=".upgrades.v14"
+      profile="collective.contact.core:default" />
+
 </configure>

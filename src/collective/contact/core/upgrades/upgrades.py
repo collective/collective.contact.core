@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
@@ -105,3 +104,7 @@ def v13(context):
         obj = brain.getObject()
         if base_hasattr(obj, 'is_created'):
             delattr(obj, 'is_created')
+
+
+def v14(context):
+    IUpgradeTool(context).runImportStep('collective.contact.core', 'typeinfo')
