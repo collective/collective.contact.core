@@ -73,6 +73,17 @@ Installation
 * Re-run buildout.
 * Install the product in your plone site.
 
+
+IMPORTANT : Compatibility with collective.js.jqueryui
+-----------------------------------------------------
+
+For now, collective.js.jqueryui is not compatible with plone.formwidget.autocomplete,
+which is a dependency of collective.contact.core.
+If collective.js.jqueryui is installed, you **must** disable jqueryui autocomplete feature
+unless contact widget will not be functionnal.
+You can disable the plugin in the JQuery UI configurations settings of site control panel.
+
+
 Tests
 =====
 
