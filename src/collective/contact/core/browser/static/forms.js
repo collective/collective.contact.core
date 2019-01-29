@@ -1,4 +1,4 @@
-contactswidget = {};
+var contactswidget = {};
 
 /* Update person_title when gender changes (if person_title hasn't been set manually) */
 contactswidget.update_person_title = function(genderInput, mapping) {
@@ -46,7 +46,7 @@ contactswidget.update_token = function(){
 	var name = $(this).val();
 	var token = $(this).closest('tr').find('input[id$="-widgets-token"]');
 	if (token.val() === '') {
-		token_value = contactswidget.normalize_string(name);
+		var token_value = contactswidget.normalize_string(name);
 		token.val(token_value);
 	}
 };
@@ -165,7 +165,7 @@ $(document).ready(function(){
     /* contactswidget.manage_directory();  Do not hide token column in edit mode */
     contactswidget.manage_hide_use_parent_address();
 
-    jQuery(document).bind('loadInsideOverlay',
+    $(document).bind('loadInsideOverlay',
             function(e, pbajax, responseText, errorText, api){
         contactswidget.manage_hide_use_parent_address();
     });
