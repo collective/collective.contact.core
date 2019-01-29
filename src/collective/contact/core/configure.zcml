@@ -2,7 +2,6 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:grok="http://namespaces.zope.org/grok"
     xmlns:i18n="http://namespaces.zope.org/i18n"
-    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="collective.contact.core">
 
   <i18n:registerTranslations directory="locales" />
@@ -25,37 +24,7 @@
 
   <include file="behaviors.zcml" />
   <include file="skins.zcml" />
-
-  <genericsetup:importStep
-      name="collective.contact.core-postInstall"
-      title="collective.contact.core postInstall import step"
-      description="Post install import step from collective.contact.core"
-      handler=".setuphandlers.postInstall">
-      <depends name="plone.app.registry"/>
-  </genericsetup:importStep>
-
-  <genericsetup:importStep
-      name="collective.contact.core-createTestData"
-      title="collective.contact.core createTestData import step"
-      description="Create test data import step from collective.contact.core"
-      handler=".setuphandlers.createTestData">
-  </genericsetup:importStep>
-
-  <genericsetup:registerProfile
-      name="default"
-      title="collective.contact.core"
-      directory="profiles/default"
-      description="Installs the collective.contact.core package"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      />
-
-  <genericsetup:registerProfile
-      name="test_data"
-      title="collective.contact.core test data"
-      directory="profiles/test_data"
-      description="Installs test data for the collective.contact.core package"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      />
+  <include file="profiles.zcml" />
 
   <!-- <utility
       component=".fields.RelationChoiceHandler"

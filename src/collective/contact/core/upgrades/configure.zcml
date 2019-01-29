@@ -149,4 +149,20 @@
       handler=".upgrades.v14"
       profile="collective.contact.core:default" />
 
+  <genericsetup:upgradeStep
+      title="Upgrade from 14 to 15"
+      description="Use plone 5 style resources registry"
+      source="14"
+      destination="15"
+      handler=".upgrades.refresh_resources_registry"
+      profile="collective.contact.core:default" />
+
+  <genericsetup:upgradeStep
+      title="Use plone 5 style resources registry"
+      description=""
+      source="*"
+      destination="*"
+      handler=".upgrades.refresh_resources_registry"
+      profile="collective.contact.core:default" />
+
 </configure>

@@ -1,0 +1,9 @@
+<registry>
+  <records prefix="plone.resources/collective.contact.core"
+           interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+    <value key="js">++resource++collective.contact.core/forms.js</value>
+    <value key="css">
+      <element>++resource++collective.contact.core/style.css</element>
+    </value>
+  </records>
+</registry>

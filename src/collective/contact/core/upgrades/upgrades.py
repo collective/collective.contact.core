@@ -108,3 +108,10 @@ def v13(context):
 
 def v14(context):
     IUpgradeTool(context).runImportStep('collective.contact.core', 'typeinfo')
+
+
+def refresh_resources_registry(context):
+    tool = IUpgradeTool(context)
+    tool.runImportStep('collective.contact.core', 'cssregistry')
+    tool.runImportStep('collective.contact.core', 'jsregistry')
+    tool.runImportStep('collective.contact.core', 'plone.app.registry')
