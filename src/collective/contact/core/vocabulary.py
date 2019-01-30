@@ -6,6 +6,7 @@ from zope.schema.interfaces import IVocabularyFactory
 from five import grok
 
 from . import _
+from collective.contact.core import logger
 
 
 class NoDirectoryFound(Exception):
@@ -26,9 +27,16 @@ def get_directory(context):
 
 def get_vocabulary(schema_list):
     terms = []
+    tokens = set()
     for item in schema_list:
-        term = SimpleVocabulary.createTerm(item['token'],
-                                           item['token'],
+        token = item['token']
+        if token in tokens:
+            logger.error("Duplicated value in vocabulary: {}".format(token))
+            continue
+
+        tokens.add(token)
+        term = SimpleVocabulary.createTerm(token,
+                                           token,
                                            item['name'])
         terms.append(term)
     return SimpleVocabulary(terms)
