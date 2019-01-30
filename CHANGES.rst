@@ -7,9 +7,6 @@ Changelog
 - Do not show add link if content type is not allowed as directory subcontent.
   [thomasdesvenain]
 
-1.13 (unreleased)
------------------
-
 - Prevent address field from being erased if they are changed programmaticaly before any manual edition.
   [thomasdesvenain]
 
