@@ -1,6 +1,9 @@
 from collective.contact.widget.interfaces import IContactContent
 
+
 try:  # TODO: read with plone5 because of grok...
+    import plone.supermodel.exportimport
+    import z3c.relationfield.schema
     from Acquisition import aq_get
     from plone.app.linkintegrity.handlers import referencedObjectRemoved as baseReferencedObjectRemoved
     from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
@@ -14,6 +17,7 @@ try:
     from plone.app.referenceablebehavior.referenceable import IReferenceable
 except ImportError:
     from zope.interface import Interface
+
 
     class IReferenceable(Interface):
         pass
@@ -51,3 +55,7 @@ def referenceRemoved(obj, event, toInterface=IContactContent):
 def referencedObjectRemoved(obj, event):
     if not IReferenceable.providedBy(obj):
         baseReferencedObjectRemoved(obj, event)
+
+
+# Field import/export handlers
+RelationChoiceHandler = plone.supermodel.exportimport.ChoiceHandler(z3c.relationfield.schema.RelationChoice)

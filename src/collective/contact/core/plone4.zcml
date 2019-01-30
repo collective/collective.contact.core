@@ -12,14 +12,19 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
   />
 
-   <subscriber
-    for="plone.app.relationfield.interfaces.IDexterityHasRelations
+  <subscriber
+      for="plone.app.relationfield.interfaces.IDexterityHasRelations
          zope.lifecycleevent.interfaces.IObjectRemovedEvent"
-    handler=".plone4.referencedObjectRemoved" />
+      handler=".plone4.referencedObjectRemoved"/>
 
-   <subscriber
-    for="z3c.relationfield.interfaces.IHasIncomingRelations
+  <subscriber
+      for="z3c.relationfield.interfaces.IHasIncomingRelations
          OFS.interfaces.IObjectWillBeRemovedEvent"
-    handler=".plone4.referenceRemoved" />
+      handler=".plone4.referenceRemoved"/>
+
+  <utility
+      component=".fields.RelationChoiceHandler"
+      name="z3c.relationfield.schema.RelationChoice"
+  />
 
 </configure>

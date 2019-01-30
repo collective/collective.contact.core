@@ -29,11 +29,6 @@
 
   <include zcml:condition="not-have plone-5" file="plone4.zcml" />
 
-  <!-- <utility
-      component=".fields.RelationChoiceHandler"
-      name="z3c.relationfield.schema.RelationChoice"
-      /> -->
-
   <adapter
     name="SearchableText"
     factory=".indexers.held_position_searchable_text"
