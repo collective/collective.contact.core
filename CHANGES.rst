@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.24 (unreleased)
+1.24 (2019-01-31)
 -----------------
 
 - Added method `held_position.get_label` to get the `held_position` label so it
