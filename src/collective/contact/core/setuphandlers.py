@@ -1,25 +1,15 @@
 # -*- coding: utf-8 -*-
-#
-# File: setuphandlers.py
-#
-#
 # GNU General Public License (GPL)
-#
-from zope.lifecycleevent import modified
-
-__docformat__ = 'plaintext'
-
 import datetime
-
-from zope import component
-from zope.intid.interfaces import IIntIds
-
-from z3c.relationfield.relation import RelationValue
+import logging
 
 from plone import api
-# from plone.registry.interfaces import IRegistry
+from z3c.relationfield.relation import RelationValue
+from zope import component
+from zope.intid.interfaces import IIntIds
+from zope.lifecycleevent import modified
 
-import logging
+# from plone.registry.interfaces import IRegistry
 
 logger = logging.getLogger('collective.contact.core: setuphandlers')
 
@@ -307,11 +297,3 @@ def create_test_held_positions(portal):
               'use_parent_address': True,
               }
     rambo.invokeFactory('held_position', 'brigadelh', **params)
-
-
-def createTestData(context):
-    """Create test data for collective.contact.core"""
-    if isNotTestDataProfile(context):
-        return
-    portal = context.getSite()
-    create_test_contact_data(portal)

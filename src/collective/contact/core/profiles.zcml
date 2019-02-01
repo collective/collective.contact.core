@@ -27,19 +27,4 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
   />
 
-  <genericsetup:importStep
-      name="collective.contact.core-createTestData"
-      title="collective.contact.core createTestData import step"
-      description="Create test data import step from collective.contact.core"
-      handler=".setuphandlers.createTestData">
-  </genericsetup:importStep>
-
-  <genericsetup:registerProfile
-      name="test_data"
-      title="collective.contact.core test data"
-      directory="profiles/test_data"
-      description="Installs test data for the collective.contact.core package"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-  />
-
 </configure>
