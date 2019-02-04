@@ -172,7 +172,7 @@ $(document).ready(function(){
 
     $('.contactoverlay').prepOverlay({
       subtype: 'ajax',
-//      filter: common_content_filter,
+      filter: '#content',
       formselector: '#form',
       closeselector: '[name="form.buttons.cancel"]',
       noform: function(el, pbo) {return 'reload';}
@@ -180,7 +180,7 @@ $(document).ready(function(){
 
     $('.deleteoverlay').prepOverlay({
       subtype: 'ajax',
-//      filter: common_content_filter,
+      filter: '#content',
       formselector: '#delete_confirmation',
       closeselector: '[name="form.button.Cancel"]',
       noform: function(el, pbo) {return 'reload';}
