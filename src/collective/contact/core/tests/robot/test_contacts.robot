@@ -5,11 +5,19 @@ Resource          plone/app/robotframework/keywords.robot    #Test Setup    Open
 Resource          plone/app/robotframework/saucelabs.robot
 Resource          keywords.robot
 
+*** Variables ***
+
+#${ZOPE_HOST} =  localhost
+#${ZOPE_PORT} =  34364
+
+
 *** Test cases ***
 Directory is available
     [Tags]    Go
     Log in as site owner and wait
-    Click link    css=#portaltab-mydirectory a
+    Go to  ${PLONE_URL}
+    Wait until element is visible  css=#content-core a.contenttype-directory
+    Click link    css=#content-core a.contenttype-directory
     Wait until element is visible  xpath=//h1/span[.='Military directory']  5
 
 Create a new organization
