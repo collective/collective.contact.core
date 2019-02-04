@@ -2,6 +2,6 @@
 <metadata>
   <version>15</version>
   <dependencies>
-    <dependency>profile-collective.contact.core:base</dependency>
+    <dependency>profile-collective.contact.core:install-base</dependency>
   </dependencies>
 </metadata>

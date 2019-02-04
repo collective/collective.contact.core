@@ -13,7 +13,7 @@
   </genericsetup:importStep>
 
   <genericsetup:registerProfile
-      name="base"
+      name="install-base"
       title="collective.contact.core"
       directory="profiles/base"
       provides="Products.GenericSetup.interfaces.EXTENSION"
