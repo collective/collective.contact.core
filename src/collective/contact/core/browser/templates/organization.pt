@@ -3,81 +3,96 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      metal:use-macro="context/main_template/macros/master"
-      i18n:domain="collective.contact.core">
+   metal:use-macro="context/main_template/macros/master"
+   i18n:domain="collective.contact.core">
 <body>
 
 <div id="organization" class="vcard" metal:fill-slot="main">
 
-    <div id="viewlet-above-content-title"
-         tal:define="ajax_load request/ajax_load | nothing;"
-         tal:content="structure provider:plone.abovecontenttitle"
-         tal:condition="not:ajax_load" />
-    <div tal:replace="structure context/@@basefields" />
+  <div id="viewlet-above-content-title"
+     tal:define="ajax_load request/ajax_load | nothing;"
+     tal:content="structure provider:plone.abovecontenttitle"
+     tal:condition="not:ajax_load" />
+  <div tal:replace="structure context/@@basefields" />
 
-    <div id="organizations" class="field" tal:condition="view/parent_organizations">
-        <label><tal:block i18n:translate="">Parent organizations</tal:block>:</label>
-        <ul>
-        <tal:block tal:repeat="organization view/parent_organizations">
-            <li><img tal:attributes="src organization/getIconURL" /> <a class="link-tooltip" tal:attributes="href organization/absolute_url">
+  <div id="organizations" class="field" tal:condition="view/parent_organizations">
+    <label>
+      <tal:block i18n:translate="">Parent organizations</tal:block>
+      :</label>
+    <ul>
+      <tal:block tal:repeat="organization view/parent_organizations">
+        <li><img tal:attributes="src organization/getIconURL" /> <a
+          class="link-tooltip" tal:attributes="href organization/absolute_url">
                 <span tal:replace="organization/Title"
-                      i18n:translate="" />
-            </a></li>
-        </tal:block>
-        </ul>
-    </div>
+                   i18n:translate="" />
+        </a></li>
+      </tal:block>
+    </ul>
+  </div>
 
-    <div tal:replace="structure context/@@contactdetails" />
+  <div tal:replace="structure context/@@contactdetails" />
 
-    <div tal:replace="structure context/@@ttwfields" />
+  <div tal:replace="structure context/@@ttwfields" />
 
-    <metal:additional-fields use-macro="context/contact_core_macros/macros/additional-fields" />
+  <metal:additional-fields use-macro="context/contact_core_macros/macros/additional-fields"/>
 
-    <div tal:replace="structure context/@@suborganizations" />
+  <div tal:replace="structure context/@@suborganizations" />
 
-    <div id="positions" class="field" tal:condition="view/positions">
-        <h3><tal:block i18n:translate="">Positions in this organization</tal:block>:</h3>
-        <ul>
-        <tal:block tal:repeat="position view/positions">
-            <li tal:define="held_positions position/get_held_positions|nothing">
-              <img tal:attributes="src position/getIconURL" /> <a class="link-tooltip" tal:attributes="href position/absolute_url">
+  <div id="positions" class="field" tal:condition="view/positions">
+    <h3>
+      <tal:block i18n:translate="">Positions in this organization</tal:block>
+      :
+    </h3>
+    <ul>
+      <tal:block tal:repeat="position view/positions">
+        <li tal:define="held_positions position/get_held_positions|nothing">
+          <img tal:attributes="src position/getIconURL" /> <a
+          class="link-tooltip" tal:attributes="href position/absolute_url">
                 <span tal:replace="position/Title"
-                      i18n:translate=""></span></a><tal:semicolon i18n:translate="colon">:
-               </tal:semicolon><tal:person condition="held_positions">
-               <ul tal:repeat="held_position held_positions">
-                <li tal:define="person held_position/get_person">
-                 <img tal:attributes="src person/getIconURL" /> <a class="link-tooltip"
-                    tal:attributes="href person/absolute_url">
-                   <span tal:replace="person/Title"
-                         i18n:translate="" />
-                 </a>
-                 <tal:block condition="held_position/start_date">
-                   (<i18n:block translate="">from</i18n:block> <span tal:replace="python:view.display_date(held_position.start_date)"></span><span tal:condition="held_position/end_date"> <i18n:block translate="">to</i18n:block> <span tal:replace="python:view.display_date(held_position.end_date)"></span></span>)
-                 </tal:block><tal:comma condition="python:not repeat['held_position'].end">,</tal:comma>
-                </li>
-               </ul>
-            </tal:person><tal:nobody condition="not:held_positions" i18n:translate="">Not assigned</tal:nobody>
-            </li>
-        </tal:block>
-        </ul>
-    </div>
+                   i18n:translate=""></span></a>
+          <tal:semicolon i18n:translate="colon">:
+          </tal:semicolon>
+          <tal:person condition="held_positions">
+            <ul tal:repeat="held_position held_positions">
+              <li tal:define="person held_position/get_person">
+                <img tal:attributes="src person/getIconURL" /> <a class="link-tooltip"
+                 tal:attributes="href person/absolute_url">
+                   <span tal:replace="person/Title" i18n:translate="" />
+              </a>
+                <tal:block condition="held_position/start_date">
+                  (
+                  <i18n:block translate="">from</i18n:block>
+                  <span tal:replace="python:view.display_date(held_position.start_date)"></span><span tal:condition="held_position/end_date"> <i18n:block
+                  translate="">to</i18n:block> <span tal:replace="python:view.display_date(held_position.end_date)"></span></span>)
+                </tal:block>
+                <tal:comma condition="python:not repeat['held_position'].end">,</tal:comma>
+              </li>
+            </ul>
+          </tal:person>
+          <tal:nobody condition="not:held_positions" i18n:translate="">Not assigned</tal:nobody>
+        </li>
+      </tal:block>
+    </ul>
+  </div>
 
-    <div tal:replace="structure context/@@othercontacts" />
+  <div tal:replace="structure context/@@othercontacts" />
 
-    <tal:addnew
-           tal:define="ajax_load request/ajax_load|nothing"
-           tal:condition="python: not ajax_load and view.can_add">
-        <a href="@@add-contact" class="addnewcontactfromorganization"
-           tal:attributes="href string:${context/absolute_url}/@@add-contact">
-            <img tal:attributes="src string:${portal_url}/++resource++collective.contact.core/create_contact.png" />
-            <tal:span i18n:translate="">
-              Create <tal:i18n i18n:name="name">Contact</tal:i18n>
-            </tal:span>
-        </a>
-        <script tal:replace="structure view/addnew_script"></script>
-    </tal:addnew>
+  <tal:addnew
+     tal:define="ajax_load request/ajax_load|nothing"
+     tal:condition="python: not ajax_load and view.can_add">
+    <a tal:attributes="href string:${context/absolute_url}/@@add-contact"
+       class="add-contact btn btn-lg btn-primary pat-plone-modal"
+       data-pat-plone-modal='{"width": "70%", "height": "70%", "actionOptions": {"displayInModal": false, "reloadWindowOnClose": true, "timeout": 10000}}'>
+      <img tal:attributes="src string:${portal_url}/++resource++collective.contact.core/create_contact.png" />
+      <tal:span i18n:translate="">
+        Create
+        <tal:i18n i18n:name="name">Contact</tal:i18n>
+      </tal:span>
+    </a>
+    <script tal:replace="structure view/addnew_script"></script>
+  </tal:addnew>
 
-    <div tal:replace="structure provider:plone.belowcontentbody" tal:condition="not:ajax_load" />
+  <div tal:replace="structure provider:plone.belowcontentbody" tal:condition="not:ajax_load" />
 
 </div>
 </body>
