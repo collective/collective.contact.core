@@ -5,7 +5,7 @@ contactswidget.update_person_title = function(genderInput, mapping) {
 	var gender = $(genderInput).val();
 	var person_title = $('#form-widgets-person_title').val();
   var values = Object.values(mapping);
-  if (person_title === '' || values.indexOf(person_title) !== -1) {
+  if (person_title === "" || values.indexOf(person_title) !== -1) {
     $('#form-widgets-person_title').val(mapping[gender]);
   }
 };
@@ -44,8 +44,8 @@ contactswidget.serialize_form = function(form) {
 /* Update the token which matches the input*/
 contactswidget.update_token = function(){
 	var name = $(this).val();
-	var token = $(this).closest('tr').find('input[id$="-widgets-token"]');
-	if (token.val() === '') {
+	var token = $(this).closest("tr").find('input[id$="-widgets-token"]');
+	if (token.val() === "") {
 		var token_value = contactswidget.normalize_string(name);
 		token.val(token_value);
 	}
@@ -68,7 +68,7 @@ contactswidget.manage_directory = function(){
 contactswidget.manage_hide_use_parent_address = function(){
   if ($("#form-widgets-IContactDetails-parent_address").text().trim().length === 0) {
     if($('#form-widgets-IContactDetails-use_parent_address-0').length > 0
-      && $('#form-widgets-IContactDetails-use_parent_address-0:checked').length == 0) {
+      && $('#form-widgets-IContactDetails-use_parent_address-0:checked').length === 0) {
       if($('#formfield-form-widgets-position').length === 0){
         /* except on held position form because, there,
          * actual parent address can change during edition
@@ -110,7 +110,7 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
 
         /* change create link so that master field selection is selected by default */
         var add_link = $('#formfield-' + slave_field.replace(/\./g, '-')).find('.addnew');
-        if(add_link.length == 1){
+        if(add_link.length === 1){
             var orig_href = add_link.attr('href');
             var key;
             if(orig_href.indexOf('@add-contact') > -1) {
@@ -134,7 +134,6 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
                 } else {
                     add_link.text(text_wo_company + ' (' + selected.title + ')');
                 }
-
             }
         }
     }
@@ -158,32 +157,14 @@ $(document).ready(function(){
       $(document).on(
         'change',
         '#formfield-form-widgets-gender input',
-        function () { contactswidget.update_person_title(this, mapping) }
+        function () { contactswidget.update_person_title(this, mapping); }
       );
     });
 
     /* contactswidget.manage_directory();  Do not hide token column in edit mode */
     contactswidget.manage_hide_use_parent_address();
 
-    $(document).bind('loadInsideOverlay',
-            function(e, pbajax, responseText, errorText, api){
+    $(document).bind('after-render', function() {
         contactswidget.manage_hide_use_parent_address();
     });
-
-    $('.contactoverlay').prepOverlay({
-      subtype: 'ajax',
-      filter: '#content',
-      formselector: '#form',
-      closeselector: '[name="form.buttons.cancel"]',
-      noform: function(el, pbo) {return 'reload';}
-    });
-
-    $('.deleteoverlay').prepOverlay({
-      subtype: 'ajax',
-      filter: '#content',
-      formselector: '#delete_confirmation',
-      closeselector: '[name="form.button.Cancel"]',
-      noform: function(el, pbo) {return 'reload';}
-    });
-
 });

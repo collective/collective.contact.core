@@ -89,7 +89,6 @@
         <tal:i18n i18n:name="name">Contact</tal:i18n>
       </tal:span>
     </a>
-    <script tal:replace="structure view/addnew_script"></script>
   </tal:addnew>
 
   <div tal:replace="structure provider:plone.belowcontentbody" tal:condition="not:ajax_load" />

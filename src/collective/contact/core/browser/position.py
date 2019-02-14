@@ -7,25 +7,6 @@ from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.interfaces import IContactable
 
 
-ADDNEW_OVERLAY = """
-<script type="text/javascript">
-$(document).ready(function(){
-    $('.addnewcontactfromposition').prepOverlay({
-      subtype: 'ajax',
-      filter: '#content',
-      formselector: '#oform',
-      cssclass: 'overlay-contact-addnew',
-      closeselector: '[name="oform.buttons.cancel"]',
-      noform: function(el, pbo) {return 'reload';},
-      config: {
-          closeOnClick: false,
-          closeOnEsc: false
-      }
-    });
-});
-</script>
-"""
-
 
 class Position(BaseView):
 
@@ -42,4 +23,3 @@ class Position(BaseView):
 
         sm = getSecurityManager()
         self.can_add = sm.checkPermission('Add portal content', self.context)
-        self.addnew_script = ADDNEW_OVERLAY

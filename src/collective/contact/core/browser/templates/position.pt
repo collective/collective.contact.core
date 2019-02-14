@@ -34,14 +34,14 @@
   <tal:addnew
          tal:define="ajax_load request/ajax_load|nothing"
          tal:condition="python: not ajax_load and view.can_add">
-      <a href="@@add-contact" class="addnewcontactfromposition"
-         tal:attributes="href string:${context/absolute_url}/@@add-contact">
+      <a href="@@add-contact" class="pat-plone-modal"
+        data-pat-plone-modal='{"width": "70%", "height": "70%", "actionOptions": {"displayInModal": false, "reloadWindowOnClose": true, "timeout": 10000}}'
+        tal:attributes="href string:${context/absolute_url}/@@add-contact">
           <img tal:attributes="src string:${portal_url}/++resource++collective.contact.core/create_contact.png" />
           <tal:span i18n:translate="">
               Create <tal:i18n i18n:name="name">Contact</tal:i18n>
           </tal:span>
       </a>
-      <script tal:replace="structure view/addnew_script"></script>
   </tal:addnew>
 
     <div tal:replace="structure provider:plone.belowcontentbody" tal:condition="not:ajax_load" />

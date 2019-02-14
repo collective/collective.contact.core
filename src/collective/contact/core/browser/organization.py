@@ -11,25 +11,6 @@ from AccessControl import getSecurityManager
 from Products.Five import BrowserView
 from plone import api
 
-ADDNEW_OVERLAY = """
-<script type="text/javascript">
-$(document).ready(function(){
-    $('.addnewcontactfromorganization').prepOverlay({
-      subtype: 'ajax',
-      filter: '#content',
-      formselector: '#oform',
-      cssclass: 'overlay-contact-addnew',
-      closeselector: '[name="oform.buttons.cancel"]',
-      noform: function(el, pbo) {return 'reload';},
-      config: {
-          closeOnClick: false,
-          closeOnEsc: false
-      }
-    });
-});
-</script>
-"""
-
 
 class Organization(BaseView):
 
@@ -52,7 +33,6 @@ class Organization(BaseView):
         self.positions = self.context.get_positions()
         sm = getSecurityManager()
         self.can_add = sm.checkPermission('Add portal content', self.context)
-        self.addnew_script = ADDNEW_OVERLAY
 
     def display_date(self, date):
         """Display date nicely in template."""

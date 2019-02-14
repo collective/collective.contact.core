@@ -24,7 +24,7 @@
       name="view"
       for="..content.organization.IOrganization"
       class=".organization.Organization"
-      allowed_attributes="parent_organizations sub_organizations positions can_add addnew_script"
+      allowed_attributes="parent_organizations sub_organizations positions can_add"
       template="templates/organization.pt"
       permission="zope2.View"
       />

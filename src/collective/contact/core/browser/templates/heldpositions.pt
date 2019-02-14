@@ -13,22 +13,26 @@
             <div class="held_position vcard" tal:define="url held_position/object/absolute_url">
 
               <div class="actions" tal:condition="python: checkPermission('Modify portal content', context)">
-                <a class="zoom-held-position contactoverlay" tal:attributes="href string:${url}/view">
+                <a class="zoom-held-position pat-plone-modal"
+                   tal:attributes="href string:${url}/view"
+                   data-pat-plone-modal='{"width": "80%", "actionOptions": {"displayInModal": false, "reloadWindowOnClose": false, "isForm": false}}'>
                   <img alt="View" title="View"
                        i18n:domain="plone"
                        tal:attributes="src string:${portal_url}/++resource++collective.contact.core/search_icon.png"
                        i18n:attributes="alt; title" />
                 </a>
-                <a class="edit-held-position contactoverlay"
+                <a class="edit-held-position pat-plone-modal"
                    tal:attributes="href string:${url}/edit"
+                   data-pat-plone-modal='{"width": "80%", "actionOptions": {"displayInModal": false, "reloadWindowOnClose": true, "isForm": true}}'
                    tal:condition="held_position/can_edit">
                   <img alt="Edit" title="Edit"
                        i18n:domain="plone"
                        tal:attributes="src string:${portal_url}/++resource++collective.contact.core/edit.png"
                        i18n:attributes="alt; title" />
                 </a>
-                <a class="delete-held-position deleteoverlay"
+                <a class="delete-held-position pat-plone-modal"
                    tal:attributes="href string:${url}/delete_confirmation"
+                   data-pat-plone-modal='{"width": "80%", "actionOptions": {"displayInModal": false, "reloadWindowOnClose": true, "isForm": true}}'
                    tal:condition="held_position/can_delete">
                   <img alt="Delete" title="Delete"
                        i18n:domain="plone"

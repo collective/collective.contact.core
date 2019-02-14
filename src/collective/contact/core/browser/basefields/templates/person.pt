@@ -7,10 +7,12 @@
       i18n:domain="collective.contact.core" tal:omit-tag="">
 
   <div class="actions">
-    <a class="edit-person contactoverlay" tal:attributes="href string:${context/absolute_url}/edit">
+    <a class="edit-person pat-plone-modal"
+       tal:condition="view/can_edit"
+       data-pat-plone-modal='{"width": "80%", "actionOptions": {"displayInModal": false, "reloadWindowOnClose": true, "isForm": true}}'
+       tal:attributes="href string:${context/absolute_url}/edit">
       <img alt="Edit" title="Edit"
            tal:attributes="src string:${portal_url}/++resource++collective.contact.core/edit.png"
-           tal:condition="view/can_edit"
            i18n:domain="plone"
            i18n:attributes="alt; title" />
     </a>
