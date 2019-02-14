@@ -71,7 +71,7 @@ class ContactDetails(BrowserView):
         self.contact_details = contactable.get_contact_details()
 
     def render_address(self):
-        return self.address_template()
+        return self.address_template(self.contact_details['address'])
 
 
 class NoFallbackContactDetails(ContactDetails):
