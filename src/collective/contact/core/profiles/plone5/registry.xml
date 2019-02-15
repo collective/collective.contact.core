@@ -6,4 +6,16 @@
       <element>++resource++collective.contact.core/style.css</element>
     </value>
   </records>
+
+  <records prefix="plone.bundles/collective-contact"
+           interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+    <value key="resources">
+      <element>collective.contact.core</element>
+    </value>
+    <value key="enabled">True</value>
+    <value key="depends">plone</value>
+    <value key="compile">False</value>
+    <value key="jscompilation">++resource++collective.contact.core/forms.min.js</value>
+    <value key="last_compilation">2019-02-15 10:32:00</value>
+  </records>
 </registry>

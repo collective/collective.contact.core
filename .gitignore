@@ -22,3 +22,4 @@ htmlcov
 output.xml
 *.swp
 /.idea
+node_modules

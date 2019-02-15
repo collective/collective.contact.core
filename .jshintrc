@@ -1,0 +1,7 @@
+{
+    "browser": true,
+    "globals": {
+        "$": false,
+        "window": false
+    }
+}

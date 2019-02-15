@@ -1,0 +1,25 @@
+{
+  "name": "collective.contact.core",
+  "version": "1.0.0",
+  "description": ".. contents::",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "minify": "uglifyjs src/collective/contact/core/browser/static/forms.js > src/collective/contact/core/browser/static/forms.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/collective/collective.contact.core.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/collective/collective.contact.core/issues"
+  },
+  "homepage": "https://github.com/collective/collective.contact.core#readme",
+  "dependencies": {
+    "uglify-js": "^3.4.9"
+  }
+}
