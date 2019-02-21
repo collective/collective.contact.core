@@ -1,6 +1,5 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       metal:use-macro="context/main_template/macros/master"
@@ -22,28 +21,40 @@
         <h2><tal:block i18n:translate="">Organizations</tal:block>:</h2>
         <ul>
         <tal:block tal:repeat="organization view/organizations">
-            <li><a class="link-tooltip" tal:attributes="href organization/getURL">
-                <img tal:attributes="src organization/getIconURL" />
-                <span tal:replace="organization/Title"
-                      i18n:translate="" />
-            </a></li>
+        <li>
+          <span data-toggle="tooltip" class="pat-tooltip" data-placement="right"
+                tal:attributes='data-pat-tooltip string:{"ajaxUrl": "${organization/getURL}?ajax_load=1", "contentSelector": "#content", "class": "contact-tooltip organization-tooltip"}'>
+            <a tal:attributes="href organization/getURL;">
+              <img tal:attributes="src organization/getIconURL" />
+              <span tal:replace="organization/Title"
+                    i18n:translate="" />
+            </a>
+          </span>
+        </li>
         </tal:block>
         </ul>
     </div>
 
-    <div id="persons" tal:condition="view/persons">
-        <h2><tal:block i18n:translate="">Persons</tal:block>:</h2>
-        <ul>
-        <tal:block tal:repeat="person view/persons">
-            <li><a class="link-tooltip" tal:attributes="href person/getURL">
-                <img tal:attributes="src person/getIconURL" />
-                <span tal:replace="person/Title"
-                      i18n:translate="" />
-            </a></li>
-        </tal:block>
-        </ul>
-    </div>
-
+  <div id="persons" tal:condition="view/persons">
+    <h2>
+      <tal:block i18n:translate="">Persons</tal:block>
+      :
+    </h2>
+    <ul>
+      <tal:block tal:repeat="person view/persons">
+        <li>
+          <span data-toggle="tooltip" class="pat-tooltip" data-placement="right"
+                tal:attributes='data-pat-tooltip string:{"ajaxUrl": "${person/getURL}?ajax_load=1", "contentSelector": "#content", "class": "contact-tooltip person-tooltip"}'>
+            <a tal:attributes="href person/getURL">
+              <img tal:attributes="src person/getIconURL" />
+              <span tal:replace="person/Title"
+                    i18n:translate="" />
+            </a>
+          </span>
+        </li>
+      </tal:block>
+    </ul>
+  </div>
   <div tal:replace="structure provider:plone.belowcontentbody" tal:condition="not:ajax_load" />
 
 </div>

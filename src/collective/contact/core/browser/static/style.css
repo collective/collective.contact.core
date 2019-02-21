@@ -64,6 +64,20 @@ h3 img, h4 img {
     vertical-align: baseline;
 }
 
-#content a:link.link-tooltip {
+#content .pat-tooltip a {
     border-bottom: 1px dotted;
+}
+
+/*
+ tooltip
+  */
+
+.contact-tooltip.mockup-tooltip.tooltip.in {
+    opacity: 99%;
+}
+
+.contact-tooltip.mockup-tooltip .tooltip-inner {
+    max-width: 100%;
+    text-align: inherit;
+    padding: 12px;
 }

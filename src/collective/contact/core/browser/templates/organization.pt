@@ -21,11 +21,16 @@
       :</label>
     <ul>
       <tal:block tal:repeat="organization view/parent_organizations">
-        <li><img tal:attributes="src organization/getIconURL" /> <a
-          class="link-tooltip" tal:attributes="href organization/absolute_url">
-                <span tal:replace="organization/Title"
-                   i18n:translate="" />
-        </a></li>
+        <li>
+          <span data-toggle="tooltip" class="pat-tooltip" data-placement="right"
+                tal:attributes='data-pat-tooltip string:{"ajaxUrl": "${organization/absolute_url}?ajax_load=1", "contentSelector": "#content", "class": "contact-tooltip organization-tooltip"}'>
+            <a tal:attributes="href organization/absolute_url">
+              <img tal:attributes="src organization/getIconURL" />
+              <span tal:replace="organization/Title"
+                    i18n:translate="" />
+            </a>
+          </span>
+        </li>
       </tal:block>
     </ul>
   </div>
@@ -46,19 +51,25 @@
     <ul>
       <tal:block tal:repeat="position view/positions">
         <li tal:define="held_positions position/get_held_positions|nothing">
-          <img tal:attributes="src position/getIconURL" /> <a
-          class="link-tooltip" tal:attributes="href position/absolute_url">
-                <span tal:replace="position/Title"
-                   i18n:translate=""></span></a>
-          <tal:semicolon i18n:translate="colon">:
+
+          <span data-toggle="tooltip" class="pat-tooltip" data-placement="right"
+                tal:attributes='data-pat-tooltip string:{"ajaxUrl": "${position/absolute_url}?ajax_load=1", "contentSelector": "#content", "class": "contact-tooltip position-tooltip"}'>
+            <a tal:attributes="href position/absolute_url">
+              <img tal:attributes="src position/getIconURL" />
+              <span tal:replace="position/Title"
+                    i18n:translate="" /></a></span><tal:semicolon i18n:translate="colon">:
           </tal:semicolon>
           <tal:person condition="held_positions">
             <ul tal:repeat="held_position held_positions">
               <li tal:define="person held_position/get_person">
-                <img tal:attributes="src person/getIconURL" /> <a class="link-tooltip"
-                 tal:attributes="href person/absolute_url">
-                   <span tal:replace="person/Title" i18n:translate="" />
-              </a>
+                <span data-toggle="tooltip" class="pat-tooltip" data-placement="right"
+                tal:attributes='data-pat-tooltip string:{"ajaxUrl": "${person/absolute_url}?ajax_load=1", "contentSelector": "#content", "class": "contact-tooltip person-tooltip"}'>
+                  <a tal:attributes="href person/absolute_url">
+                    <img tal:attributes="src person/getIconURL" />
+                    <span tal:replace="person/Title"
+                          i18n:translate="" />
+                  </a>
+                </span>
                 <tal:block condition="held_position/start_date">
                   (
                   <i18n:block translate="">from</i18n:block>

@@ -17,10 +17,16 @@
         <label><tal:block i18n:translate="">Parent organizations</tal:block>:</label>
         <ul>
         <tal:block tal:repeat="organization view/organizations">
-            <li><img tal:attributes="src organization/getIconURL" /> <a class="link-tooltip" tal:attributes="href organization/absolute_url">
+          <li>
+            <span data-toggle="tooltip" class="pat-tooltip" data-placement="right"
+                  tal:attributes='data-pat-tooltip string:{"ajaxUrl": "${organization/absolute_url}?ajax_load=1", "contentSelector": "#content", "class": "contact-tooltip organization-tooltip"}'>
+              <a tal:attributes="href organization/absolute_url">
+                <img tal:attributes="src organization/getIconURL" />
                 <span tal:replace="organization/Title"
                       i18n:translate="" />
-            </a></li>
+              </a>
+            </span>
+          </li>
         </tal:block>
         </ul>
   </div>

@@ -10,10 +10,16 @@
         <h3><tal:block i18n:translate="">Organizations in this organization</tal:block>:</h3>
         <ul>
         <tal:block tal:repeat="sub_org view/sub_organizations">
-            <li><img tal:condition="sub_org/getIcon" tal:attributes="src string:${portal_url}/${sub_org/getIcon}" /> <a class="link-tooltip" tal:attributes="href sub_org/getURL">
-                <span tal:replace="sub_org/Title"
-                      i18n:translate="" />
-            </a></li>
+            <li>
+              <span data-toggle="tooltip" class="pat-tooltip" data-placement="right"
+                tal:attributes='data-pat-tooltip string:{"ajaxUrl": "${sub_org/getURL}?ajax_load=1", "contentSelector": "#content", "class": "contact-tooltip organization-tooltip"}'>
+                <a tal:attributes="href sub_org/absolute_url">
+                  <img tal:condition="sub_org/getIcon" tal:attributes="src string:${portal_url}/${sub_org/getIcon}" />
+                  <span tal:replace="sub_org/Title"
+                        i18n:translate="" />
+                </a>
+              </span>
+            </li>
         </tal:block>
         </ul>
     </div>
