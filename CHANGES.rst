@@ -4,6 +4,10 @@ Changelog
 2.0 (unreleased)
 ----------------
 
+- Use mockup for tooltips, modals and date widget.
+  This removes Plone 4 compatibility.
+  [thomasdesvenain]
+
 - Do not show add link if content type is not allowed as directory subcontent.
   [thomasdesvenain]
 
