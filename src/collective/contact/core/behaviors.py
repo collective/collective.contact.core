@@ -1,20 +1,18 @@
 import re
-import datetime
 
+from plone.app.z3cform.widget import DateFieldWidget
 from zope.interface import alsoProvides
 from zope.interface import Interface
 from zope import schema
 from Acquisition import aq_base
 
 from z3c.form.widget import ComputedWidgetAttribute
-from z3c.form.widget import FieldWidget
 from plone.supermodel import model
 
 from plone.supermodel.directives import fieldset
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.autoform import directives as form
 from plone.formwidget.masterselect import MasterSelectBoolField
-from plone.formwidget.datetime.z3cform import DateWidget
 from plone.app.textfield import RichText
 from plone.app.dexterity.browser.types import TypeSchemaContext
 
@@ -322,14 +320,6 @@ DefaultParentAddress = ComputedWidgetAttribute(
     get_parent_address,
     field=IContactDetails['parent_address'], view=Interface)
 
-
-def DateFieldWidget(field, request):
-    """IFieldWidget factory for DatetimeWidget."""
-    widget = FieldWidget(field, DateWidget(request))
-    currentYear = datetime.date.today().year
-    minimumYearRange = currentYear - 1900  # don't display dates before 1900
-    widget.years_range = (-minimumYearRange, 1)
-    return widget
 
 
 class IBirthday(model.Schema):

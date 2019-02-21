@@ -15,7 +15,6 @@
   <include package="plone.app.dexterity" />
   <include package="plone.app.relationfield" />
   <include package="plone.supermodel" />
-  <include package="plone.formwidget.datetime" />
   <include package="plone.formwidget.masterselect" />
   <include package="collective.contact.widget" />
   <include package="collective.z3cform.datagridfield" />
