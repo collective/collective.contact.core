@@ -1,8 +1,11 @@
 Changelog
 =========
 
-2.0 (unreleased)
+1.5 (unreleased)
 ----------------
+
+- Plone 5 compatibility
+  [thomasdesvenain,agitator]
 
 - Do not show add link if content type is not allowed as directory subcontent.
   [thomasdesvenain]
