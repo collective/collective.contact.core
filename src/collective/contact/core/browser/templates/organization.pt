@@ -9,10 +9,8 @@
 
 <div id="organization" class="vcard" metal:fill-slot="main">
 
-    <div id="viewlet-above-content-title"
-         tal:define="ajax_load request/ajax_load | nothing;"
-         tal:content="structure provider:plone.abovecontenttitle"
-         tal:condition="not:ajax_load" />
+    <div tal:replace="structure provider:plone.abovecontenttitle" />
+
     <div tal:replace="structure context/@@basefields" />
 
     <div id="organizations" class="field" tal:condition="view/parent_organizations">
@@ -77,7 +75,7 @@
         <script tal:replace="structure view/addnew_script"></script>
     </tal:addnew>
 
-    <div tal:replace="structure provider:plone.belowcontentbody" tal:condition="not:ajax_load" />
+    <div tal:replace="structure provider:plone.belowcontentbody" />
 
 </div>
 </body>

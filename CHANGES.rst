@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.5 (unreleased)
-----------------
+1.25 (unreleased)
+-----------------
 
 - Plone 5 compatibility
   [thomasdesvenain,agitator]
@@ -13,6 +13,18 @@ Changelog
 - Prevent address field from being erased if they are changed programmaticaly before any manual edition.
   [thomasdesvenain]
 
+
+1.24 (2019-01-31)
+-----------------
+
+- Added method `held_position.get_label` to get the `held_position` label so it
+  is easy to override.
+  [gbastien]
+- Removed check on `ajax_load` when rendering `plone.abovecontenttitle` and
+  `plone.belowcontentbody` viewlet managers or it is not possible to render any
+  viewlet when content is displayed in an overlay. This was done for
+  `directory`, `contact`, `organization`, `person` and `position` views.
+  [gbastien]
 
 1.23 (2018-11-20)
 -----------------

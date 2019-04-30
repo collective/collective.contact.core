@@ -4,13 +4,12 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       metal:use-macro="context/main_template/macros/master"
-      tal:define="ajax_load request/ajax_load | nothing;"
       i18n:domain="collective.contact.core">
 <body>
 
 <div metal:fill-slot="main">
 
-  <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" tal:condition="not:ajax_load" />
+  <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" />
   <div tal:replace="structure context/@@basefields" />
 
   <div id="organizations" class="field" tal:condition="view/organizations">
@@ -31,7 +30,7 @@
 
   <metal:additional-fields use-macro="context/contact_core_macros/macros/additional-fields" />
 
-  <div tal:replace="structure provider:plone.belowcontentbody" tal:condition="not:ajax_load" />
+  <div tal:replace="structure provider:plone.belowcontentbody" />
 </div>
 
 </body>
