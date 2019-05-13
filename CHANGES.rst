@@ -14,6 +14,12 @@ Changelog
 - Prevent address field from being erased if they are changed programmaticaly before any manual edition.
   [thomasdesvenain]
 
+1.25 (unreleased)
+-----------------
+
+- Use `canonical link` to call `@@gender_person_title_mapping.json`.
+  [gbastien]
+
 1.24 (unreleased)
 -----------------
 
