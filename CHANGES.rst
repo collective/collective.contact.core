@@ -4,8 +4,8 @@ Changelog
 1.25 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Use `canonical link` to call `@@gender_person_title_mapping.json`.
+  [gbastien]
 
 1.24 (2019-01-31)
 -----------------
