@@ -4,7 +4,7 @@ Changelog
 1.25 (unreleased)
 -----------------
 
-- Use `canonical link` to call `@@gender_person_title_mapping.json`.
+- Call `@@gender_person_title_mapping.json` from JS on `portal_url`.
   [gbastien]
 
 1.24 (2019-01-31)
