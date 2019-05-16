@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.25 (unreleased)
+1.25 (2019-05-16)
 -----------------
 
 - Call `@@gender_person_title_mapping.json` from JS on `portal_url`.
