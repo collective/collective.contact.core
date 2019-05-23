@@ -36,6 +36,11 @@
     />
 
   <adapter
+    name="email"
+    factory=".indexers.contact_email"
+    />
+
+  <adapter
     name="SearchableText"
     factory=".indexers.held_position_searchable_text"
     />
