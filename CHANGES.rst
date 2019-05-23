@@ -4,8 +4,8 @@ Changelog
 1.26 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Set `cacheable="True"` for `style.css` in `cssregistry.xml`.
+  [gbastien]
 
 1.25 (2019-05-16)
 -----------------

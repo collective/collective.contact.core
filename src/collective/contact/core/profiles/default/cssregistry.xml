@@ -4,7 +4,7 @@
     <stylesheet title=""
         id="style.css"
         media="screen" rel="stylesheet" rendering="import"
-        cacheable="False" compression="safe" cookable="True"
+        cacheable="True" compression="safe" cookable="True"
         enabled="1" expression=""/>
 
 </object>

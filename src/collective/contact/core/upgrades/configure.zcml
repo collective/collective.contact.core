@@ -141,4 +141,14 @@
       handler=".upgrades.v13"
       profile="collective.contact.core:default" />
 
+  <genericsetup:upgradeSteps
+      source="13"
+      destination="14"
+      profile="collective.contact.core:default">
+      <genericsetup:upgradeDepends
+          title="Reapply cssregistry.xml so cacheable is set to True for style.css"
+          description=""
+          import_steps="cssregistry" />
+  </genericsetup:upgradeSteps>
+
 </configure>
