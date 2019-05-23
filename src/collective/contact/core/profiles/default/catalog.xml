@@ -5,4 +5,10 @@
     <column value="get_full_title" />
     <column value="sortable_title" />
 
+
+     <index name="email" meta_type="FieldIndex">
+       <indexed_attr value="email"/>
+     </index>
+     <column value="email"/>
+
 </object>
