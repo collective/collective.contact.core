@@ -7,9 +7,17 @@ Changelog
 - Use mockup for tooltips, modals and date widget.
   This removes Plone 4 compatibility.
   [thomasdesvenain]
+- Set `cacheable="True"` for `style.css` in `cssregistry.xml`.
+  [gbastien]
+- Keep div and CSS id `viewlet-below-content-body` when rendering
+  `plone.belowcontentbody` viewlets on various views.
+  [gbastien]
 
 - Do not show add link if content type is not allowed as directory subcontent.
   [thomasdesvenain]
+
+1.26 (unreleased)
+-----------------
 
 - Prevent address field from being erased if they are changed programmaticaly before any manual edition.
   [thomasdesvenain]

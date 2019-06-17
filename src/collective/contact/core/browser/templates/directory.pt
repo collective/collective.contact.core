@@ -13,27 +13,27 @@
 
 <div metal:fill-slot="main">
 
-    <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" tal:condition="not:ajax_load" />
+  <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" tal:condition="not:ajax_load" />
 
-    <h1 class="directory"><img tal:attributes="src context/getIconURL" /> <span tal:content="context/Title" /></h1>
+  <h1 class="directory"><img tal:attributes="src context/getIconURL" /> <span tal:content="context/Title" /></h1>
 
-    <div id="organizations" tal:condition="view/organizations">
-        <h2><tal:block i18n:translate="">Organizations</tal:block>:</h2>
-        <ul>
-        <tal:block tal:repeat="organization view/organizations">
-        <li>
-          <span data-toggle="tooltip" class="pat-tooltip" data-placement="right"
-                tal:attributes='data-pat-tooltip string:{"ajaxUrl": "${organization/getURL}?ajax_load=1", "contentSelector": "#content", "class": "contact-tooltip organization-tooltip"}'>
-            <a tal:attributes="href organization/getURL;">
-              <img tal:attributes="src organization/getIconURL" />
-              <span tal:replace="organization/Title"
-                    i18n:translate="" />
-            </a>
-          </span>
-        </li>
-        </tal:block>
-        </ul>
-    </div>
+  <div id="organizations" tal:condition="view/organizations">
+      <h2><tal:block i18n:translate="">Organizations</tal:block>:</h2>
+      <ul>
+      <tal:block tal:repeat="organization view/organizations">
+      <li>
+        <span data-toggle="tooltip" class="pat-tooltip" data-placement="right"
+              tal:attributes='data-pat-tooltip string:{"ajaxUrl": "${organization/getURL}?ajax_load=1", "contentSelector": "#content", "class": "contact-tooltip organization-tooltip"}'>
+          <a tal:attributes="href organization/getURL;">
+            <img tal:attributes="src organization/getIconURL" />
+            <span tal:replace="organization/Title"
+                  i18n:translate="" />
+          </a>
+        </span>
+      </li>
+      </tal:block>
+      </ul>
+  </div>
 
   <div id="persons" tal:condition="view/persons">
     <h2>
@@ -55,7 +55,7 @@
       </tal:block>
     </ul>
   </div>
-  <div tal:replace="structure provider:plone.belowcontentbody" tal:condition="not:ajax_load" />
+  <div id="viewlet-below-content-body" tal:content="structure provider:plone.belowcontentbody" tal:condition="not:ajax_load" />
 
 </div>
 
