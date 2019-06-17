@@ -6,6 +6,9 @@ Changelog
 
 - Set `cacheable="True"` for `style.css` in `cssregistry.xml`.
   [gbastien]
+- Keep div and CSS id `viewlet-below-content-body` when rendering
+  `plone.belowcontentbody` viewlets on various views.
+  [gbastien]
 
 1.25 (2019-05-16)
 -----------------

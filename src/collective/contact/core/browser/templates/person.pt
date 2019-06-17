@@ -19,7 +19,7 @@
 
     <div tal:replace="structure context/@@heldpositions" />
 
-    <div tal:replace="structure provider:plone.belowcontentbody" />
+    <div id="viewlet-below-content-body" tal:content="structure provider:plone.belowcontentbody" />
   </div>
 
 </html>

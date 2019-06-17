@@ -75,7 +75,7 @@
         <script tal:replace="structure view/addnew_script"></script>
     </tal:addnew>
 
-    <div tal:replace="structure provider:plone.belowcontentbody" />
+    <div id="viewlet-below-content-body" tal:content="structure provider:plone.belowcontentbody" />
 
 </div>
 </body>
