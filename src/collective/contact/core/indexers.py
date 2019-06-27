@@ -36,7 +36,6 @@ def contact_source(contact):
     except:
         pass
     return u''
-    return email if email else ''
 
 
 @indexer(IOrganization)

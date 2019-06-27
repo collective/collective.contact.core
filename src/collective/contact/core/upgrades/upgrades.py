@@ -110,6 +110,12 @@ def v14(context):
     IUpgradeTool(context).runImportStep('collective.contact.core', 'typeinfo')
 
 
+def v15(context):
+    tool = IUpgradeTool(context)
+    tool.runImportStep('collective.contact.core', 'catalog')
+    tool.reindexContents(IContactContent, ('email',))
+
+
 def refresh_resources_registry(context):
     tool = IUpgradeTool(context)
 #     tool.runImportStep('collective.contact.core', 'cssregistry')

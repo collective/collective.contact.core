@@ -157,4 +157,12 @@
       handler=".upgrades.refresh_resources_registry"
       profile="collective.contact.core:default" />
 
+  <genericsetup:upgradeStep
+      title="Upgrade from 14 to 15"
+      description="Email index"
+      source="14"
+      destination="15"
+      handler=".upgrades.v15"
+      profile="collective.contact.core:default" />
+
 </configure>
