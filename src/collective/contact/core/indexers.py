@@ -15,7 +15,7 @@ from collective.contact.widget.interfaces import IContactContent
 @indexer(IContactContent)
 def contact_email(contact):
     email = IContactDetails(contact).email
-    return email if email else ''
+    return email or u''
 
 
 @indexer(IOrganization)

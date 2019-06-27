@@ -13,6 +13,8 @@ Changelog
   `use_to` that will add new values to returned result prepended by
   `'B'` or `'T'`.
   [gbastien]
+- Added email index
+  [sgeulette, daggelpop]
 
 1.25 (2019-05-16)
 -----------------

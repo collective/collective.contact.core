@@ -105,3 +105,9 @@ def v13(context):
         obj = brain.getObject()
         if base_hasattr(obj, 'is_created'):
             delattr(obj, 'is_created')
+
+
+def v15(context):
+    tool = IUpgradeTool(context)
+    tool.runImportStep('collective.contact.core', 'catalog')
+    tool.reindexContents(IContactContent, ('email',))

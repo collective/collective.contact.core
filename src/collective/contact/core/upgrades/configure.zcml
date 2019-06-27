@@ -151,4 +151,12 @@
           import_steps="cssregistry" />
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeStep
+      title="Upgrade from 14 to 15"
+      description="Email index"
+      source="14"
+      destination="15"
+      handler=".upgrades.v15"
+      profile="collective.contact.core:default" />
+
 </configure>
