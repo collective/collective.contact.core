@@ -9,6 +9,10 @@ Changelog
 - Keep div and CSS id `viewlet-below-content-body` when rendering
   `plone.belowcontentbody` viewlets on various views.
   [gbastien]
+- Extended `utils.get_gender_and_number` to manage parameters `use_by` and
+  `use_to` that will add new values to returned result prepended by
+  `'B'` or `'T'`.
+  [gbastien]
 
 1.25 (2019-05-16)
 -----------------

@@ -59,9 +59,11 @@ class TestUtils(unittest.TestCase, BaseTest):
 
         # Male have priority over Female
         # Male, Plural
-        self.assertEqual(
-            get_gender_and_number([self.sergent_pepper, self.draper]), u'MP')
+        self.assertEqual(get_gender_and_number([self.sergent_pepper, self.draper]), u'MP')
 
         # user unicity, if we pass twice same person, it stays singular, even thru held_position
-        self.assertEqual(
-            get_gender_and_number([self.pepper, self.sergent_pepper]), u'MS')
+        self.assertEqual(get_gender_and_number([self.pepper, self.sergent_pepper]), u'MS')
+
+        # parameters use_by and use_to will prepend a 'B' or 'T' to returned value
+        self.assertEqual(get_gender_and_number([self.sergent_pepper, self.draper], use_by=True), u'BMP')
+        self.assertEqual(get_gender_and_number([self.pepper, self.sergent_pepper], use_to=True), u'TMS')
