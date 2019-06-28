@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.26 (unreleased)
+1.26 (2019-06-28)
 -----------------
 
 - Set `cacheable="True"` for `style.css` in `cssregistry.xml`.
