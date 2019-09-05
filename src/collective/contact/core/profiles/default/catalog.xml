@@ -4,7 +4,7 @@
     <!-- Add a new metadata column which will read from context.get_full_title() function -->
     <column value="get_full_title" />
     <column value="sortable_title" />
-
+    <column value="contact_source" />
 
      <index name="email" meta_type="FieldIndex">
        <indexed_attr value="email"/>

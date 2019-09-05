@@ -4,8 +4,8 @@ Changelog
 1.27 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Added contact_source metadata to be used in contact widget.
+  [sgeulette]
 
 1.26 (2019-06-28)
 -----------------

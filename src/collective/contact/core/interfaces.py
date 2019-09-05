@@ -1,13 +1,13 @@
-from zope.interface import Interface
-from zope import schema
-
-from plone.namedfile.field import NamedImage
-from plone.supermodel import model
-
 from collective.contact.core import _
 from collective.contact.core.schema import ContactChoice
 from collective.contact.widget.interfaces import IContactContent
 from collective.contact.widget.source import ContactSourceBinder
+from plone.namedfile.field import NamedImage
+from plone.supermodel import model
+from zope import schema
+from zope.interface import Interface
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
 
 
 class IContactable(Interface):
@@ -59,6 +59,13 @@ class IContactCoreParameters(Interface):
         title=_(u"Display contact photo on organization view (instead person content type icon)."),
         description=u"",
         required=False, default=True)
+
+    contact_source_metadata_content = schema.TextLine(
+        title=_(u"Choose information displayed after a search in contact widget."),
+        description=u"Format string containing variables like : {gft} (full title) , {number} , {street} , "
+                    u"{additional_address_details} , {zip_code} , {city} , {region} , {country}, {email}, {phone}, "
+                    u"{cell_phone}, {fax}, {website}, {im_handle}",
+        required=True, default=u'{gft}')
 
 
 class IPersonHeldPositions(Interface):

@@ -41,6 +41,10 @@ The following configuration can be adapted in the plone registry (prefix=IContac
     Use held positions to search persons.
 * use_description_to_search_person : boolean, default to True.
     Use description to search persons.
+* display_contact_photo_on_organization_view : boolean, default to True.
+    Display contact photo on organization view.
+* contact_source_metadata_content : choice, default to get_full_title.
+    Choose information displayed after a search in contact widget.
 
 Localization
 ============

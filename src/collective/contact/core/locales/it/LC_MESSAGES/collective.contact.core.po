@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2018-10-23 08:18+0000\n"
+"POT-Creation-Date: 2019-09-05 13:13+0000\n"
 "PO-Revision-Date: 2016-10-04 18:45+0200\n"
 "Last-Translator: Luca Fabbri <keul@redturtle.it>\n"
 "Language-Team: \n"
@@ -48,11 +48,11 @@ msgstr "Aggiungi"
 msgid "Additional address details"
 msgstr "Dettagli aggiuntivi dell'indirizzo"
 
-#: ../interfaces.py:93
+#: ../interfaces.py:100
 msgid "Additional label"
 msgstr "Etichetta aggiuntiva"
 
-#: ../interfaces.py:94
+#: ../interfaces.py:101
 msgid "Additional label with information that does not appear on position label"
 msgstr "Etichetta aggiuntiva con informazioni che non compaiono nell'etichetta della posizione"
 
@@ -74,6 +74,10 @@ msgstr "Telefono cellulare"
 #: ../browser/templates/contactdetails.pt:28
 msgid "Cell phone number"
 msgstr "Telefono cellulare"
+
+#: ../interfaces.py:64
+msgid "Choose information displayed after a search in contact widget."
+msgstr ""
 
 #: ../behaviors.py:250
 msgid "City"
@@ -101,7 +105,7 @@ msgid "Country"
 msgstr "Paese"
 
 #: ../browser/addcontact.py:65
-#: ../browser/templates/organization.pt:74
+#: ../browser/templates/organization.pt:72
 #: ../browser/templates/position.pt:41
 msgid "Create ${name}"
 msgstr "Crea ${name}"
@@ -138,7 +142,7 @@ msgstr "E-mail"
 
 #: ../browser/basefields/templates/held_position.pt:28
 #: ../browser/templates/heldpositions.pt:47
-#: ../interfaces.py:102
+#: ../interfaces.py:109
 msgid "End date"
 msgstr "Data fine"
 
@@ -252,7 +256,7 @@ msgstr ""
 msgid "Name"
 msgstr "Nome"
 
-#: ../browser/templates/organization.pt:59
+#: ../browser/templates/organization.pt:57
 msgid "Not assigned"
 msgstr "Non assegnata"
 
@@ -282,11 +286,11 @@ msgstr "Tipo organizzazione"
 msgid "Organization types"
 msgstr "Tipi di organizzazione"
 
-#: ../interfaces.py:88
+#: ../interfaces.py:95
 msgid "Organization/Position"
 msgstr "Organizzazione/Posizione"
 
-#: ../browser/templates/contact.pt:17
+#: ../browser/templates/contact.pt:16
 #: ../browser/templates/directory.pt:22
 msgid "Organizations"
 msgstr "Organizzazioni"
@@ -299,7 +303,7 @@ msgstr "Organizzazioni in questa organizzazione"
 msgid "Other contacts in this organization:"
 msgstr "Altri contatti in questa organizzazione:"
 
-#: ../browser/templates/organization.pt:19
+#: ../browser/templates/organization.pt:17
 #: ../browser/templates/position.pt:17
 msgid "Parent organizations"
 msgstr "Organizzazione padre"
@@ -327,7 +331,7 @@ msgid "Phone number"
 msgstr "Numero di telefono"
 
 #: ../content/person.py:50
-#: ../interfaces.py:106
+#: ../interfaces.py:113
 msgid "Photo"
 msgstr "Foto"
 
@@ -349,7 +353,7 @@ msgstr "Tipi di posizione"
 msgid "Positions"
 msgstr "Posizioni"
 
-#: ../browser/templates/organization.pt:39
+#: ../browser/templates/organization.pt:37
 msgid "Positions in this organization"
 msgstr "Posizione in questa organizzazione"
 
@@ -389,7 +393,7 @@ msgstr ""
 
 #: ../browser/basefields/templates/held_position.pt:22
 #: ../browser/templates/heldpositions.pt:42
-#: ../interfaces.py:98
+#: ../interfaces.py:105
 msgid "Start date"
 msgstr "Datas inizio"
 
@@ -460,11 +464,11 @@ msgid "collective.contact.core tests"
 msgstr ""
 
 #. Default: ":"
-#: ../browser/templates/organization.pt:45
+#: ../browser/templates/organization.pt:43
 msgid "colon"
 msgstr ":"
 
-#: ../browser/templates/organization.pt:55
+#: ../browser/templates/organization.pt:53
 msgid "from"
 msgstr "Da"
 
@@ -487,6 +491,6 @@ msgstr "Se la voce non esiste, puoi aggiungerla al database:"
 msgid "organization/position"
 msgstr "organizzazione/posizione"
 
-#: ../browser/templates/organization.pt:55
+#: ../browser/templates/organization.pt:53
 msgid "to"
 msgstr "A"

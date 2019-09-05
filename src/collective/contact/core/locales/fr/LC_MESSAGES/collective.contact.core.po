@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.contact.core\n"
-"POT-Creation-Date: 2018-10-23 08:18+0000\n"
+"POT-Creation-Date: 2019-09-05 13:13+0000\n"
 "PO-Revision-Date: 2017-03-30 15:56+0200\n"
 "Last-Translator: Harald Friessnegger <harald@webmeisterei.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../browser/addcontact.py:112
 msgid "${name} (${position}"
-msgstr ""
+msgstr "${name} (${position}"
 
 #: ../browser/addcontact.py:333
 msgid "A contact is a position held by a person in an organization"
@@ -46,11 +46,11 @@ msgstr "Ajouter"
 msgid "Additional address details"
 msgstr "Complément d'adresse"
 
-#: ../interfaces.py:93
+#: ../interfaces.py:100
 msgid "Additional label"
 msgstr "Intitulé"
 
-#: ../interfaces.py:94
+#: ../interfaces.py:101
 msgid "Additional label with information that does not appear on position label"
 msgstr "Intitulé complétant l'intitulé de poste"
 
@@ -73,6 +73,10 @@ msgstr "Téléphone portable"
 msgid "Cell phone number"
 msgstr "Numéro de téléphone portable "
 
+#: ../interfaces.py:64
+msgid "Choose information displayed after a search in contact widget."
+msgstr "Choisir les informations affichées lors d'une recherche dans un champ contact."
+
 #: ../behaviors.py:250
 msgid "City"
 msgstr "Ville"
@@ -92,14 +96,14 @@ msgstr "Informations de contact (numéro de téléphone, adresse, email, ...)"
 
 #: ../behaviors.zcml:28
 msgid "Contact have a birthday."
-msgstr ""
+msgstr "Ajout d'un champ anniversaire"
 
 #: ../behaviors.py:240
 msgid "Country"
 msgstr "Pays"
 
 #: ../browser/addcontact.py:65
-#: ../browser/templates/organization.pt:74
+#: ../browser/templates/organization.pt:72
 #: ../browser/templates/position.pt:41
 msgid "Create ${name}"
 msgstr "Créer ${name}"
@@ -119,7 +123,7 @@ msgstr "Annuaire"
 
 #: ../interfaces.py:59
 msgid "Display contact photo on organization view (instead person content type icon)."
-msgstr ""
+msgstr "Afficher la photo du contact dans la vue de l'organisation (à la place de l'icône 'personne')"
 
 #: ../interfaces.py:44
 msgid "Display person title in displayed person's title."
@@ -136,7 +140,7 @@ msgstr "Courriel "
 
 #: ../browser/basefields/templates/held_position.pt:28
 #: ../browser/templates/heldpositions.pt:47
-#: ../interfaces.py:102
+#: ../interfaces.py:109
 msgid "End date"
 msgstr "Date de fin "
 
@@ -167,7 +171,7 @@ msgstr "Localisation"
 
 #: ../behaviors.zcml:22
 msgid "Global positioning (latitude and longitude)."
-msgstr ""
+msgstr "Ajout des champs latitude et longitude"
 
 #: ../profiles/default/types/held_position.xml
 #: ../upgrades/profiles/v2/types/held_position.xml
@@ -180,11 +184,11 @@ msgstr "Identifiant de messagerie instantanée "
 
 #: ../configure.zcml:58
 msgid "Installs test data for the collective.contact.core package"
-msgstr ""
+msgstr "Installe les données de tests de collective.contact.core"
 
 #: ../configure.zcml:50
 msgid "Installs the collective.contact.core package"
-msgstr ""
+msgstr "Installe le package collective.contact.core"
 
 #: ../behaviors.py:171
 msgid "Instant messenger handle"
@@ -220,23 +224,23 @@ msgstr "Masculin"
 
 #: ../upgrades/configure.zcml:14
 msgid "Migration profile for collective.contact.core to 2"
-msgstr ""
+msgstr "Migration de collective.contact.core vers version 2"
 
 #: ../upgrades/configure.zcml:54
 msgid "Migration profile for collective.contact.core to 6"
-msgstr ""
+msgstr "Migration de collective.contact.core vers version 6"
 
 #: ../upgrades/configure.zcml:70
 msgid "Migration profile for collective.contact.core to 7"
-msgstr ""
+msgstr "Migration de collective.contact.core vers version 7"
 
 #: ../upgrades/configure.zcml:86
 msgid "Migration profile for collective.contact.core to 8"
-msgstr ""
+msgstr "Migration de collective.contact.core vers version 8"
 
 #: ../upgrades/configure.zcml:102
 msgid "Migration profile for collective.contact.core to 9"
-msgstr ""
+msgstr "Migration de collective.contact.core vers version 9"
 
 #: ../browser/person_title_mapping.py:24
 msgid "Mr"
@@ -250,7 +254,7 @@ msgstr "Madame"
 msgid "Name"
 msgstr "Nom"
 
-#: ../browser/templates/organization.pt:59
+#: ../browser/templates/organization.pt:57
 msgid "Not assigned"
 msgstr "Non assigné"
 
@@ -280,11 +284,11 @@ msgstr "Type d'organisation "
 msgid "Organization types"
 msgstr "Types d'organisations"
 
-#: ../interfaces.py:88
+#: ../interfaces.py:95
 msgid "Organization/Position"
 msgstr "Organisation/Fonction"
 
-#: ../browser/templates/contact.pt:17
+#: ../browser/templates/contact.pt:16
 #: ../browser/templates/directory.pt:22
 msgid "Organizations"
 msgstr "Organisations "
@@ -297,7 +301,7 @@ msgstr "Organisations dans cette organisation "
 msgid "Other contacts in this organization:"
 msgstr "Autres contacts dans cette organisation :"
 
-#: ../browser/templates/organization.pt:19
+#: ../browser/templates/organization.pt:17
 #: ../browser/templates/position.pt:17
 msgid "Parent organizations"
 msgstr "Organisations parentes "
@@ -325,7 +329,7 @@ msgid "Phone number"
 msgstr "Numéro de téléphone "
 
 #: ../content/person.py:50
-#: ../interfaces.py:106
+#: ../interfaces.py:113
 msgid "Photo"
 msgstr "Photo"
 
@@ -347,7 +351,7 @@ msgstr "Types de fonctions"
 msgid "Positions"
 msgstr "Fonctions occupées"
 
-#: ../browser/templates/organization.pt:39
+#: ../browser/templates/organization.pt:37
 msgid "Positions in this organization"
 msgstr "Fonctions dans cette organisation "
 
@@ -387,13 +391,13 @@ msgstr "Signature"
 
 #: ../browser/basefields/templates/held_position.pt:22
 #: ../browser/templates/heldpositions.pt:42
-#: ../interfaces.py:98
+#: ../interfaces.py:105
 msgid "Start date"
 msgstr "Date de début "
 
 #: ../testing.zcml:18
 msgid "Steps to ease tests of collective.contact.core"
-msgstr ""
+msgstr "Steps pour faciliter les tests de collective.contact.core"
 
 #: ../behaviors.py:255
 msgid "Street"
@@ -429,7 +433,7 @@ msgstr "Utiliser l'adresse de l'entité d'appartenance"
 
 #: ../behaviors.zcml:34
 msgid "We can attach organizations on content."
-msgstr ""
+msgstr "Lier des organisations au contenu"
 
 #: ../behaviors.py:166
 #: ../browser/templates/contactdetails.pt:50
@@ -447,22 +451,22 @@ msgstr "${street} ${number}"
 
 #: ../configure.zcml:50
 msgid "collective.contact.core"
-msgstr ""
+msgstr "collective.contact.core"
 
 #: ../configure.zcml:58
 msgid "collective.contact.core test data"
-msgstr ""
+msgstr "Données de tests de collective.contact.core"
 
 #: ../testing.zcml:18
 msgid "collective.contact.core tests"
-msgstr ""
+msgstr "Tests de collective.contact.core"
 
 #. Default: ":"
-#: ../browser/templates/organization.pt:45
+#: ../browser/templates/organization.pt:43
 msgid "colon"
 msgstr " :"
 
-#: ../browser/templates/organization.pt:55
+#: ../browser/templates/organization.pt:53
 msgid "from"
 msgstr "de"
 
@@ -485,6 +489,6 @@ msgstr "Si l'élément n'existe pas, vous pouvez l'ajouter à la base :"
 msgid "organization/position"
 msgstr "organisation/fonction"
 
-#: ../browser/templates/organization.pt:55
+#: ../browser/templates/organization.pt:53
 msgid "to"
 msgstr "à"

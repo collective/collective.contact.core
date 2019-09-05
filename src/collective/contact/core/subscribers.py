@@ -1,18 +1,26 @@
 from Acquisition import aq_get
+from collective.contact.core.behaviors import IContactDetails
+from collective.contact.core.content.organization import IOrganization
+from collective.contact.core.content.person import IPerson
+from collective.contact.core.content.position import IPosition
+from collective.contact.core.interfaces import IContactCoreParameters
+from collective.contact.core.interfaces import IHeldPosition
+from collective.contact.widget.interfaces import IContactContent
 from five import grok
+from plone import api
+from plone.app.linkintegrity.handlers import referencedObjectRemoved as baseReferencedObjectRemoved
+from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
+from plone.registry.interfaces import IRecordModifiedEvent
 from z3c.form.interfaces import NO_VALUE
-
 from zc.relation.interfaces import ICatalog
 from zope import component
-from zope.lifecycleevent.interfaces import IObjectAddedEvent,\
-    IObjectModifiedEvent
 from zope.container.contained import ContainerModifiedEvent
 from zope.intid.interfaces import IIntIds
+from zope.lifecycleevent.interfaces import IObjectAddedEvent
+from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 from zope.schema import getFields
 
-from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
-from plone.app.linkintegrity.handlers import referencedObjectRemoved as \
-        baseReferencedObjectRemoved
+
 try:
     from plone.app.referenceablebehavior.referenceable import IReferenceable
 except ImportError:
@@ -21,12 +29,6 @@ except ImportError:
     class IReferenceable(Interface):
         pass
 
-from collective.contact.widget.interfaces import IContactContent
-from collective.contact.core.behaviors import IContactDetails
-from collective.contact.core.content.position import IPosition
-from collective.contact.core.content.person import IPerson
-from collective.contact.core.content.organization import IOrganization
-from collective.contact.core.interfaces import IHeldPosition
 
 # update indexes of related content when a content is modified
 # you can monkey patch this value if you have an index that needs this
@@ -130,3 +132,15 @@ def clear_fields_use_parent_address(obj, event):
                 delattr(obj, field_name)
             except AttributeError:
                 pass
+
+
+def recordModified(event):
+    """
+        Manage configuration change in registry
+    """
+    if (IRecordModifiedEvent.providedBy(event) and event.record.interfaceName and
+            event.record.interface == IContactCoreParameters):
+        if event.record.fieldName == 'contact_source_metadata_content':
+            pc = api.portal.get_tool('portal_catalog')
+            for brain in pc(object_provides=IContactContent.__identifier__):
+                brain.getObject().reindexObject(idxs=['contact_source'])
