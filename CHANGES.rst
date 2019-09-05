@@ -12,6 +12,12 @@ Changelog
 - Prevent address field from being erased if they are changed programmaticaly before any manual edition.
   [thomasdesvenain]
 
+1.27 (unreleased)
+-----------------
+
+- Added contact_source metadata to be used in contact widget.
+  [sgeulette]
+
 1.26 (unreleased)
 -----------------
 

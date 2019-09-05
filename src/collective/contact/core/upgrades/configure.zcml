@@ -165,4 +165,12 @@
       handler=".upgrades.v15"
       profile="collective.contact.core:default" />
 
+  <genericsetup:upgradeStep
+      title="Upgrade from 15 to 16"
+      description="contact_source metadata, to be used in contact widget"
+      source="15"
+      destination="16"
+      handler=".upgrades.v16"
+      profile="collective.contact.core:default" />
+
 </configure>

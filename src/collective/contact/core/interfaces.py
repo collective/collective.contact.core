@@ -58,6 +58,13 @@ class IContactCoreParameters(Interface):
         description=u"",
         required=False, default=True)
 
+    contact_source_metadata_content = schema.TextLine(
+        title=_(u"Choose information displayed after a search in contact widget."),
+        description=u"Format string containing variables like : {gft} (full title) , {number} , {street} , "
+                    u"{additional_address_details} , {zip_code} , {city} , {region} , {country}, {email}, {phone}, "
+                    u"{cell_phone}, {fax}, {website}, {im_handle}",
+        required=True, default=u'{gft}')
+
 
 class IPersonHeldPositions(Interface):
     """Adapter interface to get ordered positions of a person

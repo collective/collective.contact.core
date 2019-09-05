@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>15</version>
+  <version>16</version>
   <dependencies>
     <dependency>profile-collective.contact.widget:default</dependency>
     <dependency>profile-plone.app.dexterity:default</dependency>

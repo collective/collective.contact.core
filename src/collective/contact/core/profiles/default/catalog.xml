@@ -6,15 +6,9 @@
     <column value="sortable_title" />
     <column value="contact_source" />
 
-     <index name="email" meta_type="FieldIndex">
-       <indexed_attr value="email"/>
-     </index>
-     <column value="email"/>
-
-
-     <index name="email" meta_type="FieldIndex">
-       <indexed_attr value="email"/>
-     </index>
-     <column value="email"/>
+    <index name="email" meta_type="FieldIndex">
+      <indexed_attr value="email"/>
+    </index>
+    <column value="email"/>
 
 </object>

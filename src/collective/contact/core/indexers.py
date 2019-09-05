@@ -1,4 +1,4 @@
-from collective.contact.core.behaviors import ADDRESS_FIELDS
+# -*- coding: utf-8 -*-
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.behaviors import IRelatedOrganizations
 from collective.contact.core.content.organization import IOrganization
@@ -24,13 +24,11 @@ def contact_source(contact):
     csmc = api.portal.get_registry_record('collective.contact.core.interfaces.IContactCoreParameters.'
                                           'contact_source_metadata_content', default=u'{gft}')
     variables = {'gft': contact.get_full_title()}
-    contactable = IContactable(contact)
-    details = contactable.get_contact_details()
-    address = details.pop('address')
-    for fld in ADDRESS_FIELDS:
-        address.setdefault(fld, '')
-    variables.update(address)
-    variables.update(details)
+    if '{city}' in csmc or '{street}' in csmc:
+        contactable = IContactable(contact)
+        details = contactable.get_contact_details()
+        variables.update(details.pop('address'))
+        variables.update(details)
     try:
         return csmc.format(**variables)
     except:
