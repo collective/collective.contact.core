@@ -26,6 +26,7 @@ class TestAdapters(unittest.TestCase, BaseTest):
         self.directory = self.portal['mydirectory']
         self.degaulle = self.directory['degaulle']
         self.pepper = self.directory['pepper']
+        self.rambo = self.directory['rambo']
 
     def test_gadt_vcard(self):
         gadt = self.degaulle['gadt']
@@ -130,6 +131,11 @@ class TestAdapters(unittest.TestCase, BaseTest):
         details = IContactable(self.degaulle).get_contact_details(keys=('email',))
         self.assertEqual(details, {'email': 'charles.de.gaulle@private.com'})
 
+        # test with rambo data empty
+        details = IContactable(self.rambo).get_contact_details()
+        self.assertEqual(details['email'], '')
+        self.assertDictEqual(details['address'], {})
+
         # test an held position using parent address and related to an organization
         details = IContactable(self.degaulle['adt']).get_contact_details()
         self.assertEqual(details['email'], u'contact@armees.fr')  # phone from org
@@ -184,6 +190,12 @@ class TestAdapters(unittest.TestCase, BaseTest):
         # # person contact details are not private
         api.portal.set_registry_record(name='person_contact_details_private', value=False,
                                        interface=IContactCoreParameters)
+
+        # test with rambo data empty : we get info from relations
+        details = IContactable(self.rambo).get_contact_details()
+        self.assertEqual(details['email'], 'contact@armees.fr')
+        self.assertEqual(details['address']['street'], u"rue de l'harmonie")
+
         # test an held position using parent address and related to an organization
         details = IContactable(self.degaulle['adt']).get_contact_details()
         self.assertEqual(details['email'], u'charles.de.gaulle@private.com')  # phone from person

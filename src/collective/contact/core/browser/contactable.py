@@ -113,6 +113,8 @@ class Contactable(grok.Adapter):
         related_items = [self.context, self.held_position, self.position] + list(reversed(self.organizations))
         if not api.portal.get_registry_record(name='person_contact_details_private', interface=IContactCoreParameters):
             related_items.insert(2, self.person)
+        elif self.context == self.person:
+            related_items = [self.context]  # for a person, we get private info only
         for related_item in related_items:
             if related_item is not None \
                and IContactDetails.providedBy(related_item) \
