@@ -25,11 +25,10 @@ def contact_source(contact):
     csmc = api.portal.get_registry_record('collective.contact.core.interfaces.IContactCoreParameters.'
                                           'contact_source_metadata_content', default=u'{gft}')
     variables = {'gft': contact.get_full_title()}
-    if '{city}' in csmc or '{street}' in csmc:
-        contactable = IContactable(contact)
-        details = contactable.get_contact_details()
-        variables.update(details.pop('address'))
-        variables.update(details)
+    contactable = IContactable(contact)
+    details = contactable.get_contact_details()
+    variables.update(details.pop('address'))
+    variables.update(details)
     try:
         return csmc.format(**variables)
     except:
