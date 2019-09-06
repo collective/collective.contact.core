@@ -17,6 +17,8 @@ Changelog
 
 - Added contact_source metadata to be used in contact widget.
   [sgeulette]
+- If person details privacy is True, contact details on person don't search related items.
+  [sgeulette]
 
 1.26 (unreleased)
 -----------------
