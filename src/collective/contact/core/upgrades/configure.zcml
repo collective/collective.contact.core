@@ -159,7 +159,7 @@
 
   <genericsetup:upgradeStep
       title="Upgrade from 14 to 15"
-      description="Email index"
+      description="Email index. !! You can skip this upgrade if not yet done and if the next one 15 -> 16 is available !!"
       source="14"
       destination="15"
       handler=".upgrades.v15"

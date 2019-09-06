@@ -112,6 +112,7 @@ def v14(context):
 
 def v15(context):
     tool = IUpgradeTool(context)
+    tool.runImportStep('collective.contact.core', 'plone.app.registry')
     tool.runImportStep('collective.contact.core', 'catalog')
     tool.reindexContents(IContactContent, ('email',))
 
@@ -120,7 +121,7 @@ def v16(context):
     tool = IUpgradeTool(context)
     tool.runImportStep('collective.contact.core', 'plone.app.registry')
     tool.runImportStep('collective.contact.core', 'catalog')
-    tool.reindexContents(IContactContent, ('contact_source',))
+    tool.reindexContents(IContactContent, ('email', 'contact_source',))
 
 
 def refresh_resources_registry(context):
