@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collective.contact.core.behaviors import ADDRESS_FIELDS
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.behaviors import IRelatedOrganizations
 from collective.contact.core.content.organization import IOrganization
@@ -26,7 +27,10 @@ def contact_source(contact):
     variables = {'gft': contact.get_full_title()}
     contactable = IContactable(contact)
     details = contactable.get_contact_details()
-    variables.update(details.pop('address'))
+    address = details.pop('address')
+    for fld in ADDRESS_FIELDS:
+        address.setdefault(fld, '')
+    variables.update(address)
     variables.update(details)
     try:
         return csmc.format(**variables)
