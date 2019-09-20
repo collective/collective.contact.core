@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.27 (unreleased)
+1.27 (2019-09-20)
 -----------------
 
 - Added contact_source metadata to be used in contact widget.
