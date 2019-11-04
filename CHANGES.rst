@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.28 (unreleased)
+1.28 (2019-11-04)
 -----------------
 
 - Ensure than export is unicode encoding.
