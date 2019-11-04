@@ -12,6 +12,13 @@ Changelog
 - Prevent address field from being erased if they are changed programmaticaly before any manual edition.
   [thomasdesvenain]
 
+1.28 (unreleased)
+-----------------
+
+- Ensure than export is unicode encoding.
+  [boulch]
+
+
 1.27 (unreleased)
 -----------------
 
