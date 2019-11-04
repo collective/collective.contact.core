@@ -6,6 +6,7 @@ from zope.interface import implements
 
 from plone.dexterity.interfaces import IDexterityFTI
 from plone import api
+from Products.CMFPlone.utils import safe_unicode
 
 try:
     from collective.excelexport.exportables.dexterityfields import BaseFieldRenderer
@@ -36,9 +37,9 @@ if HAS_EXCELEXPORT:
             if not rel_obj:
                 return u""
             if IHeldPosition.providedBy(rel_obj):
-                return rel_obj.get_full_title() or u""
+                return safe_unicode(rel_obj.get_full_title()) or u""
             else:
-                return rel_obj.Title()
+                return safe_unicode(rel_obj.Title())
 
     class HeldPositionPersonInfoExportableFactory(BaseExportableFactory):
         adapts(IDexterityFTI, Interface, Interface)

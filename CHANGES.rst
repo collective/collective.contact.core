@@ -4,7 +4,8 @@ Changelog
 1.28 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Ensure than export is unicode encoding.
+  [boulch]
 
 
 1.27 (2019-09-20)
