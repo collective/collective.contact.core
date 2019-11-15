@@ -2,9 +2,13 @@
       lang="en"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
-      i18n:domain="collective.contact.core">
+      i18n:domain="collective.contact.core"
+      tal:define="ajax_load request/ajax_load | nothing;">
 
   <h1 class="heldpos"><img tal:attributes="src context/getIconURL" /> <span tal:content="view/title" /></h1>
+
+  <div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle"
+       tal:condition="python: view.display_below_content_title() and not ajax_load" />
 
   <div class="field" tal:condition="context/photo">
     <img tal:replace="structure context/@@images/photo/thumb" />

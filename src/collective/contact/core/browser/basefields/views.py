@@ -1,22 +1,28 @@
 from AccessControl import getSecurityManager
-
-from five import grok
-
-from zope.component import getUtility
-from zope.schema.interfaces import IVocabularyFactory
-
 from collective.contact.core.behaviors import IBirthday
 from collective.contact.core.browser.utils import date_to_DateTime
-from collective.contact.core.content.person import IPerson
 from collective.contact.core.content.organization import IOrganization
+from collective.contact.core.content.person import IPerson
 from collective.contact.core.content.position import IPosition
+from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.interfaces import IHeldPosition
+from five import grok
+from plone import api
+from zope.component import getUtility
+from zope.schema.interfaces import IVocabularyFactory
 
 
 grok.templatedir('templates')
 
 
-class PersonBaseFields(grok.View):
+class BaseFields(object):
+
+    def display_below_content_title(self):
+        return api.portal.get_registry_record('display_below_content_title_on_views', interface=IContactCoreParameters,
+                                              default=False)
+
+
+class PersonBaseFields(grok.View, BaseFields):
     grok.name('basefields')
     grok.template('person')
     grok.context(IPerson)
@@ -45,7 +51,7 @@ class PersonBaseFields(grok.View):
         self.can_edit = sm.checkPermission('Modify portal content', person)
 
 
-class OrganizationBaseFields(grok.View):
+class OrganizationBaseFields(grok.View, BaseFields):
 
     grok.name('basefields')
     grok.template('organization')
@@ -70,7 +76,7 @@ class OrganizationBaseFields(grok.View):
         self.activity = self.context.activity
 
 
-class PositionBaseFields(grok.View):
+class PositionBaseFields(grok.View, BaseFields):
 
     grok.name('basefields')
     grok.template('position')
@@ -88,7 +94,7 @@ class PositionBaseFields(grok.View):
         self.type = vocabulary.getTerm(position.position_type).title
 
 
-class HeldPositionBaseFields(grok.View):
+class HeldPositionBaseFields(grok.View, BaseFields):
     grok.name('basefields')
     grok.template('held_position')
     grok.context(IHeldPosition)
