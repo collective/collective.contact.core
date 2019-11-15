@@ -4,15 +4,14 @@ Changelog
 1.29 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Removed overlay on heldposition actions in person view.
+  [sgeulette]
 
 1.28 (2019-11-04)
 -----------------
 
 - Ensure than export is unicode encoding.
   [boulch]
-
 
 1.27 (2019-09-20)
 -----------------

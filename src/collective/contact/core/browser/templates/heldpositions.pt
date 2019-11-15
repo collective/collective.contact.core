@@ -12,13 +12,15 @@
             <div class="held_position vcard" tal:define="url held_position/object/absolute_url">
 
               <div class="actions">
-                <a class="zoom-held-position contactoverlay" tal:attributes="href string:${url}/view">
+                <tal:comment replace="nothing">class="zoom-held-position contactoverlay"</tal:comment>
+                <a class="zoom-held-position" tal:attributes="href string:${url}/view">
                   <img alt="View" title="View"
                        i18n:domain="plone"
                        tal:attributes="src string:${portal_url}/search_icon.png"
                        i18n:attributes="alt; title" />
                 </a>
-                <a class="edit-held-position contactoverlay"
+                <tal:comment replace="nothing">class="edit-held-position contactoverlay"</tal:comment>
+                <a class="edit-held-position"
                    tal:attributes="href string:${url}/edit"
                    tal:condition="held_position/can_edit">
                   <img alt="Edit" title="Edit"
@@ -26,7 +28,8 @@
                        tal:attributes="src string:${portal_url}/edit.png"
                        i18n:attributes="alt; title" />
                 </a>
-                <a class="delete-held-position deleteoverlay"
+                <tal:comment replace="nothing">class="delete-held-position deleteoverlay"</tal:comment>
+                <a class="delete-held-position"
                    tal:attributes="href string:${url}/delete_confirmation"
                    tal:condition="held_position/can_delete">
                   <img alt="Delete" title="Delete"
