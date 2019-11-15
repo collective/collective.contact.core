@@ -58,6 +58,11 @@ class IContactCoreParameters(Interface):
         description=u"",
         required=False, default=True)
 
+    display_below_content_title_on_views = schema.Bool(
+        title=_(u"Display belowcontenttitle viewlet on contact views."),
+        description=u"",
+        required=False, default=False)
+
     contact_source_metadata_content = schema.TextLine(
         title=_(u"Choose information displayed after a search in contact widget."),
         description=u"Format string containing variables like : {gft} (full title) , {number} , {street} , "

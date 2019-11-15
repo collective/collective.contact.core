@@ -5,6 +5,24 @@ from collective.contact.core.browser.utils import date_to_DateTime
 from Products.Five import BrowserView
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
+from collective.contact.core.content.organization import IOrganization
+from collective.contact.core.content.person import IPerson
+from collective.contact.core.content.position import IPosition
+from collective.contact.core.interfaces import IContactCoreParameters
+from collective.contact.core.interfaces import IHeldPosition
+from plone import api
+from zope.component import getUtility
+from zope.schema.interfaces import IVocabularyFactory
+
+
+class BaseFields(object):
+
+    def display_below_content_title(self):
+        return api.portal.get_registry_record(
+            'display_below_content_title_on_views',
+            interface=IContactCoreParameters,
+            default=False
+        )
 
 
 class PersonBaseFields(BrowserView):

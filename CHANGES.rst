@@ -12,6 +12,14 @@ Changelog
 - Prevent address field from being erased if they are changed programmaticaly before any manual edition.
   [thomasdesvenain]
 
+1.29 (unreleased)
+-----------------
+
+- Removed overlay on heldposition actions in person view.
+  [sgeulette]
+- Added option to display belowcontenttitle viewlet on contact views.
+  [sgeulette]
+
 1.28 (unreleased)
 -----------------
 

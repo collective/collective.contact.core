@@ -173,4 +173,14 @@
       handler=".upgrades.v16"
       profile="collective.contact.core:default" />
 
+  <genericsetup:upgradeSteps
+      source="16"
+      destination="17"
+      profile="collective.contact.core:default">
+      <genericsetup:upgradeDepends
+          title="Reapply registry.xml"
+          description=""
+          import_steps="plone.app.registry" />
+  </genericsetup:upgradeSteps>
+
 </configure>
