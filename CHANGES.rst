@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.29 (unreleased)
+1.29 (2019-11-25)
 -----------------
 
 - Removed overlay on heldposition actions in person view.
