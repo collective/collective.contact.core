@@ -12,6 +12,12 @@ Changelog
 - Prevent address field from being erased if they are changed programmaticaly before any manual edition.
   [thomasdesvenain]
 
+1.30 (unreleased)
+-----------------
+
+- Avoid an error when we try to remove a working copy from plone.app.iterate
+  [mpeeters]
+
 1.29 (unreleased)
 -----------------
 
