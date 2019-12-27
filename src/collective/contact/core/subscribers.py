@@ -8,6 +8,7 @@ from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
 from five import grok
 from plone import api
+from plone.app.iterate.interfaces import IWorkingCopy
 from plone.app.linkintegrity.handlers import referencedObjectRemoved as baseReferencedObjectRemoved
 from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
 from plone.registry.interfaces import IRecordModifiedEvent
@@ -114,6 +115,9 @@ def referenceRemoved(obj, event, toInterface=IContactContent):
 
 
 def referencedObjectRemoved(obj, event):
+    # Avoid an error when we try to remove a working copy (plone.app.iterate)
+    if IWorkingCopy.providedBy(obj):
+        return
     if not IReferenceable.providedBy(obj):
         baseReferencedObjectRemoved(obj, event)
 

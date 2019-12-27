@@ -4,7 +4,8 @@ Changelog
 1.30 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Avoid an error when we try to remove a working copy from plone.app.iterate
+  [mpeeters]
 
 
 1.29 (2019-11-25)
