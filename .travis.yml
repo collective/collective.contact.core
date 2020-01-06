@@ -23,9 +23,9 @@ before_install:
   - bin/pip install -r requirements.txt -c constraints_plone$PLONE_VERSION.txt
   - cp test_plone$PLONE_VERSION.cfg buildout.cfg
 
-install:
-  - bin/buildout -N -t 3 code-analysis:return-status-codes=True annotate
-  - bin/buildout -N -t 3 code-analysis:return-status-codes=True
+#install:
+#  - bin/buildout -N -t 3 code-analysis:return-status-codes=True annotate
+#  - bin/buildout -N -t 3 code-analysis:return-status-codes=True
 
 before_script:
 - 'export DISPLAY=:99.0'
@@ -35,7 +35,7 @@ before_script:
 
 script:
 # Run code-analysis, except on Python 3.6, which mysteriously fails to find zc.buildout.
-  - python --version 2> /dev/stdout | grep 3.6 || bin/code-analysis
+#  - python --version 2> /dev/stdout | grep 3.6 || bin/code-analysis
   - bin/test --all
 
 after_success:
