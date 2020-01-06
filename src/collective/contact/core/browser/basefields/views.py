@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
+from AccessControl import getSecurityManager
 from collective.contact.core.behaviors import IBirthday
 from collective.contact.core.browser.utils import date_to_DateTime
-
-from AccessControl import getSecurityManager
 from Products.Five import BrowserView
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory

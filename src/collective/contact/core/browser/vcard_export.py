@@ -1,7 +1,6 @@
-from five import grok
-
 from collective.contact.core.interfaces import IVCard
 from collective.contact.widget.interfaces import IContactContent
+from five import grok
 
 
 class ContactVCF(grok.View):

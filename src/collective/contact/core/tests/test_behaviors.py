@@ -1,20 +1,19 @@
 # -*- coding: utf8 -*-
-import unittest
-
+from collective.contact.core.behaviors import IBirthday
+from collective.contact.core.behaviors import IContactDetails
+from collective.contact.core.behaviors import IGlobalPositioning
+from collective.contact.core.testing import INTEGRATION
+from ecreall.helpers.testing.base import BaseTest
+from plone.app.testing.helpers import setRoles
+from plone.app.testing.interfaces import TEST_USER_ID
+from plone.app.testing.interfaces import TEST_USER_NAME
+from plone.autoform.interfaces import IFormFieldProvider
+from plone.behavior.interfaces import IBehavior
 from zope.component import getUtility
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 
-from plone.behavior.interfaces import IBehavior
-from plone.autoform.interfaces import IFormFieldProvider
-from plone.app.testing.helpers import setRoles
-from plone.app.testing.interfaces import TEST_USER_NAME, TEST_USER_ID
-
-from ecreall.helpers.testing.base import BaseTest
-
-from collective.contact.core.testing import INTEGRATION
-from collective.contact.core.behaviors import IContactDetails,\
-    IGlobalPositioning, IBirthday
+import unittest
 
 
 class TestBehaviors(unittest.TestCase, BaseTest):

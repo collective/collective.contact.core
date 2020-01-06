@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
 # GNU General Public License (GPL)
-import datetime
-import logging
-
+from collective.contact.core.interfaces import IContactCoreParameters
 from plone import api
 from z3c.relationfield.relation import RelationValue
 from zope import component
 from zope.intid.interfaces import IIntIds
 from zope.lifecycleevent import modified
 
+import datetime
+import logging
+
+
 # from plone.registry.interfaces import IRegistry
 
 logger = logging.getLogger('collective.contact.core: setuphandlers')
 
-from collective.contact.core.interfaces import IContactCoreParameters
 
 
 def isNotCollectiveContactContentProfile(context):

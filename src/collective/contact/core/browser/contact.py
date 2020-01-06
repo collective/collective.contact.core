@@ -1,8 +1,7 @@
-from plone import api
-
+from collective.contact.core.behaviors import IBirthday
 from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.browser.utils import date_to_DateTime
-from collective.contact.core.behaviors import IBirthday
+from plone import api
 
 
 class Contact(BaseView):

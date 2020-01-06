@@ -1,16 +1,18 @@
 # -*- coding: utf8 -*-
 
-import datetime
-import unittest
-
-from collective.contact.core.indexers import (
-    held_position_searchable_text, organization_searchable_text,
-    person_sortable_title, held_position_sortable_title, start_date, end_date)
+from collective.contact.core.indexers import end_date
+from collective.contact.core.indexers import held_position_searchable_text
+from collective.contact.core.indexers import held_position_sortable_title
+from collective.contact.core.indexers import organization_searchable_text
+from collective.contact.core.indexers import person_sortable_title
+from collective.contact.core.indexers import start_date
 from collective.contact.core.setuphandlers import create_test_held_positions
 from collective.contact.core.testing import INTEGRATION
-
 from ecreall.helpers.testing.base import BaseTest
 from plone import api
+
+import datetime
+import unittest
 
 
 class TestSearch(unittest.TestCase, BaseTest):

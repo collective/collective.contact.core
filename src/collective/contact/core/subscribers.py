@@ -3,13 +3,13 @@ from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.content.person import IPerson
 from collective.contact.core.content.position import IPosition
 from collective.contact.core.interfaces import IHeldPosition
-
 from five import grok
 from z3c.form.interfaces import NO_VALUE
 from zope.container.contained import ContainerModifiedEvent
-from zope.lifecycleevent.interfaces import IObjectAddedEvent, \
-    IObjectModifiedEvent
+from zope.lifecycleevent.interfaces import IObjectAddedEvent
+from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 from zope.schema import getFields
+
 
 # update indexes of related content when a content is modified
 # you can monkey patch this value if you have an index that needs this

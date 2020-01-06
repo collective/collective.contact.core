@@ -1,16 +1,17 @@
 # -*- coding: utf8 -*-
 
-import collective.contact.core
 from collective.contact.core.setuphandlers import create_test_contact_data
-
-import pkg_resources
 from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneWithPackageLayer
-from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from plone.testing import z2
+
+import collective.contact.core
+import pkg_resources
+
 
 try:
     pkg_resources.get_distribution('plone.app.contenttypes')

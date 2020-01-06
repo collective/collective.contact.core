@@ -1,13 +1,11 @@
-from zope.interface import Interface
-from zope import schema
-
-from plone.namedfile.field import NamedImage
-from plone.supermodel import model
-
 from collective.contact.core import _
 from collective.contact.core.schema import ContactChoice
 from collective.contact.widget.interfaces import IContactContent
 from collective.contact.widget.source import ContactSourceBinder
+from plone.namedfile.field import NamedImage
+from plone.supermodel import model
+from zope import schema
+from zope.interface import Interface
 
 
 class IContactable(Interface):

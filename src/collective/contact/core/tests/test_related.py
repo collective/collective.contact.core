@@ -1,16 +1,16 @@
 # -*- coding: utf8 -*-
 
+from collective.contact.core.behaviors import IRelatedOrganizations
+from collective.contact.core.indexers import organization_searchable_text
+from collective.contact.core.testing import INTEGRATION
 from ecreall.helpers.testing.base import BaseTest
 from plone import api
-import unittest
 from z3c.relationfield.relation import RelationValue
-from zope.intid.interfaces import IIntIds
 from zope.component import getUtility
 from zope.interface import alsoProvides
+from zope.intid.interfaces import IIntIds
 
-from collective.contact.core.behaviors import IRelatedOrganizations
-from collective.contact.core.testing import INTEGRATION
-from collective.contact.core.indexers import organization_searchable_text
+import unittest
 
 
 class TestSearch(unittest.TestCase, BaseTest):

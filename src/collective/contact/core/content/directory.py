@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 from collective.contact.core import _
-from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
+from collective.z3cform.datagridfield import DataGridFieldFactory
+from collective.z3cform.datagridfield import DictRow
 from five import grok
 from plone.autoform.directives import widget
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.supermodel import model
 from zope import schema
-from zope.interface import Interface, implements
+from zope.interface import implements
+from zope.interface import Interface
 
 
 class INameTokenTableRowSchema(Interface):

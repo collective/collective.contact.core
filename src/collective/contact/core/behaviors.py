@@ -1,28 +1,28 @@
-import re
-
+from Acquisition import aq_base
+from collective.contact.core import _
+from collective.contact.core.interfaces import IContactable
+from collective.contact.widget.schema import ContactChoice
+from collective.contact.widget.schema import ContactList
+from collective.contact.widget.source import ContactSourceBinder
+from plone.app.dexterity.browser.types import TypeSchemaContext
+from plone.app.textfield import RichText
 from plone.app.z3cform.widget import DateFieldWidget
+from plone.autoform import directives as form
+from plone.autoform.interfaces import IFormFieldProvider
+from plone.formwidget.masterselect import MasterSelectBoolField
+from plone.supermodel import model
+from plone.supermodel.directives import fieldset
+from z3c.form.widget import ComputedWidgetAttribute
+from zope import schema
 from zope.interface import alsoProvides
 from zope.interface import Interface
-from zope import schema
-from Acquisition import aq_base
 
-from z3c.form.widget import ComputedWidgetAttribute
-from plone.supermodel import model
+import re
 
-from plone.supermodel.directives import fieldset
-from plone.autoform.interfaces import IFormFieldProvider
-from plone.autoform import directives as form
-from plone.formwidget.masterselect import MasterSelectBoolField
-from plone.app.textfield import RichText
-from plone.app.dexterity.browser.types import TypeSchemaContext
 
 # from Products.CMFDefault.utils import checkEmailAddress
 # from Products.CMFDefault.exceptions import EmailAddressInvalid
 
-from collective.contact.core import _
-from collective.contact.core.interfaces import IContactable
-from collective.contact.widget.schema import ContactChoice, ContactList
-from collective.contact.widget.source import ContactSourceBinder
 
 # Taken from http://www.regular-expressions.info/email.html
 _isemail = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}"

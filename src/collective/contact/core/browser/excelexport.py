@@ -1,11 +1,16 @@
+from collective.contact.core.behaviors import ADDRESS_FIELDS
+from collective.contact.core.interfaces import IContactable
+from collective.contact.core.interfaces import IHeldPosition
+from collective.contact.widget.interfaces import IContactChoice
+from collective.contact.widget.interfaces import IContactContent
+from plone import api
+from plone.dexterity.interfaces import IDexterityFTI
 from zope.component import adapts
 from zope.component import getMultiAdapter
 from zope.component.interfaces import ComponentLookupError
-from zope.interface import Interface
 from zope.interface import implements
+from zope.interface import Interface
 
-from plone.dexterity.interfaces import IDexterityFTI
-from plone import api
 
 try:
     from collective.excelexport.exportables.dexterityfields import BaseFieldRenderer
@@ -17,9 +22,6 @@ try:
 except ImportError:
     HAS_EXCELEXPORT = False
 
-from collective.contact.widget.interfaces import IContactChoice, IContactContent
-from collective.contact.core.interfaces import IContactable, IHeldPosition
-from collective.contact.core.behaviors import ADDRESS_FIELDS
 
 
 if HAS_EXCELEXPORT:

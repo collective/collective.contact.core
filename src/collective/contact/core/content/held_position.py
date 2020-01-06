@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.core.interfaces import IHeldPosition
-
 from ComputedAttribute import ComputedAttribute
-from Products.CMFPlone.utils import normalizeString, safe_unicode
 from five import grok
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
+from Products.CMFPlone.utils import normalizeString
+from Products.CMFPlone.utils import safe_unicode
 from z3c.form.interfaces import NO_VALUE
 from zope.interface import implements
 

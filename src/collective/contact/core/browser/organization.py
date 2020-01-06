@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
+from AccessControl import getSecurityManager
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.browser.utils import date_to_DateTime
 from collective.contact.core.browser.utils import get_valid_url
 from collective.contact.core.indexers import held_position_sortable_title
-from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.interfaces import IContactable
-
-from AccessControl import getSecurityManager
-from Products.Five import BrowserView
+from collective.contact.core.interfaces import IContactCoreParameters
 from plone import api
+from Products.Five import BrowserView
 
 
 class Organization(BaseView):

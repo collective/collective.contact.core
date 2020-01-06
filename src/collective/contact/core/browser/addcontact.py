@@ -1,15 +1,10 @@
-import copy
-
+from AccessControl import getSecurityManager
 from collective.contact.core import _
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.content.person import IPerson
 from collective.contact.widget.interfaces import IContactWidgetSettings
 from collective.contact.widget.schema import ContactChoice
 from collective.contact.widget.source import ContactSourceBinder
-
-from AccessControl import getSecurityManager
-from Products.CMFPlone.interfaces import IConstrainTypes
-from Products.statusmessages.interfaces import IStatusMessage
 from five import grok
 from plone import api
 from plone.dexterity.browser.add import DefaultAddForm
@@ -19,18 +14,26 @@ from plone.dexterity.interfaces import IDexterityFTI
 from plone.dexterity.utils import addContentToContainer
 from plone.supermodel import model
 from plone.z3cform.interfaces import IDeferSecurityCheck
-from z3c.form import field, form, button
+from Products.CMFPlone.interfaces import IConstrainTypes
+from Products.statusmessages.interfaces import IStatusMessage
+from z3c.form import button
+from z3c.form import field
+from z3c.form import form
 from z3c.form.contentprovider import ContentProviders
-from z3c.form.interfaces import IFieldsAndContentProvidersForm, \
-    DISPLAY_MODE
-from zope.component import getUtility, queryAdapter
+from z3c.form.interfaces import DISPLAY_MODE
+from z3c.form.interfaces import IFieldsAndContentProvidersForm
+from zope.component import getUtility
+from zope.component import queryAdapter
 from zope.component.hooks import getSite
 from zope.contentprovider.interfaces import IContentProvider
 from zope.event import notify
 from zope.i18n import Message
 from zope.interface import alsoProvides
-from zope.interface import implements, Interface
+from zope.interface import implements
+from zope.interface import Interface
 from zope.publisher.browser import BrowserView
+
+import copy
 
 
 class ICustomSettings(Interface):

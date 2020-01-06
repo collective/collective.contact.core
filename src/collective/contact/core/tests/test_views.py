@@ -1,14 +1,11 @@
 # -*- coding: utf8 -*-
-import unittest
-
+from collective.contact.core.behaviors import ADDRESS_FIELDS
 from collective.contact.core.setuphandlers import create_test_held_positions
-
+from collective.contact.core.testing import INTEGRATION
+from ecreall.helpers.testing.base import BaseTest
 from plone.app.testing.interfaces import TEST_USER_NAME
 
-from ecreall.helpers.testing.base import BaseTest
-
-from collective.contact.core.testing import INTEGRATION
-from collective.contact.core.behaviors import ADDRESS_FIELDS
+import unittest
 
 
 class TestView(unittest.TestCase, BaseTest):

@@ -1,12 +1,9 @@
-from Acquisition import aq_parent
-
-from zope.schema.vocabulary import SimpleVocabulary
-from zope.schema.interfaces import IVocabularyFactory
-
-from five import grok
-
 from . import _
+from Acquisition import aq_parent
 from collective.contact.core import logger
+from five import grok
+from zope.schema.interfaces import IVocabularyFactory
+from zope.schema.vocabulary import SimpleVocabulary
 
 
 class NoDirectoryFound(Exception):

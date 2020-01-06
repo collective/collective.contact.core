@@ -1,5 +1,5 @@
-from plone.dexterity.browser.view import DefaultView
 from plone import api
+from plone.dexterity.browser.view import DefaultView
 
 
 class Directory(DefaultView):
