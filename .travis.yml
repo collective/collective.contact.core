@@ -1,33 +1,88 @@
+dist: bionic
 language: python
+sudo: false
+cache:
+  pip: true
+  directories:
+  - eggs
 python:
-- 2.7
+  - "2.7"
+matrix:
+  include:
+    - python: "2.7"
+      env: PLONE_VERSION=51
+    - python: "2.7"
+      env: PLONE_VERSION=52
+    - python: "3.7"
+      env: PLONE_VERSION=52
+  sudo: true
+  fast_finish: true
+before_install:
+  - sudo apt-get install -y firefox-geckodriver
+  - virtualenv -p `which python` .
+  - bin/pip install -r requirements.txt -c constraints_plone$PLONE_VERSION.txt
+  - cp test_plone$PLONE_VERSION.cfg buildout.cfg
+
 install:
-- mkdir -p buildout-cache/{eggs,downloads}
-- python bootstrap.py -c travis.cfg
-- bin/buildout -c travis.cfg -N -q -t 3
-- pip install coverage
-- curl -O https://saucelabs.com/downloads/sc-4.4.11-linux.tar.gz
-- tar xzvf sc-4.4.11-linux.tar.gz
-- ./sc-4.4.11-linux/bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY -i $TRAVIS_JOB_ID -f CONNECTED &
-- JAVA_PID=$!
-- bash -c "while [ ! -f CONNECTED ]; do sleep 2; done"
+  - bin/buildout -N -t 3 code-analysis:return-status-codes=True annotate
+  - bin/buildout -N -t 3 code-analysis:return-status-codes=True
+
+before_script:
+- 'export DISPLAY=:99.0'
+- Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+- sleep 3
+- firefox -v
+
 script:
-- bin/test
-- coverage run ./bin/test -t \!robot
+# Run code-analysis, except on Python 3.6, which mysteriously fails to find zc.buildout.
+  - python --version 2> /dev/stdout | grep 3.6 || bin/code-analysis
+  - bin/test --all
+
 after_success:
-- pip install coveralls
-- coveralls
-after_script:
-- kill $JAVA_PID
-notifications:
-  email:
-  - prive-ged@listes.entrouvert.com
-  - travis-reports@ecreall.com
-  - devs@imio.be
-env:
-  global:
-  - secure: vUcL3IrMd2Wc2fEnrIR6jD/e1tqnNKiJHKy83EPJM08xLPUghDbx5VoGtfrIur4GN22Ov+nCIH3U6n4BMrsaIj7KGSrOS31tY+UDQHpiu9t03oCfg5e7wHi1/4tn6aVN5UZI1A8a4xJO4S+ziXkM/VbOk2Ln5Petpsck/c2I9ps=
-  - secure: coD6Bmb6pK+dfbUj49Rmi7XNj1QCGYTECmZvpRWeJs2HFaYceb6Bc+yJI2hFc06P6XUwUoPOS52rn6C/JOcOFXdCuwSSXxKBVgXdt9jDTDYRumbhUqEJfLLqd012gfs10cZDE09uH0W+FPpLaD3Ft71JLhf9WzjXwgO6EVxFp/8=
-  - ROBOT_BUILD_NUMBER=travis-$TRAVIS_BUILD_NUMBER
-  - ROBOT_REMOTE_URL=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com:80/wd/hub
-  - ROBOT_DESIRED_CAPABILITIES=tunnel-identifier:$TRAVIS_JOB_ID
+  - bin/createcoverage --output-dir=parts/test/coverage
+  - bin/pip install coverage
+  - bin/python -m coverage.pickle2json
+  - bin/pip install -q coveralls
+  - bin/coveralls
+
+
+
+
+
+
+
+
+
+# language: python
+# python:
+# - 2.7
+# install:
+# - mkdir -p buildout-cache/{eggs,downloads}
+# - python bootstrap.py -c travis.cfg
+# - bin/buildout -c travis.cfg -N -q -t 3
+# - pip install coverage
+# - curl -O https://saucelabs.com/downloads/sc-4.4.11-linux.tar.gz
+# - tar xzvf sc-4.4.11-linux.tar.gz
+# - ./sc-4.4.11-linux/bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY -i $TRAVIS_JOB_ID -f CONNECTED &
+# - JAVA_PID=$!
+# - bash -c "while [ ! -f CONNECTED ]; do sleep 2; done"
+# script:
+# - bin/test
+# - coverage run ./bin/test -t \!robot
+# after_success:
+# - pip install coveralls
+# - coveralls
+# after_script:
+# - kill $JAVA_PID
+# notifications:
+#   email:
+#   - prive-ged@listes.entrouvert.com
+#   - travis-reports@ecreall.com
+#   - devs@imio.be
+# env:
+#   global:
+#   - secure: vUcL3IrMd2Wc2fEnrIR6jD/e1tqnNKiJHKy83EPJM08xLPUghDbx5VoGtfrIur4GN22Ov+nCIH3U6n4BMrsaIj7KGSrOS31tY+UDQHpiu9t03oCfg5e7wHi1/4tn6aVN5UZI1A8a4xJO4S+ziXkM/VbOk2Ln5Petpsck/c2I9ps=
+#   - secure: coD6Bmb6pK+dfbUj49Rmi7XNj1QCGYTECmZvpRWeJs2HFaYceb6Bc+yJI2hFc06P6XUwUoPOS52rn6C/JOcOFXdCuwSSXxKBVgXdt9jDTDYRumbhUqEJfLLqd012gfs10cZDE09uH0W+FPpLaD3Ft71JLhf9WzjXwgO6EVxFp/8=
+#   - ROBOT_BUILD_NUMBER=travis-$TRAVIS_BUILD_NUMBER
+#   - ROBOT_REMOTE_URL=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com:80/wd/hub
+#   - ROBOT_DESIRED_CAPABILITIES=tunnel-identifier:$TRAVIS_JOB_ID

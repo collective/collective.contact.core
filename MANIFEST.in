@@ -1,6 +1,6 @@
-recursive-include src/collective *
-recursive-include docs *
-include *
+graft src/collective
+graft docs
+include *.rst
+global-exclude *.pyc
 exclude .installed.cfg
 exclude .mr.developer.cfg
-global-exclude *pyc
