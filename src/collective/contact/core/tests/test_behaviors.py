@@ -31,11 +31,11 @@ class TestBehaviors(unittest.TestCase, BaseTest):
 
     def test_behaviors_installation(self):
         contact_details_behavior = getUtility(IBehavior,
-                name='collective.contact.core.behaviors.IContactDetails')
+                                              name='collective.contact.core.behaviors.IContactDetails')
         global_positioning_behavior = getUtility(IBehavior,
-                name='collective.contact.core.behaviors.IGlobalPositioning')
+                                                 name='collective.contact.core.behaviors.IGlobalPositioning')
         birthday_behavior = getUtility(IBehavior,
-                name='collective.contact.core.behaviors.IBirthday')
+                                       name='collective.contact.core.behaviors.IBirthday')
         self.assertEqual(contact_details_behavior.interface, IContactDetails)
         self.assertEqual(global_positioning_behavior.interface,
                          IGlobalPositioning)

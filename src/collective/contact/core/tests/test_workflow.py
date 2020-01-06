@@ -8,35 +8,36 @@ import unittest
 
 
 USERDEFS = [
-        {'user': 'manager', 'roles': ('Manager', 'Member',), 'groups': ()},
-        {'user': 'contributor', 'roles': ('Contributor', 'Member',), 'groups': ()},
-        {'user': 'member', 'roles': ('Member',), 'groups': ()},
-        ]
+    {'user': 'manager', 'roles': ('Manager', 'Member',), 'groups': ()},
+    {'user': 'contributor', 'roles': (
+        'Contributor', 'Member',), 'groups': ()},
+    {'user': 'member', 'roles': ('Member',), 'groups': ()},
+]
 
 
 PERSON_PERMISSIONS = {'active':
-                        {'Access contents information':
-                         ('manager', 'contributor', 'member'),
-                         'Modify portal content':
-                         ('manager', 'contributor'),
-                         'View':
-                         ('manager', 'contributor', 'member'),
-                        },
-                     'deactivated':
-                        {'Access contents information':
-                         ('manager', 'contributor'),
-                         'Modify portal content':
-                         ('manager', 'contributor'),
-                         'View':
-                         ('manager', 'contributor'),
-                        },
-                     }
+                      {'Access contents information':
+                       ('manager', 'contributor', 'member'),
+                       'Modify portal content':
+                       ('manager', 'contributor'),
+                       'View':
+                       ('manager', 'contributor', 'member'),
+                       },
+                      'deactivated':
+                      {'Access contents information':
+                       ('manager', 'contributor'),
+                       'Modify portal content':
+                       ('manager', 'contributor'),
+                       'View':
+                       ('manager', 'contributor'),
+                       },
+                      }
 
 
 WORKFLOW_TRACK = [('', 'active'),
                   ('deactivate', 'deactivated'),
                   ('activate', 'active'),
-                 ]
+                  ]
 
 
 class TestSecurity(unittest.TestCase, BaseWorkflowTest):

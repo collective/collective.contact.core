@@ -23,8 +23,7 @@ except ImportError:
     HAS_EXCELEXPORT = False
 
 
-
-if HAS_EXCELEXPORT:
+if HAS_EXCELEXPORT:  # noqa for now 'is too complex'
 
     class ContactFieldRenderer(BaseFieldRenderer):
         adapts(IContactChoice, Interface, Interface)
@@ -58,14 +57,14 @@ if HAS_EXCELEXPORT:
                 try:
                     # check if there is a specific adapter for the field name
                     exportable = getMultiAdapter(
-                                        (field, self.context, self.request),
-                                        interface=IExportable,
-                                        name=field_name)
+                        (field, self.context, self.request),
+                        interface=IExportable,
+                        name=field_name)
                 except ComponentLookupError:
                     # get the generic adapter for the field
                     exportable = getMultiAdapter(
-                                        (field, self.context, self.request),
-                                        interface=IExportable)
+                        (field, self.context, self.request),
+                        interface=IExportable)
 
                 exportables.append(exportable)
 

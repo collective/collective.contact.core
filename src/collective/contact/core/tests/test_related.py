@@ -4,7 +4,6 @@ from collective.contact.core.behaviors import IRelatedOrganizations
 from collective.contact.core.indexers import organization_searchable_text
 from collective.contact.core.testing import INTEGRATION
 from ecreall.helpers.testing.base import BaseTest
-from plone import api
 from z3c.relationfield.relation import RelationValue
 from zope.component import getUtility
 from zope.interface import alsoProvides
@@ -29,7 +28,7 @@ class TestSearch(unittest.TestCase, BaseTest):
 
     def test_related_searchable_text(self):
         self.assertEqual(organization_searchable_text(self.divisionalpha)(),
-            u"Armée de terre Corps A Division Alpha")
+                         u"Armée de terre Corps A Division Alpha")
 
         intids = getUtility(IIntIds)
         alsoProvides(self.divisionalpha, IRelatedOrganizations)
@@ -37,4 +36,4 @@ class TestSearch(unittest.TestCase, BaseTest):
             RelationValue(intids.getId(self.divisionbeta)),
         ]
         self.assertEqual(organization_searchable_text(self.divisionalpha)(),
-            u'Armée de terre Corps A Division Beta Armée de terre Corps A Division Alpha')
+                         u'Armée de terre Corps A Division Beta Armée de terre Corps A Division Alpha')

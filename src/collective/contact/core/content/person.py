@@ -28,32 +28,32 @@ class IPerson(model.Schema, IContactContent):
     lastname = schema.TextLine(
         title=_("Lastname"),
         required=True
-        )
+    )
     firstname = schema.TextLine(
         title=_("Firstname"),
         required=False,
-        )
+    )
     gender = schema.Choice(
         title=_("Gender"),
         vocabulary="Genders",
         required=False,
-        )
+    )
     form.widget(gender=RadioFieldWidget)
     person_title = schema.TextLine(
         title=_("Person title"),
         description=_('help_person_title',
                       u"Doctor, Mrs..."),
         required=False,
-        )
+    )
     photo = NamedImage(
         title=_("Photo"),
         required=False,
-        )
+    )
     signature = NamedImage(
         title=_("Signature"),
         description=_("Scanned signature"),
         required=False,
-        )
+    )
 
     def get_held_positions(self):
         """Returns held positions of this person

@@ -20,7 +20,7 @@ class DexterityConfigurablePolicyFTI(DexterityFTI):
          'mode': 'w',
          'label': 'Schema policy',
          'description': 'Schema policy'
-        },
+         },
     )
 
     schema_policy = u'dexterity'

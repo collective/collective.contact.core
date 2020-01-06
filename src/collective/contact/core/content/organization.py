@@ -27,7 +27,7 @@ class IOrganization(model.Schema, IContactContent):
     activity = RichText(
         title=_("Activity"),
         required=False,
-        )
+    )
 
     organization_type = schema.Choice(
         title=_("Type or level"),
@@ -37,7 +37,7 @@ class IOrganization(model.Schema, IContactContent):
     logo = NamedImage(
         title=_("Logo"),
         required=False,
-        )
+    )
 
     def get_organizations_chain(self):
         """Returns the list of organizations and sub-organizations in this organization
@@ -143,9 +143,9 @@ class Organization(Container):
         catalog = getUtility(ICatalog)
         orga_intid = intids.getId(self)
         contact_relations = catalog.findRelations(
-                              {'to_id': orga_intid,
-                               'from_interfaces_flattened': IHeldPosition,
-                               'from_attribute': 'position'})
+            {'to_id': orga_intid,
+             'from_interfaces_flattened': IHeldPosition,
+             'from_attribute': 'position'})
         held_positions = []
         for relation in contact_relations:
             held_position = relation.from_object

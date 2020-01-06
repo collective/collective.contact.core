@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-from collective.contact.core.browser import TEMPLATES_DIR
 from collective.contact.core.browser.utils import get_ttw_fields
 from Products.Five import BrowserView
-from zope.interface import Interface
 
 
 class TTWFields(BrowserView):

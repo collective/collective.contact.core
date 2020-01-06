@@ -85,7 +85,7 @@ class ContactWidgetSettings(grok.GlobalUtility):
         else:
             return results[0].getObject()
 
-    def add_contact_infos(self, widget):
+    def add_contact_infos(self, widget):  # noqa for now 'is too complex'
         source = widget.bound_source
         criteria = source.selectable_filter.criteria
         addlink_enabled = widget.field.addlink

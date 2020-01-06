@@ -16,7 +16,6 @@ import logging
 logger = logging.getLogger('collective.contact.core: setuphandlers')
 
 
-
 def isNotCollectiveContactContentProfile(context):
     return context.readDataFile("collective_contact_core_marker.txt") is None
 
