@@ -8,6 +8,16 @@
 
     <h1 class="org"><img tal:attributes="src context/getIconURL" /> <span tal:content="view/name" /></h1>
 
+    <div metal:use-macro="context/kss_generic_macros/macros/generic_description_view">
+        Generic KSS Description. Is rendered with class="documentDescription".
+    </div>
+
+    <div id="logo" class="field" tal:condition="context/logo">
+        <img tal:define="scales nocall:context/@@images"
+             tal:replace="structure python:scales.tag('logo', 'thumb', css_class='photo')"
+             tal:on-error="string:Bad logo format" />
+    </div>
+
     <div id="logo" class="field" tal:condition="context/logo">
         <img tal:define="scales nocall:context/@@images"
              tal:replace="structure python:scales.tag('logo', 'thumb', css_class='photo')"

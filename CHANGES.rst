@@ -6,7 +6,9 @@ Changelog
 
 - Avoid an error when we try to remove a working copy from plone.app.iterate
   [mpeeters]
-
+- Display `description` on the organization view. Field `description` may be
+  filled but was not displayed.
+  [gbastien]
 
 1.29 (2019-11-25)
 -----------------
