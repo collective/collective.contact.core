@@ -1,7 +1,8 @@
 from . import _
 from Acquisition import aq_parent
 from collective.contact.core import logger
-from five import grok
+from zope.interface import provider
+from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -39,21 +40,18 @@ def get_vocabulary(schema_list):
     return SimpleVocabulary(terms)
 
 
-class PositionTypes(grok.GlobalUtility):
-    grok.name("PositionTypes")
-    grok.implements(IVocabularyFactory)
+@provider(IVocabularyFactory)
+def PositionTypes(context):
 
-    def __call__(self, context):
-        try:
-            directory = get_directory(context)
-            return get_vocabulary(directory.position_types)
-        except NoDirectoryFound:
-            return SimpleVocabulary([])
+    try:
+        directory = get_directory(context)
+        return get_vocabulary(directory.position_types)
+    except NoDirectoryFound:
+        return SimpleVocabulary([])
 
 
-class OrganizationTypesOrLevels(grok.GlobalUtility):
-    grok.name("OrganizationTypesOrLevels")
-    grok.implements(IVocabularyFactory)
+@implementer(IVocabularyFactory)
+class OrganizationTypesOrLevels(object):
 
     def get_container_type(self, context):
         request = context.REQUEST
@@ -77,14 +75,15 @@ class OrganizationTypesOrLevels(grok.GlobalUtility):
             return SimpleVocabulary([])
 
 
-class Genders(grok.GlobalUtility):
-    grok.name("Genders")
-    grok.implements(IVocabularyFactory)
+OrganizationTypesOrLevelsFactory = OrganizationTypesOrLevels()
 
-    def __call__(self, context):
-        terms = []
-        genders = {'M': _("Male"), 'F': _("Female")}
-        for (token, value) in genders.iteritems():
-            term = SimpleVocabulary.createTerm(token, token, value)
-            terms.append(term)
-        return SimpleVocabulary(terms)
+
+@provider(IVocabularyFactory)
+def Genders(context):
+
+    terms = []
+    genders = {'M': _("Male"), 'F': _("Female")}
+    for (token, value) in genders.iteritems():
+        term = SimpleVocabulary.createTerm(token, token, value)
+        terms.append(term)
+    return SimpleVocabulary(terms)
