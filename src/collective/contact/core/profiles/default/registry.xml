@@ -1,4 +1,13 @@
 <registry>
+
+  <records interface="collective.contact.core.interfaces.IContactCoreParameters" />
+
+  <record name="plone.displayed_types" interface="Products.CMFPlone.interfaces.controlpanel.INavigationSchema" field="displayed_types">
+    <value purge="False">
+      <element>directory</element>
+    </value>
+  </record>
+
   <records prefix="plone.resources/collective.contact.core"
            interface='Products.CMFPlone.interfaces.IResourceRegistry'>
     <value key="js">++resource++collective.contact.core/forms.js</value>
@@ -18,4 +27,5 @@
     <value key="jscompilation">++resource++collective.contact.core/forms.min.js</value>
     <value key="last_compilation">2019-02-15 10:32:00</value>
   </records>
+
 </registry>

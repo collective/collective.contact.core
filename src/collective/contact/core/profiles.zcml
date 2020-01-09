@@ -12,17 +12,10 @@
     <depends name="plone.app.registry"/>
   </genericsetup:importStep>
 
-  <genericsetup:registerProfile
-      name="install-base"
-      title="collective.contact.core"
-      directory="profiles/base"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-  />
-
   <genericsetup:registerProfile zcml:condition="have plone-5"
       name="default"
       title="collective.contact.core"
-      directory="profiles/plone5"
+      directory="profiles/default"
       description="Installs the collective.contact.core package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
   />

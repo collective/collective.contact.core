@@ -26,8 +26,6 @@
   <include file="skins.zcml" />
   <include file="profiles.zcml" />
 
-  <include zcml:condition="not-have plone-5" file="plone4.zcml" />
-
   <adapter
     name="SearchableText"
     factory=".indexers.held_position_searchable_text"
