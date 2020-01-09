@@ -173,6 +173,13 @@
       permission="zope2.View"
       />
 
+  <browser:page
+       name="contact.vcf"
+       for="collective.contact.widget.interfaces.IContactContent"
+       class=".vcard_export.ContactVCF"
+       permission="zope2.View"
+       />
+
   <include zcml:condition="installed collective.excelexport"
            file="excelexport.zcml" />
 
