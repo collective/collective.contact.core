@@ -2,7 +2,6 @@
 from collective.contact.core import _
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
-from five import grok
 from plone.autoform.directives import widget
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
@@ -51,10 +50,8 @@ class Directory(Container):
     implements(IDirectory)
 
 
-class DirectorySchemaPolicy(grok.GlobalUtility,
-                            DexteritySchemaPolicy):
+class DirectorySchemaPolicy(DexteritySchemaPolicy):
     """Schema policy for Directory content type"""
-    grok.name("schema_policy_directory")
 
     def bases(self, schemaName, tree):
         return (IDirectory, )

@@ -2,7 +2,6 @@
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.core.interfaces import IHeldPosition
 from ComputedAttribute import ComputedAttribute
-from five import grok
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from Products.CMFPlone.utils import normalizeString
@@ -137,11 +136,8 @@ class HeldPosition(Container):
         return person.photo
 
 
-class HeldPositionSchemaPolicy(grok.GlobalUtility,
-                               DexteritySchemaPolicy):
+class HeldPositionSchemaPolicy(DexteritySchemaPolicy):
     """Schema policy for HeldPosition content type"""
-
-    grok.name("schema_policy_held_position")
 
     def bases(self, schemaName, tree):
         return (IHeldPosition,)

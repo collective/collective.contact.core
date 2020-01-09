@@ -21,6 +21,7 @@
   <include package="five.globalrequest" />
   <include package=".upgrades" />
   <include package=".browser" />
+  <include package=".content" />
 
   <include file="behaviors.zcml" />
   <include file="skins.zcml" />

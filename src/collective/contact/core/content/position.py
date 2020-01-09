@@ -4,7 +4,6 @@ from collective.contact.core import logger
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
-from five import grok
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.supermodel import model
@@ -97,11 +96,8 @@ class Position(Container):
         return held_positions
 
 
-class PositionSchemaPolicy(grok.GlobalUtility,
-                           DexteritySchemaPolicy):
+class PositionSchemaPolicy(DexteritySchemaPolicy):
     """Schema policy for Position content type"""
-
-    grok.name("schema_policy_position")
 
     def bases(self, schemaName, tree):
         return (IPosition,)

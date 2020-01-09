@@ -6,7 +6,6 @@ from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.core.interfaces import IPersonHeldPositions
 from collective.contact.widget.interfaces import IContactContent
-from five import grok
 from plone.autoform import directives as form
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
@@ -141,11 +140,8 @@ class Person(Container):
         return u' '.join([x for x in (self.firstname, self.lastname) if x])
 
 
-class PersonSchemaPolicy(grok.GlobalUtility,
-                         DexteritySchemaPolicy):
+class PersonSchemaPolicy(DexteritySchemaPolicy):
     """Schema policy for Person content type"""
-
-    grok.name("schema_policy_person")
 
     def bases(self, schemaName, tree):
         return (IPerson, )
