@@ -1,21 +1,17 @@
 # -*- coding: utf-8 -*-
 from collective.contact.core import _
-from five import grok
+from Products.Five import BrowserView
 from zope.i18n import translate
 from zope.interface import Interface
 
 import json
 
 
-class GenderPersonTitleMapping(grok.View):
+class GenderPersonTitleMapping(BrowserView):
 
     """Return gender/person_title mapping in json."""
 
-    grok.name("gender_person_title_mapping.json")
-    grok.context(Interface)
-    grok.require('zope2.View')
-
-    def render(self):
+    def __call__(self):
         request = self.request
         request.response.setHeader(
             'Content-Type', 'application/json')

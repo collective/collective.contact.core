@@ -100,6 +100,15 @@
       />
 
   <browser:page
+      name="gender_person_title_mapping.json"
+      for="*"
+      class=".person_title_mapping.GenderPersonTitleMapping"
+      permission="zope2.View"
+      />
+
+
+
+  <browser:page
       name="heldpositions"
       for=".person.IPerson"
       class=".person.HeldPositions"
