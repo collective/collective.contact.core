@@ -26,6 +26,7 @@
   <include file="behaviors.zcml" />
   <include file="skins.zcml" />
   <include file="profiles.zcml" />
+  <include file="subscribers.zcml" />
 
   <adapter
     name="SearchableText"

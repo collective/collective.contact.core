@@ -3,7 +3,6 @@ from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.content.person import IPerson
 from collective.contact.core.content.position import IPosition
 from collective.contact.core.interfaces import IHeldPosition
-from five import grok
 from z3c.form.interfaces import NO_VALUE
 from zope.container.contained import ContainerModifiedEvent
 from zope.lifecycleevent.interfaces import IObjectAddedEvent
@@ -16,8 +15,6 @@ from zope.schema import getFields
 indexes_to_update = ['SearchableText']
 
 
-@grok.subscribe(IHeldPosition, IObjectAddedEvent)
-@grok.subscribe(IHeldPosition, IObjectModifiedEvent)
 def update_related_with_held_position(obj, event=None):
     if isinstance(event, ContainerModifiedEvent):
         return
@@ -25,7 +22,6 @@ def update_related_with_held_position(obj, event=None):
     obj.get_person().reindexObject(idxs=indexes_to_update)
 
 
-@grok.subscribe(IPosition, IObjectModifiedEvent)
 def update_related_with_position(obj, event=None):
     if isinstance(event, ContainerModifiedEvent):
         return
@@ -35,7 +31,6 @@ def update_related_with_position(obj, event=None):
         update_related_with_held_position(held_position)
 
 
-@grok.subscribe(IPerson, IObjectModifiedEvent)
 def update_related_with_person(obj, event=None):
     if isinstance(event, ContainerModifiedEvent):
         return
@@ -44,7 +39,6 @@ def update_related_with_person(obj, event=None):
         held_position.reindexObject(idxs=indexes_to_update)
 
 
-@grok.subscribe(IOrganization, IObjectModifiedEvent)
 def update_related_with_organization(obj, event=None):
     if isinstance(event, ContainerModifiedEvent):
         return
@@ -65,8 +59,6 @@ def update_related_with_organization(obj, event=None):
             update_related_with_organization(child)
 
 
-@grok.subscribe(IContactDetails, IObjectModifiedEvent)
-@grok.subscribe(IContactDetails, IObjectAddedEvent)
 def clear_fields_use_parent_address(obj, event):
     """If 'use parent address' has been selected,
     ensure content address fields are cleared
