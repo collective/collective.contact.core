@@ -13,6 +13,14 @@
       />
 
   <browser:page
+      name="address"
+      for="collective.contact.core.behaviors.IContactDetails"
+      class=".address.Address"
+      template="templates/address.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
       name="view"
       for="..interfaces.IHeldPosition"
       class=".contact.Contact"

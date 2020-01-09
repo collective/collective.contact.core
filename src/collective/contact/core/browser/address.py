@@ -4,11 +4,8 @@ from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.browser import TEMPLATES_DIR
 from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.interfaces import IHeldPosition
-from five import grok
+from Products.Five import BrowserView
 from plone import api
-
-
-grok.templatedir(TEMPLATES_DIR)
 
 
 def get_address(obj):
@@ -41,11 +38,7 @@ def get_address(obj):
     return address
 
 
-class Address(grok.View):
-    grok.name('address')
-    grok.context(IContactDetails)
-    grok.require("zope2.View")
-    grok.template('address')
+class Address(BrowserView):
 
     def namespace(self):
         return get_address(self.context)
