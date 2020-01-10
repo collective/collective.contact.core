@@ -140,6 +140,12 @@
       permission="zope2.View"
       />
 
+
+  <utility
+      factory=".addcontact.ContactWidgetSettings"
+      provides="collective.contact.widget.interfaces.IContactWidgetSettings"
+      />
+
   <browser:page
       name="add-contact"
       for="*"

@@ -5,7 +5,6 @@ from collective.contact.core.content.person import IPerson
 from collective.contact.widget.interfaces import IContactWidgetSettings
 from collective.contact.widget.schema import ContactChoice
 from collective.contact.widget.source import ContactSourceBinder
-from five import grok
 from plone import api
 from plone.dexterity.browser.add import DefaultAddForm
 from plone.dexterity.events import AddCancelledEvent
@@ -31,6 +30,8 @@ from zope.i18n import Message
 from zope.interface import alsoProvides
 from zope.interface import implements
 from zope.interface import Interface
+from zope.interface import implementer
+from zope.interface import provider
 from zope.publisher.browser import BrowserView
 
 import copy
@@ -53,10 +54,8 @@ class ICustomSettings(Interface):
         """Return add url for the specified portal_type.
         """
 
-
-class ContactWidgetSettings(grok.GlobalUtility):
-    grok.provides(IContactWidgetSettings)
-    grok.implements(ICustomSettings)
+@implementer(ICustomSettings)
+class ContactWidgetSettings(object):
 
     def label_for_portal_type(self, portal_type):
         if isinstance(portal_type, Message):
