@@ -7,7 +7,6 @@ from collective.contact.core.browser.address import get_address
 from collective.contact.core.browser.utils import get_valid_url
 from collective.contact.core.interfaces import IContactable
 from collective.contact.core.interfaces import IContactCoreParameters
-from five import grok
 from plone import api
 from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.utils import getAdditionalSchemata
@@ -17,9 +16,6 @@ from zope.globalrequest import getRequest
 from zope.interface import implementer
 
 import os.path
-
-
-grok.templatedir(TEMPLATES_DIR)
 
 
 @implementer(IContactable)
