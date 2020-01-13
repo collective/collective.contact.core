@@ -3,6 +3,7 @@ from AccessControl import getSecurityManager
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.browser.utils import date_to_DateTime
+from collective.contact.core.content.person import IPerson  # noqa
 from collective.contact.core.interfaces import IContactable
 from collective.contact.core.interfaces import IPersonHeldPositions
 from Products.Five import BrowserView
