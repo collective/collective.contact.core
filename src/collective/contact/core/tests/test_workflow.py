@@ -1,6 +1,7 @@
 # -*- coding: utf8 -*-
 
-from collective.contact.core.testing import INTEGRATION
+from collective.contact.core.testing import COLLECTIVE_CONTACT_CORE_ACCEPTANCE_TESTING
+from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from ecreall.helpers.testing import member as memberhelpers
 from ecreall.helpers.testing.workflow import BaseWorkflowTest
 
@@ -43,7 +44,7 @@ WORKFLOW_TRACK = [('', 'active'),
 class TestSecurity(unittest.TestCase, BaseWorkflowTest):
     """Tests collective.contact.core workflows"""
 
-    layer = INTEGRATION
+    layer = COLLECTIVE_CONTACT_CORE_ACCEPTANCE_TESTING
 
     def setUp(self):
         super(TestSecurity, self).setUp()

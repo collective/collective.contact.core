@@ -7,7 +7,7 @@ from collective.contact.core.indexers import organization_searchable_text
 from collective.contact.core.indexers import person_sortable_title
 from collective.contact.core.indexers import start_date
 from collective.contact.core.setuphandlers import create_test_held_positions
-from collective.contact.core.testing import INTEGRATION
+from collective.contact.core.testing import COLLECTIVE_CONTACT_CORE_ACCEPTANCE_TESTING
 from ecreall.helpers.testing.base import BaseTest
 from plone import api
 
@@ -18,7 +18,7 @@ import unittest
 class TestSearch(unittest.TestCase, BaseTest):
     """Tests search"""
 
-    layer = INTEGRATION
+    layer = COLLECTIVE_CONTACT_CORE_ACCEPTANCE_TESTING
 
     def setUp(self):
         super(TestSearch, self).setUp()

@@ -12,7 +12,7 @@
     <depends name="plone.app.registry"/>
   </genericsetup:importStep>
 
-  <genericsetup:registerProfile zcml:condition="have plone-5"
+  <genericsetup:registerProfile
       name="default"
       title="collective.contact.core"
       directory="profiles/default"

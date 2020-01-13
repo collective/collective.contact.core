@@ -1,4 +1,4 @@
-from ..testing import ACCEPTANCE
+from ..testing import COLLECTIVE_CONTACT_CORE_ACCEPTANCE_TESTING
 from plone.testing import layered
 
 import os
@@ -18,7 +18,7 @@ def test_suite():
         suite.addTests([
             layered(
                 robotsuite.RobotTestSuite(test),
-                layer=ACCEPTANCE
+                layer=COLLECTIVE_CONTACT_CORE_ACCEPTANCE_TESTING
             ),
         ])
     return suite

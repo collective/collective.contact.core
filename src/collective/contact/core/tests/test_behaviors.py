@@ -2,7 +2,7 @@
 from collective.contact.core.behaviors import IBirthday
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.behaviors import IGlobalPositioning
-from collective.contact.core.testing import INTEGRATION
+from collective.contact.core.testing import COLLECTIVE_CONTACT_CORE_ACCEPTANCE_TESTING
 from ecreall.helpers.testing.base import BaseTest
 from plone.app.testing.helpers import setRoles
 from plone.app.testing.interfaces import TEST_USER_ID
@@ -19,7 +19,7 @@ import unittest
 class TestBehaviors(unittest.TestCase, BaseTest):
     """Tests behaviors"""
 
-    layer = INTEGRATION
+    layer = COLLECTIVE_CONTACT_CORE_ACCEPTANCE_TESTING
 
     def setUp(self):
         super(TestBehaviors, self).setUp()

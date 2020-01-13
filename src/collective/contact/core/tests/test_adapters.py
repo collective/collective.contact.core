@@ -4,7 +4,7 @@ from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.interfaces import IPersonHeldPositions
 from collective.contact.core.interfaces import IVCard
 from collective.contact.core.setuphandlers import create_test_held_positions
-from collective.contact.core.testing import INTEGRATION
+from collective.contact.core.testing import COLLECTIVE_CONTACT_CORE_ACCEPTANCE_TESTING
 from ecreall.helpers.testing.base import BaseTest
 from plone import api
 from plone.app.testing.interfaces import TEST_USER_NAME
@@ -19,7 +19,7 @@ import unittest
 class TestAdapters(unittest.TestCase, BaseTest):
     """Tests adapters"""
 
-    layer = INTEGRATION
+    layer = COLLECTIVE_CONTACT_CORE_ACCEPTANCE_TESTING
 
     def setUp(self):
         super(TestAdapters, self).setUp()

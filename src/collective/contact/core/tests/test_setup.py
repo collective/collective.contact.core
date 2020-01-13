@@ -1,4 +1,4 @@
-from collective.contact.core.testing import INTEGRATION
+from collective.contact.core.testing import COLLECTIVE_CONTACT_CORE_ACCEPTANCE_TESTING
 from plone import api
 
 import unittest
@@ -6,7 +6,7 @@ import unittest
 
 class TestSetup(unittest.TestCase):
 
-    layer = INTEGRATION
+    layer = COLLECTIVE_CONTACT_CORE_ACCEPTANCE_TESTING
 
     def setUp(self):
         super(TestSetup, self).setUp()
