@@ -3,14 +3,13 @@ from plone.dexterity.interfaces import IDexterityFTI
 from plone.supermodel import loadFile
 from plone.supermodel import loadString
 from plone.supermodel.model import Model
-from zope.interface import implements
+from zope.interface import implementer
 
 
+@implementer(IDexterityFTI)
 class DexterityConfigurablePolicyFTI(DexterityFTI):
     """A Configurable policy FTI
     """
-
-    implements(IDexterityFTI)
 
     meta_type = "Dexterity configurable policy FTI"
 

@@ -5,10 +5,10 @@ from collective.contact.widget.interfaces import IContactChoice
 from collective.contact.widget.interfaces import IContactContent
 from plone import api
 from plone.dexterity.interfaces import IDexterityFTI
-from zope.component import adapts
+from zope.component import adapter
 from zope.component import getMultiAdapter
 from zope.component.interfaces import ComponentLookupError
-from zope.interface import implements
+from zope.interface import implementer
 from zope.interface import Interface
 
 
@@ -25,8 +25,8 @@ except ImportError:
 
 if HAS_EXCELEXPORT:  # noqa for now 'is too complex'
 
+    @adapter(IContactChoice, Interface, Interface)
     class ContactFieldRenderer(BaseFieldRenderer):
-        adapts(IContactChoice, Interface, Interface)
 
         def render_value(self, obj):
             value = self.get_value(obj)
@@ -41,8 +41,8 @@ if HAS_EXCELEXPORT:  # noqa for now 'is too complex'
             else:
                 return rel_obj.Title()
 
+    @adapter(IDexterityFTI, Interface, Interface)
     class HeldPositionPersonInfoExportableFactory(BaseExportableFactory):
-        adapts(IDexterityFTI, Interface, Interface)
         portal_types = ('held_position',)
         weight = 10
 
@@ -70,9 +70,9 @@ if HAS_EXCELEXPORT:  # noqa for now 'is too complex'
 
             return exportables
 
+    @implementer(IFieldValueGetter)
+    @adapter(IContactContent)
     class ContactValueGetter(object):
-        adapts(IContactContent)
-        implements(IFieldValueGetter)
 
         def __init__(self, context):
             self.context = context

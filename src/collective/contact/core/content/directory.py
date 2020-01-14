@@ -7,7 +7,7 @@ from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.supermodel import model
 from zope import schema
-from zope.interface import implements
+from zope.interface import implementer
 from zope.interface import Interface
 
 
@@ -45,9 +45,9 @@ class IDirectory(model.Schema):
     widget('organization_levels', DataGridFieldFactory, allow_reorder=True)
 
 
+@implementer(IDirectory)
 class Directory(Container):
     """Directory content type"""
-    implements(IDirectory)
 
 
 class DirectorySchemaPolicy(DexteritySchemaPolicy):

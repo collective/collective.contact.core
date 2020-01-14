@@ -28,7 +28,6 @@ from zope.event import notify
 from zope.i18n import Message
 from zope.interface import alsoProvides
 from zope.interface import implementer
-from zope.interface import implements
 from zope.interface import Interface
 from zope.publisher.browser import BrowserView
 
@@ -181,8 +180,8 @@ return '<img src="%s/++resource++collective.contact.core/' + row[2] + '_icon.png
                 }
 
 
+@implementer(IContentProvider)
 class MasterSelectAddContactProvider(BrowserView):
-    implements(IContentProvider)
 
     def __init__(self, context, request, view):
         super(MasterSelectAddContactProvider, self).__init__(context, request)
@@ -334,6 +333,7 @@ class IAddContact(model.Schema):
         source=ContactSourceBinder(portal_type="position"))
 
 
+@implementer(IFieldsAndContentProvidersForm)
 class AddContact(DefaultAddForm, form.AddForm):
     """
     The following is possible with this AddContact form:
@@ -345,7 +345,6 @@ class AddContact(DefaultAddForm, form.AddForm):
       It's for this case we want no required errors in the form if the
       IHeldPosition required fields are not filled.
     """
-    implements(IFieldsAndContentProvidersForm)
     contentProviders = ContentProviders(['organization-ms'])
     #    contentProviders['organization-ms'] = MasterSelectAddContactProvider
     contentProviders['organization-ms'].position = -1
@@ -475,8 +474,8 @@ class AddContactFromPosition(AddContact):
         super(AddContactFromPosition, self).updateWidgets()
 
 
+@implementer(IFieldsAndContentProvidersForm)
 class AddOrganization(form.AddForm):
-    implements(IFieldsAndContentProvidersForm)
     contentProviders = ContentProviders(['organization-ms'])
     contentProviders['organization-ms'].position = 2
     label = _(u"Create ${name}", mapping={'name': _(u"organization/position")})

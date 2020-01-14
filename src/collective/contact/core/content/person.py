@@ -18,7 +18,7 @@ from z3c.form.interfaces import NO_VALUE
 from zope import schema
 from zope.cachedescriptors.property import CachedProperty
 from zope.component import queryUtility
-from zope.interface import implements
+from zope.interface import implementer
 
 
 class IPerson(model.Schema, IContactContent):
@@ -85,10 +85,9 @@ class PersonContactableAdapter(Contactable):
             return ()
 
 
+@implementer(IPerson)
 class Person(Container):
     """Person content type"""
-
-    implements(IPerson)
 
     # plone.dexterity.content.Content.__getattr__ retrieve the field.default
     # so step 1.2.1 in z3c.form.widget.py returns something instead of NO_VALUE

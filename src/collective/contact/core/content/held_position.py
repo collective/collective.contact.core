@@ -7,7 +7,7 @@ from plone.dexterity.schema import DexteritySchemaPolicy
 from Products.CMFPlone.utils import normalizeString
 from Products.CMFPlone.utils import safe_unicode
 from z3c.form.interfaces import NO_VALUE
-from zope.interface import implements
+from zope.interface import implementer
 
 
 def acqproperty(func):
@@ -32,12 +32,11 @@ class HeldPositionContactableAdapter(Contactable):
         return organization and organization.get_organizations_chain() or []
 
 
+@implementer(IHeldPosition)
 class HeldPosition(Container):
     """HeldPosition content type
     Links a Position or an Organization to a person in an organization
     """
-
-    implements(IHeldPosition)
 
     use_parent_address = NO_VALUE
     parent_address = NO_VALUE
