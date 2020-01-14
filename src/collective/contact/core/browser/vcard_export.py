@@ -1,5 +1,4 @@
 from collective.contact.core.interfaces import IVCard
-from collective.contact.widget.interfaces import IContactContent
 from Products.Five import BrowserView
 
 

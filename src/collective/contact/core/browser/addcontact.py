@@ -2,7 +2,6 @@ from AccessControl import getSecurityManager
 from collective.contact.core import _
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.content.person import IPerson
-from collective.contact.widget.interfaces import IContactWidgetSettings
 from collective.contact.widget.schema import ContactChoice
 from collective.contact.widget.source import ContactSourceBinder
 from plone import api
@@ -28,10 +27,9 @@ from zope.contentprovider.interfaces import IContentProvider
 from zope.event import notify
 from zope.i18n import Message
 from zope.interface import alsoProvides
+from zope.interface import implementer
 from zope.interface import implements
 from zope.interface import Interface
-from zope.interface import implementer
-from zope.interface import provider
 from zope.publisher.browser import BrowserView
 
 import copy
@@ -53,6 +51,7 @@ class ICustomSettings(Interface):
     def add_url_for_portal_type(self, directory_url, portal_type):
         """Return add url for the specified portal_type.
         """
+
 
 @implementer(ICustomSettings)
 class ContactWidgetSettings(object):

@@ -1,8 +1,8 @@
 from . import _
 from Acquisition import aq_parent
 from collective.contact.core import logger
-from zope.interface import provider
 from zope.interface import implementer
+from zope.interface import provider
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
 

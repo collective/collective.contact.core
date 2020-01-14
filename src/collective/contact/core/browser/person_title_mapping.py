@@ -2,7 +2,6 @@
 from collective.contact.core import _
 from Products.Five import BrowserView
 from zope.i18n import translate
-from zope.interface import Interface
 
 import json
 

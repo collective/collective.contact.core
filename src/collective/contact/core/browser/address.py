@@ -1,11 +1,10 @@
 from Acquisition import aq_base
 from collective.contact.core.behaviors import ADDRESS_FIELDS
 from collective.contact.core.behaviors import IContactDetails
-from collective.contact.core.browser import TEMPLATES_DIR
 from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.interfaces import IHeldPosition
-from Products.Five import BrowserView
 from plone import api
+from Products.Five import BrowserView
 
 
 def get_address(obj):

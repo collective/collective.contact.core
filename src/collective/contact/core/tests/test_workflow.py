@@ -1,7 +1,6 @@
 # -*- coding: utf8 -*-
 
 from collective.contact.core.testing import COLLECTIVE_CONTACT_CORE_ACCEPTANCE_TESTING
-from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from ecreall.helpers.testing import member as memberhelpers
 from ecreall.helpers.testing.workflow import BaseWorkflowTest
 
