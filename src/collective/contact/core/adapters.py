@@ -77,10 +77,11 @@ class ContactDetailsVCard(ContactableVCard):
 
     def get_vcard(self):
         vcard = ContactableVCard.get_vcard(self)
+        title = safe_unicode(self.context.Title(), encoding='utf8')
         vcard.add('fn')
-        vcard.fn.value = self.context.Title()
+        vcard.fn.value = title
         vcard.add('n')
-        vcard.n.value = vobject.vcard.Name(self.context.Title())
+        vcard.n.value = vobject.vcard.Name(title)
         return vcard
 
 
