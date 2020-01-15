@@ -1,16 +1,12 @@
 from collective.contact.core.behaviors import IBirthday
-from collective.contact.core.content.held_position import HeldPosition
 from collective.contact.core.content.organization import IOrganization
-from collective.contact.core.content.organization import Organization
 from collective.contact.core.interfaces import IContactable
 from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.core.interfaces import IPersonHeldPositions
-from collective.contact.core.interfaces import IVCard
-from five import grok
 from plone import api
 from Products.CMFPlone.utils import safe_unicode
+from zope.interface import implementer
 from zope.interface import implements
-from zope.interface import Interface
 
 import datetime
 import vobject
@@ -74,9 +70,7 @@ class ContactableVCard:
         return vcard
 
 
-class ContactDetailsVCard(grok.Adapter, ContactableVCard):
-    grok.context(Interface)
-    grok.provides(IVCard)
+class ContactDetailsVCard(ContactableVCard):
 
     def __init__(self, context):
         self.context = context
@@ -90,10 +84,8 @@ class ContactDetailsVCard(grok.Adapter, ContactableVCard):
         return vcard
 
 
-class HeldPositionVCard(grok.Adapter, ContactableVCard):
-    grok.implements(IHeldPosition)
-    grok.context(HeldPosition)
-    grok.provides(IVCard)
+@implementer(IHeldPosition)
+class HeldPositionVCard(ContactableVCard):
 
     def __init__(self, context):
         self.context = context
@@ -147,10 +139,8 @@ class HeldPositionVCard(grok.Adapter, ContactableVCard):
         return vcard
 
 
-class OrganizationVCard(grok.Adapter, ContactableVCard):
-    grok.implements(IOrganization)
-    grok.context(Organization)
-    grok.provides(IVCard)
+@implementer(IOrganization)
+class OrganizationVCard(ContactableVCard):
 
     def __init__(self, context):
         self.context = context

@@ -83,8 +83,27 @@
     />
 
   <adapter
+    for="*"
+    provides="collective.contact.core.interfaces.IVCard"
+    factory=".adapters.ContactDetailsVCard"
+    />
+
+  <adapter
+    for="collective.contact.core.content.held_position.HeldPosition"
+    provides="collective.contact.core.interfaces.IVCard"
+    factory=".adapters.HeldPositionVCard"
+    />
+
+  <adapter
+    for="collective.contact.core.content.organization.Organization"
+    provides="collective.contact.core.interfaces.IVCard"
+    factory=".adapters.OrganizationVCard"
+    />
+
+  <adapter
     for="collective.contact.core.content.person.IPerson"
     provides="collective.contact.core.interfaces.IPersonHeldPositions"
     factory=".adapters.PersonHeldPositionsAdapter"
     />
+
 </configure>
