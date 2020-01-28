@@ -1,13 +1,41 @@
+from collective.contact.core.behaviors import ADDRESS_FIELDS
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.behaviors import IRelatedOrganizations
 from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.content.person import IPerson
 from collective.contact.core.content.position import IPosition
+from collective.contact.core.interfaces import IContactable
 from collective.contact.core.interfaces import IHeldPosition
+from collective.contact.widget.interfaces import IContactContent
 from datetime import date
 from plone import api
 from plone.indexer import indexer
 from Products.CMFPlone.utils import safe_unicode
+
+
+@indexer(IContactContent)
+def contact_email(contact):
+    email = IContactDetails(contact).email
+    return email or u''
+
+
+@indexer(IContactContent)
+def contact_source(contact):
+    csmc = api.portal.get_registry_record('collective.contact.core.interfaces.IContactCoreParameters.'
+                                          'contact_source_metadata_content', default=u'{gft}')
+    variables = {'gft': contact.get_full_title()}
+    contactable = IContactable(contact)
+    details = contactable.get_contact_details()
+    address = details.pop('address')
+    for fld in ADDRESS_FIELDS:
+        address.setdefault(fld, '')
+    variables.update(address)
+    variables.update(details)
+    try:
+        return csmc.format(**variables)
+    except:
+        pass
+    return u''
 
 
 @indexer(IOrganization)
