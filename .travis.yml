@@ -61,9 +61,9 @@ after_success:
 # - python bootstrap.py -c travis.cfg
 # - bin/buildout -c travis.cfg -N -q -t 3
 # - pip install coverage
-# - curl -O https://saucelabs.com/downloads/sc-4.4.11-linux.tar.gz
+# - curl -O https://saucelabs.com/downloads/sc-4.5.4-linux.tar.gz
 # - tar xzvf sc-4.5.4-linux.tar.gz
-# - ./sc-4.4.11-linux/bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY -i $TRAVIS_JOB_ID -f CONNECTED &
+# - ./sc-4.5.4-linux/bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY -i $TRAVIS_JOB_ID -f CONNECTED &
 # - JAVA_PID=$!
 # - bash -c "while [ ! -f CONNECTED ]; do sleep 2; done"
 # script:
