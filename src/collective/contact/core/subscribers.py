@@ -8,8 +8,8 @@ from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
 from plone import api
 from plone.app.iterate.interfaces import IWorkingCopy
-from plone.app.linkintegrity.handlers import referencedObjectRemoved as baseReferencedObjectRemoved
-from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
+# from plone.app.linkintegrity.handlers import referencedObjectRemoved as baseReferencedObjectRemoved
+# from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
 from plone.registry.interfaces import IRecordModifiedEvent
 from z3c.form.interfaces import NO_VALUE
 from zc.relation.interfaces import ICatalog
