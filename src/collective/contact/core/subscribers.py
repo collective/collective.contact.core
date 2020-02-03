@@ -6,7 +6,6 @@ from collective.contact.core.content.position import IPosition
 from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
-from five import grok
 from plone import api
 from plone.app.iterate.interfaces import IWorkingCopy
 from plone.app.linkintegrity.handlers import referencedObjectRemoved as baseReferencedObjectRemoved
