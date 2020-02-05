@@ -9,6 +9,8 @@ from Products.CMFPlone.utils import safe_unicode
 from z3c.form.interfaces import NO_VALUE
 from zope.interface import implementer
 
+import six
+
 
 def acqproperty(func):
     """Property that manages acquisition"""
@@ -96,7 +98,10 @@ class HeldPosition(Container):
     def get_full_title(self, separator=u' / ', first_index=0):
         """Returns the 'title' and include person name."""
         person_name = self.get_person_title()
-        title = self.Title(separator=separator, first_index=first_index).decode('utf8')
+        if isinstance(self.Title(), six.binary_type):
+            title = self.Title(separator=separator, first_index=first_index).decode('utf8')
+        else:
+            title = self.Title(separator=separator, first_index=first_index)
         if title[0:1] == '(':
             return u"%s %s" % (person_name, title)
         else:

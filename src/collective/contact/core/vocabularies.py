@@ -83,7 +83,7 @@ def Genders(context):
 
     terms = []
     genders = {'M': _("Male"), 'F': _("Female")}
-    for (token, value) in genders.iteritems():
+    for (token, value) in genders.items():
         term = SimpleVocabulary.createTerm(token, token, value)
         terms.append(term)
     return SimpleVocabulary(terms)

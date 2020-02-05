@@ -6,7 +6,6 @@ from collective.contact.core.interfaces import IPersonHeldPositions
 from plone import api
 from Products.CMFPlone.utils import safe_unicode
 from zope.interface import implementer
-from zope.interface import implements
 
 import datetime
 import vobject
@@ -173,8 +172,8 @@ def sort_closed_positions(position1, position2):
         return cmp(position1.end_date, position2.end_date)
 
 
+@implementer(IPersonHeldPositions)
 class PersonHeldPositionsAdapter(object):
-    implements(IPersonHeldPositions)
 
     def __init__(self, person):
         self.person = person
