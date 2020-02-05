@@ -143,8 +143,8 @@ class Organization(Container):
         orga_intid = intids.getId(self)
         contact_relations = catalog.findRelations(
             {'to_id': orga_intid,
-             'from_interfaces_flattened': IHeldPosition,
-             'from_attribute': 'position'})
+             'from_attribute': 'position'}
+        )
         held_positions = []
         for relation in contact_relations:
             held_position = relation.from_object
