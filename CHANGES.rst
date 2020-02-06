@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.30 (unreleased)
+1.30 (2020-02-06)
 -----------------
 
 - Avoid an error when we try to remove a working copy from plone.app.iterate
