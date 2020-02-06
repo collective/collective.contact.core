@@ -3,7 +3,8 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
-      tal:define="portal_url context/@@plone_portal_state/portal_url;"
+      tal:define="portal_url context/@@plone_portal_state/portal_url;
+                  ajax_load request/ajax_load | nothing;"
       i18n:domain="collective.contact.core" tal:omit-tag="">
 
   <div class="actions">
@@ -18,6 +19,9 @@
     </a>
   </div>
   <h1 class="fn"><img tal:attributes="src context/getIconURL" /> <span tal:content="view/name" /></h1>
+
+  <div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle"
+       tal:condition="python: view.display_below_content_title() and not ajax_load" />
 
   <div id="photo" class="field" tal:condition="context/photo">
       <img tal:define="scales nocall:context/@@images"

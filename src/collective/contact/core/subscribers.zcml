@@ -44,4 +44,18 @@
         handler=".subscribers.clear_fields_use_parent_address"
         />
 
+    <!-- <subscriber
+        for="plone.app.relationfield.interfaces.IDexterityHasRelations
+             zope.lifecycleevent.interfaces.IObjectRemovedEvent"
+        handler=".subscribers.referencedObjectRemoved" /> -->
+
+    <!-- <subscriber
+        for="z3c.relationfield.interfaces.IHasIncomingRelations
+             OFS.interfaces.IObjectWillBeRemovedEvent"
+        handler=".subscribers.referenceRemoved" /> -->
+
+    <subscriber
+        for="plone.registry.interfaces.IRecordModifiedEvent"
+        handler=".subscribers.recordModified"/>
+
 </configure>

@@ -7,13 +7,68 @@ Changelog
 - Use mockup for tooltips, modals and date widget.
   This removes Plone 4 compatibility.
   [thomasdesvenain]
-
 - Do not show add link if content type is not allowed as directory subcontent.
   [thomasdesvenain]
-
 - Prevent address field from being erased if they are changed programmaticaly before any manual edition.
   [thomasdesvenain]
 
+1.30 (unreleased)
+-----------------
+
+- Avoid an error when we try to remove a working copy from plone.app.iterate
+  [mpeeters]
+- Display `description` on the organization view. Field `description` may be
+  filled but was not displayed.
+  [gbastien]
+
+1.29 (unreleased)
+-----------------
+
+- Removed overlay on heldposition actions in person view.
+  [sgeulette]
+- Added option to display belowcontenttitle viewlet on contact views.
+  [sgeulette]
+
+1.28 (unreleased)
+-----------------
+
+- Ensure than export is unicode encoding.
+  [boulch]
+
+
+1.27 (unreleased)
+-----------------
+
+- Added contact_source metadata to be used in contact widget.
+  [sgeulette]
+- If person details privacy is True, contact details on person don't search related items.
+  [sgeulette]
+
+1.26 (unreleased)
+-----------------
+
+- Keep div and CSS id `viewlet-below-content-body` when rendering
+  `plone.belowcontentbody` viewlets on various views.
+  [gbastien]
+- Extended `utils.get_gender_and_number` to manage parameters `use_by` and
+  `use_to` that will add new values to returned result prepended by
+  `'B'` or `'T'`.
+  [gbastien]
+- Added email index
+  [sgeulette, daggelpop]
+
+1.25 (unreleased)
+-----------------
+
+- Call `@@gender_person_title_mapping.json` from JS on `portal_url`.
+  [gbastien]
+
+1.24 (unreleased)
+-----------------
+
+- Added method `held_position.get_label` to get the `held_position` label so it
+  is easy to override.
+  [gbastien]
 
 1.23 (2018-11-20)
 -----------------

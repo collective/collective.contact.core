@@ -153,7 +153,8 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
 };
 
 $(document).ready(function(){
-    var url = 'gender_person_title_mapping.json';
+    // call view on portal
+    var url = portal_url + '/@@gender_person_title_mapping.json';
     $.get(url, function (mapping) {
       $(document).on(
         'change',

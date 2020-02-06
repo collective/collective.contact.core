@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from collective.contact.core.behaviors import ADDRESS_FIELDS
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.behaviors import IRelatedOrganizations
@@ -67,8 +68,9 @@ def held_position_searchable_text(obj):
     if organization:
         indexed_fields.extend(organization.get_organizations_titles())
 
-    if obj.label:
-        indexed_fields.append(obj.label)
+    label = obj.get_label()
+    if label:
+        indexed_fields.append(label)
 
     email = IContactDetails(obj).email
     if email:

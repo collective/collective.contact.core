@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.contact.core\n"
-"POT-Creation-Date: 2018-10-23 08:18+0000\n"
+"POT-Creation-Date: 2019-09-05 13:13+0000\n"
 "PO-Revision-Date: 2016-10-01 22:38+0200\n"
 "Last-Translator: Cédric Messiant <cedric.messiant@gmail.com>\n"
 "Language-Team: French\n"
@@ -45,11 +45,11 @@ msgstr "Dodaj"
 msgid "Additional address details"
 msgstr "Podatki o dodatnem naslovu"
 
-#: ../interfaces.py:93
+#: ../interfaces.py:100
 msgid "Additional label"
 msgstr "Dodatna oznaka"
 
-#: ../interfaces.py:94
+#: ../interfaces.py:101
 msgid "Additional label with information that does not appear on position label"
 msgstr "Dodatna oznaka z informacijami, ki niso vidne na oznaki pozicije"
 
@@ -71,6 +71,10 @@ msgstr "GSM"
 #: ../browser/templates/contactdetails.pt:28
 msgid "Cell phone number"
 msgstr "GSM Številka"
+
+#: ../interfaces.py:64
+msgid "Choose information displayed after a search in contact widget."
+msgstr ""
 
 #: ../behaviors.py:250
 msgid "City"
@@ -98,7 +102,7 @@ msgid "Country"
 msgstr "Država"
 
 #: ../browser/addcontact.py:65
-#: ../browser/templates/organization.pt:74
+#: ../browser/templates/organization.pt:72
 #: ../browser/templates/position.pt:41
 msgid "Create ${name}"
 msgstr "Ustvari  ${name}"
@@ -135,7 +139,7 @@ msgstr "Email"
 
 #: ../browser/basefields/templates/held_position.pt:28
 #: ../browser/templates/heldpositions.pt:47
-#: ../interfaces.py:102
+#: ../interfaces.py:109
 msgid "End date"
 msgstr "Končni datum"
 
@@ -249,7 +253,7 @@ msgstr ""
 msgid "Name"
 msgstr "Ime"
 
-#: ../browser/templates/organization.pt:59
+#: ../browser/templates/organization.pt:57
 msgid "Not assigned"
 msgstr "Ni dodeljen"
 
@@ -279,11 +283,11 @@ msgstr "Tip organizacije"
 msgid "Organization types"
 msgstr "Tipi organizacij"
 
-#: ../interfaces.py:88
+#: ../interfaces.py:95
 msgid "Organization/Position"
 msgstr "Organizacija/pozicija"
 
-#: ../browser/templates/contact.pt:17
+#: ../browser/templates/contact.pt:16
 #: ../browser/templates/directory.pt:22
 msgid "Organizations"
 msgstr "Organizacije"
@@ -296,7 +300,7 @@ msgstr "Organizacije v tej organizaciji"
 msgid "Other contacts in this organization:"
 msgstr "Drugi kontakti v tej organizaciji"
 
-#: ../browser/templates/organization.pt:19
+#: ../browser/templates/organization.pt:17
 #: ../browser/templates/position.pt:17
 msgid "Parent organizations"
 msgstr "Krovne organizacije"
@@ -324,7 +328,7 @@ msgid "Phone number"
 msgstr "Telefonske številke"
 
 #: ../content/person.py:50
-#: ../interfaces.py:106
+#: ../interfaces.py:113
 msgid "Photo"
 msgstr "Foto"
 
@@ -346,7 +350,7 @@ msgstr "Tipi pozicij"
 msgid "Positions"
 msgstr "Pozicije"
 
-#: ../browser/templates/organization.pt:39
+#: ../browser/templates/organization.pt:37
 msgid "Positions in this organization"
 msgstr "Pozicije v tej organizaciji"
 
@@ -386,7 +390,7 @@ msgstr ""
 
 #: ../browser/basefields/templates/held_position.pt:22
 #: ../browser/templates/heldpositions.pt:42
-#: ../interfaces.py:98
+#: ../interfaces.py:105
 msgid "Start date"
 msgstr "Začetni datum"
 
@@ -457,11 +461,11 @@ msgid "collective.contact.core tests"
 msgstr ""
 
 #. Default: ":"
-#: ../browser/templates/organization.pt:45
+#: ../browser/templates/organization.pt:43
 msgid "colon"
 msgstr "dvopičje"
 
-#: ../browser/templates/organization.pt:55
+#: ../browser/templates/organization.pt:53
 msgid "from"
 msgstr "od"
 
@@ -484,6 +488,6 @@ msgstr "Če predmet ne obstaja, ga lahko dodaš v podatkovno bazo"
 msgid "organization/position"
 msgstr "Organizacija/pozicija"
 
-#: ../browser/templates/organization.pt:55
+#: ../browser/templates/organization.pt:53
 msgid "to"
 msgstr "za"

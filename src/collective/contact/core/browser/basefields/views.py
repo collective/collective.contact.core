@@ -2,12 +2,28 @@
 from AccessControl import getSecurityManager
 from collective.contact.core.behaviors import IBirthday
 from collective.contact.core.browser.utils import date_to_DateTime
+from collective.contact.core.content.organization import IOrganization
+from collective.contact.core.content.person import IPerson
+from collective.contact.core.content.position import IPosition
+from collective.contact.core.interfaces import IContactCoreParameters
+from collective.contact.core.interfaces import IHeldPosition
+from plone import api
 from Products.Five import BrowserView
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 
 
-class PersonBaseFields(BrowserView):
+class BaseFields(object):
+
+    def display_below_content_title(self):
+        return api.portal.get_registry_record(
+            'display_below_content_title_on_views',
+            interface=IContactCoreParameters,
+            default=False
+        )
+
+
+class PersonBaseFields(BrowserView, BaseFields):
 
     name = ''
     birthday = ''
@@ -37,7 +53,7 @@ class PersonBaseFields(BrowserView):
         return super(PersonBaseFields, self).__call__()
 
 
-class OrganizationBaseFields(BrowserView):
+class OrganizationBaseFields(BrowserView, BaseFields):
 
     name = ''
     type = ''
@@ -64,7 +80,7 @@ class OrganizationBaseFields(BrowserView):
         return super(OrganizationBaseFields, self).__call__()
 
 
-class PositionBaseFields(BrowserView):
+class PositionBaseFields(BrowserView, BaseFields):
 
     name = ''
     type = ''
@@ -82,7 +98,7 @@ class PositionBaseFields(BrowserView):
         return super(PositionBaseFields, self).__call__()
 
 
-class HeldPositionBaseFields(BrowserView):
+class HeldPositionBaseFields(BrowserView, BaseFields):
 
     start_date = ''
     end_date = ''

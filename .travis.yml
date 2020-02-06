@@ -53,17 +53,19 @@ after_success:
 
 
 
-# language: python
+#language: python
 # python:
 # - 2.7
 # install:
 # - mkdir -p buildout-cache/{eggs,downloads}
-# - python bootstrap.py -c travis.cfg
+# - pip install --upgrade pip
+# - pip install -r requirements.txt
+# - python bootstrap.py --version=2.11.4 -c travis.cfg
 # - bin/buildout -c travis.cfg -N -q -t 3
 # - pip install coverage
-# - curl -O https://saucelabs.com/downloads/sc-4.4.11-linux.tar.gz
-# - tar xzvf sc-4.4.11-linux.tar.gz
-# - ./sc-4.4.11-linux/bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY -i $TRAVIS_JOB_ID -f CONNECTED &
+# - curl -O https://saucelabs.com/downloads/sc-4.5.4-linux.tar.gz
+# - tar xzvf sc-4.5.4-linux.tar.gz
+# - ./sc-4.5.4-linux/bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY -i $TRAVIS_JOB_ID -f CONNECTED &
 # - JAVA_PID=$!
 # - bash -c "while [ ! -f CONNECTED ]; do sleep 2; done"
 # script:
@@ -86,3 +88,4 @@ after_success:
 #   - ROBOT_BUILD_NUMBER=travis-$TRAVIS_BUILD_NUMBER
 #   - ROBOT_REMOTE_URL=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com:80/wd/hub
 #   - ROBOT_DESIRED_CAPABILITIES=tunnel-identifier:$TRAVIS_JOB_ID
+#   - ZSERVER_PORT=55001

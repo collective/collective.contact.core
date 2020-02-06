@@ -5,6 +5,7 @@ from collective.contact.widget.interfaces import IContactChoice
 from collective.contact.widget.interfaces import IContactContent
 from plone import api
 from plone.dexterity.interfaces import IDexterityFTI
+from Products.CMFPlone.utils import safe_unicode
 from zope.component import adapter
 from zope.component import getMultiAdapter
 from zope.component.interfaces import ComponentLookupError
@@ -37,9 +38,9 @@ if HAS_EXCELEXPORT:  # noqa for now 'is too complex'
             if not rel_obj:
                 return u""
             if IHeldPosition.providedBy(rel_obj):
-                return rel_obj.get_full_title() or u""
+                return safe_unicode(rel_obj.get_full_title()) or u""
             else:
-                return rel_obj.Title()
+                return safe_unicode(rel_obj.Title())
 
     @adapter(IDexterityFTI, Interface, Interface)
     class HeldPositionPersonInfoExportableFactory(BaseExportableFactory):
