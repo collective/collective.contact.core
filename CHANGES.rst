@@ -4,6 +4,8 @@ Changelog
 2.0 (unreleased)
 ----------------
 
+- Update for Plone 5.2
+  [agitator]
 - Use mockup for tooltips, modals and date widget.
   This removes Plone 4 compatibility.
   [thomasdesvenain]
