@@ -22,7 +22,7 @@
  <property name="add_permission">cmf.AddPortalContent</property>
  <property name="klass">collective.contact.core.content.person.Person</property>
  <property name="behaviors" purge="False">
-  <element value="plone.app.content.interfaces.INameFromTitle"/>
+  <element value="plone.namefromtitle"/>
   <element value="collective.contact.core.behaviors.IContactDetails" />
   <element value="collective.contact.core.behaviors.IBirthday" />
 </property>

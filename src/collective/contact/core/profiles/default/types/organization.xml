@@ -24,8 +24,8 @@
  <property name="add_permission">cmf.AddPortalContent</property>
  <property name="klass">collective.contact.core.content.organization.Organization</property>
  <property name="behaviors" purge="False">
-  <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
-  <element value="plone.app.content.interfaces.INameFromTitle"/>
+  <element value="plone.basic"/>
+  <element value="plone.namefromtitle"/>
   <element value="collective.contact.core.behaviors.IContactDetails" />
  </property>
  <property name="schema"/>
