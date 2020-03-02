@@ -4,7 +4,7 @@ from collective.contact.core.content.person import IPerson
 from collective.contact.core.interfaces import IHeldPosition
 
 
-def get_gender_and_number(contacts, use_by=False, use_to=False):
+def get_gender_and_number(contacts, use_by=False, use_to=False):  # noqa for now 'is too complex'
     """Return gender and number of given contacts.
        Returns None if not genderable.
        Returns a 2 letters code if genderable:

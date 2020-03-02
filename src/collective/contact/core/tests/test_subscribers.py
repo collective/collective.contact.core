@@ -1,6 +1,6 @@
 # -*- coding: utf8 -*-
 
-from collective.contact.core.testing import INTEGRATION
+from collective.contact.core.testing import COLLECTIVE_CONTACT_CORE_ACCEPTANCE_TESTING
 from ecreall.helpers.testing.search import BaseSearchTest
 from plone import api
 from plone.app.testing import setRoles
@@ -12,7 +12,7 @@ import unittest
 
 class TestUtils(unittest.TestCase, BaseSearchTest):
 
-    layer = INTEGRATION
+    layer = COLLECTIVE_CONTACT_CORE_ACCEPTANCE_TESTING
 
     def setUp(self):
         super(TestUtils, self).setUp()

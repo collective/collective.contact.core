@@ -1,6 +1,7 @@
 # -*- coding: utf8 -*-
 
 from collective.contact.core.setuphandlers import create_test_contact_data
+from collective.contact.core.setuphandlers import create_test_held_positions
 from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from plone.app.testing import FunctionalTesting
@@ -31,6 +32,7 @@ class CollectiveContactCoreLayer(PloneSandboxLayer):
         # # insert some test data
         setRoles(portal, TEST_USER_ID, ['Manager'])
         create_test_contact_data(portal)
+        create_test_held_positions(portal)
 
 
 COLLECTIVE_CONTACT_CORE_FIXTURE = CollectiveContactCoreLayer()
