@@ -3,8 +3,6 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="collective.contact.core">
 
-  <include package="ecreall.helpers.upgrade" />
-
   <genericsetup:registerProfile
       name="v2"
       title="Migration profile for collective.contact.core to 2"

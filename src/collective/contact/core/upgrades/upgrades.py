@@ -2,13 +2,13 @@
 from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
-from ecreall.helpers.upgrade.interfaces import IUpgradeTool
 from plone import api
 from Products.CMFPlone.utils import base_hasattr
 from z3c.relationfield.event import updateRelations
 from z3c.relationfield.interfaces import IHasRelations
 from zc.relation.interfaces import ICatalog
 from zope.component import getUtility
+from Products.CMFCore.utils import getToolByName
 
 
 def reindex_relations(context):
@@ -24,9 +24,27 @@ def reindex_relations(context):
         updateRelations(obj, None)
 
 
+def refreshResources(self):
+    """Refresh all resource registries
+    """
+    css_tool = getToolByName(self.portal, 'portal_css')
+    css_tool.cookResources()
+
+    js_tool = getToolByName(self.portal, 'portal_javascripts')
+    js_tool.cookResources()
+
+    kss_tool = getToolByName(self.portal, 'portal_kss', None)
+    if kss_tool:
+        kss_tool.cookResources()
+
+    return "Js, kss and css refreshed"
+
+
 def v2(context):
-    tool = IUpgradeTool(context)
-    tool.runProfile('collective.contact.core.upgrades:v2')
+    context.runAllImportStepsFromProfile(
+        'profile-collective.contact.core.upgrades:v2',
+        purge_old=False,
+    )
     catalog = api.portal.get_tool(name='portal_catalog')
     catalog.clearFindAndRebuild()
     reindex_relations(context)
@@ -41,36 +59,49 @@ def v3(context):
 
 
 def v4(context):
-    IUpgradeTool(context).runImportStep('collective.contact.core', 'rolemap')
+    context.runAllImportStepsFromProfile(
+        'profile-collective.contact.core', 'rolemap',
+    )
 
 
 def v5(context):
-    tool = IUpgradeTool(context)
-    tool.runProfile('collective.contact.widget:default')
+    context.runAllImportStepsFromProfile(
+        'profile-collective.contact.widget:default',
+    )
     # add sortable_title column and reindex persons and organizations
-    tool.addMetadata('sortable_title')
-    tool.reindexContents(IContactContent, ('sortable_title',))
+    catalog = api.portal.get_tool('portal_catalog')
+    catalog.addColumn('sortable_title')
+    items = api.content.find(
+        object_provides='collective.contact.widget.interfaces.IContactContent'
+    )
+    for item in items:
+        item.getObject().reindexObject(idxs=['sortable_title']
+    )
 
 
 def v6(context):
-    tool = IUpgradeTool(context)
-    tool.runProfile('collective.contact.core.upgrades:v6')
-    tool.refreshResources()
+    context.runAllImportStepsFromProfile(
+        'profile-collective.contact.core.upgrades:v6',
+    )
+    refreshResources()
 
 
 def v7(context):
-    tool = IUpgradeTool(context)
-    tool.runProfile('collective.contact.core.upgrades:v7')
+    context.runAllImportStepsFromProfile(
+        'profile-collective.contact.core.upgrades:v7',
+    )
 
 
 def v8(context):
-    tool = IUpgradeTool(context)
-    tool.runProfile('collective.contact.core.upgrades:v8')
+    context.runAllImportStepsFromProfile(
+        'profile-collective.contact.core.upgrades:v8',
+    )
 
 
 def v9(context):
-    tool = IUpgradeTool(context)
-    tool.runProfile('collective.contact.core.upgrades:v9')
+    context.runAllImportStepsFromProfile(
+        'profile-collective.contact.core.upgrades:v9',
+    )
 
 
 def v10(context):
@@ -81,8 +112,12 @@ def v10(context):
 
 
 def v11(context):
-    IUpgradeTool(context).runImportStep('collective.contact.core', 'typeinfo')
-    IUpgradeTool(context).runImportStep('collective.contact.core', 'plone.app.registry')
+    context.runAllImportStepsFromProfile(
+        'profile-collective.contact.core', 'typeinfo',
+    )
+    context.runAllImportStepsFromProfile(
+        'profile-collective.contact.core', 'plone.app.registry',
+    )
     val = api.portal.get_registry_record(name='person_contact_details_private', interface=IContactCoreParameters)
     if val is None:
         api.portal.set_registry_record(name='person_contact_details_private', value=True,
@@ -90,7 +125,9 @@ def v11(context):
 
 
 def v12(context):
-    IUpgradeTool(context).runImportStep('collective.contact.core', 'plone.app.registry')
+    context.runAllImportStepsFromProfile(
+        'profile-collective.contact.core', 'plone.app.registry',
+    )
     catalog = api.portal.get_tool('portal_catalog')
     brains = catalog.unrestrictedSearchResults(object_provides=IContactContent.__identifier__)
     for brain in brains:
@@ -107,25 +144,39 @@ def v13(context):
 
 
 def v14(context):
-    IUpgradeTool(context).runImportStep('collective.contact.core', 'typeinfo')
+    context.runAllImportStepsFromProfile(
+        'profile-collective.contact.core', 'plone.app.registry', 'typeinfo'
+    )
 
 
 def v15(context):
-    tool = IUpgradeTool(context)
-    tool.runImportStep('collective.contact.core', 'plone.app.registry')
-    tool.runImportStep('collective.contact.core', 'catalog')
-    tool.reindexContents(IContactContent, ('email',))
-
+    context.runAllImportStepsFromProfile(
+        'profile-collective.contact.core', 'plone.app.registry',
+    )
+    context.runAllImportStepsFromProfile(
+        'profile-collective.contact.core', 'catalog'
+    )
+    items = api.content.find(
+        object_provides='collective.contact.widget.interfaces.IContactContent'
+    )
+    for item in items:
+        item.getObject().reindexObject(idxs=['email'])
 
 def v16(context):
-    tool = IUpgradeTool(context)
-    tool.runImportStep('collective.contact.core', 'plone.app.registry')
-    tool.runImportStep('collective.contact.core', 'catalog')
-    tool.reindexContents(IContactContent, ('email', 'contact_source',))
+    context.runAllImportStepsFromProfile(
+        'profile-collective.contact.core', 'plone.app.registry',
+    )
+    context.runAllImportStepsFromProfile(
+        'profile-collective.contact.core', 'catalog'
+    )
+    items = api.content.find(
+        object_provides='collective.contact.widget.interfaces.IContactContent'
+    )
+    for item in items:
+        item.getObject().reindexObject(idxs=['email', 'contact_source'])
 
 
 def refresh_resources_registry(context):
-    tool = IUpgradeTool(context)
-#     tool.runImportStep('collective.contact.core', 'cssregistry')
-#     tool.runImportStep('collective.contact.core', 'jsregistry')
-    tool.runImportStep('collective.contact.core', 'plone.app.registry')
+    context.runAllImportStepsFromProfile(
+        'profile-collective.contact.core', 'plone.app.registry',
+    )
