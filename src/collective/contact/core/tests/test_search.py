@@ -60,7 +60,8 @@ class TestSearch(unittest.TestCase, BaseTest):
         degaulle = self.degaulle
         self.assertEqual(person_sortable_title(degaulle)(),
                          'de-gaulle-charles')
-        self.assertEqual(start_date(sergent_pepper)(), datetime.date(1980, 6, 5))
+        self.assertEqual(start_date(sergent_pepper)(),
+                         datetime.date(1980, 6, 5))
         self.assertEqual(end_date(sergent_pepper)(), datetime.date(2100, 1, 1))
         self.assertEqual(end_date(self.gadt)(), datetime.date(1970, 11, 9))
         self.assertEqual(start_date(self.mydirectory['draper']['captain_crunch'])(),

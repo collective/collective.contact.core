@@ -192,7 +192,8 @@ class PersonHeldPositionsAdapter(object):
         """
         all_positions = self.person.get_held_positions()
         active_positions = self.get_current_positions()
-        closed_positions = [p for p in all_positions if p not in active_positions]
+        closed_positions = [
+            p for p in all_positions if p not in active_positions]
         closed_positions = sorted(
             closed_positions,
             key=lambda i: i.get('end_date', datetime.date(2100, 1, 1)),

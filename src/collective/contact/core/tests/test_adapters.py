@@ -86,11 +86,13 @@ class TestAdapters(unittest.TestCase, BaseTest):
                            start_date=datetime.date(1959, 1, 8),
                            position=RelationValue(intids.getId(self.directory.france)))
         api.content.create(container=degaulle, type='held_position', id='lieutenant-colonel',
-                           position=RelationValue(intids.getId(self.directory.armeedeterre)),
+                           position=RelationValue(intids.getId(
+                               self.directory.armeedeterre)),
                            end_date=datetime.date(1940, 6, 1),
                            start_date=datetime.date(1933, 12, 25))
         api.content.create(container=degaulle, type='held_position', id='commandant',
-                           position=RelationValue(intids.getId(self.directory.armeedeterre)),
+                           position=RelationValue(intids.getId(
+                               self.directory.armeedeterre)),
                            start_date=datetime.date(1927, 10, 9),
                            end_date=datetime.date(1933, 12, 25))
         del self.degaulle.gadt.end_date
@@ -121,7 +123,8 @@ class TestAdapters(unittest.TestCase, BaseTest):
                                        interface=IContactCoreParameters)
         # test a person
         details = IContactable(self.degaulle).get_contact_details()
-        self.assertEqual(details['website'], 'http://www.charles-de-gaulle.org')
+        self.assertEqual(details['website'],
+                         'http://www.charles-de-gaulle.org')
         self.assertEqual(details['email'], 'charles.de.gaulle@private.com')
         self.assertEqual(details['address'], {'city': u'Colombey les deux \xe9glises',
                                               'country': u'France', 'region': '',
@@ -130,7 +133,8 @@ class TestAdapters(unittest.TestCase, BaseTest):
                                               'street': u'rue Jean Moulin',
                                               'zip_code': u'52330'})
 
-        details = IContactable(self.degaulle).get_contact_details(keys=('email',))
+        details = IContactable(
+            self.degaulle).get_contact_details(keys=('email',))
         self.assertEqual(details, {'email': 'charles.de.gaulle@private.com'})
 
         # test with rambo data empty
@@ -140,7 +144,8 @@ class TestAdapters(unittest.TestCase, BaseTest):
 
         # test an held position using parent address and related to an organization
         details = IContactable(self.degaulle['adt']).get_contact_details()
-        self.assertEqual(details['email'], u'contact@armees.fr')  # phone from org
+        # phone from org
+        self.assertEqual(details['email'], u'contact@armees.fr')
         self.assertEqual(details['phone'], u'01000000001')  # phone from org
         self.assertDictEqual(details['address'], {'additional_address_details': '',
                                                   'city': u'Paris',
@@ -151,7 +156,8 @@ class TestAdapters(unittest.TestCase, BaseTest):
                                                   'zip_code': u'75008'})
 
         # test an held position using parent address and related to a position
-        self.assertFalse(self.directory['armeedeterre']['general_adt'].use_parent_address)
+        self.assertFalse(
+            self.directory['armeedeterre']['general_adt'].use_parent_address)
         details = IContactable(self.degaulle['gadt']).get_contact_details()
         self.assertEqual(details['email'], u'general@armees.fr')
         self.assertEqual(details['phone'], u'0987654321')
@@ -178,7 +184,8 @@ class TestAdapters(unittest.TestCase, BaseTest):
                                                   'zip_code': u'75008'})
 
         # test an held position not using parent address
-        details = IContactable(self.pepper['sergent_pepper']).get_contact_details()
+        details = IContactable(
+            self.pepper['sergent_pepper']).get_contact_details()
         self.assertEqual(details['email'], u'sgt.pepper@armees.fr')
         self.assertEqual(details['phone'], u'0288552211')
         self.assertDictEqual(details['address'], {'additional_address_details': '',
@@ -200,7 +207,8 @@ class TestAdapters(unittest.TestCase, BaseTest):
 
         # test an held position using parent address and related to an organization
         details = IContactable(self.degaulle['adt']).get_contact_details()
-        self.assertEqual(details['email'], u'charles.de.gaulle@private.com')  # phone from person
+        # phone from person
+        self.assertEqual(details['email'], u'charles.de.gaulle@private.com')
         self.assertEqual(details['phone'], u'01000000001')  # phone from org
         self.assertDictEqual(details['address'], {'additional_address_details': u'b\xe2timent D',
                                                   'city': u'Colombey les deux \xe9glises',
@@ -211,7 +219,8 @@ class TestAdapters(unittest.TestCase, BaseTest):
                                                   'zip_code': u'52330'})
 
         # test an held position using parent address and related to a position
-        self.assertFalse(self.directory['armeedeterre']['general_adt'].use_parent_address)
+        self.assertFalse(
+            self.directory['armeedeterre']['general_adt'].use_parent_address)
         details = IContactable(self.degaulle['gadt']).get_contact_details()
         self.assertEqual(details['email'], u'charles.de.gaulle@private.com')
         self.assertEqual(details['phone'], u'0987654321')
@@ -238,7 +247,8 @@ class TestAdapters(unittest.TestCase, BaseTest):
                                                   'zip_code': u'52330'})
 
         # test an held position not using parent address
-        details = IContactable(self.pepper['sergent_pepper']).get_contact_details()
+        details = IContactable(
+            self.pepper['sergent_pepper']).get_contact_details()
         self.assertEqual(details['email'], u'sgt.pepper@armees.fr')
         self.assertEqual(details['phone'], u'0288552211')
         self.assertDictEqual(details['address'], {'additional_address_details': '',

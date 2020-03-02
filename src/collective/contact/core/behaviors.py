@@ -104,6 +104,7 @@ class IGlobalPositioning(model.Schema):
         required=False,
     )
 
+
 alsoProvides(IGlobalPositioning, IFormFieldProvider)
 
 
@@ -137,7 +138,8 @@ CONTACT_DETAILS_FIELDS = (
 
 class IContactDetails(model.Schema):
     """Contact details behavior"""
-    form.write_permission(use_parent_address='collective.contact.core.UseParentAddress')
+    form.write_permission(
+        use_parent_address='collective.contact.core.UseParentAddress')
     fieldset(
         'contact_details',
         label=_(u'Contact details'),
@@ -281,6 +283,7 @@ class IContactDetails(model.Schema):
         required=False,
     )
 
+
 alsoProvides(IContactDetails, IFormFieldProvider)
 
 
@@ -297,7 +300,7 @@ def default_use_parent_address(adapter):
 
     try:
         parent_type = parent.portal_type
-    except:
+    except Exception:
         # in schema editor
         return False
 

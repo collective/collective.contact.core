@@ -12,7 +12,8 @@ class TTWFields(BrowserView):
         contact_view.update()
         self.widgets = contact_view.widgets
         ttw_fields = get_ttw_fields(self.context)
-        self.ttw_fields = [field for field in ttw_fields if field in self.widgets.keys()]
+        self.ttw_fields = [
+            field for field in ttw_fields if field in self.widgets.keys()]
 
     def __call__(self):
         self.update()

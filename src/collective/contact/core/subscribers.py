@@ -1,10 +1,7 @@
 from Acquisition import aq_get
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.content.organization import IOrganization
-from collective.contact.core.content.person import IPerson
-from collective.contact.core.content.position import IPosition
 from collective.contact.core.interfaces import IContactCoreParameters
-from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
 from plone import api
 from plone.app.iterate.interfaces import IWorkingCopy
@@ -16,8 +13,6 @@ from zc.relation.interfaces import ICatalog
 from zope import component
 from zope.container.contained import ContainerModifiedEvent
 from zope.intid.interfaces import IIntIds
-from zope.lifecycleevent.interfaces import IObjectAddedEvent
-from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 from zope.schema import getFields
 
 
@@ -134,7 +129,8 @@ def recordModified(event):
     """
         Manage configuration change in registry
     """
-    if (IRecordModifiedEvent.providedBy(event) and event.record.interfaceName and
+    if (IRecordModifiedEvent.providedBy(event) and  # noqa W504
+            event.record.interfaceName and  # noqa W504
             event.record.interface == IContactCoreParameters):
         if event.record.fieldName == 'contact_source_metadata_content':
             pc = api.portal.get_tool('portal_catalog')

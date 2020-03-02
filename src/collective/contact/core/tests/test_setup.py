@@ -18,7 +18,8 @@ class TestSetup(unittest.TestCase):
         """ Validate that our products GS profile has been run and the product
             installed
         """
-        self.assertTrue(self.qi_tool.isProductInstalled('collective.contact.core'))
+        self.assertTrue(self.qi_tool.isProductInstalled(
+            'collective.contact.core'))
 
     def test_test_data_created(self):
         self.assertTrue('mydirectory' in self.portal)

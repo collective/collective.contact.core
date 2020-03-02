@@ -108,11 +108,13 @@ class Contactable(object):
         we use the one of the first object in this list which have this information
         """
         contactables = []
-        related_items = [self.context, self.held_position, self.position] + list(reversed(self.organizations))
+        related_items = [self.context, self.held_position,
+                         self.position] + list(reversed(self.organizations))
         if not api.portal.get_registry_record(name='person_contact_details_private', interface=IContactCoreParameters):
             related_items.insert(2, self.person)
         elif self.context == self.person:
-            related_items = [self.context]  # for a person, we get private info only
+            # for a person, we get private info only
+            related_items = [self.context]
         for related_item in related_items:
             if related_item is not None \
                and IContactDetails.providedBy(related_item) \
@@ -156,7 +158,8 @@ class Contactable(object):
             contact_details['address'] = self._get_address(contactables)
 
         if 'website' in contact_details:
-            contact_details['website'] = get_valid_url(contact_details['website'])
+            contact_details['website'] = get_valid_url(
+                contact_details['website'])
 
         return contact_details
 

@@ -42,7 +42,7 @@ def get_ttw_fields(obj):
             # @TODO: get generic method to get widget id
             new_fields.extend(['%s.%s' % (behavior_name, field_name)
                                for field_name in default_fieldset_fields])
-        except:
+        except Exception:
             pass
 
     return new_fields

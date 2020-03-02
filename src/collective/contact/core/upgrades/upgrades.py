@@ -3,12 +3,12 @@ from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
 from plone import api
+from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import base_hasattr
 from z3c.relationfield.event import updateRelations
 from z3c.relationfield.interfaces import IHasRelations
 from zc.relation.interfaces import ICatalog
 from zope.component import getUtility
-from Products.CMFCore.utils import getToolByName
 
 
 def reindex_relations(context):
@@ -18,7 +18,8 @@ def reindex_relations(context):
     rcatalog = getUtility(ICatalog)
     rcatalog.clear()
     catalog = api.portal.get_tool('portal_catalog')
-    brains = catalog.searchResults(object_provides=IHasRelations.__identifier__)
+    brains = catalog.searchResults(
+        object_provides=IHasRelations.__identifier__)
     for brain in brains:
         obj = brain.getObject()
         updateRelations(obj, None)
@@ -52,7 +53,8 @@ def v2(context):
 
 def v3(context):
     catalog = api.portal.get_tool('portal_catalog')
-    brains = catalog.unrestrictedSearchResults(object_provides=IContactContent.__identifier__)
+    brains = catalog.unrestrictedSearchResults(
+        object_provides=IContactContent.__identifier__)
     for brain in brains:
         obj = brain.getObject()
         obj.is_created = True
@@ -76,7 +78,7 @@ def v5(context):
     )
     for item in items:
         item.getObject().reindexObject(idxs=['sortable_title']
-    )
+                                       )
 
 
 def v6(context):
@@ -106,7 +108,8 @@ def v9(context):
 
 def v10(context):
     catalog = api.portal.get_tool('portal_catalog')
-    brains = catalog.searchResults(object_provides=IHeldPosition.__identifier__)
+    brains = catalog.searchResults(
+        object_provides=IHeldPosition.__identifier__)
     for brain in brains:
         brain.getObject().reindexObject(['start', 'end'])
 
@@ -118,7 +121,8 @@ def v11(context):
     context.runAllImportStepsFromProfile(
         'profile-collective.contact.core', 'plone.app.registry',
     )
-    val = api.portal.get_registry_record(name='person_contact_details_private', interface=IContactCoreParameters)
+    val = api.portal.get_registry_record(
+        name='person_contact_details_private', interface=IContactCoreParameters)
     if val is None:
         api.portal.set_registry_record(name='person_contact_details_private', value=True,
                                        interface=IContactCoreParameters)
@@ -129,14 +133,17 @@ def v12(context):
         'profile-collective.contact.core', 'plone.app.registry',
     )
     catalog = api.portal.get_tool('portal_catalog')
-    brains = catalog.unrestrictedSearchResults(object_provides=IContactContent.__identifier__)
+    brains = catalog.unrestrictedSearchResults(
+        object_provides=IContactContent.__identifier__)
     for brain in brains:
-        brain.getObject().reindexObject(['Title', 'sortable_title', 'get_full_title', 'SearchableText'])
+        brain.getObject().reindexObject(
+            ['Title', 'sortable_title', 'get_full_title', 'SearchableText'])
 
 
 def v13(context):
     catalog = api.portal.get_tool('portal_catalog')
-    brains = catalog.unrestrictedSearchResults(object_provides=IContactContent.__identifier__)
+    brains = catalog.unrestrictedSearchResults(
+        object_provides=IContactContent.__identifier__)
     for brain in brains:
         obj = brain.getObject()
         if base_hasattr(obj, 'is_created'):
@@ -161,6 +168,7 @@ def v15(context):
     )
     for item in items:
         item.getObject().reindexObject(idxs=['email'])
+
 
 def v16(context):
     context.runAllImportStepsFromProfile(

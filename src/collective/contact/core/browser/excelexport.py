@@ -80,7 +80,8 @@ if HAS_EXCELEXPORT:  # noqa for now 'is too complex'
 
         def get(self, field):
             if field.__name__ in ADDRESS_FIELDS:
-                address = IContactable(self.context).get_contact_details(('address',))['address']
+                address = IContactable(self.context).get_contact_details(
+                    ('address',))['address']
                 return address.get(field.__name__, None)
 
             return getattr(self.context, field.__name__, None)

@@ -36,7 +36,8 @@ class DexterityConfigurablePolicyFTI(DexterityFTI):
             schema = self.lookupSchema()
             return Model({u"": schema})
 
-        raise ValueError("Neither model source, nor model file, nor schema is specified in FTI %s" % self.getId())
+        raise ValueError(
+            "Neither model source, nor model file, nor schema is specified in FTI %s" % self.getId())
 
     #
     # Base class overrides

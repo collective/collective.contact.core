@@ -97,11 +97,14 @@ class ContactWidgetSettings(object):
             if not sm.checkPermission("Add portal content", directory):
                 addlink_enabled = False
 
-            allowed_directory_types = api.portal.get_tool('portal_types').directory.allowed_content_types
-            allowed_portal_types = set(p for p in field_portal_types if p in allowed_directory_types)
+            allowed_directory_types = api.portal.get_tool(
+                'portal_types').directory.allowed_content_types
+            allowed_portal_types = set(
+                p for p in field_portal_types if p in allowed_directory_types)
             constrains = IConstrainTypes(directory, None)
             if constrains:
-                allowed_portal_types = set(p for p in allowed_portal_types if p in constrains.getLocallyAllowedTypes())
+                allowed_portal_types = set(
+                    p for p in allowed_portal_types if p in constrains.getLocallyAllowedTypes())
 
             if 'held_position' in field_portal_types:
                 # held position is always allowed because it has a special wizard that creates organization and person
@@ -112,11 +115,13 @@ class ContactWidgetSettings(object):
 
         close_on_click = True
         if addlink_enabled:
-            custom_settings = queryAdapter(directory, ICustomSettings, default=self)
+            custom_settings = queryAdapter(
+                directory, ICustomSettings, default=self)
             directory_url = directory.absolute_url()
             if len(allowed_portal_types) == 1:
                 portal_type = list(allowed_portal_types)[0]
-                prelabel = custom_settings.prelabel_for_portal_type(portal_type)
+                prelabel = custom_settings.prelabel_for_portal_type(
+                    portal_type)
                 if portal_type == 'held_position' and not IPerson.providedBy(widget.context):
                     url = "%s/@@add-held-position" % directory_url
                     type_name = _(u"Contact")
@@ -132,7 +137,8 @@ class ContactWidgetSettings(object):
                                     "${name} (${position}",
                                     mapping={'name': type_name,
                                              'position': related_to.Title()})
-                                label = custom_settings.label_for_portal_type(type_name)
+                                label = custom_settings.label_for_portal_type(
+                                    type_name)
                                 url += '?oform.widgets.%s=%s' % (related_to.portal_type,
                                                                  '/'.join(related_to.getPhysicalPath()))
 
@@ -146,7 +152,8 @@ class ContactWidgetSettings(object):
                     close_on_click = False
                 else:
                     label = custom_settings.label_for_portal_type(portal_type)
-                    url = custom_settings.add_url_for_portal_type(directory_url, portal_type)
+                    url = custom_settings.add_url_for_portal_type(
+                        directory_url, portal_type)
                     action = {
                         'url': url,
                         'label': label,
@@ -163,7 +170,8 @@ class ContactWidgetSettings(object):
 
                 close_on_click = False
                 label = custom_settings.label_for_portal_type(type_name)
-                prelabel = custom_settings.prelabel_for_portal_type(allowed_portal_types)
+                prelabel = custom_settings.prelabel_for_portal_type(
+                    allowed_portal_types)
                 action = {'url': url,
                           'klass': 'addnew',
                           'label': label,
@@ -293,7 +301,8 @@ class IAddHeldPosition(model.Schema):
     organization = ContactChoice(
         title=_(u"Organization"),
         required=True,
-        description=_(u"Select the organization where the person holds the position"),
+        description=_(
+            u"Select the organization where the person holds the position"),
         source=ContactSourceBinder(portal_type="organization"))
 
     person = ContactChoice(
@@ -305,7 +314,8 @@ class IAddHeldPosition(model.Schema):
     position = ContactChoice(
         title=_(u"Position"),
         required=False,
-        description=_(u"Select the position held by this person in the selected organization"),
+        description=_(
+            u"Select the position held by this person in the selected organization"),
         source=ContactSourceBinder(portal_type="position"))
 
 
@@ -317,7 +327,8 @@ class IAddContact(model.Schema):
     organization = ContactChoice(
         title=_(u"Organization"),
         required=False,
-        description=_(u"Select the organization where the person holds the position"),
+        description=_(
+            u"Select the organization where the person holds the position"),
         source=ContactSourceBinder(portal_type="organization"))
 
     person = ContactChoice(
@@ -329,7 +340,8 @@ class IAddContact(model.Schema):
     position = ContactChoice(
         title=_(u"Position"),
         required=False,
-        description=_(u"Select the position held by this person in the selected organization"),
+        description=_(
+            u"Select the position held by this person in the selected organization"),
         source=ContactSourceBinder(portal_type="position"))
 
 
@@ -349,7 +361,8 @@ class AddContact(DefaultAddForm, form.AddForm):
     #    contentProviders['organization-ms'] = MasterSelectAddContactProvider
     contentProviders['organization-ms'].position = -1
     label = _(u"Create ${name}", mapping={'name': _(u"Contact")})
-    description = _(u"A contact is a position held by a person in an organization")
+    description = _(
+        u"A contact is a position held by a person in an organization")
     schema = IAddContact
     portal_type = 'held_position'
     prefix = 'oform'

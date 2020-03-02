@@ -36,7 +36,8 @@ class HeldPositions(BrowserView):
             held_position['title'] = obj.Title()
             if obj.start_date is not None:
                 start_date = date_to_DateTime(obj.start_date)
-                held_position['start_date'] = person.toLocalizedTime(start_date)
+                held_position['start_date'] = person.toLocalizedTime(
+                    start_date)
             else:
                 held_position['start_date'] = None
 
@@ -55,8 +56,10 @@ class HeldPositions(BrowserView):
             else:
                 held_position['organization'] = None
             held_position['icon'] = obj.getIconURL()
-            held_position['can_edit'] = sm.checkPermission('Modify portal content', obj)
-            held_position['can_delete'] = sm.checkPermission('Delete objects', obj)
+            held_position['can_edit'] = sm.checkPermission(
+                'Modify portal content', obj)
+            held_position['can_delete'] = sm.checkPermission(
+                'Delete objects', obj)
             held_positions.append(held_position)
 
         self.held_positions = held_positions

@@ -4,7 +4,6 @@ from Acquisition import aq_inner
 from collective.contact.core import _
 from collective.contact.core import logger
 from collective.contact.core.browser.contactable import Contactable
-from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
 from plone import api
 from plone.app.textfield import RichText

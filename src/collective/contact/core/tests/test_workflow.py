@@ -56,7 +56,8 @@ class TestSecurity(unittest.TestCase, BaseWorkflowTest):
         degaulle = self.degaulle
         workflow = self.portal.portal_workflow
         self.login('manager')
-        self.assertCheckPermissions(degaulle, PERSON_PERMISSIONS['active'], USERDEFS)
+        self.assertCheckPermissions(
+            degaulle, PERSON_PERMISSIONS['active'], USERDEFS)
 
         for (transition, state) in WORKFLOW_TRACK:
             if transition:

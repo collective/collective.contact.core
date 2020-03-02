@@ -28,9 +28,11 @@ class TestUtils(unittest.TestCase, BaseSearchTest):
         dguid = self.degaulle.UID()
         record_name = 'collective.contact.core.interfaces.IContactCoreParameters.contact_source_metadata_content'
         self.assertEqual(api.portal.get_registry_record(record_name), u'{gft}')
-        self.assertEqual(self.getBrain(dguid).contact_source, self.degaulle.get_full_title())
+        self.assertEqual(self.getBrain(dguid).contact_source,
+                         self.degaulle.get_full_title())
         # we change registry
-        api.portal.set_registry_record(record_name, u'{gft} from {city} on {email}')
+        api.portal.set_registry_record(
+            record_name, u'{gft} from {city} on {email}')
         # metadata has been updated
         self.assertEqual(self.getBrain(dguid).contact_source,
                          u'Général Charles De Gaulle from Colombey les deux églises on charles.de.gaulle@private.com')

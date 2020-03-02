@@ -110,7 +110,8 @@ class TestOrganization(TestContentTypes):
                          self.divisionalpha.get_organizations_chain())
         self.assertEqual([corpsa, divisionalpha],
                          self.divisionalpha.get_organizations_chain(first_index=1))
-        self.assertEqual([], self.divisionalpha.get_organizations_chain(first_index=50))
+        self.assertEqual(
+            [], self.divisionalpha.get_organizations_chain(first_index=50))
 
     def test_get_root_organization(self):
         armeedeterre = self.armeedeterre
@@ -140,7 +141,8 @@ class TestOrganization(TestContentTypes):
         self.assertIn(u'Brigade LH', brigadelh_titles)
         self.assertEquals(len(brigadelh_titles), 5)
 
-        brigadelh_titles = self.brigadelh.get_organizations_titles(first_index=2)
+        brigadelh_titles = self.brigadelh.get_organizations_titles(
+            first_index=2)
         self.assertIn(u'Division Alpha', brigadelh_titles)
         self.assertIn(u'Régiment H', brigadelh_titles)
         self.assertIn(u'Brigade LH', brigadelh_titles)
@@ -157,13 +159,17 @@ class TestOrganization(TestContentTypes):
                          u"Division Alpha - Régiment H - Brigade LH")
 
     def test_reindex_suborganization(self):
-        before = self.portal.portal_catalog(UID=self.brigadelh.UID())[0].get_full_title
-        self.assertEqual(before, u'Arm\xe9e de terre / Corps A / Division Alpha / R\xe9giment H / Brigade LH')
+        before = self.portal.portal_catalog(UID=self.brigadelh.UID())[
+            0].get_full_title
+        self.assertEqual(
+            before, u'Arm\xe9e de terre / Corps A / Division Alpha / R\xe9giment H / Brigade LH')
         self.armeedeterre.title = u"Armée de l'air"
         from zope.lifecycleevent import modified
         modified(self.armeedeterre)
-        after = self.portal.portal_catalog(UID=self.brigadelh.UID())[0].get_full_title
-        self.assertEqual(after, u"Arm\xe9e de l'air / Corps A / Division Alpha / R\xe9giment H / Brigade LH")
+        after = self.portal.portal_catalog(UID=self.brigadelh.UID())[
+            0].get_full_title
+        self.assertEqual(
+            after, u"Arm\xe9e de l'air / Corps A / Division Alpha / R\xe9giment H / Brigade LH")
 
     def test_copy_paste(self):
         cb = self.mydirectory.manage_copyObjects(['armeedeterre'])
@@ -172,9 +178,12 @@ class TestOrganization(TestContentTypes):
 
     def test_get_positions(self):
         # add some positions to self.armeedeterre
-        self.armeedeterre.invokeFactory('position', 'colonel_adt', title="Colonel de l'armée de terre")
-        self.armeedeterre.invokeFactory('position', 'lieutenant_adt', title="Lieutenant de l'armée de terre")
-        self.armeedeterre.invokeFactory('position', 'sergent_adt', title="Sergent de l'armée de terre")
+        self.armeedeterre.invokeFactory(
+            'position', 'colonel_adt', title="Colonel de l'armée de terre")
+        self.armeedeterre.invokeFactory(
+            'position', 'lieutenant_adt', title="Lieutenant de l'armée de terre")
+        self.armeedeterre.invokeFactory(
+            'position', 'sergent_adt', title="Sergent de l'armée de terre")
         self.assertEquals(
             [pos.id for pos in self.armeedeterre.get_positions()],
             ['general_adt', 'colonel_adt', 'lieutenant_adt', 'sergent_adt'])

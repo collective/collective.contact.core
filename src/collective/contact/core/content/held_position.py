@@ -113,7 +113,8 @@ class HeldPosition(Container):
         """Returns the 'title' and include person name."""
         person_name = self.get_person_title()
         if six.PY2:
-            title = self.Title(separator=separator, first_index=first_index).decode('utf8')
+            title = self.Title(separator=separator,
+                               first_index=first_index).decode('utf8')
         else:
             title = self.Title(separator=separator, first_index=first_index)
         if title[0:1] == '(':

@@ -254,7 +254,8 @@ class TestPersonView(TestView):
     def test_person_contact_details_view(self):
         view = self.degaulle.restrictedTraverse("@@contactdetails")
         view.update()
-        self.assertEqual(view.contact_details['email'], 'charles.de.gaulle@private.com')
+        self.assertEqual(
+            view.contact_details['email'], 'charles.de.gaulle@private.com')
         self.assertEqual(view.contact_details['phone'], '')
         self.assertEqual(view.contact_details['cell_phone'], '')
         self.assertEqual(view.contact_details['im_handle'], '')
