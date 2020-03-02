@@ -95,11 +95,19 @@ class HeldPosition(Container):
         organization = self.get_organization()
         label = self.get_label()
         if position is None and not label:
-            return "(%s)" % organization.get_full_title(separator=separator, first_index=first_index).encode('utf8')
+            if six.PY2:
+                return "(%s)" % organization.get_full_title(separator=separator, first_index=first_index).encode('utf8')
+            else:
+                return "(%s)" % organization.get_full_title(separator=separator, first_index=first_index)
+
         # we display the position title or the label
         position_title = label or position.title
-        return "%s (%s)" % (position_title.encode('utf8'),
-                            organization.get_full_title(separator=separator, first_index=first_index).encode('utf8'))
+        if six.PY2:
+            return "%s (%s)" % (position_title.encode('utf8'),
+                                organization.get_full_title(separator=separator, first_index=first_index).encode('utf8'))
+        else:
+            return "%s (%s)" % (position_title,
+                                organization.get_full_title(separator=separator, first_index=first_index))
 
     def get_full_title(self, separator=u' / ', first_index=0):
         """Returns the 'title' and include person name."""
