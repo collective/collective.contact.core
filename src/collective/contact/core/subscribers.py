@@ -1,18 +1,18 @@
-from Acquisition import aq_get
+# from Acquisition import aq_get
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.widget.interfaces import IContactContent
 from plone import api
-from plone.app.iterate.interfaces import IWorkingCopy
+# from plone.app.iterate.interfaces import IWorkingCopy
 # from plone.app.linkintegrity.handlers import referencedObjectRemoved as baseReferencedObjectRemoved
 # from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
 from plone.registry.interfaces import IRecordModifiedEvent
 from z3c.form.interfaces import NO_VALUE
-from zc.relation.interfaces import ICatalog
-from zope import component
+# from zc.relation.interfaces import ICatalog
+# from zope import component
 from zope.container.contained import ContainerModifiedEvent
-from zope.intid.interfaces import IIntIds
+# from zope.intid.interfaces import IIntIds
 from zope.schema import getFields
 
 
@@ -74,41 +74,41 @@ def update_related_with_organization(obj, event=None):
             update_related_with_organization(child)
 
 
-def referenceRemoved(obj, event, toInterface=IContactContent):
-    """Store information about the removed link integrity reference.
-    """
-    # inspired from z3c/relationfield/event.py:breakRelations
-    # and plone/app/linkintegrity/handlers.py:referenceRemoved
-    # if the object the event was fired on doesn't have a `REQUEST` attribute
-    # we can safely assume no direct user action was involved and therefore
-    # never raise a link integrity exception...
-    request = aq_get(obj, 'REQUEST', None)
-    if not request:
-        return
-    storage = ILinkIntegrityInfo(request)
+# def referenceRemoved(obj, event, toInterface=IContactContent):
+#     """Store information about the removed link integrity reference.
+#     """
+#     # inspired from z3c/relationfield/event.py:breakRelations
+#     # and plone/app/linkintegrity/handlers.py:referenceRemoved
+#     # if the object the event was fired on doesn't have a `REQUEST` attribute
+#     # we can safely assume no direct user action was involved and therefore
+#     # never raise a link integrity exception...
+#     request = aq_get(obj, 'REQUEST', None)
+#     if not request:
+#         return
+#     storage = ILinkIntegrityInfo(request)
 
-    catalog = component.queryUtility(ICatalog)
-    intids = component.queryUtility(IIntIds)
-    if catalog is None or intids is None:
-        return
+#     catalog = component.queryUtility(ICatalog)
+#     intids = component.queryUtility(IIntIds)
+#     if catalog is None or intids is None:
+#         return
 
-    # find all relations that point to us
-    obj_id = intids.queryId(obj)
-    if obj_id is None:
-        return
+#     # find all relations that point to us
+#     obj_id = intids.queryId(obj)
+#     if obj_id is None:
+#         return
 
-    rels = list(catalog.findRelations({'to_id': obj_id}))
-    for rel in rels:
-        if toInterface.providedBy(rel.to_object):
-            storage.addBreach(rel.from_object, rel.to_object)
+#     rels = list(catalog.findRelations({'to_id': obj_id}))
+#     for rel in rels:
+#         if toInterface.providedBy(rel.to_object):
+#             storage.addBreach(rel.from_object, rel.to_object)
 
 
-def referencedObjectRemoved(obj, event):
-    # Avoid an error when we try to remove a working copy (plone.app.iterate)
-    if IWorkingCopy.providedBy(obj):
-        return
-    if not IReferenceable.providedBy(obj):
-        baseReferencedObjectRemoved(obj, event)
+# def referencedObjectRemoved(obj, event):
+#     # Avoid an error when we try to remove a working copy (plone.app.iterate)
+#     if IWorkingCopy.providedBy(obj):
+#         return
+#     if not IReferenceable.providedBy(obj):
+#         baseReferencedObjectRemoved(obj, event)
 
 
 def clear_fields_use_parent_address(obj, event):
