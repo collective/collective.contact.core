@@ -24,8 +24,8 @@
  <property name="add_permission">cmf.AddPortalContent</property>
  <property name="klass">collective.contact.core.content.directory.Directory</property>
  <property name="behaviors" purge="False">
-  <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
-  <element value="plone.app.content.interfaces.INameFromTitle"/>
+  <element value="plone.basic"/>
+  <element value="plone.namefromtitle"/>
  </property>
  <property name="schema" />
  <!-- DO NOT use a model_source or it removes manually added fields while reapplying the profile -->
