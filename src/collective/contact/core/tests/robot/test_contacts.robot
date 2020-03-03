@@ -9,7 +9,7 @@ Resource          keywords.robot
 Directory is available
     [Tags]    Go
     Log in as site owner and wait
-    Click link    css=#portaltab-mydirectory a
+    Click link    css=#portal-globalnav .mydirectory a
     Wait until element is visible  xpath=//h1/span[.='Military directory']  5
 
 Create a new organization
