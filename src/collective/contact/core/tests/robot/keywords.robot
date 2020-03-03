@@ -1,7 +1,4 @@
 *** Keywords ***
-
-${BROWSER}  chrome
-
 a Site Owner
     Log in as site owner
 

@@ -1,9 +1,7 @@
 *** Settings ***
-Test Setup        keywords.Open test browser
-# Test Setup        Open SauceLabs test browser
-Test Teardown     Run keywords    Report test status    Close all browsers
+Test Setup        Open test browser
+Test Teardown     Run keywords    Close all browsers
 Resource          plone/app/robotframework/keywords.robot    #Test Setup    Open test browser    #Test Teardown    Close all browsers
-# Resource          plone/app/robotframework/saucelabs.robot
 Resource          keywords.robot
 
 *** Test cases ***
