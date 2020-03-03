@@ -9,6 +9,7 @@ from zope.lifecycleevent import modified
 
 import datetime
 import logging
+import transaction
 
 
 # from plone.registry.interfaces import IRegistry
@@ -236,6 +237,7 @@ def create_test_contact_data(portal):
               'use_parent_address': True,
               }
     brigadelh.invokeFactory('position', 'sergent_lh', **params)
+    transaction.commit()
 
 
 def create_test_held_positions(portal):
@@ -300,3 +302,4 @@ def create_test_held_positions(portal):
               'use_parent_address': True,
               }
     rambo.invokeFactory('held_position', 'brigadelh', **params)
+    transaction.commit()

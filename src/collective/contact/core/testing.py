@@ -32,7 +32,6 @@ class CollectiveContactCoreLayer(PloneSandboxLayer):
         # # insert some test data
         setRoles(portal, TEST_USER_ID, ['Manager'])
         create_test_contact_data(portal)
-        create_test_held_positions(portal)
 
 
 COLLECTIVE_CONTACT_CORE_FIXTURE = CollectiveContactCoreLayer()
