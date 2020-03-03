@@ -20,6 +20,8 @@ from zope.cachedescriptors.property import CachedProperty
 from zope.component import queryUtility
 from zope.interface import implementer
 
+import six
+
 
 class IPerson(model.Schema, IContactContent):
     """Interface for Person content type"""
@@ -120,7 +122,10 @@ class Person(Container):
     def Title(self):
         # must return utf8 and not unicode (Title() from basic behavior return utf8)
         # attributes are stored as unicode
-        return self.get_title().encode('utf-8')
+        if six.PY2:
+            return self.get_title().encode('utf-8')
+        else:
+            return self.get_title()
 
     def get_sortable_title(self):
         if self.firstname is None:
