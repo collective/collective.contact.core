@@ -18,7 +18,10 @@ matrix:
   sudo: true
   fast_finish: true
 before_install:
-  - sudo apt-get install -y firefox-geckodriver
+  - mkdir webdriver;
+    wget https://chromedriver.storage.googleapis.com/2.40/chromedriver_linux64.zip;
+    unzip chromedriver_linux64.zip -d webdriver;
+    export PATH=$PATH:$(pwd)/webdriver;
   - virtualenv -p `which python` .
   - bin/pip install -r requirements.txt -c constraints_plone$PLONE_VERSION.txt
   - cp test_plone$PLONE_VERSION.cfg buildout.cfg
@@ -31,7 +34,6 @@ before_script:
 - 'export DISPLAY=:99.0'
 - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
 - sleep 3
-- firefox -v
 
 script:
 # Run code-analysis, except on Python 3.6, which mysteriously fails to find zc.buildout.
