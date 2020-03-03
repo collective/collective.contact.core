@@ -1,7 +1,6 @@
 # -*- coding: utf8 -*-
 
 from collective.contact.core.setuphandlers import create_test_contact_data
-from collective.contact.core.setuphandlers import create_test_held_positions
 from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from plone.app.testing import FunctionalTesting
