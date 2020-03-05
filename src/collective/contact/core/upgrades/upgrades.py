@@ -61,8 +61,8 @@ def v3(context):
 
 
 def v4(context):
-    context.runAllImportStepsFromProfile(
-        'profile-collective.contact.core', 'rolemap',
+    context.runImportStepFromProfile(
+        'profile-collective.contact.core:default', 'rolemap',
     )
 
 
@@ -115,11 +115,11 @@ def v10(context):
 
 
 def v11(context):
-    context.runAllImportStepsFromProfile(
-        'profile-collective.contact.core', 'typeinfo',
+    context.runImportStepFromProfile(
+        'profile-collective.contact.core:default', 'typeinfo',
     )
-    context.runAllImportStepsFromProfile(
-        'profile-collective.contact.core', 'plone.app.registry',
+    context.runImportStepFromProfile(
+        'profile-collective.contact.core:default', 'plone.app.registry',
     )
     val = api.portal.get_registry_record(
         name='person_contact_details_private', interface=IContactCoreParameters)
@@ -129,8 +129,8 @@ def v11(context):
 
 
 def v12(context):
-    context.runAllImportStepsFromProfile(
-        'profile-collective.contact.core', 'plone.app.registry',
+    context.runImportStepFromProfile(
+        'profile-collective.contact.core:default', 'plone.app.registry',
     )
     catalog = api.portal.get_tool('portal_catalog')
     brains = catalog.unrestrictedSearchResults(
@@ -151,17 +151,17 @@ def v13(context):
 
 
 def v14(context):
-    context.runAllImportStepsFromProfile(
-        'profile-collective.contact.core', 'plone.app.registry', 'typeinfo'
+    context.runImportStepFromProfile(
+        'profile-collective.contact.core:default', 'plone.app.registry', 'typeinfo'
     )
 
 
 def v15(context):
-    context.runAllImportStepsFromProfile(
-        'profile-collective.contact.core', 'plone.app.registry',
+    context.runImportStepFromProfile(
+        'profile-collective.contact.core:default', 'plone.app.registry',
     )
-    context.runAllImportStepsFromProfile(
-        'profile-collective.contact.core', 'catalog'
+    context.runImportStepFromProfile(
+        'profile-collective.contact.core:default', 'catalog'
     )
     items = api.content.find(
         object_provides='collective.contact.widget.interfaces.IContactContent'
@@ -171,11 +171,11 @@ def v15(context):
 
 
 def v16(context):
-    context.runAllImportStepsFromProfile(
-        'profile-collective.contact.core', 'plone.app.registry',
+    context.runImportStepFromProfile(
+        'profile-collective.contact.core:default', 'plone.app.registry',
     )
-    context.runAllImportStepsFromProfile(
-        'profile-collective.contact.core', 'catalog'
+    context.runImportStepFromProfile(
+        'profile-collective.contact.core:default', 'catalog'
     )
     items = api.content.find(
         object_provides='collective.contact.widget.interfaces.IContactContent'
@@ -185,6 +185,6 @@ def v16(context):
 
 
 def refresh_resources_registry(context):
-    context.runAllImportStepsFromProfile(
-        'profile-collective.contact.core', 'plone.app.registry',
+    context.runImportStepFromProfile(
+        'profile-collective.contact.core:default', 'plone.app.registry',
     )
