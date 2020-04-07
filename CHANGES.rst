@@ -4,7 +4,9 @@ Changelog
 1.31 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Do not execute integrity check for content types that are not related to this package.
+  This prevent issues with plone.app.iterate.
+  [mpeeters]
 
 
 1.30 (2020-02-06)

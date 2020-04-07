@@ -1,5 +1,6 @@
 from Acquisition import aq_get
 from collective.contact.core.behaviors import IContactDetails
+from collective.contact.core.content.directory import IDirectory
 from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.content.person import IPerson
 from collective.contact.core.content.position import IPosition
@@ -16,6 +17,7 @@ from z3c.form.interfaces import NO_VALUE
 from zc.relation.interfaces import ICatalog
 from zope import component
 from zope.container.contained import ContainerModifiedEvent
+from zope.interface import providedBy
 from zope.intid.interfaces import IIntIds
 from zope.lifecycleevent.interfaces import IObjectAddedEvent
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
@@ -115,6 +117,15 @@ def referenceRemoved(obj, event, toInterface=IContactContent):
 
 
 def referencedObjectRemoved(obj, event):
+    allowed_interfaces = set([
+        IDirectory,
+        IOrganization,
+        IPerson,
+        IHeldPosition,
+        IPosition,
+    ])
+    if len(allowed_interfaces.intersection([i for i in providedBy(obj)])) == 0:
+        return
     # Avoid an error when we try to remove a working copy (plone.app.iterate)
     if IWorkingCopy.providedBy(obj):
         return
