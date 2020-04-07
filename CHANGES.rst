@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.31 (unreleased)
+1.31 (2020-04-07)
 -----------------
 
 - Do not execute integrity check for content types that are not related to this package.
