@@ -3,24 +3,26 @@
      i18n:domain="collective.contact.core"
      tal:repeat="address args">
     <div tal:condition="address" class="field adr address">
-    <label><tal:block i18n:translate="">Address</tal:block>:</label>
-    <div class="street-address" class="address_line street-address" i18n:translate="address_line">
-        <span i18n:name="street" tal:replace="address/street"></span>
-        <span i18n:name="number" tal:replace="address/number"></span>
-    </div>
-    <div class="additional_address_details" class="address_line">
-        <span i18n:translate="" tal:replace="address/additional_address_details"></span>
-    </div>
-    <div class="postal_code_and_locality" class="address_line">
-        <span class="postal-code" i18n:translate="" tal:condition="address/zip_code" tal:content="address/zip_code"></span>
-        <span class="locality" i18n:translate="" tal:condition="address/city" tal:content="address/city"></span>
-    </div>
-    <div class="region" class="address_line region" tal:condition="address/region">
-        <span i18n:translate="" tal:replace="address/region"></span>
-    </div>
-    <div class="country" class="address_line country-name" tal:condition="address/country">
-        <span i18n:translate="" tal:replace="address/country"></span>
-    </div>
-
+        <label><tal:block i18n:translate="">Address</tal:block>:</label>
+        <div class="address_line street-address"
+             tal:condition="address/additional_address_details" >
+            <span tal:replace="address/street"></span>
+            <span tal:replace="address/number"></span>
+        </div>
+        <div class="additional_address_details address_line"
+             tal:condition="address/additional_address_details">
+            <span i18n:translate="" tal:replace="address/additional_address_details"></span>
+        </div>
+        <div class="postal_code_and_locality address_line"
+             tal:condition="python:address['zip_code'] or address['city'] ">
+            <span class="postal-code" tal:condition="address/zip_code" tal:content="address/zip_code"></span>
+            <span class="locality" tal:condition="address/city" tal:content="address/city"></span>
+        </div>
+        <div class="address_line region" tal:condition="address/region">
+            <span tal:replace="address/region"></span>
+        </div>
+        <div class="address_line  country-name" tal:condition="address/country">
+            <span tal:replace="address/country"></span>
+        </div>
     </div>
 </div>

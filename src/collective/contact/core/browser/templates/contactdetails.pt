@@ -7,7 +7,7 @@
       class="contact-details"
       tal:define="portal_url context/@@plone_portal_state/portal_url;">
 
-    <p id="email" class="field" tal:condition="view/contact_details/email">
+    <p class="field email" tal:condition="view/contact_details/email">
         <label><tal:block i18n:translate="">Email</tal:block>:</label>
         <a class="email"
            tal:content="view/contact_details/email"
@@ -15,7 +15,7 @@
            i18n:translate="" />
     </p>
 
-    <p id="phone" class="field" tal:condition="view/contact_details/phone">
+    <p class="field phone" tal:condition="view/contact_details/phone">
         <label><tal:block i18n:translate="">Phone number</tal:block>:</label>
         <a tal:attributes="href string:tel:${view/contact_details/phone}">
         <span class="tel"
@@ -24,27 +24,27 @@
         </a>
     </p>
 
-    <p id="cell_phone" class="field" tal:condition="view/contact_details/cell_phone">
+    <p class="field cell_phone" tal:condition="view/contact_details/cell_phone">
         <label><tal:block i18n:translate="">Cell phone number</tal:block>:</label>
         <span class="tel"
               tal:content="view/contact_details/cell_phone"
               i18n:translate="" />
     </p>
 
-    <p id="fax" class="field" tal:condition="view/contact_details/fax">
+    <p class="field fax" tal:condition="view/contact_details/fax">
         <label><tal:block i18n:translate="">Fax number</tal:block>:</label>
         <span class="tel"
               tal:content="view/contact_details/fax"
               i18n:translate="" />
     </p>
 
-    <p id="im_handle" class="field" tal:condition="view/contact_details/im_handle">
+    <p class="field im_handle" tal:condition="view/contact_details/im_handle">
         <label><tal:block i18n:translate="">IM handle</tal:block>:</label>
         <span tal:content="view/contact_details/im_handle"
               i18n:translate="" />
     </p>
 
-    <p id="website" class="field"
+    <p class="field website"
        tal:condition="view/contact_details/website"
        tal:define="website view/contact_details/website">
         <label><tal:block i18n:translate="">Website</tal:block>:</label>
@@ -53,7 +53,7 @@
            tal:attributes="href website" />
     </p>
 
-    <p id="address" tal:replace="structure view/render_address" />
+    <p class="contact-address" tal:replace="structure view/render_address" />
 
     <p id="download_vcard" tal:condition="view/contact_details">
         <a href="@@contact.vcf" tal:attributes="href string: ${context/absolute_url}/@@contact.vcf">
