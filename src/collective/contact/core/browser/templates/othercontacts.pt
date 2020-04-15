@@ -29,12 +29,12 @@
             <span id="contact-held-position" tal:condition="contact/held_position" tal:content="contact/held_position"></span>
           </a>
 
-          <span id="contact-phone"tal:condition="contact/phone" tal:content="contact/phone" />
-          <span id="contact-cellphone"tal:condition="contact/cell_phone" tal:content="contact/cell_phone" />
-          <span id="contact-fax" tal:condition="contact/fax" tal:content="contact/fax" />
-          <a tal:attributes="href string:mailto:${contact/email}" id="contact-email" tal:condition="contact/email" tal:content="contact/email" />
+          <span class="contact-phone"tal:condition="contact/phone" tal:content="contact/phone" />
+          <span class="contact-cellphone"tal:condition="contact/cell_phone" tal:content="contact/cell_phone" />
+          <span class="contact-fax" tal:condition="contact/fax" tal:content="contact/fax" />
+          <a tal:attributes="href string:mailto:${contact/email}" class="contact-email" tal:condition="contact/email" tal:content="contact/email" />
           <span id="contact-im_handle" tal:condition="contact/im_handle" tal:content="contact/im_handle" />
-          <a tal:attributes="href contact/website" id="contact-website" tal:condition="contact/website" tal:content="contact/website" />
+          <a tal:attributes="href contact/website" class="contact-website" tal:condition="contact/website" tal:content="contact/website" />
         </div>
       </tal:block>
     </div>
