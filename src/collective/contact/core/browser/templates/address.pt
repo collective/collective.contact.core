@@ -5,7 +5,7 @@
     <div tal:condition="address" class="field adr address">
         <label><tal:block i18n:translate="">Address</tal:block>:</label>
         <div class="address_line street-address"
-             tal:condition="address/additional_address_details" >
+             tal:condition="address/street" >
             <span tal:replace="address/street"></span>
             <span tal:replace="address/number"></span>
         </div>
