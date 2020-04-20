@@ -4,7 +4,8 @@ Changelog
 1.32 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Added upgrade step for display_below_content_title_on_views. Fix for instances have not this registry key yet.
+  [boulch]
 
 
 1.31 (2020-04-07)

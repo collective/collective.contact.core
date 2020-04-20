@@ -119,3 +119,11 @@ def v16(context):
     tool.runImportStep('collective.contact.core', 'plone.app.registry')
     tool.runImportStep('collective.contact.core', 'catalog')
     tool.reindexContents(IContactContent, ('email', 'contact_source',))
+
+def v17(context):
+    IUpgradeTool(context).runImportStep('collective.contact.core', 'typeinfo')
+    IUpgradeTool(context).runImportStep('collective.contact.core', 'plone.app.registry')
+    val = api.portal.get_registry_record(name='display_below_content_title_on_views', interface=IContactCoreParameters)
+    if val is None:
+        api.portal.set_registry_record(name='display_below_content_title_on_views', value=False,
+                                       interface=IContactCoreParameters)

@@ -167,9 +167,18 @@
       handler=".upgrades.v16"
       profile="collective.contact.core:default" />
 
-  <genericsetup:upgradeSteps
+  <genericsetup:upgradeStep
+      title="Upgrade from 16 to 17"
+      description="Use belowcontenttitle viewlet on contact views."
       source="16"
       destination="17"
+      handler=".upgrades.v17"
+      profile="collective.contact.core:default" />
+
+
+  <genericsetup:upgradeSteps
+      source="17"
+      destination="18"
       profile="collective.contact.core:default">
       <genericsetup:upgradeDepends
           title="Reapply registry.xml"
