@@ -1,0 +1,17 @@
+[main]
+host = https://www.transifex.com
+
+[plone-collective.collective-contact-core-pot]
+file_filter = src/collective/contact/core/locales/<lang>/LC_MESSAGES/collective.contact.core.po
+minimum_perc = 0
+source_file = src/collective/contact/core/locales/collective.contact.core.pot
+source_lang = en
+type = PO
+
+[plone-collective.collective-contact-core-plone-pot]
+file_filter = src/collective/contact/core/locales/<lang>/LC_MESSAGES/plone.po
+minimum_perc = 0
+source_file = src/collective/contact/core/locales/plone.pot
+source_lang = en
+type = PO
+

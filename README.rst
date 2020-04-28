@@ -79,6 +79,8 @@ This product has been translated into
 
 - Slovenian.
 
+You can contribute for any message missing or other new languages, join us at `Plone Collective Team <https://www.transifex.com/plone/plone-collective/>`_ into *Transifex.net* service with all world Plone translators community.
+
 
 Installation
 ============

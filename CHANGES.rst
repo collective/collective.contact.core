@@ -4,6 +4,8 @@ Changelog
 1.32 (unreleased)
 -----------------
 
+- Add Transifex.net service integration to manage the translation process.
+  [macagua]
 - Add Spanish translation
   [macagua]
 
