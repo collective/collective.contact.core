@@ -120,6 +120,6 @@ Have an idea? Found a bug? Let us know by `opening a ticket`_.
 
 - Issue Tracker: https://github.com/collective/collective.contact.core/issues
 - Source Code: https://github.com/collective/collective.contact.core
-- Documentation: https://docs.plone.org/
+- Documentation: https://github.com/collective/collective.contact.demo/blob/master/README.md
 
 .. _`opening a ticket`: https://github.com/collective/collective.contact.core/issues
