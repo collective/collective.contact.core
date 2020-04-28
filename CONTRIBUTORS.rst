@@ -4,4 +4,5 @@
 - Cédric Messiant, Ecreall
 - Frédéric Peters, Entr'ouvert
 - Thomas Desvenain, Ecreall
+- Leonardo J. Caballero G., Plone Venezuela
 
