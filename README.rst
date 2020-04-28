@@ -64,6 +64,22 @@ In your addon, create a `patches.py` file with this content::
 and import it in yout `__init__.py` so the patches takes effect.
 
 
+Translations
+------------
+
+This product has been translated into
+
+- German.
+
+- Spanish.
+
+- French.
+
+- Italian.
+
+- Slovenian.
+
+
 Installation
 ============
 
