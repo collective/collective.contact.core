@@ -61,7 +61,7 @@ In your addon, create a `patches.py` file with this content::
     behaviors.ADDRESS_FIELDS[0:2] = reversed(behaviors.ADDRESS_FIELDS[0:2])
     behaviors.ADDRESS_FIELDS_PLUS_PARENT[2:4] = reversed(behaviors.ADDRESS_FIELDS_PLUS_PARENT[2:4])
 
-and import it in yout `__init__.py` so the patches takes effect.
+and import it in your `__init__.py` so the patches takes effect.
 
 
 Translations
@@ -85,21 +85,41 @@ You can contribute for any message missing or other new languages, join us at `P
 Installation
 ============
 
-* Add collective.contact.core to your eggs.
-* Re-run buildout.
-* Install the product in your plone site.
+Install collective.contact.core by adding it to your buildout file:
+
+   [buildout]
+
+    ...
+
+    eggs =
+        collective.contact.core
+
+
+and then running "bin/buildout", next enable the product in your plone site.
+
 
 Tests
 =====
 
 This add-on is tested using Travis CI. The current status of the add-on is :
 
-.. image:: https://secure.travis-ci.org/collective/collective.contact.core.png
+.. image:: https://img.shields.io/travis/collective/collective.contact.core/master.svg
     :target: http://travis-ci.org/collective/collective.contact.core
 
-Credits
-=======
+.. image:: https://img.shields.io/coveralls/collective/collective.contact.core/master.svg
+    :target: https://coveralls.io/r/collective/collective.contact.core
+
+.. image:: http://img.shields.io/pypi/v/collective.contact.core.svg
+   :target: https://pypi.python.org/pypi/collective.contact.core
+
+
+Contribute
+==========
 
 Have an idea? Found a bug? Let us know by `opening a ticket`_.
+
+- Issue Tracker: https://github.com/collective/collective.contact.core/issues
+- Source Code: https://github.com/collective/collective.contact.core
+- Documentation: https://docs.plone.org/
 
 .. _`opening a ticket`: https://github.com/collective/collective.contact.core/issues
