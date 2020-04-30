@@ -18,12 +18,6 @@
              tal:on-error="string:Bad logo format" />
     </div>
 
-    <div id="logo" class="field" tal:condition="context/logo">
-        <img tal:define="scales nocall:context/@@images"
-             tal:replace="structure python:scales.tag('logo', 'thumb', css_class='photo')"
-             tal:on-error="string:Bad logo format" />
-    </div>
-
     <div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle"
          tal:condition="python: view.display_below_content_title() and not ajax_load" />
 

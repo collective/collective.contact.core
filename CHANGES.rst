@@ -8,6 +8,8 @@ Changelog
   [macagua]
 - Add Spanish translation
   [macagua]
+- Removed duplicated code displaying two times the logo in organization view.
+  [gbastien]
 
 
 1.31 (2020-04-07)
