@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.32 (unreleased)
+1.32 (2020-05-08)
 -----------------
 
 - Add Transifex.net service integration to manage the translation process.
