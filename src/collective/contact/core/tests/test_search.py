@@ -105,3 +105,5 @@ class TestSearch(unittest.TestCase, BaseTest):
             SearchableText='charles.de.gaulle@private.com')
         self.assertEqual(len(restults), 1)
         self.assertEqual(restults[0].getPath(), '/plone/mydirectory/degaulle')
+        results = catalog.searchResults(SearchableText='BE123456789')
+        self.assertEqual(len(results), 1)

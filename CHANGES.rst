@@ -4,6 +4,8 @@ Changelog
 2.0 (unreleased)
 ----------------
 
+- Add new `enterprise number` field for organization content type
+  [laulaz]
 - Update for Plone 5.2
   [agitator]
 - Use mockup for tooltips, modals and date widget.

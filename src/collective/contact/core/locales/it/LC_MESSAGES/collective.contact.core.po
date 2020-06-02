@@ -146,6 +146,15 @@ msgstr "E-mail"
 msgid "End date"
 msgstr "Data fine"
 
+#: ../browser/basefields/templates/organization.pt:42
+#: ../content/organization.py:53
+msgid "Enterprise (or VAT) number"
+msgstr ""
+
+#: ../content/organization.py:24
+msgid "Enterprise number must contain only letters and numbers"
+msgstr ""
+
 #: ../behaviors.py:161
 msgid "Fax"
 msgstr "Fax"

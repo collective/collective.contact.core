@@ -8,3 +8,4 @@ Contributors
 - Frédéric Peters, Entr'ouvert
 - Thomas Desvenain, Ecreall
 - Peter Holzer, peter.holzer@agitator.com
+- Laurent Lasudry, Affinitic

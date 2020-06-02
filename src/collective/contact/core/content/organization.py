@@ -19,6 +19,18 @@ from zope.interface import implementer
 from zope.intid.interfaces import IIntIds
 
 
+class InvalidEnterpriseNumber(schema.ValidationError):
+    """Exception for invalid enterprise number"""
+    __doc__ = _(u"Enterprise number must contain only letters and numbers")
+
+
+def validateEnterpriseNumber(value):
+    """Enterprise number validator"""
+    if not value.isalnum():
+        raise InvalidEnterpriseNumber(value)
+    return True
+
+
 class IOrganization(model.Schema, IContactContent):
     """Interface for Organization content type"""
 
@@ -35,6 +47,12 @@ class IOrganization(model.Schema, IContactContent):
     logo = NamedImage(
         title=_("Logo"),
         required=False,
+    )
+
+    enterprise_number = schema.TextLine(
+        title=_(u"Enterprise (or VAT) number"),
+        required=False,
+        constraint=validateEnterpriseNumber,
     )
 
     def get_organizations_chain(self):

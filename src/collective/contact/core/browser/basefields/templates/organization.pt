@@ -38,4 +38,9 @@
          <span class="note" tal:content="structure view/activity/output" />
     </div>
 
+    <div id="enterprise-number" class="field" tal:condition="context/enterprise_number">
+         <label><tal:block i18n:translate="">Enterprise (or VAT) number</tal:block>:</label>
+         <span class="note" tal:content="context/enterprise_number" />
+    </div>
+
 </html>

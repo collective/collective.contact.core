@@ -89,6 +89,7 @@ class TestOrganization(TestContentTypes):
         armeedeterre = self.armeedeterre
         self.assertIn('armeedeterre', self.mydirectory)
         self.assertEqual(armeedeterre.Title(), "Armée de terre")
+        self.assertEqual(armeedeterre.enterprise_number, "BE123456789")
         self.assertIn('corpsa', armeedeterre)
         self.assertIn('corpsb', armeedeterre)
         self.assertIn('divisionalpha', self.corpsa)
