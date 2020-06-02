@@ -5,4 +5,4 @@
 - Frédéric Peters, Entr'ouvert
 - Thomas Desvenain, Ecreall
 - Leonardo J. Caballero G., Plone Venezuela
-
+- Laurent Lasudry, Affinitic

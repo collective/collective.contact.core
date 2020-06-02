@@ -166,6 +166,7 @@ def create_test_contact_data(portal):
               'number': u'1',
               'zip_code': u'75008',
               'country': u'France',
+              'enterprise_number': 'BE123456789',
               }
     mydirectory.invokeFactory('organization', 'armeedeterre', **params)
     armeedeterre = mydirectory['armeedeterre']
