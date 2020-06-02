@@ -50,6 +50,9 @@ def organization_searchable_text(organization):
 
     words += organization.get_organizations_titles()
 
+    if organization.enterprise_number is not None:
+        words.append(organization.enterprise_number)
+
     email = IContactDetails(organization).email
     if email:
         words.append(email)

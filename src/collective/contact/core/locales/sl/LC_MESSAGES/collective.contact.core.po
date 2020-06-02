@@ -143,6 +143,15 @@ msgstr "Email"
 msgid "End date"
 msgstr "Končni datum"
 
+#: ../browser/basefields/templates/organization.pt:36
+#: ../content/organization.py:55
+msgid "Enterprise (or VAT) number"
+msgstr ""
+
+#: ../content/organization.py:26
+msgid "Enterprise number must contain only letters and numbers"
+msgstr ""
+
 #: ../behaviors.py:161
 msgid "Fax"
 msgstr "Telefaks"

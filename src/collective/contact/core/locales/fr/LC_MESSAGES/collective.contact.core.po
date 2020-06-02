@@ -144,6 +144,15 @@ msgstr "Courriel "
 msgid "End date"
 msgstr "Date de fin "
 
+#: ../browser/basefields/templates/organization.pt:36
+#: ../content/organization.py:55
+msgid "Enterprise (or VAT) number"
+msgstr "Numéro d'entreprise (ou de TVA)"
+
+#: ../content/organization.py:26
+msgid "Enterprise number must contain only letters and numbers"
+msgstr "Le numéro d'entreprise ne peut contenir que des lettres et des chiffres"
+
 #: ../behaviors.py:161
 msgid "Fax"
 msgstr "Fax"

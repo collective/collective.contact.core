@@ -4,7 +4,8 @@ Changelog
 1.33 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Add new `enterprise number` field for organization content type
+  [laulaz]
 
 
 1.32 (2020-05-08)
