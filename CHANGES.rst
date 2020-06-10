@@ -6,7 +6,8 @@ Changelog
 
 - Add new `enterprise number` field for organization content type
   [laulaz]
-
+- Updated Title to work with transmogrifier
+  [sgeulette]
 
 1.32 (2020-05-08)
 -----------------

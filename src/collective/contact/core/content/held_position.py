@@ -91,6 +91,8 @@ class HeldPosition(Container):
     def Title(self, separator=u' / ', first_index=0):
         """The held position's title is constituted by the position's
            title (or held_position label) and the organizations chain."""
+        if self.position is None:  # when created by transmogrifier by example
+            return self.getId()
         position = self.position.to_object
         if position is None:  # the reference was removed
             return self.getId()
