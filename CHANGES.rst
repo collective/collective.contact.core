@@ -8,6 +8,8 @@ Changelog
   [laulaz]
 - Updated Title to work with transmogrifier
   [sgeulette]
+- Updated birthday widget to manage dates range
+  [sgeulette]
 
 1.32 (2020-05-08)
 -----------------
