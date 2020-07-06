@@ -4,7 +4,7 @@ import datetime
 from zope.interface import alsoProvides
 from zope.interface import Interface
 from zope import schema
-from Acquisition import aq_base
+from Acquisition import aq_base  # noqa
 
 from z3c.form.widget import ComputedWidgetAttribute
 from plone.supermodel import model
@@ -31,7 +31,7 @@ class InvalidEmailAddress(schema.ValidationError):
     __doc__ = _(u"Invalid email address")
 
 
-def validateEmail(value):
+def validate_email(value):
     """Simple email validator"""
     try:
         checkEmailAddress(value)
@@ -45,10 +45,10 @@ class InvalidPhone(schema.ValidationError):
     __doc__ = _(u"Invalid phone")
 
 
-_PHONE_RE = re.compile(r'[+]?[0-9 \(\)]*$')
+_PHONE_RE = re.compile(r'[+]?[0-9 \(\)]*$')  # noqa
 
 
-def validatePhone(value):
+def validate_phone(value):
     """Simple email validator"""
     if not _PHONE_RE.match(value):
         raise InvalidPhone(value)
@@ -75,7 +75,7 @@ class IGlobalPositioning(model.Schema):
         'global_positioning',
         label=_(u'Global positioning'),
         fields=('latitude', 'longitude')
-        )
+    )
 
     latitude = schema.Float(
             title=_('Latitude'),
@@ -83,7 +83,7 @@ class IGlobalPositioning(model.Schema):
             min=-90.0,
             max=90.0,
             required=False,
-            )
+    )
 
     longitude = schema.Float(
             title=_('Longitude'),
@@ -91,7 +91,8 @@ class IGlobalPositioning(model.Schema):
             min=-90.0,
             max=90.0,
             required=False,
-            )
+    )
+
 
 alsoProvides(IGlobalPositioning, IFormFieldProvider)
 
@@ -105,7 +106,7 @@ ADDRESS_FIELDS = [
                 'city',
                 'region',
                 'country',
-                ]
+]
 
 
 # must stay a list so it can be patched
@@ -121,7 +122,7 @@ CONTACT_DETAILS_FIELDS = (
                 'email',
                 'im_handle',
                 'website',
-                )
+)
 
 
 class IContactDetails(model.Schema):
@@ -131,98 +132,105 @@ class IContactDetails(model.Schema):
         'contact_details',
         label=_(u'Contact details'),
         fields=CONTACT_DETAILS_FIELDS
-        )
+    )
     fieldset(
         'address',
         label=_(u'Address'),
         fields=ADDRESS_FIELDS_PLUS_PARENT
 
-        )
+    )
 
     email = schema.TextLine(
         title=_(u"Email"),
-        constraint=validateEmail,
+        constraint=validate_email,
         required=False,
-        )
+    )
 
     phone = schema.TextLine(
         title=_(u"Phone"),
         required=False,
-        constraint=validatePhone,
-        )
+        constraint=validate_phone,
+    )
 
     cell_phone = schema.TextLine(
         title=_(u"Cell phone"),
         required=False,
-        )
+    )
 
     fax = schema.TextLine(
         title=_(u"Fax"),
         required=False,
-        )
+    )
 
     website = schema.TextLine(
         title=_(u"Website"),
         required=False,
-        )
+    )
 
     im_handle = schema.TextLine(
         title=_('Instant messenger handle'),
         required=False,
-        )
+    )
 
     use_parent_address = MasterSelectBoolField(
         title=_("Use the belonging entity address"),
         slave_fields=(
-            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, #oform-widgets-use_parent_address-0',
+            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, '
+                               '#oform-widgets-use_parent_address-0',
              'name': 'country',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
-            },
-            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, #oform-widgets-use_parent_address-0',
+             },
+            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, '
+                               '#oform-widgets-use_parent_address-0',
              'name': 'region',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
-            },
-            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, #oform-widgets-use_parent_address-0',
+             },
+            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, '
+                               '#oform-widgets-use_parent_address-0',
              'name': 'zip_code',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
-            },
-            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, #oform-widgets-use_parent_address-0',
+             },
+            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, '
+                               '#oform-widgets-use_parent_address-0',
              'name': 'city',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
-            },
-            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, #oform-widgets-use_parent_address-0',
+             },
+            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, '
+                               '#oform-widgets-use_parent_address-0',
              'name': 'number',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
-            },
-            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, #oform-widgets-use_parent_address-0',
+             },
+            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, '
+                               '#oform-widgets-use_parent_address-0',
              'name': 'street',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
-            },
-            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, #oform-widgets-use_parent_address-0',
+             },
+            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, '
+                               '#oform-widgets-use_parent_address-0',
              'name': 'additional_address_details',
              'action': 'show',
              'hide_values': 0,
              'siblings': True,
-            },
-
-            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, #oform-widgets-use_parent_address-0',
+             },
+            {'masterSelector': '#form-widgets-IContactDetails-use_parent_address-0, '
+                               '#oform-widgets-use_parent_address-0',
              'name': 'parent_address',
              'action': 'hide',
              'hide_values': 0,
              'siblings': True,
-            },
+             },
         ),
         default=True,
         required=False,
@@ -232,43 +240,44 @@ class IContactDetails(model.Schema):
         default_mime_type='text/html',
         output_mime_type='text/html',
         required=False,
-        )
+    )
     form.mode(parent_address='display')
 
     country = schema.TextLine(
         title=_('Country'),
         required=False,
-        )
+    )
 
     zip_code = schema.TextLine(
         title=_('Zip Code'),
         required=False,
-        )
+    )
 
     city = schema.TextLine(
         title=_('City'),
         required=False,
-        )
+    )
 
     street = schema.TextLine(
         title=_('Street'),
         required=False,
-        )
+    )
 
     number = schema.TextLine(
         title=_('Number'),
         required=False,
-        )
+    )
 
     region = schema.TextLine(
             title=_('Region'),
             required=False,
-            )
+    )
 
     additional_address_details = schema.TextLine(
             title=_('Additional address details'),
             required=False,
-            )
+    )
+
 
 alsoProvides(IContactDetails, IFormFieldProvider)
 
@@ -286,15 +295,15 @@ def default_use_parent_address(adapter):
 
     try:
         parent_type = parent.portal_type
-    except:
+    except Exception:  # noqa
         # in schema editor
         return False
 
     if parent_type == 'person':
         return False
-    elif parent_type == 'organization' \
-      and not IOrganization.providedBy(adapter.context) \
-      and not IPosition.providedBy(adapter.context):
+    elif (parent_type == 'organization'
+          and not IOrganization.providedBy(adapter.context)
+          and not IPosition.providedBy(adapter.context)):
         return False
     else:
         return True
@@ -318,7 +327,8 @@ class IBirthday(model.Schema):
         required=False,
         min=datetime.date(1900, 1, 1),
         max=datetime.date.today(),
-        )
+    )
+
 
 alsoProvides(IBirthday, IFormFieldProvider)
 
@@ -331,7 +341,7 @@ class IRelatedOrganizations(model.Schema):
         'related_organizations',
         label=_(u'Related organizations'),
         fields=('related_organizations',),
-        )
+    )
 
     related_organizations = ContactList(
             value_type=ContactChoice(
