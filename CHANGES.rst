@@ -10,6 +10,8 @@ Changelog
   [sgeulette]
 - Updated birthday widget to manage dates range
   [sgeulette]
+- Added `create_organization.png` icon useable if necessary
+  [gbastien]
 
 1.32 (2020-05-08)
 -----------------
