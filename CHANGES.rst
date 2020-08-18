@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.33 (unreleased)
+1.33 (2020-08-18)
 -----------------
 
 - Add new `enterprise number` field for organization content type
