@@ -48,7 +48,7 @@ setup(
     install_requires=[
         'ExtensionClass',
         'collective.z3cform.datagridfield',
-        'collective.contact.widget > 1.2.2',
+        'collective.contact.widget >= 1.12',
         'setuptools',
         'ecreall.helpers.upgrade >= 1.1.6.dev0',
         'five.grok',
