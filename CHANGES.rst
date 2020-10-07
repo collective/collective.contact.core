@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.34 (unreleased)
+1.34 (2020-10-07)
 -----------------
 
 - Added robot test for collective.contatc.widget 1.12 version.
