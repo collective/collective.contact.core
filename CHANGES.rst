@@ -4,8 +4,8 @@ Changelog
 1.34 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Added robot test for collective.contatc.widget 1.12 version.
+  [daggelpop]
 
 1.33 (2020-08-18)
 -----------------
