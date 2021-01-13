@@ -2,6 +2,7 @@
 
 from collective.contact.core.testing import INTEGRATION
 from collective.contact.core.utils import get_gender_and_number
+from collective.contact.core.utils import get_position_type_name
 from ecreall.helpers.testing.base import BaseTest
 from plone.app.testing.interfaces import TEST_USER_NAME
 
@@ -67,3 +68,11 @@ class TestUtils(unittest.TestCase, BaseTest):
         # parameters use_by and use_to will prepend a 'B' or 'T' to returned value
         self.assertEqual(get_gender_and_number([self.sergent_pepper, self.draper], use_by=True), u'BMP')
         self.assertEqual(get_gender_and_number([self.pepper, self.sergent_pepper], use_to=True), u'TMS')
+
+    def test_get_position_type_name(self):
+        """ """
+        self.login(TEST_USER_NAME)
+        self.assertIsNone(get_position_type_name(self.mydirectory, ''))
+        self.assertIsNone(get_position_type_name(self.mydirectory, None))
+        self.assertEqual(get_position_type_name(self.mydirectory, 'general'), u'General')
+        self.assertEqual(get_position_type_name(self.mydirectory, 'captain'), u'Captain')

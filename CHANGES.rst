@@ -4,8 +4,9 @@ Changelog
 1.35 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Added `utils.get_position_type_name` that will return a `position_type name`
+  for a given `directory` and `position_type token`.
+  [gbastien]
 
 1.34 (2020-10-07)
 -----------------

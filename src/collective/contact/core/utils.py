@@ -43,3 +43,11 @@ def get_gender_and_number(contacts, use_by=False, use_to=False):
             gender = 'T' + gender
         res = gender + (number > 1 and 'P' or 'S')
     return res
+
+
+def get_position_type_name(directory, token):
+    """Return the 'name' for given 'token' of given directoty.position_types."""
+    position_types = directory.position_types
+    for position_type in position_types:
+        if position_type['token'] == token:
+            return position_type['name']
