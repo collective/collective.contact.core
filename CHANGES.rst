@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.35 (unreleased)
+1.35 (2021-01-14)
 -----------------
 
 - Added `utils.get_position_type_name` that will return a `position_type name`
