@@ -4,8 +4,10 @@ Changelog
 1.36 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- In vocabulary.OrganizationTypesOrLevels, use `getRequest` instead
+  `context.REQUEST` to get the current request, in some case like when using a
+  `plone.restapi` endpoint, `context.REQUEST` could not have an `URL`.
+  [gbastien]
 
 1.35 (2021-01-14)
 -----------------
