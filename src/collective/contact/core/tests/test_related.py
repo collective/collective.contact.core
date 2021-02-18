@@ -1,16 +1,15 @@
 # -*- coding: utf8 -*-
 
-from ecreall.helpers.testing.base import BaseTest
-from plone import api
-import unittest
-from z3c.relationfield.relation import RelationValue
-from zope.intid.interfaces import IIntIds
-from zope.component import getUtility
-from zope.interface import alsoProvides
-
 from collective.contact.core.behaviors import IRelatedOrganizations
 from collective.contact.core.testing import INTEGRATION
-from collective.contact.core.indexers import organization_searchable_text
+from ecreall.helpers.testing.base import BaseTest
+from plone import api
+from z3c.relationfield.relation import RelationValue
+from zope.component import getUtility
+from zope.interface import alsoProvides
+from zope.intid.interfaces import IIntIds
+
+import unittest
 
 
 class TestSearch(unittest.TestCase, BaseTest):
@@ -28,13 +27,18 @@ class TestSearch(unittest.TestCase, BaseTest):
         self.divisionbeta = self.corpsa['divisionbeta']
 
     def test_related_searchable_text(self):
-        self.assertEqual(organization_searchable_text(self.divisionalpha)(),
-            u"Armée de terre Corps A Division Alpha")
+        pc = self.portal.portal_catalog
+        index = pc._catalog.getIndex("SearchableText")
+        rid = pc(UID=self.divisionalpha.UID())[0].getRID()
+        indexed = index.getEntryForObject(rid, default=[])
+        self.assertListEqual(indexed, ['armee', 'de', 'terre', 'corps', 'a', 'division', 'alpha'])
 
         intids = getUtility(IIntIds)
         alsoProvides(self.divisionalpha, IRelatedOrganizations)
         self.divisionalpha.related_organizations = [
             RelationValue(intids.getId(self.divisionbeta)),
         ]
-        self.assertEqual(organization_searchable_text(self.divisionalpha)(),
-            u'Armée de terre Corps A Division Beta Armée de terre Corps A Division Alpha')
+        self.divisionalpha.reindexObject()
+        indexed = index.getEntryForObject(rid, default=[])
+        self.assertListEqual(indexed, ['armee', 'de', 'terre', 'corps', 'a', 'division', 'beta', 'armee', 'de',
+                                       'terre', 'corps', 'a', 'division', 'alpha'])

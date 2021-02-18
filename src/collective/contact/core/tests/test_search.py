@@ -1,16 +1,15 @@
 # -*- coding: utf8 -*-
 
-import datetime
-import unittest
-
+from collective.contact.core.indexers import end_date
+from collective.contact.core.indexers import held_position_sortable_title
+from collective.contact.core.indexers import person_sortable_title
+from collective.contact.core.indexers import start_date
+from collective.contact.core.testing import INTEGRATION
+from ecreall.helpers.testing.base import BaseTest
 from plone import api
 
-from ecreall.helpers.testing.base import BaseTest
-
-from collective.contact.core.testing import INTEGRATION
-from collective.contact.core.indexers import (
-    held_position_searchable_text, organization_searchable_text,
-    person_sortable_title, held_position_sortable_title, start_date, end_date)
+import datetime
+import unittest
 
 
 class TestSearch(unittest.TestCase, BaseTest):
@@ -36,18 +35,31 @@ class TestSearch(unittest.TestCase, BaseTest):
         self.sergent_pepper = self.pepper['sergent_pepper']
 
     def test_indexers(self):
-        divisionalpha = self.divisionalpha
-        self.assertEqual(organization_searchable_text(divisionalpha)(),
-                         u"Armée de terre Corps A Division Alpha")
-        gadt = self.gadt
-        self.assertEqual(held_position_searchable_text(gadt)(),
-                         u"Général Charles De Gaulle Général de l'armée de terre Armée de terre Émissaire OTAN")
-        sergent_pepper = self.sergent_pepper
-        self.assertEqual(
-            held_position_searchable_text(sergent_pepper)(),
-            (u"Mister Pepper Sergent de la brigade LH Armée de terre Corps A "
-             u"Division Alpha Régiment H Brigade LH sgt.pepper@armees.fr")
-            )
+        pc = self.portal.portal_catalog
+        index = pc._catalog.getIndex("SearchableText")
+        # check organization searchable text
+        rid = pc(UID=self.divisionalpha.UID())[0].getRID()
+        indexed = index.getEntryForObject(rid, default=[])
+        self.assertListEqual(indexed, ['armee', 'de', 'terre', 'corps', 'a', 'division', 'alpha'])
+        # check held position searchable text
+        rid = pc(UID=self.gadt.UID())[0].getRID()
+        indexed = index.getEntryForObject(rid, default=[])
+        self.assertListEqual(indexed, ['general', 'charles', 'de', 'gaulle', 'general', 'de', 'l', 'armee', 'de',
+                                       'terre', 'armee', 'de', 'terre', 'emissaire', 'otan'])
+        rid = pc(UID=self.sergent_pepper.UID())[0].getRID()
+        indexed = index.getEntryForObject(rid, default=[])
+        self.assertListEqual(indexed, ['mister', 'pepper', 'sergent', 'de', 'la', 'brigade', 'lh', 'armee', 'de',
+                                       'terre', 'corps', 'a', 'division', 'alpha', 'regiment', 'h', 'brigade', 'lh',
+                                       'sgt', 'pepper', 'armees', 'fr'])
+        # check person searchable text
+        rid = pc(UID=self.degaulle.UID())[0].getRID()
+        indexed = index.getEntryForObject(rid, default=[])
+        self.assertListEqual(indexed, ['general', 'charles', 'de', 'gaulle', 'charles', 'de', 'gaulle', 'private',
+                                       'com', 'general', 'charles', 'de', 'gaulle', 'armee', 'de', 'terre', 'general',
+                                       'charles', 'de', 'gaulle', 'general', 'de', 'l', 'armee', 'de', 'terre',
+                                       'armee', 'de', 'terre', 'emissaire', 'otan'])
+
+        # check others
         pepper = self.pepper
         self.assertEqual(person_sortable_title(pepper)(),
                          "pepper")
@@ -57,8 +69,8 @@ class TestSearch(unittest.TestCase, BaseTest):
         degaulle = self.degaulle
         self.assertEqual(person_sortable_title(degaulle)(),
                          'de-gaulle-charles')
-        self.assertEqual(start_date(sergent_pepper)(), datetime.date(1980, 6, 5))
-        self.assertEqual(end_date(sergent_pepper)(), datetime.date(2100, 1, 1))
+        self.assertEqual(start_date(self.sergent_pepper)(), datetime.date(1980, 6, 5))
+        self.assertEqual(end_date(self.sergent_pepper)(), datetime.date(2100, 1, 1))
         self.assertEqual(end_date(self.gadt)(), datetime.date(1970, 11, 9))
         self.assertEqual(start_date(self.mydirectory['draper']['captain_crunch'])(),
                          self.mydirectory['draper']['captain_crunch'].created())
