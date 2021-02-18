@@ -69,28 +69,27 @@ class OrganizationSearchableExtender(object):
         if email:
             words.append(email)
 
-@indexer(IHeldPosition)
-def held_position_searchable_text(obj):
-    indexed_fields = []
-    indexed_fields.append(obj.get_person().get_title())
-    position = obj.get_position()
-    if position is not None:
-        indexed_fields.append(position.title)
+        return u' '.join(words)
 
-    organization = obj.get_organization()
-    if organization:
-        indexed_fields.extend(organization.get_organizations_titles())
 
-    label = obj.get_label()
-    if label:
-        indexed_fields.append(label)
+class HeldPositionSearchableExtender(object):
+    """Extends SearchableText of a held position."""
+    adapts(IHeldPosition)
+    implements(IDynamicTextIndexExtender)
 
-    email = IContactDetails(obj).email
-    if email:
-        indexed_fields.append(email)
+    def __init__(self, context):
+        self.context = context
 
-    return u' '.join(indexed_fields)
+    def __call__(self):
+        obj = self.context
+        indexed_fields = [obj.get_person().get_title()]
+        position = obj.get_position()
+        if position is not None:
+            indexed_fields.append(position.title)
 
+        organization = obj.get_organization()
+        if organization:
+            indexed_fields.extend(organization.get_organizations_titles())
 
 @indexer(IPosition)
 def position_searchable_text(obj):
