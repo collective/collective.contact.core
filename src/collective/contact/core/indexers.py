@@ -152,30 +152,6 @@ class PersonSearchableExtender(object):
                 results.append(HeldPositionSearchableExtender(held_positions)())
         return u' '.join(results)
 
-@indexer(IPerson)
-def person_searchable_text(obj):
-    results = []
-    use_description = api.portal.get_registry_record(
-        "collective.contact.core.interfaces.IContactCoreParameters."
-        "use_description_to_search_person")
-    if use_description:
-        text = obj.SearchableText()
-    else:
-        text = obj.Title()
-
-    results.append(safe_unicode(text))
-
-    email = IContactDetails(obj).email
-    if email:
-        results.append(email)
-
-    use_held_positions = api.portal.get_registry_record(
-        "collective.contact.core.interfaces.IContactCoreParameters."
-        "use_held_positions_to_search_person")
-    if use_held_positions:
-        for held_positions in obj.get_held_positions():
-            results.append(held_position_searchable_text(held_positions)())
-    return results
 
 class ContactEscapingTitleFieldConverter(DefaultDexterityTextIndexFieldConverter):
     """Contact field converter for collective.dexteritytextindexer to escape title and description."""

@@ -85,10 +85,6 @@
   <adapter name="collective.contact.core.PersonSearchableExtender"
            factory=".indexers.PersonSearchableExtender" />
 
-  <adapter
-    name="SearchableText"
-    factory=".indexers.person_searchable_text"
-    />
   <!-- Needed to remove title and description values from indexation
        because IBasic.title and description are added by collective.dexteritytextindexer -->
   <adapter for="collective.contact.core.content.organization.IOrganization
