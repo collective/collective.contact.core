@@ -20,6 +20,7 @@
   <include package="collective.contact.widget" />
   <include package="collective.z3cform.datagridfield" />
   <include package="five.globalrequest" />
+  <include package="collective.dexteritytextindexer"/>
   <include package=".upgrades" />
   <include package=".browser" />
 
@@ -77,10 +78,8 @@
     factory=".indexers.held_position_searchable_text"
     />
 
-  <adapter
-    name="SearchableText"
-    factory=".indexers.organization_searchable_text"
-    />
+  <adapter name="collective.contact.core.OrganizationSearchableExtender"
+           factory=".indexers.OrganizationSearchableExtender" />
 
   <adapter
     name="SearchableText"
@@ -91,6 +90,13 @@
     name="SearchableText"
     factory=".indexers.person_searchable_text"
     />
+  <!-- Needed to remove title and description values from indexation
+       because IBasic.title and description are added by collective.dexteritytextindexer -->
+  <adapter for="collective.contact.core.content.organization.IOrganization
+                zope.schema.interfaces.IField
+                z3c.form.interfaces.IWidget"
+           factory=".indexers.ContactEscapingTitleFieldConverter"
+           provides="collective.dexteritytextindexer.interfaces.IDexterityTextIndexFieldConverter" />
 
   <adapter
     name="sortable_title"

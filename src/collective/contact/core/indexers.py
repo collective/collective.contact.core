@@ -9,10 +9,14 @@ from collective.contact.core.content.position import IPosition
 from collective.contact.core.interfaces import IContactable
 from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
+from collective.dexteritytextindexer.converters import DefaultDexterityTextIndexFieldConverter
+from collective.dexteritytextindexer.interfaces import IDynamicTextIndexExtender
 from datetime import date
 from plone import api
 from plone.indexer import indexer
 from Products.CMFPlone.utils import safe_unicode
+from zope.component import adapts
+from zope.interface import implements
 
 
 @indexer(IContactContent)
@@ -40,25 +44,30 @@ def contact_source(contact):
     return u''
 
 
-@indexer(IOrganization)
-def organization_searchable_text(organization):
-    words = []
-    if IRelatedOrganizations.providedBy(organization) \
-            and organization.related_organizations is not None:
-        for related in organization.related_organizations:
-            words += related.to_object.get_organizations_titles()
+class OrganizationSearchableExtender(object):
+    """Extends SearchableText of an organization."""
+    adapts(IOrganization)
+    implements(IDynamicTextIndexExtender)
 
-    words += organization.get_organizations_titles()
+    def __init__(self, context):
+        self.context = context
 
-    if organization.enterprise_number is not None:
-        words.append(organization.enterprise_number)
+    def __call__(self):
+        words = []
+        organization = self.context
+        if IRelatedOrganizations.providedBy(organization) \
+                and organization.related_organizations is not None:
+            for related in organization.related_organizations:
+                words += related.to_object.get_organizations_titles()
 
-    email = IContactDetails(organization).email
-    if email:
-        words.append(email)
+        words += organization.get_organizations_titles()
 
-    return u' '.join(words)
+        if organization.enterprise_number is not None:
+            words.append(organization.enterprise_number)
 
+        email = IContactDetails(organization).email
+        if email:
+            words.append(email)
 
 @indexer(IHeldPosition)
 def held_position_searchable_text(obj):
@@ -117,6 +126,15 @@ def person_searchable_text(obj):
         for held_positions in obj.get_held_positions():
             results.append(held_position_searchable_text(held_positions)())
     return results
+
+class ContactEscapingTitleFieldConverter(DefaultDexterityTextIndexFieldConverter):
+    """Contact field converter for collective.dexteritytextindexer to escape title and description."""
+
+    def convert(self):
+        """Convert the adapted field value to text/plain for indexing"""
+        if self.field.__name__ in ('title', 'description'):
+            return ''
+        return super(ContactEscapingTitleFieldConverter, self).convert()
 
 
 @indexer(IPerson)
