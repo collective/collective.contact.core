@@ -301,9 +301,8 @@ def default_use_parent_address(adapter):
 
     if parent_type == 'person':
         return False
-    elif (parent_type == 'organization'
-          and not IOrganization.providedBy(adapter.context)
-          and not IPosition.providedBy(adapter.context)):
+    elif (parent_type == 'organization' and not IOrganization.providedBy(adapter.context) and
+          not IPosition.providedBy(adapter.context)):
         return False
     else:
         return True
