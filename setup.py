@@ -49,6 +49,7 @@ setup(
         'ExtensionClass',
         'collective.z3cform.datagridfield',
         'collective.contact.widget >= 1.12',
+        'collective.dexteritytextindexer',
         'setuptools',
         'ecreall.helpers.upgrade >= 1.1.6.dev0',
         'five.grok',

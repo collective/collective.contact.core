@@ -177,4 +177,12 @@
           import_steps="plone.app.registry" />
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeStep
+      title="Upgrade from 17 to 18"
+      source="17"
+      destination="18"
+      handler=".upgrades.v18"
+      profile="collective.contact.core:default">
+  </genericsetup:upgradeStep>
+
 </configure>
