@@ -91,15 +91,66 @@ class HeldPositionSearchableExtender(object):
         if organization:
             indexed_fields.extend(organization.get_organizations_titles())
 
-@indexer(IPosition)
-def position_searchable_text(obj):
-    result = [safe_unicode(obj.SearchableText())]
-    result.append(safe_unicode(obj.get_organization().Title()))
-    email = IContactDetails(obj).email
-    if email:
-        result.append(email)
-    return u' '.join(result)
+        label = obj.get_label()
+        if label:
+            indexed_fields.append(label)
 
+        email = IContactDetails(obj).email
+        if email:
+            indexed_fields.append(email)
+
+        return u' '.join(indexed_fields)
+
+
+class PositionSearchableExtender(object):
+    """Extends SearchableText of a position."""
+    adapts(IPosition)
+    implements(IDynamicTextIndexExtender)
+
+    def __init__(self, context):
+        self.context = context
+
+    def __call__(self):
+        obj = self.context
+        result = [safe_unicode(obj.get_organization().Title())]
+        email = IContactDetails(obj).email
+        if email:
+            result.append(email)
+        return u' '.join(result)
+
+
+class PersonSearchableExtender(object):
+    """Extends SearchableText of a position."""
+    adapts(IPerson)
+    implements(IDynamicTextIndexExtender)
+
+    def __init__(self, context):
+        self.context = context
+
+    def __call__(self):
+        obj = self.context
+        results = []
+        use_description = api.portal.get_registry_record(
+            "collective.contact.core.interfaces.IContactCoreParameters."
+            "use_description_to_search_person")
+        if use_description:
+            text = obj.SearchableText()
+        else:
+            text = obj.Title()
+
+        results.append(safe_unicode(text))
+
+        email = IContactDetails(obj).email
+        if email:
+            results.append(email)
+
+        use_held_positions = api.portal.get_registry_record(
+            "collective.contact.core.interfaces.IContactCoreParameters."
+            "use_held_positions_to_search_person")
+        if use_held_positions:
+            for held_positions in obj.get_held_positions():
+                results.append(HeldPositionSearchableExtender(held_positions)())
+        return u' '.join(results)
 
 @indexer(IPerson)
 def person_searchable_text(obj):

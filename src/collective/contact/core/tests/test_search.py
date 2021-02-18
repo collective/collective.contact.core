@@ -41,6 +41,11 @@ class TestSearch(unittest.TestCase, BaseTest):
         rid = pc(UID=self.divisionalpha.UID())[0].getRID()
         indexed = index.getEntryForObject(rid, default=[])
         self.assertListEqual(indexed, ['armee', 'de', 'terre', 'corps', 'a', 'division', 'alpha'])
+        # check position searchable text
+        rid = pc(UID=self.general_adt.UID())[0].getRID()
+        indexed = index.getEntryForObject(rid, default=[])
+        self.assertListEqual(indexed, ['general', 'de', 'l', 'armee', 'de', 'terre', 'armee', 'de', 'terre',
+                                       'general', 'armees', 'fr'])
         # check held position searchable text
         rid = pc(UID=self.gadt.UID())[0].getRID()
         indexed = index.getEntryForObject(rid, default=[])

@@ -79,10 +79,11 @@
   <adapter name="collective.contact.core.OrganizationSearchableExtender"
            factory=".indexers.OrganizationSearchableExtender" />
 
-  <adapter
-    name="SearchableText"
-    factory=".indexers.position_searchable_text"
-    />
+  <adapter name="collective.contact.core.PositionSearchableExtender"
+           factory=".indexers.PositionSearchableExtender" />
+
+  <adapter name="collective.contact.core.PersonSearchableExtender"
+           factory=".indexers.PersonSearchableExtender" />
 
   <adapter
     name="SearchableText"
