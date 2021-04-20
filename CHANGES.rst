@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.36 (unreleased)
+1.36 (2021-04-20)
 -----------------
 
 - In vocabulary.OrganizationTypesOrLevels, use `getRequest` instead
