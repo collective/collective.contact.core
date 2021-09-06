@@ -11,6 +11,9 @@
     <adapter factory=".excelexport.ContactFieldRenderer"
              provides="collective.excelexport.interfaces.IExportable" />
 
+    <adapter factory=".excelexport.ImageFieldRenderer"
+             provides="collective.excelexport.interfaces.IExportable" />
+
     <adapter factory=".excelexport.HeldPositionPersonInfoExportableFactory"
              provides="collective.excelexport.interfaces.IExportableFactory"
              name="personinfo" />
