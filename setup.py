@@ -61,7 +61,7 @@ setup(
         'plone.app.textfield!=1.2.8',
         'plone.autoform',
         'plone.formwidget.datetime',
-        'plone.formwidget.masterselect>=1.3',
+        'plone.formwidget.masterselect>=1.3,<2.0.0',
         'plone.supermodel',
         'Products.CMFPlone',
         'vobject',
