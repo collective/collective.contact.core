@@ -4,8 +4,8 @@ Changelog
 1.37 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Add image path when exporting
+  [boulch]
 
 1.36 (2021-04-20)
 -----------------
