@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.37 (unreleased)
+1.37 (2021-10-20)
 -----------------
 
 - Add image path when exporting
