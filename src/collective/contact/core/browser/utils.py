@@ -1,16 +1,14 @@
-from DateTime import DateTime
-from zope.component import getUtility
-from zope import schema
-
-from plone.supermodel.interfaces import ISchemaPolicy
-from plone.autoform.interfaces import IFormFieldProvider
-from plone.behavior.interfaces import IBehavior
-from plone.schemaeditor.utils import non_fieldset_fields
-from plone.dexterity.interfaces import IDexterityFTI
-from plone.app.dexterity.behaviors.metadata import IBasic
-
 from collective.contact.core.behaviors import IBirthday
 from collective.contact.core.behaviors import IContactDetails
+from DateTime import DateTime
+from plone.app.dexterity.behaviors.metadata import IBasic
+from plone.autoform.interfaces import IFormFieldProvider
+from plone.behavior.interfaces import IBehavior
+from plone.dexterity.interfaces import IDexterityFTI
+from plone.schemaeditor.utils import non_fieldset_fields
+from plone.supermodel.interfaces import ISchemaPolicy
+from zope import schema
+from zope.component import getUtility
 
 
 IGNORED_BEHAVIORS = [IContactDetails, IBasic, IBirthday]
@@ -44,7 +42,7 @@ def get_ttw_fields(obj):
             # @TODO: get generic method to get widget id
             new_fields.extend(['%s.%s' % (behavior_name, field_name)
                                for field_name in default_fieldset_fields])
-        except:
+        except Exception:
             pass
 
     return new_fields

@@ -1,8 +1,7 @@
-import unittest
-
+from collective.contact.core.testing import INTEGRATION
 from plone import api
 
-from collective.contact.core.testing import INTEGRATION
+import unittest
 
 
 class TestSetup(unittest.TestCase):

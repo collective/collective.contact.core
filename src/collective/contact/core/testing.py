@@ -1,21 +1,21 @@
 # -*- coding: utf8 -*-
 
-from plone.app.testing import PloneWithPackageLayer
-from plone.app.testing import IntegrationTesting
-from plone.app.testing import FunctionalTesting
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
-from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
-from plone.autoform.interfaces import IFormFieldProvider
-from plone.supermodel import model
-
-from plone.testing import z2
 from collective.contact.widget.schema import ContactChoice
 from collective.contact.widget.schema import ContactList
 from collective.contact.widget.source import ContactSourceBinder
+from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
+from plone.app.testing import FunctionalTesting
+from plone.app.testing import IntegrationTesting
+from plone.app.testing import PloneWithPackageLayer
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.autoform.interfaces import IFormFieldProvider
+from plone.supermodel import model
+from plone.testing import z2
 from zope.interface import alsoProvides
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+
 import collective.contact.core
 
 

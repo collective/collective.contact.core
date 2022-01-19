@@ -1,16 +1,15 @@
 # -*- coding: utf8 -*-
 
-import unittest
-
-import datetime
-
-from ecreall.helpers.testing.base import BaseTest
-
 from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.testing import INTEGRATION
+from ecreall.helpers.testing.base import BaseTest
 from plone import api
-from plone.app.testing.interfaces import TEST_USER_ID, TEST_USER_NAME
 from plone.app.testing.helpers import setRoles
+from plone.app.testing.interfaces import TEST_USER_ID
+from plone.app.testing.interfaces import TEST_USER_NAME
+
+import datetime
+import unittest
 
 
 class TestContentTypes(unittest.TestCase, BaseTest):

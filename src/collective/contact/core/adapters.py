@@ -1,18 +1,19 @@
+from collective.contact.core.behaviors import IBirthday
+from collective.contact.core.content.held_position import HeldPosition
+from collective.contact.core.content.organization import IOrganization
+from collective.contact.core.content.organization import Organization
+from collective.contact.core.interfaces import IContactable
+from collective.contact.core.interfaces import IHeldPosition
+from collective.contact.core.interfaces import IPersonHeldPositions
+from collective.contact.core.interfaces import IVCard
+from five import grok
+from plone import api
+from Products.CMFPlone.utils import safe_unicode
+from zope.interface import implements
+from zope.interface import Interface
+
 import datetime
 import vobject
-
-from zope.interface import Interface, implements
-from five import grok
-
-from Products.CMFPlone.utils import safe_unicode
-from plone import api
-
-from collective.contact.core.interfaces import IVCard, IContactable,\
-    IPersonHeldPositions, IHeldPosition
-from collective.contact.core.content.held_position import HeldPosition
-from collective.contact.core.content.organization import IOrganization,\
-                                                             Organization
-from collective.contact.core.behaviors import IBirthday
 
 
 class ContactableVCard:

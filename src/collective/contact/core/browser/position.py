@@ -1,10 +1,8 @@
 from AccessControl import getSecurityManager
-
-from zope.component import getUtility
-from zope.schema.interfaces import IVocabularyFactory
-
 from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.interfaces import IContactable
+from zope.component import getUtility
+from zope.schema.interfaces import IVocabularyFactory
 
 
 ADDNEW_OVERLAY = """

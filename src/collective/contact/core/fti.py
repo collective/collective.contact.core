@@ -1,9 +1,9 @@
-from zope.interface import implements
-
-from plone.dexterity.interfaces import IDexterityFTI
 from plone.dexterity.fti import DexterityFTI
-from plone.supermodel import loadString, loadFile
+from plone.dexterity.interfaces import IDexterityFTI
+from plone.supermodel import loadFile
+from plone.supermodel import loadString
 from plone.supermodel.model import Model
+from zope.interface import implements
 
 
 class DexterityConfigurablePolicyFTI(DexterityFTI):

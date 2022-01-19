@@ -1,23 +1,22 @@
-import os.path
-
-from zope.globalrequest import getRequest
-from zope.interface import Interface
-from five import grok
 from Acquisition import aq_base
-
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
+from collective.contact.core.behaviors import CONTACT_DETAILS_FIELDS
+from collective.contact.core.behaviors import IContactDetails
+from collective.contact.core.browser import TEMPLATES_DIR
+from collective.contact.core.browser.address import get_address
+from collective.contact.core.browser.utils import get_valid_url
+from collective.contact.core.interfaces import IContactable
+from collective.contact.core.interfaces import IContactCoreParameters
+from collective.contact.widget.interfaces import IContactContent
+from five import grok
 from plone import api
 from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.utils import getAdditionalSchemata
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from zope.globalrequest import getRequest
+from zope.interface import Interface
 
-from collective.contact.core.browser import TEMPLATES_DIR
-from collective.contact.core.browser.address import get_address
-from collective.contact.core.behaviors import IContactDetails
-from collective.contact.core.interfaces import IContactable, IContactCoreParameters
-from collective.contact.widget.interfaces import IContactContent
-from collective.contact.core.behaviors import CONTACT_DETAILS_FIELDS
-from collective.contact.core.browser.utils import get_valid_url
+import os.path
+
 
 grok.templatedir(TEMPLATES_DIR)
 

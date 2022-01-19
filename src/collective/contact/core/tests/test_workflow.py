@@ -1,11 +1,10 @@
 # -*- coding: utf8 -*-
 
-import unittest
-
+from collective.contact.core.testing import INTEGRATION
 from ecreall.helpers.testing import member as memberhelpers
 from ecreall.helpers.testing.workflow import BaseWorkflowTest
 
-from collective.contact.core.testing import INTEGRATION
+import unittest
 
 
 USERDEFS = [
