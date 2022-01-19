@@ -1,21 +1,11 @@
-import copy
-
 from AccessControl import getSecurityManager
-from zope.component import getUtility, queryAdapter
-from zope.contentprovider.interfaces import IContentProvider
-from zope.event import notify
-from zope.i18n import Message
-from zope.interface import implements, Interface
-from zope.publisher.browser import BrowserView
-
-from z3c.form import field, form, button
-from z3c.form.contentprovider import ContentProviders
-from z3c.form.interfaces import IFieldsAndContentProvidersForm, HIDDEN_MODE,\
-    DISPLAY_MODE
-
-from Products.statusmessages.interfaces import IStatusMessage
+from collective.contact.core import _
+from collective.contact.core.behaviors import IContactDetails
+from collective.contact.core.content.person import IPerson
+from collective.contact.widget.interfaces import IContactWidgetSettings
+from collective.contact.widget.schema import ContactChoice
+from collective.contact.widget.source import ContactSourceBinder
 from five import grok
-
 from plone import api
 from plone.dexterity.browser.add import DefaultAddForm
 from plone.dexterity.events import AddCancelledEvent
@@ -23,14 +13,23 @@ from plone.dexterity.i18n import MessageFactory as DMF
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.dexterity.utils import addContentToContainer
 from plone.supermodel import model
+from Products.statusmessages.interfaces import IStatusMessage
+from z3c.form import button
+from z3c.form import field
+from z3c.form import form
+from z3c.form.contentprovider import ContentProviders
+from z3c.form.interfaces import DISPLAY_MODE
+from z3c.form.interfaces import IFieldsAndContentProvidersForm
+from zope.component import getUtility
+from zope.component import queryAdapter
+from zope.contentprovider.interfaces import IContentProvider
+from zope.event import notify
+from zope.i18n import Message
+from zope.interface import implements
+from zope.interface import Interface
+from zope.publisher.browser import BrowserView
 
-from collective.contact.widget.schema import ContactChoice
-from collective.contact.widget.source import ContactSourceBinder
-from collective.contact.widget.interfaces import IContactWidgetSettings
-
-from collective.contact.core import _
-from collective.contact.core.content.person import IPerson
-from collective.contact.core.behaviors import IContactDetails
+import copy
 
 
 class ICustomSettings(Interface):

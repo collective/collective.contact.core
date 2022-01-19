@@ -153,8 +153,9 @@ def recordModified(event):
     """
         Manage configuration change in registry
     """
-    if (IRecordModifiedEvent.providedBy(event) and event.record.interfaceName and
-            event.record.interface == IContactCoreParameters):
+    if IRecordModifiedEvent.providedBy(event) \
+            and event.record.interfaceName \
+            and event.record.interface == IContactCoreParameters:
         if event.record.fieldName == 'contact_source_metadata_content':
             pc = api.portal.get_tool('portal_catalog')
             for brain in pc(object_provides=IContactContent.__identifier__):

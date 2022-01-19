@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-import json
-
+from collective.contact.core import _
 from five import grok
 from zope.i18n import translate
 from zope.interface import Interface
 
-from collective.contact.core import _
+import json
 
 
 class GenderPersonTitleMapping(grok.View):

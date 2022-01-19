@@ -39,7 +39,7 @@ def contact_source(contact):
     variables.update(details)
     try:
         return csmc.format(**variables)
-    except:
+    except Exception:
         pass
     return u''
 

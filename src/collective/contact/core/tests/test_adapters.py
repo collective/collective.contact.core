@@ -1,18 +1,18 @@
 # -*- coding: utf8 -*-
-import datetime
-import unittest
-
-from zope.intid.interfaces import IIntIds
-from zope.component import getUtility
+from collective.contact.core.interfaces import IContactable
+from collective.contact.core.interfaces import IContactCoreParameters
+from collective.contact.core.interfaces import IPersonHeldPositions
+from collective.contact.core.interfaces import IVCard
+from collective.contact.core.testing import INTEGRATION
+from ecreall.helpers.testing.base import BaseTest
 from plone import api
 from plone.app.testing.interfaces import TEST_USER_NAME
 from z3c.relationfield.relation import RelationValue
+from zope.component import getUtility
+from zope.intid.interfaces import IIntIds
 
-from ecreall.helpers.testing.base import BaseTest
-
-from collective.contact.core.testing import INTEGRATION
-from collective.contact.core.interfaces import IVCard, IPersonHeldPositions,\
-    IContactable, IContactCoreParameters
+import datetime
+import unittest
 
 
 class TestAdapters(unittest.TestCase, BaseTest):

@@ -1,9 +1,7 @@
-from five import grok
-
-from zope.interface import Interface
-
-from collective.contact.core.browser.utils import get_ttw_fields
 from collective.contact.core.browser import TEMPLATES_DIR
+from collective.contact.core.browser.utils import get_ttw_fields
+from five import grok
+from zope.interface import Interface
 
 
 grok.templatedir(TEMPLATES_DIR)

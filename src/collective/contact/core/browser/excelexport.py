@@ -1,28 +1,29 @@
+from collective.contact.core.behaviors import ADDRESS_FIELDS
+from collective.contact.core.interfaces import IContactable
+from collective.contact.core.interfaces import IHeldPosition
+from collective.contact.widget.interfaces import IContactChoice
+from collective.contact.widget.interfaces import IContactContent
+from plone import api
+from plone.dexterity.interfaces import IDexterityFTI
+from plone.namedfile.interfaces import INamedImageField
+from Products.CMFPlone.utils import safe_unicode
 from zope.component import adapts
 from zope.component import getMultiAdapter
 from zope.component.interfaces import ComponentLookupError
-from zope.interface import Interface
 from zope.interface import implements
+from zope.interface import Interface
 
-from plone.dexterity.interfaces import IDexterityFTI
-from plone.namedfile.interfaces import INamedImageField
-from plone import api
-from Products.CMFPlone.utils import safe_unicode
 
 try:
+    from collective.excelexport.exportables.base import BaseExportableFactory
     from collective.excelexport.exportables.dexterityfields import BaseFieldRenderer
     from collective.excelexport.exportables.dexterityfields import FileFieldRenderer as baseFileFieldRenderer
-    from collective.excelexport.exportables.base import BaseExportableFactory
     from collective.excelexport.exportables.dexterityfields import get_ordered_fields
-    from collective.excelexport.interfaces import IExportable
     from collective.excelexport.exportables.dexterityfields import IFieldValueGetter
+    from collective.excelexport.interfaces import IExportable
     HAS_EXCELEXPORT = True
 except ImportError:
     HAS_EXCELEXPORT = False
-
-from collective.contact.widget.interfaces import IContactChoice, IContactContent
-from collective.contact.core.interfaces import IContactable, IHeldPosition
-from collective.contact.core.behaviors import ADDRESS_FIELDS
 
 
 if HAS_EXCELEXPORT:
@@ -32,16 +33,11 @@ if HAS_EXCELEXPORT:
 
         def render_value(self, obj):
             value = self.get_value(obj)
-            return (
-                value
-                and "{}/@@images/{}?{}".format(
-                    obj.absolute_url(),
-                    self.field.__name__,
-                    value.filename.encode("utf8"),
-                )
-                or u""
+            return (value and "{}/@@images/{}?{}".format(
+                obj.absolute_url(),
+                self.field.__name__,
+                value.filename.encode("utf8")) or u""
             )
-
 
     class ContactFieldRenderer(BaseFieldRenderer):
         adapts(IContactChoice, Interface, Interface)

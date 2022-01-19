@@ -8,20 +8,19 @@
 
 __docformat__ = 'plaintext'
 
-import datetime
-
+from collective.contact.core.interfaces import IContactCoreParameters
+from plone import api
+from z3c.relationfield.relation import RelationValue
 from zope import component
 from zope.intid.interfaces import IIntIds
 
-from z3c.relationfield.relation import RelationValue
+import datetime
+import logging
 
-from plone import api
+
 # from plone.registry.interfaces import IRegistry
 
-import logging
 logger = logging.getLogger('collective.contact.core: setuphandlers')
-
-from collective.contact.core.interfaces import IContactCoreParameters
 
 
 def isNotCollectiveContactContentProfile(context):
