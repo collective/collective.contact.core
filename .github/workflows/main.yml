@@ -25,7 +25,7 @@ jobs:
           cache-name: cache-eggs
         with:
           path: ~/buildout-cache/eggs
-          key: ${{ runner.os }}-build-${{ env.cache-name }}
+          key: ${{ runner.os }}-test-${{ env.cache-name }}
           restore-keys: ${{ runner.os }}-test-${{ env.cache-name }}
       - name: buildout
         run: |
@@ -53,7 +53,7 @@ jobs:
         with:
           path: ~/buildout-cache/eggs
           key: ${{ runner.os }}-coverage-${{ env.cache-name }}
-          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}
+          restore-keys: ${{ runner.os }}-coverage-${{ env.cache-name }}
       - name: buildout
         run: |
           buildout -c ci.cfg
