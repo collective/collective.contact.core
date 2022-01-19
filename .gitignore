@@ -21,4 +21,5 @@ htmlcov
 *.log
 output.xml
 *.swp
-/.idea
+.idea
+pyvenv.cfg
