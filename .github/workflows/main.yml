@@ -33,7 +33,7 @@ jobs:
           buildout -c ci.cfg
       - name: test
         run: |
-          bin/test
+          bin/test -t !robot
   coverage:
     runs-on: ubuntu-latest
     steps:
@@ -62,7 +62,7 @@ jobs:
           bin/code-analysis
       - name: test coverage
         run: |
-          bin/coverage run bin/test
+          bin/coverage run bin/test -t !robot
       - name: Set up Python 3.8
         uses: actions/setup-python@v2
         with:
