@@ -4,7 +4,9 @@ Changelog
 1.38 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Removed useless imports in collective.contact.core.schema.
+  Import ContactList or ContactChoice should be done from collective.contact.widget.schema
+  [odelaere]
 
 
 1.37 (2021-10-20)
