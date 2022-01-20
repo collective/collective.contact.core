@@ -1,6 +1,6 @@
 [report]
 include =
-    src/collective/*
-    src/collective.contact.widget/*
+    src/collective.contact.core/*
 omit =
     */test*
+    */__init__.py
