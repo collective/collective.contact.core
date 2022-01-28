@@ -185,4 +185,14 @@
       profile="collective.contact.core:default">
   </genericsetup:upgradeStep>
 
+  <genericsetup:upgradeSteps
+      source="18"
+      destination="19"
+      profile="collective.contact.core:default">
+      <genericsetup:upgradeDepends
+          title="Reapply registry.xml to add 'display_photo_label_on_views'"
+          description=""
+          import_steps="plone.app.registry" />
+  </genericsetup:upgradeSteps>
+
 </configure>

@@ -11,6 +11,7 @@
        tal:condition="python: view.display_below_content_title() and not ajax_load" />
 
   <div class="field" tal:condition="context/photo">
+    <label tal:condition="view/display_photo_label"><tal:block i18n:translate="">Photo</tal:block>:</label>
     <img tal:replace="structure context/@@images/photo/thumb" />
   </div>
 

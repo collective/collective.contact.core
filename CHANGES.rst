@@ -7,7 +7,9 @@ Changelog
 - Removed useless imports in collective.contact.core.schema.
   Import ContactList or ContactChoice should be done from collective.contact.widget.schema
   [odelaere]
-
+- Added parameter `display_photo_label_on_views` that will display the field photo
+  `label` instead of default behavior that is only displaying the photo without label.
+  [gbastien]
 
 1.37 (2021-10-20)
 -----------------

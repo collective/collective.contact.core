@@ -22,6 +22,7 @@
        tal:condition="python: view.display_below_content_title() and not ajax_load" />
 
   <div id="photo" class="field" tal:condition="context/photo">
+      <label tal:condition="view/display_photo_label"><tal:block i18n:translate="">Photo</tal:block>:</label>
       <img tal:define="scales nocall:context/@@images"
            tal:replace="structure python:scales.tag('photo', 'thumb', css_class='photo')"
            tal:on-error="string:Bad photo format" />

@@ -8,6 +8,9 @@
 
     <h1 class="org"><img tal:attributes="src context/getIconURL" /> <span tal:content="view/name" /></h1>
 
+    <div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle"
+         tal:condition="python: view.display_below_content_title() and not ajax_load" />
+
     <div metal:use-macro="context/kss_generic_macros/macros/generic_description_view">
         Generic KSS Description. Is rendered with class="documentDescription".
     </div>
@@ -17,9 +20,6 @@
              tal:replace="structure python:scales.tag('logo', 'thumb', css_class='photo')"
              tal:on-error="string:Bad logo format" />
     </div>
-
-    <div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle"
-         tal:condition="python: view.display_below_content_title() and not ajax_load" />
 
     <div id="type" class="field">
          <label><tal:block i18n:translate="">Organization type</tal:block>:</label>
