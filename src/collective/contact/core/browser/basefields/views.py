@@ -18,8 +18,10 @@ grok.templatedir('templates')
 class BaseFields(object):
 
     def display_below_content_title(self):
-        return api.portal.get_registry_record('display_below_content_title_on_views', interface=IContactCoreParameters,
-                                              default=False)
+        return api.portal.get_registry_record(
+            'display_below_content_title_on_views',
+            interface=IContactCoreParameters,
+            default=False)
 
 
 class PersonBaseFields(grok.View, BaseFields):
@@ -31,6 +33,12 @@ class PersonBaseFields(grok.View, BaseFields):
     birthday = ''
     person_title = ''
     gender = ''
+
+    def display_photo_label(self):
+        return api.portal.get_registry_record(
+            'display_photo_label_on_views',
+            interface=IContactCoreParameters,
+            default=False)
 
     def update(self):
         self.person = self.context
@@ -105,6 +113,12 @@ class HeldPositionBaseFields(grok.View, BaseFields):
     gender = ''
     position = None
     organizations = []
+
+    def display_photo_label(self):
+        return api.portal.get_registry_record(
+            'display_photo_label_on_views',
+            interface=IContactCoreParameters,
+            default=False)
 
     def update(self):
         held_position = self.context
