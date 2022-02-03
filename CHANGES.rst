@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.38 (unreleased)
+1.38 (2022-02-03)
 -----------------
 
 - Removed useless imports in collective.contact.core.schema.
