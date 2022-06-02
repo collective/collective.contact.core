@@ -4,8 +4,8 @@ Changelog
 1.39 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Added `safe_utils.py` that will only include safe utils.
+  [gbastien]
 
 1.38 (2022-02-03)
 -----------------
