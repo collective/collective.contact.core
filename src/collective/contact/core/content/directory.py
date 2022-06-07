@@ -5,8 +5,10 @@ from five import grok
 from plone.autoform.directives import widget
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
+from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.supermodel import model
 from zope import schema
+from zope.component import getUtility
 from zope.interface import implements
 from zope.interface import Interface
 
@@ -16,8 +18,12 @@ class INameTokenTableRowSchema(Interface):
     name is the 'real' name
     token is the token used in the vocabularies
     """
+    def is_valid_identifier(identifier):
+        idnormalizer = getUtility(IIDNormalizer)
+        return idnormalizer.normalize(identifier) == identifier
+
     name = schema.TextLine(title=_(u"Name"))
-    token = schema.TextLine(title=_(u"Token"))
+    token = schema.TextLine(title=_(u"Token"), constraint=is_valid_identifier)
 
 
 class IDirectory(model.Schema):
