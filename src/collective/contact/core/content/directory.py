@@ -13,14 +13,16 @@ from zope.interface import implements
 from zope.interface import Interface
 
 
+def is_valid_identifier(identifier):
+    idnormalizer = getUtility(IIDNormalizer)
+    return idnormalizer.normalize(identifier) == identifier
+
+
 class INameTokenTableRowSchema(Interface):
     """Schema for dict rows used in DataGridFields
     name is the 'real' name
     token is the token used in the vocabularies
     """
-    def is_valid_identifier(identifier):
-        idnormalizer = getUtility(IIDNormalizer)
-        return idnormalizer.normalize(identifier) == identifier
 
     name = schema.TextLine(title=_(u"Name"))
     token = schema.TextLine(title=_(u"Token"), constraint=is_valid_identifier)
