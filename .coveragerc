@@ -2,6 +2,6 @@
 include =
     src/collective/contact/core/*
 omit =
-    */upgrades*
+    */upgrade*
     */test*
     */__init__.py
