@@ -6,6 +6,8 @@ Changelog
 
 - Added `safe_utils.py` that will only include safe utils.
   [gbastien]
+- Added validation for identifiers token INameTokenTableRowSchema.
+  [odelaere]
 
 1.38 (2022-02-03)
 -----------------

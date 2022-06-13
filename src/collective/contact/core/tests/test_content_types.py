@@ -1,5 +1,6 @@
 # -*- coding: utf8 -*-
 
+from collective.contact.core.content.directory import is_valid_identifier
 from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.testing import INTEGRATION
 from ecreall.helpers.testing.base import BaseTest
@@ -50,6 +51,16 @@ class TestDirectory(TestContentTypes):
                       mydirectory.organization_types)
         self.assertIn({'name': 'Regiment', 'token': 'regiment'},
                       mydirectory.organization_levels)
+
+    def test_is_valid_identifier(self):
+        self.assertFalse(is_valid_identifier('Toto'))
+        self.assertTrue(is_valid_identifier('toto'))
+        self.assertTrue(is_valid_identifier('toto56'))
+        self.assertFalse(is_valid_identifier('toto 56'))
+        self.assertTrue(is_valid_identifier('toto-56'))
+        self.assertFalse(is_valid_identifier('toto-56@'))
+        self.assertFalse(is_valid_identifier('toto-56à'))
+        self.assertFalse(is_valid_identifier('toto-56É'))
 
 
 class TestPerson(TestContentTypes):
