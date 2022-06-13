@@ -1,4 +1,9 @@
-.. contents::
+.. image:: https://github.com/collective/collective.contact.core/actions/workflows/main.yml/badge.svg
+   :target: https://github.com/collective/collective.contact.core/actions/workflows/main.yml
+
+.. image:: https://coveralls.io/repos/collective/collective.contact.core/badge.png?branch=master
+   :target: https://coveralls.io/r/collective/collective.contact.core?branch=master
+
 
 Introduction
 ============
@@ -96,21 +101,6 @@ Install collective.contact.core by adding it to your buildout file:
 
 
 and then running "bin/buildout", next enable the product in your plone site.
-
-
-Tests
-=====
-
-This add-on is tested using Travis CI. The current status of the add-on is :
-
-.. image:: https://img.shields.io/travis/collective/collective.contact.core/master.svg
-    :target: http://travis-ci.org/collective/collective.contact.core
-
-.. image:: https://img.shields.io/coveralls/collective/collective.contact.core/master.svg
-    :target: https://coveralls.io/r/collective/collective.contact.core
-
-.. image:: http://img.shields.io/pypi/v/collective.contact.core.svg
-   :target: https://pypi.python.org/pypi/collective.contact.core
 
 
 Contribute
