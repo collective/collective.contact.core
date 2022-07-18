@@ -56,6 +56,7 @@ setup(
         'five.globalrequest',
         'plone.api>=1.4.11',
         'plone.app.dexterity',
+        'plone.app.iterate',
         'plone.app.linkintegrity',
         'plone.app.relationfield',
         'plone.app.textfield!=1.2.8',

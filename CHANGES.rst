@@ -4,8 +4,8 @@ Changelog
 1.40 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Added plone.app.iterate dependency.
+  [sgeulette]
 
 1.39 (2022-06-14)
 -----------------
