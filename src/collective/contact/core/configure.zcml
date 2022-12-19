@@ -122,14 +122,47 @@
       name="default" />
 
   <subscriber
-    for="plone.app.relationfield.interfaces.IDexterityHasRelations
-         zope.lifecycleevent.interfaces.IObjectRemovedEvent"
-    handler=".subscribers.referencedObjectRemoved" />
+    for="collective.contact.core.interfaces.IHeldPosition
+         zope.lifecycleevent.interfaces.IObjectAddedEvent"
+    handler=".subscribers.update_related_with_held_position" />
+  <subscriber
+    for="collective.contact.core.interfaces.IHeldPosition
+         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    handler=".subscribers.update_related_with_held_position" />
+
+  <subscriber
+    for="collective.contact.core.content.position.IPosition
+         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    handler=".subscribers.update_related_with_position" />
+
+  <subscriber
+    for="collective.contact.core.content.person.IPerson
+         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    handler=".subscribers.update_related_with_person" />
+
+  <subscriber
+    for="collective.contact.core.content.organization.IOrganization
+         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    handler=".subscribers.update_related_with_organization" />
 
   <subscriber
     for="z3c.relationfield.interfaces.IHasIncomingRelations
          OFS.interfaces.IObjectWillBeRemovedEvent"
     handler=".subscribers.referenceRemoved" />
+
+  <subscriber
+    for="plone.app.relationfield.interfaces.IDexterityHasRelations
+         zope.lifecycleevent.interfaces.IObjectRemovedEvent"
+    handler=".subscribers.referencedObjectRemoved" />
+
+  <subscriber
+    for="collective.contact.core.behaviors.IContactDetails
+         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    handler=".subscribers.clear_fields_use_parent_address" />
+  <subscriber
+    for="collective.contact.core.behaviors.IContactDetails
+         zope.lifecycleevent.interfaces.IObjectAddedEvent"
+    handler=".subscribers.clear_fields_use_parent_address" />
 
   <subscriber
     for="plone.registry.interfaces.IRecordModifiedEvent"

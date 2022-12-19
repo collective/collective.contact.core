@@ -1,3 +1,4 @@
+# coding=utf-8
 from Acquisition import aq_get
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.content.directory import IDirectory
@@ -7,7 +8,6 @@ from collective.contact.core.content.position import IPosition
 from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
-from five import grok
 from plone import api
 from plone.app.iterate.interfaces import IWorkingCopy
 from plone.app.linkintegrity.handlers import referencedObjectRemoved as baseReferencedObjectRemoved
@@ -19,8 +19,6 @@ from zope import component
 from zope.container.contained import ContainerModifiedEvent
 from zope.interface import providedBy
 from zope.intid.interfaces import IIntIds
-from zope.lifecycleevent.interfaces import IObjectAddedEvent
-from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 from zope.schema import getFields
 
 
@@ -38,8 +36,6 @@ except ImportError:
 indexes_to_update = ['SearchableText']
 
 
-@grok.subscribe(IHeldPosition, IObjectAddedEvent)
-@grok.subscribe(IHeldPosition, IObjectModifiedEvent)
 def update_related_with_held_position(obj, event=None):
     if isinstance(event, ContainerModifiedEvent):
         return
@@ -47,7 +43,6 @@ def update_related_with_held_position(obj, event=None):
     obj.get_person().reindexObject(idxs=indexes_to_update)
 
 
-@grok.subscribe(IPosition, IObjectModifiedEvent)
 def update_related_with_position(obj, event=None):
     if isinstance(event, ContainerModifiedEvent):
         return
@@ -57,7 +52,6 @@ def update_related_with_position(obj, event=None):
         update_related_with_held_position(held_position)
 
 
-@grok.subscribe(IPerson, IObjectModifiedEvent)
 def update_related_with_person(obj, event=None):
     if isinstance(event, ContainerModifiedEvent):
         return
@@ -66,7 +60,6 @@ def update_related_with_person(obj, event=None):
         held_position.reindexObject(idxs=indexes_to_update)
 
 
-@grok.subscribe(IOrganization, IObjectModifiedEvent)
 def update_related_with_organization(obj, event=None):
     if isinstance(event, ContainerModifiedEvent):
         return
@@ -133,8 +126,6 @@ def referencedObjectRemoved(obj, event):
         baseReferencedObjectRemoved(obj, event)
 
 
-@grok.subscribe(IContactDetails, IObjectModifiedEvent)
-@grok.subscribe(IContactDetails, IObjectAddedEvent)
 def clear_fields_use_parent_address(obj, event):
     """If 'use parent address' has been selected,
     ensure content address fields are cleared
