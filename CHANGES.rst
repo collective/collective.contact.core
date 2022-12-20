@@ -8,6 +8,8 @@ Changelog
   [sgeulette]
 - Replaced subscribers grok declaration by zcml
   [sgeulette]
+- Added subscribers docstrings
+  [sgeulette]
 
 1.39 (2022-06-14)
 -----------------

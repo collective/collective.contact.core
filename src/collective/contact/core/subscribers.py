@@ -37,6 +37,7 @@ indexes_to_update = ['SearchableText']
 
 
 def update_related_with_held_position(obj, event=None):
+    """Reindexes related person `SearchableText`."""
     if isinstance(event, ContainerModifiedEvent):
         return
 
@@ -44,6 +45,7 @@ def update_related_with_held_position(obj, event=None):
 
 
 def update_related_with_position(obj, event=None):
+    """Reindexes related held_position `SearchableText` and related hp person `SearchableText`."""
     if isinstance(event, ContainerModifiedEvent):
         return
 
@@ -53,6 +55,7 @@ def update_related_with_position(obj, event=None):
 
 
 def update_related_with_person(obj, event=None):
+    """Reindexes contained held_positions `SearchableText`."""
     if isinstance(event, ContainerModifiedEvent):
         return
 
@@ -61,6 +64,7 @@ def update_related_with_person(obj, event=None):
 
 
 def update_related_with_organization(obj, event=None):
+    """Reindexes related hp, person, position `SearchableText` and identically the contained organizations."""
     if isinstance(event, ContainerModifiedEvent):
         return
 
@@ -81,8 +85,7 @@ def update_related_with_organization(obj, event=None):
 
 
 def referenceRemoved(obj, event, toInterface=IContactContent):
-    """Store information about the removed link integrity reference.
-    """
+    """Stores a link integrity breach if the object is referenced by another item."""
     # inspired from z3c/relationfield/event.py:breakRelations
     # and plone/app/linkintegrity/handlers.py:referenceRemoved
     # if the object the event was fired on doesn't have a `REQUEST` attribute
@@ -110,13 +113,8 @@ def referenceRemoved(obj, event, toInterface=IContactContent):
 
 
 def referencedObjectRemoved(obj, event):
-    allowed_interfaces = set([
-        IDirectory,
-        IOrganization,
-        IPerson,
-        IHeldPosition,
-        IPosition,
-    ])
+    """Calls linkintegrity check on a contact content."""
+    allowed_interfaces = {IDirectory, IOrganization, IPerson, IHeldPosition, IPosition}
     if len(allowed_interfaces.intersection([i for i in providedBy(obj)])) == 0:
         return
     # Avoid an error when we try to remove a working copy (plone.app.iterate)
@@ -127,9 +125,7 @@ def referencedObjectRemoved(obj, event):
 
 
 def clear_fields_use_parent_address(obj, event):
-    """If 'use parent address' has been selected,
-    ensure content address fields are cleared
-    """
+    """Deletes use_parent_address slave fields if upa is selected."""
     if obj.use_parent_address and obj.use_parent_address != NO_VALUE:
         upa_field = getFields(IContactDetails)['use_parent_address']
         slave_ids = [f['name'] for f in upa_field.slave_fields]
@@ -141,8 +137,8 @@ def clear_fields_use_parent_address(obj, event):
 
 
 def recordModified(event):
-    """
-        Manage configuration change in registry
+    """Handles configuration change.
+    Updates `contact_source` index after `contact_source_metadata_content` change.
     """
     if IRecordModifiedEvent.providedBy(event) \
             and event.record.interfaceName \
