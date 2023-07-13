@@ -7,6 +7,10 @@ from plone.supermodel import model
 from zope import schema
 from zope.interface import Interface
 
+import datetime
+
+now = datetime.datetime.today()
+
 
 class IContactable(Interface):
     """Interface for Contactable adapter"""
@@ -112,10 +116,14 @@ class IHeldPosition(model.Schema, IContactContent):
     start_date = schema.Date(
         title=_("Start date"),
         required=False,
+        min=datetime.date(1990, 1, 1),
+        max=datetime.date.today(),
     )
     end_date = schema.Date(
         title=_("End date"),
         required=False,
+        min=datetime.date(1990, 1, 1),
+        max=datetime.date(now.year + 1, 12, 31),
     )
     photo = NamedImage(
         title=_("Photo"),
