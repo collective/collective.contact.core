@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.40 (unreleased)
+1.40 (2023-07-20)
 -----------------
 
 - Added plone.app.iterate dependency.
