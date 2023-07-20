@@ -10,6 +10,8 @@ Changelog
   [sgeulette]
 - Added subscribers docstrings
   [sgeulette]
+- fix: [DMS-949] min & max for start_date, end_date
+  [bleybaert]
 
 1.39 (2022-06-14)
 -----------------
