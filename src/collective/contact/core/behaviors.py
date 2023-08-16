@@ -323,7 +323,7 @@ class IBirthday(model.Schema):
         title=_("Birthday"),
         required=False,
         min=datetime.date(1900, 1, 1),
-        max=datetime.date.today(),
+        max=datetime.date.today() + datetime.timedelta(days=7),
     )
 
 

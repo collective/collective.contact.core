@@ -118,7 +118,7 @@ class IHeldPosition(model.Schema, IContactContent):
         title=_("Start date"),
         required=False,
         min=datetime.date(1990, 1, 1),
-        max=datetime.date.today(),
+        max=datetime.date.today() + datetime.timedelta(weeks=12),
     )
     end_date = schema.Date(
         title=_("End date"),

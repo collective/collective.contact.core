@@ -4,8 +4,8 @@ Changelog
 1.41 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Improved date ranges.
+  [sgeulette]
 
 1.40 (2023-07-20)
 -----------------
