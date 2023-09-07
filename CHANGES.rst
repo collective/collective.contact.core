@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.41 (unreleased)
+1.41 (2023-09-07)
 -----------------
 
 - Improved date ranges.
