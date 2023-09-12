@@ -22,7 +22,7 @@ from zope.interface import implements
 @indexer(IContactContent)
 def contact_email(contact):
     email = IContactDetails(contact).email
-    return email or u''
+    return email.lower() or u''
 
 
 @indexer(IContactContent)
@@ -186,4 +186,4 @@ def end_date(obj):
     if obj.end_date:
         return obj.end_date
     # if empty we return future date
-    return date(2100, 01, 01)
+    return date(2100, 1, 1)

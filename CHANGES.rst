@@ -4,8 +4,8 @@ Changelog
 1.42 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Set mail index lowercase.
+  [sgeulette]
 
 1.41 (2023-09-07)
 -----------------
