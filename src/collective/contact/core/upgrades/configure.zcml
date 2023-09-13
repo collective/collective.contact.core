@@ -195,4 +195,12 @@
           import_steps="plone.app.registry" />
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeStep
+      title="Upgrade from 19 to 20"
+      source="19"
+      destination="20"
+      handler=".upgrades.v20"
+      profile="collective.contact.core:default">
+  </genericsetup:upgradeStep>
+
 </configure>

@@ -125,3 +125,10 @@ def v18(context):
     tool = IUpgradeTool(context)
     tool.runImportStep('collective.contact.core', 'typeinfo')
     tool.reindexContents(IContactContent, ('SearchableText',))
+
+
+def v20(context):
+    catalog = api.portal.get_tool('portal_catalog')
+    brains = catalog.unrestrictedSearchResults(object_provides=IContactContent.__identifier__)
+    for brain in brains:
+        brain.getObject().reindexObject(['email'])
