@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.42 (unreleased)
------------------
+1.42.0 (2023-09-13)
+-------------------
 
 - Set mail index lowercase.
   [sgeulette]
