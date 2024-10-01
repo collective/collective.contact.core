@@ -1,0 +1,25 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="collective.contact.core">
+
+    <utility
+        component=".vocabularies.PositionTypesFactory"
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        name="PositionTypes"
+        />
+
+    <utility
+        component=".vocabularies.OrganizationTypesOrLevelsFactory"
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        name="OrganizationTypesOrLevels"
+        />
+
+    <utility
+        component=".vocabularies.GendersFactory"
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        name="Genders"
+        />
+
+</configure>

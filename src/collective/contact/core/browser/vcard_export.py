@@ -1,14 +1,11 @@
 from collective.contact.core.interfaces import IVCard
 from collective.contact.widget.interfaces import IContactContent
-from five import grok
+from Products.Five import BrowserView
 
 
-class ContactVCF(grok.View):
-    grok.name('contact.vcf')
-    grok.context(IContactContent)
-    grok.require("zope2.View")
+class ContactVCF(BrowserView):
 
-    def render(self):
+    def __call__(self):
         self.request.response.setHeader(
             'Content-type', "text/x-vCard; charset=utf-8")
         content_disposition = 'attachment; filename=%s.vcf' % (self.context.id)

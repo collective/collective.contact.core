@@ -11,8 +11,8 @@ from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
 from plone import api
 from plone.app.iterate.interfaces import IWorkingCopy
-from plone.app.linkintegrity.handlers import referencedObjectRemoved as baseReferencedObjectRemoved
-from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
+# from plone.app.linkintegrity.handlers import referencedObjectRemoved as baseReferencedObjectRemoved  # MIGRATION-PLONE6
+# from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo  # MIGRATION-PLONE6
 from plone.registry.interfaces import IRecordModifiedEvent
 from z3c.form.interfaces import NO_VALUE
 from zc.relation.interfaces import ICatalog
@@ -79,7 +79,7 @@ def update_related_with_organization(obj, event=None):
             held_position.reindexObject(idxs=indexes_to_update)
             update_related_with_held_position(held_position)
 
-    for child in obj.values():
+    for child in list(obj.values()):
         if IOrganization.providedBy(child):
             child.reindexObject(idxs=indexes_to_update)
             update_related_with_organization(child)
@@ -95,7 +95,8 @@ def referenceRemoved(obj, event, toInterface=IContactContent):
     request = aq_get(obj, 'REQUEST', None)
     if not request:
         return
-    storage = ILinkIntegrityInfo(request)
+    # storage = ILinkIntegrityInfo(request)  # MIGRATION-PLONE6
+    storage = None
 
     catalog = component.queryUtility(ICatalog)
     intids = component.queryUtility(IIntIds)
@@ -122,7 +123,8 @@ def referencedObjectRemoved(obj, event):
     if IWorkingCopy.providedBy(obj):
         return
     if not IReferenceable.providedBy(obj):
-        baseReferencedObjectRemoved(obj, event)
+        pass
+        # baseReferencedObjectRemoved(obj, event)  # MIGRATION-PLONE6
 
 
 def clear_fields_use_parent_address(obj, event):

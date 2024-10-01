@@ -2,10 +2,8 @@ from AccessControl import getSecurityManager
 from collective.contact.core import _
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.content.person import IPerson
-from collective.contact.widget.interfaces import IContactWidgetSettings
 from collective.contact.widget.schema import ContactChoice
 from collective.contact.widget.source import ContactSourceBinder
-from five import grok
 from plone import api
 from plone.dexterity.browser.add import DefaultAddForm
 from plone.dexterity.events import AddCancelledEvent
@@ -25,7 +23,7 @@ from zope.component import queryAdapter
 from zope.contentprovider.interfaces import IContentProvider
 from zope.event import notify
 from zope.i18n import Message
-from zope.interface import implements
+from zope.interface import implementer
 from zope.interface import Interface
 from zope.publisher.browser import BrowserView
 
@@ -50,9 +48,8 @@ class ICustomSettings(Interface):
         """
 
 
-class ContactWidgetSettings(grok.GlobalUtility):
-    grok.provides(IContactWidgetSettings)
-    grok.implements(ICustomSettings)
+@implementer(ICustomSettings)
+class ContactWidgetSettings(object):
 
     def label_for_portal_type(self, portal_type):
         if isinstance(portal_type, Message):
@@ -162,8 +159,8 @@ return '<img src="' + portal_url + '/' + row[2] + '_icon.png'
                 }
 
 
+@implementer(IContentProvider)
 class MasterSelectAddContactProvider(BrowserView):
-    implements(IContentProvider)
 
     def __init__(self, context, request, view):
         super(MasterSelectAddContactProvider, self).__init__(context, request)
@@ -313,6 +310,7 @@ class IAddContact(model.Schema):
             source=ContactSourceBinder(portal_type="position"))
 
 
+@implementer(IFieldsAndContentProvidersForm)
 class AddContact(DefaultAddForm, form.AddForm):
     """
     The following is possible with this AddContact form:
@@ -324,7 +322,6 @@ class AddContact(DefaultAddForm, form.AddForm):
       It's for this case we want no required errors in the form if the
       IHeldPosition required fields are not filled.
     """
-    implements(IFieldsAndContentProvidersForm)
     contentProviders = ContentProviders(['organization-ms'])
 #    contentProviders['organization-ms'] = MasterSelectAddContactProvider
     contentProviders['organization-ms'].position = -1
@@ -355,7 +352,7 @@ class AddContact(DefaultAddForm, form.AddForm):
         # del the widget of the one from IHeldPosition but keep its field
         del self.widgets[self._schema_name + '.position']
         if self.schema != IAddHeldPosition:
-            for widget in self.widgets.values():
+            for widget in list(self.widgets.values()):
                 if getattr(widget, 'required', False):
                     # copy field to not modify original one
                     widget.field = copy.copy(widget.field)
@@ -454,8 +451,8 @@ class AddContactFromPosition(AddContact):
         super(AddContactFromPosition, self).updateWidgets()
 
 
+@implementer(IFieldsAndContentProvidersForm)
 class AddOrganization(form.AddForm):
-    implements(IFieldsAndContentProvidersForm)
     contentProviders = ContentProviders(['organization-ms'])
     contentProviders['organization-ms'].position = 2
     label = _(u"Create ${name}", mapping={'name': _(u"organization/position")})

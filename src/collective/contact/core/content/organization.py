@@ -5,7 +5,6 @@ from collective.contact.core import logger
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
-from five import grok
 from plone import api
 from plone.app.textfield import RichText
 from plone.dexterity.content import Container
@@ -16,7 +15,7 @@ from Products.CMFPlone.utils import base_hasattr
 from zc.relation.interfaces import ICatalog
 from zope import schema
 from zope.component import getUtility
-from zope.interface import implements
+from zope.interface import implementer
 from zope.intid.interfaces import IIntIds
 
 
@@ -95,16 +94,14 @@ class IOrganization(model.Schema, IContactContent):
 class OrganizationContactableAdapter(Contactable):
     """Contactable adapter for Organization content type"""
 
-    grok.context(IOrganization)
-
     @property
     def organizations(self):
         return self.context.get_organizations_chain()
 
 
+@implementer(IOrganization)
 class Organization(Container):
     """Organization content type"""
-    implements(IOrganization)
 
     def get_organizations_chain(self, first_index=0):
         """Returns the list of organizations and sub-organizations in this organization
@@ -177,11 +174,8 @@ class Organization(Container):
         return held_positions
 
 
-class OrganizationSchemaPolicy(grok.GlobalUtility,
-                               DexteritySchemaPolicy):
+class OrganizationSchemaPolicy(DexteritySchemaPolicy):
     """Schema policy for Organization content type"""
-
-    grok.name("schema_policy_organization")
 
     def bases(self, schemaName, tree):
         return (IOrganization,)

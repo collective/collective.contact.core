@@ -24,7 +24,7 @@
   <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
   <element value="plone.app.content.interfaces.INameFromTitle"/>
   <element value="collective.contact.core.behaviors.IContactDetails" />
-  <element value="collective.dexteritytextindexer.behavior.IDexterityTextIndexer" />
+  <element value="collective.dexteritytextindexer.behavior.IDexterityTextIndexer" /><!-- MIGRATION-PLONE6 -->
  </property>
  <property name="schema" />
  <!-- DO NOT use a model_source or it removes manually added fields while reapplying the profile -->
