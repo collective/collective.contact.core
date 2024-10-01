@@ -1,31 +1,31 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:grok="http://namespaces.zope.org/grok"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="collective.contact.core">
 
   <i18n:registerTranslations directory="locales" />
 
-  <include package="five.grok" />
   <include package="plone.api" />
-
-  <grok:grok package="." />
-
   <include package="plone.app.dexterity" />
   <include package="plone.app.relationfield" />
   <include package="plone.supermodel" />
-  <include package="plone.formwidget.datetime" />
   <include package="plone.formwidget.masterselect" />
-  <include package="collective.contact.widget" />
+  <!-- <include package="collective.contact.widget" /> -->
   <include package="collective.z3cform.datagridfield" />
   <include package="five.globalrequest" />
-  <include package="collective.dexteritytextindexer"/>
   <include package=".upgrades" />
   <include package=".browser" />
+  <include package=".content" />
 
   <include file="behaviors.zcml" />
   <include file="skins.zcml" />
+  <include file="subscribers.zcml" />
+
+  <permission
+    id="collective.contact.core.UseParentAddress"
+    title="collective.contact.core: Use parent address"
+    />
 
   <genericsetup:importStep
       name="collective.contact.core-postInstall"
@@ -58,10 +58,10 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
-  <utility
+  <!-- <utility
       component=".fields.RelationChoiceHandler"
       name="z3c.relationfield.schema.RelationChoice"
-      />
+      />  MIGRATION-PLONE6 -->
 
   <adapter
     name="email"
@@ -87,11 +87,11 @@
 
   <!-- Needed to remove title and description values from indexation
        because IBasic.title and description are added by collective.dexteritytextindexer -->
-  <adapter for="collective.contact.core.content.organization.IOrganization
+  <!-- <adapter for="collective.contact.core.content.organization.IOrganization
                 zope.schema.interfaces.IField
                 z3c.form.interfaces.IWidget"
            factory=".indexers.ContactEscapingTitleFieldConverter"
-           provides="collective.dexteritytextindexer.interfaces.IDexterityTextIndexFieldConverter" />
+           provides="collective.dexteritytextindexer.interfaces.IDexterityTextIndexFieldConverter" />  MIGRATION-PLONE6 -->
 
   <adapter
     name="sortable_title"
@@ -121,57 +121,22 @@
       factory=".behaviors.DefaultParentAddress"
       name="default" />
 
-  <subscriber
-    for="collective.contact.core.interfaces.IHeldPosition
-         zope.lifecycleevent.interfaces.IObjectAddedEvent"
-    handler=".subscribers.update_related_with_held_position" />
-  <subscriber
-    for="collective.contact.core.interfaces.IHeldPosition
-         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-    handler=".subscribers.update_related_with_held_position" />
+  <adapter
+    for="*"
+    provides="collective.contact.core.interfaces.IVCard"
+    factory=".adapters.ContactDetailsVCard"
+    />
 
-  <subscriber
-    for="collective.contact.core.content.position.IPosition
-         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-    handler=".subscribers.update_related_with_position" />
+  <adapter
+    for="collective.contact.core.content.held_position.HeldPosition"
+    provides="collective.contact.core.interfaces.IVCard"
+    factory=".adapters.HeldPositionVCard"
+    />
 
-  <subscriber
-    for="collective.contact.core.content.person.IPerson
-         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-    handler=".subscribers.update_related_with_person" />
-
-  <subscriber
-    for="collective.contact.core.content.organization.IOrganization
-         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-    handler=".subscribers.update_related_with_organization" />
-
-  <subscriber
-    for="z3c.relationfield.interfaces.IHasIncomingRelations
-         OFS.interfaces.IObjectWillBeRemovedEvent"
-    handler=".subscribers.referenceRemoved" />
-
-  <subscriber
-    for="plone.app.relationfield.interfaces.IDexterityHasRelations
-         zope.lifecycleevent.interfaces.IObjectRemovedEvent"
-    handler=".subscribers.referencedObjectRemoved" />
-
-  <subscriber
-    for="collective.contact.core.behaviors.IContactDetails
-         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-    handler=".subscribers.clear_fields_use_parent_address" />
-  <subscriber
-    for="collective.contact.core.behaviors.IContactDetails
-         zope.lifecycleevent.interfaces.IObjectAddedEvent"
-    handler=".subscribers.clear_fields_use_parent_address" />
-
-  <subscriber
-    for="plone.registry.interfaces.IRecordModifiedEvent"
-    handler=".subscribers.recordModified"/>
-
-
-  <permission
-    id="collective.contact.core.UseParentAddress"
-    title="collective.contact.core: Use parent address"
+  <adapter
+    for="collective.contact.core.content.organization.Organization"
+    provides="collective.contact.core.interfaces.IVCard"
+    factory=".adapters.OrganizationVCard"
     />
 
   <adapter
@@ -179,4 +144,5 @@
     provides="collective.contact.core.interfaces.IPersonHeldPositions"
     factory=".adapters.PersonHeldPositionsAdapter"
     />
+
 </configure>

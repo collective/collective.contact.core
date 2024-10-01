@@ -89,7 +89,7 @@ class TestPerson(TestContentTypes):
     def test_copy_paste(self):
         cb = self.mydirectory.manage_copyObjects(['pepper'])
         self.mydirectory.manage_pasteObjects(cb)
-        self.assertIn('copy_of_pepper', self.mydirectory.keys())
+        self.assertIn('copy_of_pepper', list(self.mydirectory.keys()))
 
 
 class TestOrganization(TestContentTypes):
@@ -134,13 +134,13 @@ class TestOrganization(TestContentTypes):
         corpsa_titles = self.corpsa.get_organizations_titles()
         self.assertIn(u'Armée de terre', corpsa_titles)
         self.assertIn(u'Corps A', corpsa_titles)
-        self.assertEquals(len(corpsa_titles), 2)
+        self.assertEqual(len(corpsa_titles), 2)
 
         division_alpha_titles = self.divisionalpha.get_organizations_titles()
         self.assertIn(u'Armée de terre', division_alpha_titles)
         self.assertIn(u'Corps A', division_alpha_titles)
         self.assertIn(u'Division Alpha', division_alpha_titles)
-        self.assertEquals(len(division_alpha_titles), 3)
+        self.assertEqual(len(division_alpha_titles), 3)
 
         brigadelh_titles = self.brigadelh.get_organizations_titles()
         self.assertIn(u'Armée de terre', brigadelh_titles)
@@ -148,13 +148,13 @@ class TestOrganization(TestContentTypes):
         self.assertIn(u'Division Alpha', brigadelh_titles)
         self.assertIn(u'Régiment H', brigadelh_titles)
         self.assertIn(u'Brigade LH', brigadelh_titles)
-        self.assertEquals(len(brigadelh_titles), 5)
+        self.assertEqual(len(brigadelh_titles), 5)
 
         brigadelh_titles = self.brigadelh.get_organizations_titles(first_index=2)
         self.assertIn(u'Division Alpha', brigadelh_titles)
         self.assertIn(u'Régiment H', brigadelh_titles)
         self.assertIn(u'Brigade LH', brigadelh_titles)
-        self.assertEquals(len(brigadelh_titles), 3)
+        self.assertEqual(len(brigadelh_titles), 3)
 
     def test_get_full_title(self):
         self.assertEqual(self.armeedeterre.get_full_title(),
@@ -178,21 +178,21 @@ class TestOrganization(TestContentTypes):
     def test_copy_paste(self):
         cb = self.mydirectory.manage_copyObjects(['armeedeterre'])
         self.mydirectory.manage_pasteObjects(cb)
-        self.assertIn('copy_of_armeedeterre', self.mydirectory.keys())
+        self.assertIn('copy_of_armeedeterre', list(self.mydirectory.keys()))
 
     def test_get_positions(self):
         # add some positions to self.armeedeterre
         self.armeedeterre.invokeFactory('position', 'colonel_adt', title="Colonel de l'armée de terre")
         self.armeedeterre.invokeFactory('position', 'lieutenant_adt', title="Lieutenant de l'armée de terre")
         self.armeedeterre.invokeFactory('position', 'sergent_adt', title="Sergent de l'armée de terre")
-        self.assertEquals(
+        self.assertEqual(
             [pos.id for pos in self.armeedeterre.get_positions()],
             ['general_adt', 'colonel_adt', 'lieutenant_adt', 'sergent_adt'])
         # get_positions sorts positions using getObjPositionInParent
         # move 'general_adt' to last position
         self.armeedeterre.moveObjectToPosition(
             'general_adt', len(self.armeedeterre.objectIds()))
-        self.assertEquals(
+        self.assertEqual(
             [pos.id for pos in self.armeedeterre.get_positions()],
             ['colonel_adt', 'lieutenant_adt', 'sergent_adt', 'general_adt'])
 
@@ -217,7 +217,7 @@ class TestPosition(TestContentTypes):
     def test_copy_paste(self):
         cb = self.armeedeterre.manage_copyObjects(['general_adt'])
         self.armeedeterre.manage_pasteObjects(cb)
-        self.assertIn('copy_of_general_adt', self.armeedeterre.keys())
+        self.assertIn('copy_of_general_adt', list(self.armeedeterre.keys()))
 
 
 class TestHeldPosition(TestContentTypes):

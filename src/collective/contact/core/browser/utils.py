@@ -29,7 +29,7 @@ def get_ttw_fields(obj):
     original_schema = schema_policy.bases(None, None)[0]
     original_fields = schema.getFieldsInOrder(original_schema)
     new_fields = [field[0] for field in all_fields
-                  if field[0] not in dict(original_fields).keys()]
+                  if field[0] not in list(dict(original_fields).keys())]
 
     for behavior_id in fti.behaviors:
         behavior = getUtility(IBehavior, behavior_id).interface

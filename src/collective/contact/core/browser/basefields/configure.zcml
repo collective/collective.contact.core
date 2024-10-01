@@ -1,0 +1,40 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="collective.contact.core">
+
+  <browser:page
+      name="basefields"
+      for="collective.contact.core.content.person.IPerson"
+      class=".views.PersonBaseFields"
+      template="templates/person.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="basefields"
+      for="collective.contact.core.content.organization.IOrganization"
+      class=".views.OrganizationBaseFields"
+      template="templates/organization.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="basefields"
+      for="collective.contact.core.content.position.IPosition"
+      class=".views.PositionBaseFields"
+      template="templates/position.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="basefields"
+      for="collective.contact.core.content.held_position.IHeldPosition"
+      class=".views.HeldPositionBaseFields"
+      template="templates/held_position.pt"
+      permission="zope2.View"
+      />
+
+</configure>

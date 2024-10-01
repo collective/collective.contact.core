@@ -1,7 +1,7 @@
 from . import _
 from Acquisition import aq_parent
-from five import grok
 from zope.globalrequest import getRequest
+from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -32,9 +32,8 @@ def get_vocabulary(schema_list):
     return SimpleVocabulary(terms)
 
 
-class PositionTypes(grok.GlobalUtility):
-    grok.name("PositionTypes")
-    grok.implements(IVocabularyFactory)
+@implementer(IVocabularyFactory)
+class PositionTypes(object):
 
     def __call__(self, context):
         try:
@@ -44,9 +43,11 @@ class PositionTypes(grok.GlobalUtility):
             return SimpleVocabulary([])
 
 
-class OrganizationTypesOrLevels(grok.GlobalUtility):
-    grok.name("OrganizationTypesOrLevels")
-    grok.implements(IVocabularyFactory)
+PositionTypesFactory = PositionTypes()
+
+
+@implementer(IVocabularyFactory)
+class OrganizationTypesOrLevels(object):
 
     def get_container_type(self, context):
         request = getRequest()
@@ -70,14 +71,19 @@ class OrganizationTypesOrLevels(grok.GlobalUtility):
             return SimpleVocabulary([])
 
 
-class Genders(grok.GlobalUtility):
-    grok.name("Genders")
-    grok.implements(IVocabularyFactory)
+OrganizationTypesOrLevelsFactory = OrganizationTypesOrLevels()
+
+
+@implementer(IVocabularyFactory)
+class Genders(object):
 
     def __call__(self, context):
         terms = []
         genders = {'M': _("Male"), 'F': _("Female")}
-        for (token, value) in genders.iteritems():
+        for (token, value) in genders.items():
             term = SimpleVocabulary.createTerm(token, token, value)
             terms.append(term)
         return SimpleVocabulary(terms)
+
+
+GendersFactory = Genders()

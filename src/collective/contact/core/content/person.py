@@ -7,7 +7,6 @@ from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.core.interfaces import IPersonHeldPositions
 from collective.contact.widget.interfaces import IContactContent
-from five import grok
 from plone.autoform import directives as form
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
@@ -20,7 +19,7 @@ from z3c.form.interfaces import NO_VALUE
 from zope import schema
 from zope.cachedescriptors.property import CachedProperty
 from zope.component import queryUtility
-from zope.interface import implements
+from zope.interface import implementer
 
 
 class IPerson(model.Schema, IContactContent):
@@ -64,8 +63,6 @@ class IPerson(model.Schema, IContactContent):
 class PersonContactableAdapter(Contactable):
     """Contactable adapter for Person content type"""
 
-    grok.context(IPerson)
-
     @property
     def person(self):
         return self.context
@@ -89,10 +86,9 @@ class PersonContactableAdapter(Contactable):
             return ()
 
 
+@implementer(IPerson)
 class Person(Container):
     """Person content type"""
-
-    implements(IPerson)
 
     # plone.dexterity.content.Content.__getattr__ retrieve the field.default
     # so step 1.2.1 in z3c.form.widget.py returns something instead of NO_VALUE
@@ -135,7 +131,7 @@ class Person(Container):
         return normalizeString(fullname)
 
     def get_held_positions(self):
-        return [obj for obj in self.values() if IHeldPosition.providedBy(obj)]
+        return [obj for obj in list(self.values()) if IHeldPosition.providedBy(obj)]
 
     def get_held_positions_titles(self):
         return [p.Title() for p in self.get_held_positions()]
@@ -144,11 +140,8 @@ class Person(Container):
         return u' '.join([x for x in (self.firstname, self.lastname) if x])
 
 
-class PersonSchemaPolicy(grok.GlobalUtility,
-                         DexteritySchemaPolicy):
+class PersonSchemaPolicy(DexteritySchemaPolicy):
     """Schema policy for Person content type"""
-
-    grok.name("schema_policy_person")
 
     def bases(self, schemaName, tree):
         return (IPerson, )

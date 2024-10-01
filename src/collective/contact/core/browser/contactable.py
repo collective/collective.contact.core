@@ -6,25 +6,23 @@ from collective.contact.core.browser.address import get_address
 from collective.contact.core.browser.utils import get_valid_url
 from collective.contact.core.interfaces import IContactable
 from collective.contact.core.interfaces import IContactCoreParameters
-from collective.contact.widget.interfaces import IContactContent
-from five import grok
 from plone import api
 from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.utils import getAdditionalSchemata
+from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.globalrequest import getRequest
-from zope.interface import Interface
+from zope.interface import implementer
 
 import os.path
 
 
-grok.templatedir(TEMPLATES_DIR)
-
-
-class ContactDetailsContactable(grok.Adapter):
+@implementer(IContactable)
+class ContactDetailsContactable(object):
     """Common adapter class for objects that just implement the IContactDetails behavior"""
-    grok.provides(IContactable)
-    grok.context(Interface)
+
+    def __init__(self, context):
+        self.context = context
 
     def get_contact_details(self, keys=(), fallback=True):
         if not IContactDetails.providedBy(self.context):
@@ -56,35 +54,33 @@ class ContactDetailsContactable(grok.Adapter):
         return u""
 
 
-class ContactDetails(grok.View):
-    grok.name('contactdetails')
-    grok.template('contactdetails')
-    grok.context(IContactContent)
+class ContactDetails(BrowserView):
+    address_template = ViewPageTemplateFile('templates/address.pt')
 
-    template_path = os.path.join(TEMPLATES_DIR, 'address.pt')
+    def __call__(self):
+        self.update()
+        return super(ContactDetails, self).__call__()
 
     def update(self):
         contactable = IContactable(self.context)
         self.contact_details = contactable.get_contact_details()
 
     def render_address(self):
-        template = ViewPageTemplateFile(self.template_path)
-        return template(self, self.contact_details['address'])
+        return self.address_template()
 
 
 class NoFallbackContactDetails(ContactDetails):
-    grok.name('nofallbackcontactdetails')
 
     def update(self):
         contactable = IContactable(self.context)
         self.contact_details = contactable.get_contact_details(fallback=False)
 
 
-class Contactable(grok.Adapter):
-    """Base adapter class for contact content types with fallback system"""
-    grok.provides(IContactable)
-    grok.context(IContactContent)
-    grok.baseclass()
+@implementer(IContactable)
+class Contactable(object):
+
+    def __init__(self, context):
+        self.context = context
 
     @property
     def person(self):

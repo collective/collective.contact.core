@@ -1,18 +1,11 @@
 from AccessControl import getSecurityManager
 from collective.contact.core.behaviors import IBirthday
 from collective.contact.core.browser.utils import date_to_DateTime
-from collective.contact.core.content.organization import IOrganization
-from collective.contact.core.content.person import IPerson
-from collective.contact.core.content.position import IPosition
 from collective.contact.core.interfaces import IContactCoreParameters
-from collective.contact.core.interfaces import IHeldPosition
-from five import grok
 from plone import api
+from Products.Five import BrowserView
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
-
-
-grok.templatedir('templates')
 
 
 class BaseFields(object):
@@ -24,11 +17,7 @@ class BaseFields(object):
             default=False)
 
 
-class PersonBaseFields(grok.View, BaseFields):
-    grok.name('basefields')
-    grok.template('person')
-    grok.context(IPerson)
-
+class PersonBaseFields(BrowserView):
     name = ''
     birthday = ''
     person_title = ''
@@ -58,13 +47,12 @@ class PersonBaseFields(grok.View, BaseFields):
         self.gender = person.gender or ''
         self.can_edit = sm.checkPermission('Modify portal content', person)
 
+    def __call__(self):
+        self.update()
+        return super(PersonBaseFields, self).__call__()
 
-class OrganizationBaseFields(grok.View, BaseFields):
 
-    grok.name('basefields')
-    grok.template('organization')
-    grok.context(IOrganization)
-
+class OrganizationBaseFields(BrowserView):
     name = ''
     type = ''
     positions = []
@@ -83,13 +71,12 @@ class OrganizationBaseFields(grok.View, BaseFields):
             pass
         self.activity = self.context.activity
 
+    def __call__(self):
+        self.update()
+        return super(OrganizationBaseFields, self).__call__()
 
-class PositionBaseFields(grok.View, BaseFields):
 
-    grok.name('basefields')
-    grok.template('position')
-    grok.context(IPosition)
-
+class PositionBaseFields(BrowserView):
     name = ''
     type = ''
 
@@ -101,12 +88,12 @@ class PositionBaseFields(grok.View, BaseFields):
         vocabulary = factory(self.context)
         self.type = vocabulary.getTerm(position.position_type).title
 
+    def __call__(self):
+        self.update()
+        return super(PositionBaseFields, self).__call__()
 
-class HeldPositionBaseFields(grok.View, BaseFields):
-    grok.name('basefields')
-    grok.template('held_position')
-    grok.context(IHeldPosition)
 
+class HeldPositionBaseFields(BrowserView):
     start_date = ''
     end_date = ''
     birthday = ''
@@ -139,3 +126,7 @@ class HeldPositionBaseFields(grok.View, BaseFields):
         self.title = held_position.get_full_title()
 
         self.position = held_position.get_position()
+
+    def __call__(self):
+        self.update()
+        return super(HeldPositionBaseFields, self).__call__()
