@@ -1,13 +1,12 @@
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.core.interfaces import IHeldPosition
 from ComputedAttribute import ComputedAttribute
-from five import grok
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from Products.CMFPlone.utils import normalizeString
 from Products.CMFPlone.utils import safe_unicode
 from z3c.form.interfaces import NO_VALUE
-from zope.interface import implements
+from zope.interface import implementer
 
 
 def acqproperty(func):
@@ -17,8 +16,6 @@ def acqproperty(func):
 
 class HeldPositionContactableAdapter(Contactable):
     """Contactable adapter for HeldPosition content type"""
-
-    grok.context(IHeldPosition)
 
     @property
     def person(self):
@@ -34,13 +31,11 @@ class HeldPositionContactableAdapter(Contactable):
         return organization and organization.get_organizations_chain() or []
 
 
+@implementer(IHeldPosition)
 class HeldPosition(Container):
     """HeldPosition content type
     Links a Position or an Organization to a person in an organization
     """
-
-    implements(IHeldPosition)
-
     use_parent_address = NO_VALUE
     parent_address = NO_VALUE
 
@@ -146,11 +141,8 @@ class HeldPosition(Container):
         return person.photo
 
 
-class HeldPositionSchemaPolicy(grok.GlobalUtility,
-                               DexteritySchemaPolicy):
+class HeldPositionSchemaPolicy(DexteritySchemaPolicy):
     """Schema policy for HeldPosition content type"""
-
-    grok.name("schema_policy_held_position")
 
     def bases(self, schemaName, tree):
         return (IHeldPosition,)

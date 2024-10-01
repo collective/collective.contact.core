@@ -10,15 +10,15 @@ from collective.contact.core.content.position import IPosition
 from collective.contact.core.interfaces import IContactable
 from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
-from collective.dexteritytextindexer.converters import DefaultDexterityTextIndexFieldConverter
-from collective.dexteritytextindexer.interfaces import IDynamicTextIndexExtender
+from plone.app.dexterity.textindexer.converters import DefaultDexterityTextIndexFieldConverter
+from plone.app.dexterity.textindexer.interfaces import IDynamicTextIndexExtender
 from datetime import date
 from plone import api
 from plone.indexer import indexer
 from Products.CMFPlone.utils import safe_unicode
 from zope.component import adapts
 from zope.i18n import translate
-from zope.interface import implements
+from zope.interface import implementer
 
 
 # one word per type, none being the prefix of another (the contact widget searches "word*")
@@ -56,10 +56,10 @@ def contact_source(contact):
     return u''
 
 
+@implementer(IDynamicTextIndexExtender)
 class OrganizationSearchableExtender(object):
     """Extends SearchableText of an organization."""
     adapts(IOrganization)
-    implements(IDynamicTextIndexExtender)
 
     def __init__(self, context):
         self.context = context
@@ -84,10 +84,10 @@ class OrganizationSearchableExtender(object):
         return u' '.join(words)
 
 
+@implementer(IDynamicTextIndexExtender)
 class HeldPositionSearchableExtender(object):
     """Extends SearchableText of a held position."""
     adapts(IHeldPosition)
-    implements(IDynamicTextIndexExtender)
 
     def __init__(self, context):
         self.context = context
@@ -114,10 +114,10 @@ class HeldPositionSearchableExtender(object):
         return u' '.join(indexed_fields)
 
 
+@implementer(IDynamicTextIndexExtender)
 class PositionSearchableExtender(object):
     """Extends SearchableText of a position."""
     adapts(IPosition)
-    implements(IDynamicTextIndexExtender)
 
     def __init__(self, context):
         self.context = context
@@ -131,10 +131,10 @@ class PositionSearchableExtender(object):
         return u' '.join(result)
 
 
+@implementer(IDynamicTextIndexExtender)
 class PersonSearchableExtender(object):
     """Extends SearchableText of a position."""
     adapts(IPerson)
-    implements(IDynamicTextIndexExtender)
 
     def __init__(self, context):
         self.context = context
@@ -165,9 +165,9 @@ class PersonSearchableExtender(object):
         return u' '.join(results)
 
 
+@implementer(IDynamicTextIndexExtender)
 class TypeSearchableExtender(object):
     """Extends SearchableText with a translated type term, to search "organization xxx"."""
-    implements(IDynamicTextIndexExtender)
 
     def __init__(self, context):
         self.context = context
@@ -184,7 +184,7 @@ class TypeSearchableExtender(object):
 
 
 class ContactEscapingTitleFieldConverter(DefaultDexterityTextIndexFieldConverter):
-    """Contact field converter for collective.dexteritytextindexer to escape title and description."""
+    """Contact field converter for dexteritytextindexer to escape title and description."""
 
     def convert(self):
         """Convert the adapted field value to text/plain for indexing"""

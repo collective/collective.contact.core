@@ -1,14 +1,10 @@
 from Acquisition import aq_base
 from collective.contact.core.behaviors import ADDRESS_FIELDS
 from collective.contact.core.behaviors import IContactDetails
-from collective.contact.core.browser import TEMPLATES_DIR
 from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.interfaces import IHeldPosition
-from five import grok
+from Products.Five import BrowserView
 from plone import api
-
-
-grok.templatedir(TEMPLATES_DIR)
 
 
 def get_address(obj):
@@ -34,18 +30,14 @@ def get_address(obj):
         value = getattr(obj, field, '') or ''
         address[field] = value
 
-    if not [v for v in address.values() if v]:
+    if not [v for v in list(address.values()) if v]:
         # no value in address fields
         return {}
 
     return address
 
 
-class Address(grok.View):
-    grok.name('address')
-    grok.context(IContactDetails)
-    grok.require("zope2.View")
-    grok.template('address')
+class Address(BrowserView):
 
     def namespace(self):
         return get_address(self.context)

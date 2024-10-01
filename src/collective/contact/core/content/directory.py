@@ -1,7 +1,6 @@
 from collective.contact.core import _
-from collective.z3cform.datagridfield import DataGridFieldFactory
-from collective.z3cform.datagridfield import DictRow
-from five import grok
+from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
+from collective.z3cform.datagridfield.row import DictRow
 from plone.autoform.directives import widget
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
@@ -9,7 +8,7 @@ from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.supermodel import model
 from zope import schema
 from zope.component import getUtility
-from zope.interface import implements
+from zope.interface import implementer
 from zope.interface import Interface
 
 
@@ -53,15 +52,13 @@ class IDirectory(model.Schema):
     widget('organization_levels', DataGridFieldFactory, allow_reorder=True)
 
 
+@implementer(IDirectory)
 class Directory(Container):
     """Directory content type"""
-    implements(IDirectory)
 
 
-class DirectorySchemaPolicy(grok.GlobalUtility,
-                            DexteritySchemaPolicy):
+class DirectorySchemaPolicy(DexteritySchemaPolicy):
     """Schema policy for Directory content type"""
-    grok.name("schema_policy_directory")
 
     def bases(self, schemaName, tree):
         return (IDirectory, )

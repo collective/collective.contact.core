@@ -6,10 +6,8 @@ from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.browser.utils import audit_access
 from collective.contact.core.browser.utils import date_to_DateTime
 from collective.contact.core.browser.utils import get_valid_url
-from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.interfaces import IContactable
 from collective.contact.core.interfaces import IContactCoreParameters
-from five import grok
 from plone import api
 from Products.Five import BrowserView
 
@@ -34,13 +32,9 @@ $(document).ready(function(){
 """
 
 
-grok.templatedir('templates')
-
-
 class Organization(BaseView):
 
     def update(self):
-        super(Organization, self).update()
         self.organization = self.context
         organization = self.organization
 
@@ -77,14 +71,11 @@ class SubOrganizations(BrowserView):
         return self.index()
 
 
-class OtherContacts(grok.View):
+class OtherContacts(BrowserView):
     """Displays other contacts list"""
-    grok.name('othercontacts')
-    grok.context(IOrganization)
-
     held_positions = ''
 
-    def update(self):
+    def __call__(self):
         organization = self.context
         othercontacts = []
         held_positions = organization.get_held_positions()

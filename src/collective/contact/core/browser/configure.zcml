@@ -6,6 +6,10 @@
     i18n_domain="collective.contact.core">
 
   <include package="plone.formwidget.autocomplete" />
+  <include zcml:condition="installed collective.excelexport"
+           file="excelexport.zcml" />
+
+  <include package=".basefields" />
 
   <browser:resourceDirectory
       name="collective.contact.core"
@@ -13,9 +17,18 @@
       />
 
   <browser:page
+      name="address"
+      for="collective.contact.core.behaviors.IContactDetails"
+      class=".address.Address"
+      template="templates/address.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
       name="view"
       for="..interfaces.IHeldPosition"
       class=".contact.Contact"
+      allowed_attributes="parent_organizations sub_organizations positions can_add addnew_script"
       template="templates/contact.pt"
       permission="zope2.View"
       />
@@ -87,13 +100,6 @@
       permission="cmf.AddPortalContent"
       />
 
-  <adapter
-    name="organization-ms"
-    for="zope.interface.Interface z3c.form.interfaces.IFormLayer zope.interface.Interface"
-    provides="zope.contentprovider.interfaces.IContentProvider"
-    factory=".addcontact.MasterSelectAddContactProvider"
-    />
-
   <browser:page
       name="view"
       for="..content.directory.IDirectory"
@@ -102,7 +108,100 @@
       permission="zope2.View"
       />
 
-  <include zcml:condition="installed collective.excelexport"
-           file="excelexport.zcml" />
+  <browser:page
+      name="contact.vcf"
+      for="collective.contact.widget.interfaces.IContactContent"
+      class=".vcard_export.ContactVCF"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="gender_person_title_mapping.json"
+      for="*"
+      class=".person_title_mapping.GenderPersonTitleMapping"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="contactdetails"
+      for="collective.contact.widget.interfaces.IContactContent"
+      class=".contactable.ContactDetails"
+      template="templates/contactdetails.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="nofallbackcontactdetails"
+      for="collective.contact.widget.interfaces.IContactContent"
+      class=".contactable.NoFallbackContactDetails"
+      template="templates/contactdetails.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="heldpositions"
+      for="..content.person.IPerson"
+      class=".person.HeldPositions"
+      template="templates/heldpositions.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="othercontacts"
+      for="..content.organization.IOrganization"
+      class=".organization.OtherContacts"
+      template="templates/othercontacts.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="ttwfields"
+      for="*"
+      class=".ttwfields.TTWFields"
+      template="templates/ttwfields.pt"
+      permission="zope2.View"
+      />
+
+  <adapter
+      for="*"
+      factory=".contactable.ContactDetailsContactable"
+      />
+
+  <adapter
+      for="collective.contact.widget.interfaces.IContactContent"
+      factory=".contactable.ContactDetailsContactable"
+      />
+
+  <adapter
+     for="..content.organization.IOrganization"
+     factory="..content.organization.OrganizationContactableAdapter"
+     />
+
+  <adapter
+      for="..content.person.IPerson"
+      factory="..content.person.PersonContactableAdapter"
+      />
+
+  <adapter
+      for="..content.held_position.IHeldPosition"
+      factory="..content.held_position.HeldPositionContactableAdapter"
+      />
+
+  <adapter
+      for="..content.position.IPosition"
+      factory="..content.position.PositionContactableAdapter"
+      />
+
+  <adapter
+      name="organization-ms"
+      for="zope.interface.Interface z3c.form.interfaces.IFormLayer zope.interface.Interface"
+      provides="zope.contentprovider.interfaces.IContentProvider"
+      factory=".addcontact.MasterSelectAddContactProvider"
+      />
+
+  <utility
+      factory=".addcontact.ContactWidgetSettings"
+      provides="collective.contact.widget.interfaces.IContactWidgetSettings"
+      />
 
 </configure>
