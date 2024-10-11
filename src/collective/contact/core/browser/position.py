@@ -5,26 +5,6 @@ from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 
 
-ADDNEW_OVERLAY = """
-<script type="text/javascript">
-$(document).ready(function(){
-    $('.addnewcontactfromposition').prepOverlay({
-      subtype: 'ajax',
-      filter: common_content_filter,
-      formselector: '#oform',
-      cssclass: 'overlay-contact-addnew',
-      closeselector: '[name="oform.buttons.cancel"]',
-      noform: function(el, pbo) {return 'reload';},
-      config: {
-          closeOnClick: false,
-          closeOnEsc: false
-      }
-    });
-});
-</script>
-"""
-
-
 class Position(BaseView):
 
     def update(self):
@@ -40,4 +20,3 @@ class Position(BaseView):
 
         sm = getSecurityManager()
         self.can_add = sm.checkPermission('Add portal content', self.context)
-        self.addnew_script = ADDNEW_OVERLAY

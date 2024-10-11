@@ -5,6 +5,7 @@ from collective.contact.core.browser.utils import date_to_DateTime
 from collective.contact.core.interfaces import IContactable
 from collective.contact.core.interfaces import IPersonHeldPositions
 from Products.Five import BrowserView
+from zope.component import queryMultiAdapter
 
 
 class Person(BaseView):
@@ -47,7 +48,9 @@ class HeldPositions(BrowserView):
             # held_position['email'] = obj.email
             held_position['object'] = obj
             organization = obj.get_organization()
-            held_position['icon'] = obj.getIconURL()
+
+            icons = queryMultiAdapter((obj, self.request), name="iconresolver")
+            held_position['icon'] = icons.url("file-earmark-person-fill")
             held_position['organization'] = organization if organization else None
             held_position['can_edit'] = sm.checkPermission('Modify portal content', obj)
             held_position['can_delete'] = sm.checkPermission('Delete objects', obj)

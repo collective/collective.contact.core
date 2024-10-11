@@ -16,14 +16,19 @@
 
     <div tal:replace="structure provider:plone.abovecontenttitle" />
 
-    <h1 class="directory"><img tal:attributes="src context/getIconURL" /> <span tal:content="context/Title" /></h1>
+    <h1 class="directory">
+        <tal:icon
+         tal:replace="structure python:icons.tag('journals')" />
+        <span tal:content="context/Title" />
+    </h1>
 
     <div id="organizations" tal:condition="view/organizations">
         <h2><tal:block i18n:translate="">Organizations</tal:block>:</h2>
         <ul>
         <tal:block tal:repeat="organization view/organizations">
             <li><a class="link-tooltip" tal:attributes="href organization/getURL">
-                <img tal:attributes="src organization/getIconURL" />
+                <tal:icon
+                 tal:replace="structure python:icons.tag('diagram-3-fill')" />
                 <span tal:replace="organization/Title"
                       i18n:translate="" />
             </a></li>
@@ -36,7 +41,8 @@
         <ul>
         <tal:block tal:repeat="person view/persons">
             <li><a class="link-tooltip" tal:attributes="href person/getURL">
-                <img tal:attributes="src person/getIconURL" />
+                <tal:icon
+                 tal:replace="structure python:icons.tag('file-earmark-person')" />
                 <span tal:replace="person/Title"
                       i18n:translate="" />
             </a></li>

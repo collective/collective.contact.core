@@ -21,7 +21,7 @@ class BaseFields(object):
         return sm.checkPermission('Modify portal content', self.context)
 
 
-class PersonBaseFields(BrowserView):
+class PersonBaseFields(BrowserView, BaseFields):
     name = ''
     birthday = ''
     person_title = ''
@@ -54,7 +54,7 @@ class PersonBaseFields(BrowserView):
         return super(PersonBaseFields, self).__call__()
 
 
-class OrganizationBaseFields(BrowserView):
+class OrganizationBaseFields(BrowserView, BaseFields):
     name = ''
     type = ''
     positions = []
@@ -78,7 +78,7 @@ class OrganizationBaseFields(BrowserView):
         return super(OrganizationBaseFields, self).__call__()
 
 
-class PositionBaseFields(BrowserView):
+class PositionBaseFields(BrowserView, BaseFields):
     name = ''
     type = ''
 
@@ -95,7 +95,7 @@ class PositionBaseFields(BrowserView):
         return super(PositionBaseFields, self).__call__()
 
 
-class HeldPositionBaseFields(BrowserView):
+class HeldPositionBaseFields(BrowserView, BaseFields):
     start_date = ''
     end_date = ''
     birthday = ''

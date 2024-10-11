@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<registry>
+
+    <record name="plone.displayed_types"
+            interface="plone.base.interfaces.controlpanel.INavigationSchema"
+            field="displayed_types">
+      <value purge="false">
+        <element>directory</element>
+      </value>
+    </record>
+
+</registry>

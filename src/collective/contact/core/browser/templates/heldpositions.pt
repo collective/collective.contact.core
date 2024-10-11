@@ -3,39 +3,44 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
-      tal:define="portal_url context/@@plone_portal_state/portal_url;"
+      tal:define="icons python:context.restrictedTraverse('@@iconresolver');
+                  portal_url context/@@plone_portal_state/portal_url;"
       i18n:domain="collective.contact.core" tal:omit-tag="">
 
     <div id="held_positions" class="field" tal:condition="view/held_positions">
         <h2 i18n:translate="">Positions</h2>
         <tal:block tal:repeat="held_position view/held_positions">
-            <div class="held_position vcard" tal:define="url held_position/object/absolute_url">
+            <div class="held_position card" tal:define="url held_position/object/absolute_url">
 
               <div class="actions">
                 <tal:comment replace="nothing">class="zoom-held-position contactoverlay"</tal:comment>
-                <a class="zoom-held-position" tal:attributes="href string:${url}/view">
-                  <img alt="View" title="View"
-                       i18n:domain="plone"
-                       tal:attributes="src string:${portal_url}/search_icon.png"
-                       i18n:attributes="alt; title" />
+                <a class="zoom-held-position no-decoration"
+                   tal:attributes="href string:${url}/view"
+                   title="View"
+                   i18n:domain="plone"
+                   i18n:attributes="title">
+                  <tal:icon
+                   tal:replace="structure python:icons.tag('eye')" />
                 </a>
                 <tal:comment replace="nothing">class="edit-held-position contactoverlay"</tal:comment>
-                <a class="edit-held-position"
+                <a class="edit-held-position no-decoration"
                    tal:attributes="href string:${url}/edit"
-                   tal:condition="held_position/can_edit">
-                  <img alt="Edit" title="Edit"
-                       i18n:domain="plone"
-                       tal:attributes="src string:${portal_url}/edit.png"
-                       i18n:attributes="alt; title" />
+                   tal:condition="held_position/can_edit"
+                   title="Edit"
+                   i18n:domain="plone"
+                   i18n:attributes="title">
+                  <tal:icon
+                   tal:replace="structure python:icons.tag('pencil')" />
                 </a>
                 <tal:comment replace="nothing">class="delete-held-position deleteoverlay"</tal:comment>
-                <a class="delete-held-position"
+                <a class="delete-held-position no-decoration"
                    tal:attributes="href string:${url}/delete_confirmation"
-                   tal:condition="held_position/can_delete">
-                  <img alt="Delete" title="Delete"
-                       i18n:domain="plone"
-                       tal:attributes="src string:${portal_url}/delete_icon.png"
-                       i18n:attributes="alt; title" />
+                   tal:condition="held_position/can_delete"
+                   title="Edit"
+                   i18n:domain="plone"
+                   i18n:attributes="title">
+                  <tal:icon
+                   tal:replace="structure python:icons.tag('trash3')" />
                 </a>
               </div>
 
@@ -53,7 +58,7 @@
 
               <div tal:replace="structure held_position/object/@@nofallbackcontactdetails"></div>
 
-              <div class="organization vcard"
+              <div class="organization card"
                    tal:condition="python:held_position.get('organization', None)"
                    tal:define="organization nocall:held_position/organization">
                   <div class="logo" class="field" tal:condition="organization/logo">
@@ -61,7 +66,12 @@
                            tal:replace="structure python:scales.tag('logo', 'tile', css_class='photo')"
                            tal:on-error="string:Bad logo format" />
                   </div>
-                  <h4><img tal:attributes="src organization/getIconURL" /> <a tal:attributes="href organization/absolute_url" tal:content="organization/get_full_title"></a></h4>
+                  <h4>
+                     <tal:icon
+                      tal:define="icon_name organization/getIconURL"
+                      tal:replace="structure python:icons.tag(icon_name)" />
+                      <a tal:attributes="href organization/absolute_url" tal:content="organization/get_full_title"></a>
+                  </h4>
 
                   <div tal:replace="structure held_position/organization/@@contactdetails"></div>
               </div>

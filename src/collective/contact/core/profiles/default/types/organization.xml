@@ -3,7 +3,7 @@
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title" i18n:translate="">Organization</property>
  <property name="description" i18n:translate=""></property>
- <property name="icon_expr">string:${portal_url}/organization_icon.png</property>
+ <property name="icon_expr">string:diagram-3-fill</property>
  <property name="factory">organization</property>
  <property
     name="add_view_expr">string:${folder_url}/++add++organization</property>
@@ -27,7 +27,7 @@
   <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
   <element value="plone.app.content.interfaces.INameFromTitle"/>
   <element value="collective.contact.core.behaviors.IContactDetails" />
-  <element value="collective.dexteritytextindexer.behavior.IDexterityTextIndexer" /><!-- MIGRATION-PLONE6 -->
+  <element value="plone.app.dexterity.textindexer.behavior.IDexterityTextIndexer" />
  </property>
  <property name="schema"/>
  <!-- DO NOT use a model_source or it removes manually added fields while reapplying the profile -->

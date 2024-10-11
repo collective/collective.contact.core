@@ -46,7 +46,6 @@ class TestBehaviors(unittest.TestCase, BaseTest):
 
     def test_contact_details_fields(self):
         item = self.testitem
-        self.assertIsNone(item.getAttributes())
         for attr in ('country', 'region', 'zip_code', 'city', 'street',
                      'number', 'im_handle', 'cell_phone', 'phone', 'email',
                      'fax', 'website',

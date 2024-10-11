@@ -154,9 +154,9 @@ class ContactWidgetSettings(object):
         return {'actions': actions,
                 'close_on_click': close_on_click,
                 'formatItem': """function(row, idx, count, value) {
-return '<img src="' + portal_url + '/' + row[2] + '_icon.png'
+return '<img src="' + $("body").data("portal-url") + '/' + row[2] + '_icon.png'
  +'" /> ' + row[1] }"""
-                }
+                }  # TODO
 
 
 @implementer(IContentProvider)
@@ -210,7 +210,7 @@ $(document).ready(function() {
           add_text = addneworga.data('pbo').original_text;
         } else {
           // update add new orga link to add sub orga
-          add_organization_url = portal_url + orga.path + '/++add++organization';
+          add_organization_url = $("body").data("portal-url") + orga.path + '/++add++organization';
           add_text = addneworga.data('pbo').original_text + ' dans ' + orga.title;
         }
         addneworga.data('pbo').src = add_organization_url;
@@ -225,7 +225,7 @@ $(document).ready(function() {
             .setOptions({extraParams: {path: orga.token}}).flushCache();
 
         // update add new position url
-        var add_position_url = portal_url + orga.path + '/++add++position';
+        var add_position_url = $("body").data("portal-url") + orga.path + '/++add++position';
         o.find('#oform-widgets-position-autocomplete .addnew').each(function(){
             jQuery(this).data('pbo').src = add_position_url;
         })
@@ -258,6 +258,7 @@ $(document).ready(function() {
 });
 </script>
 """ % str(bool(getattr(self.__parent__.form, 'schema', None) == IAddHeldPosition)).lower()
+# TODO
 
 
 class IAddHeldPosition(model.Schema):
