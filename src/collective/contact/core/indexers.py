@@ -3,6 +3,7 @@
 from collective.contact.core.behaviors import ADDRESS_FIELDS
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.behaviors import IRelatedOrganizations
+from collective.contact.core.content.directory import IDirectory
 from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.content.person import IPerson
 from collective.contact.core.content.position import IPosition
@@ -187,3 +188,8 @@ def end_date(obj):
         return obj.end_date
     # if empty we return future date
     return date(2100, 1, 1)
+
+
+@indexer(IDirectory)
+def exclude_from_nav(obj):
+    return False

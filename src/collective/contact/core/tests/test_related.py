@@ -3,6 +3,7 @@
 from collective.contact.core.behaviors import IRelatedOrganizations
 from collective.contact.core.testing import INTEGRATION
 from ecreall.helpers.testing.base import BaseTest
+from plone import api
 from z3c.relationfield.relation import RelationValue
 from zope.component import getUtility
 from zope.interface import alsoProvides
@@ -27,9 +28,9 @@ class TestSearch(unittest.TestCase, BaseTest):
 
     def test_related_searchable_text(self):
         pc = self.portal.portal_catalog
-        index = pc._catalog.getIndex("SearchableText")
-        rid = pc(UID=self.divisionalpha.UID())[0].getRID()
-        indexed = index.getEntryForObject(rid, default=[])
+        brain = api.content.find(UID=self.divisionalpha.UID())[0]
+        indexes = pc.getIndexDataForRID(brain.getRID())
+        indexed = indexes.get("SearchableText")
         self.assertListEqual(indexed, ['armee', 'de', 'terre', 'corps', 'a', 'division', 'alpha'])
 
         intids = getUtility(IIntIds)
@@ -38,6 +39,8 @@ class TestSearch(unittest.TestCase, BaseTest):
             RelationValue(intids.getId(self.divisionbeta)),
         ]
         self.divisionalpha.reindexObject()
-        indexed = index.getEntryForObject(rid, default=[])
+        brain = api.content.find(UID=self.divisionalpha.UID())[0]
+        indexes = pc.getIndexDataForRID(brain.getRID())
+        indexed = indexes.get("SearchableText")
         self.assertListEqual(indexed, ['armee', 'de', 'terre', 'corps', 'a', 'division', 'beta', 'armee', 'de',
                                        'terre', 'corps', 'a', 'division', 'alpha'])

@@ -3,7 +3,7 @@
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title" i18n:translate="">Held position</property>
  <property name="description" i18n:translate=""></property>
- <property name="icon_expr">string:${portal_url}/held_position_icon.png</property>
+ <property name="icon_expr">string:person-badge</property>
  <property name="factory">held_position</property>
  <property name="add_view_expr">string:${folder_url}/++add++held_position</property>
  <property name="link_target"></property>
@@ -22,7 +22,7 @@
  <property name="behaviors" purge="False">
   <element value="plone.app.content.interfaces.INameFromTitle"/>
   <element value="collective.contact.core.behaviors.IContactDetails" />
-  <element value="collective.dexteritytextindexer.behavior.IDexterityTextIndexer" /><!-- MIGRATION-PLONE6 -->
+  <element value="plone.app.dexterity.textindexer.behavior.IDexterityTextIndexer" />
  </property>
  <property name="schema"/>
  <!-- DO NOT use a model_source or it removes manually added fields while reapplying the profile -->

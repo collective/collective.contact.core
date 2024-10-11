@@ -4,7 +4,8 @@
   	  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
       metal:use-macro="context/main_template/macros/master"
-      i18n:domain="collective.contact.core">
+      i18n:domain="collective.contact.core"
+      tal:define="icons python:context.restrictedTraverse('@@iconresolver');">
 <body>
 
 <div metal:fill-slot="main">
@@ -17,7 +18,11 @@
         <label><tal:block i18n:translate="">Parent organizations</tal:block>:</label>
         <ul>
         <tal:block tal:repeat="organization view/organizations">
-            <li><img tal:attributes="src organization/getIconURL" /> <a class="link-tooltip" tal:attributes="href organization/absolute_url">
+            <li>
+            <tal:icon
+             tal:define="icon_name organization/getIconURL"
+             tal:replace="structure python:icons.tag(icon_name)" />
+            <a class="link-tooltip" tal:attributes="href organization/absolute_url">
                 <span tal:replace="organization/Title"
                       i18n:translate="" />
             </a></li>
@@ -29,19 +34,18 @@
 
   <div tal:replace="structure context/@@ttwfields" />
 
-  <metal:additional-fields use-macro="context/contact_core_macros/macros/additional-fields" />
+  <metal:additional-fields use-macro="context/@@contact_core_macros/macros/additional-fields" />
 
   <tal:addnew
          tal:define="ajax_load request/ajax_load|nothing"
          tal:condition="python: not ajax_load and view.can_add">
-      <a href="@@add-contact" class="addnewcontactfromposition"
+      <a href="@@add-contact" class="addnewcontactfromposition pat-plone-modal"
          tal:attributes="href string:${context/absolute_url}/@@add-contact">
-          <img tal:attributes="src string:${portal_url}/create_contact.png" />
+          <tal:icon tal:replace="structure python:icons.tag('person-add')" />
           <tal:span i18n:translate="">
               Create <tal:i18n i18n:name="name">Contact</tal:i18n>
           </tal:span>
       </a>
-      <script tal:replace="structure view/addnew_script"></script>
   </tal:addnew>
 
   <div id="viewlet-below-content-body" tal:content="structure provider:plone.belowcontentbody" />

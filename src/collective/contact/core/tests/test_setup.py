@@ -1,5 +1,5 @@
 from collective.contact.core.testing import INTEGRATION
-from plone import api
+from Products.CMFPlone.utils import get_installer
 
 import unittest
 
@@ -9,15 +9,9 @@ class TestSetup(unittest.TestCase):
     layer = INTEGRATION
 
     def setUp(self):
-        self.app = self.layer['app']
-        self.portal = self.layer['portal']
-        self.qi_tool = api.portal.get_tool('portal_quickinstaller')
+        self.portal = self.layer["portal"]
+        self.installer = get_installer(self.portal, self.layer["request"])
 
     def test_product_is_installed(self):
-        """ Validate that our products GS profile has been run and the product
-            installed
-        """
-        pid = 'collective.contact.core'
-        installed = [p['id'] for p in self.qi_tool.listInstalledProducts()]
-        self.assertTrue(pid in installed,
-                        'package appears not to have been installed')
+        """Test if collective.contact.core is installed."""
+        self.assertTrue(self.installer.is_product_installed("collective.contact.core"))
