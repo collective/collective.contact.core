@@ -3,20 +3,28 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
-      tal:define="portal_url context/@@plone_portal_state/portal_url;
+      tal:define="icons python:context.restrictedTraverse('@@iconresolver');
+                  portal_url context/@@plone_portal_state/portal_url;
                   ajax_load request/ajax_load | nothing;"
       i18n:domain="collective.contact.core" tal:omit-tag="">
 
   <div class="actions">
-    <a class="edit-person contactoverlay" tal:attributes="href string:${context/absolute_url}/edit">
-      <img alt="Edit" title="Edit"
-           tal:attributes="src string:${portal_url}/edit.png"
-           tal:condition="view/can_edit"
-           i18n:domain="plone"
-           i18n:attributes="alt; title" />
+    <a class="edit-person contactoverlay pat-plone-modal"
+       tal:attributes="href string:${context/absolute_url}/edit"
+       title="Edit"
+       i18n:domain="plone"
+       i18n:attributes="title">
+      <tal:icon
+       tal:replace="structure python:icons.tag('pencil-fill')"
+       tal:condition="view/can_edit" />
     </a>
   </div>
-  <h1 class="fn"><img tal:attributes="src context/getIconURL" /> <span tal:content="view/name" /></h1>
+  <h1 class="fn">
+      <tal:icon
+       tal:define="icon_name context/getIconURL"
+       tal:replace="structure python:icons.tag(icon_name)" />
+      <span tal:content="view/name" />
+  </h1>
 
   <div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle"
        tal:condition="python: view.display_below_content_title() and not ajax_load" />

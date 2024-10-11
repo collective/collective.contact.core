@@ -7,7 +7,7 @@
       i18n:domain="collective.contact.core">
 <body>
 
-<div id="organization" class="vcard" metal:fill-slot="main">
+<div id="organization" class="card" metal:fill-slot="main">
 
     <div tal:replace="structure provider:plone.abovecontenttitle" />
 
@@ -17,7 +17,11 @@
         <label><tal:block i18n:translate="">Parent organizations</tal:block>:</label>
         <ul>
         <tal:block tal:repeat="organization view/parent_organizations">
-            <li><img tal:attributes="src organization/getIconURL" /> <a class="link-tooltip" tal:attributes="href organization/absolute_url">
+            <li>
+                <tal:icon
+                 tal:define="icon_name organization/getIconURL"
+                 tal:replace="structure python:icons.tag(icon_name)" />
+                <a class="link-tooltip" tal:attributes="href organization/absolute_url">
                 <span tal:replace="organization/Title"
                       i18n:translate="" />
             </a></li>
@@ -29,7 +33,7 @@
 
     <div tal:replace="structure context/@@ttwfields" />
 
-    <metal:additional-fields use-macro="context/contact_core_macros/macros/additional-fields" />
+    <metal:additional-fields use-macro="context/@@contact_core_macros/macros/additional-fields" />
 
     <div tal:replace="structure context/@@suborganizations" />
 
@@ -38,13 +42,19 @@
         <ul>
         <tal:block tal:repeat="position view/positions">
             <li tal:define="held_positions position/get_held_positions|nothing">
-              <img tal:attributes="src position/getIconURL" /> <a class="link-tooltip" tal:attributes="href position/absolute_url">
+              <tal:icon
+               tal:define="icon_name position/getIconURL"
+               tal:replace="structure python:icons.tag(icon_name)" />
+              <a class="link-tooltip" tal:attributes="href position/absolute_url">
                 <span tal:replace="position/Title"
                       i18n:translate=""></span></a><tal:semicolon i18n:translate="colon">:
                </tal:semicolon><tal:person condition="held_positions">
                <ul tal:repeat="held_position held_positions">
                 <li tal:define="person held_position/get_person">
-                 <img tal:attributes="src person/getIconURL" /> <a class="link-tooltip"
+                 <tal:icon
+                  tal:define="icon_name person/getIconURL"
+                  tal:replace="structure python:icons.tag(icon_name)" />
+                 <a class="link-tooltip"
                     tal:attributes="href person/absolute_url">
                    <span tal:replace="person/Title"
                          i18n:translate="" />
@@ -65,14 +75,14 @@
     <tal:addnew
            tal:define="ajax_load request/ajax_load|nothing"
            tal:condition="python: not ajax_load and view.can_add">
-        <a href="@@add-contact" class="addnewcontactfromorganization"
+        <a href="@@add-contact"
+           class="addnewcontactfromorganization pat-plone-modal"
            tal:attributes="href string:${context/absolute_url}/@@add-contact">
-            <img tal:attributes="src string:${portal_url}/create_contact.png" />
+            <tal:icon tal:replace="structure python:icons.tag('person-add')" />
             <tal:span i18n:translate="">
               Create <tal:i18n i18n:name="name">Contact</tal:i18n>
             </tal:span>
         </a>
-        <script tal:replace="structure view/addnew_script"></script>
     </tal:addnew>
 
     <div id="viewlet-below-content-body" tal:content="structure provider:plone.belowcontentbody" />

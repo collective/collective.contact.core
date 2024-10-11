@@ -11,26 +11,6 @@ from plone import api
 from Products.Five import BrowserView
 
 
-ADDNEW_OVERLAY = """
-<script type="text/javascript">
-$(document).ready(function(){
-    $('.addnewcontactfromorganization').prepOverlay({
-      subtype: 'ajax',
-      filter: common_content_filter,
-      formselector: '#oform',
-      cssclass: 'overlay-contact-addnew',
-      closeselector: '[name="oform.buttons.cancel"]',
-      noform: function(el, pbo) {return 'reload';},
-      config: {
-          closeOnClick: false,
-          closeOnEsc: false
-      }
-    });
-});
-</script>
-"""
-
-
 class Organization(BaseView):
 
     def update(self):
@@ -51,7 +31,6 @@ class Organization(BaseView):
         self.positions = self.context.get_positions()
         sm = getSecurityManager()
         self.can_add = sm.checkPermission('Add portal content', self.context)
-        self.addnew_script = ADDNEW_OVERLAY
 
     def display_date(self, date):
         """Display date nicely in template."""
@@ -75,6 +54,10 @@ class OtherContacts(BrowserView):
     held_positions = ''
 
     def __call__(self):
+        self.update()
+        return super(OtherContacts, self).__call__()
+
+    def update(self):
         organization = self.context
         othercontacts = []
         held_positions = organization.get_held_positions()

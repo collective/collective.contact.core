@@ -154,7 +154,7 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
 
 $(document).ready(function(){
     // call view on portal
-    var url = portal_url + '/@@gender_person_title_mapping.json';
+    var url = $("body").data("portal-url") + '/@@gender_person_title_mapping.json';
     $.get(url, function (mapping) {
       $(document).on(
         'change',
@@ -169,22 +169,6 @@ $(document).ready(function(){
     jQuery(document).bind('loadInsideOverlay',
             function(e, pbajax, responseText, errorText, api){
         contactswidget.manage_hide_use_parent_address();
-    });
-
-    $('.contactoverlay').prepOverlay({
-      subtype: 'ajax',
-      filter: common_content_filter,
-      formselector: '#form',
-      closeselector: '[name="form.buttons.cancel"]',
-      noform: function(el, pbo) {return 'reload';}
-    });
-
-    $('.deleteoverlay').prepOverlay({
-      subtype: 'ajax',
-      filter: common_content_filter,
-      formselector: '#delete_confirmation',
-      closeselector: '[name="form.button.Cancel"]',
-      noform: function(el, pbo) {return 'reload';}
-    });
+    }); // TODO - not working
 
 });

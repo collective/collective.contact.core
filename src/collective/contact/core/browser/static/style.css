@@ -1,6 +1,7 @@
-.addnew-block {
-    width: 75%;
+.no-decoration {
+    text-decoration: none;
 }
+
 .addnew{
     font-weight: 500;
 }
@@ -50,5 +51,6 @@ h3 img, h4 img {
 }
 
 #content a:link.link-tooltip {
+    text-decoration: none;
     border-bottom: 1px dotted;
 }

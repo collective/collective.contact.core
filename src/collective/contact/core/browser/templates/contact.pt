@@ -16,7 +16,11 @@
       <label><tal:block i18n:translate="">Organizations</tal:block>:</label>
       <ul>
       <tal:block tal:repeat="organization view/organizations">
-          <li><img tal:attributes="src organization/getIconURL" /> <a class="link-tooltip" tal:attributes="href organization/absolute_url">
+          <li>
+              <tal:icon
+               tal:define="icon_name organization/getIconURL"
+               tal:replace="structure python:icons.tag(icon_name)" />
+              <a class="link-tooltip" tal:attributes="href organization/absolute_url">
               <span tal:replace="organization/Title"
                     i18n:translate="" />
           </a></li>
@@ -28,7 +32,7 @@
 
   <div tal:replace="structure context/@@ttwfields" />
 
-  <metal:additional-fields use-macro="context/contact_core_macros/macros/additional-fields" />
+  <metal:additional-fields use-macro="context/@@contact_core_macros/macros/additional-fields" />
 
   <div id="viewlet-below-content-body" tal:content="structure provider:plone.belowcontentbody" />
 </div>

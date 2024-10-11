@@ -28,7 +28,7 @@
       name="view"
       for="..interfaces.IHeldPosition"
       class=".contact.Contact"
-      allowed_attributes="parent_organizations sub_organizations positions can_add addnew_script"
+      allowed_attributes="parent_organizations sub_organizations positions can_add"
       template="templates/contact.pt"
       permission="zope2.View"
       />
@@ -159,6 +159,13 @@
       for="*"
       class=".ttwfields.TTWFields"
       template="templates/ttwfields.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="contact_core_macros"
+      for="*"
+      template="templates/contact_core_macros.pt"
       permission="zope2.View"
       />
 

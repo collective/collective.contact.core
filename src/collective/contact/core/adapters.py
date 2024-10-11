@@ -160,17 +160,9 @@ class OrganizationVCard(ContactableVCard):
         return vcard
 
 
-def sort_closed_positions(position1, position2):
-    if position1.end_date == position2.end_date:
-        return 0
-    elif not position1.end_date:
-        # position without end date is greater
-        return 1
-    elif not position2.end_date:
-        return -1
-    else:
-        return cmp(position1.end_date, position2.end_date)
-
+def closed_position_sort_key(position):
+    return position.end_date or float('inf')
+    
 
 @implementer(IPersonHeldPositions)
 class PersonHeldPositionsAdapter(object):
@@ -205,7 +197,7 @@ class PersonHeldPositionsAdapter(object):
         all_positions = self.person.get_held_positions()
         active_positions = self.get_current_positions()
         closed_positions = [p for p in all_positions if p not in active_positions]
-        closed_positions.sort(cmp=sort_closed_positions, reverse=True)
+        closed_positions.sort(key=closed_position_sort_key, reverse=True)
         return tuple(closed_positions)
 
     def get_sorted_positions(self):

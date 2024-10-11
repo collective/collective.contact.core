@@ -16,6 +16,7 @@ from zope.intid.interfaces import IIntIds
 
 import datetime
 import logging
+import transaction
 
 
 # from plone.registry.interfaces import IRegistry
@@ -296,6 +297,7 @@ def create_test_contact_data(portal):
               'use_parent_address': True,
               }
     rambo.invokeFactory('held_position', 'brigadelh', **params)
+    transaction.commit()
 
 
 def createTestData(context):
