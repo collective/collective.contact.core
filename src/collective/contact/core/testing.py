@@ -12,6 +12,7 @@ from plone.app.testing import TEST_USER_ID
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.supermodel import model
 from plone.testing import z2
+from zope.globalrequest import setLocal
 from zope.interface import alsoProvides
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
@@ -64,6 +65,7 @@ alsoProvides(IPrefiltering, IFormFieldProvider)
 class ContactContentLayer(PloneWithPackageLayer):
 
     def setUpPloneSite(self, portal):
+        setLocal("request", portal.REQUEST)  # for fingerpointing
         self.applyProfile(portal, 'collective.contact.core:testing')
         # insert some test data
         self.applyProfile(portal, 'collective.contact.core:test_data')
