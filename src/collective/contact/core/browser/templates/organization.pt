@@ -19,7 +19,7 @@
         <tal:block tal:repeat="organization view/parent_organizations">
             <li>
                 <tal:icon
-                 tal:define="icon_name organization/getIconURL"
+                 tal:define="icon_name string:contenttype/${organization/portal_type}"
                  tal:replace="structure python:icons.tag(icon_name)" />
                 <a class="link-tooltip" tal:attributes="href organization/absolute_url">
                 <span tal:replace="organization/Title"
@@ -43,7 +43,7 @@
         <tal:block tal:repeat="position view/positions">
             <li tal:define="held_positions position/get_held_positions|nothing">
               <tal:icon
-               tal:define="icon_name position/getIconURL"
+               tal:define="icon_name string:contenttype/${position/portal_type}"
                tal:replace="structure python:icons.tag(icon_name)" />
               <a class="link-tooltip" tal:attributes="href position/absolute_url">
                 <span tal:replace="position/Title"
@@ -52,7 +52,7 @@
                <ul tal:repeat="held_position held_positions">
                 <li tal:define="person held_position/get_person">
                  <tal:icon
-                  tal:define="icon_name person/getIconURL"
+                  tal:define="icon_name string:contenttype/${person/portal_type}"
                   tal:replace="structure python:icons.tag(icon_name)" />
                  <a class="link-tooltip"
                     tal:attributes="href person/absolute_url">

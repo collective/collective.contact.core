@@ -20,7 +20,7 @@
         <tal:block tal:repeat="organization view/organizations">
             <li>
             <tal:icon
-             tal:define="icon_name organization/getIconURL"
+             tal:define="icon_name string:contenttype/${organization/portal_type}"
              tal:replace="structure python:icons.tag(icon_name)" />
             <a class="link-tooltip" tal:attributes="href organization/absolute_url">
                 <span tal:replace="organization/Title"

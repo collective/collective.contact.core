@@ -13,7 +13,7 @@
         <tal:block tal:repeat="sub_org view/sub_organizations">
             <li>
                 <tal:icon
-                 tal:define="icon_name context/getIconURL"
+                 tal:define="icon_name string:contenttype/${context/portal_type}"
                  tal:replace="structure python:icons.tag(icon_name)" />
                 <a class="link-tooltip" tal:attributes="href sub_org/getURL">
                 <span tal:replace="sub_org/Title"

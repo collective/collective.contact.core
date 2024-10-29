@@ -21,14 +21,14 @@
                    height="64" />
             </span>
             <img tal:condition="not:contact/display_photo" 
-                 tal:define="icon_name contact/person/getIconURL"
+                 tal:define="icon_name string:contenttype/${contact/person/portal_type}"
                  tal:replace="structure python:icons.tag(icon_name)" />
 
             <span class="contact-title" tal:content="title"></span>
           </a>
 
           <a tal:attributes="href contact/obj/absolute_url;">
-          <img tal:define="icon_name contact/obj/getIconURL"
+          <img tal:define="icon_name string:contenttype/${contact/obj/portal_type}"
                tal:replace="structure python:icons.tag(icon_name)" />
           <span id="contact-held-position" tal:condition="contact/held_position" tal:content="contact/held_position" />
           </a>
