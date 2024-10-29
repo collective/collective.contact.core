@@ -68,7 +68,7 @@
                   </div>
                   <h4>
                      <tal:icon
-                      tal:define="icon_name organization/getIconURL"
+                      tal:define="icon_name string:contenttype/${organization/portal_type}"
                       tal:replace="structure python:icons.tag(icon_name)" />
                       <a tal:attributes="href organization/absolute_url" tal:content="organization/get_full_title"></a>
                   </h4>
