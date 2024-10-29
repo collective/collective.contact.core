@@ -1,6 +1,9 @@
+from collective.contact.core import _tr as _
 from collective.contact.core.behaviors import IBirthday
 from collective.contact.core.behaviors import IContactDetails
 from DateTime import DateTime
+from imio.fpaudit.utils import fplog
+from plone import api
 from plone.app.dexterity.behaviors.metadata import IBasic
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.behavior.interfaces import IBehavior
@@ -12,6 +15,25 @@ from zope.component import getUtility
 
 
 IGNORED_BEHAVIORS = [IContactDetails, IBasic, IBirthday]
+
+
+def audit_access(contact, context):
+    """Logs access to a contact"""
+    if api.portal.get_registry_record("collective.contact.core.interfaces.IContactCoreParameters."
+                                      "audit_contact_access", default=False):
+        req = contact.REQUEST
+        ctx = ""
+        if context == "address":
+            if req["URL"].endswith("/edit"):
+                ctx = _("contact_edit")
+        else:
+            if req["URL"].endswith("/view"):
+                ctx = _('contact_view')
+        if ctx:
+            main_obj = req["PARENTS"][0]
+            extra = u"UID={} PATH={} CTX_PATH={} CTX={}".format(contact.UID(), contact.absolute_url_path(),
+                                                                main_obj.absolute_url_path(), ctx)
+            fplog("contacts", "AUDIT", extra)
 
 
 def date_to_DateTime(date):
