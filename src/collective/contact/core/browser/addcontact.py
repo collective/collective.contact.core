@@ -11,6 +11,7 @@ from plone.dexterity.i18n import MessageFactory as DMF
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.dexterity.utils import addContentToContainer
 from plone.supermodel import model
+from plone.z3cform.interfaces import IDeferSecurityCheck
 from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
 from z3c.form import field
@@ -23,8 +24,10 @@ from zope.component import queryAdapter
 from zope.contentprovider.interfaces import IContentProvider
 from zope.event import notify
 from zope.i18n import Message
+from zope.interface import alsoProvides
 from zope.interface import implementer
 from zope.interface import Interface
+from zope.interface import noLongerProvides
 from zope.publisher.browser import BrowserView
 
 import copy
@@ -361,7 +364,9 @@ class AddContact(DefaultAddForm, form.AddForm):
             self.widgets['parent_address'].mode = DISPLAY_MODE
 
     def update(self):
+        alsoProvides(self.request, IDeferSecurityCheck)
         super(AddContact, self).update()
+        noLongerProvides(self.request, IDeferSecurityCheck)
 
     @button.buttonAndHandler(_('Add'), name='save')
     def handleAdd(self, action):
