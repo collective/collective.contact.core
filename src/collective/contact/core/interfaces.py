@@ -80,6 +80,11 @@ class IContactCoreParameters(Interface):
                     u"{cell_phone}, {fax}, {website}, {im_handle}",
         required=True, default=u'{gft}')
 
+    audit_contact_access = schema.Bool(
+        title=_(u"Log contact details access (with imio.fputils product)."),
+        description=u"",
+        required=False, default=False)
+
 
 class IPersonHeldPositions(Interface):
     """Adapter interface to get ordered positions of a person

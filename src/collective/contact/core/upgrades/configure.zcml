@@ -203,4 +203,12 @@
       profile="collective.contact.core:default">
   </genericsetup:upgradeStep>
 
+  <genericsetup:upgradeStep
+      title="Upgrade from 20 to 21"
+      source="20"
+      destination="21"
+      handler=".upgrades.v21"
+      profile="collective.contact.core:default">
+  </genericsetup:upgradeStep>
+
 </configure>
