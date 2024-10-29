@@ -9,7 +9,7 @@
 
     <h1 class="pos">
         <tal:icon
-         tal:define="icon_name context/getIconURL"
+         tal:define="icon_name string:contenttype/${context/portal_type}"
          tal:replace="structure python:icons.tag(icon_name)" />
         <span tal:content="view/name" />
     </h1>
