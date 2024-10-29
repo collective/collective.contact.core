@@ -154,10 +154,9 @@ class ContactWidgetSettings(object):
         return {'actions': actions,
                 'close_on_click': close_on_click,
                 'formatItem': """function(row, idx, count, value) {
-return '<img src="' + $("body").data("portal-url") + '/' + row[2] + '_icon.png'
+return '<img src="' + $("body").data("portal-url") + '/@@iconresolver/contenttype/' + row[2]
  +'" /> ' + row[1] }"""
-                }  # TODO
-
+                }
 
 @implementer(IContentProvider)
 class MasterSelectAddContactProvider(BrowserView):
