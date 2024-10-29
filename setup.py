@@ -1,6 +1,8 @@
 # -*- coding: utf8 -*-
 
-from setuptools import setup, find_packages
+from setuptools import find_packages
+from setuptools import setup
+
 
 long_description = (
     open('README.rst').read()
@@ -54,6 +56,7 @@ setup(
         'ecreall.helpers.upgrade >= 1.1.6.dev0',
         'five.grok',
         'five.globalrequest',
+        'imio.fpaudit',
         'plone.api>=1.4.11',
         'plone.app.dexterity',
         'plone.app.iterate',
