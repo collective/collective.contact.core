@@ -11,4 +11,39 @@
     <value key="load_defer">False</value>
   </records>
 
+  <record name="plone.icon.contenttype/directory">
+    <field type="plone.registry.field.TextLine">
+      <title>Directory</title>
+    </field>
+    <value key="resource">++plone++bootstrap-icons/journals.svg</value>
+  </record>
+
+  <record name="plone.icon.contenttype/held_position">
+    <field type="plone.registry.field.TextLine">
+      <title>Held position</title>
+    </field>
+    <value key="resource">++plone++bootstrap-icons/person-badge.svg</value>
+  </record>
+
+  <record name="plone.icon.contenttype/organization">
+    <field type="plone.registry.field.TextLine">
+      <title>Organization</title>
+    </field>
+    <value key="resource">++plone++bootstrap-icons/diagram-3-fill.svg</value>
+  </record>
+
+  <record name="plone.icon.contenttype/person">
+    <field type="plone.registry.field.TextLine">
+      <title>Person</title>
+    </field>
+    <value key="resource">++plone++bootstrap-icons/file-earmark-person-fill.svg</value>
+  </record>
+
+  <record name="plone.icon.contenttype/position">
+    <field type="plone.registry.field.TextLine">
+      <title>Position</title>
+    </field>
+    <value key="resource">++plone++bootstrap-icons/briefcase.svg</value>
+  </record>
+
 </registry>

@@ -18,7 +18,7 @@
 
     <h1 class="directory">
         <tal:icon
-         tal:replace="structure python:icons.tag('journals')" />
+         tal:replace="structure python:icons.tag('contenttype/directory')" />
         <span tal:content="context/Title" />
     </h1>
 
@@ -28,7 +28,7 @@
         <tal:block tal:repeat="organization view/organizations">
             <li><a class="link-tooltip" tal:attributes="href organization/getURL">
                 <tal:icon
-                 tal:replace="structure python:icons.tag('diagram-3-fill')" />
+                 tal:replace="structure python:icons.tag('contenttype/organization')" />
                 <span tal:replace="organization/Title"
                       i18n:translate="" />
             </a></li>
@@ -42,7 +42,7 @@
         <tal:block tal:repeat="person view/persons">
             <li><a class="link-tooltip" tal:attributes="href person/getURL">
                 <tal:icon
-                 tal:replace="structure python:icons.tag('file-earmark-person')" />
+                 tal:replace="structure python:icons.tag('contenttype/person')" />
                 <span tal:replace="person/Title"
                       i18n:translate="" />
             </a></li>
