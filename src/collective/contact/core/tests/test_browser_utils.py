@@ -3,7 +3,11 @@ from collective.contact.core import logged_actions
 from collective.contact.core.testing import FUNCTIONAL
 from ecreall.helpers.testing.base import BaseTest
 from plone import api
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from plone.app.testing.interfaces import TEST_USER_NAME
+from zope.security.management import endInteraction
+from zope.security.management import newInteraction
 
 import unittest
 
@@ -47,6 +51,7 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         view.render()
 
     def test_audit_access(self):
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
         self.call_view(self.armeedeterre, "view")
         self.assertEqual(len(logged_actions), 0)
         # we set the registry record to True
@@ -89,3 +94,14 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         self.assertEqual(len(logged_actions), 1)
         self.assertEqual(rmv_uid(0), "PATH=/plone/mydirectory/armeedeterre/general_adt "
                          "CTX_PATH=/plone/mydirectory/armeedeterre/general_adt CTX=contact_view")
+        # check held_position view
+        logged_actions[:] = []  # clear
+        # necessary for z3c.formwidget.query widget initialization... to avoid NoInteraction error
+        newInteraction()
+        self.call_view(self.gadt, "view")
+        endInteraction()
+        self.assertEqual(len(logged_actions), 2)
+        self.assertEqual(rmv_uid(0), "PATH=/plone/mydirectory/armeedeterre/general_adt "
+                         "CTX_PATH=/plone/mydirectory/degaulle/gadt CTX=contact_view")
+        self.assertEqual(rmv_uid(1), "PATH=/plone/mydirectory/degaulle/gadt "
+                         "CTX_PATH=/plone/mydirectory/degaulle/gadt CTX=contact_view")

@@ -4,8 +4,8 @@ Changelog
 1.42.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Added audit_access function, called at some places, to log contact access.
+  [sgeulette]
 
 1.42.0 (2023-09-13)
 -------------------
