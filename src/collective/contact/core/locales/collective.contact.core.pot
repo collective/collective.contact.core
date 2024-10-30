@@ -1,10 +1,10 @@
-# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
-# SOME DESCRIPTIVE TITLE.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#--- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+#SOME DESCRIPTIVE TITLE.
+#FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-01-28 13:27+0000\n"
+"POT-Creation-Date: 2024-10-30 14:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,11 +46,11 @@ msgstr ""
 msgid "Additional address details"
 msgstr ""
 
-#: ../interfaces.py:108
+#: ../interfaces.py:118
 msgid "Additional label"
 msgstr ""
 
-#: ../interfaces.py:109
+#: ../interfaces.py:119
 msgid "Additional label with information that does not appear on position label"
 msgstr ""
 
@@ -73,7 +73,7 @@ msgstr ""
 msgid "Cell phone number"
 msgstr ""
 
-#: ../interfaces.py:72
+#: ../interfaces.py:77
 msgid "Choose information displayed after a search in contact widget."
 msgstr ""
 
@@ -98,7 +98,7 @@ msgstr ""
 msgid "Contact have a birthday."
 msgstr ""
 
-#: ../testing.zcml:16
+#: ../testing.zcml:17
 msgid "Contact lists"
 msgstr ""
 
@@ -125,19 +125,19 @@ msgstr ""
 msgid "Directory"
 msgstr ""
 
-#: ../interfaces.py:62
+#: ../interfaces.py:67
 msgid "Display belowcontenttitle viewlet on contact views."
 msgstr ""
 
-#: ../interfaces.py:57
+#: ../interfaces.py:62
 msgid "Display contact photo on organization view (instead person content type icon)."
 msgstr ""
 
-#: ../interfaces.py:42
+#: ../interfaces.py:47
 msgid "Display person title in displayed person's title."
 msgstr ""
 
-#: ../interfaces.py:67
+#: ../interfaces.py:72
 msgid "Display the \"Photo\" label before the photo image on contact views."
 msgstr ""
 
@@ -152,7 +152,7 @@ msgstr ""
 
 #: ../browser/basefields/templates/held_position.pt:33
 #: ../browser/templates/heldpositions.pt:50
-#: ../interfaces.py:117
+#: ../interfaces.py:129
 msgid "End date"
 msgstr ""
 
@@ -231,6 +231,10 @@ msgstr ""
 msgid "Latitude"
 msgstr ""
 
+#: ../interfaces.py:84
+msgid "Log contact details access (with imio.fputils product)."
+msgstr ""
+
 #: ../content/organization.py:49
 msgid "Logo"
 msgstr ""
@@ -271,7 +275,7 @@ msgstr ""
 msgid "Mrs"
 msgstr ""
 
-#: ../content/directory.py:19
+#: ../content/directory.py:27
 msgid "Name"
 msgstr ""
 
@@ -284,16 +288,16 @@ msgid "Number"
 msgstr ""
 
 #: ../browser/addcontact.py:273
-#: ../content/directory.py:35
+#: ../content/directory.py:43
 #: ../profiles/default/types/organization.xml
 msgid "Organization"
 msgstr ""
 
-#: ../content/directory.py:42
+#: ../content/directory.py:50
 msgid "Organization level"
 msgstr ""
 
-#: ../content/directory.py:41
+#: ../content/directory.py:49
 msgid "Organization levels"
 msgstr ""
 
@@ -301,11 +305,11 @@ msgstr ""
 msgid "Organization type"
 msgstr ""
 
-#: ../content/directory.py:34
+#: ../content/directory.py:42
 msgid "Organization types"
 msgstr ""
 
-#: ../interfaces.py:103
+#: ../interfaces.py:113
 msgid "Organization/Position"
 msgstr ""
 
@@ -357,7 +361,7 @@ msgstr ""
 
 #: ../browser/addcontact.py:285
 #: ../browser/basefields/templates/held_position.pt:19
-#: ../content/directory.py:28
+#: ../content/directory.py:36
 msgid "Position"
 msgstr ""
 
@@ -365,7 +369,7 @@ msgstr ""
 msgid "Position type"
 msgstr ""
 
-#: ../content/directory.py:27
+#: ../content/directory.py:35
 msgid "Position types"
 msgstr ""
 
@@ -413,11 +417,11 @@ msgstr ""
 
 #: ../browser/basefields/templates/held_position.pt:27
 #: ../browser/templates/heldpositions.pt:45
-#: ../interfaces.py:113
+#: ../interfaces.py:123
 msgid "Start date"
 msgstr ""
 
-#: ../testing.zcml:24
+#: ../testing.zcml:25
 msgid "Steps to ease tests of collective.contact.core"
 msgstr ""
 
@@ -425,11 +429,11 @@ msgstr ""
 msgid "Street"
 msgstr ""
 
-#: ../interfaces.py:37
+#: ../interfaces.py:42
 msgid "The person contact details are private and will not be used in other context, like held position."
 msgstr ""
 
-#: ../content/directory.py:20
+#: ../content/directory.py:28
 msgid "Token"
 msgstr ""
 
@@ -441,11 +445,11 @@ msgstr ""
 msgid "Type or level"
 msgstr ""
 
-#: ../interfaces.py:52
+#: ../interfaces.py:57
 msgid "Use description to search persons."
 msgstr ""
 
-#: ../interfaces.py:47
+#: ../interfaces.py:52
 msgid "Use held positions to search persons."
 msgstr ""
 
@@ -479,13 +483,25 @@ msgstr ""
 msgid "collective.contact.core test data"
 msgstr ""
 
-#: ../testing.zcml:24
+#: ../testing.zcml:25
 msgid "collective.contact.core tests"
 msgstr ""
 
 #. Default: ":"
 #: ../browser/templates/organization.pt:43
 msgid "colon"
+msgstr ""
+
+#: ../browser/utils.py:67
+msgid "contact_edit"
+msgstr ""
+
+#: ../browser/utils.py:77
+msgid "contact_overlay"
+msgstr ""
+
+#: ../browser/utils.py:71
+msgid "contact_view"
 msgstr ""
 
 #: ../browser/templates/organization.pt:53

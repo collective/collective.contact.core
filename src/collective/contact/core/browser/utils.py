@@ -21,7 +21,8 @@ IGNORED_BEHAVIORS = [IContactDetails, IBasic, IBirthday]
 
 
 def get_object_from_request(request, default=None):
-    """Returns the object from the request"""
+    """Returns the object from the request.
+    Not used here but can be useful"""
     portal = api.portal.get()
     published = request.get('PUBLISHED', None)
     if base_hasattr(published, "getTagName"):
