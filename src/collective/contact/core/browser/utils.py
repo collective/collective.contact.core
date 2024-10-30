@@ -10,11 +10,47 @@ from plone.behavior.interfaces import IBehavior
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.schemaeditor.utils import non_fieldset_fields
 from plone.supermodel.interfaces import ISchemaPolicy
+from Products.CMFPlone.utils import base_hasattr
 from zope import schema
 from zope.component import getUtility
 
+import re
+
 
 IGNORED_BEHAVIORS = [IContactDetails, IBasic, IBirthday]
+
+
+def get_object_from_request(request, default=None):
+    """Returns the object from the request"""
+    portal = api.portal.get()
+    published = request.get('PUBLISHED', None)
+    if base_hasattr(published, "getTagName"):
+        context = published
+    else:
+        context = base_hasattr(published, 'context') and published.context or None
+    if not context or context == portal:
+        referer = portal.REQUEST['HTTP_REFERER'].replace(portal.absolute_url() + '/', '')
+        # remove view and parameters
+        referer = re.sub(r'/@@[^?]*$', '', re.sub(r'\?.*$', '', referer))
+        try:
+            context = portal.unrestrictedTraverse(referer)
+        except (KeyError, AttributeError):
+            return default
+            # if not hasattr(context, 'portal_type'):
+            #     return default
+    return context
+
+
+def get_object_from_referer(referer, default=None):
+    """Returns the object from the referer"""
+    portal = api.portal.get()
+    referer = referer.replace(portal.absolute_url() + '/', '')
+    # remove view and parameters
+    referer = re.sub(r'/@@[^?]*$', '', re.sub(r'\?.*$', '', referer))
+    try:
+        return portal.unrestrictedTraverse(referer)
+    except (KeyError, AttributeError):
+        return default
 
 
 def audit_access(contact, context):
@@ -23,13 +59,22 @@ def audit_access(contact, context):
                                       "audit_contact_access", default=False):
         req = contact.REQUEST
         ctx = ""
+        # logger.info("{}, {}, {}| {}| {}| {}".format(contact, context, req["URL"], req["HTTP_REFERER"],
+        # req["PARENTS"][0], req["PUBLISHED"]))
         if context == "edit":
+            main_obj = req["PARENTS"][0]
             ctx = _("contact_edit")
         else:
-            if req["URL"].endswith("/view"):
+            if not req["HTTP_REFERER"]:  # simple view
+                main_obj = req["PARENTS"][0]
                 ctx = _('contact_view')
+            elif re.search(r'/(@@)?edit(\?.*)?$', req["HTTP_REFERER"]):  # view after edit
+                main_obj = req["PARENTS"][0]
+                ctx = _('contact_view')
+            else:  # overlay
+                main_obj = get_object_from_referer(req["HTTP_REFERER"])
+                ctx = _('contact_overlay')
         if ctx:
-            main_obj = req["PARENTS"][0]
             extra = u"UID={} PATH={} CTX_PATH={} CTX={}".format(contact.UID(), contact.absolute_url_path(),
                                                                 main_obj.absolute_url_path(), ctx)
             fplog("contacts", "AUDIT", extra)

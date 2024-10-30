@@ -2,7 +2,6 @@ from Acquisition import aq_base
 from collective.contact.core.behaviors import ADDRESS_FIELDS
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.browser import TEMPLATES_DIR
-from collective.contact.core.browser.utils import audit_access
 from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.interfaces import IHeldPosition
 from five import grok
@@ -14,7 +13,6 @@ grok.templatedir(TEMPLATES_DIR)
 
 def get_address(obj):
     """Returns a dictionary which contains address fields"""
-    # audit_access(obj, "address")
     if aq_base(obj).use_parent_address is True:
         related = None
         priv = api.portal.get_registry_record(name='person_contact_details_private', interface=IContactCoreParameters)
