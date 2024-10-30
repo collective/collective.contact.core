@@ -23,9 +23,8 @@ def audit_access(contact, context):
                                       "audit_contact_access", default=False):
         req = contact.REQUEST
         ctx = ""
-        if context == "address":
-            if req["URL"].endswith("/edit"):
-                ctx = _("contact_edit")
+        if context == "edit":
+            ctx = _("contact_edit")
         else:
             if req["URL"].endswith("/view"):
                 ctx = _('contact_view')

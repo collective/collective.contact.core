@@ -14,7 +14,7 @@ grok.templatedir(TEMPLATES_DIR)
 
 def get_address(obj):
     """Returns a dictionary which contains address fields"""
-    audit_access(obj, "address")
+    # audit_access(obj, "address")
     if aq_base(obj).use_parent_address is True:
         related = None
         priv = api.portal.get_registry_record(name='person_contact_details_private', interface=IContactCoreParameters)

@@ -165,6 +165,11 @@
     handler=".subscribers.clear_fields_use_parent_address" />
 
   <subscriber
+    for="collective.contact.core.behaviors.IContactDetails
+         plone.dexterity.interfaces.IEditBegunEvent"
+    handler=".subscribers.contact_details_edit_begun" />
+
+  <subscriber
     for="plone.registry.interfaces.IRecordModifiedEvent"
     handler=".subscribers.recordModified"/>
 
