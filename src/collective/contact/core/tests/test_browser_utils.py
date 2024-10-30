@@ -144,3 +144,16 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         self.assertEqual(len(logged_actions), 1)
         self.assertEqual(rmv_uid(0), "PATH=/plone/mydirectory/degaulle/gadt "
                          "CTX_PATH=/plone/mydirectory/degaulle/gadt CTX=contact_edit")
+        # # OVERLAY
+        # check directory overlay
+        logged_actions[:] = []
+        self.call_view(self.mydirectory, "view")
+        self.assertEqual(len(logged_actions), 0)
+        # simulate overlay
+        self.armeedeterre.REQUEST["HTTP_REFERER"] = "http://nohost/plone/mydirectory"
+        self.call_view(self.armeedeterre, "view")
+        self.assertEqual(len(logged_actions), 2)
+        self.assertEqual(rmv_uid(0), "PATH=/plone/mydirectory/armeedeterre "
+                         "CTX_PATH=/plone/mydirectory CTX=contact_overlay")
+        self.assertEqual(rmv_uid(1), "PATH=/plone/mydirectory/degaulle/adt "
+                         "CTX_PATH=/plone/mydirectory CTX=contact_overlay")
