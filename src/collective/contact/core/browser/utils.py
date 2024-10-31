@@ -66,15 +66,12 @@ def audit_access(contact, context):
             main_obj = req["PARENTS"][0]
             ctx = _("contact_edit")
         else:
-            if not req["HTTP_REFERER"]:  # simple view
-                main_obj = req["PARENTS"][0]
-                ctx = _('contact_view')
-            elif re.search(r'/(@@)?edit(\?.*)?$', req["HTTP_REFERER"]):  # view after edit
-                main_obj = req["PARENTS"][0]
-                ctx = _('contact_view')
-            else:  # overlay
+            if "ajax_load" in req:  # overlay
                 main_obj = get_object_from_referer(req["HTTP_REFERER"])
                 ctx = _('contact_overlay')
+            else:  # simple view
+                main_obj = req["PARENTS"][0]
+                ctx = _('contact_view')
         if ctx:
             extra = u"UID={} PATH={} CTX_PATH={} CTX={}".format(contact.UID(), contact.absolute_url_path(),
                                                                 main_obj.absolute_url_path(), ctx)
