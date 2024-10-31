@@ -494,7 +494,7 @@ msgstr " :"
 
 #: ../browser/utils.py:67
 msgid "contact_edit"
-msgstr "édition"
+msgstr "edition"
 
 #: ../browser/utils.py:77
 msgid "contact_overlay"
