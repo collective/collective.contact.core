@@ -85,6 +85,12 @@ class IContactCoreParameters(Interface):
         description=u"",
         required=False, default=False)
 
+    audit_contact_types = schema.List(
+        title=_(u"Types selection to audit."),
+        description=u"",
+        value_type=schema.Choice(vocabulary=u"collective.contact.core.audit_types"),
+        required=False, default=[])
+
 
 class IPersonHeldPositions(Interface):
     """Adapter interface to get ordered positions of a person

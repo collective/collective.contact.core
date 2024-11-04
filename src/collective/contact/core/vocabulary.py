@@ -1,7 +1,10 @@
 from . import _
 from Acquisition import aq_parent
 from five import grok
+from plone.dexterity.interfaces import IDexterityFTI
+from zope.component import getUtilitiesFor
 from zope.globalrequest import getRequest
+from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -80,4 +83,21 @@ class Genders(grok.GlobalUtility):
         for (token, value) in genders.iteritems():
             term = SimpleVocabulary.createTerm(token, token, value)
             terms.append(term)
+        return SimpleVocabulary(terms)
+
+
+@implementer(IVocabularyFactory)
+class AuditTypes(object):
+
+    def __call__(self, context):
+        terms = []
+        for name, fti in getUtilitiesFor(IDexterityFTI):
+            if not fti:
+                continue
+            if "collective.contact.core.behaviors.IContactDetails" in fti.behaviors:
+                terms.append(
+                    SimpleVocabulary.createTerm(
+                        name, name, _(fti.title or name)
+                    )
+                )
         return SimpleVocabulary(terms)

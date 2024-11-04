@@ -184,4 +184,10 @@
     provides="collective.contact.core.interfaces.IPersonHeldPositions"
     factory=".adapters.PersonHeldPositionsAdapter"
     />
+
+  <utility
+    name="collective.contact.core.audit_types"
+    factory="collective.contact.core.vocabulary.AuditTypes"
+    />
+
 </configure>

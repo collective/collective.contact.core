@@ -58,6 +58,10 @@ def audit_access(contact, context):
     """Logs access to a contact"""
     if api.portal.get_registry_record("collective.contact.core.interfaces.IContactCoreParameters."
                                       "audit_contact_access", default=False):
+        filtered_pt = api.portal.get_registry_record("collective.contact.core.interfaces.IContactCoreParameters."
+                                                     "audit_contact_types", default=[])
+        if filtered_pt and contact.portal_type not in filtered_pt:
+            return
         req = contact.REQUEST
         ctx = ""
         # logger.info("{}, {}, {}| {}| {}| {}".format(contact, context, req["URL"], req["HTTP_REFERER"],

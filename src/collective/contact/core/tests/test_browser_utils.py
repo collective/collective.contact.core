@@ -60,6 +60,8 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         # we set the registry record to True
         api.portal.set_registry_record("collective.contact.core.interfaces.IContactCoreParameters."
                                        "audit_contact_access", True)
+        api.portal.set_registry_record("collective.contact.core.interfaces.IContactCoreParameters.audit_contact_types",
+                                       [])
         # # VIEW
         # check organisation view
         self.call_view(self.armeedeterre, "view")
@@ -157,4 +159,72 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         self.assertEqual(rmv_uid(0), "PATH=/plone/mydirectory/armeedeterre "
                                      "CTX_PATH=/plone/mydirectory CTX=contact_overlay")
         self.assertEqual(rmv_uid(1), "PATH=/plone/mydirectory/degaulle/adt "
+                                     "CTX_PATH=/plone/mydirectory CTX=contact_overlay")
+        # # # we filter on person only
+        api.portal.set_registry_record("collective.contact.core.interfaces.IContactCoreParameters.audit_contact_types",
+                                       ["person"])
+        del self.armeedeterre.REQUEST.other["ajax_load"]
+        # # VIEW
+        # check organisation view
+        logged_actions[:] = []  # clear
+        self.call_view(self.armeedeterre, "view")
+        self.assertEqual(len(logged_actions), 0)
+        # check sub organization view
+        logged_actions[:] = []  # clear
+        self.call_view(self.brigadelh, "view")
+        self.assertEqual(len(logged_actions), 0)
+        # check person view
+        logged_actions[:] = []  # clear
+        self.call_view(self.degaulle, "view")
+        self.assertEqual(len(logged_actions), 1)
+        self.assertEqual(rmv_uid(0), "PATH=/plone/mydirectory/degaulle "
+                                     "CTX_PATH=/plone/mydirectory/degaulle CTX=contact_view")
+        # check position view
+        logged_actions[:] = []  # clear
+        self.call_view(self.general_adt, "view")
+        self.assertEqual(len(logged_actions), 0)
+        # check held_position view
+        logged_actions[:] = []  # clear
+        # necessary for z3c.formwidget.query widget initialization... to avoid NoInteraction error
+        newInteraction()
+        self.call_view(self.gadt, "view")
+        endInteraction()
+        self.assertEqual(len(logged_actions), 0)
+        # # EDIT
+        # check organisation edit
+        logged_actions[:] = []  # clear
+        self.call_view(self.armeedeterre, "@@edit")
+        self.assertEqual(len(logged_actions), 0)
+        # check sub organization edit
+        logged_actions[:] = []  # clear
+        self.call_view(self.brigadelh, "@@edit")
+        self.assertEqual(len(logged_actions), 0)
+        # check person edit
+        logged_actions[:] = []  # clear
+        self.call_view(self.degaulle, "@@edit")
+        self.assertEqual(len(logged_actions), 1)
+        self.assertEqual(rmv_uid(0), "PATH=/plone/mydirectory/degaulle "
+                                     "CTX_PATH=/plone/mydirectory/degaulle CTX=contact_edit")
+        # check position edit
+        logged_actions[:] = []  # clear
+        self.call_view(self.general_adt, "@@edit")
+        self.assertEqual(len(logged_actions), 0)
+        # check held_position edit
+        logged_actions[:] = []  # clear
+        # necessary for z3c.formwidget.query widget initialization... to avoid NoInteraction error
+        newInteraction()
+        self.call_view(self.gadt, "@@edit")
+        endInteraction()
+        self.assertEqual(len(logged_actions), 0)
+        # # OVERLAY
+        # check directory overlay
+        logged_actions[:] = []
+        self.call_view(self.mydirectory, "view")
+        self.assertEqual(len(logged_actions), 0)
+        # simulate overlay
+        self.armeedeterre.REQUEST["HTTP_REFERER"] = "http://nohost/plone/mydirectory"
+        self.armeedeterre.REQUEST["ajax_load"] = "12345678"
+        self.call_view(self.degaulle, "view")
+        self.assertEqual(len(logged_actions), 1)
+        self.assertEqual(rmv_uid(0), "PATH=/plone/mydirectory/degaulle "
                                      "CTX_PATH=/plone/mydirectory CTX=contact_overlay")
