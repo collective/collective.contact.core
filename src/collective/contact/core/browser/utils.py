@@ -42,9 +42,8 @@ def get_object_from_request(request, default=None):
     return context
 
 
-def get_object_from_referer(referer, default=None):
+def get_object_from_referer(portal, referer, default=None):
     """Returns the object from the referer"""
-    portal = api.portal.get()
     referer = referer.replace(portal.absolute_url() + '/', '')
     # remove view and parameters
     referer = re.sub(r'/@@[^?]*$', '', re.sub(r'\?.*$', '', referer))
@@ -62,23 +61,26 @@ def audit_access(contact, context):
                                                      "audit_contact_types", default=[])
         if filtered_pt and contact.portal_type not in filtered_pt:
             return
+        portal = api.portal.get()
+        portal_path_len = len(portal.absolute_url_path())
         req = contact.REQUEST
-        ctx = ""
+        case = ""
         # logger.info("{}, {}, {}| {}| {}| {}".format(contact, context, req["URL"], req["HTTP_REFERER"],
         # req["PARENTS"][0], req["PUBLISHED"]))
         if context == "edit":
             main_obj = req["PARENTS"][0]
-            ctx = _("contact_edit")
+            case = _("contact_edit")
         else:
             if "ajax_load" in req:  # overlay
-                main_obj = get_object_from_referer(req["HTTP_REFERER"])
-                ctx = _('contact_overlay')
+                main_obj = get_object_from_referer(portal, req["HTTP_REFERER"])
+                case = _('contact_overlay')
             else:  # simple view
                 main_obj = req["PARENTS"][0]
-                ctx = _('contact_view')
-        if ctx:
-            extra = u"UID={} PATH={} CTX_PATH={} CASE={}".format(contact.UID(), contact.absolute_url_path(),
-                                                                 main_obj.absolute_url_path(), ctx)
+                case = _('contact_view')
+        if case:
+            extra = u"UID={} PATH={} CTX_PATH={} CASE={}".format(contact.UID(),
+                                                                 contact.absolute_url_path()[portal_path_len:],
+                                                                 main_obj.absolute_url_path()[portal_path_len:], case)
             fplog("contacts", contact.portal_type, extra)
 
 
