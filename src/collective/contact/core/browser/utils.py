@@ -77,9 +77,9 @@ def audit_access(contact, context):
                 main_obj = req["PARENTS"][0]
                 ctx = _('contact_view')
         if ctx:
-            extra = u"UID={} PATH={} CTX_PATH={} CTX={}".format(contact.UID(), contact.absolute_url_path(),
-                                                                main_obj.absolute_url_path(), ctx)
-            fplog("contacts", "AUDIT", extra)
+            extra = u"UID={} PATH={} CTX_PATH={} CASE={}".format(contact.UID(), contact.absolute_url_path(),
+                                                                 main_obj.absolute_url_path(), ctx)
+            fplog("contacts", contact.portal_type, extra)
 
 
 def date_to_DateTime(date):
