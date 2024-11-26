@@ -20,10 +20,11 @@ import re
 IGNORED_BEHAVIORS = [IContactDetails, IBasic, IBirthday]
 
 
-def get_object_from_request(request, default=None):
+def get_object_from_request(request, portal=None, default=None):
     """Returns the object from the request.
     Not used here but can be useful"""
-    portal = api.portal.get()
+    if not portal:
+        portal = api.portal.get()
     published = request.get('PUBLISHED', None)
     if base_hasattr(published, "getTagName"):
         context = published
@@ -46,9 +47,15 @@ def get_object_from_referer(portal, referer, default=None):
     """Returns the object from the referer"""
     referer = referer.replace(portal.absolute_url() + '/', '')
     # remove view and parameters
-    referer = re.sub(r'/@@[^?]*$', '', re.sub(r'\?.*$', '', referer))
+    referer = re.sub(r'/@@[^?]*$', '', re.sub(r'/\+\+add\+\+\w+', '', re.sub(r'\?.*$', '', referer)))
     try:
-        return portal.unrestrictedTraverse(referer)
+        obj = portal.unrestrictedTraverse(referer)
+        if not base_hasattr(obj, 'portal_type'):
+            if base_hasattr(obj, 'context'):  # on a view like contactlist/view
+                return obj.context
+            if base_hasattr(obj, 'im_self'):  # on org selection on held_position edit
+                return obj.im_self
+        return obj
     except (KeyError, AttributeError):
         return default
 
@@ -67,6 +74,10 @@ def audit_access(contact, context):
         case = ""
         # logger.info("{}, {}, {}| {}| {}| {}".format(contact, context, req["URL"], req["HTTP_REFERER"],
         # req["PARENTS"][0], req["PUBLISHED"]))
+        if req["ACTUAL_URL"].endswith("@@autocomplete-search"):  # when org autocomplete search on held_position edit
+            return
+        if req["ACTUAL_URL"].endswith("@@masterselect-jsonvalue"):  # when editing person with admin
+            return
         if context == "edit":
             main_obj = req["PARENTS"][0]
             case = _("contact_edit")
