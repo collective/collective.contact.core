@@ -6,7 +6,7 @@ Changelog
 
 - Added libjpeg8 for Pillow install in gha.
   [sgeulette]
-- Added libbz2-1.0 for feedparser install in gha.
+- Added libbz2-dev for feedparser install in gha.
   [sgeulette]
 
 1.43.0 (2025-02-20)
