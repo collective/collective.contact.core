@@ -1,6 +1,8 @@
 # -*- coding: utf8 -*-
 
-from setuptools import setup, find_packages
+from setuptools import find_packages
+from setuptools import setup
+
 
 long_description = (
     open('README.rst').read()
@@ -15,7 +17,7 @@ long_description = (
 
 setup(
     name='collective.contact.core',
-    version='1.42.1.dev0',
+    version='1.43.1.dev0',
     description="Core package for collective.contact add-ons",
     long_description=long_description,
     # Get more strings from
@@ -54,6 +56,7 @@ setup(
         'ecreall.helpers.upgrade >= 1.1.6.dev0',
         'five.grok',
         'five.globalrequest',
+        'imio.fpaudit',
         'plone.api>=1.4.11',
         'plone.app.dexterity',
         'plone.app.iterate',

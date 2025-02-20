@@ -3,6 +3,7 @@
 from AccessControl import getSecurityManager
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.browser.contactable import BaseView
+from collective.contact.core.browser.utils import audit_access
 from collective.contact.core.browser.utils import date_to_DateTime
 from collective.contact.core.browser.utils import get_valid_url
 from collective.contact.core.content.organization import IOrganization
@@ -114,5 +115,6 @@ class OtherContacts(grok.View):
             contact['website'] = get_valid_url(contactable.website)
 
             othercontacts.append(contact)
+            audit_access(contactable, "other")
 
         self.othercontacts = othercontacts

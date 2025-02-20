@@ -165,6 +165,11 @@
     handler=".subscribers.clear_fields_use_parent_address" />
 
   <subscriber
+    for="collective.contact.core.behaviors.IContactDetails
+         plone.dexterity.interfaces.IEditBegunEvent"
+    handler=".subscribers.contact_details_edit_begun" />
+
+  <subscriber
     for="plone.registry.interfaces.IRecordModifiedEvent"
     handler=".subscribers.recordModified"/>
 
@@ -179,4 +184,10 @@
     provides="collective.contact.core.interfaces.IPersonHeldPositions"
     factory=".adapters.PersonHeldPositionsAdapter"
     />
+
+  <utility
+    name="collective.contact.core.audit_types"
+    factory="collective.contact.core.vocabulary.AuditTypes"
+    />
+
 </configure>

@@ -1,11 +1,17 @@
 Changelog
 =========
 
-1.42.1 (unreleased)
+1.43.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Added libjpeg8 for Pillow install in gha.
+  [sgeulette]
 
+1.43.0 (2025-02-20)
+-------------------
+
+- Added audit_access function, called at some places, to log contact access.
+  [sgeulette]
 
 1.42.0 (2023-09-13)
 -------------------

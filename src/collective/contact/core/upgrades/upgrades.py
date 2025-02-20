@@ -132,3 +132,9 @@ def v20(context):
     brains = catalog.unrestrictedSearchResults(object_provides=IContactContent.__identifier__)
     for brain in brains:
         brain.getObject().reindexObject(['email'])
+
+
+def v21(context):
+    tool = IUpgradeTool(context)
+    tool.runProfile('imio.fpaudit:default')
+    tool.runImportStep('collective.contact.core', 'plone.app.registry')

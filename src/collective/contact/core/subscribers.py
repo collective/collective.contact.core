@@ -1,6 +1,7 @@
 # coding=utf-8
 from Acquisition import aq_get
 from collective.contact.core.behaviors import IContactDetails
+from collective.contact.core.browser.utils import audit_access
 from collective.contact.core.content.directory import IDirectory
 from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.content.person import IPerson
@@ -134,6 +135,11 @@ def clear_fields_use_parent_address(obj, event):
                 delattr(obj, field_name)
             except AttributeError:
                 pass
+
+
+def contact_details_edit_begun(obj, event):
+    """Audit access."""
+    audit_access(obj, "edit")
 
 
 def recordModified(event):

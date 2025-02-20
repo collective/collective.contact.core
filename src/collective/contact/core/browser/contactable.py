@@ -3,6 +3,7 @@ from collective.contact.core.behaviors import CONTACT_DETAILS_FIELDS
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.browser import TEMPLATES_DIR
 from collective.contact.core.browser.address import get_address
+from collective.contact.core.browser.utils import audit_access
 from collective.contact.core.browser.utils import get_valid_url
 from collective.contact.core.interfaces import IContactable
 from collective.contact.core.interfaces import IContactCoreParameters
@@ -49,7 +50,7 @@ class ContactDetailsContactable(grok.Adapter):
         if 'website' in contact_details:
             contact_details['website'] = get_valid_url(
                 contact_details['website'])
-
+        audit_access(self.context, "details2")
         return contact_details
 
     def get_parent_address(self):
@@ -159,6 +160,7 @@ class Contactable(grok.Adapter):
         if 'website' in contact_details:
             contact_details['website'] = get_valid_url(contact_details['website'])
 
+        audit_access(self.context, "details1")
         return contact_details
 
     def get_parent_address(self):
