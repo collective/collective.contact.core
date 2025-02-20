@@ -19,7 +19,7 @@ jobs:
           command: pyenv -v
       - name: Setup Env
         run: |
-          sudo apt-get install -y libjpeg8-dev
+          sudo apt-get install -y libjpeg8-dev libbz2-dev
           pip install -r requirements.txt coverage==5.3.1
       - name: Cache eggs
         uses: actions/cache@v2
