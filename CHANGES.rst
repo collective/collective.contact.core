@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.42.1 (unreleased)
+1.43.0 (2025-02-20)
 -------------------
 
 - Added audit_access function, called at some places, to log contact access.
