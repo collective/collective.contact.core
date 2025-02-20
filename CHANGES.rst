@@ -4,8 +4,8 @@ Changelog
 1.43.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Added libjpeg8 for Pillow install in gha.
+  [sgeulette]
 
 1.43.0 (2025-02-20)
 -------------------
