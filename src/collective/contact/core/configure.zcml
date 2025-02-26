@@ -20,6 +20,7 @@
   <include package="collective.contact.widget" />
   <include package="collective.z3cform.datagridfield" />
   <include package="five.globalrequest" />
+  <include package="imio.fpaudit"/>
   <include package="collective.dexteritytextindexer"/>
   <include package=".upgrades" />
   <include package=".browser" />

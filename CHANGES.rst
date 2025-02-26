@@ -8,6 +8,8 @@ Changelog
   [sgeulette]
 - Added libbz2-dev for feedparser install in gha.
   [sgeulette]
+- Moved include package `imio.fpaudit` from `testing.zcml` to `configure.zcml`.
+  [gbastien]
 
 1.43.0 (2025-02-20)
 -------------------
