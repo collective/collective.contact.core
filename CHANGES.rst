@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.43.1 (unreleased)
+1.43.1 (2025-02-28)
 -------------------
 
 - Added libjpeg8 for Pillow install in gha.
