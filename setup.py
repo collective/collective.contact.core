@@ -17,7 +17,7 @@ long_description = (
 
 setup(
     name='collective.contact.core',
-    version='1.43.1',
+    version='1.43.2.dev0',
     description="Core package for collective.contact add-ons",
     long_description=long_description,
     # Get more strings from
