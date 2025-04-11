@@ -15,7 +15,7 @@
                 <tal:icon
                  tal:define="icon_name string:contenttype/${context/portal_type}"
                  tal:replace="structure python:icons.tag(icon_name)" />
-                <a class="link-tooltip" tal:attributes="href sub_org/getURL">
+                <a class="link-tooltip" tal:attributes="href sub_org/getURL; data-base_url sub_org/getURL">
                 <span tal:replace="sub_org/Title"
                       i18n:translate="" />
             </a></li>

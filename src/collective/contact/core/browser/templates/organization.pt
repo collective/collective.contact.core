@@ -21,7 +21,7 @@
                 <tal:icon
                  tal:define="icon_name string:contenttype/${organization/portal_type}"
                  tal:replace="structure python:icons.tag(icon_name)" />
-                <a class="link-tooltip" tal:attributes="href organization/absolute_url">
+                <a class="link-tooltip" tal:attributes="href organization/absolute_url; data-base_url organization/absolute_url">
                 <span tal:replace="organization/Title"
                       i18n:translate="" />
             </a></li>
@@ -45,7 +45,7 @@
               <tal:icon
                tal:define="icon_name string:contenttype/${position/portal_type}"
                tal:replace="structure python:icons.tag(icon_name)" />
-              <a class="link-tooltip" tal:attributes="href position/absolute_url">
+              <a class="link-tooltip" tal:attributes="href position/absolute_url; data-base_url position/absolute_url">
                 <span tal:replace="position/Title"
                       i18n:translate=""></span></a><tal:semicolon i18n:translate="colon">:
                </tal:semicolon><tal:person condition="held_positions">
@@ -55,7 +55,7 @@
                   tal:define="icon_name string:contenttype/${person/portal_type}"
                   tal:replace="structure python:icons.tag(icon_name)" />
                  <a class="link-tooltip"
-                    tal:attributes="href person/absolute_url">
+                    tal:attributes="href person/absolute_url; data-base_url person/absolute_url">
                    <span tal:replace="person/Title"
                          i18n:translate="" />
                  </a>
