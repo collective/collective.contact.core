@@ -31,6 +31,9 @@ class Organization(BaseView):
         self.positions = self.context.get_positions()
         sm = getSecurityManager()
         self.can_add = sm.checkPermission('Add portal content', self.context)
+        # We need to update widgets to avoid view.widgets being None which
+        # causes a traceback in collective.eeafaceted.z3ctable
+        self.updateWidgets()
 
     def display_date(self, date):
         """Display date nicely in template."""
