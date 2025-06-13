@@ -50,6 +50,7 @@ setup(
         'collective.z3cform.datagridfield',
         'collective.contact.widget >= 1.12',
         'setuptools',
+        'collective.js.tooltipster',
         'five.globalrequest',
         'plone.api>=1.4.11',
         'plone.app.dexterity',
