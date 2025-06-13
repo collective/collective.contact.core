@@ -26,7 +26,7 @@
         <h2><tal:block i18n:translate="">Organizations</tal:block>:</h2>
         <ul>
         <tal:block tal:repeat="organization view/organizations">
-            <li><a class="link-tooltip" tal:attributes="href organization/getURL">
+            <li><a class="link-tooltip" tal:attributes="href organization/getURL; data-base_url organization/getURL">
                 <tal:icon
                  tal:replace="structure python:icons.tag('contenttype/organization')" />
                 <span tal:replace="organization/Title"
@@ -40,7 +40,7 @@
         <h2><tal:block i18n:translate="">Persons</tal:block>:</h2>
         <ul>
         <tal:block tal:repeat="person view/persons">
-            <li><a class="link-tooltip" tal:attributes="href person/getURL">
+            <li><a class="link-tooltip" tal:attributes="href person/getURL; data-base_url person/getURL">
                 <tal:icon
                  tal:replace="structure python:icons.tag('contenttype/person')" />
                 <span tal:replace="person/Title"

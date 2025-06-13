@@ -26,7 +26,7 @@
       <tal:icon
        tal:define="icon_name string:contenttype/${view/position/portal_type}"
        tal:replace="structure python:icons.tag(icon_name)" />
-      <a class="link-tooltip" tal:attributes="href view/position/absolute_url">
+      <a class="link-tooltip" tal:attributes="href view/position/absolute_url; data-base_url view/position/absolute_url">
         <span tal:content="view/position/Title"
             i18n:translate="" />
       </a>
