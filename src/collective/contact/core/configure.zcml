@@ -14,7 +14,6 @@
   <include package="collective.contact.widget" />
   <include package="collective.js.tooltipster" />
   <include package="collective.z3cform.datagridfield" />
-  <include package="five.globalrequest" />
   <include package=".upgrades" />
   <include package=".browser" />
   <include package=".content" />
