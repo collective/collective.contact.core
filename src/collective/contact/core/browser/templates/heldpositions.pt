@@ -36,7 +36,7 @@
                 <a class="delete-held-position no-decoration"
                    tal:attributes="href string:${url}/delete_confirmation"
                    tal:condition="held_position/can_delete"
-                   title="Edit"
+                   title="Delete"
                    i18n:domain="plone"
                    i18n:attributes="title">
                   <tal:icon
