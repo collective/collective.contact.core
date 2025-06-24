@@ -297,7 +297,6 @@ def create_test_contact_data(portal):
               'use_parent_address': True,
               }
     rambo.invokeFactory('held_position', 'brigadelh', **params)
-    transaction.commit()
 
 
 def createTestData(context):

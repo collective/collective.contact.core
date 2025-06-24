@@ -19,6 +19,7 @@ from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
 import collective.contact.core
+import transaction
 
 
 logged_actions = []
@@ -80,6 +81,7 @@ class ContactContentLayer(PloneWithPackageLayer):
         # insert some test data
         self.applyProfile(portal, 'collective.contact.core:test_data')
         setRoles(portal, TEST_USER_ID, ['Manager'])
+        transaction.commit()
 
 
 COLLECTIVE_CONTACT_CORE = ContactContentLayer(
