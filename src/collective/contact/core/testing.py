@@ -17,6 +17,7 @@ from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
 import collective.contact.core
+import transaction
 
 
 static_prefilter_vocabulary = SimpleVocabulary(
@@ -68,6 +69,7 @@ class ContactContentLayer(PloneWithPackageLayer):
         # insert some test data
         self.applyProfile(portal, 'collective.contact.core:test_data')
         setRoles(portal, TEST_USER_ID, ['Manager'])
+        transaction.commit()
 
 
 COLLECTIVE_CONTACT_CORE = ContactContentLayer(
