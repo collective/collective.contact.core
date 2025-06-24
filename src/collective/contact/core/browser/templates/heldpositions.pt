@@ -77,7 +77,7 @@
               </div>
             </div>
         </tal:block>
-        <div class="visualClear"><!--  --></div>
+        <div class="clearfix"><!--  --></div>
     </div>
 
 
