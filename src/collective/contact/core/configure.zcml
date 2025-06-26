@@ -58,10 +58,10 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
-  <utility
+  <!-- MIGRATION-PLONE6 utility
       component=".fields.RelationChoiceHandler"
       name="z3c.relationfield.schema.RelationChoice"
-      />
+      /-->
 
   <adapter
     name="email"
