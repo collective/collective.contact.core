@@ -2,7 +2,7 @@ from collective.contact.core import _tr as _
 from collective.contact.core.behaviors import IBirthday
 from collective.contact.core.behaviors import IContactDetails
 from DateTime import DateTime
-from imio.fpaudit.utils import fplog
+from imio.fpaudit import utils as _fpaudit_utils  # import module so it can be patched in a second time
 from plone import api
 from plone.app.dexterity.behaviors.metadata import IBasic
 from plone.autoform.interfaces import IFormFieldProvider
@@ -92,7 +92,7 @@ def audit_access(contact, context):
             extra = u"UID={} PATH={} CTX_PATH={} CASE={}".format(contact.UID(),
                                                                  contact.absolute_url_path()[portal_path_len:],
                                                                  main_obj.absolute_url_path()[portal_path_len:], case)
-            fplog("contacts", contact.portal_type, extra)
+            _fpaudit_utils.fpalog("contacts", contact.portal_type, extra)
 
 
 def date_to_DateTime(date):

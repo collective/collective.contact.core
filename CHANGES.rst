@@ -4,8 +4,8 @@ Changelog
 1.43.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Used imio.fpaudit.fpalog. Removed init patch and moved it to testing module.
+  [sgeulette]
 
 1.43.1 (2025-02-28)
 -------------------

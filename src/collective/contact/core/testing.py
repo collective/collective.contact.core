@@ -3,6 +3,7 @@
 from collective.contact.widget.schema import ContactChoice
 from collective.contact.widget.schema import ContactList
 from collective.contact.widget.source import ContactSourceBinder
+from imio.fpaudit import utils as _fpaudit_utils
 from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
@@ -19,6 +20,15 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 import collective.contact.core
 
+
+logged_actions = []
+
+
+def _mock_fpalog(log_id, action, extras):
+    logged_actions.append(extras)
+
+
+_fpaudit_utils.fpalog = _mock_fpalog
 
 static_prefilter_vocabulary = SimpleVocabulary(
     [
