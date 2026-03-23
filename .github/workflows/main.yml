@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: packages
         run: |
           sudo apt-get install -y libjpeg8-dev libbz2-dev
       - name: Set up pyenv and Python
-        uses: "gabrielfalcao/pyenv-action@v14"
+        uses: "gabrielfalcao/pyenv-action@v18"
         with:
           default: 2.7.18
           command: pyenv -v
@@ -24,13 +24,12 @@ jobs:
         run: |
           pip install -r requirements.txt coverage==5.3.1
       - name: Cache eggs
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         env:
           cache-name: cache-eggs
         with:
           path: ~/buildout-cache/eggs
           key: ${{ runner.os }}-test-${{ env.cache-name }}
-          restore-keys: ${{ runner.os }}-test-${{ env.cache-name }}
       - name: buildout
         run: |
           buildout -c ci.cfg annotate
@@ -42,12 +41,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: packages
         run: |
           sudo apt-get install -y libjpeg8-dev libbz2-dev
       - name: Set up pyenv and Python
-        uses: "gabrielfalcao/pyenv-action@v14"
+        uses: "gabrielfalcao/pyenv-action@v18"
         with:
           default: 2.7.18
           command: pyenv -v
@@ -55,13 +54,12 @@ jobs:
         run: |
           pip install -r requirements.txt coverage==5.3.1
       - name: Cache eggs
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         env:
           cache-name: cache-eggs
         with:
           path: ~/buildout-cache/eggs
           key: ${{ runner.os }}-coverage-${{ env.cache-name }}
-          restore-keys: ${{ runner.os }}-coverage-${{ env.cache-name }}
       - name: buildout
         run: |
           buildout -c ci.cfg
@@ -72,7 +70,7 @@ jobs:
         run: |
           bin/coverage run bin/test -t !robot
       - name: Set up Python 3.8
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.8
       - name: Install Coveralls
