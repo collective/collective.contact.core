@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.43.2 (unreleased)
+1.43.2 (2026-03-24)
 -------------------
 
 - Used imio.fpaudit.fpalog. Removed init patch and moved it to testing module.
