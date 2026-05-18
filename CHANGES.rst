@@ -4,8 +4,8 @@ Changelog
 1.43.3 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Added edit icon on all contact basefields views.
+  [sgeulette]
 
 1.43.2 (2026-03-24)
 -------------------

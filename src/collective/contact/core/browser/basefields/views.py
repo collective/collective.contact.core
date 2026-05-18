@@ -23,6 +23,10 @@ class BaseFields(object):
             interface=IContactCoreParameters,
             default=False)
 
+    def can_edit(self):
+        sm = getSecurityManager()
+        return sm.checkPermission('Modify portal content', self.context)
+
 
 class PersonBaseFields(grok.View, BaseFields):
     grok.name('basefields')
@@ -43,7 +47,6 @@ class PersonBaseFields(grok.View, BaseFields):
     def update(self):
         self.person = self.context
         person = self.person
-        sm = getSecurityManager()
 
         self.name = person.Title()
         if IBirthday.providedBy(person):
@@ -56,7 +59,6 @@ class PersonBaseFields(grok.View, BaseFields):
 
         self.person_title = person.person_title
         self.gender = person.gender or ''
-        self.can_edit = sm.checkPermission('Modify portal content', person)
 
 
 class OrganizationBaseFields(grok.View, BaseFields):
