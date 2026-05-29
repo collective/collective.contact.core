@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.43.3 (unreleased)
+1.43.3 (2026-05-29)
 -------------------
 
 - Added edit icon on all contact basefields views.
