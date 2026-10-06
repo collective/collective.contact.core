@@ -47,15 +47,9 @@
         />
 
     <subscriber
-        for="z3c.relationfield.interfaces.IHasIncomingRelations
-             OFS.interfaces.IObjectWillBeRemovedEvent"
-        handler=".subscribers.referenceRemoved"
-        />
-
-    <subscriber
         for="plone.app.relationfield.interfaces.IDexterityHasRelations
-             zope.lifecycleevent.interfaces.IObjectRemovedEvent"
-        handler=".subscribers.referencedObjectRemoved"
+             OFS.interfaces.IObjectWillBeRemovedEvent"
+        handler=".subscribers.referenceObjectRemoved"
         />
 
     <subscriber
