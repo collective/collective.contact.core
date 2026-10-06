@@ -32,6 +32,9 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.13",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
@@ -46,6 +49,7 @@ setup(
     namespace_packages=['collective', 'collective.contact'],
     include_package_data=True,
     zip_safe=False,
+    python_requires='>=3.10',
     install_requires=[
         'ExtensionClass',
         'collective.z3cform.datagridfield',
