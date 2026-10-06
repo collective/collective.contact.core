@@ -12,6 +12,9 @@ Changelog
 - Kept the old overlay behaviour in the contact modals: reload the page after
   save, and don't close the add-contact modal on a click outside it or on Esc.
   [chris-adam]
+- Used `plone.base.interfaces.IBundleRegistry` for the bundle and `contenttype/<type>`
+  icon names in the content types `icon_expr`, as Plone core types do.
+  [chris-adam]
 
 
 1.43.3 (2026-05-29)

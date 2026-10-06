@@ -1,7 +1,7 @@
 <registry>
 
   <records prefix="plone.bundles/collective-contact"
-           interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+           interface='plone.base.interfaces.IBundleRegistry'>
     <value key="enabled">True</value>
     <value key="csscompilation">++resource++collective.contact.core/style.css</value>
     <value key="jscompilation">++resource++collective.contact.core/forms.js</value>
