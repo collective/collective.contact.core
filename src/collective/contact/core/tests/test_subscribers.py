@@ -57,3 +57,11 @@ class TestUtils(unittest.TestCase, BaseSearchTest):
         # metadata has been updated
         self.assertEqual(self.getBrain(dguid).contact_source,
                          u'Général Charles De Gaulle from Colombey les deux églises on charles.de.gaulle@private.com')
+
+    def test_linkintegrity_breach_on_referenced_contact(self):
+        """Plone linkintegrity reports contact relations as breaches."""
+        mydirectory = self.portal['mydirectory']
+        sergent_lh = mydirectory.unrestrictedTraverse('armeedeterre/corpsa/divisionalpha/regimenth/brigadelh/sergent_lh')
+        view = self.portal.restrictedTraverse('@@delete_confirmation_info')
+        sources = [s['uid'] for b in view.get_breaches([sergent_lh]) for s in b['sources']]
+        self.assertEqual(sources, [mydirectory['pepper']['sergent_pepper'].UID()])

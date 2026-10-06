@@ -12,8 +12,7 @@ from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.supermodel import model
-from plone.testing import z2
-from zope.globalrequest import setLocal
+from plone.testing.zope import WSGI_SERVER_FIXTURE
 from zope.interface import alsoProvides
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
@@ -101,5 +100,5 @@ FUNCTIONAL = FunctionalTesting(
 ACCEPTANCE = FunctionalTesting(
     bases=(COLLECTIVE_CONTACT_CORE,
            AUTOLOGIN_LIBRARY_FIXTURE,
-           z2.ZSERVER_FIXTURE),
+           WSGI_SERVER_FIXTURE),
     name="ACCEPTANCE")

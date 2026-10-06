@@ -6,24 +6,18 @@ from collective.contact.widget.schema import ContactList
 from collective.contact.widget.source import ContactSourceBinder
 from plone.app.dexterity.browser.types import TypeSchemaContext
 from plone.app.textfield import RichText
-from plone.app.z3cform.widget import DatetimeFieldWidget
+from plone.app.z3cform.widgets.datetime import DatetimeFieldWidget
 from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.formwidget.masterselect import MasterSelectBoolField
 from plone.supermodel import model
 from plone.supermodel.directives import fieldset
+from Products.CMFPlone.RegistrationTool import checkEmailAddress
+from Products.CMFPlone.RegistrationTool import EmailAddressInvalid
 from z3c.form.widget import ComputedWidgetAttribute
 from zope import schema
 from zope.interface import alsoProvides
 from zope.interface import Interface
-
-
-try:
-    from Products.CMFDefault.exceptions import EmailAddressInvalid
-    from Products.CMFDefault.utils import checkEmailAddress
-except ImportError:
-    from Products.CMFPlone.RegistrationTool import checkEmailAddress
-    from Products.CMFPlone.RegistrationTool import EmailAddressInvalid
 
 import datetime
 import re

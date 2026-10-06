@@ -6,11 +6,11 @@ from collective.contact.core.browser.contactable import Contactable
 from collective.contact.widget.interfaces import IContactContent
 from plone import api
 from plone.app.textfield import RichText
+from plone.base.utils import base_hasattr
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.namedfile.field import NamedImage
 from plone.supermodel import model
-from Products.CMFPlone.utils import base_hasattr
 from zc.relation.interfaces import ICatalog
 from zope import schema
 from zope.component import getUtility
