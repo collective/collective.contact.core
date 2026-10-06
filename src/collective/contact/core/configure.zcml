@@ -59,11 +59,6 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
-  <!-- MIGRATION-PLONE6 utility
-      component=".fields.RelationChoiceHandler"
-      name="z3c.relationfield.schema.RelationChoice"
-      /-->
-
   <adapter
     name="email"
     factory=".indexers.contact_email"
@@ -102,7 +97,7 @@
            zcml:condition="installed collective.contact.contactlist" />
 
   <!-- Needed to remove title and description values from indexation
-       because IBasic.title and description are added by collective.dexteritytextindexer -->
+       because IBasic.title and description are added by plone.textindexer -->
   <adapter for="collective.contact.core.content.organization.IOrganization
                 zope.schema.interfaces.IField
                 z3c.form.interfaces.IWidget"

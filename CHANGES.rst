@@ -4,7 +4,11 @@ Changelog
 1.44.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Removed Plone 4 compatibility code and obsolete `fields.RelationChoiceHandler`.
+  Fixed deprecated imports (`plone.base.utils`, `DatetimeFieldWidget`, `WSGI_SERVER_FIXTURE`).
+  [chris-adam]
+- Fixed image filename rendered as bytes in excel export url.
+  [chris-adam]
 
 
 1.44.0 (2026-11-16)

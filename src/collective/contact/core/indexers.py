@@ -15,8 +15,8 @@ from datetime import date
 from plone import api
 from plone.app.dexterity.textindexer.converters import DefaultDexterityTextIndexFieldConverter
 from plone.app.dexterity.textindexer.interfaces import IDynamicTextIndexExtender
+from plone.base.utils import safe_text
 from plone.indexer import indexer
-from Products.CMFPlone.utils import safe_unicode
 from zope.component import adapts
 from zope.i18n import translate
 from zope.interface import implementer
@@ -125,7 +125,7 @@ class PositionSearchableExtender(object):
 
     def __call__(self):
         obj = self.context
-        result = [safe_unicode(obj.get_organization().Title())]
+        result = [safe_text(obj.get_organization().Title())]
         email = IContactDetails(obj).email
         if email:
             result.append(email)
@@ -151,7 +151,7 @@ class PersonSearchableExtender(object):
         else:
             text = obj.Title()
 
-        results.append(safe_unicode(text))
+        results.append(safe_text(text))
 
         email = IContactDetails(obj).email
         if email:
@@ -185,7 +185,7 @@ class TypeSearchableExtender(object):
 
 
 class ContactEscapingTitleFieldConverter(DefaultDexterityTextIndexFieldConverter):
-    """Contact field converter for dexteritytextindexer to escape title and description."""
+    """Contact field converter for plone.textindexer to escape title and description."""
 
     def convert(self):
         """Convert the adapted field value to text/plain for indexing"""

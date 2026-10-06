@@ -4,7 +4,7 @@ from collective.contact.core.interfaces import IContactable
 from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.core.interfaces import IPersonHeldPositions
 from plone import api
-from Products.CMFPlone.utils import safe_unicode
+from plone.base.utils import safe_text
 from zope.interface import implementer
 
 import datetime
@@ -50,14 +50,13 @@ class ContactableVCard:
         # if we don't have relevant address information, we don't need address
         if address:
             vcard.add('adr')
-            country = safe_unicode(address['country'], encoding='utf8')
-            region = safe_unicode(address['region'], encoding='utf8')
-            zip_code = safe_unicode(address['zip_code'], encoding='utf8')
-            city = safe_unicode(address['city'], encoding='utf8')
-            street = safe_unicode(address['street'], encoding='utf8')
-            number = safe_unicode(address['number'], encoding='utf8')
-            additional = safe_unicode(address['additional_address_details'],
-                                      encoding='utf8')
+            country = safe_text(address['country'], encoding='utf8')
+            region = safe_text(address['region'], encoding='utf8')
+            zip_code = safe_text(address['zip_code'], encoding='utf8')
+            city = safe_text(address['city'], encoding='utf8')
+            street = safe_text(address['street'], encoding='utf8')
+            number = safe_text(address['number'], encoding='utf8')
+            additional = safe_text(address['additional_address_details'], encoding='utf8')
             vcard.adr.value = vobject.vcard.Address(street=street,
                                                     city=city,
                                                     region=region,
@@ -102,9 +101,9 @@ class HeldPositionVCard(ContactableVCard):
         organizations = contactable.organizations
 
         vcard.add('n')
-        firstname = safe_unicode(person.firstname or '', encoding='utf8')
-        lastname = safe_unicode(person.lastname or '', encoding='utf8')
-        person_title = safe_unicode(person.person_title or '', encoding='utf8')
+        firstname = safe_text(person.firstname or '', encoding='utf8')
+        lastname = safe_text(person.lastname or '', encoding='utf8')
+        person_title = safe_text(person.person_title or '', encoding='utf8')
         vcard.n.value = vobject.vcard.Name(prefix=person_title,
                                            family=lastname,
                                            given=firstname)
@@ -116,15 +115,14 @@ class HeldPositionVCard(ContactableVCard):
             vcard.bday.value = person.birthday.isoformat()
 
         if position is not None:
-            position_name = safe_unicode(position.Title(), encoding='utf8')
+            position_name = safe_text(position.Title(), encoding='utf8')
             vcard.add('role')
             vcard.role.value = position_name
             vcard.add('title')
             vcard.title.value = position_name
 
         vcard.add('org')
-        vcard.org.value = [safe_unicode(org.Title(),
-                                        encoding='utf8') for org in organizations]
+        vcard.org.value = [safe_text(org.Title(), encoding='utf8') for org in organizations]
 
         # TODO ?
         # vcard.add('photo')
@@ -151,7 +149,7 @@ class OrganizationVCard(ContactableVCard):
         vcard.kind.value = "org"
 
         organization = self.context
-        title = safe_unicode(organization.Title(), encoding='utf8')
+        title = safe_text(organization.Title(), encoding='utf8')
         vcard.add('n')
         vcard.n.value = vobject.vcard.Name(title)
         vcard.add('fn')
