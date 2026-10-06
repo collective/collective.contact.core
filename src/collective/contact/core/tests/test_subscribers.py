@@ -3,9 +3,13 @@
 from collective.contact.core.testing import INTEGRATION
 from ecreall.helpers.testing.search import BaseSearchTest
 from plone import api
+from plone.app.linkintegrity.exceptions import LinkIntegrityNotificationException
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing.interfaces import TEST_USER_NAME
+from zc.relation.interfaces import ICatalog
+from zope.component import getUtility
+from zope.intid.interfaces import IIntIds
 
 import unittest
 
@@ -20,6 +24,25 @@ class TestUtils(unittest.TestCase, BaseSearchTest):
         self.portal = self.layer['portal']
         mydirectory = self.portal['mydirectory']
         self.degaulle = mydirectory['degaulle']
+        self.rambo = mydirectory['rambo']
+        self.brigadelh = mydirectory['armeedeterre']['corpsa']['divisionalpha']['regimenth']['brigadelh']
+
+    def test_relation_unindex(self):
+        catalog = getUtility(ICatalog)
+        intids = getUtility(IIntIds)
+        held_brigadelh = self.rambo["brigadelh"]
+        int_id = intids.getId(held_brigadelh)
+        rels = catalog.findRelations({"from_id": int_id})
+        self.assertEqual(len([i for i in rels]), 1)
+        brigadelh_id = intids.getId(self.brigadelh)
+        self.assertTrue(list(catalog.findRelations({"to_id": brigadelh_id})))
+        with self.assertRaises(LinkIntegrityNotificationException):
+            api.content.delete(self.brigadelh)
+        api.content.delete(self.brigadelh, check_linkintegrity=False)
+        rels = catalog.findRelations({"from_id": int_id})
+        self.assertEqual(len([i for i in rels]), 0)
+        # no broken relation is left pointing to the deleted organization
+        self.assertEqual(list(catalog.findRelations({"to_id": brigadelh_id})), [])
 
     def test_recordModified(self):
         """ """
