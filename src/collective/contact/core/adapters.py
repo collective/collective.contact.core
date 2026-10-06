@@ -6,7 +6,6 @@ from collective.contact.core.interfaces import IPersonHeldPositions
 from plone import api
 from Products.CMFPlone.utils import safe_unicode
 from zope.interface import implementer
-from zope.interface import Interface
 
 import datetime
 import vobject
@@ -162,7 +161,7 @@ class OrganizationVCard(ContactableVCard):
 
 def closed_position_sort_key(position):
     return position.end_date or float('inf')
-    
+
 
 @implementer(IPersonHeldPositions)
 class PersonHeldPositionsAdapter(object):

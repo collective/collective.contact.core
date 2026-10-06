@@ -7,7 +7,7 @@
       i18n:domain="collective.contact.core">
 <body>
 
-<div id="organization" class="card" metal:fill-slot="main">
+<div id="organization" metal:fill-slot="main">
 
     <div tal:replace="structure provider:plone.abovecontenttitle" />
 
