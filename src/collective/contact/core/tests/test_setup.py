@@ -1,5 +1,5 @@
 from collective.contact.core.testing import INTEGRATION
-from Products.CMFPlone.utils import get_installer
+from plone.base.utils import get_installer
 
 import unittest
 

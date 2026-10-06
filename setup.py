@@ -57,6 +57,7 @@ setup(
         'plone.app.relationfield',
         'plone.app.textfield!=1.2.8',
         'plone.autoform',
+        'plone.base',
         'plone.formwidget.masterselect',
         'plone.supermodel',
         'Products.CMFPlone',

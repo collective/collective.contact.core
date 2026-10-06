@@ -1,10 +1,10 @@
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.core.interfaces import IHeldPosition
 from ComputedAttribute import ComputedAttribute
+from plone.base.utils import safe_text
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from Products.CMFPlone.utils import normalizeString
-from Products.CMFPlone.utils import safe_unicode
 from z3c.form.interfaces import NO_VALUE
 from zope.interface import implementer
 
@@ -43,7 +43,7 @@ class HeldPosition(Container):
         return
 
     def get_title(self):
-        return safe_unicode(self.Title())
+        return safe_text(self.Title())
 
     title = property(get_title, set_title)
 
@@ -122,7 +122,7 @@ class HeldPosition(Container):
         held_position_title = self.Title()
         return u"%s-%s" % (
             sortable_fullname,
-            normalizeString(safe_unicode(held_position_title))
+            normalizeString(safe_text(held_position_title))
         )
 
     @acqproperty
