@@ -16,7 +16,6 @@ from zope.intid.interfaces import IIntIds
 
 import datetime
 import logging
-import transaction
 
 
 # from plone.registry.interfaces import IRegistry
