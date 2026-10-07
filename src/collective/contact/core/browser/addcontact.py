@@ -6,6 +6,7 @@ from collective.contact.widget.schema import ContactChoice
 from collective.contact.widget.source import ContactSourceBinder
 from plone import api
 from plone.dexterity.browser.add import DefaultAddForm
+from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.events import AddCancelledEvent
 from plone.dexterity.i18n import MessageFactory as DMF
 from plone.dexterity.interfaces import IDexterityFTI
@@ -185,6 +186,8 @@ $(document).ready(function() {
     min_radio = 2;
   }
   o.find('#formfield-oform-widgets-use_parent_address input').prop("checked", true);
+  // trigger change to force masterselect to handle address fields
+  o.find('#formfield-oform-widgets-use_parent_address input').trigger("change");
   var position_fields = '#formfield-oform-widgets-position,div[id*=held_position],#formfield-oform-widgets-email,#formfield-oform-widgets-phone,#formfield-oform-widgets-cell_phone,#formfield-oform-widgets-fax,#formfield-oform-widgets-website,#formfield-oform-widgets-im_handle,#formfield-oform-widgets-use_parent_address';
   if (!(o.find('input[name="oform.widgets.person"]').length >= min_radio &&
         o.find('input[name="oform.widgets.organization"]').length >= min_radio)) {
@@ -202,25 +205,26 @@ $(document).ready(function() {
 
     addneworga = o.find('#oform-widgets-organization-autocomplete .addnew');
     addneworga.each(function(){
-        if (!addneworga.data('pbo').original_src) {
-            addneworga.data('pbo').original_src = addneworga.data('pbo').src;
-            addneworga.data('pbo').original_text = addneworga.text();
+        // allows to create an organization object into a different location (if an orga radio is selected)
+        if (!addneworga.data('original_src')) {
+            addneworga.data('original_src', addneworga.attr('href'));
+            addneworga.data('original_text', addneworga.text());
         }
+        // Hides position fields (if a person was previously selected)
         if (orga === undefined || orga.token == '--NOVALUE--') {
           o.find(position_fields).hide();
-          add_organization_url = addneworga.data('pbo').original_src;
-          add_text = addneworga.data('pbo').original_text;
+          add_organization_url = addneworga.data('original_src');
+          add_text = addneworga.data('original_text');
         } else {
           // update add new orga link to add sub orga
           add_organization_url = $("body").data("portal-url") + orga.path + '/++add++organization';
-          add_text = addneworga.data('pbo').original_text + ' dans ' + orga.title;
+          add_text = addneworga.data('original_text') + ' dans ' + orga.title;
         }
-        addneworga.data('pbo').src = add_organization_url;
+        addneworga.attr('href', add_organization_url);
         addneworga.text(add_text);
     })
 
     if (orga !== undefined) {
-
         // update position autocomplete field
         o.find('#formfield-oform-widgets-position > .fieldErrorBox').text('Recherchez ou ajoutez une fonction dans "' + orga.title + '".');
         o.find("#oform-widgets-position-widgets-query")
@@ -229,7 +233,7 @@ $(document).ready(function() {
         // update add new position url
         var add_position_url = $("body").data("portal-url") + orga.path + '/++add++position';
         o.find('#oform-widgets-position-autocomplete .addnew').each(function(){
-            jQuery(this).data('pbo').src = add_position_url;
+            jQuery(this).attr('href', add_position_url);
         })
 
         // show position and held position fields if orga and person are selected
@@ -490,3 +494,16 @@ class AddOrganization(form.AddForm):
     @button.buttonAndHandler(DMF(u'Cancel'), name='cancel')
     def handleCancel(self, action):
         pass
+
+
+class PrefillableAddForm(DefaultAddForm):
+    """Default dexterity add form accepting values from the GET request.
+
+    Used by the add link of the contact widget to prefill the new contact
+    fields (title, firstname, lastname...) from what was typed in the widget.
+    """
+    allow_prefill_from_GET_request = True
+
+
+class PrefillableAddView(DefaultAddView):
+    form = PrefillableAddForm

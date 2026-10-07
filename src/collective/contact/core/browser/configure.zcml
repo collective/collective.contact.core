@@ -100,6 +100,50 @@
       permission="cmf.AddPortalContent"
       />
 
+  <!-- Add views accepting prefill values from the GET request -->
+  <adapter
+      factory=".addcontact.PrefillableAddView"
+      provides="zope.publisher.interfaces.browser.IBrowserPage"
+      for="Products.CMFCore.interfaces.IFolderish
+           zope.publisher.interfaces.browser.IDefaultBrowserLayer
+           plone.dexterity.interfaces.IDexterityFTI"
+      name="organization"
+      />
+
+  <adapter
+      factory=".addcontact.PrefillableAddView"
+      provides="zope.publisher.interfaces.browser.IBrowserPage"
+      for="Products.CMFCore.interfaces.IFolderish
+           zope.publisher.interfaces.browser.IDefaultBrowserLayer
+           plone.dexterity.interfaces.IDexterityFTI"
+      name="person"
+      />
+
+  <adapter
+      factory=".addcontact.PrefillableAddView"
+      provides="zope.publisher.interfaces.browser.IBrowserPage"
+      for="Products.CMFCore.interfaces.IFolderish
+           zope.publisher.interfaces.browser.IDefaultBrowserLayer
+           plone.dexterity.interfaces.IDexterityFTI"
+      name="position"
+      />
+
+  <adapter
+      factory=".addcontact.PrefillableAddView"
+      provides="zope.publisher.interfaces.browser.IBrowserPage"
+      for="Products.CMFCore.interfaces.IFolderish
+           zope.publisher.interfaces.browser.IDefaultBrowserLayer
+           plone.dexterity.interfaces.IDexterityFTI"
+      name="held_position"
+      />
+
+  <class class=".addcontact.PrefillableAddView">
+    <require
+        permission="cmf.AddPortalContent"
+        interface="zope.publisher.interfaces.browser.IBrowserPage"
+        />
+  </class>
+
   <browser:page
       name="view"
       for="..content.directory.IDirectory"
