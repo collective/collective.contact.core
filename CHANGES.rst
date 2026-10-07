@@ -9,6 +9,9 @@ Changelog
   [chris-adam]
 - Fixed image filename rendered as bytes in excel export url.
   [chris-adam]
+- Kept the old overlay behaviour in the contact modals: reload the page after
+  save, and don't close the add-contact modal on a click outside it or on Esc.
+  [chris-adam]
 
 
 1.42.0 (2023-09-13)
