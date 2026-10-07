@@ -77,6 +77,8 @@
            tal:condition="python: not ajax_load and view.can_add">
         <a href="@@add-contact"
            class="addnewcontactfromorganization pat-plone-modal"
+           data-pat-plone-modal='{"actionOptions": {"displayInModal": false},
+                                  "backdropOptions": {"closeOnClick": false, "closeOnEsc": false}}'
            tal:attributes="href string:${context/absolute_url}/@@add-contact">
             <tal:icon tal:replace="structure python:icons.tag('person-add')" />
             <tal:span i18n:translate="">

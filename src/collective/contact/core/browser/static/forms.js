@@ -60,7 +60,7 @@ contactswidget.manage_directory = function(){
 	$('#formfield-form-widgets-organization_levels thead').hide();
 	$('.portaltype-directory .datagridwidget-table-view thead').hide();
 	// update tokens if necessary
-	$('input[id$="-widgets-name"]').blur(contactswidget.update_token);
+	$('input[id$="-widgets-name"]').on('blur', contactswidget.update_token);
 };
 
 /* Hide use_parent_address field if parent address is empty and if
