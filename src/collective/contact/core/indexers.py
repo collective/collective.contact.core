@@ -10,10 +10,10 @@ from collective.contact.core.content.position import IPosition
 from collective.contact.core.interfaces import IContactable
 from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
-from plone.app.dexterity.textindexer.converters import DefaultDexterityTextIndexFieldConverter
-from plone.app.dexterity.textindexer.interfaces import IDynamicTextIndexExtender
 from datetime import date
 from plone import api
+from plone.app.dexterity.textindexer.converters import DefaultDexterityTextIndexFieldConverter
+from plone.app.dexterity.textindexer.interfaces import IDynamicTextIndexExtender
 from plone.indexer import indexer
 from Products.CMFPlone.utils import safe_unicode
 from zope.component import adapts

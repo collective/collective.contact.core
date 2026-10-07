@@ -9,10 +9,13 @@ from plone.namedfile.interfaces import INamedImageField
 from Products.CMFPlone.utils import safe_unicode
 from zope.component import adapts
 from zope.component import getMultiAdapter
+
+
 try:
     from zope.interface.interfaces import ComponentLookupError
 except ImportError:
     from zope.component.interfaces import ComponentLookupError
+
 from zope.interface import implementer
 from zope.interface import Interface
 
