@@ -162,6 +162,7 @@ return '<img src="' + $("body").data("portal-url") + '/@@iconresolver/contenttyp
  +'" /> ' + row[1] }"""
                 }
 
+
 @implementer(IContentProvider)
 class MasterSelectAddContactProvider(BrowserView):
 
