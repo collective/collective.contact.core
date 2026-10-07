@@ -23,3 +23,7 @@ output.xml
 *.swp
 .idea
 pyvenv.cfg
+.plone-version
+.plone*
+checkversion*.html
+.python-version
