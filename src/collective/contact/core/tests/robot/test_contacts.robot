@@ -5,131 +5,125 @@ Resource          plone/app/robotframework/keywords.robot    #Test Setup    Open
 Resource          plone/app/robotframework/saucelabs.robot
 Resource          keywords.robot
 
+*** Variables ***
+${DIVISIONALPHA}    ${PLONE_URL}/mydirectory/armeedeterre/corpsa/divisionalpha
+${SERGENT_LH}    ${PLONE_URL}/mydirectory/armeedeterre/corpsa/divisionalpha/regimenth/brigadelh/sergent_lh
+
 *** Test cases ***
-# Directory is available
-#     [Tags]    Go
-#     Log in as site owner
-#     Click link    css=#portal-globalnav li.mydirectory a
-#     Wait until element is visible  xpath=//h1/span[.='Military directory']  5
+Directory is available
+    Log in as site owner and wait
+    Go to directory
+    Page should contain    Military directory
 
-# Create a new organization
-#     [Tags]    Go
-#     Log in as site owner and wait
-#     Go to directory
-#     Add new    organization
-#     Input Text    css=#form-widgets-IBasic-title    Squadron five
-#     Debug
-#     Element should be visible    css=#form-buttons-save
-#     Click Button    Save
-#     Page should contain    Squadron five
-#     Go to directory
-#     Element should contain    organizations    Squadron five
+Create a new organization
+    Log in as site owner and wait
+    Go to directory
+    Add new    organization    ${PLONE_URL}/mydirectory
+    Input Text    css=#form-widgets-IBasic-title    Squadron five
+    Click Button    css=#form-buttons-save
+    Page should contain    Squadron five
 
-# Can create new contact from organization
-#     Log in as site owner and wait
-#     Go to    ${PLONE_URL}/mydirectory/armeedeterre/corpsa/divisionalpha
-#     Page should contain link    css=.addnewcontactfromorganization
-#     Click link    css=.addnewcontactfromorganization
-#     Overlay is opened
-#     Wait For Condition    return $('.overlay h1').text() === "Create Contact"
-#     Element should contain    oform-widgets-organization-input-fields    Armée de terre / Corps A / Division Alpha
-#     Sleep  1
-#     Input text    oform-widgets-person-widgets-query    Ramb
-#     Click element    oform-widgets-person-widgets-query
-#     Wait Until Page Contains Element    css=.ac_results
-#     Click element    css=.ac_results li:nth-child(1)
-#     Sleep  1
-#     Click button    Add
-#
-# Can create new person from organization
-#     Log in as site owner and wait
-#     Go to    ${PLONE_URL}/mydirectory/armeedeterre/corpsa/divisionalpha
-#     Click link    css=.addnewcontactfromorganization
-#     Wait For Condition    return $('.overlay h1').text() === "Create Contact"
-#     Element should not be visible    css=#formfield-oform-widgets-person .addnew-block
-#     Sleep  1
-#     Input text    oform-widgets-person-widgets-query    Chuck Norris
-#     Element should become visible    css=#formfield-oform-widgets-person .addnew-block
-#     Click link    Create Person
-#     Wait Until Page Contains    Add Person
-#     ${original_speed} =    Get Selenium speed
-#     Set Selenium speed    1
-#     Textfield Value Should Be    form-widgets-lastname    Norris
-#     Set Selenium speed    ${original_speed}
-#     Textfield Value Should Be    form-widgets-firstname    Chuck
-#     Click element    form-widgets-gender-0
-#     Click button    Save
-#     Wait Until Page Contains    Chuck Norris
-#     Sleep  1
-#     Click button    Add
-#     Wait Until Page Contains Element    other-contacts
-#     Element Should Contain    other-contacts    Chuck Norris
-#
-# Can create new contact from position
-#     Log in as site owner and wait
-#     Go to    ${PLONE_URL}/mydirectory/armeedeterre/corpsa/divisionalpha/regimenth/brigadelh/sergent_lh
-#     Page should contain link    css=.addnewcontactfromposition
-#     Click link    css=.addnewcontactfromposition
-#     Overlay is opened
-#     Wait For Condition    return $('.overlay h1').text() === "Create Contact"
-#     Element should not be visible    css=#oform-widgets-position-input-fields
-#     Element should contain    oform-widgets-organization-input-fields    Armée de terre / Corps A / Division Alpha / Régiment H / Brigade LH
-#     Sleep  1
-#     Input text    oform-widgets-person-widgets-query    Ramb
-#     Click element    oform-widgets-person-widgets-query
-#     Wait Until Page Contains Element    css=.ac_results
-#     Click element    css=.ac_results li:nth-child(1)
-#     Sleep  1
-#     Element should become visible    css=#oform-widgets-position-input-fields
-#     Element should contain    oform-widgets-position-input-fields    Sergent de la brigade LH (Armée de terre / Corps A / Division Alpha / Régiment H / Brigade LH)
-#     Click button    Add
-#
-# Show parent address if it exists in creation
-#     Log in as site owner and wait
-#     Go to    ${PLONE_URL}/mydirectory/armeedeterre/corpsa
-#     Add new    organization
-#     Click link    Address
-#     Checkbox Should Be Selected    form-widgets-IContactDetails-use_parent_address-0
-#     Element should contain    css=.address    rue Philibert Lucot
-#     Element should contain    css=.address    Orléans
-#     Element should contain    css=.address    France
-#     Element should not be visible    formfield-form-widgets-IContactDetails-number
-#     Element should not be visible    formfield-form-widgets-IContactDetails-street
-#     Element should not be visible    formfield-form-widgets-IContactDetails-city
-#     Element should not be visible    formfield-form-widgets-IContactDetails-country
-#
-# Show parent address if it exists in edition
-#     Log in as site owner and wait
-#     Go to    ${PLONE_URL}/mydirectory/armeedeterre/corpsa/divisionalpha/capitaine_alpha
-#     Click Edit In Edit Bar
-#     Click link    Address
-#     ${original_speed} =    Get Selenium speed
-#     Set Selenium speed    1
-#     Checkbox Should Be Selected    form-widgets-IContactDetails-use_parent_address-0
-#     Element should contain    css=.address    rue Philibert Lucot
-#     Set Selenium speed    ${original_speed}
-#     Element should contain    css=.address    Orléans
-#     Element should contain    css=.address    France
-#     Element should not be visible    formfield-form-widgets-IContactDetails-number
-#     Element should not be visible    formfield-form-widgets-IContactDetails-street
-#     Element should not be visible    formfield-form-widgets-IContactDetails-city
-#     Element should not be visible    formfield-form-widgets-IContactDetails-country
-#
-# Show use parent address checkbox if no parent address when creating a position
-#     Log in as site owner and wait
-#     Go to    ${PLONE_URL}/mydirectory/armeedeterre/corpsb
-#     Add new    position
-#     Click link    Address
-#     Page should contain element    formfield-form-widgets-IContactDetails-number
-#     Page should contain element    formfield-form-widgets-IContactDetails-street
-#     Page should contain element    formfield-form-widgets-IContactDetails-city
-#     Page should contain element    formfield-form-widgets-IContactDetails-country
-#     Element should be visible    form-widgets-IContactDetails-use_parent_address-0
-#
+Can create new contact from organization
+    Log in as site owner and wait
+    Go to    ${DIVISIONALPHA}
+    Page should contain link    css=.addnewcontactfromorganization
+    Click link    css=.addnewcontactfromorganization
+    Modal is opened
+    Wait Until Page Contains Element    css=.modal #oform
+    Element should contain    oform-widgets-organization-input-fields    Armée de terre / Corps A / Division Alpha
+    Select in livesearch    oform-widgets-person    Ramb
+    Element should contain    oform-widgets-person-input-fields    Rambo
+    Click button    css=.modal-footer [name="oform.buttons.save"]
+    Modal should close
+
+Can create new person from organization
+    Log in as site owner and wait
+    Go to    ${DIVISIONALPHA}
+    Click link    css=.addnewcontactfromorganization
+    Modal is opened
+    Wait Until Page Contains Element    css=#oform-widgets-person-widgets-query
+    Element should not be visible    css=#oform-widgets-person-autocomplete .addnew-block
+    Input text    oform-widgets-person-widgets-query    Chuck Norris
+    Wait Until Element Is Visible    css=#oform-widgets-person-autocomplete .addnew-block
+    Click link    css=#oform-widgets-person-autocomplete .addnew-block a
+    Wait Until Page Contains Element    css=#form-widgets-lastname
+    Textfield Value Should Be    form-widgets-lastname    Norris
+    Textfield Value Should Be    form-widgets-firstname    Chuck
+    Click element    form-widgets-gender-0
+    Click button    css=.modal-footer [name="form.buttons.save"]
+    Wait Until Element Contains    oform-widgets-person-input-fields    Chuck Norris
+    Click button    css=.modal-footer [name="oform.buttons.save"]
+    Modal should close
+    Go to    ${DIVISIONALPHA}
+    Wait Until Page Contains Element    other-contacts
+    Element Should Contain    other-contacts    Chuck Norris
+
+Can create new organization from the contact form
+    Log in as site owner and wait
+    Go to    ${PLONE_URL}/mydirectory/@@add-contact
+    Wait Until Page Contains Element    css=#oform-widgets-organization-widgets-query
+    Input text    oform-widgets-organization-widgets-query    Squadron six
+    Wait Until Element Is Visible    css=#oform-widgets-organization-autocomplete .addnew-block
+    Click link    css=#oform-widgets-organization-autocomplete .addnew-block a
+    Modal is opened
+    Wait Until Page Contains Element    css=#form-widgets-IBasic-title
+    Textfield Value Should Be    form-widgets-IBasic-title    Squadron six
+    Click button    css=.modal-footer [name="form.buttons.save"]
+    Modal should close
+    Wait Until Element Contains    oform-widgets-organization-input-fields    Squadron six
+
+Can create new contact from position
+    Log in as site owner and wait
+    Go to    ${SERGENT_LH}
+    Page should contain link    css=.addnewcontactfromposition
+    Click link    css=.addnewcontactfromposition
+    Modal is opened
+    Wait Until Page Contains Element    css=#oform-widgets-person-widgets-query
+    Element should not be visible    css=#oform-widgets-position-input-fields
+    Element should contain    oform-widgets-organization-input-fields    Armée de terre / Corps A / Division Alpha / Régiment H / Brigade LH
+    Select in livesearch    oform-widgets-person    Ramb
+    Wait Until Element Is Visible    css=#oform-widgets-position-input-fields
+    Element should contain    oform-widgets-position-input-fields    Sergent de la brigade LH (Armée de terre / Corps A / Division Alpha / Régiment H / Brigade LH)
+
+Show parent address if it exists in creation
+    Log in as site owner and wait
+    Add new    organization    ${PLONE_URL}/mydirectory/armeedeterre/corpsa
+    Click link    Address
+    Checkbox Should Be Selected    form-widgets-IContactDetails-use_parent_address-0
+    Element should contain    css=.address    rue Philibert Lucot
+    Element should contain    css=.address    Orléans
+    Element should contain    css=.address    France
+    Element should not be visible    formfield-form-widgets-IContactDetails-number
+    Element should not be visible    formfield-form-widgets-IContactDetails-street
+    Element should not be visible    formfield-form-widgets-IContactDetails-city
+    Element should not be visible    formfield-form-widgets-IContactDetails-country
+
+Show parent address if it exists in edition
+    Log in as site owner and wait
+    Go to edit    ${PLONE_URL}/mydirectory/armeedeterre/corpsa/divisionalpha/capitaine_alpha
+    Click link    Address
+    Checkbox Should Be Selected    form-widgets-IContactDetails-use_parent_address-0
+    Element should contain    css=.address    rue Philibert Lucot
+    Element should contain    css=.address    Orléans
+    Element should contain    css=.address    France
+    Element should not be visible    formfield-form-widgets-IContactDetails-number
+    Element should not be visible    formfield-form-widgets-IContactDetails-street
+    Element should not be visible    formfield-form-widgets-IContactDetails-city
+    Element should not be visible    formfield-form-widgets-IContactDetails-country
+
+Show use parent address checkbox if no parent address when creating a position
+    Log in as site owner and wait
+    Add new    position    ${PLONE_URL}/mydirectory/armeedeterre/corpsb
+    Click link    Address
+    Page should contain element    formfield-form-widgets-IContactDetails-number
+    Page should contain element    formfield-form-widgets-IContactDetails-street
+    Page should contain element    formfield-form-widgets-IContactDetails-city
+    Page should contain element    formfield-form-widgets-IContactDetails-country
+    Element should be visible    form-widgets-IContactDetails-use_parent_address-0
+
 Don't show use parent address checkbox in edition if no parent address and use parent address is False
     Log in as site owner and wait
-    Go to    ${PLONE_URL}/mydirectory/armeedeterre/corpsa
-    Click Edit In Edit Bar
+    Go to edit    ${PLONE_URL}/mydirectory/armeedeterre/corpsa
     Click link    Address
     Page should contain element    formfield-form-widgets-IContactDetails-number
     Page should contain element    formfield-form-widgets-IContactDetails-street
@@ -139,8 +133,7 @@ Don't show use parent address checkbox in edition if no parent address and use p
 
 Show use parent address checkbox in edition if no parent address and use parent address is True
     Log in as site owner and wait
-    Go to    ${PLONE_URL}/mydirectory/armeedeterre/corpsb
-    Click Edit In Edit Bar
+    Go to edit    ${PLONE_URL}/mydirectory/armeedeterre/corpsb
     Click link    Address
     Page should contain element    formfield-form-widgets-IContactDetails-number
     Page should contain element    formfield-form-widgets-IContactDetails-street
@@ -156,3 +149,11 @@ Go to directory
 Log in as site owner and wait
     Log in as site owner
     Wait until page contains    admin
+
+Select in livesearch
+    [Documentation]    Type in the search field of a contact widget and select
+    ...                the first result.
+    [Arguments]    ${widget_id}    ${text}
+    Input text    ${widget_id}-widgets-query    ${text}
+    Wait Until Element Is Visible    css=#${widget_id}-autocomplete .livesearch-results li.search-result
+    Click element    css=#${widget_id}-autocomplete .livesearch-results li.search-result
