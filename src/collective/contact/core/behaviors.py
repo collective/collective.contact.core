@@ -6,7 +6,6 @@ from collective.contact.widget.schema import ContactList
 from collective.contact.widget.source import ContactSourceBinder
 from plone.app.dexterity.browser.types import TypeSchemaContext
 from plone.app.textfield import RichText
-from plone.app.z3cform.widgets.datetime import DatetimeFieldWidget
 from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.formwidget.masterselect import MasterSelectBoolField
@@ -318,7 +317,6 @@ DefaultParentAddress = ComputedWidgetAttribute(
 
 class IBirthday(model.Schema):
 
-    form.widget(birthday=DatetimeFieldWidget)
     birthday = schema.Date(
         title=_("Birthday"),
         required=False,

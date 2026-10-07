@@ -15,6 +15,9 @@ Changelog
 - Used `plone.base.interfaces.IBundleRegistry` for the bundle and `contenttype/<type>`
   icon names in the content types `icon_expr`, as Plone core types do.
   [chris-adam]
+- Fixed the person birthday widget: it showed a time and parsed the date in the
+  site locale format. It now uses the default Plone date widget.
+  [chris-adam]
 
 
 1.43.3 (2026-05-29)
