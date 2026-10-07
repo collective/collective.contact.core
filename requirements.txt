@@ -1,4 +1,0 @@
-pip==24.2
-setuptools==74.0.0
-zc.buildout==3.1.0
-wheel==0.44.0
