@@ -8,20 +8,19 @@ a French Plone site
     Click Button  form.actions.save
 
 Add new
-    [Arguments]   ${name}
-    Open Add New Menu
-    Click link  css=#plone-contentmenu-factories a#${name}
+    [Documentation]    Open the add form of a content type in a container (the
+    ...                add menu of the toolbar has no stable locator).
+    [Arguments]   ${name}    ${container}=${PLONE_URL}
+    Go to  ${container}/++add++${name}
     Wait Until Page Contains Element  css=#form
 
-Close Overlay
-    Click Element  css=div.overlay div.close
+Go to edit
+    [Arguments]   ${url}
+    Go to  ${url}/edit
+    Wait Until Page Contains Element  css=#form
 
-Overlay should close
-    Element should not remain visible  id=exposeMask
-    Wait until keyword succeeds  60  1  Page should not contain element  css=div.overlay
+Modal is opened
+    Wait Until Page Contains Element  css=.modal
 
-Person overlay should close
-    Wait until page contains element  oform
-
-Overlay is opened
-    Wait Until Page Contains Element  css=.overlay
+Modal should close
+    Wait Until Page Does Not Contain Element  css=.modal

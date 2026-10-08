@@ -45,9 +45,8 @@ Add test type
 
 Autocomplete results should contain
     [Arguments]    ${value}
-    Wait Until Element Is Visible  xpath://div[@class="ac_results"]
-    Element Should Be Visible  xpath://div[@class="ac_results"]/ul/li/strong[text()='${value}']
+    Wait Until Element Is Visible  xpath://ul[contains(@class, "livesearch-results")]//li[contains(@class, "search-result")][contains(., "${value}")]
 
 Autocomplete results should not contain
     [Arguments]    ${value}
-    Page Should Not Contain Element  xpath://div[@class="ac_results"]/ul/li/strong[text()='${value}']
+    Page Should Not Contain Element  xpath://ul[contains(@class, "livesearch-results")]//li[contains(@class, "search-result")][contains(., "${value}")]

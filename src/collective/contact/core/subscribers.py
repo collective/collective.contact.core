@@ -1,5 +1,4 @@
 # coding=utf-8
-from Acquisition import aq_get
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.browser.utils import audit_access
 from collective.contact.core.content.directory import IDirectory
@@ -11,25 +10,13 @@ from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
 from plone import api
 from plone.app.iterate.interfaces import IWorkingCopy
-from plone.app.linkintegrity.handlers import referencedObjectRemoved as baseReferencedObjectRemoved
-from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
 from plone.registry.interfaces import IRecordModifiedEvent
 from z3c.form.interfaces import NO_VALUE
 from zc.relation.interfaces import ICatalog
-from zope import component
+from zope.component import getUtility
 from zope.container.contained import ContainerModifiedEvent
-from zope.interface import providedBy
 from zope.intid.interfaces import IIntIds
 from zope.schema import getFields
-
-
-try:
-    from plone.app.referenceablebehavior.referenceable import IReferenceable
-except ImportError:
-    from zope.interface import Interface
-
-    class IReferenceable(Interface):
-        pass
 
 
 # update indexes of related content when a content is modified
@@ -79,50 +66,33 @@ def update_related_with_organization(obj, event=None):
             held_position.reindexObject(idxs=indexes_to_update)
             update_related_with_held_position(held_position)
 
-    for child in obj.values():
+    for child in list(obj.values()):
         if IOrganization.providedBy(child):
             child.reindexObject(idxs=indexes_to_update)
             update_related_with_organization(child)
 
 
-def referenceRemoved(obj, event, toInterface=IContactContent):
-    """Stores a link integrity breach if the object is referenced by another item."""
-    # inspired from z3c/relationfield/event.py:breakRelations
-    # and plone/app/linkintegrity/handlers.py:referenceRemoved
-    # if the object the event was fired on doesn't have a `REQUEST` attribute
-    # we can safely assume no direct user action was involved and therefore
-    # never raise a link integrity exception...
-    request = aq_get(obj, 'REQUEST', None)
-    if not request:
-        return
-    storage = ILinkIntegrityInfo(request)
-
-    catalog = component.queryUtility(ICatalog)
-    intids = component.queryUtility(IIntIds)
-    if catalog is None or intids is None:
-        return
-
-    # find all relations that point to us
-    obj_id = intids.queryId(obj)
-    if obj_id is None:
-        return
-
-    rels = list(catalog.findRelations({'to_id': obj_id}))
-    for rel in rels:
-        if toInterface.providedBy(rel.to_object):
-            storage.addBreach(rel.from_object, rel.to_object)
-
-
-def referencedObjectRemoved(obj, event):
-    """Calls linkintegrity check on a contact content."""
-    allowed_interfaces = {IDirectory, IOrganization, IPerson, IHeldPosition, IPosition}
-    if len(allowed_interfaces.intersection([i for i in providedBy(obj)])) == 0:
+def referenceObjectRemoved(obj, event):
+    """Unindex relations on a deleted contact content."""
+    allowed_interfaces = (IDirectory, IOrganization, IPerson, IHeldPosition, IPosition)
+    if not any(i.providedBy(obj) for i in allowed_interfaces):
         return
     # Avoid an error when we try to remove a working copy (plone.app.iterate)
     if IWorkingCopy.providedBy(obj):
         return
-    if not IReferenceable.providedBy(obj):
-        baseReferencedObjectRemoved(obj, event)
+
+    intids = getUtility(IIntIds)
+    try:
+        int_id = intids.getId(obj)
+    except KeyError:
+        return
+    catalog = getUtility(ICatalog)
+    outcoming_rels = catalog.findRelations({"from_id": int_id})
+    for rel in list(outcoming_rels):
+        catalog.unindex(rel)
+    incoming_rels = catalog.findRelations({"to_id": int_id})
+    for rel in list(incoming_rels):
+        catalog.unindex(rel)
 
 
 def clear_fields_use_parent_address(obj, event):

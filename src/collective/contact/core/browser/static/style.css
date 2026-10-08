@@ -1,0 +1,56 @@
+.no-decoration {
+    text-decoration: none;
+}
+
+.addnew{
+    font-weight: 500;
+}
+
+#download_vcard {
+    margin-bottom: 1em;
+}
+
+.portaltype-person #person .actions {
+    float: right;
+}
+
+#held_positions .held_position {
+    border: 1px solid black;
+    padding: 1em;
+    margin-bottom: 0.5em;
+}
+.portaltype-person #held_positions .held_position {
+    margin: 1em;
+    float: left;
+    width: 33%;
+    min-height: 30em;
+}
+
+.portaltype-person #held_positions .held_position .actions {
+    float: right;
+}
+
+/* hide download vcard link for positions on person page */
+.portaltype-person #held_positions .held_position #download_vcard {
+    display: none;
+}
+
+#held_positions .held_position .organization {
+    border: 1px solid black;
+    padding: 1em;
+    background-color: #DDD;
+}
+
+#held_positions .held_position .organization #logo {
+    float: left;
+    padding-right: 1em;
+}
+
+h3 img, h4 img {
+    vertical-align: baseline;
+}
+
+#content a:link.link-tooltip {
+    text-decoration: none;
+    border-bottom: 1px dotted;
+}

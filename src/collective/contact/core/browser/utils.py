@@ -6,11 +6,11 @@ from imio.fpaudit import utils as _fpaudit_utils  # import module so it can be p
 from plone import api
 from plone.app.dexterity.behaviors.metadata import IBasic
 from plone.autoform.interfaces import IFormFieldProvider
+from plone.base.utils import base_hasattr
 from plone.behavior.interfaces import IBehavior
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.schemaeditor.utils import non_fieldset_fields
 from plone.supermodel.interfaces import ISchemaPolicy
-from Products.CMFPlone.utils import base_hasattr
 from zope import schema
 from zope.component import getUtility
 
@@ -110,7 +110,7 @@ def get_ttw_fields(obj):
     original_schema = schema_policy.bases(None, None)[0]
     original_fields = schema.getFieldsInOrder(original_schema)
     new_fields = [field[0] for field in all_fields
-                  if field[0] not in dict(original_fields).keys()]
+                  if field[0] not in list(dict(original_fields).keys())]
 
     for behavior_id in fti.behaviors:
         behavior = getUtility(IBehavior, behavior_id).interface

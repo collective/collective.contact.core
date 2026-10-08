@@ -1,0 +1,27 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="collective.contact.core">
+
+  <utility
+      factory=".directory.DirectorySchemaPolicy"
+      name="schema_policy_directory" />
+
+  <utility
+      factory=".held_position.HeldPositionSchemaPolicy"
+      name="schema_policy_held_position" />
+
+  <utility
+      factory=".organization.OrganizationSchemaPolicy"
+      name="schema_policy_organization" />
+
+  <utility
+      factory=".person.PersonSchemaPolicy"
+      name="schema_policy_person" />
+
+  <utility
+      factory=".position.PositionSchemaPolicy"
+      name="schema_policy_position" />
+
+</configure>

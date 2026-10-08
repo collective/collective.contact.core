@@ -5,7 +5,8 @@
       lang="en"
       i18n:domain="collective.contact.core"
       class="contact-details"
-      tal:define="portal_url context/@@plone_portal_state/portal_url;">
+      tal:define="icons python:context.restrictedTraverse('@@iconresolver');
+                  portal_url context/@@plone_portal_state/portal_url;">
 
     <p id="email" class="field" tal:condition="view/contact_details/email">
         <label><tal:block i18n:translate="">Email</tal:block>:</label>
@@ -57,8 +58,9 @@
 
     <p id="download_vcard" tal:condition="view/contact_details">
         <a href="@@contact.vcf" tal:attributes="href string: ${context/absolute_url}/@@contact.vcf">
-            <img tal:attributes="src string:${portal_url}/vcard_icon.png" />
-            <tal:vcard i18n:translate=""> Download VCard</tal:vcard>
+            <tal:icon
+             tal:replace="structure python:icons.tag('person-vcard')" />
+            <tal:vcard i18n:translate="">Download VCard</tal:vcard>
         </a>
     </p>
 

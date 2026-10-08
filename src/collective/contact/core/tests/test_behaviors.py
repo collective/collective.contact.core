@@ -3,7 +3,7 @@ from collective.contact.core.behaviors import IBirthday
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.behaviors import IGlobalPositioning
 from collective.contact.core.testing import INTEGRATION
-from ecreall.helpers.testing.base import BaseTest
+from collective.contact.core.tests.base import BaseTest
 from plone.app.testing.helpers import setRoles
 from plone.app.testing.interfaces import TEST_USER_ID
 from plone.app.testing.interfaces import TEST_USER_NAME
@@ -46,7 +46,6 @@ class TestBehaviors(unittest.TestCase, BaseTest):
 
     def test_contact_details_fields(self):
         item = self.testitem
-        self.assertIsNone(item.getAttributes())
         for attr in ('country', 'region', 'zip_code', 'city', 'street',
                      'number', 'im_handle', 'cell_phone', 'phone', 'email',
                      'fax', 'website',

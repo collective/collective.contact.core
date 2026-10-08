@@ -1,11 +1,13 @@
 Changelog
 =========
 
-1.43.4 (unreleased)
+2.0.0 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Drop `collective.contact.widget` profile dependency (was removed)
+  [laulaz]
+- Migrate to Plone 6 / drop Plone 4 compatibility
+  [laulaz, chris-adam]
 
 1.43.3 (2026-05-29)
 -------------------

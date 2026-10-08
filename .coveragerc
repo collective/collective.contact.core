@@ -1,7 +1,12 @@
-[report]
-include =
-    src/collective/contact/core/*
+[run]
+source = src/collective/contact/core
 omit =
     */upgrade*
-    */test*
+    */tests/*
+    */__init__.py
+
+[report]
+omit =
+    */upgrade*
+    */tests/*
     */__init__.py

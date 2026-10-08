@@ -15,7 +15,7 @@
 
     <div tal:replace="structure context/@@ttwfields" />
 
-    <metal:additional-fields use-macro="context/contact_core_macros/macros/additional-fields" />
+    <metal:additional-fields use-macro="context/@@contact_core_macros/macros/additional-fields" />
 
     <div tal:replace="structure context/@@heldpositions" />
 

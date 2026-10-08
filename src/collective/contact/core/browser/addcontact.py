@@ -2,17 +2,17 @@ from AccessControl import getSecurityManager
 from collective.contact.core import _
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.content.person import IPerson
-from collective.contact.widget.interfaces import IContactWidgetSettings
 from collective.contact.widget.schema import ContactChoice
 from collective.contact.widget.source import ContactSourceBinder
-from five import grok
 from plone import api
 from plone.dexterity.browser.add import DefaultAddForm
+from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.events import AddCancelledEvent
 from plone.dexterity.i18n import MessageFactory as DMF
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.dexterity.utils import addContentToContainer
 from plone.supermodel import model
+from plone.z3cform.interfaces import IDeferSecurityCheck
 from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
 from z3c.form import field
@@ -25,8 +25,10 @@ from zope.component import queryAdapter
 from zope.contentprovider.interfaces import IContentProvider
 from zope.event import notify
 from zope.i18n import Message
-from zope.interface import implements
+from zope.interface import alsoProvides
+from zope.interface import implementer
 from zope.interface import Interface
+from zope.interface import noLongerProvides
 from zope.publisher.browser import BrowserView
 
 import copy
@@ -50,9 +52,8 @@ class ICustomSettings(Interface):
         """
 
 
-class ContactWidgetSettings(grok.GlobalUtility):
-    grok.provides(IContactWidgetSettings)
-    grok.implements(ICustomSettings)
+@implementer(ICustomSettings)
+class ContactWidgetSettings(object):
 
     def label_for_portal_type(self, portal_type):
         if isinstance(portal_type, Message):
@@ -157,13 +158,13 @@ class ContactWidgetSettings(grok.GlobalUtility):
         return {'actions': actions,
                 'close_on_click': close_on_click,
                 'formatItem': """function(row, idx, count, value) {
-return '<img src="' + portal_url + '/' + row[2] + '_icon.png'
+return '<img src="' + $("body").data("portal-url") + '/@@iconresolver/contenttype/' + row[2]
  +'" /> ' + row[1] }"""
                 }
 
 
+@implementer(IContentProvider)
 class MasterSelectAddContactProvider(BrowserView):
-    implements(IContentProvider)
 
     def __init__(self, context, request, view):
         super(MasterSelectAddContactProvider, self).__init__(context, request)
@@ -186,6 +187,8 @@ $(document).ready(function() {
     min_radio = 2;
   }
   o.find('#formfield-oform-widgets-use_parent_address input').prop("checked", true);
+  // trigger change to force masterselect to handle address fields
+  o.find('#formfield-oform-widgets-use_parent_address input').trigger("change");
   var position_fields = '#formfield-oform-widgets-position,div[id*=held_position],#formfield-oform-widgets-email,#formfield-oform-widgets-phone,#formfield-oform-widgets-cell_phone,#formfield-oform-widgets-fax,#formfield-oform-widgets-website,#formfield-oform-widgets-im_handle,#formfield-oform-widgets-use_parent_address';
   if (!(o.find('input[name="oform.widgets.person"]').length >= min_radio &&
         o.find('input[name="oform.widgets.organization"]').length >= min_radio)) {
@@ -203,34 +206,35 @@ $(document).ready(function() {
 
     addneworga = o.find('#oform-widgets-organization-autocomplete .addnew');
     addneworga.each(function(){
-        if (!addneworga.data('pbo').original_src) {
-            addneworga.data('pbo').original_src = addneworga.data('pbo').src;
-            addneworga.data('pbo').original_text = addneworga.text();
+        // allows to create an organization object into a different location (if an orga radio is selected)
+        if (!addneworga.data('original_src')) {
+            addneworga.data('original_src', addneworga.attr('href'));
+            addneworga.data('original_text', addneworga.text());
         }
+        // Hides position fields (if a person was previously selected)
         if (orga === undefined || orga.token == '--NOVALUE--') {
           o.find(position_fields).hide();
-          add_organization_url = addneworga.data('pbo').original_src;
-          add_text = addneworga.data('pbo').original_text;
+          add_organization_url = addneworga.data('original_src');
+          add_text = addneworga.data('original_text');
         } else {
           // update add new orga link to add sub orga
-          add_organization_url = portal_url + orga.path + '/++add++organization';
-          add_text = addneworga.data('pbo').original_text + ' dans ' + orga.title;
+          add_organization_url = $("body").data("portal-url") + orga.path + '/++add++organization';
+          add_text = addneworga.data('original_text') + ' dans ' + orga.title;
         }
-        addneworga.data('pbo').src = add_organization_url;
+        addneworga.attr('href', add_organization_url);
         addneworga.text(add_text);
     })
 
     if (orga !== undefined) {
-
         // update position autocomplete field
         o.find('#formfield-oform-widgets-position > .fieldErrorBox').text('Recherchez ou ajoutez une fonction dans "' + orga.title + '".');
         o.find("#oform-widgets-position-widgets-query")
             .setOptions({extraParams: {path: orga.token}}).flushCache();
 
         // update add new position url
-        var add_position_url = portal_url + orga.path + '/++add++position';
+        var add_position_url = $("body").data("portal-url") + orga.path + '/++add++position';
         o.find('#oform-widgets-position-autocomplete .addnew').each(function(){
-            jQuery(this).data('pbo').src = add_position_url;
+            jQuery(this).attr('href', add_position_url);
         })
 
         // show position and held position fields if orga and person are selected
@@ -261,6 +265,7 @@ $(document).ready(function() {
 });
 </script>
 """ % str(bool(getattr(self.__parent__.form, 'schema', None) == IAddHeldPosition)).lower()
+# TODO
 
 
 class IAddHeldPosition(model.Schema):
@@ -313,6 +318,7 @@ class IAddContact(model.Schema):
             source=ContactSourceBinder(portal_type="position"))
 
 
+@implementer(IFieldsAndContentProvidersForm)
 class AddContact(DefaultAddForm, form.AddForm):
     """
     The following is possible with this AddContact form:
@@ -324,7 +330,6 @@ class AddContact(DefaultAddForm, form.AddForm):
       It's for this case we want no required errors in the form if the
       IHeldPosition required fields are not filled.
     """
-    implements(IFieldsAndContentProvidersForm)
     contentProviders = ContentProviders(['organization-ms'])
 #    contentProviders['organization-ms'] = MasterSelectAddContactProvider
     contentProviders['organization-ms'].position = -1
@@ -355,7 +360,7 @@ class AddContact(DefaultAddForm, form.AddForm):
         # del the widget of the one from IHeldPosition but keep its field
         del self.widgets[self._schema_name + '.position']
         if self.schema != IAddHeldPosition:
-            for widget in self.widgets.values():
+            for widget in list(self.widgets.values()):
                 if getattr(widget, 'required', False):
                     # copy field to not modify original one
                     widget.field = copy.copy(widget.field)
@@ -364,7 +369,9 @@ class AddContact(DefaultAddForm, form.AddForm):
             self.widgets['parent_address'].mode = DISPLAY_MODE
 
     def update(self):
+        alsoProvides(self.request, IDeferSecurityCheck)
         super(AddContact, self).update()
+        noLongerProvides(self.request, IDeferSecurityCheck)
 
     @button.buttonAndHandler(_('Add'), name='save')
     def handleAdd(self, action):
@@ -454,8 +461,8 @@ class AddContactFromPosition(AddContact):
         super(AddContactFromPosition, self).updateWidgets()
 
 
+@implementer(IFieldsAndContentProvidersForm)
 class AddOrganization(form.AddForm):
-    implements(IFieldsAndContentProvidersForm)
     contentProviders = ContentProviders(['organization-ms'])
     contentProviders['organization-ms'].position = 2
     label = _(u"Create ${name}", mapping={'name': _(u"organization/position")})
@@ -488,3 +495,16 @@ class AddOrganization(form.AddForm):
     @button.buttonAndHandler(DMF(u'Cancel'), name='cancel')
     def handleCancel(self, action):
         pass
+
+
+class PrefillableAddForm(DefaultAddForm):
+    """Default dexterity add form accepting values from the GET request.
+
+    Used by the add link of the contact widget to prefill the new contact
+    fields (title, firstname, lastname...) from what was typed in the widget.
+    """
+    allow_prefill_from_GET_request = True
+
+
+class PrefillableAddView(DefaultAddView):
+    form = PrefillableAddForm
