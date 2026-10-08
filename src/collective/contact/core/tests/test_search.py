@@ -6,7 +6,7 @@ from collective.contact.core.indexers import person_sortable_title
 from collective.contact.core.indexers import start_date
 from collective.contact.core.indexers import TypeSearchableExtender
 from collective.contact.core.testing import INTEGRATION
-from ecreall.helpers.testing.base import BaseTest
+from collective.contact.core.tests.base import BaseTest
 from plone import api
 
 import datetime

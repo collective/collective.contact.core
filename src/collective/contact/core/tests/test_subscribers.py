@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 
 from collective.contact.core.testing import INTEGRATION
-from ecreall.helpers.testing.search import BaseSearchTest
+from collective.contact.core.tests.base import BaseTest
 from plone import api
 from plone.app.linkintegrity.exceptions import LinkIntegrityNotificationException
 from plone.app.testing import setRoles
@@ -14,7 +14,7 @@ from zope.intid.interfaces import IIntIds
 import unittest
 
 
-class TestUtils(unittest.TestCase, BaseSearchTest):
+class TestUtils(unittest.TestCase, BaseTest):
 
     layer = INTEGRATION
 

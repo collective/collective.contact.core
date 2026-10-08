@@ -47,6 +47,12 @@
         />
 
     <subscriber
+        for="collective.contact.core.behaviors.IContactDetails
+             plone.dexterity.interfaces.IEditBegunEvent"
+        handler=".subscribers.contact_details_edit_begun"
+        />
+
+    <subscriber
         for="plone.app.relationfield.interfaces.IDexterityHasRelations
              OFS.interfaces.IObjectWillBeRemovedEvent"
         handler=".subscribers.referenceObjectRemoved"

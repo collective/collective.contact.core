@@ -63,6 +63,7 @@ setup(
         'plone.app.relationfield',
         'plone.app.textfield!=1.2.8',
         'plone.autoform',
+        'imio.fpaudit',
         'plone.base',
         'plone.formwidget.masterselect',
         'plone.supermodel',
@@ -73,7 +74,6 @@ setup(
     extras_require={
         'test': ['plone.app.testing',
                  'plone.app.robotframework',
-                 'ecreall.helpers.testing',
                  ],
         },
     entry_points="""

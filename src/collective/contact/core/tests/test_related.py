@@ -2,7 +2,7 @@
 
 from collective.contact.core.behaviors import IRelatedOrganizations
 from collective.contact.core.testing import INTEGRATION
-from ecreall.helpers.testing.base import BaseTest
+from collective.contact.core.tests.base import BaseTest
 from plone import api
 from z3c.relationfield.relation import RelationValue
 from zope.component import getUtility
