@@ -4,6 +4,8 @@ Changelog
 2.0.0 (unreleased)
 -------------------
 
+- Drop `collective.contact.widget` profile dependency (was removed)
+  [laulaz]
 - Migrate to Plone 6 / drop Plone 4 compatibility
   [laulaz, chris-adam]
 
