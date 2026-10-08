@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>21</version>
+  <version>2000</version>
   <dependencies>
     <dependency>profile-collective.js.tooltipster:default</dependency>
     <dependency>profile-plone.app.dexterity:default</dependency>
