@@ -4,11 +4,8 @@ Changelog
 2.0.0 (unreleased)
 -------------------
 
-- Dropped Plone 4 Support.
+- Migrate to Plone 6 / drop Plone 4 compatibility
   [laulaz, chris-adam]
-- Added plone 6 Support.
-  [laulaz, chris-adam]
-
 
 1.43.3 (2026-05-29)
 -------------------

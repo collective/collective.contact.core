@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 from collective.contact.core.behaviors import ADDRESS_FIELDS
 from collective.contact.core.testing import INTEGRATION
-from ecreall.helpers.testing.base import BaseTest
+from collective.contact.core.tests.base import BaseTest
 from plone.app.testing.interfaces import TEST_USER_NAME
 
 import unittest

@@ -3,4 +3,13 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="collective.contact.core">
 
+  <genericsetup:upgradeStep
+      title="Upgrade from 20 to 21"
+      description="Install imio.fpaudit and add contact access audit registry records"
+      source="20"
+      destination="21"
+      handler=".upgrades.v21"
+      profile="collective.contact.core:default"
+      />
+
 </configure>

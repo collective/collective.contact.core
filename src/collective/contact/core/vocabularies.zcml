@@ -22,4 +22,10 @@
         name="Genders"
         />
 
+    <utility
+        component=".vocabularies.AuditTypesFactory"
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        name="collective.contact.core.audit_types"
+        />
+
 </configure>

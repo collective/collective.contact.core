@@ -13,6 +13,7 @@ from plone.app.testing import TEST_USER_ID
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.supermodel import model
 from plone.testing.zope import WSGI_SERVER_FIXTURE
+from zope.globalrequest import setLocal
 from zope.interface import alsoProvides
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary

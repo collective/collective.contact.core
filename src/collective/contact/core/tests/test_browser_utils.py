@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 from collective.contact.core.testing import FUNCTIONAL
 from collective.contact.core.testing import logged_actions
-from ecreall.helpers.testing.base import BaseTest
+from collective.contact.core.tests.base import BaseTest
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID

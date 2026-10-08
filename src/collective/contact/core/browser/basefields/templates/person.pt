@@ -8,16 +8,14 @@
                   ajax_load request/ajax_load | nothing;"
       i18n:domain="collective.contact.core" tal:omit-tag="">
 
-  <div class="actions">
+  <div class="actions" tal:condition="view/can_edit">
     <a class="edit-person pat-plone-modal"
        data-pat-plone-modal='{"actionOptions": {"displayInModal": false}}'
        tal:attributes="href string:${context/absolute_url}/edit"
        title="Edit"
        i18n:domain="plone"
        i18n:attributes="title">
-      <tal:icon
-       tal:replace="structure python:icons.tag('pencil-fill')"
-       tal:condition="view/can_edit" />
+      <tal:icon tal:replace="structure python:icons.tag('pencil-fill')" />
     </a>
   </div>
   <h1 class="fn">
