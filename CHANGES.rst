@@ -1,23 +1,13 @@
 Changelog
 =========
 
-1.43.4 (unreleased)
+2.0.0 (unreleased)
 -------------------
 
-- Removed Plone 4 compatibility code and obsolete `fields.RelationChoiceHandler`.
-  Fixed deprecated imports (`plone.base.utils`, `DatetimeFieldWidget`, `WSGI_SERVER_FIXTURE`).
-  [chris-adam]
-- Fixed image filename rendered as bytes in excel export url.
-  [chris-adam]
-- Kept the old overlay behaviour in the contact modals: reload the page after
-  save, and don't close the add-contact modal on a click outside it or on Esc.
-  [chris-adam]
-- Used `plone.base.interfaces.IBundleRegistry` for the bundle and `contenttype/<type>`
-  icon names in the content types `icon_expr`, as Plone core types do.
-  [chris-adam]
-- Fixed the person birthday widget: it showed a time and parsed the date in the
-  site locale format. It now uses the default Plone date widget.
-  [chris-adam]
+- Dropped Plone 4 Support.
+  [laulaz, chris-adam]
+- Added plone 6 Support.
+  [laulaz, chris-adam]
 
 
 1.43.3 (2026-05-29)
