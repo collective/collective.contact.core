@@ -132,3 +132,9 @@ The contact widget results contain
 The contact widget results do not contain
     [Arguments]  ${widget_id}  ${text}
     Page should not contain element  jquery=.ac_results:visible li strong:contains("${text}")
+
+The tooltip shows the organization
+    [Documentation]  Tooltip of a .link-tooltip link (collective.contact.widget, jquerytools): the content of the organization view
+    [Arguments]  ${full_title}
+    Wait until element contains  css=.tooltip h1  ${full_title}  timeout=10s
+    Page should not contain element  css=.tooltip #portal-header

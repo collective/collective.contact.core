@@ -12,6 +12,8 @@ Changelog
   [laulaz, sgeulette, chris-adam]
 - Drop `plone.formwidget.autocomplete` and `plone.formwidget.contenttree` (no longer used by `collective.contact.widget`).
   [chris-adam]
+- Fix the `tooltipster_helper` call: tooltips showed the whole page instead of `#content`.
+  [chris-adam]
 
 1.43.3 (2026-05-29)
 -------------------
