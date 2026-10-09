@@ -7,14 +7,14 @@ import json
 
 
 class GenderPersonTitleMapping(BrowserView):
-
     """Return gender/person_title mapping in json."""
 
     def __call__(self):
         request = self.request
-        request.response.setHeader(
-            'Content-Type', 'application/json')
-        return json.dumps({
-            'M': translate(_(u"Mr"), context=request),
-            'F': translate(_(u"Mrs"), context=request),
-        })
+        request.response.setHeader("Content-Type", "application/json")
+        return json.dumps(
+            {
+                "M": translate(_("Mr"), context=request),
+                "F": translate(_("Mrs"), context=request),
+            }
+        )

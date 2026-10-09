@@ -10,7 +10,7 @@ class BaseTest(object):
     """Mixin for unittest.TestCase using a plone.app.testing layer."""
 
     def login(self, username):
-        login(self.layer['portal'], username)
+        login(self.layer["portal"], username)
 
     def logout(self):
         logout()
@@ -22,14 +22,14 @@ class BaseTest(object):
 
 def create_members(portal, userdefs):
     for userdef in userdefs:
-        username = userdef['user']
+        username = userdef["user"]
         api.user.create(
-            email='{}@example.com'.format(username),
+            email="{}@example.com".format(username),
             username=username,
-            password='secret_pass_123',
-            roles=tuple(userdef['roles']),
+            password="secret_pass_123",
+            roles=tuple(userdef["roles"]),
         )
-        for group in userdef.get('groups', ()):
+        for group in userdef.get("groups", ()):
             api.group.add_user(groupname=group, username=username)
 
 
@@ -42,13 +42,17 @@ class BaseWorkflowTest(BaseTest):
         """Check that for each permission, only the listed users have it."""
         for permission, allowed in permissions.items():
             for userdef in userdefs:
-                username = userdef['user']
+                username = userdef["user"]
                 self.login(username)
                 has_perm = bool(getSecurityManager().checkPermission(permission, obj))
                 self.assertEqual(
-                    has_perm, username in allowed,
+                    has_perm,
+                    username in allowed,
                     "{} permission {} for {}{}".format(
-                        'Missing' if username in allowed else 'Unexpected',
-                        permission, username,
-                        ' in state {}'.format(stateid) if stateid else ''))
-        self.login('manager')
+                        "Missing" if username in allowed else "Unexpected",
+                        permission,
+                        username,
+                        " in state {}".format(stateid) if stateid else "",
+                    ),
+                )
+        self.login("manager")

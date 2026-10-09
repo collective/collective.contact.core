@@ -4,7 +4,7 @@ from zope.i18nmessageid import MessageFactory
 import logging
 
 
-logger = logging.getLogger('collective.contact.core')
+logger = logging.getLogger("collective.contact.core")
 
 _ = MessageFactory("collective.contact.core")
 
@@ -14,4 +14,4 @@ def initialize(context):
 
 
 def _tr(msgid):
-    return api.portal.translate(msgid, domain='collective.contact.core')
+    return api.portal.translate(msgid, domain="collective.contact.core")
