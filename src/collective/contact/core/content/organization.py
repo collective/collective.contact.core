@@ -3,6 +3,7 @@ from Acquisition import aq_inner
 from collective.contact.core import _
 from collective.contact.core import logger
 from collective.contact.core.browser.contactable import Contactable
+from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
 from plone import api
 from plone.app.textfield import RichText
@@ -160,8 +161,6 @@ class Organization(Container):
         catalog = getUtility(ICatalog)
         orga_intid = intids.getId(self)
         contact_relations = catalog.findRelations({"to_id": orga_intid, "from_attribute": "position"})
-        # 'from_interfaces_flattened': IHeldPosition,
-        # TODO
         held_positions = []
         for relation in contact_relations:
             held_position = relation.from_object
@@ -171,6 +170,9 @@ class Organization(Container):
                     self,
                     relation.__dict__,
                 )
+                continue
+            # the Plone 6 relation catalog has no from_interfaces_flattened index
+            if not IHeldPosition.providedBy(held_position):
                 continue
             held_positions.append(held_position)
         return held_positions

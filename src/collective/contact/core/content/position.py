@@ -1,6 +1,7 @@
 from collective.contact.core import _
 from collective.contact.core import logger
 from collective.contact.core.browser.contactable import Contactable
+from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
@@ -85,6 +86,9 @@ class Position(Container):
                 logger.error(
                     "from_object missing for relation from held_position to position %s: %s", self, relation.__dict__
                 )
+                continue
+            # the Plone 6 relation catalog has no from_interfaces_flattened index
+            if not IHeldPosition.providedBy(held_position):
                 continue
             held_positions.append(held_position)
         return held_positions

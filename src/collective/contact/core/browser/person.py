@@ -51,7 +51,7 @@ class HeldPositions(BrowserView):
             organization = obj.get_organization()
 
             icons = queryMultiAdapter((obj, self.request), name="iconresolver")
-            held_position["icon"] = icons.url("file-earmark-person-fill")
+            held_position["icon"] = icons.url("contenttype/held_position")
             held_position["organization"] = organization if organization else None
             held_position["can_edit"] = sm.checkPermission("Modify portal content", obj)
             held_position["can_delete"] = sm.checkPermission("Delete objects", obj)
