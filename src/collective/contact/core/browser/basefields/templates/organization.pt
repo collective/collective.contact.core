@@ -28,6 +28,9 @@
     <div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle"
          tal:condition="python: view.display_below_content_title() and not ajax_load" />
 
+    <p class="documentDescription"
+       tal:condition="context/Description"
+       tal:content="context/Description" />
 
     <div id="logo" class="field" tal:condition="context/logo">
         <img tal:define="scales nocall:context/@@images"

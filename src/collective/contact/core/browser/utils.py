@@ -26,7 +26,7 @@ def get_object_from_request(request, portal=None, default=None):
     if not portal:
         portal = api.portal.get()
     published = request.get("PUBLISHED", None)
-    if base_hasattr(published, "getTagName"):
+    if base_hasattr(published, "portal_type"):
         context = published
     else:
         context = base_hasattr(published, "context") and published.context or None
@@ -53,8 +53,8 @@ def get_object_from_referer(portal, referer, default=None):
         if not base_hasattr(obj, "portal_type"):
             if base_hasattr(obj, "context"):  # on a view like contactlist/view
                 return obj.context
-            if base_hasattr(obj, "im_self"):  # on org selection on held_position edit
-                return obj.im_self
+            if base_hasattr(obj, "__self__"):  # on org selection on held_position edit
+                return obj.__self__
         return obj
     except (KeyError, AttributeError):
         return default
