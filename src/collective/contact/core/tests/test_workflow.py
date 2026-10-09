@@ -73,3 +73,15 @@ class TestSecurity(unittest.TestCase, BaseWorkflowTest):
             if state:
                 self.assertHasState(degaulle, state)
                 self.assertCheckPermissions(degaulle, PERSON_PERMISSIONS[state], USERDEFS, stateid=state)
+
+    def test_contact_permissions(self):
+        """organization, position and held_position have the same workflow as person"""
+        workflow = self.portal.portal_workflow
+        armeedeterre = self.mydirectory["armeedeterre"]
+        self.login("manager")
+        for obj in (armeedeterre, armeedeterre["general_adt"], self.degaulle["gadt"]):
+            for transition, state in WORKFLOW_TRACK:
+                if transition:
+                    workflow.doActionFor(obj, transition)
+                self.assertHasState(obj, state)
+                self.assertCheckPermissions(obj, PERSON_PERMISSIONS[state], USERDEFS, stateid=state)

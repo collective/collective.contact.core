@@ -1,52 +1,35 @@
 *** Settings ***
-Test Setup        Open SauceLabs test browser
-Test Teardown     Run keywords    Report test status    Close all browsers
-Resource          plone/app/robotframework/keywords.robot    #Test Setup    Open test browser    #Test Teardown    Close all browsers
-Resource          plone/app/robotframework/saucelabs.robot
-Resource          keywords.robot
+Documentation  Prefilter of the contact widget (testing.IPrefiltering behavior of the testtype).
+...            Version-independent: Plone selectors are in ui_plone*.robot.
+Resource  contactcore.robot
+Test Setup  Open a manager browser
+Test Teardown  Close all browsers
 
 
-*** Test cases ***
+*** Variables ***
+${NO_DEFAULT}  form-widgets-IPrefiltering-contact_list_no_default
+${WITH_DEFAULT}  form-widgets-IPrefiltering-contact_list_with_contextual_default
+
+
+*** Test Cases ***
 With and without default value
-    Add test type
-    List Selection Should Be  css:#form-widgets-IPrefiltering-contact_list_no_default-autocomplete .prefilter-select  No filter
-    List Selection Should Be  css:#form-widgets-IPrefiltering-contact_list_with_contextual_default-autocomplete .prefilter-select  Only organizations
+    Open the test type add form
+    The prefilter of the contact widget is  ${NO_DEFAULT}  No filter
+    The prefilter of the contact widget is  ${WITH_DEFAULT}  Only organizations
 
 Without prefilter
-    Add test type
-    Input Text  css:#form-widgets-IPrefiltering-contact_list_no_default-widgets-query  Pepper
-    Autocomplete results should contain  Pepper
+    Open the test type add form
+    Type in the contact widget  ${NO_DEFAULT}  Pepper
+    The contact widget results contain  ${NO_DEFAULT}  Pepper
 
 With prefilter
-    Add test type
-    Input Text  css:#form-widgets-IPrefiltering-contact_list_with_contextual_default-widgets-query  Pepper
+    Open the test type add form
+    Type in the contact widget  ${WITH_DEFAULT}  Pepper
     Sleep  5
-    Autocomplete results should not contain  Pepper
+    The contact widget results do not contain  ${WITH_DEFAULT}  Pepper
 
 Selecting another prefilter
-    Add test type
-    Select From List By Label  css:#form-widgets-IPrefiltering-contact_list_with_contextual_default-autocomplete .prefilter-select  Only people
-    Input Text  css:#form-widgets-IPrefiltering-contact_list_no_default-widgets-query  Pepper
-    Autocomplete results should contain  Pepper
-
-
-*** Keywords ***
-Go to directory
-    Go to    ${PLONE_URL}/mydirectory
-
-Log in as site owner and wait
-    Log in as site owner
-    Wait until page contains    admin
-
-Add test type
-    Log in as site owner and wait
-    Go to    ${PLONE_URL}
-    Add new    testtype
-
-Autocomplete results should contain
-    [Arguments]    ${value}
-    Wait Until Element Is Visible  xpath://ul[contains(@class, "livesearch-results")]//li[contains(@class, "search-result")][contains(., "${value}")]
-
-Autocomplete results should not contain
-    [Arguments]    ${value}
-    Page Should Not Contain Element  xpath://ul[contains(@class, "livesearch-results")]//li[contains(@class, "search-result")][contains(., "${value}")]
+    Open the test type add form
+    Select the prefilter of the contact widget  ${WITH_DEFAULT}  Only people
+    Type in the contact widget  ${NO_DEFAULT}  Pepper
+    The contact widget results contain  ${NO_DEFAULT}  Pepper
