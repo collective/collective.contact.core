@@ -21,49 +21,45 @@ class ContactableVCard:
         contactable = IContactable(self.context)
         contact_details = contactable.get_contact_details()
 
-        email = contact_details['email']
+        email = contact_details["email"]
         if email:
-            vcard.add('email')
-            vcard.email.type_param = 'INTERNET'
+            vcard.add("email")
+            vcard.email.type_param = "INTERNET"
             vcard.email.value = email
 
-        phone = contact_details['phone']
+        phone = contact_details["phone"]
         if phone:
-            vcard.add('tel')
-            vcard.tel.type_param = 'WORK'
+            vcard.add("tel")
+            vcard.tel.type_param = "WORK"
             vcard.tel.value = phone
 
-        cell_phone = contact_details['cell_phone']
+        cell_phone = contact_details["cell_phone"]
         if cell_phone:
-            vcard.add('tel')
+            vcard.add("tel")
             last_item = len(vcard.tel_list) - 1
-            vcard.tel_list[last_item].type_param = 'CELL'
+            vcard.tel_list[last_item].type_param = "CELL"
             vcard.tel_list[last_item].value = cell_phone
 
-        im_handle = contact_details['im_handle']
+        im_handle = contact_details["im_handle"]
         if im_handle:
-            vcard.add('impp')
+            vcard.add("impp")
             vcard.impp.value = im_handle
 
-        address = contact_details['address']
+        address = contact_details["address"]
 
         # if we don't have relevant address information, we don't need address
         if address:
-            vcard.add('adr')
-            country = safe_text(address['country'], encoding='utf8')
-            region = safe_text(address['region'], encoding='utf8')
-            zip_code = safe_text(address['zip_code'], encoding='utf8')
-            city = safe_text(address['city'], encoding='utf8')
-            street = safe_text(address['street'], encoding='utf8')
-            number = safe_text(address['number'], encoding='utf8')
-            additional = safe_text(address['additional_address_details'], encoding='utf8')
-            vcard.adr.value = vobject.vcard.Address(street=street,
-                                                    city=city,
-                                                    region=region,
-                                                    code=zip_code,
-                                                    country=country,
-                                                    box=number,
-                                                    extended=additional)
+            vcard.add("adr")
+            country = safe_text(address["country"], encoding="utf8")
+            region = safe_text(address["region"], encoding="utf8")
+            zip_code = safe_text(address["zip_code"], encoding="utf8")
+            city = safe_text(address["city"], encoding="utf8")
+            street = safe_text(address["street"], encoding="utf8")
+            number = safe_text(address["number"], encoding="utf8")
+            additional = safe_text(address["additional_address_details"], encoding="utf8")
+            vcard.adr.value = vobject.vcard.Address(
+                street=street, city=city, region=region, code=zip_code, country=country, box=number, extended=additional
+            )
 
         return vcard
 
@@ -75,9 +71,9 @@ class ContactDetailsVCard(ContactableVCard):
 
     def get_vcard(self):
         vcard = ContactableVCard.get_vcard(self)
-        vcard.add('fn')
+        vcard.add("fn")
         vcard.fn.value = self.context.Title()
-        vcard.add('n')
+        vcard.add("n")
         vcard.n.value = vobject.vcard.Name(self.context.Title())
         return vcard
 
@@ -91,7 +87,7 @@ class HeldPositionVCard(ContactableVCard):
     def get_vcard(self):
         vcard = ContactableVCard.get_vcard(self)
 
-        vcard.add('kind')
+        vcard.add("kind")
         vcard.kind.value = "individual"
 
         held_position = self.context
@@ -100,38 +96,36 @@ class HeldPositionVCard(ContactableVCard):
         position = contactable.position
         organizations = contactable.organizations
 
-        vcard.add('n')
-        firstname = safe_text(person.firstname or '', encoding='utf8')
-        lastname = safe_text(person.lastname or '', encoding='utf8')
-        person_title = safe_text(person.person_title or '', encoding='utf8')
-        vcard.n.value = vobject.vcard.Name(prefix=person_title,
-                                           family=lastname,
-                                           given=firstname)
-        vcard.add('fn')
-        vcard.fn.value = ' '.join([e for e in (firstname, lastname) if e])
+        vcard.add("n")
+        firstname = safe_text(person.firstname or "", encoding="utf8")
+        lastname = safe_text(person.lastname or "", encoding="utf8")
+        person_title = safe_text(person.person_title or "", encoding="utf8")
+        vcard.n.value = vobject.vcard.Name(prefix=person_title, family=lastname, given=firstname)
+        vcard.add("fn")
+        vcard.fn.value = " ".join([e for e in (firstname, lastname) if e])
 
         if IBirthday.providedBy(person) and person.birthday is not None:
-            vcard.add('bday')
+            vcard.add("bday")
             vcard.bday.value = person.birthday.isoformat()
 
         if position is not None:
-            position_name = safe_text(position.Title(), encoding='utf8')
-            vcard.add('role')
+            position_name = safe_text(position.Title(), encoding="utf8")
+            vcard.add("role")
             vcard.role.value = position_name
-            vcard.add('title')
+            vcard.add("title")
             vcard.title.value = position_name
 
-        vcard.add('org')
-        vcard.org.value = [safe_text(org.Title(), encoding='utf8') for org in organizations]
+        vcard.add("org")
+        vcard.org.value = [safe_text(org.Title(), encoding="utf8") for org in organizations]
 
         # TODO ?
         # vcard.add('photo')
         # vcard.photo.value = person.photo
 
-#        if person.latitude is not None and \
-#           person.longitude is not None:
-#            vcard.add('geo')
-#            vcard.geo.value = "%.2f;%.2f" % (person.latitude, person.longitude)
+        #        if person.latitude is not None and \
+        #           person.longitude is not None:
+        #            vcard.add('geo')
+        #            vcard.geo.value = "%.2f;%.2f" % (person.latitude, person.longitude)
 
         return vcard
 
@@ -145,20 +139,20 @@ class OrganizationVCard(ContactableVCard):
     def get_vcard(self):
         vcard = ContactableVCard.get_vcard(self)
 
-        vcard.add('kind')
+        vcard.add("kind")
         vcard.kind.value = "org"
 
         organization = self.context
-        title = safe_text(organization.Title(), encoding='utf8')
-        vcard.add('n')
+        title = safe_text(organization.Title(), encoding="utf8")
+        vcard.add("n")
         vcard.n.value = vobject.vcard.Name(title)
-        vcard.add('fn')
+        vcard.add("fn")
         vcard.fn.value = title
         return vcard
 
 
 def closed_position_sort_key(position):
-    return position.end_date or float('inf')
+    return position.end_date or float("inf")
 
 
 @implementer(IPersonHeldPositions)
@@ -176,21 +170,18 @@ class PersonHeldPositionsAdapter(object):
             return None
 
         for position in current_positions:
-            if api.content.get_state(position) == 'active':
+            if api.content.get_state(position) == "active":
                 return position
         else:
             return current_positions[0]
 
     def get_current_positions(self):
-        """Get not ended positions
-        """
+        """Get not ended positions"""
         positions = self.person.get_held_positions()
-        return tuple([p for p in positions
-                      if (not p.end_date or p.end_date > datetime.date.today())])
+        return tuple([p for p in positions if (not p.end_date or p.end_date > datetime.date.today())])
 
     def get_closed_positions(self):
-        """Get closed positions by descending order of end date
-        """
+        """Get closed positions by descending order of end date"""
         all_positions = self.person.get_held_positions()
         active_positions = self.get_current_positions()
         closed_positions = [p for p in all_positions if p not in active_positions]

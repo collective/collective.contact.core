@@ -13,7 +13,7 @@ import unittest
 
 
 def rmv_uid(idx):
-    return logged_actions[idx][logged_actions[idx].index(" PATH=") + 1:]
+    return logged_actions[idx][logged_actions[idx].index(" PATH=") + 1 :]
 
 
 class TestBrowserUtils(unittest.TestCase, BaseTest):
@@ -23,24 +23,24 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
     def setUp(self):
         super(TestBrowserUtils, self).setUp()
         self.login(TEST_USER_NAME)
-        self.app = self.layer['app']
-        self.portal = self.layer['portal']
-        mydirectory = self.portal['mydirectory']
-        self.degaulle = mydirectory['degaulle']
-        self.adt = self.degaulle['adt']
-        self.gadt = self.degaulle['gadt']
-        self.pepper = mydirectory['pepper']
-        self.sergent_pepper = self.pepper['sergent_pepper']
-        self.rambo = mydirectory['rambo']
-        self.armeedeterre = mydirectory['armeedeterre']
-        self.corpsa = self.armeedeterre['corpsa']
-        self.divisionalpha = self.corpsa['divisionalpha']
-        self.regimenth = self.divisionalpha['regimenth']
-        self.brigadelh = self.regimenth['brigadelh']
-        self.general_adt = self.armeedeterre['general_adt']
-        self.sergent_lh = self.brigadelh['sergent_lh']
-        self.draper = mydirectory['draper']
-        self.captain_crunch = self.draper['captain_crunch']
+        self.app = self.layer["app"]
+        self.portal = self.layer["portal"]
+        mydirectory = self.portal["mydirectory"]
+        self.degaulle = mydirectory["degaulle"]
+        self.adt = self.degaulle["adt"]
+        self.gadt = self.degaulle["gadt"]
+        self.pepper = mydirectory["pepper"]
+        self.sergent_pepper = self.pepper["sergent_pepper"]
+        self.rambo = mydirectory["rambo"]
+        self.armeedeterre = mydirectory["armeedeterre"]
+        self.corpsa = self.armeedeterre["corpsa"]
+        self.divisionalpha = self.corpsa["divisionalpha"]
+        self.regimenth = self.divisionalpha["regimenth"]
+        self.brigadelh = self.regimenth["brigadelh"]
+        self.general_adt = self.armeedeterre["general_adt"]
+        self.sergent_lh = self.brigadelh["sergent_lh"]
+        self.draper = mydirectory["draper"]
+        self.captain_crunch = self.draper["captain_crunch"]
         self.mydirectory = mydirectory
 
     def call_view(self, obj, view_name):
@@ -58,48 +58,64 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         self.call_view(self.armeedeterre, "view")
         self.assertEqual(len(logged_actions), 0)
         # we set the registry record to True
-        api.portal.set_registry_record("collective.contact.core.interfaces.IContactCoreParameters."
-                                       "audit_contact_access", True)
-        api.portal.set_registry_record("collective.contact.core.interfaces.IContactCoreParameters.audit_contact_types",
-                                       [])
+        api.portal.set_registry_record(
+            "collective.contact.core.interfaces.IContactCoreParameters." "audit_contact_access", True
+        )
+        api.portal.set_registry_record(
+            "collective.contact.core.interfaces.IContactCoreParameters.audit_contact_types", []
+        )
         # # VIEW
         # check organisation view
         self.call_view(self.armeedeterre, "view")
         self.assertEqual(len(logged_actions), 2)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/armeedeterre "
-                                     "CTX_PATH=/mydirectory/armeedeterre CASE=contact_view")
-        self.assertEqual(rmv_uid(1), "PATH=/mydirectory/degaulle/adt "
-                                     "CTX_PATH=/mydirectory/armeedeterre CASE=contact_view")
+        self.assertEqual(
+            rmv_uid(0), "PATH=/mydirectory/armeedeterre " "CTX_PATH=/mydirectory/armeedeterre CASE=contact_view"
+        )
+        self.assertEqual(
+            rmv_uid(1), "PATH=/mydirectory/degaulle/adt " "CTX_PATH=/mydirectory/armeedeterre CASE=contact_view"
+        )
         # check sub organization view
         logged_actions[:] = []  # clear
         self.call_view(self.brigadelh, "view")
         self.assertEqual(len(logged_actions), 2)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/armeedeterre/corpsa/divisionalpha/regimenth/brigadelh "
-                                     "CTX_PATH=/mydirectory/armeedeterre/corpsa/divisionalpha/regimenth/brigadelh"
-                                     " CASE=contact_view")
-        self.assertEqual(rmv_uid(1), "PATH=/mydirectory/rambo/brigadelh "
-                                     "CTX_PATH=/mydirectory/armeedeterre/corpsa/divisionalpha/regimenth/brigadelh"
-                                     " CASE=contact_view")
+        self.assertEqual(
+            rmv_uid(0),
+            "PATH=/mydirectory/armeedeterre/corpsa/divisionalpha/regimenth/brigadelh "
+            "CTX_PATH=/mydirectory/armeedeterre/corpsa/divisionalpha/regimenth/brigadelh"
+            " CASE=contact_view",
+        )
+        self.assertEqual(
+            rmv_uid(1),
+            "PATH=/mydirectory/rambo/brigadelh "
+            "CTX_PATH=/mydirectory/armeedeterre/corpsa/divisionalpha/regimenth/brigadelh"
+            " CASE=contact_view",
+        )
         # check person view
         logged_actions[:] = []  # clear
         self.call_view(self.degaulle, "view")
         self.assertEqual(len(logged_actions), 5)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/degaulle "
-                                     "CTX_PATH=/mydirectory/degaulle CASE=contact_view")
-        self.assertEqual(rmv_uid(1), "PATH=/mydirectory/degaulle/adt "
-                                     "CTX_PATH=/mydirectory/degaulle CASE=contact_view")
-        self.assertEqual(rmv_uid(2), "PATH=/mydirectory/armeedeterre "
-                                     "CTX_PATH=/mydirectory/degaulle CASE=contact_view")
-        self.assertEqual(rmv_uid(3), "PATH=/mydirectory/degaulle/gadt "
-                                     "CTX_PATH=/mydirectory/degaulle CASE=contact_view")
-        self.assertEqual(rmv_uid(4), "PATH=/mydirectory/armeedeterre "
-                                     "CTX_PATH=/mydirectory/degaulle CASE=contact_view")
+        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/degaulle " "CTX_PATH=/mydirectory/degaulle CASE=contact_view")
+        self.assertEqual(
+            rmv_uid(1), "PATH=/mydirectory/degaulle/adt " "CTX_PATH=/mydirectory/degaulle CASE=contact_view"
+        )
+        self.assertEqual(
+            rmv_uid(2), "PATH=/mydirectory/armeedeterre " "CTX_PATH=/mydirectory/degaulle CASE=contact_view"
+        )
+        self.assertEqual(
+            rmv_uid(3), "PATH=/mydirectory/degaulle/gadt " "CTX_PATH=/mydirectory/degaulle CASE=contact_view"
+        )
+        self.assertEqual(
+            rmv_uid(4), "PATH=/mydirectory/armeedeterre " "CTX_PATH=/mydirectory/degaulle CASE=contact_view"
+        )
         # check position view
         logged_actions[:] = []  # clear
         self.call_view(self.general_adt, "view")
         self.assertEqual(len(logged_actions), 1)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/armeedeterre/general_adt "
-                                     "CTX_PATH=/mydirectory/armeedeterre/general_adt CASE=contact_view")
+        self.assertEqual(
+            rmv_uid(0),
+            "PATH=/mydirectory/armeedeterre/general_adt "
+            "CTX_PATH=/mydirectory/armeedeterre/general_adt CASE=contact_view",
+        )
         # check held_position view
         logged_actions[:] = []  # clear
         # necessary for z3c.formwidget.query widget initialization... to avoid NoInteraction error
@@ -107,36 +123,45 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         self.call_view(self.gadt, "view")
         endInteraction()
         self.assertEqual(len(logged_actions), 2)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/armeedeterre/general_adt "
-                                     "CTX_PATH=/mydirectory/degaulle/gadt CASE=contact_view")
-        self.assertEqual(rmv_uid(1), "PATH=/mydirectory/degaulle/gadt "
-                                     "CTX_PATH=/mydirectory/degaulle/gadt CASE=contact_view")
+        self.assertEqual(
+            rmv_uid(0),
+            "PATH=/mydirectory/armeedeterre/general_adt " "CTX_PATH=/mydirectory/degaulle/gadt CASE=contact_view",
+        )
+        self.assertEqual(
+            rmv_uid(1), "PATH=/mydirectory/degaulle/gadt " "CTX_PATH=/mydirectory/degaulle/gadt CASE=contact_view"
+        )
         # # EDIT
         # check organisation edit
         logged_actions[:] = []  # clear
         self.call_view(self.armeedeterre, "@@edit")
         self.assertEqual(len(logged_actions), 1)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/armeedeterre "
-                                     "CTX_PATH=/mydirectory/armeedeterre CASE=contact_edit")
+        self.assertEqual(
+            rmv_uid(0), "PATH=/mydirectory/armeedeterre " "CTX_PATH=/mydirectory/armeedeterre CASE=contact_edit"
+        )
         # check sub organization edit
         logged_actions[:] = []  # clear
         self.call_view(self.brigadelh, "@@edit")
         self.assertEqual(len(logged_actions), 1)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/armeedeterre/corpsa/divisionalpha/regimenth/brigadelh "
-                                     "CTX_PATH=/mydirectory/armeedeterre/corpsa/divisionalpha/regimenth/brigadelh"
-                                     " CASE=contact_edit")
+        self.assertEqual(
+            rmv_uid(0),
+            "PATH=/mydirectory/armeedeterre/corpsa/divisionalpha/regimenth/brigadelh "
+            "CTX_PATH=/mydirectory/armeedeterre/corpsa/divisionalpha/regimenth/brigadelh"
+            " CASE=contact_edit",
+        )
         # check person edit
         logged_actions[:] = []  # clear
         self.call_view(self.degaulle, "@@edit")
         self.assertEqual(len(logged_actions), 1)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/degaulle "
-                                     "CTX_PATH=/mydirectory/degaulle CASE=contact_edit")
+        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/degaulle " "CTX_PATH=/mydirectory/degaulle CASE=contact_edit")
         # check position edit
         logged_actions[:] = []  # clear
         self.call_view(self.general_adt, "@@edit")
         self.assertEqual(len(logged_actions), 1)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/armeedeterre/general_adt "
-                                     "CTX_PATH=/mydirectory/armeedeterre/general_adt CASE=contact_edit")
+        self.assertEqual(
+            rmv_uid(0),
+            "PATH=/mydirectory/armeedeterre/general_adt "
+            "CTX_PATH=/mydirectory/armeedeterre/general_adt CASE=contact_edit",
+        )
         # check held_position edit
         logged_actions[:] = []  # clear
         # necessary for z3c.formwidget.query widget initialization... to avoid NoInteraction error
@@ -144,8 +169,9 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         self.call_view(self.gadt, "@@edit")
         endInteraction()
         self.assertEqual(len(logged_actions), 1)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/degaulle/gadt "
-                                     "CTX_PATH=/mydirectory/degaulle/gadt CASE=contact_edit")
+        self.assertEqual(
+            rmv_uid(0), "PATH=/mydirectory/degaulle/gadt " "CTX_PATH=/mydirectory/degaulle/gadt CASE=contact_edit"
+        )
         # # OVERLAY
         # check directory overlay
         logged_actions[:] = []
@@ -156,13 +182,12 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         self.armeedeterre.REQUEST["ajax_load"] = "12345678"
         self.call_view(self.armeedeterre, "view")
         self.assertEqual(len(logged_actions), 2)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/armeedeterre "
-                                     "CTX_PATH=/mydirectory CASE=contact_overlay")
-        self.assertEqual(rmv_uid(1), "PATH=/mydirectory/degaulle/adt "
-                                     "CTX_PATH=/mydirectory CASE=contact_overlay")
+        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/armeedeterre " "CTX_PATH=/mydirectory CASE=contact_overlay")
+        self.assertEqual(rmv_uid(1), "PATH=/mydirectory/degaulle/adt " "CTX_PATH=/mydirectory CASE=contact_overlay")
         # # # we filter on person only
-        api.portal.set_registry_record("collective.contact.core.interfaces.IContactCoreParameters.audit_contact_types",
-                                       ["person"])
+        api.portal.set_registry_record(
+            "collective.contact.core.interfaces.IContactCoreParameters.audit_contact_types", ["person"]
+        )
         del self.armeedeterre.REQUEST.other["ajax_load"]
         # # VIEW
         # check organisation view
@@ -177,8 +202,7 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         logged_actions[:] = []  # clear
         self.call_view(self.degaulle, "view")
         self.assertEqual(len(logged_actions), 1)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/degaulle "
-                                     "CTX_PATH=/mydirectory/degaulle CASE=contact_view")
+        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/degaulle " "CTX_PATH=/mydirectory/degaulle CASE=contact_view")
         # check position view
         logged_actions[:] = []  # clear
         self.call_view(self.general_adt, "view")
@@ -203,8 +227,7 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         logged_actions[:] = []  # clear
         self.call_view(self.degaulle, "@@edit")
         self.assertEqual(len(logged_actions), 1)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/degaulle "
-                                     "CTX_PATH=/mydirectory/degaulle CASE=contact_edit")
+        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/degaulle " "CTX_PATH=/mydirectory/degaulle CASE=contact_edit")
         # check position edit
         logged_actions[:] = []  # clear
         self.call_view(self.general_adt, "@@edit")
@@ -226,5 +249,4 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         self.armeedeterre.REQUEST["ajax_load"] = "12345678"
         self.call_view(self.degaulle, "view")
         self.assertEqual(len(logged_actions), 1)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/degaulle "
-                                     "CTX_PATH=/mydirectory CASE=contact_overlay")
+        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/degaulle " "CTX_PATH=/mydirectory CASE=contact_overlay")

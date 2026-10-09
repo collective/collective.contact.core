@@ -1,1 +1,1 @@
-TEMPLATES_DIR = 'templates'
+TEMPLATES_DIR = "templates"

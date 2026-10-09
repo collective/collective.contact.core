@@ -23,15 +23,14 @@ class Organization(BaseView):
         self.parent_organizations = [org for org in organizations]
         self.parent_organizations.remove(organization)
 
-        catalog = api.portal.get_tool('portal_catalog')
-        context_path = '/'.join(organization.getPhysicalPath())
-        self.sub_organizations = catalog.searchResults(portal_type="organization",
-                                                       path={'query': context_path,
-                                                             'depth': 1},
-                                                       sort_on='getObjPositionInParent')
+        catalog = api.portal.get_tool("portal_catalog")
+        context_path = "/".join(organization.getPhysicalPath())
+        self.sub_organizations = catalog.searchResults(
+            portal_type="organization", path={"query": context_path, "depth": 1}, sort_on="getObjPositionInParent"
+        )
         self.positions = self.context.get_positions()
         sm = getSecurityManager()
-        self.can_add = sm.checkPermission('Add portal content', self.context)
+        self.can_add = sm.checkPermission("Add portal content", self.context)
         # We need to update widgets to avoid view.widgets being None which
         # causes a traceback in collective.eeafaceted.z3ctable
         self.updateWidgets()
@@ -44,18 +43,18 @@ class Organization(BaseView):
 class SubOrganizations(BrowserView):
 
     def __call__(self):
-        catalog = api.portal.get_tool('portal_catalog')
-        context_path = '/'.join(self.context.getPhysicalPath())
-        self.sub_organizations = catalog.searchResults(portal_type="organization",
-                                                       path={'query': context_path,
-                                                             'depth': 1},
-                                                       sort_on='getObjPositionInParent')
+        catalog = api.portal.get_tool("portal_catalog")
+        context_path = "/".join(self.context.getPhysicalPath())
+        self.sub_organizations = catalog.searchResults(
+            portal_type="organization", path={"query": context_path, "depth": 1}, sort_on="getObjPositionInParent"
+        )
         return self.index()
 
 
 class OtherContacts(BrowserView):
     """Displays other contacts list"""
-    held_positions = ''
+
+    held_positions = ""
 
     def __call__(self):
         self.update()
@@ -69,27 +68,27 @@ class OtherContacts(BrowserView):
         for hp in held_positions:
             contact = {}
             person = hp.get_person()
-            contact['person'] = person
-            contact['title'] = person.Title()
-            contact['held_position'] = hp.Title()
-            contact['label'] = hp.get_label()
-            contact['obj'] = hp
-            contact['display_photo'] = api.portal.get_registry_record(
-                name='display_contact_photo_on_organization_view',
-                interface=IContactCoreParameters)
-            contact['has_photo'] = contact['display_photo'] and hp.photo or None
+            contact["person"] = person
+            contact["title"] = person.Title()
+            contact["held_position"] = hp.Title()
+            contact["label"] = hp.get_label()
+            contact["obj"] = hp
+            contact["display_photo"] = api.portal.get_registry_record(
+                name="display_contact_photo_on_organization_view", interface=IContactCoreParameters
+            )
+            contact["has_photo"] = contact["display_photo"] and hp.photo or None
 
             if IContactDetails.providedBy(hp):
                 contactable = hp
             elif IContactDetails.providedBy(person):
                 contactable = person
 
-            contact['email'] = contactable.email
-            contact['phone'] = contactable.phone
-            contact['cell_phone'] = contactable.cell_phone
-            contact['fax'] = contactable.fax
-            contact['im_handle'] = contactable.im_handle
-            contact['website'] = get_valid_url(contactable.website)
+            contact["email"] = contactable.email
+            contact["phone"] = contactable.phone
+            contact["cell_phone"] = contactable.cell_phone
+            contact["fax"] = contactable.fax
+            contact["im_handle"] = contactable.im_handle
+            contact["website"] = get_valid_url(contactable.website)
 
             othercontacts.append(contact)
             audit_access(contactable, "other")

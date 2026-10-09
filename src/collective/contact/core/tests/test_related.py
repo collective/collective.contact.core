@@ -19,19 +19,19 @@ class TestSearch(unittest.TestCase, BaseTest):
 
     def setUp(self):
         super(TestSearch, self).setUp()
-        self.portal = self.layer['portal']
-        self.mydirectory = self.portal['mydirectory']
-        self.armeedeterre = self.mydirectory['armeedeterre']
-        self.corpsa = self.armeedeterre['corpsa']
-        self.divisionalpha = self.corpsa['divisionalpha']
-        self.divisionbeta = self.corpsa['divisionbeta']
+        self.portal = self.layer["portal"]
+        self.mydirectory = self.portal["mydirectory"]
+        self.armeedeterre = self.mydirectory["armeedeterre"]
+        self.corpsa = self.armeedeterre["corpsa"]
+        self.divisionalpha = self.corpsa["divisionalpha"]
+        self.divisionbeta = self.corpsa["divisionbeta"]
 
     def test_related_searchable_text(self):
         pc = self.portal.portal_catalog
         brain = api.content.find(UID=self.divisionalpha.UID())[0]
         indexes = pc.getIndexDataForRID(brain.getRID())
         indexed = indexes.get("SearchableText")
-        self.assertListEqual(indexed, ['armee', 'de', 'terre', 'corps', 'a', 'division', 'alpha'])
+        self.assertListEqual(indexed, ["armee", "de", "terre", "corps", "a", "division", "alpha"])
 
         intids = getUtility(IIntIds)
         alsoProvides(self.divisionalpha, IRelatedOrganizations)
@@ -42,5 +42,22 @@ class TestSearch(unittest.TestCase, BaseTest):
         brain = api.content.find(UID=self.divisionalpha.UID())[0]
         indexes = pc.getIndexDataForRID(brain.getRID())
         indexed = indexes.get("SearchableText")
-        self.assertListEqual(indexed, ['armee', 'de', 'terre', 'corps', 'a', 'division', 'beta', 'armee', 'de',
-                                       'terre', 'corps', 'a', 'division', 'alpha'])
+        self.assertListEqual(
+            indexed,
+            [
+                "armee",
+                "de",
+                "terre",
+                "corps",
+                "a",
+                "division",
+                "beta",
+                "armee",
+                "de",
+                "terre",
+                "corps",
+                "a",
+                "division",
+                "alpha",
+            ],
+        )

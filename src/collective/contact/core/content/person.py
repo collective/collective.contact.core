@@ -25,39 +25,34 @@ from zope.interface import implementer
 class IPerson(model.Schema, IContactContent):
     """Interface for Person content type"""
 
-    lastname = schema.TextLine(
-        title=_("Lastname"),
-        required=True
-        )
+    lastname = schema.TextLine(title=_("Lastname"), required=True)
     firstname = schema.TextLine(
         title=_("Firstname"),
         required=False,
-        )
+    )
     gender = schema.Choice(
         title=_("Gender"),
         vocabulary="Genders",
         required=False,
-        )
+    )
     form.widget(gender=RadioFieldWidget)
     person_title = schema.TextLine(
         title=_("Person title"),
-        description=_('help_person_title',
-                      u"Doctor, Mrs..."),
+        description=_("help_person_title", "Doctor, Mrs..."),
         required=False,
-        )
+    )
     photo = NamedImage(
         title=_("Photo"),
         required=False,
-        )
+    )
     signature = NamedImage(
         title=_("Signature"),
         description=_("Scanned signature"),
         required=False,
-        )
+    )
 
     def get_held_positions(self):
-        """Returns held positions of this person
-        """
+        """Returns held positions of this person"""
 
 
 class PersonContactableAdapter(Contactable):
@@ -100,19 +95,19 @@ class Person(Container):
         return
 
     def get_title(self, include_person_title=True):
-        displayed_attrs = ('person_title', 'firstname', 'lastname')
+        displayed_attrs = ("person_title", "firstname", "lastname")
         if not include_person_title:
-            displayed_attrs = ('firstname', 'lastname')
+            displayed_attrs = ("firstname", "lastname")
         else:
             registry = queryUtility(IRegistry)
             if registry is not None:
                 record = registry.forInterface(IContactCoreParameters, None)
                 if record is not None:
                     if not record.person_title_in_title:
-                        displayed_attrs = ('firstname', 'lastname')
+                        displayed_attrs = ("firstname", "lastname")
 
         displayed = [getattr(self, attr, None) for attr in displayed_attrs]
-        return u' '.join([x for x in displayed if x])
+        return " ".join([x for x in displayed if x])
 
     title = property(get_title, set_title)
 
@@ -125,7 +120,7 @@ class Person(Container):
         if self.firstname is None:
             fullname = self.lastname
         else:
-            fullname = u"%s %s" % (self.lastname, self.firstname)
+            fullname = "%s %s" % (self.lastname, self.firstname)
         return normalizeString(fullname)
 
     def get_held_positions(self):
@@ -135,11 +130,11 @@ class Person(Container):
         return [p.Title() for p in self.get_held_positions()]
 
     def get_full_name(self):
-        return u' '.join([x for x in (self.firstname, self.lastname) if x])
+        return " ".join([x for x in (self.firstname, self.lastname) if x])
 
 
 class PersonSchemaPolicy(DexteritySchemaPolicy):
     """Schema policy for Person content type"""
 
     def bases(self, schemaName, tree):
-        return (IPerson, )
+        return (IPerson,)

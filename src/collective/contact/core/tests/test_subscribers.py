@@ -20,12 +20,12 @@ class TestUtils(unittest.TestCase, BaseTest):
 
     def setUp(self):
         super(TestUtils, self).setUp()
-        self.app = self.layer['app']
-        self.portal = self.layer['portal']
-        mydirectory = self.portal['mydirectory']
-        self.degaulle = mydirectory['degaulle']
-        self.rambo = mydirectory['rambo']
-        self.brigadelh = mydirectory['armeedeterre']['corpsa']['divisionalpha']['regimenth']['brigadelh']
+        self.app = self.layer["app"]
+        self.portal = self.layer["portal"]
+        mydirectory = self.portal["mydirectory"]
+        self.degaulle = mydirectory["degaulle"]
+        self.rambo = mydirectory["rambo"]
+        self.brigadelh = mydirectory["armeedeterre"]["corpsa"]["divisionalpha"]["regimenth"]["brigadelh"]
 
     def test_relation_unindex(self):
         catalog = getUtility(ICatalog)
@@ -47,21 +47,25 @@ class TestUtils(unittest.TestCase, BaseTest):
     def test_recordModified(self):
         """ """
         self.login(TEST_USER_NAME)
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
         dguid = self.degaulle.UID()
-        record_name = 'collective.contact.core.interfaces.IContactCoreParameters.contact_source_metadata_content'
-        self.assertEqual(api.portal.get_registry_record(record_name), u'{gft}')
+        record_name = "collective.contact.core.interfaces.IContactCoreParameters.contact_source_metadata_content"
+        self.assertEqual(api.portal.get_registry_record(record_name), "{gft}")
         self.assertEqual(self.getBrain(dguid).contact_source, self.degaulle.get_full_title())
         # we change registry
-        api.portal.set_registry_record(record_name, u'{gft} from {city} on {email}')
+        api.portal.set_registry_record(record_name, "{gft} from {city} on {email}")
         # metadata has been updated
-        self.assertEqual(self.getBrain(dguid).contact_source,
-                         u'Général Charles De Gaulle from Colombey les deux églises on charles.de.gaulle@private.com')
+        self.assertEqual(
+            self.getBrain(dguid).contact_source,
+            "Général Charles De Gaulle from Colombey les deux églises on charles.de.gaulle@private.com",
+        )
 
     def test_linkintegrity_breach_on_referenced_contact(self):
         """Plone linkintegrity reports contact relations as breaches."""
-        mydirectory = self.portal['mydirectory']
-        sergent_lh = mydirectory.unrestrictedTraverse('armeedeterre/corpsa/divisionalpha/regimenth/brigadelh/sergent_lh')
-        view = self.portal.restrictedTraverse('@@delete_confirmation_info')
-        sources = [s['uid'] for b in view.get_breaches([sergent_lh]) for s in b['sources']]
-        self.assertEqual(sources, [mydirectory['pepper']['sergent_pepper'].UID()])
+        mydirectory = self.portal["mydirectory"]
+        sergent_lh = mydirectory.unrestrictedTraverse(
+            "armeedeterre/corpsa/divisionalpha/regimenth/brigadelh/sergent_lh"
+        )
+        view = self.portal.restrictedTraverse("@@delete_confirmation_info")
+        sources = [s["uid"] for b in view.get_breaches([sergent_lh]) for s in b["sources"]]
+        self.assertEqual(sources, [mydirectory["pepper"]["sergent_pepper"].UID()])

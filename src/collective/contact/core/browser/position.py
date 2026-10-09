@@ -19,4 +19,4 @@ class Position(BaseView):
         self.organizations = contactable.organizations
 
         sm = getSecurityManager()
-        self.can_add = sm.checkPermission('Add portal content', self.context)
+        self.can_add = sm.checkPermission("Add portal content", self.context)
