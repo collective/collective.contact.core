@@ -46,12 +46,12 @@
 
               <h3><img tal:attributes="src held_position/icon" /> <span tal:content="held_position/title" /></h3>
 
-              <div class="start_date" class="field" tal:condition="held_position/start_date">
+              <div class="start_date" tal:condition="held_position/start_date">
                 <label><tal:block i18n:translate="">Start date</tal:block>:</label>
                 <span tal:replace="held_position/start_date" />
               </div>
 
-              <div class="end_date" class="field" tal:condition="held_position/end_date">
+              <div class="end_date" tal:condition="held_position/end_date">
                 <label><tal:block i18n:translate="">End date</tal:block>:</label>
                 <span tal:replace="held_position/end_date" />
               </div>
@@ -61,7 +61,7 @@
               <div class="organization card"
                    tal:condition="python:held_position.get('organization', None)"
                    tal:define="organization nocall:held_position/organization">
-                  <div class="logo" class="field" tal:condition="organization/logo">
+                  <div class="logo" tal:condition="organization/logo">
                       <img tal:define="scales nocall:organization/@@images"
                            tal:replace="structure python:scales.tag('logo', 'tile', css_class='photo')"
                            tal:on-error="string:Bad logo format" />
