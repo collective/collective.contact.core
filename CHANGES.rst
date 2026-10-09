@@ -8,6 +8,8 @@ Changelog
   [laulaz]
 - Migrate to Plone 6 / drop Plone 4 compatibility
   [laulaz, chris-adam]
+- Migrate to Plone 6.2, based on the work started by @laulaz and @sgeulette on `python3`.
+  [laulaz, sgeulette, chris-adam]
 
 1.44.0 (2026-11-16)
 -------------------
