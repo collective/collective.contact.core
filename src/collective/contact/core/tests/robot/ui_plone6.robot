@@ -133,3 +133,9 @@ The contact widget results contain
 The contact widget results do not contain
     [Arguments]  ${widget_id}  ${text}
     Page should not contain element  xpath=//*[@id="${widget_id}-autocomplete"]//li[contains(@class, "search-result")][contains(., "${text}")]
+
+The tooltip shows the organization
+    [Documentation]  Tooltip of a .link-tooltip link (tooltipster): the content of the organization view, not the whole page
+    [Arguments]  ${full_title}
+    Wait until element contains  css=.tooltipster-content > #content h1  ${full_title}  timeout=10s
+    Page should not contain element  css=.tooltipster-base #portal-header

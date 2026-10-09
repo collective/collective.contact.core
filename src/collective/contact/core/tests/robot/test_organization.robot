@@ -32,3 +32,8 @@ A sub-organization can be created from an organization
     Wait until element contains  css=#content h1  Armée de terre / Corps B / Division Gamma
     Go to  ${CORPSB}
     The sub-organizations contain  Division Gamma
+
+Hovering a sub-organization link shows that organization in a tooltip
+    Go to  ${CORPSA}
+    Hover the sub-organization link  Division Alpha
+    The tooltip shows the organization  Armée de terre / Corps A / Division Alpha

@@ -124,3 +124,7 @@ The vcard of the contact is downloadable
 The sub-organizations contain
     [Arguments]  ${text}
     Element should contain  css=#sub_organizations  ${text}
+
+Hover the sub-organization link
+    [Arguments]  ${title}
+    Mouse over  xpath=//*[@id="sub_organizations"]//a[contains(@class, "link-tooltip")][normalize-space(.)="${title}"]
