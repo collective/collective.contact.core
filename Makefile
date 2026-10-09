@@ -4,7 +4,7 @@
 # The original Makefile can be found on https://github.com/IMIO/scripts-buildout
 
 SHELL=/bin/bash
-plones=6.1
+plones=6.1 6.2
 b_o=
 old_plone=$(shell [ -e .plone-version ] && cat .plone-version)
 
@@ -24,6 +24,9 @@ endif
 
 ifndef python
 ifeq ($(plone),6.1)
+  python=3.13
+endif
+ifeq ($(plone),6.2)
   python=3.13
 endif
 endif
