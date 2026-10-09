@@ -1,4 +1,7 @@
 # -*- coding: utf8 -*-
+from collective.contact.core.browser.utils import get_object_from_referer
+from collective.contact.core.browser.utils import get_object_from_request
+from collective.contact.core.browser.utils import get_valid_url
 from collective.contact.core.testing import FUNCTIONAL
 from collective.contact.core.testing import logged_actions
 from collective.contact.core.tests.base import BaseTest
@@ -250,3 +253,43 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         self.call_view(self.degaulle, "view")
         self.assertEqual(len(logged_actions), 1)
         self.assertEqual(rmv_uid(0), "PATH=/mydirectory/degaulle " "CTX_PATH=/mydirectory CASE=contact_overlay")
+
+    def test_get_object_from_referer(self):
+        portal = self.portal
+        url = self.armeedeterre.absolute_url()
+        self.assertEqual(get_object_from_referer(portal, url), self.armeedeterre)
+        # views and parameters are removed
+        self.assertEqual(get_object_from_referer(portal, url + "/@@edit?_authenticator=123"), self.armeedeterre)
+        self.assertEqual(get_object_from_referer(portal, url + "/++add++organization"), self.armeedeterre)
+        self.assertEqual(get_object_from_referer(portal, url + "/++add++position?x=1"), self.armeedeterre)
+        # on a view like organization/view
+        self.assertEqual(get_object_from_referer(portal, url + "/view"), self.armeedeterre)
+        # on a method of an object, like held_position/edit (org selection on held_position edit)
+        self.assertEqual(get_object_from_referer(portal, self.gadt.absolute_url() + "/edit"), self.gadt)
+        # not found
+        self.assertIsNone(get_object_from_referer(portal, portal.absolute_url() + "/mydirectory/unknown"))
+        self.assertEqual(get_object_from_referer(portal, portal.absolute_url() + "/unknown", default="x"), "x")
+
+    def test_get_object_from_request(self):
+        request = self.portal.REQUEST
+        # published object
+        request["PUBLISHED"] = self.corpsa
+        self.assertEqual(get_object_from_request(request), self.corpsa)
+        # published view
+        request["PUBLISHED"] = self.armeedeterre.restrictedTraverse("view")
+        self.assertEqual(get_object_from_request(request, portal=self.portal), self.armeedeterre)
+        # nothing published or portal: the referer is used
+        request["PUBLISHED"] = None
+        request["HTTP_REFERER"] = self.corpsa.absolute_url() + "/@@edit?_authenticator=123"
+        self.assertEqual(get_object_from_request(request), self.corpsa)
+        request["PUBLISHED"] = self.portal.restrictedTraverse("view")
+        self.assertEqual(get_object_from_request(request), self.corpsa)
+        request["HTTP_REFERER"] = self.portal.absolute_url() + "/unknown"
+        self.assertEqual(get_object_from_request(request, default="x"), "x")
+
+    def test_get_valid_url(self):
+        self.assertEqual(get_valid_url("www.imio.be"), "http://www.imio.be")
+        self.assertEqual(get_valid_url("http://www.imio.be"), "http://www.imio.be")
+        self.assertEqual(get_valid_url("https://www.imio.be"), "https://www.imio.be")
+        self.assertEqual(get_valid_url(""), "")
+        self.assertIsNone(get_valid_url(None))

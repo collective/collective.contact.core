@@ -1,16 +1,37 @@
 # -*- coding: utf8 -*-
 
 from collective.contact.core.content.directory import is_valid_identifier
+from collective.contact.core.content.organization import InvalidEnterpriseNumber
+from collective.contact.core.content.organization import IOrganization
+from collective.contact.core.content.organization import validateEnterpriseNumber
 from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.testing import INTEGRATION
 from collective.contact.core.tests.base import BaseTest
+from collective.contact.widget.schema import ContactChoice
+from collective.contact.widget.source import ContactSourceBinder
 from plone import api
 from plone.app.testing.helpers import setRoles
 from plone.app.testing.interfaces import TEST_USER_ID
 from plone.app.testing.interfaces import TEST_USER_NAME
+from plone.dexterity.fti import DexterityFTI
+from plone.supermodel import model
+from z3c.relationfield.relation import RelationValue
+from zc.relation.interfaces import ICatalog
+from zope.component import getUtility
+from zope.intid.interfaces import IIntIds
 
 import datetime
 import unittest
+
+
+class IPositionHolder(model.Schema):
+    """Schema of a content that is not a held position but has a `position` relation"""
+
+    position = ContactChoice(
+        title="Position",
+        required=False,
+        source=ContactSourceBinder(portal_type=("organization", "position")),
+    )
 
 
 class TestContentTypes(unittest.TestCase, BaseTest):
@@ -37,6 +58,25 @@ class TestContentTypes(unittest.TestCase, BaseTest):
         self.sergent_pepper = self.pepper["sergent_pepper"]
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
         self.login(TEST_USER_NAME)
+
+    def add_position_holder(self, target):
+        """Adds a non held position content whose `position` field points to target"""
+        if "position_holder" not in self.portal.portal_types:
+            fti = DexterityFTI(
+                "position_holder",
+                klass="plone.dexterity.content.Item",
+                global_allow=True,
+                schema="collective.contact.core.tests.test_content_types.IPositionHolder",
+            )
+            self.portal.portal_types._setObject("position_holder", fti)
+        intids = getUtility(IIntIds)
+        holder = api.content.create(
+            container=self.portal, type="position_holder", id="holder", position=RelationValue(intids.getId(target))
+        )
+        # the relation is cataloged like the held position ones
+        relations = getUtility(ICatalog).findRelations({"to_id": intids.getId(target), "from_attribute": "position"})
+        self.assertIn(holder, [rel.from_object for rel in relations])
+        return holder
 
 
 class TestDirectory(TestContentTypes):
@@ -190,6 +230,26 @@ class TestOrganization(TestContentTypes):
             ["colonel_adt", "lieutenant_adt", "sergent_adt", "general_adt"],
         )
 
+    def test_get_held_positions(self):
+        # held positions directly linked to the organization (without position)
+        self.assertEqual(self.armeedeterre.get_held_positions(), [self.adt])
+        self.assertEqual(self.brigadelh.get_held_positions(), [self.mydirectory["rambo"]["brigadelh"]])
+        # a held position linked to a position of the organization is not returned
+        self.assertEqual(self.corpsa.get_held_positions(), [])
+        # only held positions are returned, not other contents having a `position` relation
+        self.add_position_holder(self.armeedeterre)
+        self.assertEqual(self.armeedeterre.get_held_positions(), [self.adt])
+
+    def test_validateEnterpriseNumber(self):
+        self.assertTrue(validateEnterpriseNumber("BE123456789"))
+        with self.assertRaises(InvalidEnterpriseNumber):
+            validateEnterpriseNumber("BE 123.456.789")
+        # the organization field uses the validator
+        field = IOrganization["enterprise_number"]
+        field.validate("BE123456789")
+        with self.assertRaises(InvalidEnterpriseNumber):
+            field.validate("BE-123")
+
 
 class TestPosition(TestContentTypes):
 
@@ -210,6 +270,13 @@ class TestPosition(TestContentTypes):
         cb = self.armeedeterre.manage_copyObjects(["general_adt"])
         self.armeedeterre.manage_pasteObjects(cb)
         self.assertIn("copy_of_general_adt", list(self.armeedeterre.keys()))
+
+    def test_get_held_positions(self):
+        self.assertEqual(self.general_adt.get_held_positions(), [self.gadt])
+        self.assertEqual(self.sergent_lh.get_held_positions(), [self.sergent_pepper])
+        # only held positions are returned, not other contents having a `position` relation
+        self.add_position_holder(self.general_adt)
+        self.assertEqual(self.general_adt.get_held_positions(), [self.gadt])
 
 
 class TestHeldPosition(TestContentTypes):
