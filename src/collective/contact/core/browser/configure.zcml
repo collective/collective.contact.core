@@ -5,7 +5,6 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="collective.contact.core">
 
-  <include package="plone.formwidget.autocomplete" />
   <include zcml:condition="installed collective.excelexport"
            file="excelexport.zcml" />
 

@@ -10,6 +10,8 @@ Changelog
   [laulaz, chris-adam]
 - Migrate to Plone 6.2, based on the work started by @laulaz and @sgeulette on `python3`.
   [laulaz, sgeulette, chris-adam]
+- Drop `plone.formwidget.autocomplete` and `plone.formwidget.contenttree` (no longer used by `collective.contact.widget`).
+  [chris-adam]
 
 1.44.0 (2026-11-16)
 -------------------
