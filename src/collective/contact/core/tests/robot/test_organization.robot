@@ -37,3 +37,8 @@ Hovering a sub-organization link shows that organization in a tooltip
     Go to  ${CORPSA}
     Hover the sub-organization link  Division Alpha
     The tooltip shows the organization  Armée de terre / Corps A / Division Alpha
+
+The organization address is shown on its view
+    Go to  ${CORPSA}
+    Element should contain  css=#content .address  rue Philibert Lucot
+    Element should contain  css=#content .address  Orléans
