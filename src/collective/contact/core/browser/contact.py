@@ -6,10 +6,10 @@ from plone import api
 
 class Contact(BaseView):
 
-    start_date = ''
-    end_date = ''
-    birthday = ''
-    gender = ''
+    start_date = ""
+    end_date = ""
+    birthday = ""
+    gender = ""
     position = None
     organizations = []
 
@@ -42,7 +42,7 @@ class Contact(BaseView):
         else:
             self.birthday = None
 
-        self.gender = person.gender or ''
+        self.gender = person.gender or ""
 
         self.position = held_position.get_position()
 

@@ -21,7 +21,7 @@ from zope.schema import getFields
 
 # update indexes of related content when a content is modified
 # you can monkey patch this value if you have an index that needs this
-indexes_to_update = ['SearchableText']
+indexes_to_update = ["SearchableText"]
 
 
 def update_related_with_held_position(obj, event=None):
@@ -73,7 +73,8 @@ def update_related_with_organization(obj, event=None):
 
 
 def referenceObjectRemoved(obj, event):
-    """Unindex relations on a deleted contact content."""
+    """Unindex the outgoing relations of a deleted contact content.
+    Incoming ones are left to z3c.relationfield, that breaks them."""
     allowed_interfaces = (IDirectory, IOrganization, IPerson, IHeldPosition, IPosition)
     if not any(i.providedBy(obj) for i in allowed_interfaces):
         return
@@ -90,16 +91,13 @@ def referenceObjectRemoved(obj, event):
     outcoming_rels = catalog.findRelations({"from_id": int_id})
     for rel in list(outcoming_rels):
         catalog.unindex(rel)
-    incoming_rels = catalog.findRelations({"to_id": int_id})
-    for rel in list(incoming_rels):
-        catalog.unindex(rel)
 
 
 def clear_fields_use_parent_address(obj, event):
     """Deletes use_parent_address slave fields if upa is selected."""
     if obj.use_parent_address and obj.use_parent_address != NO_VALUE:
-        upa_field = getFields(IContactDetails)['use_parent_address']
-        slave_ids = [f['name'] for f in upa_field.slave_fields]
+        upa_field = getFields(IContactDetails)["use_parent_address"]
+        slave_ids = [f["name"] for f in upa_field.slave_fields]
         for field_name in slave_ids:
             try:
                 delattr(obj, field_name)
@@ -116,10 +114,12 @@ def recordModified(event):
     """Handles configuration change.
     Updates `contact_source` index after `contact_source_metadata_content` change.
     """
-    if IRecordModifiedEvent.providedBy(event) \
-            and event.record.interfaceName \
-            and event.record.interface == IContactCoreParameters:
-        if event.record.fieldName == 'contact_source_metadata_content':
-            pc = api.portal.get_tool('portal_catalog')
+    if (
+        IRecordModifiedEvent.providedBy(event)
+        and event.record.interfaceName
+        and event.record.interface == IContactCoreParameters
+    ):
+        if event.record.fieldName == "contact_source_metadata_content":
+            pc = api.portal.get_tool("portal_catalog")
             for brain in pc(object_provides=IContactContent.__identifier__):
-                brain.getObject().reindexObject(idxs=['contact_source'])
+                brain.getObject().reindexObject(idxs=["contact_source"])

@@ -23,33 +23,28 @@ class INameTokenTableRowSchema(Interface):
     token is the token used in the vocabularies
     """
 
-    name = schema.TextLine(title=_(u"Name"))
-    token = schema.TextLine(title=_(u"Token"), constraint=is_valid_identifier)
+    name = schema.TextLine(title=_("Name"))
+    token = schema.TextLine(title=_("Token"), constraint=is_valid_identifier)
 
 
 class IDirectory(model.Schema):
     """Interface for Directory content type"""
 
     position_types = schema.List(
-        title=_("Position types"),
-        value_type=DictRow(title=_(u'Position'),
-                           schema=INameTokenTableRowSchema)
-        )
-    widget('position_types', DataGridFieldFactory, allow_reorder=True)
+        title=_("Position types"), value_type=DictRow(title=_("Position"), schema=INameTokenTableRowSchema)
+    )
+    widget("position_types", DataGridFieldFactory, allow_reorder=True)
 
     organization_types = schema.List(
-        title=_("Organization types"),
-        value_type=DictRow(title=_(u'Organization'),
-                           schema=INameTokenTableRowSchema)
-        )
-    widget('organization_types', DataGridFieldFactory, allow_reorder=True)
+        title=_("Organization types"), value_type=DictRow(title=_("Organization"), schema=INameTokenTableRowSchema)
+    )
+    widget("organization_types", DataGridFieldFactory, allow_reorder=True)
 
     organization_levels = schema.List(
         title=_("Organization levels"),
-        value_type=DictRow(title=_(u'Organization level'),
-                           schema=INameTokenTableRowSchema)
-        )
-    widget('organization_levels', DataGridFieldFactory, allow_reorder=True)
+        value_type=DictRow(title=_("Organization level"), schema=INameTokenTableRowSchema),
+    )
+    widget("organization_levels", DataGridFieldFactory, allow_reorder=True)
 
 
 @implementer(IDirectory)
@@ -61,4 +56,4 @@ class DirectorySchemaPolicy(DexteritySchemaPolicy):
     """Schema policy for Directory content type"""
 
     def bases(self, schemaName, tree):
-        return (IDirectory, )
+        return (IDirectory,)

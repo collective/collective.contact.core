@@ -3,6 +3,7 @@ from Acquisition import aq_inner
 from collective.contact.core import _
 from collective.contact.core import logger
 from collective.contact.core.browser.contactable import Contactable
+from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
 from plone import api
 from plone.app.textfield import RichText
@@ -20,7 +21,8 @@ from zope.intid.interfaces import IIntIds
 
 class InvalidEnterpriseNumber(schema.ValidationError):
     """Exception for invalid enterprise number"""
-    __doc__ = _(u"Enterprise number must contain only letters and numbers")
+
+    __doc__ = _("Enterprise number must contain only letters and numbers")
 
 
 def validateEnterpriseNumber(value):
@@ -36,7 +38,7 @@ class IOrganization(model.Schema, IContactContent):
     activity = RichText(
         title=_("Activity"),
         required=False,
-        )
+    )
 
     organization_type = schema.Choice(
         title=_("Type or level"),
@@ -46,13 +48,13 @@ class IOrganization(model.Schema, IContactContent):
     logo = NamedImage(
         title=_("Logo"),
         required=False,
-        )
+    )
 
     enterprise_number = schema.TextLine(
-        title=_(u"Enterprise (or VAT) number"),
+        title=_("Enterprise (or VAT) number"),
         required=False,
         constraint=validateEnterpriseNumber,
-        )
+    )
 
     def get_organizations_chain(self):
         """Returns the list of organizations and sub-organizations in this organization
@@ -85,8 +87,8 @@ class IOrganization(model.Schema, IContactContent):
 
     def get_held_positions(self):
         """Returns the held positions
-           that have been directly linked to the organization
-           without a position
+        that have been directly linked to the organization
+        without a position
         """
 
 
@@ -109,10 +111,10 @@ class Organization(Container):
         """
         organizations_chain = []
         for item in aq_chain(aq_inner(self)):
-            if base_hasattr(item, 'portal_type'):
-                if item.portal_type == 'directory':
+            if base_hasattr(item, "portal_type"):
+                if item.portal_type == "directory":
                     break
-                elif item.portal_type == 'organization':
+                elif item.portal_type == "organization":
                     organizations_chain.append(item)
 
         organizations_chain.reverse()
@@ -132,7 +134,7 @@ class Organization(Container):
         """
         return [item.title for item in self.get_organizations_chain(first_index=first_index)]
 
-    def get_full_title(self, separator=u' / ', first_index=0):
+    def get_full_title(self, separator=" / ", first_index=0):
         """Returns the full title of the organization
         It is constituted by the list of the names of the organizations and
         sub-organizations in this organization separated by slashes
@@ -142,33 +144,35 @@ class Organization(Container):
         return separator.join(self.get_organizations_titles(first_index=first_index))
 
     def get_positions(self):
-        catalog = api.portal.get_tool('portal_catalog')
-        positions = catalog.searchResults(portal_type="position",
-                                          path={'query': '/'.join(self.getPhysicalPath()),
-                                                'depth': 1},
-                                          sort_on='getObjPositionInParent')
+        catalog = api.portal.get_tool("portal_catalog")
+        positions = catalog.searchResults(
+            portal_type="position",
+            path={"query": "/".join(self.getPhysicalPath()), "depth": 1},
+            sort_on="getObjPositionInParent",
+        )
         return [c.getObject() for c in positions]
 
     def get_held_positions(self):
         """Returns the held positions
-           that have been directly linked to the organization
-           without a position
+        that have been directly linked to the organization
+        without a position
         """
         intids = getUtility(IIntIds)
         catalog = getUtility(ICatalog)
         orga_intid = intids.getId(self)
-        contact_relations = catalog.findRelations(
-                              {'to_id': orga_intid,
-                               'from_attribute': 'position'})
-        # 'from_interfaces_flattened': IHeldPosition,
-        # TODO
+        contact_relations = catalog.findRelations({"to_id": orga_intid, "from_attribute": "position"})
         held_positions = []
         for relation in contact_relations:
             held_position = relation.from_object
             if not held_position:
                 logger.error(
                     "from_object missing for relation from held_position to organisation %s: %s",
-                    self, relation.__dict__)
+                    self,
+                    relation.__dict__,
+                )
+                continue
+            # the Plone 6 relation catalog has no from_interfaces_flattened index
+            if not IHeldPosition.providedBy(held_position):
                 continue
             held_positions.append(held_position)
         return held_positions

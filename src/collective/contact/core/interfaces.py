@@ -22,7 +22,9 @@ class IContactable(Interface):
         If fallback is False, we don't fallback contact details on objects it is related
         """
 
-    def get_parent_address(self,):
+    def get_parent_address(
+        self,
+    ):
         """Returns the address of the first element in the chain with a relevant address"""
 
 
@@ -39,57 +41,65 @@ class IVCard(Interface):
 class IContactCoreParameters(Interface):
 
     person_contact_details_private = schema.Bool(
-        title=_(u"The person contact details are private and will not be used in other context, like held position."),
-        description=u"",
-        required=False, default=True)
+        title=_("The person contact details are private and will not be used in other context, like held position."),
+        description="",
+        required=False,
+        default=True,
+    )
 
     person_title_in_title = schema.Bool(
-        title=_(u"Display person title in displayed person's title."),
-        description=u"",
-        required=False, default=True)
+        title=_("Display person title in displayed person's title."), description="", required=False, default=True
+    )
 
     use_held_positions_to_search_person = schema.Bool(
-        title=_(u"Use held positions to search persons."),
-        description=u"",
-        required=False, default=True)
+        title=_("Use held positions to search persons."), description="", required=False, default=True
+    )
 
     use_description_to_search_person = schema.Bool(
-        title=_(u"Use description to search persons."),
-        description=u"",
-        required=False, default=True)
+        title=_("Use description to search persons."), description="", required=False, default=True
+    )
 
     display_contact_photo_on_organization_view = schema.Bool(
-        title=_(u"Display contact photo on organization view (instead person content type icon)."),
-        description=u"",
-        required=False, default=True)
+        title=_("Display contact photo on organization view (instead person content type icon)."),
+        description="",
+        required=False,
+        default=True,
+    )
 
     display_below_content_title_on_views = schema.Bool(
-        title=_(u"Display belowcontenttitle viewlet on contact views."),
-        description=u"",
-        required=False, default=False)
+        title=_("Display belowcontenttitle viewlet on contact views."), description="", required=False, default=False
+    )
 
     display_photo_label_on_views = schema.Bool(
-        title=_(u"Display the \"Photo\" label before the photo image on contact views."),
-        description=u"",
-        required=False, default=False)
+        title=_('Display the "Photo" label before the photo image on contact views.'),
+        description="",
+        required=False,
+        default=False,
+    )
 
     contact_source_metadata_content = schema.TextLine(
-        title=_(u"Choose information displayed after a search in contact widget."),
-        description=u"Format string containing variables like : {gft} (full title) , {number} , {street} , "
-                    u"{additional_address_details} , {zip_code} , {city} , {region} , {country}, {email}, {phone}, "
-                    u"{cell_phone}, {fax}, {website}, {im_handle}",
-        required=True, default=u'{gft}')
+        title=_("Choose information displayed after a search in contact widget."),
+        description="Format string containing variables like : {gft} (full title) , {number} , {street} , "
+        "{additional_address_details} , {zip_code} , {city} , {region} , {country}, {email}, {phone}, "
+        "{cell_phone}, {fax}, {website}, {im_handle}",
+        required=True,
+        default="{gft}",
+    )
 
     audit_contact_access = schema.Bool(
-        title=_(u"Log contact details access (with imio.fputils product)."),
-        description=u"",
-        required=False, default=False)
+        title=_("Log contact details access (with imio.fputils product)."),
+        description="",
+        required=False,
+        default=False,
+    )
 
     audit_contact_types = schema.List(
-        title=_(u"Types selection to audit."),
-        description=u"",
-        value_type=schema.Choice(vocabulary=u"collective.contact.core.audit_types"),
-        required=False, default=[])
+        title=_("Types selection to audit."),
+        description="",
+        value_type=schema.Choice(vocabulary="collective.contact.core.audit_types"),
+        required=False,
+        default=[],
+    )
 
 
 class IPersonHeldPositions(Interface):
@@ -104,12 +114,10 @@ class IPersonHeldPositions(Interface):
         """
 
     def get_current_positions(self):
-        """Give the current positions of the person
-        """
+        """Give the current positions of the person"""
 
     def get_sorted_positions(self):
-        """Get sorted positions
-        """
+        """Get sorted positions"""
 
 
 class IHeldPosition(model.Schema, IContactContent):
@@ -122,9 +130,9 @@ class IHeldPosition(model.Schema, IContactContent):
     )
     label = schema.TextLine(
         title=_("Additional label"),
-        description=_("Additional label with information that does not appear "
-                      "on position label"),
-        required=False)
+        description=_("Additional label with information that does not appear " "on position label"),
+        required=False,
+    )
     start_date = schema.Date(
         title=_("Start date"),
         required=False,
@@ -144,12 +152,10 @@ class IHeldPosition(model.Schema, IContactContent):
     )
 
     def get_person(self):
-        """Returns the person who holds the position
-        """
+        """Returns the person who holds the position"""
 
     def get_position(self):
-        """Returns the position (if position field is a position)
-        """
+        """Returns the position (if position field is a position)"""
 
     def get_organization(self):
         """Returns the first organization related to HeldPosition

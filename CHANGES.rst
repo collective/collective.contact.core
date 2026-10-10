@@ -8,6 +8,16 @@ Changelog
   [laulaz]
 - Migrate to Plone 6 / drop Plone 4 compatibility
   [laulaz, chris-adam]
+- Migrate to Plone 6.2, based on the work started by @laulaz and @sgeulette on `python3`.
+  [laulaz, sgeulette, chris-adam]
+- Drop `plone.formwidget.autocomplete` and `plone.formwidget.contenttree` (no longer used by `collective.contact.widget`).
+  [chris-adam]
+- Fix the `tooltipster_helper` call: tooltips showed the whole page instead of `#content`.
+  [chris-adam]
+- Fix the address rendering on Plone 6: contact views showed no address.
+  [chris-adam]
+- Leave the relations to a deleted contact broken (`isBroken()`), as on Plone 4: they were unindexed.
+  [chris-adam]
 
 1.43.3 (2026-05-29)
 -------------------

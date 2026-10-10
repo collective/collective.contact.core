@@ -27,36 +27,37 @@ class ContactDetailsContactable(object):
 
     def get_contact_details(self, keys=(), fallback=True):
         if not IContactDetails.providedBy(self.context):
-            raise TypeError("Your contactable content must provide IContactDetails "
-                            "if it doesn't have a more specific contactable adapter")
+            raise TypeError(
+                "Your contactable content must provide IContactDetails "
+                "if it doesn't have a more specific contactable adapter"
+            )
 
         contact_details = {}
         if keys:
-            contact_details_fields = [k for k in keys if k != 'address']
+            contact_details_fields = [k for k in keys if k != "address"]
         else:
             contact_details_fields = CONTACT_DETAILS_FIELDS
 
         context = aq_base(self.context)
         for field in contact_details_fields:
             # search the object that carries the field
-            value = getattr(context, field, '') or ''
+            value = getattr(context, field, "") or ""
             contact_details[field] = value
 
-        if (not keys) or ('address' in keys):
-            contact_details['address'] = get_address(context)
+        if (not keys) or ("address" in keys):
+            contact_details["address"] = get_address(context)
 
-        if 'website' in contact_details:
-            contact_details['website'] = get_valid_url(
-                contact_details['website'])
+        if "website" in contact_details:
+            contact_details["website"] = get_valid_url(contact_details["website"])
         audit_access(self.context, "details2")
         return contact_details
 
     def get_parent_address(self):
-        return u""
+        return ""
 
 
 class ContactDetails(BrowserView):
-    address_template = ViewPageTemplateFile('templates/address.pt')
+    address_template = ViewPageTemplateFile("templates/address.pt")
 
     def __call__(self):
         self.update()
@@ -67,7 +68,7 @@ class ContactDetails(BrowserView):
         self.contact_details = contactable.get_contact_details()
 
     def render_address(self):
-        return self.address_template()
+        return self.address_template(self.contact_details["address"])
 
 
 class NoFallbackContactDetails(ContactDetails):
@@ -107,14 +108,16 @@ class Contactable(object):
         """
         contactables = []
         related_items = [self.context, self.held_position, self.position] + list(reversed(self.organizations))
-        if not api.portal.get_registry_record(name='person_contact_details_private', interface=IContactCoreParameters):
+        if not api.portal.get_registry_record(name="person_contact_details_private", interface=IContactCoreParameters):
             related_items.insert(2, self.person)
         elif self.context == self.person:
             related_items = [self.context]  # for a person, we get private info only
         for related_item in related_items:
-            if related_item is not None \
-               and IContactDetails.providedBy(related_item) \
-               and related_item not in contactables:
+            if (
+                related_item is not None
+                and IContactDetails.providedBy(related_item)
+                and related_item not in contactables
+            ):
                 contactables.append(related_item)
 
         return contactables
@@ -130,7 +133,7 @@ class Contactable(object):
     def get_contact_details(self, keys=(), fallback=True):
         contact_details = {}
         if keys:
-            contact_details_fields = [k for k in keys if k != 'address']
+            contact_details_fields = [k for k in keys if k != "address"]
         else:
             contact_details_fields = CONTACT_DETAILS_FIELDS
 
@@ -143,18 +146,18 @@ class Contactable(object):
             # search the object that carries the field
             for obj in contactables:
                 obj = aq_base(obj)
-                value = getattr(obj, field, '') or ''
+                value = getattr(obj, field, "") or ""
                 if value:
                     contact_details[field] = value
                     break
             else:
-                contact_details[field] = ''
+                contact_details[field] = ""
 
-        if (not keys) or ('address' in keys):
-            contact_details['address'] = self._get_address(contactables)
+        if (not keys) or ("address" in keys):
+            contact_details["address"] = self._get_address(contactables)
 
-        if 'website' in contact_details:
-            contact_details['website'] = get_valid_url(contact_details['website'])
+        if "website" in contact_details:
+            contact_details["website"] = get_valid_url(contact_details["website"])
 
         audit_access(self.context, "details1")
         return contact_details
@@ -163,15 +166,15 @@ class Contactable(object):
         contactables = self._get_contactables()
         url = self.context.REQUEST.URL
         # we don't want self.context address if the object is already created
-        if '/++add++' not in url and '/@@add' not in url:
+        if "/++add++" not in url and "/@@add" not in url:
             contactables.remove(self.context)
 
         address = self._get_address(contactables)
         if not address:
             # Very important to return unicode here, RichTextWidget needs it.
-            return u''
+            return ""
 
-        template_path = os.path.join(TEMPLATES_DIR, 'address.pt')
+        template_path = os.path.join(TEMPLATES_DIR, "address.pt")
         template = ViewPageTemplateFile(template_path)
         self.request = getRequest()
         return template(self, address)

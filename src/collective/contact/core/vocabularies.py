@@ -19,7 +19,7 @@ def get_directory(context):
         raise NoDirectoryFound
     while parent.portal_type != "directory":
         parent = aq_parent(parent)
-        if getattr(parent, 'portal_type', None) is None:
+        if getattr(parent, "portal_type", None) is None:
             raise NoDirectoryFound
     return parent
 
@@ -27,9 +27,7 @@ def get_directory(context):
 def get_vocabulary(schema_list):
     terms = []
     for item in schema_list:
-        term = SimpleVocabulary.createTerm(item['token'],
-                                           item['token'],
-                                           item['name'])
+        term = SimpleVocabulary.createTerm(item["token"], item["token"], item["name"])
         terms.append(term)
     return SimpleVocabulary(terms)
 
@@ -64,7 +62,7 @@ class OrganizationTypesOrLevels(object):
         try:
             directory = get_directory(context)
             container_type = self.get_container_type(context)
-            if container_type == 'organization':
+            if container_type == "organization":
                 return get_vocabulary(directory.organization_levels)
             else:
                 # directory, folder or anything else
@@ -81,8 +79,8 @@ class Genders(object):
 
     def __call__(self, context):
         terms = []
-        genders = {'M': _("Male"), 'F': _("Female")}
-        for (token, value) in genders.items():
+        genders = {"M": _("Male"), "F": _("Female")}
+        for token, value in genders.items():
             term = SimpleVocabulary.createTerm(token, token, value)
             terms.append(term)
         return SimpleVocabulary(terms)

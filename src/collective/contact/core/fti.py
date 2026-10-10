@@ -8,20 +8,21 @@ from zope.interface import implementer
 
 @implementer(IDexterityFTI)
 class DexterityConfigurablePolicyFTI(DexterityFTI):
-    """A Configurable policy FTI
-    """
+    """A Configurable policy FTI"""
+
     meta_type = "Dexterity configurable policy FTI"
 
     _properties = DexterityFTI._properties + (
-        {'id': 'schema_policy',
-         'type': 'string',
-         'mode': 'w',
-         'label': 'Schema policy',
-         'description': 'Schema policy'
+        {
+            "id": "schema_policy",
+            "type": "string",
+            "mode": "w",
+            "label": "Schema policy",
+            "description": "Schema policy",
         },
     )
 
-    schema_policy = u'dexterity'
+    schema_policy = "dexterity"
 
     def lookupModel(self):
         if self.model_source:
@@ -33,7 +34,7 @@ class DexterityConfigurablePolicyFTI(DexterityFTI):
 
         elif self.schema:
             schema = self.lookupSchema()
-            return Model({u"": schema})
+            return Model({"": schema})
 
         raise ValueError("Neither model source, nor model file, nor schema is specified in FTI %s" % self.getId())
 

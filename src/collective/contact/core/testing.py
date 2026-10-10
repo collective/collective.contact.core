@@ -33,36 +33,36 @@ _fpaudit_utils.fpalog = _mock_fpalog
 
 static_prefilter_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(value=u'', title=u'No filter'),
-        SimpleTerm(value=u'{"portal_type":"person"}', title=u'Only people'),
-        SimpleTerm(value=u'{"portal_type":"organization"}', title=u'Only organizations'),
+        SimpleTerm(value="", title="No filter"),
+        SimpleTerm(value='{"portal_type":"person"}', title="Only people"),
+        SimpleTerm(value='{"portal_type":"organization"}', title="Only organizations"),
     ]
 )
 
 
 def prefilter_default_value(context):
-    return u'{"portal_type":"organization"}'
+    return '{"portal_type":"organization"}'
 
 
 class IPrefiltering(model.Schema):
 
     contact_list_no_default = ContactList(
-        title=u'Contact list (no default)',
+        title="Contact list (no default)",
         required=True,
         value_type=ContactChoice(
             source=ContactSourceBinder(
-                portal_type=("organization", 'held_position', 'person', 'contact_list'),
+                portal_type=("organization", "held_position", "person", "contact_list"),
             )
         ),
         prefilter_vocabulary=static_prefilter_vocabulary,
     )
 
     contact_list_with_contextual_default = ContactList(
-        title=u'Contact list (with contextual default)',
+        title="Contact list (with contextual default)",
         required=True,
         value_type=ContactChoice(
             source=ContactSourceBinder(
-                portal_type=("organization", 'held_position', 'person', 'contact_list'),
+                portal_type=("organization", "held_position", "person", "contact_list"),
             )
         ),
         prefilter_vocabulary=static_prefilter_vocabulary,
@@ -77,29 +77,24 @@ class ContactContentLayer(PloneWithPackageLayer):
 
     def setUpPloneSite(self, portal):
         setLocal("request", portal.REQUEST)  # for fingerpointing
-        self.applyProfile(portal, 'collective.contact.core:testing')
+        self.applyProfile(portal, "collective.contact.core:testing")
         # insert some test data
-        self.applyProfile(portal, 'collective.contact.core:test_data')
-        setRoles(portal, TEST_USER_ID, ['Manager'])
+        self.applyProfile(portal, "collective.contact.core:test_data")
+        setRoles(portal, TEST_USER_ID, ["Manager"])
         transaction.commit()
 
 
 COLLECTIVE_CONTACT_CORE = ContactContentLayer(
     zcml_package=collective.contact.core,
-    zcml_filename='testing.zcml',
-    gs_profile_id='collective.contact.core:testing',
-    name="COLLECTIVE_CONTACT_CORE")
+    zcml_filename="testing.zcml",
+    gs_profile_id="collective.contact.core:testing",
+    name="COLLECTIVE_CONTACT_CORE",
+)
 
-INTEGRATION = IntegrationTesting(
-    bases=(COLLECTIVE_CONTACT_CORE, ),
-    name="INTEGRATION")
+INTEGRATION = IntegrationTesting(bases=(COLLECTIVE_CONTACT_CORE,), name="INTEGRATION")
 
-FUNCTIONAL = FunctionalTesting(
-    bases=(COLLECTIVE_CONTACT_CORE, ),
-    name="FUNCTIONAL")
+FUNCTIONAL = FunctionalTesting(bases=(COLLECTIVE_CONTACT_CORE,), name="FUNCTIONAL")
 
 ACCEPTANCE = FunctionalTesting(
-    bases=(COLLECTIVE_CONTACT_CORE,
-           AUTOLOGIN_LIBRARY_FIXTURE,
-           WSGI_SERVER_FIXTURE),
-    name="ACCEPTANCE")
+    bases=(COLLECTIVE_CONTACT_CORE, AUTOLOGIN_LIBRARY_FIXTURE, WSGI_SERVER_FIXTURE), name="ACCEPTANCE"
+)
