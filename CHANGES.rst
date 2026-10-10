@@ -16,6 +16,8 @@ Changelog
   [chris-adam]
 - Fix the address rendering on Plone 6: contact views showed no address.
   [chris-adam]
+- Leave the relations to a deleted contact broken (`isBroken()`), as on Plone 4: they were unindexed.
+  [chris-adam]
 
 1.43.3 (2026-05-29)
 -------------------

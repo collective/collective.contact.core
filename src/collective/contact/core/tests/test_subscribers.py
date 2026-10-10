@@ -46,10 +46,18 @@ class TestUtils(unittest.TestCase, BaseTest):
         with self.assertRaises(LinkIntegrityNotificationException):
             api.content.delete(self.brigadelh)
         api.content.delete(self.brigadelh, check_linkintegrity=False)
+        # the relation of the held position is broken (and not unindexed), as on Plone 4
         rels = catalog.findRelations({"from_id": int_id})
-        self.assertEqual(len([i for i in rels]), 0)
-        # no broken relation is left pointing to the deleted organization
+        self.assertEqual([rel.isBroken() for rel in rels], [True])
+        # no relation is left pointing to the deleted organization
         self.assertEqual(list(catalog.findRelations({"to_id": brigadelh_id})), [])
+
+    def test_referenceObjectRemoved_breaks_relations(self):
+        """Relations to a deleted contact (or to its contained contacts) are broken."""
+        api.content.delete(self.brigadelh, check_linkintegrity=False)
+        for held_position in (self.rambo["brigadelh"], self.portal["mydirectory"]["pepper"]["sergent_pepper"]):
+            self.assertTrue(held_position.position.isBroken())
+            self.assertIsNone(held_position.position.to_object)
 
     def test_recordModified(self):
         """ """
