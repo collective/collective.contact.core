@@ -73,7 +73,8 @@ def update_related_with_organization(obj, event=None):
 
 
 def referenceObjectRemoved(obj, event):
-    """Unindex relations on a deleted contact content."""
+    """Unindex the outgoing relations of a deleted contact content.
+    Incoming ones are left to z3c.relationfield, that breaks them."""
     allowed_interfaces = (IDirectory, IOrganization, IPerson, IHeldPosition, IPosition)
     if not any(i.providedBy(obj) for i in allowed_interfaces):
         return
@@ -89,9 +90,6 @@ def referenceObjectRemoved(obj, event):
     catalog = getUtility(ICatalog)
     outcoming_rels = catalog.findRelations({"from_id": int_id})
     for rel in list(outcoming_rels):
-        catalog.unindex(rel)
-    incoming_rels = catalog.findRelations({"to_id": int_id})
-    for rel in list(incoming_rels):
         catalog.unindex(rel)
 
 
