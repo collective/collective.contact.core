@@ -14,6 +14,8 @@ Changelog
   [chris-adam]
 - Fix the `tooltipster_helper` call: tooltips showed the whole page instead of `#content`.
   [chris-adam]
+- Fix the address rendering on Plone 6: contact views showed no address.
+  [chris-adam]
 
 1.43.3 (2026-05-29)
 -------------------
