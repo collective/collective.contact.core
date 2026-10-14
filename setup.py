@@ -1,4 +1,3 @@
-from setuptools import find_packages
 from setuptools import setup
 
 long_description = (
@@ -42,8 +41,6 @@ setup(
     url="https://github.com/collective/collective.contact.core",
     download_url="https://pypi.org/project/collective.contact.core",
     license="gpl",
-    packages=find_packages("src"),
-    package_dir={"": "src"},
     include_package_data=True,
     zip_safe=False,
     python_requires=">=3.10",
