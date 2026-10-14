@@ -69,7 +69,10 @@ class Position(Container):
         the full name of its organization.
         """
         organization = self.get_organization()
-        return "%s (%s)" % (self.title, organization.get_full_title(separator=separator, first_index=first_index))
+        return "{} ({})".format(
+            self.title,
+            organization.get_full_title(separator=separator, first_index=first_index),
+        )
 
     def get_held_positions(self):
         """Returns the held position
@@ -78,13 +81,17 @@ class Position(Container):
         intids = getUtility(IIntIds)
         catalog = getUtility(ICatalog)
         position_intid = intids.getId(self)
-        contact_relations = catalog.findRelations({"to_id": position_intid, "from_attribute": "position"})
+        contact_relations = catalog.findRelations(
+            {"to_id": position_intid, "from_attribute": "position"}
+        )
         held_positions = []
         for relation in contact_relations:
             held_position = relation.from_object
             if not held_position:
                 logger.error(
-                    "from_object missing for relation from held_position to position %s: %s", self, relation.__dict__
+                    "from_object missing for relation from held_position to position %s: %s",
+                    self,
+                    relation.__dict__,
                 )
                 continue
             # the Plone 6 relation catalog has no from_interfaces_flattened index

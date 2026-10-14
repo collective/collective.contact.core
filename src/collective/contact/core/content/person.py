@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from collective.contact.core import _
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.core.interfaces import IContactable
@@ -120,7 +118,7 @@ class Person(Container):
         if self.firstname is None:
             fullname = self.lastname
         else:
-            fullname = "%s %s" % (self.lastname, self.firstname)
+            fullname = f"{self.lastname} {self.firstname}"
         return normalizeString(fullname)
 
     def get_held_positions(self):

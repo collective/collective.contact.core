@@ -1,4 +1,3 @@
-# -*- coding: utf8 -*-
 from collective.contact.core.browser.utils import get_object_from_referer
 from collective.contact.core.browser.utils import get_object_from_request
 from collective.contact.core.browser.utils import get_valid_url
@@ -24,7 +23,7 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
     layer = FUNCTIONAL
 
     def setUp(self):
-        super(TestBrowserUtils, self).setUp()
+        super().setUp()
         self.login(TEST_USER_NAME)
         self.app = self.layer["app"]
         self.portal = self.layer["portal"]
@@ -51,7 +50,7 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
             obj.REQUEST["PARENTS"].insert(0, obj)
         else:
             obj.REQUEST["PARENTS"][0] = obj
-        obj.REQUEST["URL"] = "{}/{}".format(obj.absolute_url(), view_name)
+        obj.REQUEST["URL"] = f"{obj.absolute_url()}/{view_name}"
         view = obj.restrictedTraverse(view_name)
         view.update()
         view.render()
@@ -62,20 +61,27 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         self.assertEqual(len(logged_actions), 0)
         # we set the registry record to True
         api.portal.set_registry_record(
-            "collective.contact.core.interfaces.IContactCoreParameters." "audit_contact_access", True
+            "collective.contact.core.interfaces.IContactCoreParameters."
+            "audit_contact_access",
+            True,
         )
         api.portal.set_registry_record(
-            "collective.contact.core.interfaces.IContactCoreParameters.audit_contact_types", []
+            "collective.contact.core.interfaces.IContactCoreParameters.audit_contact_types",
+            [],
         )
         # # VIEW
         # check organisation view
         self.call_view(self.armeedeterre, "view")
         self.assertEqual(len(logged_actions), 2)
         self.assertEqual(
-            rmv_uid(0), "PATH=/mydirectory/armeedeterre " "CTX_PATH=/mydirectory/armeedeterre CASE=contact_view"
+            rmv_uid(0),
+            "PATH=/mydirectory/armeedeterre "
+            "CTX_PATH=/mydirectory/armeedeterre CASE=contact_view",
         )
         self.assertEqual(
-            rmv_uid(1), "PATH=/mydirectory/degaulle/adt " "CTX_PATH=/mydirectory/armeedeterre CASE=contact_view"
+            rmv_uid(1),
+            "PATH=/mydirectory/degaulle/adt "
+            "CTX_PATH=/mydirectory/armeedeterre CASE=contact_view",
         )
         # check sub organization view
         logged_actions[:] = []  # clear
@@ -97,18 +103,30 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         logged_actions[:] = []  # clear
         self.call_view(self.degaulle, "view")
         self.assertEqual(len(logged_actions), 5)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/degaulle " "CTX_PATH=/mydirectory/degaulle CASE=contact_view")
         self.assertEqual(
-            rmv_uid(1), "PATH=/mydirectory/degaulle/adt " "CTX_PATH=/mydirectory/degaulle CASE=contact_view"
+            rmv_uid(0),
+            "PATH=/mydirectory/degaulle "
+            "CTX_PATH=/mydirectory/degaulle CASE=contact_view",
         )
         self.assertEqual(
-            rmv_uid(2), "PATH=/mydirectory/armeedeterre " "CTX_PATH=/mydirectory/degaulle CASE=contact_view"
+            rmv_uid(1),
+            "PATH=/mydirectory/degaulle/adt "
+            "CTX_PATH=/mydirectory/degaulle CASE=contact_view",
         )
         self.assertEqual(
-            rmv_uid(3), "PATH=/mydirectory/degaulle/gadt " "CTX_PATH=/mydirectory/degaulle CASE=contact_view"
+            rmv_uid(2),
+            "PATH=/mydirectory/armeedeterre "
+            "CTX_PATH=/mydirectory/degaulle CASE=contact_view",
         )
         self.assertEqual(
-            rmv_uid(4), "PATH=/mydirectory/armeedeterre " "CTX_PATH=/mydirectory/degaulle CASE=contact_view"
+            rmv_uid(3),
+            "PATH=/mydirectory/degaulle/gadt "
+            "CTX_PATH=/mydirectory/degaulle CASE=contact_view",
+        )
+        self.assertEqual(
+            rmv_uid(4),
+            "PATH=/mydirectory/armeedeterre "
+            "CTX_PATH=/mydirectory/degaulle CASE=contact_view",
         )
         # check position view
         logged_actions[:] = []  # clear
@@ -128,10 +146,13 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         self.assertEqual(len(logged_actions), 2)
         self.assertEqual(
             rmv_uid(0),
-            "PATH=/mydirectory/armeedeterre/general_adt " "CTX_PATH=/mydirectory/degaulle/gadt CASE=contact_view",
+            "PATH=/mydirectory/armeedeterre/general_adt "
+            "CTX_PATH=/mydirectory/degaulle/gadt CASE=contact_view",
         )
         self.assertEqual(
-            rmv_uid(1), "PATH=/mydirectory/degaulle/gadt " "CTX_PATH=/mydirectory/degaulle/gadt CASE=contact_view"
+            rmv_uid(1),
+            "PATH=/mydirectory/degaulle/gadt "
+            "CTX_PATH=/mydirectory/degaulle/gadt CASE=contact_view",
         )
         # # EDIT
         # check organisation edit
@@ -139,7 +160,9 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         self.call_view(self.armeedeterre, "@@edit")
         self.assertEqual(len(logged_actions), 1)
         self.assertEqual(
-            rmv_uid(0), "PATH=/mydirectory/armeedeterre " "CTX_PATH=/mydirectory/armeedeterre CASE=contact_edit"
+            rmv_uid(0),
+            "PATH=/mydirectory/armeedeterre "
+            "CTX_PATH=/mydirectory/armeedeterre CASE=contact_edit",
         )
         # check sub organization edit
         logged_actions[:] = []  # clear
@@ -155,7 +178,11 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         logged_actions[:] = []  # clear
         self.call_view(self.degaulle, "@@edit")
         self.assertEqual(len(logged_actions), 1)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/degaulle " "CTX_PATH=/mydirectory/degaulle CASE=contact_edit")
+        self.assertEqual(
+            rmv_uid(0),
+            "PATH=/mydirectory/degaulle "
+            "CTX_PATH=/mydirectory/degaulle CASE=contact_edit",
+        )
         # check position edit
         logged_actions[:] = []  # clear
         self.call_view(self.general_adt, "@@edit")
@@ -173,7 +200,9 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         endInteraction()
         self.assertEqual(len(logged_actions), 1)
         self.assertEqual(
-            rmv_uid(0), "PATH=/mydirectory/degaulle/gadt " "CTX_PATH=/mydirectory/degaulle/gadt CASE=contact_edit"
+            rmv_uid(0),
+            "PATH=/mydirectory/degaulle/gadt "
+            "CTX_PATH=/mydirectory/degaulle/gadt CASE=contact_edit",
         )
         # # OVERLAY
         # check directory overlay
@@ -185,11 +214,20 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         self.armeedeterre.REQUEST["ajax_load"] = "12345678"
         self.call_view(self.armeedeterre, "view")
         self.assertEqual(len(logged_actions), 2)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/armeedeterre " "CTX_PATH=/mydirectory CASE=contact_overlay")
-        self.assertEqual(rmv_uid(1), "PATH=/mydirectory/degaulle/adt " "CTX_PATH=/mydirectory CASE=contact_overlay")
+        self.assertEqual(
+            rmv_uid(0),
+            "PATH=/mydirectory/armeedeterre "
+            "CTX_PATH=/mydirectory CASE=contact_overlay",
+        )
+        self.assertEqual(
+            rmv_uid(1),
+            "PATH=/mydirectory/degaulle/adt "
+            "CTX_PATH=/mydirectory CASE=contact_overlay",
+        )
         # # # we filter on person only
         api.portal.set_registry_record(
-            "collective.contact.core.interfaces.IContactCoreParameters.audit_contact_types", ["person"]
+            "collective.contact.core.interfaces.IContactCoreParameters.audit_contact_types",
+            ["person"],
         )
         del self.armeedeterre.REQUEST.other["ajax_load"]
         # # VIEW
@@ -205,7 +243,11 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         logged_actions[:] = []  # clear
         self.call_view(self.degaulle, "view")
         self.assertEqual(len(logged_actions), 1)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/degaulle " "CTX_PATH=/mydirectory/degaulle CASE=contact_view")
+        self.assertEqual(
+            rmv_uid(0),
+            "PATH=/mydirectory/degaulle "
+            "CTX_PATH=/mydirectory/degaulle CASE=contact_view",
+        )
         # check position view
         logged_actions[:] = []  # clear
         self.call_view(self.general_adt, "view")
@@ -230,7 +272,11 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         logged_actions[:] = []  # clear
         self.call_view(self.degaulle, "@@edit")
         self.assertEqual(len(logged_actions), 1)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/degaulle " "CTX_PATH=/mydirectory/degaulle CASE=contact_edit")
+        self.assertEqual(
+            rmv_uid(0),
+            "PATH=/mydirectory/degaulle "
+            "CTX_PATH=/mydirectory/degaulle CASE=contact_edit",
+        )
         # check position edit
         logged_actions[:] = []  # clear
         self.call_view(self.general_adt, "@@edit")
@@ -252,23 +298,49 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         self.armeedeterre.REQUEST["ajax_load"] = "12345678"
         self.call_view(self.degaulle, "view")
         self.assertEqual(len(logged_actions), 1)
-        self.assertEqual(rmv_uid(0), "PATH=/mydirectory/degaulle " "CTX_PATH=/mydirectory CASE=contact_overlay")
+        self.assertEqual(
+            rmv_uid(0),
+            "PATH=/mydirectory/degaulle " "CTX_PATH=/mydirectory CASE=contact_overlay",
+        )
 
     def test_get_object_from_referer(self):
         portal = self.portal
         url = self.armeedeterre.absolute_url()
         self.assertEqual(get_object_from_referer(portal, url), self.armeedeterre)
         # views and parameters are removed
-        self.assertEqual(get_object_from_referer(portal, url + "/@@edit?_authenticator=123"), self.armeedeterre)
-        self.assertEqual(get_object_from_referer(portal, url + "/++add++organization"), self.armeedeterre)
-        self.assertEqual(get_object_from_referer(portal, url + "/++add++position?x=1"), self.armeedeterre)
+        self.assertEqual(
+            get_object_from_referer(portal, url + "/@@edit?_authenticator=123"),
+            self.armeedeterre,
+        )
+        self.assertEqual(
+            get_object_from_referer(portal, url + "/++add++organization"),
+            self.armeedeterre,
+        )
+        self.assertEqual(
+            get_object_from_referer(portal, url + "/++add++position?x=1"),
+            self.armeedeterre,
+        )
         # on a view like organization/view
-        self.assertEqual(get_object_from_referer(portal, url + "/view"), self.armeedeterre)
+        self.assertEqual(
+            get_object_from_referer(portal, url + "/view"), self.armeedeterre
+        )
         # on a method of an object, like held_position/edit (org selection on held_position edit)
-        self.assertEqual(get_object_from_referer(portal, self.gadt.absolute_url() + "/edit"), self.gadt)
+        self.assertEqual(
+            get_object_from_referer(portal, self.gadt.absolute_url() + "/edit"),
+            self.gadt,
+        )
         # not found
-        self.assertIsNone(get_object_from_referer(portal, portal.absolute_url() + "/mydirectory/unknown"))
-        self.assertEqual(get_object_from_referer(portal, portal.absolute_url() + "/unknown", default="x"), "x")
+        self.assertIsNone(
+            get_object_from_referer(
+                portal, portal.absolute_url() + "/mydirectory/unknown"
+            )
+        )
+        self.assertEqual(
+            get_object_from_referer(
+                portal, portal.absolute_url() + "/unknown", default="x"
+            ),
+            "x",
+        )
 
     def test_get_object_from_request(self):
         request = self.portal.REQUEST
@@ -277,10 +349,14 @@ class TestBrowserUtils(unittest.TestCase, BaseTest):
         self.assertEqual(get_object_from_request(request), self.corpsa)
         # published view
         request["PUBLISHED"] = self.armeedeterre.restrictedTraverse("view")
-        self.assertEqual(get_object_from_request(request, portal=self.portal), self.armeedeterre)
+        self.assertEqual(
+            get_object_from_request(request, portal=self.portal), self.armeedeterre
+        )
         # nothing published or portal: the referer is used
         request["PUBLISHED"] = None
-        request["HTTP_REFERER"] = self.corpsa.absolute_url() + "/@@edit?_authenticator=123"
+        request["HTTP_REFERER"] = (
+            self.corpsa.absolute_url() + "/@@edit?_authenticator=123"
+        )
         self.assertEqual(get_object_from_request(request), self.corpsa)
         request["PUBLISHED"] = self.portal.restrictedTraverse("view")
         self.assertEqual(get_object_from_request(request), self.corpsa)

@@ -1,4 +1,3 @@
-# -*- coding: utf8 -*-
 from collective.contact.core.behaviors import IBirthday
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.behaviors import IGlobalPositioning
@@ -26,7 +25,7 @@ class TestBehaviors(unittest.TestCase, BaseTest):
     layer = INTEGRATION
 
     def setUp(self):
-        super(TestBehaviors, self).setUp()
+        super().setUp()
         self.portal = self.layer["portal"]
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
         self.login(TEST_USER_NAME)
@@ -34,9 +33,15 @@ class TestBehaviors(unittest.TestCase, BaseTest):
         self.testitem = self.portal["testitem"]
 
     def test_behaviors_installation(self):
-        contact_details_behavior = getUtility(IBehavior, name="collective.contact.core.behaviors.IContactDetails")
-        global_positioning_behavior = getUtility(IBehavior, name="collective.contact.core.behaviors.IGlobalPositioning")
-        birthday_behavior = getUtility(IBehavior, name="collective.contact.core.behaviors.IBirthday")
+        contact_details_behavior = getUtility(
+            IBehavior, name="collective.contact.core.behaviors.IContactDetails"
+        )
+        global_positioning_behavior = getUtility(
+            IBehavior, name="collective.contact.core.behaviors.IGlobalPositioning"
+        )
+        birthday_behavior = getUtility(
+            IBehavior, name="collective.contact.core.behaviors.IBirthday"
+        )
         self.assertEqual(contact_details_behavior.interface, IContactDetails)
         self.assertEqual(global_positioning_behavior.interface, IGlobalPositioning)
         self.assertEqual(birthday_behavior.interface, IBirthday)
@@ -111,7 +116,7 @@ class TestAddFormDefaults(unittest.TestCase, BaseTest):
     layer = INTEGRATION
 
     def setUp(self):
-        super(TestAddFormDefaults, self).setUp()
+        super().setUp()
         self.portal = self.layer["portal"]
         self.request = self.layer["request"]
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
@@ -123,8 +128,8 @@ class TestAddFormDefaults(unittest.TestCase, BaseTest):
 
     def add_form_widgets(self, container, portal_type):
         """Returns the widgets of the add form of portal_type in container"""
-        self.request["URL"] = "{0}/++add++{1}".format(container.absolute_url(), portal_type)
-        form = container.restrictedTraverse("++add++{0}".format(portal_type)).form_instance
+        self.request["URL"] = f"{container.absolute_url()}/++add++{portal_type}"
+        form = container.restrictedTraverse(f"++add++{portal_type}").form_instance
         form.update()
         widgets = {}
         for group in form.groups:
@@ -133,8 +138,13 @@ class TestAddFormDefaults(unittest.TestCase, BaseTest):
 
     def test_default_use_parent_address(self):
         # level-0 organization and person in a directory: own address
-        for container, portal_type in ((self.mydirectory, "organization"), (self.mydirectory, "person")):
-            widget = self.add_form_widgets(container, portal_type)["IContactDetails.use_parent_address"]
+        for container, portal_type in (
+            (self.mydirectory, "organization"),
+            (self.mydirectory, "person"),
+        ):
+            widget = self.add_form_widgets(container, portal_type)[
+                "IContactDetails.use_parent_address"
+            ]
             self.assertEqual(widget.value, [], portal_type)
         # sub organization, position, held position: parent address
         for container, portal_type in (
@@ -142,17 +152,25 @@ class TestAddFormDefaults(unittest.TestCase, BaseTest):
             (self.armeedeterre, "position"),
             (self.degaulle, "held_position"),
         ):
-            widget = self.add_form_widgets(container, portal_type)["IContactDetails.use_parent_address"]
+            widget = self.add_form_widgets(container, portal_type)[
+                "IContactDetails.use_parent_address"
+            ]
             self.assertEqual(widget.value, ["selected"], portal_type)
 
     def test_get_parent_address(self):
         # in a directory, there is no parent address
-        widget = self.add_form_widgets(self.mydirectory, "organization")["IContactDetails.parent_address"]
+        widget = self.add_form_widgets(self.mydirectory, "organization")[
+            "IContactDetails.parent_address"
+        ]
         self.assertNotIn("rue", widget.render())
         # in an organization, the parent address is the organization one
-        html = self.add_form_widgets(self.corpsa, "organization")["IContactDetails.parent_address"].render()
+        html = self.add_form_widgets(self.corpsa, "organization")[
+            "IContactDetails.parent_address"
+        ].render()
         self.assertIn("rue Philibert Lucot", html)
         self.assertIn("Orléans", html)
         # in a person, the parent address is the person one
-        html = self.add_form_widgets(self.degaulle, "held_position")["IContactDetails.parent_address"].render()
+        html = self.add_form_widgets(self.degaulle, "held_position")[
+            "IContactDetails.parent_address"
+        ].render()
         self.assertIn("rue Jean Moulin", html)

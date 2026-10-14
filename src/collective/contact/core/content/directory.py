@@ -31,18 +31,22 @@ class IDirectory(model.Schema):
     """Interface for Directory content type"""
 
     position_types = schema.List(
-        title=_("Position types"), value_type=DictRow(title=_("Position"), schema=INameTokenTableRowSchema)
+        title=_("Position types"),
+        value_type=DictRow(title=_("Position"), schema=INameTokenTableRowSchema),
     )
     widget("position_types", DataGridFieldFactory, allow_reorder=True)
 
     organization_types = schema.List(
-        title=_("Organization types"), value_type=DictRow(title=_("Organization"), schema=INameTokenTableRowSchema)
+        title=_("Organization types"),
+        value_type=DictRow(title=_("Organization"), schema=INameTokenTableRowSchema),
     )
     widget("organization_types", DataGridFieldFactory, allow_reorder=True)
 
     organization_levels = schema.List(
         title=_("Organization levels"),
-        value_type=DictRow(title=_("Organization level"), schema=INameTokenTableRowSchema),
+        value_type=DictRow(
+            title=_("Organization level"), schema=INameTokenTableRowSchema
+        ),
     )
     widget("organization_levels", DataGridFieldFactory, allow_reorder=True)
 

@@ -50,7 +50,7 @@ class HeldPosition(Container):
 
     def get_label(self):
         """Returns the held_position label.
-        Made to be overrided."""
+        Made to be overridden."""
         return self.label
 
     def get_person(self):
@@ -92,19 +92,24 @@ class HeldPosition(Container):
         organization = self.get_organization()
         label = self.get_label()
         if position is None and not label:
-            return "(%s)" % organization.get_full_title(separator=separator, first_index=first_index)
+            return "(%s)" % organization.get_full_title(
+                separator=separator, first_index=first_index
+            )
         # we display the position title or the label
         position_title = label or position.title
-        return "%s (%s)" % (position_title, organization.get_full_title(separator=separator, first_index=first_index))
+        return "{} ({})".format(
+            position_title,
+            organization.get_full_title(separator=separator, first_index=first_index),
+        )
 
     def get_full_title(self, separator=" / ", first_index=0):
         """Returns the 'title' and include person name."""
         person_name = self.get_person_title()
         title = self.Title(separator=separator, first_index=first_index)
         if title[0:1] == "(":
-            return "%s %s" % (person_name, title)
+            return f"{person_name} {title}"
         else:
-            return "%s, %s" % (person_name, title)
+            return f"{person_name}, {title}"
 
     def get_person_title(self, include_person_title=True):
         person = self.get_person()
@@ -118,7 +123,9 @@ class HeldPosition(Container):
             return ""
         sortable_fullname = person.get_sortable_title()
         held_position_title = self.Title()
-        return "%s-%s" % (sortable_fullname, normalizeString(safe_text(held_position_title)))
+        return "{}-{}".format(
+            sortable_fullname, normalizeString(safe_text(held_position_title))
+        )
 
     @acqproperty
     def person_title(self):

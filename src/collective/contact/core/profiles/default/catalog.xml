@@ -1,14 +1,18 @@
-<?xml version="1.0"?>
-<object name="portal_catalog" meta_type="Plone Catalog Tool">
+<?xml version="1.0" encoding="utf-8"?>
+<object meta_type="Plone Catalog Tool"
+        name="portal_catalog"
+>
 
-    <!-- Add a new metadata column which will read from context.get_full_title() function -->
-    <column value="get_full_title" />
-    <column value="sortable_title" />
-    <column value="contact_source" />
+  <!-- Add a new metadata column which will read from context.get_full_title() function -->
+  <column value="get_full_title" />
+  <column value="sortable_title" />
+  <column value="contact_source" />
 
-     <index name="email" meta_type="FieldIndex">
-       <indexed_attr value="email"/>
-     </index>
-     <column value="email"/>
+  <index meta_type="FieldIndex"
+         name="email"
+  >
+    <indexed_attr value="email" />
+  </index>
+  <column value="email" />
 
 </object>

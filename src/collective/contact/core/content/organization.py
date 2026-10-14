@@ -132,7 +132,9 @@ class Organization(Container):
         e.g. for HR service in Division Bar in Organization Foo :
         [u"Organization Foo", u"Division Bar", u"HR service"]
         """
-        return [item.title for item in self.get_organizations_chain(first_index=first_index)]
+        return [
+            item.title for item in self.get_organizations_chain(first_index=first_index)
+        ]
 
     def get_full_title(self, separator=" / ", first_index=0):
         """Returns the full title of the organization
@@ -160,7 +162,9 @@ class Organization(Container):
         intids = getUtility(IIntIds)
         catalog = getUtility(ICatalog)
         orga_intid = intids.getId(self)
-        contact_relations = catalog.findRelations({"to_id": orga_intid, "from_attribute": "position"})
+        contact_relations = catalog.findRelations(
+            {"to_id": orga_intid, "from_attribute": "position"}
+        )
         held_positions = []
         for relation in contact_relations:
             held_position = relation.from_object

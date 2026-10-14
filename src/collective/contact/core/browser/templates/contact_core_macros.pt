@@ -1,26 +1,33 @@
-<html
-  xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:tal="http://xml.zope.org/namespaces/tal"
-  xmlns:metal="http://xml.zope.org/namespaces/metal"
-  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-  lang="en"
-  i18n:domain="collective.contact.core">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      lang="en"
+      i18n:domain="collective.contact.core"
+>
 
- <metal:macro define-macro="additional-fields">
+  <metal:macro define-macro="additional-fields">
 
-  <tal:fieldset repeat="group view/groups">
-    <fieldset tal:define="prefix group/prefix;
-                          group_name group/__name__"
-              tal:attributes="id python:''.join((prefix, 'groups.', group_name)).replace('.', '-')">
-        <legend tal:content="group/label" />
-        <div class="field" tal:repeat="widget group/widgets/values">
-            <label tal:content="widget/label" />
-            <br />
-            <div tal:content="structure widget/render" />
+    <tal:fieldset repeat="group view/groups">
+      <fieldset tal:define="
+                  prefix group/prefix;
+                  group_name group/__name__;
+                "
+                tal:attributes="
+                  id python:''.join((prefix, 'groups.', group_name)).replace('.', '-');
+                "
+      >
+        <legend tal:content="group/label"></legend>
+        <div class="field"
+             tal:repeat="widget group/widgets/values"
+        >
+          <label tal:content="widget/label"></label>
+          <br />
+          <div tal:content="structure widget/render"></div>
         </div>
-    </fieldset>
-  </tal:fieldset>
+      </fieldset>
+    </tal:fieldset>
 
- </metal:macro>
+  </metal:macro>
 
 </html>

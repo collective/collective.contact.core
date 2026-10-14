@@ -1,5 +1,3 @@
-# -*- coding: utf8 -*-
-
 from collective.contact.core.content.directory import is_valid_identifier
 from collective.contact.core.content.organization import InvalidEnterpriseNumber
 from collective.contact.core.content.organization import IOrganization
@@ -40,7 +38,7 @@ class TestContentTypes(unittest.TestCase, BaseTest):
     layer = INTEGRATION
 
     def setUp(self):
-        super(TestContentTypes, self).setUp()
+        super().setUp()
         self.portal = self.layer["portal"]
         self.mydirectory = self.portal["mydirectory"]
         self.degaulle = self.mydirectory["degaulle"]
@@ -71,10 +69,15 @@ class TestContentTypes(unittest.TestCase, BaseTest):
             self.portal.portal_types._setObject("position_holder", fti)
         intids = getUtility(IIntIds)
         holder = api.content.create(
-            container=self.portal, type="position_holder", id="holder", position=RelationValue(intids.getId(target))
+            container=self.portal,
+            type="position_holder",
+            id="holder",
+            position=RelationValue(intids.getId(target)),
         )
         # the relation is cataloged like the held position ones
-        relations = getUtility(ICatalog).findRelations({"to_id": intids.getId(target), "from_attribute": "position"})
+        relations = getUtility(ICatalog).findRelations(
+            {"to_id": intids.getId(target), "from_attribute": "position"}
+        )
         self.assertIn(holder, [rel.from_object for rel in relations])
         return holder
 
@@ -85,9 +88,15 @@ class TestDirectory(TestContentTypes):
         self.assertIn("mydirectory", self.portal)
         mydirectory = self.portal["mydirectory"]
         self.assertEqual("Military directory", mydirectory.Title())
-        self.assertIn({"name": "Colonel", "token": "colonel"}, mydirectory.position_types)
-        self.assertIn({"name": "Air force", "token": "air_force"}, mydirectory.organization_types)
-        self.assertIn({"name": "Regiment", "token": "regiment"}, mydirectory.organization_levels)
+        self.assertIn(
+            {"name": "Colonel", "token": "colonel"}, mydirectory.position_types
+        )
+        self.assertIn(
+            {"name": "Air force", "token": "air_force"}, mydirectory.organization_types
+        )
+        self.assertIn(
+            {"name": "Regiment", "token": "regiment"}, mydirectory.organization_levels
+        )
 
     def test_is_valid_identifier(self):
         self.assertFalse(is_valid_identifier("Toto"))
@@ -149,13 +158,26 @@ class TestOrganization(TestContentTypes):
         corpsa = self.corpsa
         divisionalpha = self.divisionalpha
         self.assertEqual([armeedeterre], self.armeedeterre.get_organizations_chain())
-        self.assertEqual([armeedeterre, corpsa, divisionalpha], self.divisionalpha.get_organizations_chain())
-        self.assertEqual([corpsa, divisionalpha], self.divisionalpha.get_organizations_chain(first_index=1))
+        self.assertEqual(
+            [armeedeterre, corpsa, divisionalpha],
+            self.divisionalpha.get_organizations_chain(),
+        )
+        self.assertEqual(
+            [corpsa, divisionalpha],
+            self.divisionalpha.get_organizations_chain(first_index=1),
+        )
         self.assertEqual([], self.divisionalpha.get_organizations_chain(first_index=50))
 
     def test_get_root_organization(self):
         armeedeterre = self.armeedeterre
-        organizations = [armeedeterre, self.corpsa, self.corpsb, self.divisionalpha, self.regimenth, self.brigadelh]
+        organizations = [
+            armeedeterre,
+            self.corpsa,
+            self.corpsb,
+            self.divisionalpha,
+            self.regimenth,
+            self.brigadelh,
+        ]
         for org in organizations:
             self.assertEqual(armeedeterre, org.get_root_organization())
 
@@ -188,25 +210,33 @@ class TestOrganization(TestContentTypes):
     def test_get_full_title(self):
         self.assertEqual(self.armeedeterre.get_full_title(), "Armée de terre")
         self.assertEqual(
-            self.brigadelh.get_full_title(), "Armée de terre / Corps A / Division Alpha / Régiment H / Brigade LH"
+            self.brigadelh.get_full_title(),
+            "Armée de terre / Corps A / Division Alpha / Régiment H / Brigade LH",
         )
         self.assertEqual(
             self.brigadelh.get_full_title(separator=" - "),
             "Armée de terre - Corps A - Division Alpha - Régiment H - Brigade LH",
         )
         self.assertEqual(
-            self.brigadelh.get_full_title(separator=" - ", first_index=2), "Division Alpha - Régiment H - Brigade LH"
+            self.brigadelh.get_full_title(separator=" - ", first_index=2),
+            "Division Alpha - Régiment H - Brigade LH",
         )
 
     def test_reindex_suborganization(self):
         before = self.portal.portal_catalog(UID=self.brigadelh.UID())[0].get_full_title
-        self.assertEqual(before, "Arm\xe9e de terre / Corps A / Division Alpha / R\xe9giment H / Brigade LH")
+        self.assertEqual(
+            before,
+            "Arm\xe9e de terre / Corps A / Division Alpha / R\xe9giment H / Brigade LH",
+        )
         self.armeedeterre.title = "Armée de l'air"
         from zope.lifecycleevent import modified
 
         modified(self.armeedeterre)
         after = self.portal.portal_catalog(UID=self.brigadelh.UID())[0].get_full_title
-        self.assertEqual(after, "Arm\xe9e de l'air / Corps A / Division Alpha / R\xe9giment H / Brigade LH")
+        self.assertEqual(
+            after,
+            "Arm\xe9e de l'air / Corps A / Division Alpha / R\xe9giment H / Brigade LH",
+        )
 
     def test_copy_paste(self):
         cb = self.mydirectory.manage_copyObjects(["armeedeterre"])
@@ -215,16 +245,24 @@ class TestOrganization(TestContentTypes):
 
     def test_get_positions(self):
         # add some positions to self.armeedeterre
-        self.armeedeterre.invokeFactory("position", "colonel_adt", title="Colonel de l'armée de terre")
-        self.armeedeterre.invokeFactory("position", "lieutenant_adt", title="Lieutenant de l'armée de terre")
-        self.armeedeterre.invokeFactory("position", "sergent_adt", title="Sergent de l'armée de terre")
+        self.armeedeterre.invokeFactory(
+            "position", "colonel_adt", title="Colonel de l'armée de terre"
+        )
+        self.armeedeterre.invokeFactory(
+            "position", "lieutenant_adt", title="Lieutenant de l'armée de terre"
+        )
+        self.armeedeterre.invokeFactory(
+            "position", "sergent_adt", title="Sergent de l'armée de terre"
+        )
         self.assertEqual(
             [pos.id for pos in self.armeedeterre.get_positions()],
             ["general_adt", "colonel_adt", "lieutenant_adt", "sergent_adt"],
         )
         # get_positions sorts positions using getObjPositionInParent
         # move 'general_adt' to last position
-        self.armeedeterre.moveObjectToPosition("general_adt", len(self.armeedeterre.objectIds()))
+        self.armeedeterre.moveObjectToPosition(
+            "general_adt", len(self.armeedeterre.objectIds())
+        )
         self.assertEqual(
             [pos.id for pos in self.armeedeterre.get_positions()],
             ["colonel_adt", "lieutenant_adt", "sergent_adt", "general_adt"],
@@ -233,7 +271,10 @@ class TestOrganization(TestContentTypes):
     def test_get_held_positions(self):
         # held positions directly linked to the organization (without position)
         self.assertEqual(self.armeedeterre.get_held_positions(), [self.adt])
-        self.assertEqual(self.brigadelh.get_held_positions(), [self.mydirectory["rambo"]["brigadelh"]])
+        self.assertEqual(
+            self.brigadelh.get_held_positions(),
+            [self.mydirectory["rambo"]["brigadelh"]],
+        )
         # a held position linked to a position of the organization is not returned
         self.assertEqual(self.corpsa.get_held_positions(), [])
         # only held positions are returned, not other contents having a `position` relation
@@ -260,10 +301,14 @@ class TestPosition(TestContentTypes):
         self.assertEqual(general_adt.position_type, "general")
 
     def test_get_full_title(self):
-        self.assertEqual(self.general_adt.get_full_title(), "Général de l'armée de terre (Armée de terre)")
+        self.assertEqual(
+            self.general_adt.get_full_title(),
+            "Général de l'armée de terre (Armée de terre)",
+        )
         self.assertEqual(
             self.sergent_lh.get_full_title(),
-            "Sergent de la brigade LH (Armée de terre / Corps A / Division Alpha / Régiment H / " "Brigade LH)",
+            "Sergent de la brigade LH (Armée de terre / Corps A / Division Alpha / Régiment H / "
+            "Brigade LH)",
         )
 
     def test_copy_paste(self):
@@ -295,13 +340,19 @@ class TestHeldPosition(TestContentTypes):
         self.assertIn("sergent_pepper", pepper)
         self.assertEqual(
             sergent_pepper.Title(),
-            "Sergent de la brigade LH (Armée de terre / Corps A / Division Alpha / Régiment H / " "Brigade LH)",
+            "Sergent de la brigade LH (Armée de terre / Corps A / Division Alpha / Régiment H / "
+            "Brigade LH)",
         )
         self.assertIsNone(sergent_pepper.end_date)
 
     def test_get_full_title(self):
-        self.assertEqual(self.adt.get_full_title(), "Général Charles De Gaulle (Armée de terre)")
-        self.assertEqual(self.gadt.get_full_title(), "Général Charles De Gaulle, Émissaire OTAN (Armée de terre)")
+        self.assertEqual(
+            self.adt.get_full_title(), "Général Charles De Gaulle (Armée de terre)"
+        )
+        self.assertEqual(
+            self.gadt.get_full_title(),
+            "Général Charles De Gaulle, Émissaire OTAN (Armée de terre)",
+        )
         self.assertEqual(
             self.sergent_pepper.get_full_title(),
             "Mister Pepper, Sergent de la brigade LH (Armée de terre / Corps A / Division Alpha / "
@@ -310,9 +361,15 @@ class TestHeldPosition(TestContentTypes):
 
     def test_get_person_title(self):
         self.assertEqual(self.gadt.get_person_title(), "Général Charles De Gaulle")
-        self.assertEqual(self.gadt.get_person_title(include_person_title=False), "Charles De Gaulle")
-        api.portal.set_registry_record(name="person_title_in_title", value=False, interface=IContactCoreParameters)
-        self.assertEqual(self.gadt.get_person_title(include_person_title=True), "Charles De Gaulle")
+        self.assertEqual(
+            self.gadt.get_person_title(include_person_title=False), "Charles De Gaulle"
+        )
+        api.portal.set_registry_record(
+            name="person_title_in_title", value=False, interface=IContactCoreParameters
+        )
+        self.assertEqual(
+            self.gadt.get_person_title(include_person_title=True), "Charles De Gaulle"
+        )
 
     def test_get_person(self):
         pass

@@ -11,11 +11,13 @@ from zope.component import queryMultiAdapter
 class Person(BaseView):
 
     def update(self):
-        super(Person, self).update()
+        super().update()
         # Do not show person contact details
         # if they are the same as the main held position
         contactable_held_position = IContactable(self.context).held_position
-        if IContactDetails.providedBy(contactable_held_position) and not IContactDetails.providedBy(self.context):
+        if IContactDetails.providedBy(
+            contactable_held_position
+        ) and not IContactDetails.providedBy(self.context):
             self.show_contact_details = False
         else:
             self.show_contact_details = True
@@ -58,4 +60,4 @@ class HeldPositions(BrowserView):
             held_positions.append(held_position)
 
         self.held_positions = held_positions
-        return super(HeldPositions, self).__call__()
+        return super().__call__()

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from collective.contact.core import _
 from collective.contact.core.behaviors import ADDRESS_FIELDS
 from collective.contact.core.behaviors import IContactDetails
@@ -13,7 +11,9 @@ from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
 from datetime import date
 from plone import api
-from plone.app.dexterity.textindexer.converters import DefaultDexterityTextIndexFieldConverter
+from plone.app.dexterity.textindexer.converters import (
+    DefaultDexterityTextIndexFieldConverter,
+)
 from plone.app.dexterity.textindexer.interfaces import IDynamicTextIndexExtender
 from plone.base.utils import safe_text
 from plone.indexer import indexer
@@ -21,14 +21,13 @@ from zope.component import adapts
 from zope.i18n import translate
 from zope.interface import implementer
 
-
 # one word per type, none being the prefix of another (the contact widget searches "word*")
 SEARCH_TERMS = {
-    'organization': _(u'search_term_organization', default=u'organization'),
-    'person': _(u'search_term_person', default=u'person'),
-    'position': _(u'search_term_position', default=u'role'),
-    'held_position': _(u'search_term_held_position', default=u'post'),
-    'contact_list': _(u'search_term_contact_list', default=u'list'),
+    "organization": _("search_term_organization", default="organization"),
+    "person": _("search_term_person", default="person"),
+    "position": _("search_term_position", default="role"),
+    "held_position": _("search_term_held_position", default="post"),
+    "contact_list": _("search_term_contact_list", default="list"),
 }
 
 
@@ -41,7 +40,9 @@ def contact_email(contact):
 @indexer(IContactContent)
 def contact_source(contact):
     csmc = api.portal.get_registry_record(
-        "collective.contact.core.interfaces.IContactCoreParameters." "contact_source_metadata_content", default="{gft}"
+        "collective.contact.core.interfaces.IContactCoreParameters."
+        "contact_source_metadata_content",
+        default="{gft}",
     )
     variables = {"gft": contact.get_full_title()}
     contactable = IContactable(contact)
@@ -59,7 +60,7 @@ def contact_source(contact):
 
 
 @implementer(IDynamicTextIndexExtender)
-class OrganizationSearchableExtender(object):
+class OrganizationSearchableExtender:
     """Extends SearchableText of an organization."""
 
     adapts(IOrganization)
@@ -70,7 +71,10 @@ class OrganizationSearchableExtender(object):
     def __call__(self):
         words = []
         organization = self.context
-        if IRelatedOrganizations.providedBy(organization) and organization.related_organizations is not None:
+        if (
+            IRelatedOrganizations.providedBy(organization)
+            and organization.related_organizations is not None
+        ):
             for related in organization.related_organizations:
                 words += related.to_object.get_organizations_titles()
 
@@ -87,7 +91,7 @@ class OrganizationSearchableExtender(object):
 
 
 @implementer(IDynamicTextIndexExtender)
-class HeldPositionSearchableExtender(object):
+class HeldPositionSearchableExtender:
     """Extends SearchableText of a held position."""
 
     adapts(IHeldPosition)
@@ -118,7 +122,7 @@ class HeldPositionSearchableExtender(object):
 
 
 @implementer(IDynamicTextIndexExtender)
-class PositionSearchableExtender(object):
+class PositionSearchableExtender:
     """Extends SearchableText of a position."""
 
     adapts(IPosition)
@@ -136,7 +140,7 @@ class PositionSearchableExtender(object):
 
 
 @implementer(IDynamicTextIndexExtender)
-class PersonSearchableExtender(object):
+class PersonSearchableExtender:
     """Extends SearchableText of a position."""
 
     adapts(IPerson)
@@ -148,7 +152,8 @@ class PersonSearchableExtender(object):
         obj = self.context
         results = []
         use_description = api.portal.get_registry_record(
-            "collective.contact.core.interfaces.IContactCoreParameters." "use_description_to_search_person"
+            "collective.contact.core.interfaces.IContactCoreParameters."
+            "use_description_to_search_person"
         )
         if use_description:
             text = obj.SearchableText()
@@ -162,7 +167,8 @@ class PersonSearchableExtender(object):
             results.append(email)
 
         use_held_positions = api.portal.get_registry_record(
-            "collective.contact.core.interfaces.IContactCoreParameters." "use_held_positions_to_search_person"
+            "collective.contact.core.interfaces.IContactCoreParameters."
+            "use_held_positions_to_search_person"
         )
         if use_held_positions:
             for held_positions in obj.get_held_positions():
@@ -171,7 +177,7 @@ class PersonSearchableExtender(object):
 
 
 @implementer(IDynamicTextIndexExtender)
-class TypeSearchableExtender(object):
+class TypeSearchableExtender:
     """Extends SearchableText with a translated type term, to search "organization xxx"."""
 
     def __init__(self, context):
@@ -179,12 +185,13 @@ class TypeSearchableExtender(object):
 
     def __call__(self):
         if not api.portal.get_registry_record(
-                "collective.contact.core.interfaces.IContactCoreParameters.use_type_term_to_search_contact",
-                default=False):
-            return u''
+            "collective.contact.core.interfaces.IContactCoreParameters.use_type_term_to_search_contact",
+            default=False,
+        ):
+            return ""
         term = SEARCH_TERMS.get(self.context.portal_type)
         if term is None:
-            return u''
+            return ""
         return translate(term, target_language=api.portal.get_default_language())
 
 
@@ -195,7 +202,7 @@ class ContactEscapingTitleFieldConverter(DefaultDexterityTextIndexFieldConverter
         """Convert the adapted field value to text/plain for indexing"""
         if self.field.__name__ in ("title", "description"):
             return ""
-        return super(ContactEscapingTitleFieldConverter, self).convert()
+        return super().convert()
 
 
 @indexer(IPerson)

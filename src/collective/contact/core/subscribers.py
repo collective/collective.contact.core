@@ -1,4 +1,3 @@
-# coding=utf-8
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.browser.utils import audit_access
 from collective.contact.core.content.directory import IDirectory
@@ -17,7 +16,6 @@ from zope.component import getUtility
 from zope.container.contained import ContainerModifiedEvent
 from zope.intid.interfaces import IIntIds
 from zope.schema import getFields
-
 
 # update indexes of related content when a content is modified
 # you can monkey patch this value if you have an index that needs this

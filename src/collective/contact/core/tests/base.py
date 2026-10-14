@@ -1,12 +1,12 @@
-# -*- coding: utf8 -*-
 """Small test helpers (replacement for ecreall.helpers.testing)."""
+
 from AccessControl import getSecurityManager
 from plone import api
 from plone.app.testing import login
 from plone.app.testing import logout
 
 
-class BaseTest(object):
+class BaseTest:
     """Mixin for unittest.TestCase using a plone.app.testing layer."""
 
     def login(self, username):
@@ -24,7 +24,7 @@ def create_members(portal, userdefs):
     for userdef in userdefs:
         username = userdef["user"]
         api.user.create(
-            email="{}@example.com".format(username),
+            email=f"{username}@example.com",
             username=username,
             password="secret_pass_123",
             roles=tuple(userdef["roles"]),
@@ -52,7 +52,7 @@ class BaseWorkflowTest(BaseTest):
                         "Missing" if username in allowed else "Unexpected",
                         permission,
                         username,
-                        " in state {}".format(stateid) if stateid else "",
+                        f" in state {stateid}" if stateid else "",
                     ),
                 )
         self.login("manager")

@@ -8,7 +8,7 @@ from zope.schema.interfaces import IVocabularyFactory
 class Position(BaseView):
 
     def update(self):
-        super(Position, self).update()
+        super().update()
         self.position = self.context
         position = self.position
         factory = getUtility(IVocabularyFactory, "PositionTypes")

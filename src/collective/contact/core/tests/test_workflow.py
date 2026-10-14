@@ -1,11 +1,8 @@
-# -*- coding: utf8 -*-
-
 from collective.contact.core.testing import INTEGRATION
 from collective.contact.core.tests.base import BaseWorkflowTest
 from collective.contact.core.tests.base import create_members
 
 import unittest
-
 
 USERDEFS = [
     {
@@ -55,7 +52,7 @@ class TestSecurity(unittest.TestCase, BaseWorkflowTest):
     layer = INTEGRATION
 
     def setUp(self):
-        super(TestSecurity, self).setUp()
+        super().setUp()
         self.portal = self.layer["portal"]
         create_members(self.portal, USERDEFS)
         self.mydirectory = self.portal["mydirectory"]
@@ -72,7 +69,9 @@ class TestSecurity(unittest.TestCase, BaseWorkflowTest):
                 workflow.doActionFor(degaulle, transition)
             if state:
                 self.assertHasState(degaulle, state)
-                self.assertCheckPermissions(degaulle, PERSON_PERMISSIONS[state], USERDEFS, stateid=state)
+                self.assertCheckPermissions(
+                    degaulle, PERSON_PERMISSIONS[state], USERDEFS, stateid=state
+                )
 
     def test_contact_permissions(self):
         """organization, position and held_position have the same workflow as person"""
@@ -84,4 +83,6 @@ class TestSecurity(unittest.TestCase, BaseWorkflowTest):
                 if transition:
                     workflow.doActionFor(obj, transition)
                 self.assertHasState(obj, state)
-                self.assertCheckPermissions(obj, PERSON_PERMISSIONS[state], USERDEFS, stateid=state)
+                self.assertCheckPermissions(
+                    obj, PERSON_PERMISSIONS[state], USERDEFS, stateid=state
+                )

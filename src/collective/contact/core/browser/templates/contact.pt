@@ -1,41 +1,58 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-      lang="en"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      lang="en"
       metal:use-macro="context/main_template/macros/master"
-      i18n:domain="collective.contact.core">
-<body>
+      xml:lang="en"
+      i18n:domain="collective.contact.core"
+>
+  <body>
 
-<div metal:fill-slot="main">
+    <div metal:fill-slot="main">
 
-  <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" />
-  <div tal:replace="structure context/@@basefields" />
+      <div id="viewlet-above-content-title"
+           tal:content="structure provider:plone.abovecontenttitle"
+      ></div>
+      <div tal:replace="structure context/@@basefields"></div>
 
-  <div id="organizations" class="field" tal:condition="view/organizations">
-      <label><tal:block i18n:translate="">Organizations</tal:block>:</label>
-      <ul>
-      <tal:block tal:repeat="organization view/organizations">
-          <li>
-              <tal:icon
-               tal:define="icon_name string:contenttype/${organization/portal_type}"
-               tal:replace="structure python:icons.tag(icon_name)" />
-              <a class="link-tooltip" tal:attributes="href organization/absolute_url; data-base_url organization/absolute_url">
-              <span tal:replace="organization/Title"
-                    i18n:translate="" />
-          </a></li>
-      </tal:block>
-      </ul>
-  </div>
+      <div class="field"
+           id="organizations"
+           tal:condition="view/organizations"
+      >
+        <label><tal:block i18n:translate="">Organizations</tal:block>:</label>
+        <ul>
+          <tal:block tal:repeat="organization view/organizations">
+            <li>
+              <tal:icon tal:define="
+                          icon_name string:contenttype/${organization/portal_type};
+                        "
+                        tal:replace="structure python:icons.tag(icon_name)"
+              />
+              <a class="link-tooltip"
+                 tal:attributes="
+                   href organization/absolute_url;
+                   data-base_url organization/absolute_url;
+                 "
+              >
+                <span tal:replace="organization/Title"
+                      i18n:translate=""
+                ></span>
+              </a></li>
+          </tal:block>
+        </ul>
+      </div>
 
-  <div tal:replace="structure context/@@contactdetails" />
+      <div tal:replace="structure context/@@contactdetails"></div>
 
-  <div tal:replace="structure context/@@ttwfields" />
+      <div tal:replace="structure context/@@ttwfields"></div>
 
-  <metal:additional-fields use-macro="context/@@contact_core_macros/macros/additional-fields" />
+      <metal:additional-fields use-macro="context/@@contact_core_macros/macros/additional-fields" />
 
-  <div id="viewlet-below-content-body" tal:content="structure provider:plone.belowcontentbody" />
-</div>
+      <div id="viewlet-below-content-body"
+           tal:content="structure provider:plone.belowcontentbody"
+      ></div>
+    </div>
 
-</body>
+  </body>
 </html>

@@ -8,11 +8,13 @@ from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 
 
-class BaseFields(object):
+class BaseFields:
 
     def display_below_content_title(self):
         return api.portal.get_registry_record(
-            "display_below_content_title_on_views", interface=IContactCoreParameters, default=False
+            "display_below_content_title_on_views",
+            interface=IContactCoreParameters,
+            default=False,
         )
 
     def can_edit(self):
@@ -28,7 +30,9 @@ class PersonBaseFields(BrowserView, BaseFields):
 
     def display_photo_label(self):
         return api.portal.get_registry_record(
-            "display_photo_label_on_views", interface=IContactCoreParameters, default=False
+            "display_photo_label_on_views",
+            interface=IContactCoreParameters,
+            default=False,
         )
 
     def update(self):
@@ -49,7 +53,7 @@ class PersonBaseFields(BrowserView, BaseFields):
 
     def __call__(self):
         self.update()
-        return super(PersonBaseFields, self).__call__()
+        return super().__call__()
 
 
 class OrganizationBaseFields(BrowserView, BaseFields):
@@ -73,7 +77,7 @@ class OrganizationBaseFields(BrowserView, BaseFields):
 
     def __call__(self):
         self.update()
-        return super(OrganizationBaseFields, self).__call__()
+        return super().__call__()
 
 
 class PositionBaseFields(BrowserView, BaseFields):
@@ -90,7 +94,7 @@ class PositionBaseFields(BrowserView, BaseFields):
 
     def __call__(self):
         self.update()
-        return super(PositionBaseFields, self).__call__()
+        return super().__call__()
 
 
 class HeldPositionBaseFields(BrowserView, BaseFields):
@@ -103,7 +107,9 @@ class HeldPositionBaseFields(BrowserView, BaseFields):
 
     def display_photo_label(self):
         return api.portal.get_registry_record(
-            "display_photo_label_on_views", interface=IContactCoreParameters, default=False
+            "display_photo_label_on_views",
+            interface=IContactCoreParameters,
+            default=False,
         )
 
     def update(self):
@@ -128,4 +134,4 @@ class HeldPositionBaseFields(BrowserView, BaseFields):
 
     def __call__(self):
         self.update()
-        return super(HeldPositionBaseFields, self).__call__()
+        return super().__call__()

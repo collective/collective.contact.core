@@ -1,4 +1,3 @@
-# -*- coding: utf8 -*-
 from collective.contact.core.interfaces import IContactable
 from collective.contact.core.interfaces import IContactCoreParameters
 from collective.contact.core.interfaces import IPersonHeldPositions
@@ -21,7 +20,7 @@ class TestAdapters(unittest.TestCase, BaseTest):
     layer = INTEGRATION
 
     def setUp(self):
-        super(TestAdapters, self).setUp()
+        super().setUp()
         self.portal = self.layer["portal"]
         self.directory = self.portal["mydirectory"]
         self.degaulle = self.directory["degaulle"]
@@ -32,7 +31,9 @@ class TestAdapters(unittest.TestCase, BaseTest):
         gadt = self.degaulle["gadt"]
         vcard_provider = IVCard(gadt)
         api.portal.set_registry_record(
-            name="person_contact_details_private", value=True, interface=IContactCoreParameters
+            name="person_contact_details_private",
+            value=True,
+            interface=IContactCoreParameters,
         )
         vcard = vcard_provider.get_vcard()
         self.assertEqual(vcard.fn.value, "Charles De Gaulle")
@@ -45,7 +46,9 @@ class TestAdapters(unittest.TestCase, BaseTest):
         self.assertTrue(hasattr(vcard, "tel_list"))
         self.assertEqual(vcard.bday.value, "1901-11-22")
         api.portal.set_registry_record(
-            name="person_contact_details_private", value=False, interface=IContactCoreParameters
+            name="person_contact_details_private",
+            value=False,
+            interface=IContactCoreParameters,
         )
         vcard = vcard_provider.get_vcard()
         self.assertEqual(vcard.email.value, "charles.de.gaulle@private.com")
@@ -59,14 +62,19 @@ class TestAdapters(unittest.TestCase, BaseTest):
         vcard_provider = IVCard(sergent_pepper)
         vcard = vcard_provider.get_vcard()
         self.assertEqual(vcard.fn.value, "Pepper")
-        self.assertEqual(vcard.org.value, ["Armée de terre", "Corps A", "Division Alpha", "Régiment H", "Brigade LH"])
+        self.assertEqual(
+            vcard.org.value,
+            ["Armée de terre", "Corps A", "Division Alpha", "Régiment H", "Brigade LH"],
+        )
         self.assertEqual(vcard.role.value, "Sergent de la brigade LH")
 
         # TODO: test a held_position without address ?? Rambo ? (associate new Organization and Position to Rambo)
         # self.assertFalse(hasattr(vcard, 'adr'))
 
     def test_regimenth_vcard(self):
-        regimenth = self.directory["armeedeterre"]["corpsa"]["divisionalpha"]["regimenth"]
+        regimenth = self.directory["armeedeterre"]["corpsa"]["divisionalpha"][
+            "regimenth"
+        ]
         vcard_provider = IVCard(regimenth)
         vcard = vcard_provider.get_vcard()
         self.assertEqual(vcard.fn.value, "Régiment H")
@@ -138,7 +146,9 @@ class TestAdapters(unittest.TestCase, BaseTest):
     def test_contact_details(self):
         # # person contact details are private
         api.portal.set_registry_record(
-            name="person_contact_details_private", value=True, interface=IContactCoreParameters
+            name="person_contact_details_private",
+            value=True,
+            interface=IContactCoreParameters,
         )
         # test a person
         details = IContactable(self.degaulle).get_contact_details()
@@ -183,7 +193,9 @@ class TestAdapters(unittest.TestCase, BaseTest):
         )
 
         # test an held position using parent address and related to a position
-        self.assertFalse(self.directory["armeedeterre"]["general_adt"].use_parent_address)
+        self.assertFalse(
+            self.directory["armeedeterre"]["general_adt"].use_parent_address
+        )
         details = IContactable(self.degaulle["gadt"]).get_contact_details()
         self.assertEqual(details["email"], "general@armees.fr")
         self.assertEqual(details["phone"], "0987654321")
@@ -238,7 +250,9 @@ class TestAdapters(unittest.TestCase, BaseTest):
 
         # # person contact details are not private
         api.portal.set_registry_record(
-            name="person_contact_details_private", value=False, interface=IContactCoreParameters
+            name="person_contact_details_private",
+            value=False,
+            interface=IContactCoreParameters,
         )
 
         # test with rambo data empty : we get info from relations
@@ -248,7 +262,9 @@ class TestAdapters(unittest.TestCase, BaseTest):
 
         # test an held position using parent address and related to an organization
         details = IContactable(self.degaulle["adt"]).get_contact_details()
-        self.assertEqual(details["email"], "charles.de.gaulle@private.com")  # phone from person
+        self.assertEqual(
+            details["email"], "charles.de.gaulle@private.com"
+        )  # phone from person
         self.assertEqual(details["phone"], "01000000001")  # phone from org
         self.assertDictEqual(
             details["address"],
@@ -264,7 +280,9 @@ class TestAdapters(unittest.TestCase, BaseTest):
         )
 
         # test an held position using parent address and related to a position
-        self.assertFalse(self.directory["armeedeterre"]["general_adt"].use_parent_address)
+        self.assertFalse(
+            self.directory["armeedeterre"]["general_adt"].use_parent_address
+        )
         details = IContactable(self.degaulle["gadt"]).get_contact_details()
         self.assertEqual(details["email"], "charles.de.gaulle@private.com")
         self.assertEqual(details["phone"], "0987654321")

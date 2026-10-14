@@ -1,4 +1,3 @@
-# -*- coding: utf8 -*-
 from collective.contact.core.testing import INTEGRATION
 from collective.contact.core.tests.base import BaseTest
 from collective.contact.widget.interfaces import IContactWidgetSettings
@@ -22,7 +21,7 @@ class TestAddContact(unittest.TestCase, BaseTest):
     layer = INTEGRATION
 
     def setUp(self):
-        super(TestAddContact, self).setUp()
+        super().setUp()
         self.portal = self.layer["portal"]
         self.request = self.layer["request"]
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
@@ -43,8 +42,8 @@ class TestAddContact(unittest.TestCase, BaseTest):
         self.request.response.headers.pop("location", None)
         self.request.response.setStatus(200)
         for name, obj in contacts.items():
-            self.request.form["oform.widgets.{0}".format(name)] = "/".join(obj.getPhysicalPath())
-        self.request.form["oform.buttons.{0}".format(button)] = "Add"
+            self.request.form[f"oform.widgets.{name}"] = "/".join(obj.getPhysicalPath())
+        self.request.form[f"oform.buttons.{button}"] = "Add"
         form = context.restrictedTraverse(form_name)
         form()
         return self.request.response.getHeader("location")
@@ -63,13 +62,22 @@ class TestAddContact(unittest.TestCase, BaseTest):
         self.assertIsNone(self.submit(self.mydirectory, "@@add-contact"))
         # only an organization: redirect to it
         self.assertEqual(
-            self.submit(self.mydirectory, "@@add-contact", organization=self.corpsa), self.corpsa.absolute_url()
+            self.submit(self.mydirectory, "@@add-contact", organization=self.corpsa),
+            self.corpsa.absolute_url(),
         )
         # only a person: redirect to it
-        self.assertEqual(self.submit(self.mydirectory, "@@add-contact", person=self.rambo), self.rambo.absolute_url())
+        self.assertEqual(
+            self.submit(self.mydirectory, "@@add-contact", person=self.rambo),
+            self.rambo.absolute_url(),
+        )
         self.assertEqual(self.rambo.objectIds(), ["brigadelh"])
         # a person and an organization: a held position is created in the person
-        url = self.submit(self.mydirectory, "@@add-contact", person=self.rambo, organization=self.corpsa)
+        url = self.submit(
+            self.mydirectory,
+            "@@add-contact",
+            person=self.rambo,
+            organization=self.corpsa,
+        )
         held_position = self.new_held_position()
         self.assertEqual(held_position.portal_type, "held_position")
         self.assertEqual(held_position.get_organization(), self.corpsa)
@@ -91,46 +99,79 @@ class TestAddContact(unittest.TestCase, BaseTest):
         self.assertIn(held_position, self.general_adt.get_held_positions())
 
     def test_handleCancel(self):
-        url = self.submit(self.mydirectory, "@@add-contact", button="cancel", person=self.rambo)
+        url = self.submit(
+            self.mydirectory, "@@add-contact", button="cancel", person=self.rambo
+        )
         self.assertEqual(url, self.mydirectory.absolute_url())
         self.assertEqual(self.rambo.objectIds(), ["brigadelh"])
         self.assertIn("Add New Item operation cancelled", self.messages())
 
     def test_add_held_position(self):
         """@@add-held-position requires the organization and the person"""
-        self.assertIsNone(self.submit(self.mydirectory, "@@add-held-position", organization=self.corpsa))
-        self.assertIsNone(self.submit(self.mydirectory, "@@add-held-position", person=self.rambo))
+        self.assertIsNone(
+            self.submit(
+                self.mydirectory, "@@add-held-position", organization=self.corpsa
+            )
+        )
+        self.assertIsNone(
+            self.submit(self.mydirectory, "@@add-held-position", person=self.rambo)
+        )
         self.assertEqual(self.rambo.objectIds(), ["brigadelh"])
-        url = self.submit(self.mydirectory, "@@add-held-position", person=self.rambo, organization=self.corpsa)
+        url = self.submit(
+            self.mydirectory,
+            "@@add-held-position",
+            person=self.rambo,
+            organization=self.corpsa,
+        )
         self.assertEqual(url, self.new_held_position().absolute_url() + "/view")
 
     def test_add_contact_from_organization(self):
         form = self.corpsa.restrictedTraverse("@@add-contact")
         form.update()
-        self.assertEqual(list(form.widgets["organization"].value), ["/plone/mydirectory/armeedeterre/corpsa"])
+        self.assertEqual(
+            list(form.widgets["organization"].value),
+            ["/plone/mydirectory/armeedeterre/corpsa"],
+        )
         self.assertEqual(list(form.widgets["position"].value), [])
         # the add contact link of an organization opens this form
         html = self.corpsa.restrictedTraverse("view")()
-        self.assertIn('href="http://nohost/plone/mydirectory/armeedeterre/corpsa/@@add-contact"', html)
+        self.assertIn(
+            'href="http://nohost/plone/mydirectory/armeedeterre/corpsa/@@add-contact"',
+            html,
+        )
 
     def test_add_contact_from_position(self):
         form = self.general_adt.restrictedTraverse("@@add-contact")
         form.update()
-        self.assertEqual(list(form.widgets["organization"].value), ["/plone/mydirectory/armeedeterre"])
-        self.assertEqual(list(form.widgets["position"].value), ["/plone/mydirectory/armeedeterre/general_adt"])
+        self.assertEqual(
+            list(form.widgets["organization"].value),
+            ["/plone/mydirectory/armeedeterre"],
+        )
+        self.assertEqual(
+            list(form.widgets["position"].value),
+            ["/plone/mydirectory/armeedeterre/general_adt"],
+        )
         # the add contact link of a position opens this form
         html = self.general_adt.restrictedTraverse("view")()
-        self.assertIn('href="http://nohost/plone/mydirectory/armeedeterre/general_adt/@@add-contact"', html)
+        self.assertIn(
+            'href="http://nohost/plone/mydirectory/armeedeterre/general_adt/@@add-contact"',
+            html,
+        )
 
     def test_add_organization(self):
         """@@add-organization redirects to the selected position or organization"""
         self.assertEqual(
-            self.submit(self.mydirectory, "@@add-organization", organization=self.armeedeterre),
+            self.submit(
+                self.mydirectory, "@@add-organization", organization=self.armeedeterre
+            ),
             self.armeedeterre.absolute_url(),
         )
         self.assertEqual(
             self.submit(
-                self.mydirectory, "@@add-organization", organization=self.armeedeterre, position=self.general_adt
+                self.mydirectory,
+                "@@add-organization",
+                organization=self.armeedeterre,
+                position=self.general_adt,
             ),
             self.general_adt.absolute_url(),
         )
@@ -146,7 +187,8 @@ class TestAddContact(unittest.TestCase, BaseTest):
     @unittest.expectedFailure
     def test_add_organization_without_selection(self):
         """Bug kept from Plone 4: submitting @@add-organization without selection raises NotImplementedError
-        (handleAdd sets _finishedAdd without redirect and z3c.form AddForm.nextURL is not implemented)"""
+        (handleAdd sets _finishedAdd without redirect and z3c.form AddForm.nextURL is not implemented)
+        """
         self.assertIsNone(self.submit(self.mydirectory, "@@add-organization"))
 
 
@@ -156,7 +198,7 @@ class TestContactWidgetSettings(unittest.TestCase, BaseTest):
     layer = INTEGRATION
 
     def setUp(self):
-        super(TestContactWidgetSettings, self).setUp()
+        super().setUp()
         self.portal = self.layer["portal"]
         self.request = self.layer["request"]
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
@@ -167,7 +209,10 @@ class TestContactWidgetSettings(unittest.TestCase, BaseTest):
     def add_contact_infos(self, context, **kwargs):
         addlink = kwargs.pop("addlink", True)
         field = ContactChoice(
-            __name__="contact", title="Contact", addlink=addlink, source=ContactSourceBinder(**kwargs)
+            __name__="contact",
+            title="Contact",
+            addlink=addlink,
+            source=ContactSourceBinder(**kwargs),
         )
         field = field.bind(context)
         widget = getMultiAdapter((field, self.request), IFieldWidget)
@@ -180,14 +225,18 @@ class TestContactWidgetSettings(unittest.TestCase, BaseTest):
         infos = self.add_contact_infos(self.portal, portal_type=("organization",))
         self.assertTrue(infos["close_on_click"])
         self.assertEqual(len(infos["actions"]), 1)
-        self.assertEqual(infos["actions"][0]["url"], directory_url + "/++add++organization")
+        self.assertEqual(
+            infos["actions"][0]["url"], directory_url + "/++add++organization"
+        )
         self.assertEqual(infos["actions"][0]["label"].mapping["name"], "Organization")
         infos = self.add_contact_infos(self.portal, portal_type=("person",))
         self.assertEqual(infos["actions"][0]["url"], directory_url + "/++add++person")
         # held positions: the add held position form
         infos = self.add_contact_infos(self.portal, portal_type=("held_position",))
         self.assertFalse(infos["close_on_click"])
-        self.assertEqual(infos["actions"][0]["url"], directory_url + "/@@add-held-position")
+        self.assertEqual(
+            infos["actions"][0]["url"], directory_url + "/@@add-held-position"
+        )
         self.assertEqual(infos["actions"][0]["klass"], "addnew")
         # held positions related to a position: the form is prefilled
         infos = self.add_contact_infos(
@@ -201,13 +250,26 @@ class TestContactWidgetSettings(unittest.TestCase, BaseTest):
             "/plone/mydirectory/armeedeterre/general_adt",
         )
         # organization or position: the add organization form
-        infos = self.add_contact_infos(self.portal, portal_type=("organization", "position"))
+        infos = self.add_contact_infos(
+            self.portal, portal_type=("organization", "position")
+        )
         self.assertFalse(infos["close_on_click"])
-        self.assertEqual(infos["actions"][0]["url"], directory_url + "/@@add-organization")
+        self.assertEqual(
+            infos["actions"][0]["url"], directory_url + "/@@add-organization"
+        )
         # other types: the add contact form
-        infos = self.add_contact_infos(self.portal, portal_type=("organization", "person", "held_position"))
+        infos = self.add_contact_infos(
+            self.portal, portal_type=("organization", "person", "held_position")
+        )
         self.assertEqual(infos["actions"][0]["url"], directory_url + "/@@add-contact")
         # no add link
-        self.assertEqual(self.add_contact_infos(self.portal, portal_type=("person",), addlink=False)["actions"], [])
+        self.assertEqual(
+            self.add_contact_infos(self.portal, portal_type=("person",), addlink=False)[
+                "actions"
+            ],
+            [],
+        )
         setRoles(self.portal, TEST_USER_ID, ["Member"])
-        self.assertEqual(self.add_contact_infos(self.portal, portal_type=("person",))["actions"], [])
+        self.assertEqual(
+            self.add_contact_infos(self.portal, portal_type=("person",))["actions"], []
+        )

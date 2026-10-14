@@ -2,7 +2,7 @@ from collective.contact.core import _tr as _
 from collective.contact.core.behaviors import IBirthday
 from collective.contact.core.behaviors import IContactDetails
 from DateTime import DateTime
-from imio.fpaudit import utils as _fpaudit_utils  # import module so it can be patched in a second time
+from imio.fpaudit import utils as _fpaudit_utils
 from plone import api
 from plone.app.dexterity.behaviors.metadata import IBasic
 from plone.autoform.interfaces import IFormFieldProvider
@@ -15,7 +15,6 @@ from zope import schema
 from zope.component import getUtility
 
 import re
-
 
 IGNORED_BEHAVIORS = [IContactDetails, IBasic, IBirthday]
 
@@ -31,7 +30,9 @@ def get_object_from_request(request, portal=None, default=None):
     else:
         context = base_hasattr(published, "context") and published.context or None
     if not context or context == portal:
-        referer = portal.REQUEST["HTTP_REFERER"].replace(portal.absolute_url() + "/", "")
+        referer = portal.REQUEST["HTTP_REFERER"].replace(
+            portal.absolute_url() + "/", ""
+        )
         # remove view and parameters
         referer = re.sub(r"/@@[^?]*$", "", re.sub(r"\?.*$", "", referer))
         try:
@@ -47,7 +48,9 @@ def get_object_from_referer(portal, referer, default=None):
     """Returns the object from the referer"""
     referer = referer.replace(portal.absolute_url() + "/", "")
     # remove view and parameters
-    referer = re.sub(r"/@@[^?]*$", "", re.sub(r"/\+\+add\+\+\w+", "", re.sub(r"\?.*$", "", referer)))
+    referer = re.sub(
+        r"/@@[^?]*$", "", re.sub(r"/\+\+add\+\+\w+", "", re.sub(r"\?.*$", "", referer))
+    )
     try:
         obj = portal.unrestrictedTraverse(referer)
         if not base_hasattr(obj, "portal_type"):
@@ -63,10 +66,14 @@ def get_object_from_referer(portal, referer, default=None):
 def audit_access(contact, context):
     """Logs access to a contact"""
     if api.portal.get_registry_record(
-        "collective.contact.core.interfaces.IContactCoreParameters." "audit_contact_access", default=False
+        "collective.contact.core.interfaces.IContactCoreParameters."
+        "audit_contact_access",
+        default=False,
     ):
         filtered_pt = api.portal.get_registry_record(
-            "collective.contact.core.interfaces.IContactCoreParameters." "audit_contact_types", default=[]
+            "collective.contact.core.interfaces.IContactCoreParameters."
+            "audit_contact_types",
+            default=[],
         )
         if filtered_pt and contact.portal_type not in filtered_pt:
             return
@@ -76,9 +83,13 @@ def audit_access(contact, context):
         case = ""
         # logger.info("{}, {}, {}| {}| {}| {}".format(contact, context, req["URL"], req["HTTP_REFERER"],
         # req["PARENTS"][0], req["PUBLISHED"]))
-        if req["ACTUAL_URL"].endswith("@@autocomplete-search"):  # when org autocomplete search on held_position edit
+        if req["ACTUAL_URL"].endswith(
+            "@@autocomplete-search"
+        ):  # when org autocomplete search on held_position edit
             return
-        if req["ACTUAL_URL"].endswith("@@masterselect-jsonvalue"):  # when editing person with admin
+        if req["ACTUAL_URL"].endswith(
+            "@@masterselect-jsonvalue"
+        ):  # when editing person with admin
             return
         if context == "edit":
             main_obj = req["PARENTS"][0]
@@ -114,7 +125,11 @@ def get_ttw_fields(obj):
     schema_policy = getUtility(ISchemaPolicy, name=fti.schema_policy)
     original_schema = schema_policy.bases(None, None)[0]
     original_fields = schema.getFieldsInOrder(original_schema)
-    new_fields = [field[0] for field in all_fields if field[0] not in list(dict(original_fields).keys())]
+    new_fields = [
+        field[0]
+        for field in all_fields
+        if field[0] not in list(dict(original_fields).keys())
+    ]
 
     for behavior_id in fti.behaviors:
         behavior = getUtility(IBehavior, behavior_id).interface
@@ -125,7 +140,12 @@ def get_ttw_fields(obj):
             default_fieldset_fields = non_fieldset_fields(behavior)
             behavior_name = behavior_id.split(".")[-1]
             # @TODO: get generic method to get widget id
-            new_fields.extend(["%s.%s" % (behavior_name, field_name) for field_name in default_fieldset_fields])
+            new_fields.extend(
+                [
+                    f"{behavior_name}.{field_name}"
+                    for field_name in default_fieldset_fields
+                ]
+            )
         except Exception:
             pass
 
@@ -135,6 +155,6 @@ def get_ttw_fields(obj):
 def get_valid_url(url):
     """Returns valid url (i.e. an url which starts with http or https)"""
     if url and not url.startswith("http"):
-        return "http://{0}".format(url)
+        return f"http://{url}"
     else:
         return url

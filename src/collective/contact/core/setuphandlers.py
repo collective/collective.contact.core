@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # File: setuphandlers.py
 #
@@ -16,7 +15,6 @@ from zope.intid.interfaces import IIntIds
 
 import datetime
 import logging
-
 
 # from plone.registry.interfaces import IRegistry
 
@@ -43,9 +41,13 @@ def postInstall(context):
         "use_held_positions_to_search_person",
         "use_description_to_search_person",
     ):
-        val = api.portal.get_registry_record(name=name, interface=IContactCoreParameters)
+        val = api.portal.get_registry_record(
+            name=name, interface=IContactCoreParameters
+        )
         if val is None:
-            api.portal.set_registry_record(name=name, value=True, interface=IContactCoreParameters)
+            api.portal.set_registry_record(
+                name=name, value=True, interface=IContactCoreParameters
+            )
     # we need to remove the default model_source added to our portal_types
     # XXX to be done
 

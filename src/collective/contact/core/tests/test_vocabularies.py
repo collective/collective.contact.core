@@ -1,4 +1,3 @@
-# -*- coding: utf8 -*-
 from collective.contact.core.testing import INTEGRATION
 from collective.contact.core.vocabularies import get_directory
 from collective.contact.core.vocabularies import get_vocabulary
@@ -28,7 +27,9 @@ class TestVocabularies(unittest.TestCase):
 
     def test_get_directory(self):
         self.assertEqual(get_directory(self.mydirectory), self.mydirectory)
-        self.assertEqual(get_directory(self.mydirectory["degaulle"]["gadt"]), self.mydirectory)
+        self.assertEqual(
+            get_directory(self.mydirectory["degaulle"]["gadt"]), self.mydirectory
+        )
         self.assertEqual(get_directory(self.corpsa), self.mydirectory)
         with self.assertRaises(NoDirectoryFound):
             get_directory(None)
@@ -37,15 +38,30 @@ class TestVocabularies(unittest.TestCase):
 
     def test_get_vocabulary(self):
         vocabulary = get_vocabulary(
-            [{"name": "Général", "token": "general"}, {"name": "Sergeant", "token": "sergeant"}]
+            [
+                {"name": "Général", "token": "general"},
+                {"name": "Sergeant", "token": "sergeant"},
+            ]
         )
-        self.assertEqual(terms(vocabulary), [("general", "general", "Général"), ("sergeant", "sergeant", "Sergeant")])
+        self.assertEqual(
+            terms(vocabulary),
+            [("general", "general", "Général"), ("sergeant", "sergeant", "Sergeant")],
+        )
         self.assertEqual(terms(get_vocabulary([])), [])
 
     def test_PositionTypes(self):
         factory = getUtility(IVocabularyFactory, "PositionTypes")
-        expected = ["general", "sergeant", "colonel", "lieutenant", "captain", "admiral"]
-        self.assertEqual([term.value for term in factory(self.armeedeterre["general_adt"])], expected)
+        expected = [
+            "general",
+            "sergeant",
+            "colonel",
+            "lieutenant",
+            "captain",
+            "admiral",
+        ]
+        self.assertEqual(
+            [term.value for term in factory(self.armeedeterre["general_adt"])], expected
+        )
         self.assertEqual(factory(self.mydirectory).getTerm("captain").title, "Captain")
         # outside a directory
         self.assertEqual(terms(factory(self.portal)), [])
@@ -58,14 +74,22 @@ class TestVocabularies(unittest.TestCase):
         setRequest(self.request)
         # edit or view: depends on the organization container
         self.request["URL"] = self.armeedeterre.absolute_url() + "/edit"
-        self.assertEqual([term.value for term in factory(self.armeedeterre)], organization_types)
+        self.assertEqual(
+            [term.value for term in factory(self.armeedeterre)], organization_types
+        )
         self.request["URL"] = self.corpsa.absolute_url() + "/edit"
-        self.assertEqual([term.value for term in factory(self.corpsa)], organization_levels)
+        self.assertEqual(
+            [term.value for term in factory(self.corpsa)], organization_levels
+        )
         # add: depends on the context, the future container
         self.request["URL"] = self.mydirectory.absolute_url() + "/++add++organization"
-        self.assertEqual([term.value for term in factory(self.mydirectory)], organization_types)
+        self.assertEqual(
+            [term.value for term in factory(self.mydirectory)], organization_types
+        )
         self.request["URL"] = self.corpsa.absolute_url() + "/++add++organization"
-        self.assertEqual([term.value for term in factory(self.corpsa)], organization_levels)
+        self.assertEqual(
+            [term.value for term in factory(self.corpsa)], organization_levels
+        )
         # outside a directory
         self.assertEqual(terms(factory(self.portal)), [])
 
@@ -80,7 +104,15 @@ class TestVocabularies(unittest.TestCase):
         factory = getUtility(IVocabularyFactory, "collective.contact.core.audit_types")
         values = [term.value for term in factory(self.portal)]
         # types having the contact details behavior
-        for portal_type in ("organization", "person", "position", "held_position", "testtype"):
+        for portal_type in (
+            "organization",
+            "person",
+            "position",
+            "held_position",
+            "testtype",
+        ):
             self.assertIn(portal_type, values)
         self.assertNotIn("directory", values)
-        self.assertEqual(factory(self.portal).getTerm("held_position").title, "Held position")
+        self.assertEqual(
+            factory(self.portal).getTerm("held_position").title, "Held position"
+        )

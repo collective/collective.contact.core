@@ -1,5 +1,3 @@
-# -*- coding: utf8 -*-
-
 from collective.contact.widget.schema import ContactChoice
 from collective.contact.widget.schema import ContactList
 from collective.contact.widget.source import ContactSourceBinder
@@ -20,7 +18,6 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 import collective.contact.core
 import transaction
-
 
 logged_actions = []
 
@@ -96,5 +93,6 @@ INTEGRATION = IntegrationTesting(bases=(COLLECTIVE_CONTACT_CORE,), name="INTEGRA
 FUNCTIONAL = FunctionalTesting(bases=(COLLECTIVE_CONTACT_CORE,), name="FUNCTIONAL")
 
 ACCEPTANCE = FunctionalTesting(
-    bases=(COLLECTIVE_CONTACT_CORE, AUTOLOGIN_LIBRARY_FIXTURE, WSGI_SERVER_FIXTURE), name="ACCEPTANCE"
+    bases=(COLLECTIVE_CONTACT_CORE, AUTOLOGIN_LIBRARY_FIXTURE, WSGI_SERVER_FIXTURE),
+    name="ACCEPTANCE",
 )

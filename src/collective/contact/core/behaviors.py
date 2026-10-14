@@ -69,7 +69,11 @@ def get_parent_address(adapter):
 class IGlobalPositioning(model.Schema):
     """GlobalPositioning behavior"""
 
-    fieldset("global_positioning", label=_("Global positioning"), fields=("latitude", "longitude"))
+    fieldset(
+        "global_positioning",
+        label=_("Global positioning"),
+        fields=("latitude", "longitude"),
+    )
 
     latitude = schema.Float(
         title=_("Latitude"),
@@ -121,7 +125,9 @@ class IContactDetails(model.Schema):
     """Contact details behavior"""
 
     form.write_permission(use_parent_address="collective.contact.core.UseParentAddress")
-    fieldset("contact_details", label=_("Contact details"), fields=CONTACT_DETAILS_FIELDS)
+    fieldset(
+        "contact_details", label=_("Contact details"), fields=CONTACT_DETAILS_FIELDS
+    )
     fieldset("address", label=_("Address"), fields=ADDRESS_FIELDS_PLUS_PARENT)
 
     email = schema.TextLine(
@@ -303,7 +309,9 @@ def default_use_parent_address(adapter):
 
 
 DefaultUseParentAddress = ComputedWidgetAttribute(
-    default_use_parent_address, field=IContactDetails["use_parent_address"], view=Interface
+    default_use_parent_address,
+    field=IContactDetails["use_parent_address"],
+    view=Interface,
 )
 
 

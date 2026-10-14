@@ -1,26 +1,36 @@
 <div xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      lang="en"
-      i18n:domain="collective.contact.core"
-      class="contact-ttwfields">
-    <tal:block tal:repeat="field view/ttw_fields">
-        <p class="field"
-             tal:define="widgets view/widgets;
-                         widget python:widgets[field];"
-             tal:condition="widget/value">
+     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+     xmlns:metal="http://xml.zope.org/namespaces/metal"
+     xmlns:tal="http://xml.zope.org/namespaces/tal"
+     class="contact-ttwfields"
+     lang="en"
+     i18n:domain="collective.contact.core"
+>
+  <tal:block tal:repeat="field view/ttw_fields">
+    <p class="field"
+       tal:define="
+         widgets view/widgets;
+         widget python:widgets[field];
+       "
+       tal:condition="widget/value"
+    >
 
-            <tal:with-label tal:condition="widget/label">
-                <label><tal:block tal:content="widget/label" i18n:translate="" />:</label>
-                <span tal:on-error="nothing" tal:content="structure widget/render">
-                </span>
-            </tal:with-label>
+      <tal:with-label tal:condition="widget/label">
+        <label><tal:block tal:content="widget/label"
+                     i18n:translate=""
+          />:</label>
+        <span tal:content="structure widget/render"
+              tal:on-error="nothing"
+        >
+        </span>
+      </tal:with-label>
 
-            <tal:without-label tal:condition="not: widget/label">
-                <label><span tal:on-error="nothing" tal:replace="structure widget/render" /></label>
-            </tal:without-label>
+      <tal:without-label tal:condition="not: widget/label">
+        <label><span tal:replace="structure widget/render"
+                tal:on-error="nothing"
+          ></span></label>
+      </tal:without-label>
 
-        </p>
-    </tal:block>
+    </p>
+  </tal:block>
 </div>

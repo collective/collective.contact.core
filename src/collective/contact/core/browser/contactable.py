@@ -19,7 +19,7 @@ import os.path
 
 
 @implementer(IContactable)
-class ContactDetailsContactable(object):
+class ContactDetailsContactable:
     """Common adapter class for objects that just implement the IContactDetails behavior"""
 
     def __init__(self, context):
@@ -61,7 +61,7 @@ class ContactDetails(BrowserView):
 
     def __call__(self):
         self.update()
-        return super(ContactDetails, self).__call__()
+        return super().__call__()
 
     def update(self):
         contactable = IContactable(self.context)
@@ -79,7 +79,7 @@ class NoFallbackContactDetails(ContactDetails):
 
 
 @implementer(IContactable)
-class Contactable(object):
+class Contactable:
 
     def __init__(self, context):
         self.context = context
@@ -107,8 +107,12 @@ class Contactable(object):
         we use the one of the first object in this list which have this information
         """
         contactables = []
-        related_items = [self.context, self.held_position, self.position] + list(reversed(self.organizations))
-        if not api.portal.get_registry_record(name="person_contact_details_private", interface=IContactCoreParameters):
+        related_items = [self.context, self.held_position, self.position] + list(
+            reversed(self.organizations)
+        )
+        if not api.portal.get_registry_record(
+            name="person_contact_details_private", interface=IContactCoreParameters
+        ):
             related_items.insert(2, self.person)
         elif self.context == self.person:
             related_items = [self.context]  # for a person, we get private info only
