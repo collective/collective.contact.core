@@ -33,7 +33,7 @@ def get_vocabulary(schema_list):
 
 
 @implementer(IVocabularyFactory)
-class PositionTypes(object):
+class PositionTypes:
 
     def __call__(self, context):
         try:
@@ -47,7 +47,7 @@ PositionTypesFactory = PositionTypes()
 
 
 @implementer(IVocabularyFactory)
-class OrganizationTypesOrLevels(object):
+class OrganizationTypesOrLevels:
 
     def get_container_type(self, context):
         request = getRequest()
@@ -75,7 +75,7 @@ OrganizationTypesOrLevelsFactory = OrganizationTypesOrLevels()
 
 
 @implementer(IVocabularyFactory)
-class Genders(object):
+class Genders:
 
     def __call__(self, context):
         terms = []
@@ -90,7 +90,7 @@ GendersFactory = Genders()
 
 
 @implementer(IVocabularyFactory)
-class AuditTypes(object):
+class AuditTypes:
 
     def __call__(self, context):
         terms = []
@@ -98,7 +98,9 @@ class AuditTypes(object):
             if not fti:
                 continue
             if "collective.contact.core.behaviors.IContactDetails" in fti.behaviors:
-                terms.append(SimpleVocabulary.createTerm(name, name, _(fti.title or name)))
+                terms.append(
+                    SimpleVocabulary.createTerm(name, name, _(fti.title or name))
+                )
         return SimpleVocabulary(terms)
 
 

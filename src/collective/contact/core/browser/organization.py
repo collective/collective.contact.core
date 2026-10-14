@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from AccessControl import getSecurityManager
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.browser.contactable import BaseView
@@ -26,7 +24,9 @@ class Organization(BaseView):
         catalog = api.portal.get_tool("portal_catalog")
         context_path = "/".join(organization.getPhysicalPath())
         self.sub_organizations = catalog.searchResults(
-            portal_type="organization", path={"query": context_path, "depth": 1}, sort_on="getObjPositionInParent"
+            portal_type="organization",
+            path={"query": context_path, "depth": 1},
+            sort_on="getObjPositionInParent",
         )
         self.positions = self.context.get_positions()
         sm = getSecurityManager()
@@ -46,7 +46,9 @@ class SubOrganizations(BrowserView):
         catalog = api.portal.get_tool("portal_catalog")
         context_path = "/".join(self.context.getPhysicalPath())
         self.sub_organizations = catalog.searchResults(
-            portal_type="organization", path={"query": context_path, "depth": 1}, sort_on="getObjPositionInParent"
+            portal_type="organization",
+            path={"query": context_path, "depth": 1},
+            sort_on="getObjPositionInParent",
         )
         return self.index()
 
@@ -58,7 +60,7 @@ class OtherContacts(BrowserView):
 
     def __call__(self):
         self.update()
-        return super(OtherContacts, self).__call__()
+        return super().__call__()
 
     def update(self):
         organization = self.context
@@ -74,7 +76,8 @@ class OtherContacts(BrowserView):
             contact["label"] = hp.get_label()
             contact["obj"] = hp
             contact["display_photo"] = api.portal.get_registry_record(
-                name="display_contact_photo_on_organization_view", interface=IContactCoreParameters
+                name="display_contact_photo_on_organization_view",
+                interface=IContactCoreParameters,
             )
             contact["has_photo"] = contact["display_photo"] and hp.photo or None
 

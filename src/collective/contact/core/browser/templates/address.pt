@@ -1,26 +1,53 @@
-<div xmlns:tal="http://xml.zope.org/namespaces/tal"
-     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+<div xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+     xmlns:tal="http://xml.zope.org/namespaces/tal"
+     tal:repeat="address args"
      i18n:domain="collective.contact.core"
-     tal:repeat="address args">
-    <div tal:condition="address" class="field adr address">
+>
+  <div class="field adr address"
+       tal:condition="address"
+  >
     <label><tal:block i18n:translate="">Address</tal:block>:</label>
-    <div class="street-address" i18n:translate="address_line">
-        <span i18n:name="street" tal:replace="address/street"></span>
-        <span i18n:name="number" tal:replace="address/number"></span>
+    <div class="street-address"
+         i18n:translate="address_line"
+    >
+      <span tal:replace="address/street"
+            i18n:name="street"
+      ></span>
+      <span tal:replace="address/number"
+            i18n:name="number"
+      ></span>
     </div>
     <div class="additional_address_details">
-        <span i18n:translate="" tal:replace="address/additional_address_details"></span>
+      <span tal:replace="address/additional_address_details"
+            i18n:translate=""
+      ></span>
     </div>
     <div class="postal_code_and_locality">
-        <span class="postal-code" i18n:translate="" tal:condition="address/zip_code" tal:content="address/zip_code"></span>
-        <span class="locality" i18n:translate="" tal:condition="address/city" tal:content="address/city"></span>
+      <span class="postal-code"
+            tal:condition="address/zip_code"
+            tal:content="address/zip_code"
+            i18n:translate=""
+      ></span>
+      <span class="locality"
+            tal:condition="address/city"
+            tal:content="address/city"
+            i18n:translate=""
+      ></span>
     </div>
-    <div class="region" tal:condition="address/region">
-        <span i18n:translate="" tal:replace="address/region"></span>
+    <div class="region"
+         tal:condition="address/region"
+    >
+      <span tal:replace="address/region"
+            i18n:translate=""
+      ></span>
     </div>
-    <div class="country" tal:condition="address/country">
-        <span i18n:translate="" tal:replace="address/country"></span>
+    <div class="country"
+         tal:condition="address/country"
+    >
+      <span tal:replace="address/country"
+            i18n:translate=""
+      ></span>
     </div>
 
-    </div>
+  </div>
 </div>

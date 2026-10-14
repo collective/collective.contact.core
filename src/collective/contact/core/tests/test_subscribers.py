@@ -1,5 +1,3 @@
-# -*- coding: utf8 -*-
-
 from collective.contact.core.testing import INTEGRATION
 from collective.contact.core.tests.base import BaseTest
 from plone import api
@@ -20,19 +18,28 @@ class TestUtils(unittest.TestCase, BaseTest):
     layer = INTEGRATION
 
     def setUp(self):
-        super(TestUtils, self).setUp()
+        super().setUp()
         self.app = self.layer["app"]
         self.portal = self.layer["portal"]
         mydirectory = self.portal["mydirectory"]
         self.degaulle = mydirectory["degaulle"]
         self.rambo = mydirectory["rambo"]
-        self.brigadelh = mydirectory["armeedeterre"]["corpsa"]["divisionalpha"]["regimenth"]["brigadelh"]
+        self.brigadelh = mydirectory["armeedeterre"]["corpsa"]["divisionalpha"][
+            "regimenth"
+        ]["brigadelh"]
         self.armeedeterre = mydirectory["armeedeterre"]
         self.login(TEST_USER_NAME)
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
 
     def search(self, text, portal_type):
-        return sorted([brain.getPath() for brain in api.content.find(SearchableText=text, portal_type=portal_type)])
+        return sorted(
+            [
+                brain.getPath()
+                for brain in api.content.find(
+                    SearchableText=text, portal_type=portal_type
+                )
+            ]
+        )
 
     def test_relation_unindex(self):
         catalog = getUtility(ICatalog)
@@ -55,7 +62,10 @@ class TestUtils(unittest.TestCase, BaseTest):
     def test_referenceObjectRemoved_breaks_relations(self):
         """Relations to a deleted contact (or to its contained contacts) are broken."""
         api.content.delete(self.brigadelh, check_linkintegrity=False)
-        for held_position in (self.rambo["brigadelh"], self.portal["mydirectory"]["pepper"]["sergent_pepper"]):
+        for held_position in (
+            self.rambo["brigadelh"],
+            self.portal["mydirectory"]["pepper"]["sergent_pepper"],
+        ):
             self.assertTrue(held_position.position.isBroken())
             self.assertIsNone(held_position.position.to_object)
 
@@ -66,7 +76,9 @@ class TestUtils(unittest.TestCase, BaseTest):
         dguid = self.degaulle.UID()
         record_name = "collective.contact.core.interfaces.IContactCoreParameters.contact_source_metadata_content"
         self.assertEqual(api.portal.get_registry_record(record_name), "{gft}")
-        self.assertEqual(self.getBrain(dguid).contact_source, self.degaulle.get_full_title())
+        self.assertEqual(
+            self.getBrain(dguid).contact_source, self.degaulle.get_full_title()
+        )
         # we change registry
         api.portal.set_registry_record(record_name, "{gft} from {city} on {email}")
         # metadata has been updated
@@ -82,7 +94,9 @@ class TestUtils(unittest.TestCase, BaseTest):
             "armeedeterre/corpsa/divisionalpha/regimenth/brigadelh/sergent_lh"
         )
         view = self.portal.restrictedTraverse("@@delete_confirmation_info")
-        sources = [s["uid"] for b in view.get_breaches([sergent_lh]) for s in b["sources"]]
+        sources = [
+            s["uid"] for b in view.get_breaches([sergent_lh]) for s in b["sources"]
+        ]
         self.assertEqual(sources, [mydirectory["pepper"]["sergent_pepper"].UID()])
 
     def test_update_related_with_person(self):
@@ -101,8 +115,13 @@ class TestUtils(unittest.TestCase, BaseTest):
         general_adt.title = "Marshal"
         modified(general_adt)
         # the held position and its person are found with the new position title
-        self.assertEqual(self.search("Marshal", "held_position"), ["/plone/mydirectory/degaulle/gadt"])
-        self.assertEqual(self.search("Marshal", "person"), ["/plone/mydirectory/degaulle"])
+        self.assertEqual(
+            self.search("Marshal", "held_position"),
+            ["/plone/mydirectory/degaulle/gadt"],
+        )
+        self.assertEqual(
+            self.search("Marshal", "person"), ["/plone/mydirectory/degaulle"]
+        )
 
     def test_update_related_with_held_position(self):
         gadt = self.degaulle["gadt"]
@@ -110,4 +129,6 @@ class TestUtils(unittest.TestCase, BaseTest):
         gadt.label = "Ambassador"
         modified(gadt)
         # the person is found with the new held position label
-        self.assertEqual(self.search("Ambassador", "person"), ["/plone/mydirectory/degaulle"])
+        self.assertEqual(
+            self.search("Ambassador", "person"), ["/plone/mydirectory/degaulle"]
+        )

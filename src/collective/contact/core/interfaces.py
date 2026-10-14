@@ -9,7 +9,6 @@ from zope.interface import Interface
 
 import datetime
 
-
 now = datetime.datetime.today()
 
 
@@ -41,33 +40,49 @@ class IVCard(Interface):
 class IContactCoreParameters(Interface):
 
     person_contact_details_private = schema.Bool(
-        title=_("The person contact details are private and will not be used in other context, like held position."),
+        title=_(
+            "The person contact details are private and will not be used in other context, like held position."
+        ),
         description="",
         required=False,
         default=True,
     )
 
     person_title_in_title = schema.Bool(
-        title=_("Display person title in displayed person's title."), description="", required=False, default=True
+        title=_("Display person title in displayed person's title."),
+        description="",
+        required=False,
+        default=True,
     )
 
     use_held_positions_to_search_person = schema.Bool(
-        title=_("Use held positions to search persons."), description="", required=False, default=True
+        title=_("Use held positions to search persons."),
+        description="",
+        required=False,
+        default=True,
     )
 
     use_description_to_search_person = schema.Bool(
-        title=_("Use description to search persons."), description="", required=False, default=True
+        title=_("Use description to search persons."),
+        description="",
+        required=False,
+        default=True,
     )
 
     display_contact_photo_on_organization_view = schema.Bool(
-        title=_("Display contact photo on organization view (instead person content type icon)."),
+        title=_(
+            "Display contact photo on organization view (instead person content type icon)."
+        ),
         description="",
         required=False,
         default=True,
     )
 
     display_below_content_title_on_views = schema.Bool(
-        title=_("Display belowcontenttitle viewlet on contact views."), description="", required=False, default=False
+        title=_("Display belowcontenttitle viewlet on contact views."),
+        description="",
+        required=False,
+        default=False,
     )
 
     display_photo_label_on_views = schema.Bool(
@@ -130,7 +145,10 @@ class IHeldPosition(model.Schema, IContactContent):
     )
     label = schema.TextLine(
         title=_("Additional label"),
-        description=_("Additional label with information that does not appear " "on position label"),
+        description=_(
+            "Additional label with information that does not appear "
+            "on position label"
+        ),
         required=False,
     )
     start_date = schema.Date(

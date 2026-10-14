@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from collective.contact.core.behaviors import ADDRESS_FIELDS
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.behaviors import IRelatedOrganizations
@@ -12,7 +10,9 @@ from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
 from datetime import date
 from plone import api
-from plone.app.dexterity.textindexer.converters import DefaultDexterityTextIndexFieldConverter
+from plone.app.dexterity.textindexer.converters import (
+    DefaultDexterityTextIndexFieldConverter,
+)
 from plone.app.dexterity.textindexer.interfaces import IDynamicTextIndexExtender
 from plone.base.utils import safe_text
 from plone.indexer import indexer
@@ -29,7 +29,9 @@ def contact_email(contact):
 @indexer(IContactContent)
 def contact_source(contact):
     csmc = api.portal.get_registry_record(
-        "collective.contact.core.interfaces.IContactCoreParameters." "contact_source_metadata_content", default="{gft}"
+        "collective.contact.core.interfaces.IContactCoreParameters."
+        "contact_source_metadata_content",
+        default="{gft}",
     )
     variables = {"gft": contact.get_full_title()}
     contactable = IContactable(contact)
@@ -47,7 +49,7 @@ def contact_source(contact):
 
 
 @implementer(IDynamicTextIndexExtender)
-class OrganizationSearchableExtender(object):
+class OrganizationSearchableExtender:
     """Extends SearchableText of an organization."""
 
     adapts(IOrganization)
@@ -58,7 +60,10 @@ class OrganizationSearchableExtender(object):
     def __call__(self):
         words = []
         organization = self.context
-        if IRelatedOrganizations.providedBy(organization) and organization.related_organizations is not None:
+        if (
+            IRelatedOrganizations.providedBy(organization)
+            and organization.related_organizations is not None
+        ):
             for related in organization.related_organizations:
                 words += related.to_object.get_organizations_titles()
 
@@ -75,7 +80,7 @@ class OrganizationSearchableExtender(object):
 
 
 @implementer(IDynamicTextIndexExtender)
-class HeldPositionSearchableExtender(object):
+class HeldPositionSearchableExtender:
     """Extends SearchableText of a held position."""
 
     adapts(IHeldPosition)
@@ -106,7 +111,7 @@ class HeldPositionSearchableExtender(object):
 
 
 @implementer(IDynamicTextIndexExtender)
-class PositionSearchableExtender(object):
+class PositionSearchableExtender:
     """Extends SearchableText of a position."""
 
     adapts(IPosition)
@@ -124,7 +129,7 @@ class PositionSearchableExtender(object):
 
 
 @implementer(IDynamicTextIndexExtender)
-class PersonSearchableExtender(object):
+class PersonSearchableExtender:
     """Extends SearchableText of a position."""
 
     adapts(IPerson)
@@ -136,7 +141,8 @@ class PersonSearchableExtender(object):
         obj = self.context
         results = []
         use_description = api.portal.get_registry_record(
-            "collective.contact.core.interfaces.IContactCoreParameters." "use_description_to_search_person"
+            "collective.contact.core.interfaces.IContactCoreParameters."
+            "use_description_to_search_person"
         )
         if use_description:
             text = obj.SearchableText()
@@ -150,7 +156,8 @@ class PersonSearchableExtender(object):
             results.append(email)
 
         use_held_positions = api.portal.get_registry_record(
-            "collective.contact.core.interfaces.IContactCoreParameters." "use_held_positions_to_search_person"
+            "collective.contact.core.interfaces.IContactCoreParameters."
+            "use_held_positions_to_search_person"
         )
         if use_held_positions:
             for held_positions in obj.get_held_positions():
@@ -165,7 +172,7 @@ class ContactEscapingTitleFieldConverter(DefaultDexterityTextIndexFieldConverter
         """Convert the adapted field value to text/plain for indexing"""
         if self.field.__name__ in ("title", "description"):
             return ""
-        return super(ContactEscapingTitleFieldConverter, self).convert()
+        return super().convert()
 
 
 @indexer(IPerson)

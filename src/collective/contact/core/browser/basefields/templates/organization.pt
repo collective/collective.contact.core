@@ -1,57 +1,90 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
       lang="en"
-      i18n:domain="collective.contact.core" tal:omit-tag=""
-      tal:define="icons python:context.restrictedTraverse('@@iconresolver');
-                  ajax_load request/ajax_load | nothing;">
-  <div class="actions" tal:condition="view/can_edit">
+      tal:define="
+        icons python:context.restrictedTraverse('@@iconresolver');
+        ajax_load request/ajax_load | nothing;
+      "
+      tal:omit-tag=""
+      i18n:domain="collective.contact.core"
+>
+  <div class="actions"
+       tal:condition="view/can_edit"
+  >
     <a class="edit-org pat-plone-modal"
-       data-pat-plone-modal='{"actionOptions": {"displayInModal": false}}'
-       tal:attributes="href string:${context/absolute_url}/edit"
        title="Edit"
+       data-pat-plone-modal='{"actionOptions": {"displayInModal": false}}'
+       tal:attributes="
+         href string:${context/absolute_url}/edit;
+       "
+       i18n:attributes="title"
        i18n:domain="plone"
-       i18n:attributes="title">
+    >
       <tal:icon tal:replace="structure python:icons.tag('pencil-fill')" />
     </a>
   </div>
 
 
-    <h1 class="org">
-        <tal:icon
-         tal:define="icon_name string:contenttype/${context/portal_type}"
-         tal:replace="structure python:icons.tag(icon_name)" />
-        <span tal:content="view/name" />
-    </h1>
+  <h1 class="org">
+    <tal:icon tal:define="
+                icon_name string:contenttype/${context/portal_type};
+              "
+              tal:replace="structure python:icons.tag(icon_name)"
+    />
+    <span tal:content="view/name"></span>
+  </h1>
 
-    <div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle"
-         tal:condition="python: view.display_below_content_title() and not ajax_load" />
+  <div id="viewlet-below-content-title"
+       tal:condition="python: view.display_below_content_title() and not ajax_load"
+       tal:content="structure provider:plone.belowcontenttitle"
+  ></div>
 
-    <p class="documentDescription"
-       tal:condition="context/Description"
-       tal:content="context/Description" />
+  <p class="documentDescription"
+     tal:condition="context/Description"
+     tal:content="context/Description"
+  ></p>
 
-    <div id="logo" class="field" tal:condition="context/logo">
-        <img tal:define="scales nocall:context/@@images"
-             tal:replace="structure python:scales.tag('logo', 'thumb', css_class='photo')"
-             tal:on-error="string:Bad logo format" />
-    </div>
+  <div class="field"
+       id="logo"
+       tal:condition="context/logo"
+  >
+    <img tal:define="
+           scales nocall:context/@@images;
+         "
+         tal:replace="structure python:scales.tag('logo', 'thumb', css_class='photo')"
+         tal:on-error="string:Bad logo format"
+    />
+  </div>
 
-    <div id="type" class="field">
-         <label><tal:block i18n:translate="">Organization type</tal:block>:</label>
-         <span tal:content="view/type"
-               i18n:translate="" />
-    </div>
+  <div class="field"
+       id="type"
+  >
+    <label><tal:block i18n:translate="">Organization type</tal:block>:</label>
+    <span tal:content="view/type"
+          i18n:translate=""
+    ></span>
+  </div>
 
-    <div id="activity" class="field" tal:condition="view/activity">
-         <label><tal:block i18n:translate="">Activity</tal:block>:</label>
-         <span class="note" tal:content="structure view/activity/output" />
-    </div>
+  <div class="field"
+       id="activity"
+       tal:condition="view/activity"
+  >
+    <label><tal:block i18n:translate="">Activity</tal:block>:</label>
+    <span class="note"
+          tal:content="structure view/activity/output"
+    ></span>
+  </div>
 
-    <div id="enterprise-number" class="field" tal:condition="context/enterprise_number">
-         <label><tal:block i18n:translate="">Enterprise (or VAT) number</tal:block>:</label>
-         <span class="note" tal:content="context/enterprise_number" />
-    </div>
+  <div class="field"
+       id="enterprise-number"
+       tal:condition="context/enterprise_number"
+  >
+    <label><tal:block i18n:translate="">Enterprise (or VAT) number</tal:block>:</label>
+    <span class="note"
+          tal:content="context/enterprise_number"
+    ></span>
+  </div>
 
 </html>

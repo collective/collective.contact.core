@@ -1,4 +1,3 @@
-# -*- coding: utf8 -*-
 from collective.contact.core.behaviors import ADDRESS_FIELDS
 from collective.contact.core.testing import INTEGRATION
 from collective.contact.core.tests.base import BaseTest
@@ -11,7 +10,6 @@ from zope.security.management import newInteraction
 
 import json
 import unittest
-
 
 TTW_MODEL = """<model xmlns="http://namespaces.plone.org/supermodel/schema">
   <schema>
@@ -28,7 +26,7 @@ class TestView(unittest.TestCase, BaseTest):
     layer = INTEGRATION
 
     def setUp(self):
-        super(TestView, self).setUp()
+        super().setUp()
         self.login(TEST_USER_NAME)
         self.app = self.layer["app"]
         self.portal = self.layer["portal"]
@@ -150,7 +148,14 @@ class TestContactView(TestView):
         self.assertEqual(self.sergent_lh, view.position)
         organizations = view.organizations
         self.assertEqual(
-            [self.armeedeterre, self.corpsa, self.divisionalpha, self.regimenth, self.brigadelh], organizations
+            [
+                self.armeedeterre,
+                self.corpsa,
+                self.divisionalpha,
+                self.regimenth,
+                self.brigadelh,
+            ],
+            organizations,
         )
 
         # Person email comes before Position email
@@ -193,12 +198,18 @@ class TestContactView(TestView):
     def test_held_position_basefields_view(self):
         view = self.gadt.restrictedTraverse("@@basefields")
         view.update()
-        self.assertEqual(view.title, "Général Charles De Gaulle, Émissaire OTAN (Armée de terre)")
+        self.assertEqual(
+            view.title, "Général Charles De Gaulle, Émissaire OTAN (Armée de terre)"
+        )
         self.assertEqual(view.position, self.general_adt)
         self.assertIn(view.start_date, ("May 25, 1940", "1940-05-25"))
         html = view()
-        self.assertIn("Général Charles De Gaulle, Émissaire OTAN (Armée de terre)", html)
-        self.assertIn('href="http://nohost/plone/mydirectory/armeedeterre/general_adt"', html)
+        self.assertIn(
+            "Général Charles De Gaulle, Émissaire OTAN (Armée de terre)", html
+        )
+        self.assertIn(
+            'href="http://nohost/plone/mydirectory/armeedeterre/general_adt"', html
+        )
         self.assertIn('href="http://nohost/plone/mydirectory/degaulle/gadt/edit"', html)
         # held position without position
         view = self.adt.restrictedTraverse("@@basefields")
@@ -229,7 +240,8 @@ class TestPositionView(TestView):
         view.update()
         self.assertEqual(
             view.name,
-            "Sergent de la brigade LH (Armée de terre / Corps A / Division Alpha / " "Régiment H / Brigade LH)",
+            "Sergent de la brigade LH (Armée de terre / Corps A / Division Alpha / "
+            "Régiment H / Brigade LH)",
         )
         self.assertEqual(view.type, "Sergeant")
 
@@ -238,7 +250,14 @@ class TestPositionView(TestView):
         view.update()
         organizations = view.organizations
         self.assertEqual(
-            [self.armeedeterre, self.corpsa, self.divisionalpha, self.regimenth, self.brigadelh], organizations
+            [
+                self.armeedeterre,
+                self.corpsa,
+                self.divisionalpha,
+                self.regimenth,
+                self.brigadelh,
+            ],
+            organizations,
         )
 
     def test_position_contact_details_view(self):
@@ -287,7 +306,7 @@ class TestOrganizationView(TestView):
         view = self.armeedeterre.restrictedTraverse("view")
         view.update()
         sub_organizations_names = [e.Title for e in view.sub_organizations]
-        self.assertEqual(set(["Corps A", "Corps B"]), set(sub_organizations_names))
+        self.assertEqual({"Corps A", "Corps B"}, set(sub_organizations_names))
         # no sub-organizations
         view = self.brigadelh.restrictedTraverse("view")
         view.update()
@@ -297,7 +316,7 @@ class TestOrganizationView(TestView):
         view = self.armeedeterre.restrictedTraverse("view")
         view.update()
         positions_names = [e.Title() for e in view.positions]
-        self.assertEqual(set(["Général de l'armée de terre"]), set(positions_names))
+        self.assertEqual({"Général de l'armée de terre"}, set(positions_names))
         # no_positions
         view = self.corpsa.restrictedTraverse("view")
         view.update()
@@ -309,14 +328,20 @@ class TestOrganizationView(TestView):
         self.assertIn("Armée de terre / Corps A", html)
         self.assertIn("Corps", html)
         self.assertIn("Le corps A de l'armée", html)
-        self.assertIn('href="http://nohost/plone/mydirectory/armeedeterre/corpsa/edit"', html)
+        self.assertIn(
+            'href="http://nohost/plone/mydirectory/armeedeterre/corpsa/edit"', html
+        )
 
     def test_suborganizations_view(self):
         html = self.armeedeterre.restrictedTraverse("@@suborganizations")()
         self.assertIn('id="sub_organizations"', html)
-        self.assertIn('href="http://nohost/plone/mydirectory/armeedeterre/corpsa"', html)
+        self.assertIn(
+            'href="http://nohost/plone/mydirectory/armeedeterre/corpsa"', html
+        )
         self.assertIn("Corps A", html)
-        self.assertIn('href="http://nohost/plone/mydirectory/armeedeterre/corpsb"', html)
+        self.assertIn(
+            'href="http://nohost/plone/mydirectory/armeedeterre/corpsb"', html
+        )
         self.assertLess(html.index("Corps A"), html.index("Corps B"))
         # no sub-organizations
         html = self.brigadelh.restrictedTraverse("@@suborganizations")()
@@ -395,10 +420,13 @@ class TestPersonView(TestView):
     def test_person_held_positions_render(self):
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
         html = self.degaulle.restrictedTraverse("@@heldpositions")()
-        for url in ("http://nohost/plone/mydirectory/degaulle/adt", "http://nohost/plone/mydirectory/degaulle/gadt"):
-            self.assertIn('href="{0}/view"'.format(url), html)
-            self.assertIn('href="{0}/edit"'.format(url), html)
-            self.assertIn('href="{0}/delete_confirmation"'.format(url), html)
+        for url in (
+            "http://nohost/plone/mydirectory/degaulle/adt",
+            "http://nohost/plone/mydirectory/degaulle/gadt",
+        ):
+            self.assertIn(f'href="{url}/view"', html)
+            self.assertIn(f'href="{url}/edit"', html)
+            self.assertIn(f'href="{url}/delete_confirmation"', html)
         self.assertIn("Émissaire OTAN (Armée de terre)", html)
         self.assertIn('href="http://nohost/plone/mydirectory/armeedeterre"', html)
         # held position and organization icons (Plone 6: icons of plone.icon.contenttype/* registry records)
@@ -412,7 +440,9 @@ class TestPersonView(TestView):
         self.assertFalse(view.held_positions[0]["can_edit"])
         self.assertFalse(view.held_positions[0]["can_delete"])
         self.assertIn('href="http://nohost/plone/mydirectory/degaulle/gadt/view"', html)
-        self.assertNotIn('href="http://nohost/plone/mydirectory/degaulle/gadt/edit"', html)
+        self.assertNotIn(
+            'href="http://nohost/plone/mydirectory/degaulle/gadt/edit"', html
+        )
         self.assertNotIn("delete_confirmation", html)
         # no dates
         html = self.draper.restrictedTraverse("@@heldpositions")()
@@ -426,8 +456,13 @@ class TestDirectoryView(TestView):
     def test_directory_view(self):
         view = self.mydirectory.restrictedTraverse("view")
         view.update()
-        self.assertEqual(sorted([brain.getId for brain in view.persons]), ["degaulle", "draper", "pepper", "rambo"])
-        self.assertEqual([brain.getId for brain in view.organizations], ["armeedeterre"])
+        self.assertEqual(
+            sorted([brain.getId for brain in view.persons]),
+            ["degaulle", "draper", "pepper", "rambo"],
+        )
+        self.assertEqual(
+            [brain.getId for brain in view.organizations], ["armeedeterre"]
+        )
         html = view.render()
         self.assertIn('href="http://nohost/plone/mydirectory/armeedeterre"', html)
         self.assertIn('href="http://nohost/plone/mydirectory/degaulle"', html)
@@ -438,8 +473,12 @@ class TestContactVCF(TestView):
     def test_contact_vcf(self):
         vcf = self.gadt.restrictedTraverse("@@contact.vcf")()
         response = self.layer["request"].response
-        self.assertEqual(response.getHeader("Content-Type"), "text/x-vCard; charset=utf-8")
-        self.assertEqual(response.getHeader("Content-Disposition"), "attachment; filename=gadt.vcf")
+        self.assertEqual(
+            response.getHeader("Content-Type"), "text/x-vCard; charset=utf-8"
+        )
+        self.assertEqual(
+            response.getHeader("Content-Disposition"), "attachment; filename=gadt.vcf"
+        )
         self.assertTrue(vcf.startswith("BEGIN:VCARD"))
         self.assertIn("FN:Charles De Gaulle", vcf)
         self.assertIn("END:VCARD", vcf)
@@ -449,7 +488,9 @@ class TestGenderPersonTitleMapping(TestView):
 
     def test_gender_person_title_mapping(self):
         result = self.portal.restrictedTraverse("@@gender_person_title_mapping.json")()
-        self.assertEqual(self.layer["request"].response.getHeader("Content-Type"), "application/json")
+        self.assertEqual(
+            self.layer["request"].response.getHeader("Content-Type"), "application/json"
+        )
         self.assertEqual(json.loads(result), {"M": "Mr", "F": "Mrs"})
 
 

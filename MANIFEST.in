@@ -5,3 +5,4 @@ include *
 exclude .installed.cfg
 exclude .mr.developer.cfg
 global-exclude *pyc
+exclude *-mxdev.txt

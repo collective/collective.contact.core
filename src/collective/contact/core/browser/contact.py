@@ -14,7 +14,7 @@ class Contact(BaseView):
     organizations = []
 
     def update(self):
-        super(Contact, self).update()
+        super().update()
         held_position = self.context
 
         self.portal_url = api.portal.get().absolute_url()
@@ -47,4 +47,6 @@ class Contact(BaseView):
         self.position = held_position.get_position()
 
         organization = held_position.get_organization()
-        self.organizations = organization and organization.get_organizations_chain() or []
+        self.organizations = (
+            organization and organization.get_organizations_chain() or []
+        )

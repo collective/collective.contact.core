@@ -1,5 +1,3 @@
-# -*- coding: utf8 -*-
-
 from collective.contact.core.testing import INTEGRATION
 from collective.contact.core.tests.base import BaseTest
 from collective.contact.core.utils import get_gender_and_number
@@ -14,7 +12,7 @@ class TestUtils(unittest.TestCase, BaseTest):
     layer = INTEGRATION
 
     def setUp(self):
-        super(TestUtils, self).setUp()
+        super().setUp()
         self.app = self.layer["app"]
         self.portal = self.layer["portal"]
         mydirectory = self.portal["mydirectory"]
@@ -36,13 +34,19 @@ class TestUtils(unittest.TestCase, BaseTest):
         self.assertIsNone(get_gender_and_number([self.armeedeterre]))
 
         # possible to pass mix of different types of contact
-        self.assertEqual(get_gender_and_number([self.armeedeterre, self.sergent_pepper]), "MS")
-        self.assertEqual(get_gender_and_number([self.degaulle, self.sergent_pepper]), "MP")
+        self.assertEqual(
+            get_gender_and_number([self.armeedeterre, self.sergent_pepper]), "MS"
+        )
+        self.assertEqual(
+            get_gender_and_number([self.degaulle, self.sergent_pepper]), "MP"
+        )
 
         # Male, Singular
         self.assertEqual(get_gender_and_number([self.sergent_pepper]), "MS")
         # Male, Plural
-        self.assertEqual(get_gender_and_number([self.sergent_pepper, self.degaulle]), "MP")
+        self.assertEqual(
+            get_gender_and_number([self.sergent_pepper, self.degaulle]), "MP"
+        )
 
         # change gender to have females
         self.rambo.gender = "F"
@@ -54,14 +58,24 @@ class TestUtils(unittest.TestCase, BaseTest):
 
         # Male have priority over Female
         # Male, Plural
-        self.assertEqual(get_gender_and_number([self.sergent_pepper, self.draper]), "MP")
+        self.assertEqual(
+            get_gender_and_number([self.sergent_pepper, self.draper]), "MP"
+        )
 
         # user unicity, if we pass twice same person, it stays singular, even thru held_position
-        self.assertEqual(get_gender_and_number([self.pepper, self.sergent_pepper]), "MS")
+        self.assertEqual(
+            get_gender_and_number([self.pepper, self.sergent_pepper]), "MS"
+        )
 
         # parameters use_by and use_to will prepend a 'B' or 'T' to returned value
-        self.assertEqual(get_gender_and_number([self.sergent_pepper, self.draper], use_by=True), "BMP")
-        self.assertEqual(get_gender_and_number([self.pepper, self.sergent_pepper], use_to=True), "TMS")
+        self.assertEqual(
+            get_gender_and_number([self.sergent_pepper, self.draper], use_by=True),
+            "BMP",
+        )
+        self.assertEqual(
+            get_gender_and_number([self.pepper, self.sergent_pepper], use_to=True),
+            "TMS",
+        )
 
     def test_get_position_type_name(self):
         """ """

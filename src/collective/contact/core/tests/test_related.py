@@ -1,5 +1,3 @@
-# -*- coding: utf8 -*-
-
 from collective.contact.core.behaviors import IRelatedOrganizations
 from collective.contact.core.testing import INTEGRATION
 from collective.contact.core.tests.base import BaseTest
@@ -13,12 +11,12 @@ import unittest
 
 
 class TestSearch(unittest.TestCase, BaseTest):
-    """Tests realted organizations"""
+    """Tests related organizations"""
 
     layer = INTEGRATION
 
     def setUp(self):
-        super(TestSearch, self).setUp()
+        super().setUp()
         self.portal = self.layer["portal"]
         self.mydirectory = self.portal["mydirectory"]
         self.armeedeterre = self.mydirectory["armeedeterre"]
@@ -31,7 +29,9 @@ class TestSearch(unittest.TestCase, BaseTest):
         brain = api.content.find(UID=self.divisionalpha.UID())[0]
         indexes = pc.getIndexDataForRID(brain.getRID())
         indexed = indexes.get("SearchableText")
-        self.assertListEqual(indexed, ["armee", "de", "terre", "corps", "a", "division", "alpha"])
+        self.assertListEqual(
+            indexed, ["armee", "de", "terre", "corps", "a", "division", "alpha"]
+        )
 
         intids = getUtility(IIntIds)
         alsoProvides(self.divisionalpha, IRelatedOrganizations)

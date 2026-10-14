@@ -1,5 +1,3 @@
-# -*- coding: utf8 -*-
-
 from collective.contact.core.indexers import end_date
 from collective.contact.core.indexers import held_position_sortable_title
 from collective.contact.core.indexers import person_sortable_title
@@ -18,7 +16,7 @@ class TestSearch(unittest.TestCase, BaseTest):
     layer = INTEGRATION
 
     def setUp(self):
-        super(TestSearch, self).setUp()
+        super().setUp()
         self.portal = self.layer["portal"]
         self.mydirectory = self.portal["mydirectory"]
         self.degaulle = self.mydirectory["degaulle"]
@@ -40,12 +38,28 @@ class TestSearch(unittest.TestCase, BaseTest):
         # check organization searchable text
         rid = pc(UID=self.divisionalpha.UID())[0].getRID()
         indexed = index.getEntryForObject(rid, default=[])
-        self.assertListEqual(indexed, ["armee", "de", "terre", "corps", "a", "division", "alpha"])
+        self.assertListEqual(
+            indexed, ["armee", "de", "terre", "corps", "a", "division", "alpha"]
+        )
         # check position searchable text
         rid = pc(UID=self.general_adt.UID())[0].getRID()
         indexed = index.getEntryForObject(rid, default=[])
         self.assertListEqual(
-            indexed, ["general", "de", "l", "armee", "de", "terre", "armee", "de", "terre", "general", "armees", "fr"]
+            indexed,
+            [
+                "general",
+                "de",
+                "l",
+                "armee",
+                "de",
+                "terre",
+                "armee",
+                "de",
+                "terre",
+                "general",
+                "armees",
+                "fr",
+            ],
         )
         # check held position searchable text
         rid = pc(UID=self.gadt.UID())[0].getRID()
@@ -143,7 +157,9 @@ class TestSearch(unittest.TestCase, BaseTest):
         pepper = self.pepper
         self.assertEqual(person_sortable_title(pepper)(), "pepper")
         idxr = held_position_sortable_title(self.sergent_pepper)
-        self.assertEqual(idxr(), "pepper-sergent-de-la-brigade-lh-armee-de-terre-corps-a")
+        self.assertEqual(
+            idxr(), "pepper-sergent-de-la-brigade-lh-armee-de-terre-corps-a"
+        )
         degaulle = self.degaulle
         self.assertEqual(person_sortable_title(degaulle)(), "de-gaulle-charles")
         self.assertEqual(start_date(self.sergent_pepper)(), datetime.date(1980, 6, 5))
@@ -183,11 +199,13 @@ class TestSearch(unittest.TestCase, BaseTest):
         results = catalog.searchResults(portal_type="held_position")
         self.assertEqual(len(results), 6)
         results = catalog.searchResults(
-            portal_type="held_position", start={"query": datetime.date(1981, 1, 1), "range": "min"}
+            portal_type="held_position",
+            start={"query": datetime.date(1981, 1, 1), "range": "min"},
         )
         self.assertEqual(len(results), 3)
         results = catalog.searchResults(
-            portal_type="held_position", end={"query": datetime.date(1971, 1, 1), "range": "max"}
+            portal_type="held_position",
+            end={"query": datetime.date(1971, 1, 1), "range": "max"},
         )
         self.assertEqual(len(results), 2)
         restults = catalog.searchResults(SearchableText="charles.de.gaulle@private.com")

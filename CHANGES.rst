@@ -18,6 +18,8 @@ Changelog
   [chris-adam]
 - Leave the relations to a deleted contact broken (`isBroken()`), as on Plone 4: they were unindexed.
   [chris-adam]
+- Added plone.meta configuration (tox, pre-commit, GitHub Actions).
+  [chris-adam]
 
 1.43.3 (2026-05-29)
 -------------------
@@ -129,7 +131,7 @@ Changelog
   [sgeulette]
 - Updated birthday widget to manage dates range
   [sgeulette]
-- Added `create_organization.png` icon useable if necessary
+- Added `create_organization.png` icon usable if necessary
   [gbastien]
 
 1.32 (2020-05-08)
@@ -278,7 +280,7 @@ Changelog
   Necessary to display to the end user the right organization, without ambiguity.
   [sgeulette]
 
-- Prevent address fields from being erased if they are changed programmaticaly before any manual edition.
+- Prevent address fields from being erased if they are changed programmatically before any manual edition.
   [thomasdesvenain]
 
 - Prevent title ascii error on organization vcard export.
@@ -312,7 +314,7 @@ Changelog
 1.17 (2017-10-02)
 -----------------
 
-- Fix get_valid_url mehtod when there is accent into url.
+- Fix get_valid_url method when there is accent into url.
   [bsuttor]
 
 
@@ -492,7 +494,7 @@ Changelog
 
 - UI: If a contact field is dependent to a position or an organization,
   we update 'add new' link of the contact field
-  so that the 'position' or 'organization' field is pre-selected in the overlay.
+  so that the 'position' or 'organization' field is preselected in the overlay.
   [thomasdesvenain]
 
 - UI: use classes instead of ids on address because it can be used

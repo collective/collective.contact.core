@@ -13,11 +13,12 @@ from zope.interface import implementer
 from zope.interface import Interface
 from zope.interface.interfaces import ComponentLookupError
 
-
 try:
     from collective.excelexport.exportables.base import BaseExportableFactory
     from collective.excelexport.exportables.dexterityfields import BaseFieldRenderer
-    from collective.excelexport.exportables.dexterityfields import FileFieldRenderer as baseFileFieldRenderer
+    from collective.excelexport.exportables.dexterityfields import (
+        FileFieldRenderer as baseFileFieldRenderer,
+    )
     from collective.excelexport.exportables.dexterityfields import get_ordered_fields
     from collective.excelexport.exportables.dexterityfields import IFieldValueGetter
     from collective.excelexport.interfaces import IExportable
@@ -34,7 +35,11 @@ if HAS_EXCELEXPORT:
 
         def render_value(self, obj):
             value = self.get_value(obj)
-            return value and "{}/@@images/{}?{}".format(obj.absolute_url(), self.field.__name__, value.filename) or ""
+            return (
+                value
+                and f"{obj.absolute_url()}/@@images/{self.field.__name__}?{value.filename}"
+                or ""
+            )
 
     class ContactFieldRenderer(BaseFieldRenderer):
         adapts(IContactChoice, Interface, Interface)
@@ -60,25 +65,33 @@ if HAS_EXCELEXPORT:
         def get_exportables(self):
             position_fields = [f[0] for f in get_ordered_fields(self.fti)]
             person_fti = api.portal.get_tool("portal_types").person
-            person_fields = [(n, f) for n, f in get_ordered_fields(person_fti) if n not in position_fields]
+            person_fields = [
+                (n, f)
+                for n, f in get_ordered_fields(person_fti)
+                if n not in position_fields
+            ]
 
             exportables = []
             for field_name, field in person_fields:
                 try:
                     # check if there is a specific adapter for the field name
                     exportable = getMultiAdapter(
-                        (field, self.context, self.request), interface=IExportable, name=field_name
+                        (field, self.context, self.request),
+                        interface=IExportable,
+                        name=field_name,
                     )
                 except ComponentLookupError:
                     # get the generic adapter for the field
-                    exportable = getMultiAdapter((field, self.context, self.request), interface=IExportable)
+                    exportable = getMultiAdapter(
+                        (field, self.context, self.request), interface=IExportable
+                    )
 
                 exportables.append(exportable)
 
             return exportables
 
     @implementer(IFieldValueGetter)
-    class ContactValueGetter(object):
+    class ContactValueGetter:
         adapts(IContactContent)
 
         def __init__(self, context):
@@ -86,7 +99,9 @@ if HAS_EXCELEXPORT:
 
         def get(self, field):
             if field.__name__ in ADDRESS_FIELDS:
-                address = IContactable(self.context).get_contact_details(("address",))["address"]
+                address = IContactable(self.context).get_contact_details(("address",))[
+                    "address"
+                ]
                 return address.get(field.__name__, None)
 
             return getattr(self.context, field.__name__, None)

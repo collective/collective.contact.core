@@ -52,7 +52,7 @@ class ICustomSettings(Interface):
 
 
 @implementer(ICustomSettings)
-class ContactWidgetSettings(object):
+class ContactWidgetSettings:
 
     def label_for_portal_type(self, portal_type):
         if isinstance(portal_type, Message):
@@ -65,10 +65,13 @@ class ContactWidgetSettings(object):
         return label
 
     def prelabel_for_portal_type(self, portal_type):
-        return _("help_widget_add_new_elt", default="If the item doesn't exist, you can add it to the database :")
+        return _(
+            "help_widget_add_new_elt",
+            default="If the item doesn't exist, you can add it to the database :",
+        )
 
     def add_url_for_portal_type(self, directory_url, portal_type):
-        url = "%s/++add++%s" % (directory_url, portal_type)
+        url = f"{directory_url}/++add++{portal_type}"
         return url
 
     def add_contact_infos(self, widget):
@@ -95,7 +98,9 @@ class ContactWidgetSettings(object):
             if len(portal_types) == 1:
                 portal_type = portal_types[0]
                 prelabel = custom_settings.prelabel_for_portal_type(portal_type)
-                if portal_type == "held_position" and not IPerson.providedBy(widget.context):
+                if portal_type == "held_position" and not IPerson.providedBy(
+                    widget.context
+                ):
                     url = "%s/@@add-held-position" % directory_url
                     type_name = _("Contact")
                     label = custom_settings.label_for_portal_type(type_name)
@@ -107,10 +112,14 @@ class ContactWidgetSettings(object):
                             related_to = api.content.get(related_path)
                             if related_to is not None:
                                 type_name = _(
-                                    "${name} (${position}", mapping={"name": type_name, "position": related_to.Title()}
+                                    "${name} (${position}",
+                                    mapping={
+                                        "name": type_name,
+                                        "position": related_to.Title(),
+                                    },
                                 )
                                 label = custom_settings.label_for_portal_type(type_name)
-                                url += "?oform.widgets.%s=%s" % (
+                                url += "?oform.widgets.{}={}".format(
                                     related_to.portal_type,
                                     "/".join(related_to.getPhysicalPath()),
                                 )
@@ -127,7 +136,9 @@ class ContactWidgetSettings(object):
                     close_on_click = False
                 else:
                     label = custom_settings.label_for_portal_type(portal_type)
-                    url = custom_settings.add_url_for_portal_type(directory_url, portal_type)
+                    url = custom_settings.add_url_for_portal_type(
+                        directory_url, portal_type
+                    )
                     action = {
                         "url": url,
                         "label": label,
@@ -135,7 +146,11 @@ class ContactWidgetSettings(object):
                     }
                     actions.append(action)
             else:
-                if len(portal_types) == 2 and "organization" in portal_types and "position" in portal_types:
+                if (
+                    len(portal_types) == 2
+                    and "organization" in portal_types
+                    and "position" in portal_types
+                ):
                     url = "%s/@@add-organization" % directory_url
                     type_name = _("organization/position")
                 else:
@@ -168,7 +183,7 @@ return '<img src="' + $("body").data("portal-url") + '/@@iconresolver/contenttyp
 class MasterSelectAddContactProvider(BrowserView):
 
     def __init__(self, context, request, view):
-        super(MasterSelectAddContactProvider, self).__init__(context, request)
+        super().__init__(context, request)
         self.__parent__ = view
 
     def update(self):
@@ -267,7 +282,9 @@ $(document).ready(function() {
 });
 </script>
 """
-            % str(bool(getattr(self.__parent__.form, "schema", None) == IAddHeldPosition)).lower()
+            % str(
+                bool(getattr(self.__parent__.form, "schema", None) == IAddHeldPosition)
+            ).lower()
         )
 
 
@@ -296,7 +313,9 @@ class IAddHeldPosition(model.Schema):
     position = ContactChoice(
         title=_("Position"),
         required=False,
-        description=_("Select the position held by this person in the selected organization"),
+        description=_(
+            "Select the position held by this person in the selected organization"
+        ),
         source=ContactSourceBinder(portal_type="position"),
     )
 
@@ -323,7 +342,9 @@ class IAddContact(model.Schema):
     position = ContactChoice(
         title=_("Position"),
         required=False,
-        description=_("Select the position held by this person in the selected organization"),
+        description=_(
+            "Select the position held by this person in the selected organization"
+        ),
         source=ContactSourceBinder(portal_type="position"),
     )
 
@@ -360,13 +381,13 @@ class AddContact(DefaultAddForm, form.AddForm):
         return (schema,)
 
     def updateFieldsFromSchemata(self):
-        super(AddContact, self).updateFieldsFromSchemata()
+        super().updateFieldsFromSchemata()
         hp_fti = api.portal.get_tool("portal_types").held_position
         if IContactDetails.__identifier__ in hp_fti.behaviors:
             self.fields += field.Fields(IContactDetails)
 
     def updateWidgets(self):
-        super(AddContact, self).updateWidgets()
+        super().updateWidgets()
         # IHeldPosition and IAddContact have both a field named position
         # del the widget of the one from IHeldPosition but keep its field
         del self.widgets[self._schema_name + ".position"]
@@ -381,7 +402,7 @@ class AddContact(DefaultAddForm, form.AddForm):
 
     def update(self):
         alsoProvides(self.request, IDeferSecurityCheck)
-        super(AddContact, self).update()
+        super().update()
         noLongerProvides(self.request, IDeferSecurityCheck)
 
     @button.buttonAndHandler(_("Add"), name="save")
@@ -399,7 +420,9 @@ class AddContact(DefaultAddForm, form.AddForm):
 
     @button.buttonAndHandler(DMF("Cancel"), name="cancel")
     def handleCancel(self, action):
-        IStatusMessage(self.request).addStatusMessage(DMF("Add New Item operation cancelled"), "info")
+        IStatusMessage(self.request).addStatusMessage(
+            DMF("Add New Item operation cancelled"), "info"
+        )
         self.request.response.redirect(self.nextURL())
         notify(AddCancelledEvent(self.context))
 
@@ -415,7 +438,7 @@ class AddContact(DefaultAddForm, form.AddForm):
             self._finishedAdd = True
             return
         else:
-            return super(AddContact, self).createAndAdd(data)
+            return super().createAndAdd(data)
 
     def create(self, data):
         self._container = data.pop("person")
@@ -425,7 +448,7 @@ class AddContact(DefaultAddForm, form.AddForm):
             position = orga
 
         data[self._schema_name + ".position"] = position
-        return super(AddContact, self).create(data)
+        return super().create(data)
 
     def add(self, obj):
         container = self._container
@@ -433,13 +456,15 @@ class AddContact(DefaultAddForm, form.AddForm):
         new_object = addContentToContainer(container, obj)
 
         if fti.immediate_view:
-            self.immediate_view = "%s/%s/%s" % (
+            self.immediate_view = "{}/{}/{}".format(
                 container.absolute_url(),
                 new_object.id,
                 fti.immediate_view,
             )
         else:
-            self.immediate_view = "%s/%s" % (container.absolute_url(), new_object.id)
+            self.immediate_view = "{}/{}".format(
+                container.absolute_url(), new_object.id
+            )
 
 
 class AddHeldPosition(AddContact):
@@ -451,20 +476,26 @@ class AddHeldPosition(AddContact):
 class AddContactFromOrganization(AddContact):
     def updateWidgets(self):
         if "oform.widgets.organization" not in self.request.form:
-            self.request.form["oform.widgets.organization"] = "/".join(self.context.getPhysicalPath())
-        super(AddContactFromOrganization, self).updateWidgets()
+            self.request.form["oform.widgets.organization"] = "/".join(
+                self.context.getPhysicalPath()
+            )
+        super().updateWidgets()
 
 
 class AddContactFromPosition(AddContact):
     def updateWidgets(self):
         organization = self.context.get_organization()
         if "oform.widgets.organization" not in self.request.form:
-            self.request.form["oform.widgets.organization"] = "/".join(organization.getPhysicalPath())
+            self.request.form["oform.widgets.organization"] = "/".join(
+                organization.getPhysicalPath()
+            )
 
         if "oform.widgets.position" not in self.request.form:
-            self.request.form["oform.widgets.position"] = "/".join(self.context.getPhysicalPath())
+            self.request.form["oform.widgets.position"] = "/".join(
+                self.context.getPhysicalPath()
+            )
 
-        super(AddContactFromPosition, self).updateWidgets()
+        super().updateWidgets()
 
 
 @implementer(IFieldsAndContentProvidersForm)
@@ -477,7 +508,7 @@ class AddOrganization(form.AddForm):
     fields = field.Fields(IAddContact).select("organization", "position")
 
     def updateWidgets(self):
-        super(AddOrganization, self).updateWidgets()
+        super().updateWidgets()
         self.widgets["organization"].label = _(
             "help_add_organization_or_position_organization",
             "Please fill the organization first " "and then eventually select position",

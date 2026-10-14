@@ -1,10 +1,11 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <rolemap>
   <permissions>
-    <permission name="collective.contact.core: Use parent address"
-                acquire="True">
-      <role name="Member"/>
-      <role name="Manager"/>
+    <permission acquire="True"
+                name="collective.contact.core: Use parent address"
+    >
+      <role name="Member" />
+      <role name="Manager" />
     </permission>
   </permissions>
 </rolemap>

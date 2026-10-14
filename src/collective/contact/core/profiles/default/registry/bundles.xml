@@ -1,7 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <registry>
 
-  <records prefix="plone.bundles/collective-contact"
-           interface='plone.base.interfaces.IBundleRegistry'>
+  <records interface="plone.base.interfaces.IBundleRegistry"
+           prefix="plone.bundles/collective-contact"
+  >
     <value key="enabled">True</value>
     <value key="csscompilation">++resource++collective.contact.core/style.css</value>
     <value key="jscompilation">++resource++collective.contact.core/forms.js</value>

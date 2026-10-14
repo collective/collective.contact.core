@@ -56,9 +56,17 @@ class ContactableVCard:
             city = safe_text(address["city"], encoding="utf8")
             street = safe_text(address["street"], encoding="utf8")
             number = safe_text(address["number"], encoding="utf8")
-            additional = safe_text(address["additional_address_details"], encoding="utf8")
+            additional = safe_text(
+                address["additional_address_details"], encoding="utf8"
+            )
             vcard.adr.value = vobject.vcard.Address(
-                street=street, city=city, region=region, code=zip_code, country=country, box=number, extended=additional
+                street=street,
+                city=city,
+                region=region,
+                code=zip_code,
+                country=country,
+                box=number,
+                extended=additional,
             )
 
         return vcard
@@ -100,7 +108,9 @@ class HeldPositionVCard(ContactableVCard):
         firstname = safe_text(person.firstname or "", encoding="utf8")
         lastname = safe_text(person.lastname or "", encoding="utf8")
         person_title = safe_text(person.person_title or "", encoding="utf8")
-        vcard.n.value = vobject.vcard.Name(prefix=person_title, family=lastname, given=firstname)
+        vcard.n.value = vobject.vcard.Name(
+            prefix=person_title, family=lastname, given=firstname
+        )
         vcard.add("fn")
         vcard.fn.value = " ".join([e for e in (firstname, lastname) if e])
 
@@ -116,7 +126,9 @@ class HeldPositionVCard(ContactableVCard):
             vcard.title.value = position_name
 
         vcard.add("org")
-        vcard.org.value = [safe_text(org.Title(), encoding="utf8") for org in organizations]
+        vcard.org.value = [
+            safe_text(org.Title(), encoding="utf8") for org in organizations
+        ]
 
         # TODO ?
         # vcard.add('photo')
@@ -156,7 +168,7 @@ def closed_position_sort_key(position):
 
 
 @implementer(IPersonHeldPositions)
-class PersonHeldPositionsAdapter(object):
+class PersonHeldPositionsAdapter:
 
     def __init__(self, person):
         self.person = person
@@ -178,7 +190,13 @@ class PersonHeldPositionsAdapter(object):
     def get_current_positions(self):
         """Get not ended positions"""
         positions = self.person.get_held_positions()
-        return tuple([p for p in positions if (not p.end_date or p.end_date > datetime.date.today())])
+        return tuple(
+            [
+                p
+                for p in positions
+                if (not p.end_date or p.end_date > datetime.date.today())
+            ]
+        )
 
     def get_closed_positions(self):
         """Get closed positions by descending order of end date"""

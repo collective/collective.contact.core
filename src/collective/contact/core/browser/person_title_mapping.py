@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.contact.core import _
 from Products.Five import BrowserView
 from zope.i18n import translate
