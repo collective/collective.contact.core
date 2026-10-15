@@ -8,30 +8,32 @@ from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 
 
-class BaseFields(object):
+class BaseFields:
 
     def display_below_content_title(self):
         return api.portal.get_registry_record(
-            'display_below_content_title_on_views',
+            "display_below_content_title_on_views",
             interface=IContactCoreParameters,
-            default=False)
+            default=False,
+        )
 
     def can_edit(self):
         sm = getSecurityManager()
-        return sm.checkPermission('Modify portal content', self.context)
+        return sm.checkPermission("Modify portal content", self.context)
 
 
 class PersonBaseFields(BrowserView, BaseFields):
-    name = ''
-    birthday = ''
-    person_title = ''
-    gender = ''
+    name = ""
+    birthday = ""
+    person_title = ""
+    gender = ""
 
     def display_photo_label(self):
         return api.portal.get_registry_record(
-            'display_photo_label_on_views',
+            "display_photo_label_on_views",
             interface=IContactCoreParameters,
-            default=False)
+            default=False,
+        )
 
     def update(self):
         self.person = self.context
@@ -47,18 +49,18 @@ class PersonBaseFields(BrowserView, BaseFields):
             self.birthday = ""
 
         self.person_title = person.person_title
-        self.gender = person.gender or ''
+        self.gender = person.gender or ""
 
     def __call__(self):
         self.update()
-        return super(PersonBaseFields, self).__call__()
+        return super().__call__()
 
 
 class OrganizationBaseFields(BrowserView, BaseFields):
-    name = ''
-    type = ''
+    name = ""
+    type = ""
     positions = []
-    activity = ''
+    activity = ""
 
     def update(self):
         self.organization = self.context
@@ -75,12 +77,12 @@ class OrganizationBaseFields(BrowserView, BaseFields):
 
     def __call__(self):
         self.update()
-        return super(OrganizationBaseFields, self).__call__()
+        return super().__call__()
 
 
 class PositionBaseFields(BrowserView, BaseFields):
-    name = ''
-    type = ''
+    name = ""
+    type = ""
 
     def update(self):
         self.position = self.context
@@ -92,22 +94,23 @@ class PositionBaseFields(BrowserView, BaseFields):
 
     def __call__(self):
         self.update()
-        return super(PositionBaseFields, self).__call__()
+        return super().__call__()
 
 
 class HeldPositionBaseFields(BrowserView, BaseFields):
-    start_date = ''
-    end_date = ''
-    birthday = ''
-    gender = ''
+    start_date = ""
+    end_date = ""
+    birthday = ""
+    gender = ""
     position = None
     organizations = []
 
     def display_photo_label(self):
         return api.portal.get_registry_record(
-            'display_photo_label_on_views',
+            "display_photo_label_on_views",
             interface=IContactCoreParameters,
-            default=False)
+            default=False,
+        )
 
     def update(self):
         held_position = self.context
@@ -131,4 +134,4 @@ class HeldPositionBaseFields(BrowserView, BaseFields):
 
     def __call__(self):
         self.update()
-        return super(HeldPositionBaseFields, self).__call__()
+        return super().__call__()

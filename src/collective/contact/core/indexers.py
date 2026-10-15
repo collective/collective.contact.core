@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from collective.contact.core.behaviors import ADDRESS_FIELDS
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.behaviors import IRelatedOrganizations
@@ -12,7 +10,9 @@ from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
 from datetime import date
 from plone import api
-from plone.app.dexterity.textindexer.converters import DefaultDexterityTextIndexFieldConverter
+from plone.app.dexterity.textindexer.converters import (
+    DefaultDexterityTextIndexFieldConverter,
+)
 from plone.app.dexterity.textindexer.interfaces import IDynamicTextIndexExtender
 from plone.base.utils import safe_text
 from plone.indexer import indexer
@@ -23,31 +23,35 @@ from zope.interface import implementer
 @indexer(IContactContent)
 def contact_email(contact):
     email = IContactDetails(contact).email
-    return email.lower() or u''
+    return email.lower() or ""
 
 
 @indexer(IContactContent)
 def contact_source(contact):
-    csmc = api.portal.get_registry_record('collective.contact.core.interfaces.IContactCoreParameters.'
-                                          'contact_source_metadata_content', default=u'{gft}')
-    variables = {'gft': contact.get_full_title()}
+    csmc = api.portal.get_registry_record(
+        "collective.contact.core.interfaces.IContactCoreParameters."
+        "contact_source_metadata_content",
+        default="{gft}",
+    )
+    variables = {"gft": contact.get_full_title()}
     contactable = IContactable(contact)
     details = contactable.get_contact_details()
-    address = details.pop('address')
+    address = details.pop("address")
     for fld in ADDRESS_FIELDS:
-        address.setdefault(fld, '')
+        address.setdefault(fld, "")
     variables.update(address)
     variables.update(details)
     try:
         return csmc.format(**variables)
     except Exception:
         pass
-    return u''
+    return ""
 
 
 @implementer(IDynamicTextIndexExtender)
-class OrganizationSearchableExtender(object):
+class OrganizationSearchableExtender:
     """Extends SearchableText of an organization."""
+
     adapts(IOrganization)
 
     def __init__(self, context):
@@ -56,8 +60,10 @@ class OrganizationSearchableExtender(object):
     def __call__(self):
         words = []
         organization = self.context
-        if IRelatedOrganizations.providedBy(organization) \
-                and organization.related_organizations is not None:
+        if (
+            IRelatedOrganizations.providedBy(organization)
+            and organization.related_organizations is not None
+        ):
             for related in organization.related_organizations:
                 words += related.to_object.get_organizations_titles()
 
@@ -70,12 +76,13 @@ class OrganizationSearchableExtender(object):
         if email:
             words.append(email)
 
-        return u' '.join(words)
+        return " ".join(words)
 
 
 @implementer(IDynamicTextIndexExtender)
-class HeldPositionSearchableExtender(object):
+class HeldPositionSearchableExtender:
     """Extends SearchableText of a held position."""
+
     adapts(IHeldPosition)
 
     def __init__(self, context):
@@ -100,12 +107,13 @@ class HeldPositionSearchableExtender(object):
         if email:
             indexed_fields.append(email)
 
-        return u' '.join(indexed_fields)
+        return " ".join(indexed_fields)
 
 
 @implementer(IDynamicTextIndexExtender)
-class PositionSearchableExtender(object):
+class PositionSearchableExtender:
     """Extends SearchableText of a position."""
+
     adapts(IPosition)
 
     def __init__(self, context):
@@ -117,12 +125,13 @@ class PositionSearchableExtender(object):
         email = IContactDetails(obj).email
         if email:
             result.append(email)
-        return u' '.join(result)
+        return " ".join(result)
 
 
 @implementer(IDynamicTextIndexExtender)
-class PersonSearchableExtender(object):
+class PersonSearchableExtender:
     """Extends SearchableText of a position."""
+
     adapts(IPerson)
 
     def __init__(self, context):
@@ -133,7 +142,8 @@ class PersonSearchableExtender(object):
         results = []
         use_description = api.portal.get_registry_record(
             "collective.contact.core.interfaces.IContactCoreParameters."
-            "use_description_to_search_person")
+            "use_description_to_search_person"
+        )
         if use_description:
             text = obj.SearchableText()
         else:
@@ -147,11 +157,12 @@ class PersonSearchableExtender(object):
 
         use_held_positions = api.portal.get_registry_record(
             "collective.contact.core.interfaces.IContactCoreParameters."
-            "use_held_positions_to_search_person")
+            "use_held_positions_to_search_person"
+        )
         if use_held_positions:
             for held_positions in obj.get_held_positions():
                 results.append(HeldPositionSearchableExtender(held_positions)())
-        return u' '.join(results)
+        return " ".join(results)
 
 
 class ContactEscapingTitleFieldConverter(DefaultDexterityTextIndexFieldConverter):
@@ -159,9 +170,9 @@ class ContactEscapingTitleFieldConverter(DefaultDexterityTextIndexFieldConverter
 
     def convert(self):
         """Convert the adapted field value to text/plain for indexing"""
-        if self.field.__name__ in ('title', 'description'):
-            return ''
-        return super(ContactEscapingTitleFieldConverter, self).convert()
+        if self.field.__name__ in ("title", "description"):
+            return ""
+        return super().convert()
 
 
 @indexer(IPerson)

@@ -1,25 +1,26 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
-    xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="collective.contact.core">
+    i18n_domain="collective.contact.core"
+    >
 
   <include file="configure.zcml" />
 
 
   <plone:behavior
-    title="Contact lists"
-    provides=".testing.IPrefiltering"
-    />
+      title="Contact lists"
+      provides=".testing.IPrefiltering"
+      />
 
   <genericsetup:registerProfile
       name="testing"
       title="collective.contact.core tests"
-      directory="profiles/testing"
       description="Steps to ease tests of collective.contact.core"
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/testing"
       />
 
 </configure>
