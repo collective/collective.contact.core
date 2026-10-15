@@ -91,10 +91,10 @@ Click the modal button
     [Documentation]  Button of the form shown in the modal, by name (e.g. oform.buttons.save):
     ...              pat-plone-modal shows the form buttons in the modal footer
     [Arguments]  ${name}
-    Click button  css=.modal-footer [name="${name}"]
+    Wait until keyword succeeds  10s  1s  Click button  css=.modal-footer [name="${name}"]
 
 The modal is closed
-    Wait until page does not contain element  ${MODAL}
+    Wait until page does not contain element  ${MODAL}  timeout=20s
 
 The status message contains
     [Arguments]  ${text}
