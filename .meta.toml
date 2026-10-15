@@ -24,8 +24,7 @@ report.html
 use_mxdev = true
 test_matrix = {"6.2" = ["*"]}
 test_deps_additional = """
-collective.contact.widget @ file://{toxinidir}/sources/collective.contact.widget
-    collective.js.tooltipster @ file://{toxinidir}/sources/collective.js.tooltipster
+collective.js.tooltipster @ file://{toxinidir}/sources/collective.js.tooltipster
     imio.fpaudit @ file://{toxinidir}/sources/imio.fpaudit
     plone.formwidget.masterselect @ file://{toxinidir}/sources/plone.formwidget.masterselect
 """
