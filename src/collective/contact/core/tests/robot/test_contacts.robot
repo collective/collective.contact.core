@@ -83,7 +83,7 @@ The add organization form opens the selected organization
     Go to  ${DIRECTORY_URL}/@@add-organization
     Select in the contact widget  oform-widgets-organization  Corps B
     Wait until keyword succeeds  10s  1s  Click button  css=#oform-buttons-save
-    Location should be  ${CORPSB}
+    Wait until location is  ${CORPSB}
 
 Show parent address if it exists in creation
     Go to  ${CORPSA}
