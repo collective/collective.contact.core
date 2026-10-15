@@ -74,7 +74,7 @@ Can create new contact with the add held position form
     Go to  ${DIRECTORY_URL}/@@add-held-position
     Select in the contact widget  oform-widgets-organization  Corps B
     Select in the contact widget  oform-widgets-person  Pepper
-    Click button  css=#oform-buttons-save
+    Wait until keyword succeeds  10s  1s  Click button  css=#oform-buttons-save
     The status message contains  Item created
     Go to  ${PEPPER}
     Element should contain  css=#held_positions  Corps B
@@ -82,7 +82,7 @@ Can create new contact with the add held position form
 The add organization form opens the selected organization
     Go to  ${DIRECTORY_URL}/@@add-organization
     Select in the contact widget  oform-widgets-organization  Corps B
-    Click button  css=#oform-buttons-save
+    Wait until keyword succeeds  10s  1s  Click button  css=#oform-buttons-save
     Location should be  ${CORPSB}
 
 Show parent address if it exists in creation

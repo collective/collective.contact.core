@@ -104,8 +104,8 @@ class TestAddressView(TestView):
         view = self.corpsa.restrictedTraverse("@@contactdetails")
         view.update()
         html = view.render_address()
-        self.assertIn('<div class="street-address">rue Philibert Lucot', html)
-        self.assertIn('<span class="locality">Orléans</span>', html)
+        self.assertIn('<div class="street-address" >rue Philibert Lucot', html)
+        self.assertIn('<span class="locality" >Orléans</span>', html)
         self.assertNotIn("tal:", html)
         # no address information
         view = self.rambo.restrictedTraverse("@@contactdetails")
