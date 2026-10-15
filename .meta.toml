@@ -22,6 +22,10 @@ report.html
 
 [tox]
 use_mxdev = true
+# robot suites written for Firefox (buildout geckodriver); Chrome intercepts their clicks
+test_environment_variables = """
+    ROBOT_BROWSER=headlessfirefox
+"""
 test_matrix = {"6.2" = ["*"]}
 test_deps_additional = """
 collective.js.tooltipster @ file://{toxinidir}/sources/collective.js.tooltipster
