@@ -1,13 +1,15 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:zcml="http://namespaces.zope.org/zcml"
-    xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:browser="http://namespaces.zope.org/browser"
-    i18n_domain="collective.contact.core">
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="collective.contact.core"
+    >
 
-  <include package="plone.formwidget.autocomplete" />
-  <include zcml:condition="installed collective.excelexport"
-           file="excelexport.zcml" />
+  <include
+      file="excelexport.zcml"
+      zcml:condition="installed collective.excelexport"
+      />
 
   <include package=".basefields" />
 
@@ -214,40 +216,42 @@
       />
 
   <adapter
+      factory=".contactable.ContactDetailsContactable"
       for="*"
-      factory=".contactable.ContactDetailsContactable"
       />
 
   <adapter
+      factory=".contactable.ContactDetailsContactable"
       for="collective.contact.widget.interfaces.IContactContent"
-      factory=".contactable.ContactDetailsContactable"
       />
 
   <adapter
-     for="..content.organization.IOrganization"
-     factory="..content.organization.OrganizationContactableAdapter"
-     />
+      factory="..content.organization.OrganizationContactableAdapter"
+      for="..content.organization.IOrganization"
+      />
 
   <adapter
-      for="..content.person.IPerson"
       factory="..content.person.PersonContactableAdapter"
+      for="..content.person.IPerson"
       />
 
   <adapter
-      for="..content.held_position.IHeldPosition"
       factory="..content.held_position.HeldPositionContactableAdapter"
+      for="..content.held_position.IHeldPosition"
       />
 
   <adapter
-      for="..content.position.IPosition"
       factory="..content.position.PositionContactableAdapter"
+      for="..content.position.IPosition"
       />
 
   <adapter
-      name="organization-ms"
-      for="zope.interface.Interface z3c.form.interfaces.IFormLayer zope.interface.Interface"
-      provides="zope.contentprovider.interfaces.IContentProvider"
       factory=".addcontact.MasterSelectAddContactProvider"
+      provides="zope.contentprovider.interfaces.IContentProvider"
+      for="zope.interface.Interface
+           z3c.form.interfaces.IFormLayer
+           zope.interface.Interface"
+      name="organization-ms"
       />
 
   <utility

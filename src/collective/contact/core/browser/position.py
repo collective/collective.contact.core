@@ -8,7 +8,7 @@ from zope.schema.interfaces import IVocabularyFactory
 class Position(BaseView):
 
     def update(self):
-        super(Position, self).update()
+        super().update()
         self.position = self.context
         position = self.position
         factory = getUtility(IVocabularyFactory, "PositionTypes")
@@ -19,4 +19,4 @@ class Position(BaseView):
         self.organizations = contactable.organizations
 
         sm = getSecurityManager()
-        self.can_add = sm.checkPermission('Add portal content', self.context)
+        self.can_add = sm.checkPermission("Add portal content", self.context)

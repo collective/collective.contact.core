@@ -1,8 +1,9 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    i18n_domain="collective.contact.core">
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="collective.contact.core"
+    >
 
   <i18n:registerTranslations directory="locales" />
 
@@ -24,126 +25,140 @@
   <include file="vocabularies.zcml" />
 
   <permission
-    id="collective.contact.core.UseParentAddress"
-    title="collective.contact.core: Use parent address"
-    />
+      id="collective.contact.core.UseParentAddress"
+      title="collective.contact.core: Use parent address"
+      />
 
   <genericsetup:importStep
       name="collective.contact.core-postInstall"
       title="collective.contact.core postInstall import step"
       description="Post install import step from collective.contact.core"
-      handler=".setuphandlers.postInstall">
-      <depends name="plone.app.registry"/>
+      handler=".setuphandlers.postInstall"
+      >
+    <depends name="plone.app.registry" />
   </genericsetup:importStep>
 
   <genericsetup:importStep
       name="collective.contact.core-createTestData"
       title="collective.contact.core createTestData import step"
       description="Create test data import step from collective.contact.core"
-      handler=".setuphandlers.createTestData">
+      handler=".setuphandlers.createTestData"
+      >
   </genericsetup:importStep>
 
   <genericsetup:registerProfile
       name="default"
       title="collective.contact.core"
-      directory="profiles/default"
       description="Installs the collective.contact.core package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/default"
       />
 
   <genericsetup:registerProfile
       name="test_data"
       title="collective.contact.core test data"
-      directory="profiles/test_data"
       description="Installs test data for the collective.contact.core package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/test_data"
       />
 
   <adapter
-    name="email"
-    factory=".indexers.contact_email"
-    />
+      factory=".indexers.contact_email"
+      name="email"
+      />
 
   <adapter
-    name="contact_source"
-    factory=".indexers.contact_source"
-    />
+      factory=".indexers.contact_source"
+      name="contact_source"
+      />
 
   <adapter
-    name="exclude_from_nav"
-    factory=".indexers.exclude_from_nav"
-    />
+      factory=".indexers.exclude_from_nav"
+      name="exclude_from_nav"
+      />
 
-  <adapter name="collective.contact.core.HeldPositionSearchableExtender"
-           factory=".indexers.HeldPositionSearchableExtender" />
+  <adapter
+      factory=".indexers.HeldPositionSearchableExtender"
+      name="collective.contact.core.HeldPositionSearchableExtender"
+      />
 
-  <adapter name="collective.contact.core.OrganizationSearchableExtender"
-           factory=".indexers.OrganizationSearchableExtender" />
+  <adapter
+      factory=".indexers.OrganizationSearchableExtender"
+      name="collective.contact.core.OrganizationSearchableExtender"
+      />
 
-  <adapter name="collective.contact.core.PositionSearchableExtender"
-           factory=".indexers.PositionSearchableExtender" />
+  <adapter
+      factory=".indexers.PositionSearchableExtender"
+      name="collective.contact.core.PositionSearchableExtender"
+      />
 
-  <adapter name="collective.contact.core.PersonSearchableExtender"
-           factory=".indexers.PersonSearchableExtender" />
+  <adapter
+      factory=".indexers.PersonSearchableExtender"
+      name="collective.contact.core.PersonSearchableExtender"
+      />
 
   <!-- Needed to remove title and description values from indexation
        because IBasic.title and description are added by plone.textindexer -->
-  <adapter for="collective.contact.core.content.organization.IOrganization
-                zope.schema.interfaces.IField
-                z3c.form.interfaces.IWidget"
-           factory=".indexers.ContactEscapingTitleFieldConverter"
-           provides="plone.app.dexterity.textindexer.interfaces.IDexterityTextIndexFieldConverter" />
+  <adapter
+      factory=".indexers.ContactEscapingTitleFieldConverter"
+      provides="plone.app.dexterity.textindexer.interfaces.IDexterityTextIndexFieldConverter"
+      for="collective.contact.core.content.organization.IOrganization
+           zope.schema.interfaces.IField
+           z3c.form.interfaces.IWidget"
+      />
 
   <adapter
-    name="sortable_title"
-    factory=".indexers.person_sortable_title"
-    />
+      factory=".indexers.person_sortable_title"
+      name="sortable_title"
+      />
 
   <adapter
-    name="sortable_title"
-    factory=".indexers.held_position_sortable_title"
-    />
+      factory=".indexers.held_position_sortable_title"
+      name="sortable_title"
+      />
 
   <adapter
-    name="start"
-    factory=".indexers.start_date"
-    />
+      factory=".indexers.start_date"
+      name="start"
+      />
 
   <adapter
-    name="end"
-    factory=".indexers.end_date"
-    />
+      factory=".indexers.end_date"
+      name="end"
+      />
 
   <adapter
       factory=".behaviors.DefaultUseParentAddress"
-      name="default" />
+      name="default"
+      />
 
   <adapter
       factory=".behaviors.DefaultParentAddress"
-      name="default" />
+      name="default"
+      />
 
   <adapter
-    for="*"
-    provides="collective.contact.core.interfaces.IVCard"
-    factory=".adapters.ContactDetailsVCard"
-    />
+      factory=".adapters.ContactDetailsVCard"
+      provides="collective.contact.core.interfaces.IVCard"
+      for="*"
+      />
 
   <adapter
-    for="collective.contact.core.content.held_position.HeldPosition"
-    provides="collective.contact.core.interfaces.IVCard"
-    factory=".adapters.HeldPositionVCard"
-    />
+      factory=".adapters.HeldPositionVCard"
+      provides="collective.contact.core.interfaces.IVCard"
+      for="collective.contact.core.content.held_position.HeldPosition"
+      />
 
   <adapter
-    for="collective.contact.core.content.organization.Organization"
-    provides="collective.contact.core.interfaces.IVCard"
-    factory=".adapters.OrganizationVCard"
-    />
+      factory=".adapters.OrganizationVCard"
+      provides="collective.contact.core.interfaces.IVCard"
+      for="collective.contact.core.content.organization.Organization"
+      />
 
   <adapter
-    for="collective.contact.core.content.person.IPerson"
-    provides="collective.contact.core.interfaces.IPersonHeldPositions"
-    factory=".adapters.PersonHeldPositionsAdapter"
-    />
+      factory=".adapters.PersonHeldPositionsAdapter"
+      provides="collective.contact.core.interfaces.IPersonHeldPositions"
+      for="collective.contact.core.content.person.IPerson"
+      />
 
 </configure>

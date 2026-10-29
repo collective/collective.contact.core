@@ -153,7 +153,7 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
 
 $(document).ready(function(){
 
-    tooltipster_helper(selector='.link-tooltip', view_name="", view_content_selector="#content");
+    tooltipster_helper(".link-tooltip", "", [], {view_content_selector: "#content"});
 
     // call view on portal
     var url = $("body").data("portal-url") + '/@@gender_person_title_mapping.json';
