@@ -25,6 +25,8 @@ use_mxdev = true
 # robot suites written for Firefox (buildout geckodriver); Chrome intercepts their clicks
 test_environment_variables = """
     ROBOT_BROWSER=headlessfirefox
+    # Playwright (rfbrowser init) does not know ubuntu-latest 26.04 yet
+    PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64
 """
 test_matrix = {"6.2" = ["*"]}
 test_deps_additional = """
