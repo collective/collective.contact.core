@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from collective.contact.core import _
 from collective.contact.widget.interfaces import IContactContent
 from collective.contact.widget.schema import ContactChoice
@@ -57,6 +59,11 @@ class IContactCoreParameters(Interface):
         title=_(u"Use description to search persons."),
         description=u"",
         required=False, default=True)
+
+    use_type_term_to_search_contact = schema.Bool(
+        title=_(u"Add a type term (organization, person, ...) in contact searchable text."),
+        description=_(u"To filter contacts by type when searching, as « organization xxx »."),
+        required=False, default=False)
 
     display_contact_photo_on_organization_view = schema.Bool(
         title=_(u"Display contact photo on organization view (instead person content type icon)."),

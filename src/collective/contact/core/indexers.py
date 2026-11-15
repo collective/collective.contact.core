@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from collective.contact.core import _
 from collective.contact.core.behaviors import ADDRESS_FIELDS
 from collective.contact.core.behaviors import IContactDetails
 from collective.contact.core.behaviors import IRelatedOrganizations
@@ -16,7 +17,18 @@ from plone import api
 from plone.indexer import indexer
 from Products.CMFPlone.utils import safe_unicode
 from zope.component import adapts
+from zope.i18n import translate
 from zope.interface import implements
+
+
+# one word per type, none being the prefix of another (the contact widget searches "word*")
+SEARCH_TERMS = {
+    'organization': _(u'search_term_organization', default=u'organization'),
+    'person': _(u'search_term_person', default=u'person'),
+    'position': _(u'search_term_position', default=u'role'),
+    'held_position': _(u'search_term_held_position', default=u'post'),
+    'contact_list': _(u'search_term_contact_list', default=u'list'),
+}
 
 
 @indexer(IContactContent)
@@ -151,6 +163,24 @@ class PersonSearchableExtender(object):
             for held_positions in obj.get_held_positions():
                 results.append(HeldPositionSearchableExtender(held_positions)())
         return u' '.join(results)
+
+
+class TypeSearchableExtender(object):
+    """Extends SearchableText with a translated type term, to search "organization xxx"."""
+    implements(IDynamicTextIndexExtender)
+
+    def __init__(self, context):
+        self.context = context
+
+    def __call__(self):
+        if not api.portal.get_registry_record(
+                "collective.contact.core.interfaces.IContactCoreParameters.use_type_term_to_search_contact",
+                default=False):
+            return u''
+        term = SEARCH_TERMS.get(self.context.portal_type)
+        if term is None:
+            return u''
+        return translate(term, target_language=api.portal.get_default_language())
 
 
 class ContactEscapingTitleFieldConverter(DefaultDexterityTextIndexFieldConverter):

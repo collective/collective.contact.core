@@ -211,4 +211,14 @@
       profile="collective.contact.core:default">
   </genericsetup:upgradeStep>
 
+  <genericsetup:upgradeSteps
+      source="21"
+      destination="22"
+      profile="collective.contact.core:default">
+      <genericsetup:upgradeDepends
+          title="Reapply registry.xml to add 'use_type_term_to_search_contact'"
+          description=""
+          import_steps="plone.app.registry" />
+  </genericsetup:upgradeSteps>
+
 </configure>

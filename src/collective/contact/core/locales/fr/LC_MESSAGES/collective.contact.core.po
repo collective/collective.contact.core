@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.contact.core\n"
-"POT-Creation-Date: 2024-11-04 14:33+0000\n"
+"POT-Creation-Date: 2026-11-15 16:32+0000\n"
 "PO-Revision-Date: 2017-03-30 15:56+0200\n"
 "Last-Translator: Harald Friessnegger <harald@webmeisterei.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -33,7 +33,7 @@ msgstr "Activer l'objet"
 msgid "Active"
 msgstr "Actif"
 
-#: ../browser/basefields/templates/organization.pt:31
+#: ../browser/basefields/templates/organization.pt:41
 #: ../content/organization.py:39
 msgid "Activity"
 msgstr "Activité"
@@ -42,15 +42,19 @@ msgstr "Activité"
 msgid "Add"
 msgstr "Ajouter"
 
+#: ../interfaces.py:64
+msgid "Add a type term (organization, person, ...) in contact searchable text."
+msgstr "Ajouter un terme de type (organisation, personne, ...) dans le texte de recherche des contacts."
+
 #: ../behaviors.py:274
 msgid "Additional address details"
 msgstr "Complément d'adresse"
 
-#: ../interfaces.py:124
+#: ../interfaces.py:131
 msgid "Additional label"
 msgstr "Intitulé"
 
-#: ../interfaces.py:125
+#: ../interfaces.py:132
 msgid "Additional label with information that does not appear on position label"
 msgstr "Intitulé complétant l'intitulé de poste"
 
@@ -61,7 +65,7 @@ msgstr "Adresse "
 
 #: ../behaviors.py:323
 #: ../behaviors.zcml:28
-#: ../browser/basefields/templates/person.pt:32
+#: ../browser/basefields/templates/person.pt:31
 msgid "Birthday"
 msgstr "Date de naissance "
 
@@ -73,7 +77,7 @@ msgstr "Téléphone portable"
 msgid "Cell phone number"
 msgstr "Numéro de téléphone portable "
 
-#: ../interfaces.py:77
+#: ../interfaces.py:84
 msgid "Choose information displayed after a search in contact widget."
 msgstr "Choisir les informations affichées lors d'une recherche dans un champ contact."
 
@@ -98,7 +102,7 @@ msgstr "Informations de contact (numéro de téléphone, adresse, email, ...)"
 msgid "Contact have a birthday."
 msgstr "Ajout d'un champ anniversaire"
 
-#: ../testing.zcml:17
+#: ../testing.zcml:16
 msgid "Contact lists"
 msgstr "Listes de contacts"
 
@@ -125,19 +129,19 @@ msgstr "Désactivé"
 msgid "Directory"
 msgstr "Annuaire"
 
-#: ../interfaces.py:67
+#: ../interfaces.py:74
 msgid "Display belowcontenttitle viewlet on contact views."
 msgstr "Afficher le viewlet 'belowcontenttitle' sur les vues contact (contenant 'modifié par')."
 
-#: ../interfaces.py:62
+#: ../interfaces.py:69
 msgid "Display contact photo on organization view (instead person content type icon)."
 msgstr "Afficher la photo du contact dans la vue de l'organisation (à la place de l'icône 'personne')"
 
-#: ../interfaces.py:47
+#: ../interfaces.py:49
 msgid "Display person title in displayed person's title."
 msgstr "Afficher la civilité sur le titre de la personne."
 
-#: ../interfaces.py:72
+#: ../interfaces.py:79
 msgid "Display the \"Photo\" label before the photo image on contact views."
 msgstr "Afficher le libellé \"Photo\" devant la photo sur les vues contact (par défaut seule la photo est affichée)."
 
@@ -150,13 +154,13 @@ msgstr "Télécharger la VCard"
 msgid "Email"
 msgstr "Courriel "
 
-#: ../browser/basefields/templates/held_position.pt:33
+#: ../browser/basefields/templates/held_position.pt:43
 #: ../browser/templates/heldpositions.pt:50
-#: ../interfaces.py:135
+#: ../interfaces.py:142
 msgid "End date"
 msgstr "Date de fin "
 
-#: ../browser/basefields/templates/organization.pt:36
+#: ../browser/basefields/templates/organization.pt:46
 #: ../content/organization.py:54
 msgid "Enterprise (or VAT) number"
 msgstr "Numéro d'entreprise (ou de TVA)"
@@ -203,11 +207,11 @@ msgstr "Fonction occupée"
 msgid "IM handle"
 msgstr "Identifiant de messagerie instantanée "
 
-#: ../configure.zcml:59
+#: ../configure.zcml:61
 msgid "Installs test data for the collective.contact.core package"
 msgstr "Installe les données de tests de collective.contact.core"
 
-#: ../configure.zcml:51
+#: ../configure.zcml:53
 msgid "Installs the collective.contact.core package"
 msgstr "Installe le package collective.contact.core"
 
@@ -231,7 +235,7 @@ msgstr "Nom de famille"
 msgid "Latitude"
 msgstr "Latitude"
 
-#: ../interfaces.py:84
+#: ../interfaces.py:91
 msgid "Log contact details access (with imio.fputils product)."
 msgstr "Enregistrer l'accès aux coordonnées des contacts (avec le produit imio.fputils)."
 
@@ -301,7 +305,7 @@ msgstr "Niveau d'organisation"
 msgid "Organization levels"
 msgstr "Niveaux d'organisation"
 
-#: ../browser/basefields/templates/organization.pt:25
+#: ../browser/basefields/templates/organization.pt:35
 msgid "Organization type"
 msgstr "Type d'organisation "
 
@@ -309,7 +313,7 @@ msgstr "Type d'organisation "
 msgid "Organization types"
 msgstr "Types d'organisations"
 
-#: ../interfaces.py:119
+#: ../interfaces.py:126
 msgid "Organization/Position"
 msgstr "Organisation/Fonction"
 
@@ -353,19 +357,19 @@ msgstr "Téléphone"
 msgid "Phone number"
 msgstr "Numéro de téléphone "
 
-#: ../browser/basefields/templates/held_position.pt:14
-#: ../browser/basefields/templates/person.pt:25
+#: ../browser/basefields/templates/held_position.pt:24
+#: ../browser/basefields/templates/person.pt:24
 #: ../content/person.py:50
 msgid "Photo"
 msgstr "Photo"
 
 #: ../browser/addcontact.py:285
-#: ../browser/basefields/templates/held_position.pt:19
+#: ../browser/basefields/templates/held_position.pt:29
 #: ../content/directory.py:36
 msgid "Position"
 msgstr "Fonction "
 
-#: ../browser/basefields/templates/position.pt:15
+#: ../browser/basefields/templates/position.pt:25
 msgid "Position type"
 msgstr "Type de fonction "
 
@@ -410,18 +414,18 @@ msgstr "Sélectionnez la personne qui occupe cette fonction"
 msgid "Select the position held by this person in the selected organization"
 msgstr "Sélectionnez la fonction occupée par cette personne dans l'organisation sélectionnée"
 
-#: ../browser/basefields/templates/person.pt:38
+#: ../browser/basefields/templates/person.pt:37
 #: ../content/person.py:54
 msgid "Signature"
 msgstr "Signature"
 
-#: ../browser/basefields/templates/held_position.pt:27
+#: ../browser/basefields/templates/held_position.pt:37
 #: ../browser/templates/heldpositions.pt:45
-#: ../interfaces.py:129
+#: ../interfaces.py:136
 msgid "Start date"
 msgstr "Date de début "
 
-#: ../testing.zcml:25
+#: ../testing.zcml:24
 msgid "Steps to ease tests of collective.contact.core"
 msgstr "Steps pour faciliter les tests de collective.contact.core"
 
@@ -429,9 +433,13 @@ msgstr "Steps pour faciliter les tests de collective.contact.core"
 msgid "Street"
 msgstr "Rue"
 
-#: ../interfaces.py:42
+#: ../interfaces.py:44
 msgid "The person contact details are private and will not be used in other context, like held position."
 msgstr "Les données de contact d'une personne sont privées et ne sont pas utilisées dans un autre contexte, tel qu'une fonction occupée."
+
+#: ../interfaces.py:65
+msgid "To filter contacts by type when searching, as « organization xxx »."
+msgstr "Pour filtrer les contacts par type lors d'une recherche, comme « organisation xxx »."
 
 #: ../content/directory.py:28
 msgid "Token"
@@ -445,15 +453,15 @@ msgstr "Type"
 msgid "Type or level"
 msgstr "Type ou niveau"
 
-#: ../interfaces.py:89
+#: ../interfaces.py:96
 msgid "Types selection to audit."
 msgstr "Filtre (suivant type de contenu) sur l'enregistrement des accès."
 
-#: ../interfaces.py:57
+#: ../interfaces.py:59
 msgid "Use description to search persons."
 msgstr "Utiliser la description pour rechercher des personnes."
 
-#: ../interfaces.py:52
+#: ../interfaces.py:54
 msgid "Use held positions to search persons."
 msgstr "Utiliser la position occupée pour rechercher des personnes."
 
@@ -479,15 +487,15 @@ msgstr "Code postal"
 msgid "address_line"
 msgstr "${street} ${number}"
 
-#: ../configure.zcml:51
+#: ../configure.zcml:53
 msgid "collective.contact.core"
 msgstr "collective.contact.core"
 
-#: ../configure.zcml:59
+#: ../configure.zcml:61
 msgid "collective.contact.core test data"
 msgstr "Données de tests de collective.contact.core"
 
-#: ../testing.zcml:25
+#: ../testing.zcml:24
 msgid "collective.contact.core tests"
 msgstr "Tests de collective.contact.core"
 
@@ -496,15 +504,15 @@ msgstr "Tests de collective.contact.core"
 msgid "colon"
 msgstr " :"
 
-#: ../browser/utils.py:71
+#: ../browser/utils.py:83
 msgid "contact_edit"
 msgstr "edition"
 
-#: ../browser/utils.py:75
+#: ../browser/utils.py:87
 msgid "contact_overlay"
 msgstr "survol"
 
-#: ../browser/utils.py:78
+#: ../browser/utils.py:90
 msgid "contact_view"
 msgstr "consultation"
 
@@ -530,6 +538,31 @@ msgstr "Si l'élément n'existe pas, vous pouvez l'ajouter à la base :"
 #: ../browser/addcontact.py:141
 msgid "organization/position"
 msgstr "organisation/fonction"
+
+#. Default: "list"
+#: ../indexers.py:30
+msgid "search_term_contact_list"
+msgstr "liste"
+
+#. Default: "post"
+#: ../indexers.py:29
+msgid "search_term_held_position"
+msgstr "poste"
+
+#. Default: "organization"
+#: ../indexers.py:26
+msgid "search_term_organization"
+msgstr "organisation"
+
+#. Default: "person"
+#: ../indexers.py:27
+msgid "search_term_person"
+msgstr "personne"
+
+#. Default: "role"
+#: ../indexers.py:28
+msgid "search_term_position"
+msgstr "role"
 
 #: ../browser/templates/organization.pt:53
 msgid "to"

@@ -3,6 +3,7 @@
     xmlns:grok="http://namespaces.zope.org/grok"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="collective.contact.core">
 
   <i18n:registerTranslations directory="locales" />
@@ -85,6 +86,16 @@
 
   <adapter name="collective.contact.core.PersonSearchableExtender"
            factory=".indexers.PersonSearchableExtender" />
+
+  <adapter name="collective.contact.core.TypeSearchableExtender"
+           for="collective.contact.widget.interfaces.IContactContent"
+           factory=".indexers.TypeSearchableExtender" />
+
+  <!-- used only if the contact_list type has the IDexterityTextIndexer behavior -->
+  <adapter name="collective.contact.core.TypeSearchableExtender"
+           for="collective.contact.contactlist.interfaces.IContactList"
+           factory=".indexers.TypeSearchableExtender"
+           zcml:condition="installed collective.contact.contactlist" />
 
   <!-- Needed to remove title and description values from indexation
        because IBasic.title and description are added by collective.dexteritytextindexer -->

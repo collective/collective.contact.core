@@ -4,6 +4,7 @@ from collective.contact.core.indexers import end_date
 from collective.contact.core.indexers import held_position_sortable_title
 from collective.contact.core.indexers import person_sortable_title
 from collective.contact.core.indexers import start_date
+from collective.contact.core.indexers import TypeSearchableExtender
 from collective.contact.core.testing import INTEGRATION
 from ecreall.helpers.testing.base import BaseTest
 from plone import api
@@ -120,3 +121,18 @@ class TestSearch(unittest.TestCase, BaseTest):
         self.assertEqual(restults[0].getPath(), '/plone/mydirectory/degaulle')
         results = catalog.searchResults(SearchableText='BE123456789')
         self.assertEqual(len(results), 1)
+
+    def test_type_term_searchable(self):
+        catalog = api.portal.get_tool('portal_catalog')
+        objs = (self.armeedeterre, self.degaulle, self.general_adt, self.gadt)
+        self.assertEqual(TypeSearchableExtender(self.armeedeterre)(), u'')  # disabled by default
+        api.portal.set_registry_record(
+            'collective.contact.core.interfaces.IContactCoreParameters.use_type_term_to_search_contact', True)
+        self.assertListEqual([TypeSearchableExtender(obj)() for obj in objs],
+                             [u'organization', u'person', u'role', u'post'])
+        for obj in objs:
+            obj.reindexObject(idxs=['SearchableText'])
+        results = catalog.searchResults(SearchableText='organization* AND armee*')
+        self.assertListEqual([b.getObject() for b in results], [self.armeedeterre])
+        results = catalog.searchResults(SearchableText='post* AND gaulle*')
+        self.assertListEqual([b.getObject() for b in results], [self.gadt])

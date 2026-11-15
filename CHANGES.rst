@@ -4,8 +4,9 @@ Changelog
 1.43.4 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Added `use_type_term_to_search_contact` option (default False) to add a one-word translated type term
+  (organization, person, role, post, list) in contacts SearchableText, to filter by type when searching.
+  [sgeulette]
 
 1.43.3 (2026-05-29)
 -------------------
