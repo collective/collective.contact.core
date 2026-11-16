@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.43.4 (unreleased)
+1.44.0 (2026-11-16)
 -------------------
 
 - Added `use_type_term_to_search_contact` option to add a one-word translated type term
