@@ -1,25 +1,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-	    xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
-	    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      lang="en"
       metal:use-macro="context/main_template/macros/master"
-      i18n:domain="collective.contact.core" lang="en">
+      i18n:domain="collective.contact.core"
+>
 
-  <div id="person" class="vcard" metal:fill-slot="main">
-    <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" />
+  <div class="vcard"
+       id="person"
+       metal:fill-slot="main"
+  >
+    <div id="viewlet-above-content-title"
+         tal:content="structure provider:plone.abovecontenttitle"
+    ></div>
 
-    <div tal:replace="structure context/@@basefields" />
+    <div tal:replace="structure context/@@basefields"></div>
 
     <div tal:condition="view/show_contact_details"
-         tal:replace="structure context/@@contactdetails" />
+         tal:replace="structure context/@@contactdetails"
+    ></div>
 
-    <div tal:replace="structure context/@@ttwfields" />
+    <div tal:replace="structure context/@@ttwfields"></div>
 
     <metal:additional-fields use-macro="context/@@contact_core_macros/macros/additional-fields" />
 
-    <div tal:replace="structure context/@@heldpositions" />
+    <div tal:replace="structure context/@@heldpositions"></div>
 
-    <div id="viewlet-below-content-body" tal:content="structure provider:plone.belowcontentbody" />
+    <div id="viewlet-below-content-body"
+         tal:content="structure provider:plone.belowcontentbody"
+    ></div>
   </div>
 
 </html>

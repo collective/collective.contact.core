@@ -1,12 +1,13 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <registry>
 
-    <record name="plone.displayed_types"
-            interface="plone.base.interfaces.controlpanel.INavigationSchema"
-            field="displayed_types">
-      <value purge="false">
-        <element>directory</element>
-      </value>
-    </record>
+  <record field="displayed_types"
+          interface="plone.base.interfaces.controlpanel.INavigationSchema"
+          name="plone.displayed_types"
+  >
+    <value purge="false">
+      <element>directory</element>
+    </value>
+  </record>
 
 </registry>

@@ -6,6 +6,8 @@ omit =
     */__init__.py
 
 [report]
+include =
+    src/collective/contact/core/*
 omit =
     */upgrade*
     */tests/*

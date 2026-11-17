@@ -1,84 +1,122 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
       lang="en"
-      tal:define="icons python:context.restrictedTraverse('@@iconresolver');
-                  portal_url context/@@plone_portal_state/portal_url;"
-      i18n:domain="collective.contact.core" tal:omit-tag="">
+      tal:define="
+        icons python:context.restrictedTraverse('@@iconresolver');
+        portal_url context/@@plone_portal_state/portal_url;
+      "
+      tal:omit-tag=""
+      i18n:domain="collective.contact.core"
+>
 
-    <div id="held_positions" class="field" tal:condition="view/held_positions">
-        <h2 i18n:translate="">Positions</h2>
-        <tal:block tal:repeat="held_position view/held_positions">
-            <div class="held_position card" tal:define="url held_position/object/absolute_url">
+  <div class="field"
+       id="held_positions"
+       tal:condition="view/held_positions"
+  >
+    <h2 i18n:translate="">Positions</h2>
+    <tal:block tal:repeat="held_position view/held_positions">
+      <div class="held_position card"
+           tal:define="
+             url held_position/object/absolute_url;
+           "
+      >
 
-              <div class="actions">
-                <tal:comment replace="nothing">class="zoom-held-position contactoverlay"</tal:comment>
-                <a class="zoom-held-position no-decoration"
-                   tal:attributes="href string:${url}/view"
-                   title="View"
-                   i18n:domain="plone"
-                   i18n:attributes="title">
-                  <tal:icon
-                   tal:replace="structure python:icons.tag('eye')" />
-                </a>
-                <tal:comment replace="nothing">class="edit-held-position contactoverlay"</tal:comment>
-                <a class="edit-held-position no-decoration"
-                   tal:attributes="href string:${url}/edit"
-                   tal:condition="held_position/can_edit"
-                   title="Edit"
-                   i18n:domain="plone"
-                   i18n:attributes="title">
-                  <tal:icon
-                   tal:replace="structure python:icons.tag('pencil')" />
-                </a>
-                <tal:comment replace="nothing">class="delete-held-position deleteoverlay"</tal:comment>
-                <a class="delete-held-position no-decoration"
-                   tal:attributes="href string:${url}/delete_confirmation"
-                   tal:condition="held_position/can_delete"
-                   title="Delete"
-                   i18n:domain="plone"
-                   i18n:attributes="title">
-                  <tal:icon
-                   tal:replace="structure python:icons.tag('trash3')" />
-                </a>
-              </div>
+        <div class="actions">
+          <tal:comment replace="nothing">class="zoom-held-position contactoverlay"</tal:comment>
+          <a class="zoom-held-position no-decoration"
+             title="View"
+             tal:attributes="
+               href string:${url}/view;
+             "
+             i18n:attributes="title"
+             i18n:domain="plone"
+          >
+            <tal:icon tal:replace="structure python:icons.tag('eye')" />
+          </a>
+          <tal:comment replace="nothing">class="edit-held-position contactoverlay"</tal:comment>
+          <a class="edit-held-position no-decoration"
+             title="Edit"
+             tal:condition="held_position/can_edit"
+             tal:attributes="
+               href string:${url}/edit;
+             "
+             i18n:attributes="title"
+             i18n:domain="plone"
+          >
+            <tal:icon tal:replace="structure python:icons.tag('pencil')" />
+          </a>
+          <tal:comment replace="nothing">class="delete-held-position deleteoverlay"</tal:comment>
+          <a class="delete-held-position no-decoration"
+             title="Delete"
+             tal:condition="held_position/can_delete"
+             tal:attributes="
+               href string:${url}/delete_confirmation;
+             "
+             i18n:attributes="title"
+             i18n:domain="plone"
+          >
+            <tal:icon tal:replace="structure python:icons.tag('trash3')" />
+          </a>
+        </div>
 
-              <h3><img tal:attributes="src held_position/icon" /> <span tal:content="held_position/title" /></h3>
+        <h3><img tal:attributes="
+                 src held_position/icon;
+               " />
+          <span tal:content="held_position/title"></span></h3>
 
-              <div class="start_date" class="field" tal:condition="held_position/start_date">
-                <label><tal:block i18n:translate="">Start date</tal:block>:</label>
-                <span tal:replace="held_position/start_date" />
-              </div>
+        <div class="start_date"
+             tal:condition="held_position/start_date"
+        >
+          <label><tal:block i18n:translate="">Start date</tal:block>:</label>
+          <span tal:replace="held_position/start_date"></span>
+        </div>
 
-              <div class="end_date" class="field" tal:condition="held_position/end_date">
-                <label><tal:block i18n:translate="">End date</tal:block>:</label>
-                <span tal:replace="held_position/end_date" />
-              </div>
+        <div class="end_date"
+             tal:condition="held_position/end_date"
+        >
+          <label><tal:block i18n:translate="">End date</tal:block>:</label>
+          <span tal:replace="held_position/end_date"></span>
+        </div>
 
-              <div tal:replace="structure held_position/object/@@nofallbackcontactdetails"></div>
+        <div tal:replace="structure held_position/object/@@nofallbackcontactdetails"></div>
 
-              <div class="organization card"
-                   tal:condition="python:held_position.get('organization', None)"
-                   tal:define="organization nocall:held_position/organization">
-                  <div class="logo" class="field" tal:condition="organization/logo">
-                      <img tal:define="scales nocall:organization/@@images"
-                           tal:replace="structure python:scales.tag('logo', 'tile', css_class='photo')"
-                           tal:on-error="string:Bad logo format" />
-                  </div>
-                  <h4>
-                     <tal:icon
-                      tal:define="icon_name string:contenttype/${organization/portal_type}"
-                      tal:replace="structure python:icons.tag(icon_name)" />
-                      <a tal:attributes="href organization/absolute_url" tal:content="organization/get_full_title"></a>
-                  </h4>
+        <div class="organization card"
+             tal:define="
+               organization nocall:held_position/organization;
+             "
+             tal:condition="python:held_position.get('organization', None)"
+        >
+          <div class="logo"
+               tal:condition="organization/logo"
+          >
+            <img tal:define="
+                   scales nocall:organization/@@images;
+                 "
+                 tal:replace="structure python:scales.tag('logo', 'tile', css_class='photo')"
+                 tal:on-error="string:Bad logo format"
+            />
+          </div>
+          <h4>
+            <tal:icon tal:define="
+                        icon_name string:contenttype/${organization/portal_type};
+                      "
+                      tal:replace="structure python:icons.tag(icon_name)"
+            />
+            <a tal:content="organization/get_full_title"
+               tal:attributes="
+                 href organization/absolute_url;
+               "
+            ></a>
+          </h4>
 
-                  <div tal:replace="structure held_position/organization/@@contactdetails"></div>
-              </div>
-            </div>
-        </tal:block>
-        <div class="clearfix"><!--  --></div>
-    </div>
+          <div tal:replace="structure held_position/organization/@@contactdetails"></div>
+        </div>
+      </div>
+    </tal:block>
+    <div class="clearfix"><!--  --></div>
+  </div>
 
 
 </html>

@@ -19,7 +19,7 @@ def get_directory(context):
         raise NoDirectoryFound
     while parent.portal_type != "directory":
         parent = aq_parent(parent)
-        if getattr(parent, 'portal_type', None) is None:
+        if getattr(parent, "portal_type", None) is None:
             raise NoDirectoryFound
     return parent
 
@@ -27,15 +27,13 @@ def get_directory(context):
 def get_vocabulary(schema_list):
     terms = []
     for item in schema_list:
-        term = SimpleVocabulary.createTerm(item['token'],
-                                           item['token'],
-                                           item['name'])
+        term = SimpleVocabulary.createTerm(item["token"], item["token"], item["name"])
         terms.append(term)
     return SimpleVocabulary(terms)
 
 
 @implementer(IVocabularyFactory)
-class PositionTypes(object):
+class PositionTypes:
 
     def __call__(self, context):
         try:
@@ -49,7 +47,7 @@ PositionTypesFactory = PositionTypes()
 
 
 @implementer(IVocabularyFactory)
-class OrganizationTypesOrLevels(object):
+class OrganizationTypesOrLevels:
 
     def get_container_type(self, context):
         request = getRequest()
@@ -64,7 +62,7 @@ class OrganizationTypesOrLevels(object):
         try:
             directory = get_directory(context)
             container_type = self.get_container_type(context)
-            if container_type == 'organization':
+            if container_type == "organization":
                 return get_vocabulary(directory.organization_levels)
             else:
                 # directory, folder or anything else
@@ -77,12 +75,12 @@ OrganizationTypesOrLevelsFactory = OrganizationTypesOrLevels()
 
 
 @implementer(IVocabularyFactory)
-class Genders(object):
+class Genders:
 
     def __call__(self, context):
         terms = []
-        genders = {'M': _("Male"), 'F': _("Female")}
-        for (token, value) in genders.items():
+        genders = {"M": _("Male"), "F": _("Female")}
+        for token, value in genders.items():
             term = SimpleVocabulary.createTerm(token, token, value)
             terms.append(term)
         return SimpleVocabulary(terms)
@@ -92,7 +90,7 @@ GendersFactory = Genders()
 
 
 @implementer(IVocabularyFactory)
-class AuditTypes(object):
+class AuditTypes:
 
     def __call__(self, context):
         terms = []
@@ -100,7 +98,9 @@ class AuditTypes(object):
             if not fti:
                 continue
             if "collective.contact.core.behaviors.IContactDetails" in fti.behaviors:
-                terms.append(SimpleVocabulary.createTerm(name, name, _(fti.title or name)))
+                terms.append(
+                    SimpleVocabulary.createTerm(name, name, _(fti.title or name))
+                )
         return SimpleVocabulary(terms)
 
 

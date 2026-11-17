@@ -1,8 +1,6 @@
-.. image:: https://github.com/collective/collective.contact.core/actions/workflows/main.yml/badge.svg
-   :target: https://github.com/collective/collective.contact.core/actions/workflows/main.yml
+.. image:: https://github.com/collective/collective.contact.core/actions/workflows/meta.yml/badge.svg?branch=master
+    :target: https://github.com/collective/collective.contact.core/actions/workflows/meta.yml
 
-.. image:: https://coveralls.io/repos/collective/collective.contact.core/badge.png?branch=master
-   :target: https://coveralls.io/r/collective/collective.contact.core?branch=master
 
 
 Introduction
@@ -16,7 +14,7 @@ A Plone add-on that provides a directory where you create persons, organizations
 How-to
 ======
 
-First, create a directory in your site. This directory will contain all the informations related to your contacts.
+First, create a directory in your site. This directory will contain all the information related to your contacts.
 
 You can then add organizations to this directory. An organization can contain organizations (such as services, divisions or department) or positions (such as CEO, mayor or developer).
 
@@ -106,7 +104,7 @@ and then running "bin/buildout", next enable the product in your plone site.
 Versions
 ========
 
-- Version 2.x is for Plone 6.1+ only
+- Version 2.x is for Plone 6.2+ only
 - Version 1.x is for Plone 4
 
 

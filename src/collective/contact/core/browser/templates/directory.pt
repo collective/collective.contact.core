@@ -1,58 +1,78 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-      lang="en"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      lang="en"
       metal:use-macro="context/main_template/macros/master"
-      i18n:domain="collective.contact.core">
-<head>
+      xml:lang="en"
+      i18n:domain="collective.contact.core"
+>
+  <head>
     <metal:block fill-slot="top_slot"
-                 tal:define="disable_column_one python:request.set('disable_plone.leftcolumn',1);
-                             disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
-</head>
-<body>
+                 tal:define="
+                   disable_column_one python:request.set('disable_plone.leftcolumn',1);
+                   disable_column_two python:request.set('disable_plone.rightcolumn',1);
+                 "
+    />
+  </head>
+  <body>
 
-<div metal:fill-slot="main">
+    <div metal:fill-slot="main">
 
-    <div tal:replace="structure provider:plone.abovecontenttitle" />
+      <div tal:replace="structure provider:plone.abovecontenttitle"></div>
 
-    <h1 class="directory">
-        <tal:icon
-         tal:replace="structure python:icons.tag('contenttype/directory')" />
-        <span tal:content="context/Title" />
-    </h1>
+      <h1 class="directory">
+        <tal:icon tal:replace="structure python:icons.tag('contenttype/directory')" />
+        <span tal:content="context/Title"></span>
+      </h1>
 
-    <div id="organizations" tal:condition="view/organizations">
+      <div id="organizations"
+           tal:condition="view/organizations"
+      >
         <h2><tal:block i18n:translate="">Organizations</tal:block>:</h2>
         <ul>
-        <tal:block tal:repeat="organization view/organizations">
-            <li><a class="link-tooltip" tal:attributes="href organization/getURL; data-base_url organization/getURL">
-                <tal:icon
-                 tal:replace="structure python:icons.tag('contenttype/organization')" />
+          <tal:block tal:repeat="organization view/organizations">
+            <li><a class="link-tooltip"
+                 tal:attributes="
+                   href organization/getURL;
+                   data-base_url organization/getURL;
+                 "
+              >
+                <tal:icon tal:replace="structure python:icons.tag('contenttype/organization')" />
                 <span tal:replace="organization/Title"
-                      i18n:translate="" />
-            </a></li>
-        </tal:block>
+                      i18n:translate=""
+                ></span>
+              </a></li>
+          </tal:block>
         </ul>
-    </div>
+      </div>
 
-    <div id="persons" tal:condition="view/persons">
+      <div id="persons"
+           tal:condition="view/persons"
+      >
         <h2><tal:block i18n:translate="">Persons</tal:block>:</h2>
         <ul>
-        <tal:block tal:repeat="person view/persons">
-            <li><a class="link-tooltip" tal:attributes="href person/getURL; data-base_url person/getURL">
-                <tal:icon
-                 tal:replace="structure python:icons.tag('contenttype/person')" />
+          <tal:block tal:repeat="person view/persons">
+            <li><a class="link-tooltip"
+                 tal:attributes="
+                   href person/getURL;
+                   data-base_url person/getURL;
+                 "
+              >
+                <tal:icon tal:replace="structure python:icons.tag('contenttype/person')" />
                 <span tal:replace="person/Title"
-                      i18n:translate="" />
-            </a></li>
-        </tal:block>
+                      i18n:translate=""
+                ></span>
+              </a></li>
+          </tal:block>
         </ul>
+      </div>
+
+      <div id="viewlet-below-content-body"
+           tal:content="structure provider:plone.belowcontentbody"
+      ></div>
+
     </div>
 
-  <div id="viewlet-below-content-body" tal:content="structure provider:plone.belowcontentbody" />
-
-</div>
-
-</body>
+  </body>
 </html>
