@@ -6,41 +6,15 @@ from collective.contact.core.browser.contactable import BaseView
 from collective.contact.core.browser.utils import audit_access
 from collective.contact.core.browser.utils import date_to_DateTime
 from collective.contact.core.browser.utils import get_valid_url
-from collective.contact.core.content.organization import IOrganization
 from collective.contact.core.interfaces import IContactable
 from collective.contact.core.interfaces import IContactCoreParameters
-from five import grok
 from plone import api
 from Products.Five import BrowserView
-
-
-ADDNEW_OVERLAY = """
-<script type="text/javascript">
-$(document).ready(function(){
-    $('.addnewcontactfromorganization').prepOverlay({
-      subtype: 'ajax',
-      filter: common_content_filter,
-      formselector: '#oform',
-      cssclass: 'overlay-contact-addnew',
-      closeselector: '[name="oform.buttons.cancel"]',
-      noform: function(el, pbo) {return 'reload';},
-      config: {
-          closeOnClick: false,
-          closeOnEsc: false
-      }
-    });
-});
-</script>
-"""
-
-
-grok.templatedir('templates')
 
 
 class Organization(BaseView):
 
     def update(self):
-        super(Organization, self).update()
         self.organization = self.context
         organization = self.organization
 
@@ -58,7 +32,9 @@ class Organization(BaseView):
         self.positions = self.context.get_positions()
         sm = getSecurityManager()
         self.can_add = sm.checkPermission('Add portal content', self.context)
-        self.addnew_script = ADDNEW_OVERLAY
+        # We need to update widgets to avoid view.widgets being None which
+        # causes a traceback in collective.eeafaceted.z3ctable
+        self.updateWidgets()
 
     def display_date(self, date):
         """Display date nicely in template."""
@@ -77,12 +53,13 @@ class SubOrganizations(BrowserView):
         return self.index()
 
 
-class OtherContacts(grok.View):
+class OtherContacts(BrowserView):
     """Displays other contacts list"""
-    grok.name('othercontacts')
-    grok.context(IOrganization)
-
     held_positions = ''
+
+    def __call__(self):
+        self.update()
+        return super(OtherContacts, self).__call__()
 
     def update(self):
         organization = self.context

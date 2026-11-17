@@ -36,12 +36,6 @@ def postInstall(context):
     # the right place for your custom code
     if isNotCollectiveContactContentProfile(context):
         return
-    # we CAN NOT reinstall the product using portal_quickinstaller because
-    # it removes manualy added fields for dexterity types
-    import traceback
-    for line in traceback.format_stack():
-        if 'QuickInstallerTool.py' in line and 'reinstallProducts' in line:
-            raise Exception('You can not reinstall this product, use portal_setup to re-apply the relevant profile !')
     # Set default values in registry
     for name in ('person_contact_details_private', 'person_title_in_title', 'use_held_positions_to_search_person',
                  'use_description_to_search_person'):

@@ -4,14 +4,14 @@ from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactChoice
 from collective.contact.widget.interfaces import IContactContent
 from plone import api
+from plone.base.utils import safe_text
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.namedfile.interfaces import INamedImageField
-from Products.CMFPlone.utils import safe_unicode
 from zope.component import adapts
 from zope.component import getMultiAdapter
-from zope.component.interfaces import ComponentLookupError
-from zope.interface import implements
+from zope.interface import implementer
 from zope.interface import Interface
+from zope.interface.interfaces import ComponentLookupError
 
 
 try:
@@ -36,7 +36,7 @@ if HAS_EXCELEXPORT:
             return (value and "{}/@@images/{}?{}".format(
                 obj.absolute_url(),
                 self.field.__name__,
-                value.filename.encode("utf8")) or u""
+                value.filename) or u""
             )
 
     class ContactFieldRenderer(BaseFieldRenderer):
@@ -51,9 +51,9 @@ if HAS_EXCELEXPORT:
             if not rel_obj:
                 return u""
             if IHeldPosition.providedBy(rel_obj):
-                return safe_unicode(rel_obj.get_full_title()) or u""
+                return safe_text(rel_obj.get_full_title()) or u""
             else:
-                return safe_unicode(rel_obj.Title())
+                return safe_text(rel_obj.Title())
 
     class HeldPositionPersonInfoExportableFactory(BaseExportableFactory):
         adapts(IDexterityFTI, Interface, Interface)
@@ -84,9 +84,9 @@ if HAS_EXCELEXPORT:
 
             return exportables
 
+    @implementer(IFieldValueGetter)
     class ContactValueGetter(object):
         adapts(IContactContent)
-        implements(IFieldValueGetter)
 
         def __init__(self, context):
             self.context = context

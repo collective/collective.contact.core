@@ -1,9 +1,7 @@
 from collective.contact.core import _
 from collective.contact.core import logger
 from collective.contact.core.browser.contactable import Contactable
-from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.widget.interfaces import IContactContent
-from five import grok
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.supermodel import model
@@ -11,7 +9,7 @@ from z3c.form.interfaces import NO_VALUE
 from zc.relation.interfaces import ICatalog
 from zope import schema
 from zope.component import getUtility
-from zope.interface import implements
+from zope.interface import implementer
 from zope.intid.interfaces import IIntIds
 
 
@@ -36,8 +34,6 @@ class IPosition(model.Schema, IContactContent):
 class PositionContactableAdapter(Contactable):
     """Contactable adapter for Position content type"""
 
-    grok.context(IPosition)
-
     @property
     def position(self):
         return self.context
@@ -48,10 +44,9 @@ class PositionContactableAdapter(Contactable):
         return organization.get_organizations_chain()
 
 
+@implementer(IPosition)
 class Position(Container):
     """Position content type"""
-
-    implements(IPosition)
 
     use_parent_address = NO_VALUE
     parent_address = NO_VALUE
@@ -85,7 +80,6 @@ class Position(Container):
         position_intid = intids.getId(self)
         contact_relations = catalog.findRelations(
                               {'to_id': position_intid,
-                               'from_interfaces_flattened': IHeldPosition,
                                'from_attribute': 'position'})
         held_positions = []
         for relation in contact_relations:
@@ -97,11 +91,8 @@ class Position(Container):
         return held_positions
 
 
-class PositionSchemaPolicy(grok.GlobalUtility,
-                           DexteritySchemaPolicy):
+class PositionSchemaPolicy(DexteritySchemaPolicy):
     """Schema policy for Position content type"""
-
-    grok.name("schema_policy_position")
 
     def bases(self, schemaName, tree):
         return (IPosition,)

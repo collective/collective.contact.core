@@ -8,12 +8,11 @@ from plone.app.dexterity.browser.types import TypeSchemaContext
 from plone.app.textfield import RichText
 from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider
-from plone.formwidget.datetime.z3cform.widget import DateFieldWidget
 from plone.formwidget.masterselect import MasterSelectBoolField
 from plone.supermodel import model
 from plone.supermodel.directives import fieldset
-from Products.CMFDefault.exceptions import EmailAddressInvalid
-from Products.CMFDefault.utils import checkEmailAddress
+from Products.CMFPlone.RegistrationTool import checkEmailAddress
+from Products.CMFPlone.RegistrationTool import EmailAddressInvalid
 from z3c.form.widget import ComputedWidgetAttribute
 from zope import schema
 from zope.interface import alsoProvides
@@ -318,7 +317,6 @@ DefaultParentAddress = ComputedWidgetAttribute(
 
 class IBirthday(model.Schema):
 
-    form.widget(birthday=DateFieldWidget)
     birthday = schema.Date(
         title=_("Birthday"),
         required=False,

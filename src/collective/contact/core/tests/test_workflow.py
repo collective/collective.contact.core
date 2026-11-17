@@ -1,8 +1,8 @@
 # -*- coding: utf8 -*-
 
 from collective.contact.core.testing import INTEGRATION
-from ecreall.helpers.testing import member as memberhelpers
-from ecreall.helpers.testing.workflow import BaseWorkflowTest
+from collective.contact.core.tests.base import BaseWorkflowTest
+from collective.contact.core.tests.base import create_members
 
 import unittest
 
@@ -47,7 +47,7 @@ class TestSecurity(unittest.TestCase, BaseWorkflowTest):
     def setUp(self):
         super(TestSecurity, self).setUp()
         self.portal = self.layer['portal']
-        memberhelpers.createMembers(self.portal, USERDEFS)
+        create_members(self.portal, USERDEFS)
         self.mydirectory = self.portal['mydirectory']
         self.degaulle = self.mydirectory['degaulle']
 

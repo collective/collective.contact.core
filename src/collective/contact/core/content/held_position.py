@@ -1,13 +1,12 @@
 from collective.contact.core.browser.contactable import Contactable
 from collective.contact.core.interfaces import IHeldPosition
 from ComputedAttribute import ComputedAttribute
-from five import grok
+from plone.base.utils import safe_text
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from Products.CMFPlone.utils import normalizeString
-from Products.CMFPlone.utils import safe_unicode
 from z3c.form.interfaces import NO_VALUE
-from zope.interface import implements
+from zope.interface import implementer
 
 
 def acqproperty(func):
@@ -17,8 +16,6 @@ def acqproperty(func):
 
 class HeldPositionContactableAdapter(Contactable):
     """Contactable adapter for HeldPosition content type"""
-
-    grok.context(IHeldPosition)
 
     @property
     def person(self):
@@ -34,13 +31,11 @@ class HeldPositionContactableAdapter(Contactable):
         return organization and organization.get_organizations_chain() or []
 
 
+@implementer(IHeldPosition)
 class HeldPosition(Container):
     """HeldPosition content type
     Links a Position or an Organization to a person in an organization
     """
-
-    implements(IHeldPosition)
-
     use_parent_address = NO_VALUE
     parent_address = NO_VALUE
 
@@ -48,7 +43,7 @@ class HeldPosition(Container):
         return
 
     def get_title(self):
-        return safe_unicode(self.Title())
+        return safe_text(self.Title())
 
     title = property(get_title, set_title)
 
@@ -98,16 +93,16 @@ class HeldPosition(Container):
         organization = self.get_organization()
         label = self.get_label()
         if position is None and not label:
-            return "(%s)" % organization.get_full_title(separator=separator, first_index=first_index).encode('utf8')
+            return "(%s)" % organization.get_full_title(separator=separator, first_index=first_index)
         # we display the position title or the label
         position_title = label or position.title
-        return "%s (%s)" % (position_title.encode('utf8'),
-                            organization.get_full_title(separator=separator, first_index=first_index).encode('utf8'))
+        return "%s (%s)" % (position_title,
+                            organization.get_full_title(separator=separator, first_index=first_index))
 
     def get_full_title(self, separator=u' / ', first_index=0):
         """Returns the 'title' and include person name."""
         person_name = self.get_person_title()
-        title = self.Title(separator=separator, first_index=first_index).decode('utf8')
+        title = self.Title(separator=separator, first_index=first_index)
         if title[0:1] == '(':
             return u"%s %s" % (person_name, title)
         else:
@@ -127,7 +122,7 @@ class HeldPosition(Container):
         held_position_title = self.Title()
         return u"%s-%s" % (
             sortable_fullname,
-            normalizeString(safe_unicode(held_position_title))
+            normalizeString(safe_text(held_position_title))
         )
 
     @acqproperty
@@ -146,11 +141,8 @@ class HeldPosition(Container):
         return person.photo
 
 
-class HeldPositionSchemaPolicy(grok.GlobalUtility,
-                               DexteritySchemaPolicy):
+class HeldPositionSchemaPolicy(DexteritySchemaPolicy):
     """Schema policy for HeldPosition content type"""
-
-    grok.name("schema_policy_held_position")
 
     def bases(self, schemaName, tree):
         return (IHeldPosition,)

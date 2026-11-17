@@ -1,16 +1,11 @@
 from collective.contact.core.behaviors import IBirthday
-from collective.contact.core.content.held_position import HeldPosition
 from collective.contact.core.content.organization import IOrganization
-from collective.contact.core.content.organization import Organization
 from collective.contact.core.interfaces import IContactable
 from collective.contact.core.interfaces import IHeldPosition
 from collective.contact.core.interfaces import IPersonHeldPositions
-from collective.contact.core.interfaces import IVCard
-from five import grok
 from plone import api
-from Products.CMFPlone.utils import safe_unicode
-from zope.interface import implements
-from zope.interface import Interface
+from plone.base.utils import safe_text
+from zope.interface import implementer
 
 import datetime
 import vobject
@@ -55,14 +50,13 @@ class ContactableVCard:
         # if we don't have relevant address information, we don't need address
         if address:
             vcard.add('adr')
-            country = safe_unicode(address['country'], encoding='utf8')
-            region = safe_unicode(address['region'], encoding='utf8')
-            zip_code = safe_unicode(address['zip_code'], encoding='utf8')
-            city = safe_unicode(address['city'], encoding='utf8')
-            street = safe_unicode(address['street'], encoding='utf8')
-            number = safe_unicode(address['number'], encoding='utf8')
-            additional = safe_unicode(address['additional_address_details'],
-                                      encoding='utf8')
+            country = safe_text(address['country'], encoding='utf8')
+            region = safe_text(address['region'], encoding='utf8')
+            zip_code = safe_text(address['zip_code'], encoding='utf8')
+            city = safe_text(address['city'], encoding='utf8')
+            street = safe_text(address['street'], encoding='utf8')
+            number = safe_text(address['number'], encoding='utf8')
+            additional = safe_text(address['additional_address_details'], encoding='utf8')
             vcard.adr.value = vobject.vcard.Address(street=street,
                                                     city=city,
                                                     region=region,
@@ -74,9 +68,7 @@ class ContactableVCard:
         return vcard
 
 
-class ContactDetailsVCard(grok.Adapter, ContactableVCard):
-    grok.context(Interface)
-    grok.provides(IVCard)
+class ContactDetailsVCard(ContactableVCard):
 
     def __init__(self, context):
         self.context = context
@@ -90,10 +82,8 @@ class ContactDetailsVCard(grok.Adapter, ContactableVCard):
         return vcard
 
 
-class HeldPositionVCard(grok.Adapter, ContactableVCard):
-    grok.implements(IHeldPosition)
-    grok.context(HeldPosition)
-    grok.provides(IVCard)
+@implementer(IHeldPosition)
+class HeldPositionVCard(ContactableVCard):
 
     def __init__(self, context):
         self.context = context
@@ -111,9 +101,9 @@ class HeldPositionVCard(grok.Adapter, ContactableVCard):
         organizations = contactable.organizations
 
         vcard.add('n')
-        firstname = safe_unicode(person.firstname or '', encoding='utf8')
-        lastname = safe_unicode(person.lastname or '', encoding='utf8')
-        person_title = safe_unicode(person.person_title or '', encoding='utf8')
+        firstname = safe_text(person.firstname or '', encoding='utf8')
+        lastname = safe_text(person.lastname or '', encoding='utf8')
+        person_title = safe_text(person.person_title or '', encoding='utf8')
         vcard.n.value = vobject.vcard.Name(prefix=person_title,
                                            family=lastname,
                                            given=firstname)
@@ -125,15 +115,14 @@ class HeldPositionVCard(grok.Adapter, ContactableVCard):
             vcard.bday.value = person.birthday.isoformat()
 
         if position is not None:
-            position_name = safe_unicode(position.Title(), encoding='utf8')
+            position_name = safe_text(position.Title(), encoding='utf8')
             vcard.add('role')
             vcard.role.value = position_name
             vcard.add('title')
             vcard.title.value = position_name
 
         vcard.add('org')
-        vcard.org.value = [safe_unicode(org.Title(),
-                                        encoding='utf8') for org in organizations]
+        vcard.org.value = [safe_text(org.Title(), encoding='utf8') for org in organizations]
 
         # TODO ?
         # vcard.add('photo')
@@ -147,10 +136,8 @@ class HeldPositionVCard(grok.Adapter, ContactableVCard):
         return vcard
 
 
-class OrganizationVCard(grok.Adapter, ContactableVCard):
-    grok.implements(IOrganization)
-    grok.context(Organization)
-    grok.provides(IVCard)
+@implementer(IOrganization)
+class OrganizationVCard(ContactableVCard):
 
     def __init__(self, context):
         self.context = context
@@ -162,7 +149,7 @@ class OrganizationVCard(grok.Adapter, ContactableVCard):
         vcard.kind.value = "org"
 
         organization = self.context
-        title = safe_unicode(organization.Title(), encoding='utf8')
+        title = safe_text(organization.Title(), encoding='utf8')
         vcard.add('n')
         vcard.n.value = vobject.vcard.Name(title)
         vcard.add('fn')
@@ -170,20 +157,12 @@ class OrganizationVCard(grok.Adapter, ContactableVCard):
         return vcard
 
 
-def sort_closed_positions(position1, position2):
-    if position1.end_date == position2.end_date:
-        return 0
-    elif not position1.end_date:
-        # position without end date is greater
-        return 1
-    elif not position2.end_date:
-        return -1
-    else:
-        return cmp(position1.end_date, position2.end_date)
+def closed_position_sort_key(position):
+    return position.end_date or float('inf')
 
 
+@implementer(IPersonHeldPositions)
 class PersonHeldPositionsAdapter(object):
-    implements(IPersonHeldPositions)
 
     def __init__(self, person):
         self.person = person
@@ -215,7 +194,7 @@ class PersonHeldPositionsAdapter(object):
         all_positions = self.person.get_held_positions()
         active_positions = self.get_current_positions()
         closed_positions = [p for p in all_positions if p not in active_positions]
-        closed_positions.sort(cmp=sort_closed_positions, reverse=True)
+        closed_positions.sort(key=closed_position_sort_key, reverse=True)
         return tuple(closed_positions)
 
     def get_sorted_positions(self):

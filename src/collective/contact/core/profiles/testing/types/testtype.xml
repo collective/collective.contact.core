@@ -3,7 +3,7 @@
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title" i18n:translate="">Test type</property>
  <property name="description" i18n:translate="">None</property>
- <property name="icon_expr">string:${portal_url}/folder_icon.png</property>
+ <property name="icon_expr"></property>
  <property name="factory">testtype</property>
  <property name="add_view_expr">string:${folder_url}/++add++testtype</property>
  <property name="link_target"></property>

@@ -60,7 +60,7 @@ contactswidget.manage_directory = function(){
 	$('#formfield-form-widgets-organization_levels thead').hide();
 	$('.portaltype-directory .datagridwidget-table-view thead').hide();
 	// update tokens if necessary
-	$('input[id$="-widgets-name"]').blur(contactswidget.update_token);
+	$('input[id$="-widgets-name"]').on('blur', contactswidget.update_token);
 };
 
 /* Hide use_parent_address field if parent address is empty and if
@@ -127,7 +127,6 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
                     add_link.orig_text = add_link.text();
                 }
                 add_link.attr('href', new_url);
-                add_link.data('pbo').src = new_url;
                 var text_wo_company = add_link.orig_text.replace(/ *\([^)]*\) */g, "");
                 if (selected.token === '--NOVALUE--') {
                     add_link.text(text_wo_company);
@@ -153,8 +152,11 @@ contactswidget.setup_relation_dependency = function(master_field, slave_field, r
 };
 
 $(document).ready(function(){
+
+    tooltipster_helper(selector='.link-tooltip', view_name="", view_content_selector="#content");
+
     // call view on portal
-    var url = portal_url + '/@@gender_person_title_mapping.json';
+    var url = $("body").data("portal-url") + '/@@gender_person_title_mapping.json';
     $.get(url, function (mapping) {
       $(document).on(
         'change',
@@ -163,28 +165,12 @@ $(document).ready(function(){
       );
     });
 
+    $(document).on('patterns-injected', function(event, data) {
+        if ($(data).is('.pat-plone-modal')) {
+            contactswidget.manage_hide_use_parent_address();
+        }
+    });
+
     /* contactswidget.manage_directory();  Do not hide token column in edit mode */
     contactswidget.manage_hide_use_parent_address();
-
-    jQuery(document).bind('loadInsideOverlay',
-            function(e, pbajax, responseText, errorText, api){
-        contactswidget.manage_hide_use_parent_address();
-    });
-
-    $('.contactoverlay').prepOverlay({
-      subtype: 'ajax',
-      filter: common_content_filter,
-      formselector: '#form',
-      closeselector: '[name="form.buttons.cancel"]',
-      noform: function(el, pbo) {return 'reload';}
-    });
-
-    $('.deleteoverlay').prepOverlay({
-      subtype: 'ajax',
-      filter: common_content_filter,
-      formselector: '#delete_confirmation',
-      closeselector: '[name="form.button.Cancel"]',
-      noform: function(el, pbo) {return 'reload';}
-    });
-
 });

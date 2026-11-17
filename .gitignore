@@ -23,6 +23,7 @@ output.xml
 *.swp
 .idea
 pyvenv.cfg
-temp_auto_push.bat
-temp_interactive_push.bat
-.gitignore
+.plone-version
+.plone*
+checkversion*.html
+.python-version

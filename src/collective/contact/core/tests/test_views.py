@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 from collective.contact.core.behaviors import ADDRESS_FIELDS
 from collective.contact.core.testing import INTEGRATION
-from ecreall.helpers.testing.base import BaseTest
+from collective.contact.core.tests.base import BaseTest
 from plone.app.testing.interfaces import TEST_USER_NAME
 
 import unittest
@@ -226,7 +226,7 @@ class TestOrganizationView(TestView):
 
     def test_othercontacts(self):
         view = self.armeedeterre.restrictedTraverse("@@othercontacts")
-        view.update()
+        view()
         contact = view.othercontacts[0]
         self.assertEqual(contact['title'], 'Général Charles De Gaulle')
         self.assertEqual(contact['held_position'], '(Armée de terre)')
@@ -268,7 +268,7 @@ class TestPersonView(TestView):
 
     def test_person_held_positions_view(self):
         view = self.degaulle.restrictedTraverse("@@heldpositions")
-        view.update()
+        view()
         held_positions = view.held_positions
         self.assertEqual(len(held_positions), 2)
         first = held_positions[0]

@@ -1,0 +1,5 @@
+<registry>
+
+  <records interface="collective.contact.core.interfaces.IContactCoreParameters" />
+
+</registry>
