@@ -86,7 +86,7 @@ Zope = [
 ]
 python-dateutil = ['dateutil']
 pytest-plone = ['pytest', 'zope.pytestlayer', 'plone.testing', 'plone.app.testing']
-ignore-packages = ['collective.excelexport']
+ignore-packages = ['collective.contact.contactlist', 'collective.excelexport']
 
 ##
 # Add extra configuration options in .meta.toml:

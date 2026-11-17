@@ -30,8 +30,8 @@ test_environment_variables = """
 """
 test_matrix = {"6.2" = ["*"]}
 test_deps_additional = """
-    collective.fingerpointing @ file://{toxinidir}/sources/collective.fingerpointing
-collective.js.tooltipster @ file://{toxinidir}/sources/collective.js.tooltipster
+collective.fingerpointing @ file://{toxinidir}/sources/collective.fingerpointing
+    collective.js.tooltipster @ file://{toxinidir}/sources/collective.js.tooltipster
     imio.fpaudit @ file://{toxinidir}/sources/imio.fpaudit
     imio.helpers @ file://{toxinidir}/sources/imio.helpers
     plone.formwidget.masterselect @ file://{toxinidir}/sources/plone.formwidget.masterselect
@@ -39,4 +39,4 @@ collective.js.tooltipster @ file://{toxinidir}/sources/collective.js.tooltipster
 
 [pyproject]
 codespell_ignores = "sergent,fonction"
-dependencies_ignores = "['collective.excelexport']"
+dependencies_ignores = "['collective.contact.contactlist', 'collective.excelexport']"
