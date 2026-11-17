@@ -104,7 +104,7 @@ and then running "bin/buildout", next enable the product in your plone site.
 Versions
 ========
 
-- Version 2.x is for Plone 6.1+ only
+- Version 2.x is for Plone 6.2+ only
 - Version 1.x is for Plone 4
 
 
